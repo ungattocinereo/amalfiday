@@ -7,7 +7,8 @@ const headerSocials = socialLinks.filter((item) =>
 )
 ---
 <header class="header">
-  <div class="container header__inner">
+  <div class="header__shell">
+    <div class="header__inner">
     <nav class="nav">
       {navigation.map((item) => (
         <a class="nav__link" href={item.href}>
@@ -42,8 +43,8 @@ const headerSocials = socialLinks.filter((item) =>
         <i class="bi bi-x-lg"></i>
       </button>
     </div>
-  </div>
-  <div class="mobile-panel">
+    </div>
+    <div class="mobile-panel">
     <div class="mobile-panel__links">
       {navigation.map((item) => (
         <a class="mobile-panel__link" href={item.href}>
@@ -61,6 +62,7 @@ const headerSocials = socialLinks.filter((item) =>
         </a>
       ))}
     </div>
+    </div>
   </div>
 </header>
 
@@ -69,7 +71,7 @@ const headerSocials = socialLinks.filter((item) =>
   const header = document.querySelector('.header')
   const themeToggle = document.querySelector('.theme-switch__input')
   const menuToggle = document.querySelector('.menu-toggle')
-  const hero = document.querySelector('.hero--orange')
+  const hero = document.querySelector('.hero--orange, .hero--dark')
 
   const setTheme = (value) => {
     root.dataset.theme = value
@@ -125,29 +127,46 @@ const headerSocials = socialLinks.filter((item) =>
 <style>
   .header {
     position: sticky;
-    top: 0;
+    top: 12px;
     z-index: 20;
-    background: var(--color-nav-bg);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-nav-border);
-    transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    overflow: visible;
     color: var(--color-text);
     --nav-underline: var(--gradient-sunset);
     --nav-outline: var(--color-border);
+    pointer-events: none;
+  }
+
+  .header__shell {
+    pointer-events: auto;
+    background: var(--color-nav-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-nav-border);
+    transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    overflow: hidden;
+    border-radius: 999px;
+    margin: 0 auto;
+    width: min(1100px, calc(100% - 32px));
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   }
 
   .header.is-scrolled {
-    background: var(--color-nav-bg-strong);
-    box-shadow: var(--shadow-soft);
+    box-shadow: none;
   }
 
   .header.on-hero {
     color: #ffffff;
-    background: rgba(255, 89, 0, 0.12);
-    border-bottom-color: rgba(255, 255, 255, 0.15);
     --nav-underline: rgba(255, 255, 255, 0.95);
     --nav-outline: rgba(255, 255, 255, 0.35);
+  }
+
+  .header.on-hero .header__shell {
+    background: rgba(255, 89, 0, 0.12);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .header.is-scrolled .header__shell {
+    background: var(--color-nav-bg-strong);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--color-nav-border);
   }
 
   .header__inner {
@@ -157,14 +176,22 @@ const headerSocials = socialLinks.filter((item) =>
     gap: 2rem;
     padding: 1.35rem 0;
     transition: padding 0.2s ease;
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .header.is-scrolled .header__inner {
-    padding: 0.6rem 0;
+    padding: 0.6rem 1.5rem;
   }
 
   .logo {
     justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .logo__mark {
@@ -342,6 +369,7 @@ const headerSocials = socialLinks.filter((item) =>
     background: var(--color-nav-bg-strong);
     padding: 1.5rem 0 2rem;
     box-shadow: var(--shadow-soft);
+    border-radius: 0 0 24px 24px;
   }
 
   .mobile-panel__links {
@@ -400,6 +428,15 @@ const headerSocials = socialLinks.filter((item) =>
 
     .header.menu-open .mobile-panel {
       display: block;
+    }
+
+    .header {
+      top: 8px;
+    }
+
+    .header__shell {
+      width: calc(100% - 20px);
+      border-radius: 28px;
     }
   }
 </style>

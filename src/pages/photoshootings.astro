@@ -38,6 +38,7 @@ const heroImages = {
   ],
 }
 
+const firstHeroImage = heroImages[heroCategories[0].key][0]
 const individualAlbum = [
   '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
   '/photoshootings/individual/Silvia-Amalfi-day.jpg.jpg',
@@ -85,34 +86,99 @@ const testimonials = [
 ---
 
 <BaseLayout title="Photoshootings — Amalfi.Day">
-  <section class="ps-hero">
-    <div class="container">
-      <div class="ps-hero__header">
-        <h1>Photoshootings</h1>
-        <p>
-          A photographic journey through Southern Italy's treasures — crafted for influencer,
-          couple, and personal stories.
-        </p>
-      </div>
-
-      <div class="ps-hero__grid">
-        {heroCategories.map((cat) => (
-          <div class="ps-hero__card">
-            <div class="ps-hero__images">
-              {heroImages[cat.key].map((src) => (
-                <img src={src} alt={cat.title} loading="lazy" />
-              ))}
-            </div>
-            <div class="ps-hero__overlay">
-              <h2>{cat.title}</h2>
-              <p>{cat.subtitle}</p>
-              <button class="button">Book now!</button>
-            </div>
-          </div>
-        ))}
+  <section
+    class="ps-hero hero--dark"
+    data-sequence={JSON.stringify(
+      heroCategories.map((cat) => ({
+        title: cat.title,
+        subtitle: cat.subtitle,
+        images: heroImages[cat.key],
+      }))
+    )}
+  >
+    <div class="ps-hero__bg">
+      <div
+        class="ps-hero__layer is-active"
+        style={`background-image:url('${firstHeroImage}')`}
+      ></div>
+      <div class="ps-hero__layer"></div>
+    </div>
+    <div class="container ps-hero__content">
+      <div class="ps-hero__text">
+        <h1 id="ps-title">{heroCategories[0].title}</h1>
+        <p id="ps-subtitle">{heroCategories[0].subtitle}</p>
+        <a class="button" href="/contact">Book now!</a>
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    const hero = document.querySelector('.ps-hero')
+    const sequence = JSON.parse(hero.dataset.sequence || '[]')
+    const layers = Array.from(document.querySelectorAll('.ps-hero__layer'))
+    const titleEl = document.getElementById('ps-title')
+    const subtitleEl = document.getElementById('ps-subtitle')
+
+    let catIndex = 0
+    let imgIndex = -1
+    let activeLayer = 0
+
+    const IMAGE_DURATION = 5200
+    const zoomClass = 'is-zoom'
+
+    const preload = (src) => {
+      const img = new Image()
+      img.src = src
+    }
+
+    const setText = (cat) => {
+      titleEl.classList.add('is-fading')
+      subtitleEl.classList.add('is-fading')
+      window.setTimeout(() => {
+        titleEl.textContent = cat.title
+        subtitleEl.textContent = cat.subtitle
+        titleEl.classList.remove('is-fading')
+        subtitleEl.classList.remove('is-fading')
+      }, 300)
+    }
+
+    const showImage = (src) => {
+      const nextLayer = layers[1 - activeLayer]
+      const currentLayer = layers[activeLayer]
+
+      nextLayer.style.backgroundImage = `url(\"${src}\")`
+      nextLayer.classList.add('is-active')
+      nextLayer.classList.remove(zoomClass)
+      void nextLayer.offsetWidth
+      nextLayer.classList.add(zoomClass)
+
+      currentLayer.classList.remove('is-active')
+      currentLayer.classList.remove(zoomClass)
+
+      activeLayer = 1 - activeLayer
+    }
+
+    const step = () => {
+      if (!sequence.length) return
+      const cat = sequence[catIndex]
+      imgIndex = (imgIndex + 1) % cat.images.length
+
+      if (imgIndex === 0) {
+        setText(cat)
+      }
+
+      showImage(cat.images[imgIndex])
+      const nextImg = cat.images[(imgIndex + 1) % cat.images.length]
+      preload(nextImg)
+
+      if (imgIndex === cat.images.length - 1) {
+        catIndex = (catIndex + 1) % sequence.length
+      }
+    }
+
+    step()
+    window.setInterval(step, IMAGE_DURATION)
+  </script>
 
   <section class="section">
     <div class="container">
@@ -167,73 +233,83 @@ const testimonials = [
 
 <style>
   .ps-hero {
-    padding: 5rem 0 4rem;
-    background: #0f1115;
-    color: #ffffff;
-  }
-
-  .ps-hero__header {
-    max-width: 720px;
-    margin-bottom: 2.5rem;
-  }
-
-  .ps-hero__header h1 {
-    font-size: clamp(2.5rem, 4vw, 3.8rem);
-  }
-
-  .ps-hero__header p {
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .ps-hero__grid {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .ps-hero__card {
+    min-height: 100vh;
     position: relative;
-    border-radius: 20px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
     overflow: hidden;
-    min-height: 280px;
-    background: #101418;
   }
 
-  .ps-hero__images {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    height: 100%;
-  }
-
-  .ps-hero__images img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.55);
-  }
-
-  .ps-hero__overlay {
+  .ps-hero__bg {
     position: absolute;
     inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.6rem;
-    padding: 2rem;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 100%);
+    background: #0f1115;
   }
 
-  .ps-hero__overlay h2 {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    margin: 0;
+  .ps-hero__layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1200ms ease;
+    filter: brightness(0.65);
   }
 
-  .ps-hero__overlay p {
+  .ps-hero__layer.is-active {
+    opacity: 1;
+  }
+
+  .ps-hero__layer.is-zoom {
+    animation: ps-zoom 6.4s ease forwards;
+  }
+
+  .ps-hero__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .ps-hero__text {
+    max-width: 640px;
+  }
+
+  .ps-hero__text h1 {
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .ps-hero__text p {
     color: rgba(255, 255, 255, 0.8);
-    max-width: 560px;
+    font-size: 1.1rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
-  .ps-hero__overlay .button {
-    width: fit-content;
+  .ps-hero__text h1.is-fading,
+  .ps-hero__text p.is-fading {
+    opacity: 0.4;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .ps-hero__text .button {
+    margin-top: 1.5rem;
+  }
+
+  @keyframes ps-zoom {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ps-hero__layer {
+      transition: none;
+      animation: none !important;
+    }
   }
 
   .album {
@@ -281,12 +357,8 @@ const testimonials = [
   }
 
   @media (max-width: 720px) {
-    .ps-hero__images {
-      grid-template-columns: 1fr;
-    }
-
-    .ps-hero__card {
-      min-height: 360px;
+    .ps-hero__text {
+      max-width: 100%;
     }
   }
 </style>
