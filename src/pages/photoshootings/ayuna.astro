@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const galleryImages = [
+  {
+    src: '/photoshootings/ayuna/ayuna-01.jpg',
+    alt: 'Ayuna at sunrise on the Amalfi Coast',
+  },
+  {
+    src: '/photoshootings/ayuna/ayuna-02.jpg',
+    alt: 'Ayuna portrait in Atrani',
+  },
+  {
+    src: '/photoshootings/ayuna/ayuna-03.jpg',
+    alt: 'Ayuna by the sea in Atrani',
+  },
+  {
+    src: '/photoshootings/ayuna/ayuna-04.jpg',
+    alt: 'Ayuna with morning light in Atrani',
+  },
+  {
+    src: '/photoshootings/ayuna/ayuna-05.jpg',
+    alt: 'Ayuna on the Amalfi Coast',
+  },
+]
+
+const storyImages = [
+  {
+    src: '/photoshootings/ayuna/ayuna-06.jpg',
+    alt: 'Ayuna portrait from the Atrani session',
+  },
+  {
+    src: '/photoshootings/ayuna/ayuna-07.jpg',
+    alt: 'Ayuna portrait from the Atrani morning',
+  },
+]
+
+const circleImages = [
+  '/photoshootings/ayuna/ayuna-circle-01.jpg',
+  '/photoshootings/ayuna/ayuna-circle-02.jpg',
+  '/photoshootings/ayuna/ayuna-circle-03.jpg',
+  '/photoshootings/ayuna/ayuna-circle-04.jpg',
+  '/photoshootings/ayuna/ayuna-circle-05.jpg',
+  '/photoshootings/ayuna/ayuna-circle-06.jpg',
+  '/photoshootings/ayuna/ayuna-circle-07.jpg',
+  '/photoshootings/ayuna/ayuna-circle-08.jpg',
+  '/photoshootings/ayuna/ayuna-circle-09.jpg',
+  '/photoshootings/ayuna/ayuna-circle-10.jpg',
+]
+---
+
+<BaseLayout
+  title="Ayuna - Amalfi.Day"
+  description="An Atrani sunrise session capturing Ayuna's story through 50 standout frames."
+>
+  <section class="ayuna-hero">
+    <div class="ayuna-hero__media" style={`background-image:url('${galleryImages[0].src}')`}></div>
+    <div class="container ayuna-hero__content">
+      <div class="ayuna-hero__text">
+        <span class="badge">Atrani, August morning</span>
+        <h1>Ayuna</h1>
+        <p>
+          The Amalfi Coast has always had a magnetic allure, drawing in both locals and wanderers
+          from afar with its breathtaking beauty. This August morning, as the first rays of the sun
+          painted the skies, Atrani bore witness to a special moment - a meeting of art and
+          ambition.
+        </p>
+        <p>
+          It was 7 am, just moments after the sun had announced a new day. The world was still,
+          save for the rhythmic lull of the waves and the soft click of a camera capturing moments
+          destined to be eternal. I, Gregory Day, have been fortunate to call the Amalfi Coast
+          home and have dedicated my craft to capturing its essence through my lens. This morning,
+          however, wasn't just about the scenic beauty of Atrani. It was about Ayuna.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ayuna-heading">
+    <div class="container">
+      <h2>...Her morning elegance</h2>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <div class="ayuna-carousel" aria-label="Ayuna photoshoot gallery">
+        {galleryImages.map((image, index) => (
+          <figure class="ayuna-carousel__item">
+            <img src={image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="ayuna-story">
+        <p>
+          Ayuna, with her boundless spirit and dreams in her eyes, approached me to expand her
+          photo portfolio. As a model eager to venture into newer horizons, she embodied the fresh
+          energy that mirrors the awakening of a new day. Our collaboration was seamless. With
+          each frame, we explored different facets of Ayuna's persona, blending them with the
+          serene backdrop of Atrani.
+        </p>
+        <p>
+          We experimented - with outfits that ranged from casual to elegant, with lenses that gave
+          varied perspectives, and with angles that showcased both Ayuna and Atrani in their best
+          light. In the span of a fleeting hour, magic unfurled. Out of the many shots, 50 stood
+          out - each telling its own story, each a testament to the symbiosis of the model, the
+          location, and the photographer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <figure class="ayuna-full">
+        <img src={storyImages[0].src} alt={storyImages[0].alt} loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="ayuna-story">
+        <p>
+          What started as a professional photoshoot soon transformed into a journey of discovery.
+          As the sun climbed higher, Ayuna's confidence shone brighter, and the pictures resonated
+          with her spirit.
+        </p>
+        <p>
+          To the onlooker, it might seem like a regular photoshoot, but for Ayuna and me, it was a
+          memoir - one that would remind us of that beautiful August morning in Atrani when dreams
+          were captured, one snap at a time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <figure class="ayuna-full">
+        <img src={storyImages[1].src} alt={storyImages[1].alt} loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="ayuna-cta">
+        <div class="ayuna-cta__lottie" aria-hidden="true">
+          <lottie-player
+            src="https://lottie.host/7a5b564f-f653-43f6-8f7e-c6eff5651504/cBOQaSku7r.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay
+          ></lottie-player>
+        </div>
+        <div class="ayuna-cta__content">
+          <h3>Capture memories that will last a lifetime!</h3>
+          <a class="button" href="#leformx-11">Request now</a>
+        </div>
+        <div class="ayuna-cta__footer">
+          <div class="ayuna-avatars" aria-hidden="true">
+            {circleImages.map((src) => (
+              <img src={src} alt="" loading="lazy" />
+            ))}
+          </div>
+          <div class="ayuna-cta__note">
+            <strong>100+</strong>
+            <span>Join the happy costumers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    ;(() => {
+      if (customElements.get('lottie-player')) return
+      const script = document.createElement('script')
+      script.src = 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'
+      script.defer = true
+      document.head.appendChild(script)
+    })()
+  </script>
+</BaseLayout>
+
+<style>
+  .ayuna-hero {
+    position: relative;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .ayuna-hero__media {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.55);
+    transform: scale(1.02);
+  }
+
+  .ayuna-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(7, 10, 16, 0.8), rgba(7, 10, 16, 0.2));
+  }
+
+  .ayuna-hero__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .ayuna-hero__text {
+    max-width: 640px;
+  }
+
+  .ayuna-hero__text h1 {
+    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    margin-bottom: 1rem;
+  }
+
+  .ayuna-hero__text p {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .ayuna-heading {
+    padding: 2.5rem 0 1rem;
+  }
+
+  .ayuna-heading h2 {
+    color: #ff7f00;
+    font-size: clamp(2rem, 3.8vw, 3.1rem);
+  }
+
+  .section--flush {
+    padding-top: 0;
+  }
+
+  .ayuna-carousel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(240px, 1fr);
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .ayuna-carousel__item {
+    margin: 0;
+    scroll-snap-align: center;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .ayuna-carousel__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ayuna-story {
+    max-width: 760px;
+  }
+
+  .ayuna-full {
+    margin: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .ayuna-full img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ayuna-cta {
+    background: var(--color-card);
+    border-radius: 24px;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    box-shadow: var(--shadow-lift);
+    display: grid;
+    gap: 2rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ayuna-cta__lottie {
+    width: 96px;
+    height: 96px;
+  }
+
+  .ayuna-cta__lottie lottie-player {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ayuna-cta__content h3 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+  }
+
+  .ayuna-cta__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .ayuna-avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  .ayuna-avatars img {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    border: 2px solid var(--color-bg);
+    object-fit: cover;
+    margin-left: -12px;
+  }
+
+  .ayuna-avatars img:first-child {
+    margin-left: 0;
+  }
+
+  .ayuna-cta__note {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .ayuna-cta__note strong {
+    color: var(--color-text);
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 720px) {
+    .ayuna-hero {
+      min-height: 70vh;
+    }
+
+    .ayuna-carousel {
+      grid-auto-columns: minmax(70vw, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ayuna-hero__media {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,446 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const heroImage = '/photoshootings/berra/2-berra-new-red.webp'
+const featureImage = '/photoshootings/berra/2-backtage-berra.webp'
+
+const galleryImages = [
+  {
+    src: '/photoshootings/berra/00002-Berra-in-Atrani-amalfi-scaled.webp',
+    alt: 'Berra in Atrani, Amalfi Coast',
+  },
+  {
+    src: '/photoshootings/berra/00004-Berra-in-Atrani-amalfi.webp',
+    alt: 'Berra in Atrani with coastal light',
+  },
+  {
+    src: '/photoshootings/berra/00006-Berra-in-Atrani-amalfi-scaled.webp',
+    alt: 'Berra fashion frame in Atrani',
+  },
+  {
+    src: '/photoshootings/berra/00001-Berra-in-Atrani-amalfi.webp',
+    alt: 'Berra portrait in Atrani streets',
+  },
+  {
+    src: '/photoshootings/berra/00003-Berra-in-Atrani-amalfi-scaled.webp',
+    alt: 'Berra overlooking the Amalfi Coast',
+  },
+]
+
+const storyImages = [
+  {
+    src: '/photoshootings/berra/2-berra-with-menu-caffe-vittoria.webp',
+    alt: 'Berra at Caffe Vittoria in Atrani',
+  },
+  {
+    src: '/photoshootings/berra/2-berra-new-red.webp',
+    alt: 'Berra in a red look in Atrani',
+  },
+]
+
+const circleImages = [
+  '/photoshootings/berra/Scooter-ride-in-amalfi-portraits-02.jpg',
+  '/photoshootings/berra/slider-new-moto-scooter-experience04.jpg',
+  '/photoshootings/berra/juke-wedding-slider.jpg',
+  '/photoshootings/berra/aims-Minchuck-Amalfi-day.jpg',
+  '/photoshootings/berra/CNR0262-2.jpg',
+]
+
+const instagramPost = {
+  url: 'https://www.instagram.com/p/CiiYGp3KM9K/',
+  author: 'Berra Koyuncu',
+  handle: '@berrakoyuncuu',
+}
+---
+
+<BaseLayout
+  title="Berra — Amalfi.Day"
+  description="Fashion-forward moments with Instagram model Berra in the heart of Atrani, Amalfi Coast."
+>
+  <section class="berra-hero">
+    <div class="berra-hero__media" style={`background-image:url('${heroImage}')`}></div>
+    <div class="container berra-hero__content">
+      <div class="berra-hero__text">
+        <span class="badge">Atrani • Fashion photoshoot</span>
+        <h1>Berra</h1>
+        <p>
+          Unveiling the exquisite allure of the Amalfi Coast, our latest fashion photoshoot with the
+          effervescent Instagram model, Berra, captures the essence of style and scenic beauty in the
+          heart of Atrani. A fusion of fashion-forward looks and the timeless charm of Amalfi’s
+          landscapes, every snapshot tells a story of elegance interwoven with the natural grandeur
+          of Italy’s divine coastline.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container berra-intro">
+      <article class="card berra-feature">
+        <span class="berra-tag">Quality Work</span>
+        <h5>
+          Berra's Instagram looks great with these amazing photos. The success of the photoshoot
+          shows how the right place, fashion, and a good eye can make photos that really stand out
+          for their beauty and feel real.
+        </h5>
+        <figure class="berra-feature__image">
+          <img src={featureImage} alt="Behind the scenes with Berra" loading="lazy" />
+        </figure>
+      </article>
+
+      <article class="card berra-instagram">
+        <div class="berra-instagram__badge">
+          <i class="bi bi-instagram"></i>
+          <span>Instagram</span>
+        </div>
+        <p>
+          View this post on Instagram and see the Atrani mood, the styling details, and the coastal
+          palette that framed this story.
+        </p>
+        <a class="berra-instagram__link" href={instagramPost.url} target="_blank" rel="noreferrer">
+          A post shared by {instagramPost.author} ({instagramPost.handle})
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <div class="berra-carousel" aria-label="Berra photoshoot gallery">
+        {galleryImages.map((image, index) => (
+          <figure class="berra-carousel__item">
+            <img src={image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="berra-story">
+        <p>
+          This unique photo-shooting experience not only elevated Berra's Instagram profile but also
+          showcased the magnificent tapestry of scenes found in the Amalfi Coast. Each photograph
+          tells a story - of fashion, beauty, and the mesmerizing landscapes of Atrani.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <figure class="berra-full">
+        <img src={storyImages[0].src} alt={storyImages[0].alt} loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="berra-story">
+        <p>
+          Discover the beauty and style unveiled in this remarkable photoshoot, and immerse yourself
+          in the visual journey of fashion and scenic elegance in the heart of Italy’s enchanting
+          Amalfi Coast.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <figure class="berra-full berra-full--accent">
+        <img src={storyImages[1].src} alt={storyImages[1].alt} loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="berra-cta">
+        <div class="berra-cta__lottie" aria-hidden="true">
+          <lottie-player
+            src="https://lottie.host/7a5b564f-f653-43f6-8f7e-c6eff5651504/cBOQaSku7r.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay
+          ></lottie-player>
+        </div>
+        <div class="berra-cta__content">
+          <h3>Capture memories that will last a lifetime!</h3>
+          <a class="button" href="#leformx-11">Book now!</a>
+        </div>
+        <div class="berra-cta__footer">
+          <div class="berra-avatars" aria-hidden="true">
+            {circleImages.map((src) => (
+              <img src={src} alt="" loading="lazy" />
+            ))}
+          </div>
+          <div class="berra-cta__note">
+            <strong>100+</strong>
+            <span>Join the happy costumers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    ;(() => {
+      if (customElements.get('lottie-player')) return
+      const script = document.createElement('script')
+      script.src = 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'
+      script.defer = true
+      document.head.appendChild(script)
+    })()
+  </script>
+</BaseLayout>
+
+<style>
+  .berra-hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .berra-hero__media {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6);
+    transform: scale(1.03);
+  }
+
+  .berra-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(7, 10, 16, 0.78), rgba(7, 10, 16, 0.15));
+  }
+
+  .berra-hero__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .berra-hero__text {
+    max-width: 720px;
+  }
+
+  .berra-hero__text h1 {
+    font-size: clamp(2.6rem, 5vw, 4.6rem);
+    margin-bottom: 1rem;
+  }
+
+  .berra-hero__text p {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .section--flush {
+    padding-top: 0;
+  }
+
+  .berra-intro {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .berra-feature {
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .berra-tag {
+    align-self: flex-start;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    background: var(--color-accent);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .berra-feature h5 {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .berra-feature__image {
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .berra-feature__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .berra-instagram {
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+    background: linear-gradient(140deg, rgba(255, 89, 0, 0.12), rgba(1, 98, 255, 0.12));
+  }
+
+  .berra-instagram__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .berra-instagram__link {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .berra-carousel {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(240px, 1fr);
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .berra-carousel__item {
+    margin: 0;
+    scroll-snap-align: center;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .berra-carousel__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .berra-story {
+    max-width: 760px;
+  }
+
+  .berra-full {
+    margin: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .berra-full--accent {
+    border: 1px solid rgba(255, 89, 0, 0.2);
+  }
+
+  .berra-full img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .berra-cta {
+    background: var(--color-card);
+    border-radius: 24px;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    box-shadow: var(--shadow-lift);
+    display: grid;
+    gap: 2rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .berra-cta__lottie {
+    width: 96px;
+    height: 96px;
+  }
+
+  .berra-cta__lottie lottie-player {
+    width: 100%;
+    height: 100%;
+  }
+
+  .berra-cta__content h3 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+  }
+
+  .berra-cta__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .berra-avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  .berra-avatars img {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    border: 2px solid var(--color-bg);
+    object-fit: cover;
+    margin-left: -12px;
+  }
+
+  .berra-avatars img:first-child {
+    margin-left: 0;
+  }
+
+  .berra-cta__note {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .berra-cta__note strong {
+    color: var(--color-text);
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 900px) {
+    .berra-intro {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .berra-hero {
+      min-height: 70vh;
+    }
+
+    .berra-carousel {
+      grid-auto-columns: minmax(70vw, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .berra-hero__media {
+      transform: none;
+    }
+  }
+</style>

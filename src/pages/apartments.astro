@@ -1,14 +1,802 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+
+const placeholder =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
+
+const stats = [
+  { value: '15+', label: 'Years of experience' },
+  { value: '1000+', label: 'Positive Airbnb and Booking reviews' },
+]
+
+const villaSusy = {
+  name: 'Villa Susy',
+  title: 'Timeless Retreat in Ravello: Historical 2-bedroom apartment',
+  description:
+    "This villa, located just a mile from Amalfi, offers a unique blend of authenticity and comfort. As you step inside, you'll be transported to a world where the past comes alive, and the present moment is savored.",
+  gallery: [5124, 5123, 5121, 5122],
+  availability: 'Villa Susy',
+}
+
+const suites = [
+  {
+    name: 'Awesome apartments',
+    gallery: [2076],
+    description:
+      'Our location is just above the city center, a 5-7 minute walk uphill via 350 steps. The apartment features a separate kitchen, shower room, and a spacious room.',
+    availability: 'Awesome Apts',
+  },
+  {
+    name: 'Aria di Mare',
+    gallery: [5114, 5115],
+    description:
+      'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
+    availability: 'Aria di mare',
+    cta: {
+      label: 'Book on Airbnb',
+      href: 'https://www.airbnb.com/rooms/565787701411415824/',
+    },
+  },
+  {
+    name: 'Suite Carina',
+    gallery: [2258, 2257, 2256],
+    description:
+      'This is a double-level apartment located in the heart of the city. There are no steps to access the apartment. The windows offer views of the main street in Atrani.',
+    availability: 'Casa Carina',
+  },
+  {
+    name: 'Suite Harmony',
+    gallery: [2464, 2422, 2461],
+    description:
+      'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
+    availability: 'Harmony Suite',
+  },
+]
+
+const townhouseRooms = [
+  {
+    name: 'Vintage interior',
+    image: 5203,
+    availability: 'Vintage Room',
+    description:
+      'The room is designed with a vintage aesthetic in mind, featuring decor and furnishings that evoke a sense of nostalgia and timeless elegance. The room also comes equipped with a large closet, complete with a mirror, providing ample storage and a convenient space for getting ready. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
+  },
+  {
+    name: 'Orange room',
+    image: 2251,
+    availability: 'Orange Room',
+    description:
+      'This room evokes the nostalgia of the 1960s with its decor and furnishings. The room features a large multi-panel closet, providing ample storage space for guests. The room also comes with with couple of garden chairs and a table. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
+  },
+  {
+    name: 'Room in center',
+    image: 5202,
+    availability: 'Central Room',
+    description:
+      'This is the largest room in the house, providing plenty of space for guests to spread out and relax. The room features a large table, perfect for meals or working, and two chairs for comfortable seating. Additionally, the room has a small balcony that offers a view of the main street, perfect for enjoying the sights and sounds of the city. The closet is an original piece from the 1970s that is spacious and adds a vintage touch to the room.',
+  },
+]
+
+const budgetRooms = [
+  {
+    name: 'Room for solo traveller',
+    image: 2285,
+    availability: 'Solo Room',
+    description:
+      'This room is designed to be cozy and comfortable, with a small bed that is perfect for one person. The room features a spacious balcony that offers a great place to sit and relax, with a chair that provides a comfortable seating option. The balcony also offers a beautiful view of the mountains, providing a serene and peaceful atmosphere. Additionally, the room is facing the main street of the town, which means that guests can enjoy the hustle and bustle of the city right from the comfort of their own room. The balcony can be accessed via the room and it is perfect for a morning coffee or a nightcap.',
+  },
+  {
+    name: 'Room for youngsters',
+    image: 2262,
+    availability: 'Bunkbed Room',
+    description:
+      'This room is designed to be functional and budget-friendly, perfect for travelers who are looking for a comfortable and affordable place to stay. The room features a bunk bed. The bunk bed is comfortable and convenient, providing a great place to rest after a long day of exploring. The room also features a big mural on the wall, which adds a unique and artistic touch to the space, making it more interesting and personalized. The room also comes with a large window that overlooks an inner street, providing natural light. The window can be opened to let fresh air in and to listen to the street sounds.',
+  },
+]
+
+const testimonials = [
+  {
+    quote:
+      "My stay in Atrani was wonderful! Very close to Amalfi, it's a short distance walking and you get to enjoy the view and the way there Gregory is a very nice host, He answered all my questions, I got to know his family wish they were nice to me as well , I recommend this beautiful place 100% It's worth it!",
+    author: 'Silvia, Howey-in-the-Hills, FL',
+    meta: 'December 2022',
+  },
+  {
+    quote:
+      'Amazing stay and location, 10 minute walk to edge of Amalfi. Everything was clean and tidy, kitchen was great and well-stocked. And host is super friendly and interesting. Even more, the host has a great website guiding us on how to get there and the attractions in Amalfi. I would recommend to everybody who wants to come here.',
+    author: 'Ethan, London, United Kingdom',
+    meta: 'October 2022',
+  },
+  {
+    quote:
+      'Perfect for what I needed and looked exactly like the pictures. Communication with Gregory was great and he messaged back immediately when I was having trouble finding the walking route from Amalfi to Atrani. He provided a great guide of suggestions of things to do. I was able to easily do day trips to Ravello, a Positano boat tour and walk to Amalfi.',
+    author: 'Erin, Brighton East, Australia',
+    meta: 'October 2022',
+  },
+  {
+    quote:
+      "Amazing stay. Wifi was great. Room was cozy and clean. Loved the balcony. Shared restroom was also clean and had supplies like soap,detergent,etc. Honestly I wish I went to Gregory's airbnb as soon as I got to Amalfi coast it's a great location you'll be right next to Amalfi only like a 10 minute walk it's great you got the beach next to you!",
+    author: 'Sofia, Paris, France',
+    meta: 'October 2022',
+  },
+]
 ---
 
-<BaseLayout title="Apartments — Amalfi.Day">
-  <section class="section">
-    <div class="container">
-      <h1>
-        Amalfi <span class="accent-italic">apartments</span>
-      </h1>
-      <p>Hand-picked stays and photo-friendly spaces.</p>
+<BaseLayout title="Apartments - Amalfi.Day">
+  <section class="section apartments-hero">
+    <div class="container apartments-hero__grid">
+      <div class="apartments-hero__copy">
+        <span class="eyebrow">Comfortable stays</span>
+        <h1>
+          Apartments, rooms, and <span class="accent-italic">villa</span> near Atrani
+        </h1>
+        <p class="lead">
+          Most of our apartments are located in the center of Atrani, just a 2-minute walk from
+          the main square and Atrani's beach.
+        </p>
+        <div class="apartments-hero__stats">
+          {stats.map((item) => (
+            <div class="stat">
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="apartments-hero__visual">
+        <div class="image-stack">
+          <figure class="image-frame image-frame--tall">
+            <img
+              src={placeholder}
+              data-wp-id="5734"
+              alt="View over Atrani rooftops"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <figure class="image-frame image-frame--wide">
+            <img
+              src={placeholder}
+              data-wp-id="2285"
+              alt="Cozy apartment interior"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
     </div>
   </section>
+
+  <section class="section section--highlight">
+    <div class="container highlight-card">
+      <div class="highlight-card__header">
+        <span class="badge">Signature stay</span>
+        <h2>{villaSusy.title}</h2>
+      </div>
+      <div class="highlight-card__body">
+        <div class="highlight-card__details">
+          <h3>{villaSusy.name}</h3>
+          <p>{villaSusy.description}</p>
+          <div class="availability">
+            <i class="bi bi-calendar3"></i>
+            <span>Availability: {villaSusy.availability}</span>
+          </div>
+        </div>
+        <div class="gallery">
+          {villaSusy.gallery.map((imageId) => (
+            <div class="gallery__item">
+              <img
+                src={placeholder}
+                data-wp-id={String(imageId)}
+                alt={`${villaSusy.name} gallery`}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container section__header">
+      <h2>Suites by the sea</h2>
+      <p>Apartment options that keep you close to the beach and the Atrani rhythm.</p>
+    </div>
+    <div class="container grid grid--two">
+      {suites.map((suite) => (
+        <article class="card suite-card">
+          <div class="suite-card__media">
+            {suite.gallery.map((imageId) => (
+              <div class="suite-card__image">
+                <img
+                  src={placeholder}
+                  data-wp-id={String(imageId)}
+                  alt={`${suite.name} image`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
+          </div>
+          <div class="suite-card__content">
+            <h3>{suite.name}</h3>
+            <p>{suite.description}</p>
+            <div class="suite-card__footer">
+              <div class="availability">
+                <i class="bi bi-calendar3"></i>
+                <span>Availability: {suite.availability}</span>
+              </div>
+              {suite.cta && (
+                <a class="button small" href={suite.cta.href} target="_blank" rel="noreferrer">
+                  <i class="bi bi-calendar-check"></i> {suite.cta.label}
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container section__header">
+      <h2>Rooms in our townhouse</h2>
+      <p>Design-led rooms with balconies and vintage details in the heart of Atrani.</p>
+    </div>
+    <div class="container grid grid--three">
+      {townhouseRooms.map((room) => (
+        <article class="card room-card">
+          <div class="room-card__media">
+            <img
+              src={placeholder}
+              data-wp-id={String(room.image)}
+              alt={room.name}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="room-card__content">
+            <h3>{room.name}</h3>
+            <p>{room.description}</p>
+            <div class="availability">
+              <i class="bi bi-calendar3"></i>
+              <span>Availability: {room.availability}</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--budget">
+    <div class="container section__header">
+      <h2>Cost-effective stays</h2>
+      <p>Smart, comfortable rooms for short stays and solo adventures.</p>
+    </div>
+    <div class="container budget-grid">
+      <figure class="budget-hero">
+        <img
+          src={placeholder}
+          data-wp-id="2247"
+          alt="Budget-friendly stay in Atrani"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          Affordable rooms with the same Amalfi soul, just lighter on the budget.
+        </figcaption>
+      </figure>
+      <div class="budget-grid__rooms">
+        {budgetRooms.map((room) => (
+          <article class="card room-card room-card--compact">
+            <div class="room-card__media">
+              <img
+                src={placeholder}
+                data-wp-id={String(room.image)}
+                alt={room.name}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="room-card__content">
+              <h3>{room.name}</h3>
+              <p>{room.description}</p>
+              <div class="availability">
+                <i class="bi bi-calendar3"></i>
+                <span>Availability: {room.availability}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--adventure">
+    <div class="container adventure-grid">
+      <div class="adventure-copy">
+        <span class="eyebrow">amalfi.day</span>
+        <h2>Adventure awaits</h2>
+        <p class="lead">
+          We offer comfortable and cost-effective stays in apartments, rooms, and a villa near
+          Atrani. Most of their apartments are located in the center of Atrani, just a 2-minute
+          walk from the main square and Atrani's beach. With 15+ years of experience and 1000+
+          five star Airbnb reviews, they are a trusted and reliable choice for travelers.
+        </p>
+        <div class="adventure-pillars">
+          <div class="pillar">
+            <h3>Comfortable</h3>
+            <p>
+              As we understand the needs of travelers visiting Amalfi, we have designed our
+              rooms and apartments to be comfortable for short-term stays.
+            </p>
+          </div>
+          <div class="pillar">
+            <h3>...and cost-effective</h3>
+            <p>
+              We understand that budget can be a concern for travelers, so we have several
+              cost-effective options that will ensure your holiday in Amalfi is enjoyable and
+              fantastic.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="adventure-media">
+        <img
+          src={placeholder}
+          data-wp-id="3898"
+          alt="Atrani townscape at sunset"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials">
+    <div class="container section__header">
+      <h2>Guest impressions</h2>
+      <p>Recent words from travelers who stayed with us in Atrani.</p>
+    </div>
+    <div class="container grid grid--two testimonials__grid">
+      {testimonials.map((item) => (
+        <article class="card testimonial">
+          <p>"{item.quote}"</p>
+          <div class="testimonial__meta">
+            <strong>{item.author}</strong>
+            <span>{item.meta}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
 </BaseLayout>
+
+<script is:inline>
+  ;(() => {
+    const images = Array.from(document.querySelectorAll('img[data-wp-id]'))
+    if (!images.length) return
+
+    const ids = [...new Set(images.map((img) => img.dataset.wpId).filter(Boolean))]
+    const apiBase = 'https://amalfi.day/wp-json/wp/v2/media/'
+    const cache = new Map()
+
+    const fetchMedia = async (id) => {
+      if (cache.has(id)) return cache.get(id)
+      try {
+        const res = await fetch(`${apiBase}${id}`)
+        if (!res.ok) throw new Error(`media ${id} not found`)
+        const data = await res.json()
+        const media = { url: data.source_url, alt: data.alt_text }
+        cache.set(id, media)
+        return media
+      } catch (error) {
+        console.warn(error)
+        cache.set(id, null)
+        return null
+      }
+    }
+
+    ids.forEach(async (id) => {
+      const media = await fetchMedia(id)
+      if (!media) return
+      images
+        .filter((img) => img.dataset.wpId === id)
+        .forEach((img) => {
+          img.src = media.url
+          if (!img.alt && media.alt) {
+            img.alt = media.alt
+          }
+        })
+    })
+  })()
+</script>
+
+<style>
+  .apartments-hero {
+    position: relative;
+    background: linear-gradient(120deg, rgba(255, 89, 0, 0.08), rgba(0, 156, 255, 0.08));
+  }
+
+  .apartments-hero__grid {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .apartments-hero__copy h1 {
+    font-size: clamp(2.5rem, 4vw, 3.6rem);
+    margin-bottom: 1rem;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .apartments-hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .stat {
+    min-width: 160px;
+    padding: 1rem 1.4rem;
+    border-radius: 16px;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .stat strong {
+    font-size: 1.6rem;
+    display: block;
+    color: var(--color-text);
+  }
+
+  .stat span {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .apartments-hero__visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .image-stack {
+    position: relative;
+    width: min(460px, 100%);
+    height: 520px;
+  }
+
+  .image-frame {
+    overflow: hidden;
+    border-radius: 22px;
+    box-shadow: var(--shadow-lift);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: var(--color-surface);
+  }
+
+  .image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-frame--tall {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 70%;
+    height: 100%;
+  }
+
+  .image-frame--wide {
+    position: absolute;
+    bottom: -4%;
+    right: 0;
+    width: 58%;
+    height: 45%;
+    border: 8px solid var(--color-bg);
+  }
+
+  .section--highlight {
+    padding-top: 0;
+  }
+
+  .highlight-card {
+    background: var(--color-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    padding: 2.5rem;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .highlight-card__header h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+  }
+
+  .highlight-card__body {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  .availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-surface);
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    margin-top: 1rem;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .gallery__item {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .gallery__item img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .section__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .suite-card {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .suite-card__media {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .suite-card__image {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .suite-card__image img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .suite-card__footer {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .button.small {
+    padding: 0.6rem 1.1rem;
+    font-size: 0.9rem;
+  }
+
+  .room-card {
+    display: grid;
+    gap: 1.2rem;
+    padding: 1.4rem;
+  }
+
+  .room-card__media img {
+    width: 100%;
+    border-radius: 16px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+  }
+
+  .room-card--compact .room-card__media img {
+    aspect-ratio: 3 / 2;
+  }
+
+  .section--budget {
+    background: linear-gradient(120deg, rgba(255, 195, 0, 0.1), rgba(255, 89, 0, 0.05));
+  }
+
+  .budget-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+
+  .budget-hero {
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    background: var(--color-card);
+    border-radius: var(--radius-lg);
+    padding: 1.2rem;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .budget-hero img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .budget-hero figcaption {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .budget-grid__rooms {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .section--adventure {
+    background: var(--color-surface);
+  }
+
+  .adventure-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+  }
+
+  .adventure-media img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .adventure-pillars {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 2rem;
+  }
+
+  .pillar {
+    padding: 1.2rem;
+    border-radius: 18px;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .testimonials__grid {
+    align-items: stretch;
+  }
+
+  .testimonial {
+    padding: 1.6rem;
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .testimonial p {
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+
+  .testimonial__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 1100px) {
+    .apartments-hero__grid,
+    .highlight-card__body,
+    .budget-grid,
+    .adventure-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .image-stack {
+      height: 420px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .grid--two {
+      grid-template-columns: 1fr;
+    }
+
+    .grid--three {
+      grid-template-columns: 1fr;
+    }
+
+    .adventure-pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .image-frame--wide {
+      position: static;
+      width: 100%;
+      height: 40%;
+      margin-top: 1rem;
+      border: 0;
+    }
+
+    .image-stack {
+      height: auto;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .image-frame--tall {
+      position: static;
+      width: 100%;
+      height: 320px;
+    }
+
+    .suite-card__footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
