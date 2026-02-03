@@ -1,13 +1,13 @@
 # Ghost on Docker (Ubuntu)
 
 ## Files
-- `docker-compose.yml`
+- `dockercompose.yml`
 
 ## Quick start
 1. Start containers:
 
 ```bash
-docker compose up -d
+docker compose -f dockercompose.yml up -d
 ```
 
 2. Admin setup:
