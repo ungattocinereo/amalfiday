@@ -20,4 +20,4 @@ day.cristallpont.com {
 
 ## Notes
 - `output: "static"` is already set in `astro.config.mjs`.
-- If you need `/api/contact`, host it separately (static build has no server endpoints).
+- Contact form opens the user's email client (no server endpoints).

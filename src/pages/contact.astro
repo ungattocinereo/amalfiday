@@ -18,7 +18,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
         </div>
       </div>
 
-      <form class="contact__form" method="post" action="/api/contact">
+      <form class="contact__form">
         <label>
           Your name
           <input type="text" name="name" placeholder="Iana" required />
@@ -38,7 +38,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
         <button class="button" type="submit">
           <i class="bi bi-send"></i> Send request
         </button>
-        <p class="form__status" aria-live="polite"></p>
+        <p class="form__status" aria-live="polite">Opens your email client.</p>
       </form>
     </div>
   </section>
@@ -49,19 +49,26 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
     form?.addEventListener('submit', async (event) => {
       event.preventDefault()
-      status.textContent = 'Sending...'
+      status.textContent = 'Opening your email app...'
       const formData = new FormData(form)
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        body: formData,
-      })
+      const name = formData.get('name') || ''
+      const contact = formData.get('contact') || ''
+      const dates = formData.get('dates') || ''
+      const message = formData.get('message') || ''
 
-      if (response.ok) {
-        form.reset()
-        status.textContent = 'Sent! I will get back to you shortly.'
-      } else {
-        status.textContent = 'Something went wrong. Please email hello@amalfi.day.'
-      }
+      const body = [
+        `Name: ${name}`,
+        `Contact: ${contact}`,
+        dates ? `Dates/Location: ${dates}` : null,
+        `Message: ${message}`,
+      ]
+        .filter(Boolean)
+        .join('\n')
+
+      const mailto = `mailto:hello@amalfi.day?subject=${encodeURIComponent(
+        'Amalfi Day Inquiry'
+      )}&body=${encodeURIComponent(body)}`
+      window.location.href = mailto
     })
   </script>
 </BaseLayout>
