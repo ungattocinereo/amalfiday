@@ -1,28 +1,19 @@
 # Ghost on Docker (Ubuntu)
 
 ## Files
-- `docker-compose.ghost.yml`
-- `.env.ghost` (copy from `.env.ghost.example`)
+- `docker-compose.yml`
 
 ## Quick start
-1. Copy env file:
+1. Start containers:
 
 ```bash
-cp .env.ghost.example .env.ghost
+docker compose up -d
 ```
 
-2. Edit `.env.ghost` and set strong passwords.
-
-3. Start containers:
-
-```bash
-docker compose -f docker-compose.ghost.yml --env-file .env.ghost up -d
-```
-
-4. Admin setup:
+2. Admin setup:
 Open `https://day.cristallpont.com/ghost` and complete the Ghost setup wizard.
 
 ## Notes
 - Database: MariaDB (same env vars as MySQL).
-- Caddy should proxy `/ghost` and `/ghost/*` to `127.0.0.1:2368`.
+- Caddy should proxy `/ghost` and `/ghost/*` to `127.0.0.1:40001`.
 - If you want Ghost to also serve the public blog, proxy `/` to Ghost instead of Astro.
