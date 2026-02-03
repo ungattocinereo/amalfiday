@@ -13,14 +13,19 @@ import { blogCategories, blogTags } from '../../data/site'
 
       <div class="filters">
         {blogCategories.map((cat) => (
-          <button class="chip">{cat}</button>
+          <button class="chip">
+            <i class="bi bi-tag"></i> {cat}
+          </button>
         ))}
       </div>
 
       <div class="tag-row">
         <span>Tags:</span>
         {blogTags.map((tag) => (
-          <span class="tag">#{tag}</span>
+          <span class="tag">
+            <i class="bi bi-hash"></i>
+            {tag}
+          </span>
         ))}
       </div>
 
@@ -28,20 +33,28 @@ import { blogCategories, blogTags } from '../../data/site'
         <article class="card">
           <div class="media"></div>
           <div class="content">
-            <div class="meta">Fashion • Oct 07, 2025</div>
+            <div class="meta">
+              <i class="bi bi-calendar3"></i> Fashion • Oct 07, 2025
+            </div>
             <h3>Golden hour fashion shoot in Atrani</h3>
             <p>Styling tips and the best light for late-season shoots.</p>
-            <a href="/blog/golden-hour-fashion">Read more →</a>
+            <a href="/blog/golden-hour-fashion">
+              <i class="bi bi-arrow-up-right"></i> Read more
+            </a>
           </div>
         </article>
 
         <article class="card">
           <div class="media"></div>
           <div class="content">
-            <div class="meta">Motorbike • Sep 21, 2025</div>
+            <div class="meta">
+              <i class="bi bi-calendar3"></i> Motorbike • Sep 21, 2025
+            </div>
             <h3>Best coastal roads for a sunrise ride</h3>
             <p>Routes, stops, and photo spots for riders.</p>
-            <a href="/blog/sunrise-ride">Read more →</a>
+            <a href="/blog/sunrise-ride">
+              <i class="bi bi-arrow-up-right"></i> Read more
+            </a>
           </div>
         </article>
       </div>
@@ -68,6 +81,9 @@ import { blogCategories, blogTags } from '../../data/site'
     border-radius: 999px;
     cursor: pointer;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .chip:hover {
@@ -89,6 +105,9 @@ import { blogCategories, blogTags } from '../../data/site'
     background: var(--color-surface);
     padding: 0.3rem 0.7rem;
     border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
   }
 
   .grid {
@@ -111,5 +130,8 @@ import { blogCategories, blogTags } from '../../data/site'
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 </style>

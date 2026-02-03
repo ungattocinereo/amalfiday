@@ -21,24 +21,30 @@ const heroApartments = [
       <div class="hero__grid">
         <div class="hero__panel hero__panel--pdf" id="ferry">
           <div class="hero__panel-head">
-            <span class="badge">Ferry timetables</span>
+            <span class="badge"><i class="bi bi-ship"></i> Ferry timetables</span>
             <span class="hero__meta">PDF preview placeholder</span>
           </div>
           <div class="hero__pdf"></div>
-          <a class="hero__action" href={heroLinks.ferryPdf}>Open ferry PDF →</a>
+          <a class="hero__action" href={heroLinks.ferryPdf}>
+            <i class="bi bi-file-earmark-pdf"></i> Open ferry PDF
+          </a>
         </div>
 
         <a class="hero__panel hero__panel--bus" href={heroLinks.busPdf} id="bus">
           <div>
-            <div class="hero__panel-title">Bus timetables</div>
+            <div class="hero__panel-title">
+              <i class="bi bi-bus-front"></i> Bus timetables
+            </div>
             <p>Download the latest bus PDF schedule.</p>
           </div>
-          <span class="hero__action">Download →</span>
+          <span class="hero__action"><i class="bi bi-download"></i> Download</span>
         </a>
 
         <div class="hero__panel hero__panel--apartments">
           <div>
-            <div class="hero__panel-title">Наши апартаменты</div>
+            <div class="hero__panel-title">
+              <i class="bi bi-building"></i> Наши апартаменты
+            </div>
             <p>
               Stylish stays with the best light, perfect for your Amalfi story and photo days.
             </p>
@@ -54,10 +60,12 @@ const heroApartments = [
 
         <a class="hero__panel hero__panel--download" href={heroLinks.ferryPdf}>
           <div>
-            <div class="hero__panel-title">Ferry PDF</div>
+            <div class="hero__panel-title">
+              <i class="bi bi-file-earmark-pdf"></i> Ferry PDF
+            </div>
             <p>Download full ferry schedule.</p>
           </div>
-          <span class="hero__action">Download →</span>
+          <span class="hero__action"><i class="bi bi-download"></i> Download</span>
         </a>
       </div>
     </div>
@@ -76,6 +84,9 @@ const heroApartments = [
           <a class="card static-card" href={item.href}>
             <h3>{item.title}</h3>
             <p>{item.note}</p>
+            <span class="static-card__icon">
+              <i class="bi bi-arrow-up-right"></i>
+            </span>
           </a>
         ))}
       </div>
@@ -96,7 +107,7 @@ const heroApartments = [
             <div class="scroll__media" data-index={index}></div>
             <div class="scroll__overlay">
               <h3>{item.title}</h3>
-              <span>{item.location}</span>
+              <span><i class="bi bi-geo-alt"></i> {item.location}</span>
             </div>
           </a>
         ))}
@@ -113,7 +124,7 @@ const heroApartments = [
         <p>Prints, presets, and handcrafted Amalfi souvenirs.</p>
       </div>
       <a class="button secondary" href={etsyUrl} target="_blank" rel="noreferrer">
-        Open Etsy store →
+        <i class="bi bi-bag-heart"></i> Open Etsy store
       </a>
     </div>
   </section>
@@ -129,8 +140,12 @@ const heroApartments = [
           crafts. Let’s make it unforgettable.
         </p>
         <div class="prefooter__actions">
-          <a class="button" href="/contact">Send a request</a>
-          <a class="prefooter__link" href="/experience">Check our experiences →</a>
+          <a class="button" href="/contact">
+            <i class="bi bi-send"></i> Send a request
+          </a>
+          <a class="prefooter__link" href="/experience">
+            <i class="bi bi-stars"></i> Check our experiences
+          </a>
         </div>
       </div>
       <div class="prefooter__media">
@@ -182,6 +197,24 @@ const heroApartments = [
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+  }
+
+  .hero__panel-head .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .hero__panel-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hero__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .hero__panel--pdf {
@@ -266,6 +299,16 @@ const heroApartments = [
 
   .static-card {
     padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .static-card__icon {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
   }
 
   .scroll {
@@ -306,6 +349,12 @@ const heroApartments = [
     padding: 1.5rem;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
     color: #ffffff;
+  }
+
+  .scroll__overlay span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .etsy {
@@ -349,6 +398,9 @@ const heroApartments = [
   .prefooter__link {
     font-weight: 600;
     color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .prefooter__media {

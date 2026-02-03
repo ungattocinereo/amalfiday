@@ -35,7 +35,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
           Your message
           <textarea name="message" rows="5" placeholder="Tell me about your shoot" required></textarea>
         </label>
-        <button class="button" type="submit">Send request</button>
+        <button class="button" type="submit">
+          <i class="bi bi-send"></i> Send request
+        </button>
         <p class="form__status" aria-live="polite"></p>
       </form>
     </div>
@@ -90,6 +92,12 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     border-radius: var(--radius-lg);
     background: var(--color-card);
     box-shadow: var(--shadow-soft);
+  }
+
+  .contact__form button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   label {

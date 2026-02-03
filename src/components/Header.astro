@@ -35,30 +35,71 @@ const headerSocials = socialLinks.filter((item) =>
         <i class="bi bi-moon-stars"></i>
         <i class="bi bi-sun"></i>
       </button>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <i class="bi bi-list"></i>
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-panel">
+    <div class="mobile-panel__links">
+      {navigation.map((item) => (
+        <a class="mobile-panel__link" href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </div>
+    <div class="mobile-panel__social">
+      {headerSocials.map((item) => (
+        <a class="social__link" href={item.href} target="_blank" rel="noreferrer">
+          <span class="sr-only">{item.label}</span>
+          {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
+          {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
+          {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
+        </a>
+      ))}
     </div>
   </div>
 </header>
 
 <script is:inline>
   const root = document.documentElement
-  const stored = localStorage.getItem('theme')
-  const prefersDark =
-    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-  const initial = stored || (prefersDark ? 'night' : 'day')
-  root.dataset.theme = initial
+  const header = document.querySelector('.header')
+  const themeToggle = document.querySelector('.theme-toggle')
+  const menuToggle = document.querySelector('.menu-toggle')
 
-  const toggle = document.querySelector('.theme-toggle')
-  toggle?.addEventListener('click', () => {
+  const setTheme = (value) => {
+    root.dataset.theme = value
+    try {
+      localStorage.setItem('theme', value)
+    } catch (error) {
+      // ignore storage errors
+    }
+  }
+
+  themeToggle?.addEventListener('click', () => {
     const next = root.dataset.theme === 'night' ? 'day' : 'night'
-    root.dataset.theme = next
-    localStorage.setItem('theme', next)
+    setTheme(next)
   })
 
-  const header = document.querySelector('.header')
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = header?.classList.toggle('menu-open')
+    menuToggle?.setAttribute('aria-expanded', String(isOpen))
+  })
+
+  document.querySelectorAll('.mobile-panel__link').forEach((link) => {
+    link.addEventListener('click', () => {
+      header?.classList.remove('menu-open')
+      menuToggle?.setAttribute('aria-expanded', 'false')
+    })
+  })
+
   const onScroll = () => {
     header?.classList.toggle('is-scrolled', window.scrollY > 12)
   }
+
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('load', onScroll)
   onScroll()
 </script>
 
@@ -71,6 +112,7 @@ const headerSocials = socialLinks.filter((item) =>
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-nav-border);
     transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    overflow: visible;
   }
 
   .header.is-scrolled {
@@ -83,12 +125,12 @@ const headerSocials = socialLinks.filter((item) =>
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 2rem;
-    padding: 1.2rem 0;
+    padding: 1.35rem 0;
     transition: padding 0.2s ease;
   }
 
   .header.is-scrolled .header__inner {
-    padding: 0.7rem 0;
+    padding: 0.6rem 0;
   }
 
   .logo {
@@ -97,6 +139,11 @@ const headerSocials = socialLinks.filter((item) =>
 
   .logo img {
     height: 36px;
+    transition: transform 0.2s ease;
+  }
+
+  .header.is-scrolled .logo img {
+    transform: scale(0.92);
   }
 
   .logo--light {
@@ -175,17 +222,22 @@ const headerSocials = socialLinks.filter((item) =>
   }
 
   .theme-toggle {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    border: 1px solid var(--color-border);
-    background: transparent;
+    border: 1px solid rgba(255, 89, 0, 0.4);
+    background: radial-gradient(
+      circle at top left,
+      rgba(255, 195, 0, 0.2),
+      rgba(255, 89, 0, 0.08)
+    );
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--color-text);
     transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    box-shadow: inset 0 0 0 2px rgba(255, 89, 0, 0.08);
   }
 
   .theme-toggle i {
@@ -210,6 +262,68 @@ const headerSocials = socialLinks.filter((item) =>
     transform: translateY(-1px);
   }
 
+  .menu-toggle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-text);
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .menu-toggle i {
+    font-size: 1.05rem;
+  }
+
+  .menu-toggle .bi-x-lg {
+    display: none;
+  }
+
+  .header.menu-open .menu-toggle .bi-list {
+    display: none;
+  }
+
+  .header.menu-open .menu-toggle .bi-x-lg {
+    display: inline;
+  }
+
+  .mobile-panel {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    border-top: 1px solid var(--color-nav-border);
+    background: var(--color-nav-bg-strong);
+    padding: 1.5rem 0 2rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .mobile-panel__links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .mobile-panel__link {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .mobile-panel__social {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -229,8 +343,7 @@ const headerSocials = socialLinks.filter((item) =>
     }
 
     .nav {
-      flex-wrap: wrap;
-      justify-content: center;
+      display: none;
     }
 
     .logo {
@@ -238,7 +351,15 @@ const headerSocials = socialLinks.filter((item) =>
     }
 
     .social {
-      justify-content: center;
+      display: none;
+    }
+
+    .menu-toggle {
+      display: inline-flex;
+    }
+
+    .header.menu-open .mobile-panel {
+      display: block;
     }
   }
 </style>

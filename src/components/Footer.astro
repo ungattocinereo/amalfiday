@@ -27,7 +27,21 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noreferrer' : undefined}
         >
-          <i class="bi bi-arrow-down-right footer__icon"></i>
+          {item.label === 'Ferry timetables' && (
+            <i class="bi bi-ship footer__icon"></i>
+          )}
+          {item.label === 'Bus timetables' && (
+            <i class="bi bi-bus-front footer__icon"></i>
+          )}
+          {item.label === 'Airport shuttle' && (
+            <i class="bi bi-airplane footer__icon"></i>
+          )}
+          {item.label === "Gregory's guide" && (
+            <i class="bi bi-map footer__icon"></i>
+          )}
+          {item.label === 'Our photoblog' && (
+            <i class="bi bi-journal-text footer__icon"></i>
+          )}
           {item.label}
         </a>
       ))}
@@ -41,7 +55,15 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noreferrer' : undefined}
         >
-          <i class="bi bi-house-heart footer__icon"></i>
+          {item.label === 'Booking.com' && (
+            <i class="bi bi-building footer__icon"></i>
+          )}
+          {item.label === 'Airbnb' && (
+            <i class="bi bi-house-door footer__icon"></i>
+          )}
+          {item.label === 'Apartments overview' && (
+            <i class="bi bi-house-heart footer__icon"></i>
+          )}
           {item.label}
         </a>
       ))}
@@ -50,7 +72,18 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
     <div class="footer__column">
       {footerLinks.info.map((item) => (
         <a class="footer__link" href={item.href}>
-          <i class="bi bi-compass footer__icon"></i>
+          {item.label === 'How to get here' && (
+            <i class="bi bi-geo-alt footer__icon"></i>
+          )}
+          {item.label === 'What to do' && (
+            <i class="bi bi-stars footer__icon"></i>
+          )}
+          {item.label === 'Parking tips' && (
+            <i class="bi bi-p-circle footer__icon"></i>
+          )}
+          {item.label === 'Beach reviews' && (
+            <i class="bi bi-umbrella footer__icon"></i>
+          )}
           {item.label}
         </a>
       ))}
