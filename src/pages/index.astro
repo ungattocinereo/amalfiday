@@ -167,12 +167,13 @@ const newsPosts = await getGhostPosts({ limit: 8 })
   <section class="section etsy">
     <div class="container etsy__inner">
       <div class="etsy__copy">
-        <div class="etsy__header">
+        <div class="section__header etsy__header">
           <h2>
             Dress to <span class="accent-orange">express</span>
           </h2>
           <span class="section__subtitle-link etsy__subtitle">
-            Prints, presets, and handcrafted Amalfi souvenirs <strong>coming soon</strong>.
+            Prints, presets, and handcrafted Amalfi souvenirs<br />
+            <strong>coming soon</strong>
           </span>
         </div>
       </div>
@@ -636,10 +637,7 @@ const newsPosts = await getGhostPosts({ limit: 8 })
   }
 
   .etsy__header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 2rem;
+    margin-bottom: 0;
     width: 100%;
   }
 
