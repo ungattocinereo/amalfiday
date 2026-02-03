@@ -10,3 +10,5 @@ dist
 .codex
 .opencode
 .env.ghost
+package-lock.json
+.vercel

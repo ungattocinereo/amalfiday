@@ -2,7 +2,7 @@
 
 ## Build
 ```bash
-npm ci
+npm install
 npm run build:static
 ```
 

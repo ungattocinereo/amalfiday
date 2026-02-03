@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { brotliCompress, gzip } from 'node:zlib'
+import { brotliCompress, constants as zlibConstants, gzip } from 'node:zlib'
 import { promisify } from 'node:util'
 
 const brotli = promisify(brotliCompress)
@@ -23,7 +23,7 @@ const compressExtensions = new Set([
 
 const brotliOptions = {
   params: {
-    0x1000: 11, // BROTLI_PARAM_QUALITY
+    [zlibConstants.BROTLI_PARAM_QUALITY]: 11,
   },
 }
 
