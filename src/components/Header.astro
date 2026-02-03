@@ -298,11 +298,11 @@ const headerSocials = socialLinks.filter((item) =>
     display: none;
   }
 
-  [data-theme='night'] .logo__mark--day {
+  :global([data-theme='night']) .logo__mark--day {
     display: none;
   }
 
-  [data-theme='night'] .logo__mark--night {
+  :global([data-theme='night']) .logo__mark--night {
     display: block;
   }
 
@@ -399,39 +399,59 @@ const headerSocials = socialLinks.filter((item) =>
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    gap: 0.45rem;
     position: relative;
   }
 
   .theme-switch__icon {
-    width: 18px;
-    height: 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    color: currentColor;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 42px;
+    height: 21px;
+    pointer-events: none;
+    color: #ffffff;
+    z-index: 1;
   }
 
   .theme-switch__icon i {
     position: absolute;
-    font-size: 0.95rem;
+    font-size: 0.68rem;
     transition: opacity 0.2s ease, transform 0.2s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+
+  .theme-switch__icon .bi-moon-stars {
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .theme-switch__icon .bi-sun {
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .theme-switch__icon .bi-moon-stars {
     opacity: 0;
-    transform: scale(0.8);
+    transform: translateY(-50%) scale(0.8);
+    color: #ffffff;
   }
 
-  [data-theme='night'] .theme-switch__icon .bi-sun {
+  :global([data-theme='night']) .theme-switch__icon .bi-sun {
     opacity: 0;
-    transform: scale(0.8);
+    transform: translateY(-50%) scale(0.8);
   }
 
-  [data-theme='night'] .theme-switch__icon .bi-moon-stars {
+  :global([data-theme='night']) .theme-switch__icon .bi-moon-stars {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(-50%) scale(1);
+    color: #ffffff;
+  }
+
+  :global([data-theme='night']) .theme-switch__track {
+    background: #171c26;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
   }
 
   .theme-switch__input {
@@ -441,38 +461,40 @@ const headerSocials = socialLinks.filter((item) =>
   }
 
   .theme-switch__track {
-    width: 30px;
-    height: 16px;
+    width: 42px;
+    height: 21px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.35);
-    border: 1px solid var(--nav-outline);
+    background: #1b1f27;
+    border: none;
     display: inline-flex;
     align-items: center;
     padding: 2px;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: background 0.2s ease;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    position: relative;
+    z-index: 0;
   }
 
   .theme-switch__thumb {
-    width: 11px;
-    height: 11px;
+    width: 17px;
+    height: 17px;
     border-radius: 50%;
     background: #ffffff;
     transform: translateX(0);
     transition: transform 0.18s ease, background 0.2s ease;
     display: block;
     will-change: transform;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 2;
   }
 
   .theme-switch__input:checked + .theme-switch__track .theme-switch__thumb {
-    transform: translateX(14px);
+    transform: translateX(21px);
   }
 
-  [data-theme='night'] .theme-switch__track {
-    background: rgba(1, 98, 255, 0.35);
-  }
-
-  [data-theme='night'] .theme-switch__thumb {
-    transform: translateX(14px);
+  :global([data-theme='night']) .theme-switch__thumb {
+    transform: translateX(21px);
     background: #ffffff;
   }
 
@@ -496,8 +518,8 @@ const headerSocials = socialLinks.filter((item) =>
   }
 
   .header.on-hero .theme-switch__track {
-    background: transparent;
-    border-color: rgba(255, 255, 255, 0.35);
+    background: #1b1f27;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
   }
 
   .menu-toggle i {
