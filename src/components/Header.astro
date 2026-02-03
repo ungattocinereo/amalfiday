@@ -67,6 +67,7 @@ const headerSocials = socialLinks.filter((item) =>
   const header = document.querySelector('.header')
   const themeToggle = document.querySelector('.theme-toggle')
   const menuToggle = document.querySelector('.menu-toggle')
+  const hero = document.querySelector('.hero--orange')
 
   const setTheme = (value) => {
     root.dataset.theme = value
@@ -96,6 +97,13 @@ const headerSocials = socialLinks.filter((item) =>
 
   const onScroll = () => {
     header?.classList.toggle('is-scrolled', window.scrollY > 12)
+    if (hero) {
+      const heroBottom = hero.getBoundingClientRect().bottom
+      const onHero = window.scrollY < 12 && heroBottom > 80
+      header?.classList.toggle('on-hero', onHero)
+    } else {
+      header?.classList.remove('on-hero')
+    }
   }
 
   window.addEventListener('scroll', onScroll, { passive: true })
@@ -113,11 +121,22 @@ const headerSocials = socialLinks.filter((item) =>
     border-bottom: 1px solid var(--color-nav-border);
     transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     overflow: visible;
+    color: var(--color-text);
+    --nav-underline: var(--gradient-sunset);
+    --nav-outline: var(--color-border);
   }
 
   .header.is-scrolled {
     background: var(--color-nav-bg-strong);
     box-shadow: var(--shadow-soft);
+  }
+
+  .header.on-hero {
+    color: #ffffff;
+    background: rgba(255, 89, 0, 0.12);
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    --nav-underline: rgba(255, 255, 255, 0.95);
+    --nav-outline: rgba(255, 255, 255, 0.35);
   }
 
   .header__inner {
@@ -146,8 +165,20 @@ const headerSocials = socialLinks.filter((item) =>
     transform: scale(0.92);
   }
 
+  .logo--dark {
+    display: block;
+  }
+
   .logo--light {
     display: none;
+  }
+
+  .header.on-hero .logo--dark {
+    display: none;
+  }
+
+  .header.on-hero .logo--light {
+    display: block;
   }
 
   [data-theme='night'] .logo--dark {
@@ -166,8 +197,9 @@ const headerSocials = socialLinks.filter((item) =>
 
   .nav__link {
     font-weight: 500;
-    color: var(--color-text);
+    color: currentColor;
     position: relative;
+    text-decoration: none;
   }
 
   .nav__link::after {
@@ -177,12 +209,16 @@ const headerSocials = socialLinks.filter((item) =>
     bottom: -6px;
     width: 0;
     height: 2px;
-    background: var(--gradient-sunset);
+    background: var(--nav-underline);
     transition: width 0.2s ease;
   }
 
   .nav__link:hover::after {
     width: 100%;
+  }
+
+  .nav__link:hover {
+    text-decoration: none;
   }
 
   .social {
@@ -196,11 +232,11 @@ const headerSocials = socialLinks.filter((item) =>
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--nav-outline);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text);
+    color: currentColor;
     transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
 
@@ -225,7 +261,7 @@ const headerSocials = socialLinks.filter((item) =>
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 89, 0, 0.4);
+    border: 1px solid var(--nav-outline);
     background: radial-gradient(
       circle at top left,
       rgba(255, 195, 0, 0.2),
@@ -235,7 +271,7 @@ const headerSocials = socialLinks.filter((item) =>
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--color-text);
+    color: currentColor;
     transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     box-shadow: inset 0 0 0 2px rgba(255, 89, 0, 0.08);
   }
@@ -266,13 +302,13 @@ const headerSocials = socialLinks.filter((item) =>
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--nav-outline);
     background: var(--color-card);
     display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--color-text);
+    color: currentColor;
     transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
 

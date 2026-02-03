@@ -9,63 +9,69 @@ const staticPages = [
   { title: 'Beach reviews', href: '/beaches', note: 'Where to swim, relax, and shoot.' },
 ]
 
-const heroApartments = [
-  { label: 'Booking.com', href: 'https://www.booking.com' },
-  { label: 'Airbnb', href: 'https://www.airbnb.com' },
-]
 ---
 <BaseLayout title="Amalfi.Day — CrystalPontomAlphiday">
-  <section class="hero">
-    <div class="container">
-      <div class="hero__mast">CrystalPontomAlphiday</div>
-      <div class="hero__grid">
-        <div class="hero__panel hero__panel--pdf" id="ferry">
-          <div class="hero__panel-head">
-            <span class="badge"><i class="bi bi-ship"></i> Ferry timetables</span>
-            <span class="hero__meta">PDF preview placeholder</span>
-          </div>
-          <div class="hero__pdf"></div>
-          <a class="hero__action" href={heroLinks.ferryPdf}>
-            <i class="bi bi-file-earmark-pdf"></i> Open ferry PDF
-          </a>
+  <section class="hero hero--orange">
+    <div class="container hero__inner">
+      <div class="hero__intro">
+        <h1 class="hero__title">
+          Cristall Pont <span class="hero__domain">/amalfi.day</span>
+        </h1>
+        <p class="hero__lead">
+          Here you can find public transport timetables. Information about parking in Amalfi &
+          Atrani. Places to take perfect photos and much more...
+        </p>
+        <div class="hero__lines">
+          <span><i class="bi bi-bus-front"></i> Public transport timetables</span>
+          <span><i class="bi bi-p-circle"></i> Parking in Amalfi & Atrani</span>
+          <span><i class="bi bi-camera"></i> Places to take perfect photos</span>
         </div>
+      </div>
 
-        <a class="hero__panel hero__panel--bus" href={heroLinks.busPdf} id="bus">
-          <div>
-            <div class="hero__panel-title">
-              <i class="bi bi-bus-front"></i> Bus timetables
-            </div>
-            <p>Download the latest bus PDF schedule.</p>
+      <div class="hero__grid">
+        <a class="guide-card" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
+          <div class="guide-card__image"></div>
+          <div class="guide-card__content">
+            <span class="guide-card__eyebrow">guide.amalfi.day</span>
+            <h3>
+              Take your <span class="accent-italic">Amalfi in a Pocket</span>
+            </h3>
+            <p>
+              Plan your perfect Amalfi Coast day with ready-to-use ideas for walks, swims, moto
+              rides, and food stops — with clear directions, offline-friendly maps, and
+              simplified transport timings.
+            </p>
+            <span class="guide-card__cta">
+              <i class="bi bi-arrow-up-right"></i> Open the guide
+            </span>
           </div>
-          <span class="hero__action"><i class="bi bi-download"></i> Download</span>
         </a>
 
-        <div class="hero__panel hero__panel--apartments">
+        <a class="hero__mini" href={heroLinks.busPdf} id="bus">
+          <i class="bi bi-bus-front"></i>
           <div>
-            <div class="hero__panel-title">
-              <i class="bi bi-building"></i> Наши апартаменты
-            </div>
-            <p>
-              Stylish stays with the best light, perfect for your Amalfi story and photo days.
-            </p>
+            <strong>Bus timetables</strong>
+            <span>Download PDF</span>
           </div>
-          <div class="hero__chips">
-            {heroApartments.map((link) => (
-              <a class="chip" href={link.href} target="_blank" rel="noreferrer">
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
+          <i class="bi bi-download"></i>
+        </a>
 
-        <a class="hero__panel hero__panel--download" href={heroLinks.ferryPdf}>
+        <a class="hero__mini" href={heroLinks.ferryPdf} id="ferry">
+          <i class="bi bi-ship"></i>
           <div>
-            <div class="hero__panel-title">
-              <i class="bi bi-file-earmark-pdf"></i> Ferry PDF
-            </div>
-            <p>Download full ferry schedule.</p>
+            <strong>Ferry timetables</strong>
+            <span>Download PDF</span>
           </div>
-          <span class="hero__action"><i class="bi bi-download"></i> Download</span>
+          <i class="bi bi-download"></i>
+        </a>
+
+        <a class="hero__mini" href="/apartments">
+          <i class="bi bi-building"></i>
+          <div>
+            <strong>Наши апартаменты</strong>
+            <span>Booking & Airbnb options</span>
+          </div>
+          <i class="bi bi-arrow-up-right"></i>
         </a>
       </div>
     </div>
@@ -165,118 +171,169 @@ const heroApartments = [
 
 <style>
   .hero {
-    padding: 4rem 0 3rem;
+    padding: 6rem 0 4.5rem;
+    position: relative;
+    background: #ff5900;
+    color: #ffffff;
+    overflow: hidden;
   }
 
-  .hero__mast {
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -40%;
+    width: min(1200px, 140vw);
+    height: min(1200px, 140vw);
+    transform: translateX(-50%);
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 195, 0, 0.95) 0%,
+      rgba(255, 126, 0, 0.9) 45%,
+      rgba(255, 89, 0, 1) 72%
+    );
+    opacity: 0.95;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .hero__intro {
+    text-align: center;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(2.8rem, 5vw, 4.4rem);
-    margin-bottom: 2.5rem;
+    font-size: clamp(2.8rem, 5vw, 4.6rem);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero__domain {
+    font-style: italic;
+    opacity: 0.9;
+  }
+
+  .hero__lead {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .hero__lines span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
   }
 
   .hero__grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 1.2rem;
+    align-items: stretch;
   }
 
-  .hero__panel {
-    border-radius: var(--radius-lg);
-    background: var(--color-card);
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-soft);
+  .guide-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    padding: 2.2rem;
+    color: #1a1a1a;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    min-height: 320px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-end;
+    text-decoration: none;
   }
 
-  .hero__panel-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+  .guide-card:hover {
+    text-decoration: none;
   }
 
-  .hero__panel-head .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
+  .guide-card__image {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 195, 0, 0.2),
+        rgba(0, 156, 255, 0.2)
+      ),
+      radial-gradient(circle at 20% 30%, rgba(255, 89, 0, 0.2), transparent 60%);
   }
 
-  .hero__panel-title {
+  .guide-card__content {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+  }
+
+  .guide-card__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgba(26, 26, 26, 0.6);
+  }
+
+  .guide-card h3 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin: 0.8rem 0;
+  }
+
+  .guide-card p {
+    color: rgba(26, 26, 26, 0.7);
+  }
+
+  .guide-card__cta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-  }
-
-  .hero__action {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .hero__panel--pdf {
-    grid-row: span 2;
-    background: linear-gradient(135deg, rgba(255, 195, 0, 0.12), rgba(0, 156, 255, 0.08));
-  }
-
-  .hero__pdf {
-    flex: 1;
-    margin: 1.2rem 0;
-    border-radius: var(--radius-md);
-    background: repeating-linear-gradient(
-      -45deg,
-      rgba(255, 255, 255, 0.8),
-      rgba(255, 255, 255, 0.8) 12px,
-      rgba(240, 242, 246, 0.8) 12px,
-      rgba(240, 242, 246, 0.8) 24px
-    );
-    min-height: 260px;
-  }
-
-  .hero__panel--bus {
-    background: #0d1b2a;
-    color: #ffffff;
-    gap: 1rem;
-  }
-
-  .hero__panel--bus p {
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  .hero__panel--bus .hero__action {
-    color: #ffffff;
-  }
-
-  .hero__panel--apartments {
-    background: var(--color-card);
-    gap: 1rem;
-  }
-
-  .hero__panel--download {
-    background: linear-gradient(135deg, rgba(1, 98, 255, 0.12), rgba(0, 156, 255, 0.2));
-  }
-
-  .hero__panel-title {
-    font-size: 1.1rem;
     font-weight: 600;
+    color: var(--color-aux);
   }
 
-  .hero__meta {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
-
-  .hero__action {
-    font-weight: 600;
-  }
-
-  .hero__chips {
+  .hero__mini {
+    border-radius: 18px;
+    padding: 1.2rem 1.4rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #ffffff;
     display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    backdrop-filter: blur(8px);
+    text-decoration: none;
+  }
+
+  .hero__mini:hover {
+    text-decoration: none;
+  }
+
+  .hero__mini strong {
+    display: block;
+    font-size: 1rem;
+  }
+
+  .hero__mini span {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
   }
 
   .section__header {
@@ -434,11 +491,6 @@ const heroApartments = [
   @media (max-width: 1000px) {
     .hero__grid {
       grid-template-columns: 1fr;
-      grid-template-rows: auto;
-    }
-
-    .hero__panel--pdf {
-      grid-row: auto;
     }
 
     .prefooter__inner {
@@ -455,6 +507,19 @@ const heroApartments = [
     .section__header {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .hero {
+      padding: 5rem 0 3rem;
+    }
+
+    .hero__lines {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .hero__intro {
+      text-align: left;
     }
   }
 </style>
