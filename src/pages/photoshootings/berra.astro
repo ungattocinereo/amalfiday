@@ -2,6 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const heroImage = '/photoshootings/berra/2-berra-new-red.webp'
+const heroSlide = {
+  src: heroImage,
+  alt: 'Berra in a red look in Atrani',
+}
 
 const galleryImages = [
   {
@@ -37,6 +41,8 @@ const storyImages = [
   },
 ]
 
+const marqueeImages = [heroSlide, ...galleryImages, ...storyImages]
+
 const instagramPost = {
   url: 'https://www.instagram.com/p/CiiYGp3KM9K/',
   author: 'Berra Koyuncu',
@@ -52,7 +58,6 @@ const instagramPost = {
     <div class="berra-hero__media" style={`background-image:url('${heroImage}')`}></div>
     <div class="container berra-hero__content">
       <div class="berra-hero__text">
-        <span class="badge">Atrani • Fashion photoshoot</span>
         <h1>Berra</h1>
         <p>
           Unveiling the exquisite allure of the Amalfi Coast, our latest fashion photoshoot with the
@@ -61,12 +66,6 @@ const instagramPost = {
           landscapes, every snapshot tells a story of elegance interwoven with the natural grandeur
           of Italy’s divine coastline.
         </p>
-        <div class="berra-hero__actions">
-          <a class="button" href="/contact">Plan a session</a>
-          <a class="button secondary" href={instagramPost.url} target="_blank" rel="noreferrer">
-            View Instagram
-          </a>
-        </div>
       </div>
     </div>
   </section>
@@ -89,37 +88,60 @@ const instagramPost = {
         </p>
       </div>
       <div class="berra-aside">
-        <article class="card berra-details">
-          <span class="berra-kicker">Shoot details</span>
-          <ul>
-            <li><strong>Location:</strong> Atrani, Amalfi Coast</li>
-            <li><strong>Model:</strong> Berra Koyuncu</li>
-            <li><strong>Mood:</strong> Fashion-forward, coastal chic</li>
-            <li><strong>Palette:</strong> Sunlit neutrals and bold red accents</li>
-            <li><strong>Focus:</strong> Editorial storytelling and natural light</li>
-          </ul>
-        </article>
-        <article class="card berra-instagram">
-          <div class="berra-instagram__badge">
-            <i class="bi bi-instagram"></i>
-            <span>Instagram</span>
-          </div>
-          <p>Catch the Atrani vibe and styling details directly from the post.</p>
-          <a class="berra-instagram__link" href={instagramPost.url} target="_blank" rel="noreferrer">
-            A post shared by {instagramPost.author} ({instagramPost.handle})
-          </a>
-        </article>
+        <div class="berra-instagram">
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink={instagramPost.url}
+            data-instgrm-version="14"
+          >
+            <a href={instagramPost.url} target="_blank" rel="noreferrer">
+              A post shared by {instagramPost.author} ({instagramPost.handle})
+            </a>
+          </blockquote>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="section section--flush">
+    <div class="berra-marquee" aria-label="Berra photoshoot gallery">
+      <div class="berra-marquee__viewport">
+        <div class="berra-marquee__track">
+          {marqueeImages.map((image, index) => (
+            <figure class="berra-marquee__item">
+              <img src={image.src} alt={image.alt} loading={index < 2 ? 'eager' : 'lazy'} />
+            </figure>
+          ))}
+          {marqueeImages.map((image) => (
+            <figure class="berra-marquee__item" aria-hidden="true">
+              <img src={image.src} alt="" loading="lazy" />
+            </figure>
+          ))}
+        </div>
+        <div class="berra-marquee__controls" aria-hidden="false">
+          <button
+            class="berra-marquee__control"
+            type="button"
+            data-direction="prev"
+            aria-label="Previous photo"
+          >
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button
+            class="berra-marquee__control"
+            type="button"
+            data-direction="next"
+            aria-label="Next photo"
+          >
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
     <div class="container">
-      <div class="berra-gallery" aria-label="Berra photoshoot gallery">
-        {galleryImages.map((image, index) => (
-          <figure class={`berra-gallery__item berra-gallery__item--${index + 1}`}>
-            <img src={image.src} alt={image.alt} loading={index === 0 ? 'eager' : 'lazy'} />
-          </figure>
+      <div class="berra-thumbs">
+        {marqueeImages.map((image) => (
+          <img src={image.src} alt={image.alt} loading="lazy" />
         ))}
       </div>
     </div>
@@ -137,22 +159,6 @@ const instagramPost = {
     </div>
   </section>
 
-  <section class="section section--flush">
-    <div class="container">
-      <figure class="berra-full">
-        <img src={storyImages[0].src} alt={storyImages[0].alt} loading="lazy" />
-      </figure>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <figure class="berra-full berra-full--accent">
-        <img src={storyImages[1].src} alt={storyImages[1].alt} loading="lazy" />
-      </figure>
-    </div>
-  </section>
-
   <section class="section berra-cta">
     <div class="container">
       <div class="berra-cta__inner">
@@ -167,12 +173,107 @@ const instagramPost = {
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    ;(() => {
+      const setHeroHeight = () => {
+        const hero = document.querySelector('.berra-hero')
+        if (!hero) return
+        hero.style.setProperty('--hero-vh', `${window.innerHeight}px`)
+      }
+
+      setHeroHeight()
+      window.addEventListener('resize', setHeroHeight)
+
+      const viewport = document.querySelector('.berra-marquee__viewport')
+      const track = document.querySelector('.berra-marquee__track')
+      if (!viewport || !track) return
+
+      const halfWidth = () => track.scrollWidth / 2
+      const speed = 10
+      let rafId = null
+      let lastTime = null
+      let isPaused = false
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      const setInitial = () => {
+        viewport.scrollLeft = halfWidth()
+      }
+
+      const wrap = () => {
+        const max = halfWidth() * 2 - viewport.clientWidth
+        if (viewport.scrollLeft <= 0) {
+          viewport.scrollLeft += halfWidth()
+        } else if (viewport.scrollLeft >= max) {
+          viewport.scrollLeft -= halfWidth()
+        }
+      }
+
+      const step = (time) => {
+        if (lastTime === null) lastTime = time
+        const delta = time - lastTime
+        lastTime = time
+
+        if (!isPaused && !prefersReduced) {
+          viewport.scrollLeft -= (speed * delta) / 1000
+          wrap()
+        }
+
+        rafId = requestAnimationFrame(step)
+      }
+
+      const onEnter = () => {
+        isPaused = true
+      }
+
+      const onLeave = () => {
+        isPaused = false
+      }
+
+      viewport.addEventListener('mouseenter', onEnter)
+      viewport.addEventListener('mouseleave', onLeave)
+      viewport.addEventListener('touchstart', onEnter, { passive: true })
+      viewport.addEventListener('touchend', onLeave)
+      viewport.addEventListener('pointerdown', onEnter)
+      viewport.addEventListener('pointerup', onLeave)
+      viewport.addEventListener('scroll', wrap, { passive: true })
+
+      const controls = Array.from(document.querySelectorAll('.berra-marquee__control'))
+      controls.forEach((button) => {
+        button.addEventListener('click', () => {
+          const direction = button.dataset.direction === 'prev' ? -1 : 1
+          const amount = viewport.clientWidth * 0.6
+          viewport.scrollBy({ left: direction * amount, behavior: 'smooth' })
+        })
+      })
+
+      window.addEventListener('load', setInitial)
+      setInitial()
+      rafId = requestAnimationFrame(step)
+
+      window.addEventListener('beforeunload', () => {
+        if (rafId) cancelAnimationFrame(rafId)
+      })
+
+      if (!document.getElementById('instagram-embed')) {
+        const script = document.createElement('script')
+        script.id = 'instagram-embed'
+        script.src = 'https://www.instagram.com/embed.js'
+        script.async = true
+        script.onload = () => window.instgrm?.Embeds?.process()
+        document.body.appendChild(script)
+      } else {
+        window.instgrm?.Embeds?.process()
+      }
+    })()
+  </script>
 </BaseLayout>
 
 <style>
   .berra-hero {
     position: relative;
-    min-height: 78vh;
+    min-height: 100svh;
+    height: var(--hero-vh, 100vh);
     display: flex;
     align-items: center;
     color: #ffffff;
@@ -202,6 +303,7 @@ const instagramPost = {
 
   .berra-hero__text {
     max-width: 720px;
+    text-align: left;
   }
 
   .berra-hero__text h1 {
@@ -211,13 +313,6 @@ const instagramPost = {
 
   .berra-hero__text p {
     color: rgba(255, 255, 255, 0.82);
-  }
-
-  .berra-hero__actions {
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
   }
 
   .berra-intro {
@@ -241,49 +336,18 @@ const instagramPost = {
     gap: 1.5rem;
   }
 
-  .berra-details {
-    padding: 1.8rem;
-  }
-
-  .berra-kicker {
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    font-weight: 600;
-    color: var(--color-text-muted);
-  }
-
-  .berra-details ul {
-    list-style: none;
-    margin: 1.2rem 0 0;
-    padding: 0;
-    display: grid;
-    gap: 0.75rem;
-    color: var(--color-text);
-  }
-
-  .berra-details strong {
-    color: var(--color-text);
-  }
-
   .berra-instagram {
-    padding: 1.8rem;
-    display: grid;
-    gap: 1rem;
-    background: linear-gradient(140deg, rgba(255, 89, 0, 0.12), rgba(1, 98, 255, 0.12));
+    padding: 0;
+    display: block;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
 
-  .berra-instagram__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .berra-instagram__link {
-    font-weight: 600;
-    color: var(--color-text);
+  .berra-instagram .instagram-media {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .section--flush {
@@ -294,46 +358,139 @@ const instagramPost = {
     background: var(--color-surface);
   }
 
-  .berra-gallery {
+  .berra-marquee {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: 180px;
-    gap: 1rem;
+    gap: 1.5rem;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    overflow-x: clip;
   }
 
-  .berra-gallery__item {
-    margin: 0;
-    border-radius: 18px;
-    overflow: hidden;
+  .berra-marquee__viewport {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 0;
     box-shadow: var(--shadow-soft);
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .berra-gallery__item img {
+  .berra-marquee__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .berra-marquee__viewport:active {
+    cursor: grabbing;
+  }
+
+  .berra-marquee__viewport::before,
+  .berra-marquee__viewport::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .berra-marquee__viewport::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  }
+
+  .berra-marquee__viewport::after {
+    right: 0;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  }
+
+  :global([data-theme='night']) .berra-marquee__viewport::before {
+    background: linear-gradient(90deg, rgba(15, 17, 21, 0.95), rgba(15, 17, 21, 0));
+  }
+
+  :global([data-theme='night']) .berra-marquee__viewport::after {
+    background: linear-gradient(270deg, rgba(15, 17, 21, 0.95), rgba(15, 17, 21, 0));
+  }
+
+  .berra-marquee__track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+  }
+
+  .berra-marquee__item {
+    margin: 0;
+    width: min(64vw, 680px);
+    aspect-ratio: 4 / 3;
+    flex: 0 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .berra-marquee__item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
 
-  .berra-gallery__item--1 {
-    grid-column: span 7;
-    grid-row: span 2;
+  .berra-thumbs {
+    display: flex;
+    gap: 0.8rem;
+    overflow-x: auto;
+    padding-bottom: 0.4rem;
+    margin-top: 1.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  .berra-gallery__item--2 {
-    grid-column: span 5;
+  .berra-thumbs::-webkit-scrollbar {
+    display: none;
   }
 
-  .berra-gallery__item--3 {
-    grid-column: span 5;
+  .berra-thumbs img {
+    width: 120px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: var(--shadow-soft);
   }
 
-  .berra-gallery__item--4 {
-    grid-column: span 6;
+  .berra-marquee__controls {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    pointer-events: none;
   }
 
-  .berra-gallery__item--5 {
-    grid-column: span 6;
+  .berra-marquee__control {
+    pointer-events: auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: var(--shadow-soft);
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .berra-marquee__control:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
   }
 
   .berra-highlight {
@@ -350,23 +507,6 @@ const instagramPost = {
   .berra-highlight p {
     color: var(--color-text);
     margin: 0;
-  }
-
-  .berra-full {
-    margin: 0;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lift);
-  }
-
-  .berra-full--accent {
-    border: 1px solid rgba(255, 89, 0, 0.2);
-  }
-
-  .berra-full img {
-    width: 100%;
-    height: auto;
-    display: block;
   }
 
   .berra-cta {
@@ -396,21 +536,9 @@ const instagramPost = {
       grid-template-columns: 1fr;
     }
 
-    .berra-gallery {
-      grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 200px;
-    }
-
-    .berra-gallery__item--1 {
-      grid-column: span 2;
-      grid-row: span 1;
-    }
-
-    .berra-gallery__item--2,
-    .berra-gallery__item--3,
-    .berra-gallery__item--4,
-    .berra-gallery__item--5 {
-      grid-column: span 1;
+    .berra-marquee__item {
+      width: min(72vw, 560px);
+      aspect-ratio: 4 / 3;
     }
 
     .berra-cta__inner {
@@ -424,23 +552,19 @@ const instagramPost = {
       min-height: 70vh;
     }
 
-    .berra-gallery {
-      grid-template-columns: 1fr;
-      grid-auto-rows: 240px;
+    .berra-marquee__item {
+      width: 78vw;
+      aspect-ratio: 4 / 3;
     }
 
-    .berra-gallery__item--1,
-    .berra-gallery__item--2,
-    .berra-gallery__item--3,
-    .berra-gallery__item--4,
-    .berra-gallery__item--5 {
-      grid-column: span 1;
+    .berra-marquee__controls {
+      padding: 0 0.8rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .berra-hero__media {
-      transform: none;
+    .berra-marquee__viewport {
+      scroll-behavior: auto;
     }
   }
 </style>

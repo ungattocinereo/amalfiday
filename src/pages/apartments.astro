@@ -9,88 +9,105 @@ const stats = [
   { value: '1000+', label: 'Positive Airbnb and Booking reviews' },
 ]
 
-const villaSusy = {
-  name: 'Villa Susy',
-  title: 'Timeless Retreat in Ravello: Historical 2-bedroom apartment',
-  description:
-    "This villa, located just a mile from Amalfi, offers a unique blend of authenticity and comfort. As you step inside, you'll be transported to a world where the past comes alive, and the present moment is savored.",
-  gallery: [5124, 5123, 5121, 5122],
-  availability: 'Villa Susy',
-}
-
-const suites = [
+const staySections = [
   {
-    name: 'Awesome apartments',
-    gallery: [2076],
-    description:
-      'Our location is just above the city center, a 5-7 minute walk uphill via 350 steps. The apartment features a separate kitchen, shower room, and a spacious room.',
-    availability: 'Awesome Apts',
+    title: 'Timeless Retreat in Ravello',
+    subtitle: 'Historical 2-bedroom apartment',
+    columns: 1,
+    stays: [
+      {
+        name: 'Villa Susy',
+        description:
+          "This villa, located just a mile from Amalfi, offers a unique blend of authenticity and comfort. As you step inside, you'll be transported to a world where the past comes alive, and the present moment is savored.",
+        gallery: [5124, 5123, 5121, 5122],
+        calendar: 'Villa Susy',
+        galleryStyle: 'scroll',
+      },
+    ],
   },
   {
-    name: 'Aria di Mare',
-    gallery: [5114, 5115],
-    description:
-      'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
-    availability: 'Aria di mare',
-    cta: {
-      label: 'Book on Airbnb',
-      href: 'https://www.airbnb.com/rooms/565787701411415824/',
-    },
+    title: 'Suites by the sea',
+    subtitle: 'Apartment options that keep you close to the beach and the Atrani rhythm.',
+    columns: 2,
+    stays: [
+      {
+        name: 'Awesome apartments',
+        description:
+          'Our location is just above the city center, a 5-7 minute walk uphill via 350 steps. The apartment features a separate kitchen, shower room, and a spacious room.',
+        gallery: [2076],
+        calendar: 'Awesome Apts',
+      },
+      {
+        name: 'Aria di Mare',
+        description:
+          'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
+        gallery: [5114, 5115],
+        calendar: null,
+      },
+      {
+        name: 'Suite Carina',
+        description:
+          'This is a double-level apartment located in the heart of the city. There are no steps to access the apartment. The windows offer views of the main street in Atrani.',
+        gallery: [2258, 2257, 2256],
+        calendar: 'Casa Carina',
+      },
+      {
+        name: 'Suite Harmony',
+        description:
+          'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
+        gallery: [2464, 2422, 2461],
+        calendar: 'Harmony Suite',
+      },
+    ],
   },
   {
-    name: 'Suite Carina',
-    gallery: [2258, 2257, 2256],
-    description:
-      'This is a double-level apartment located in the heart of the city. There are no steps to access the apartment. The windows offer views of the main street in Atrani.',
-    availability: 'Casa Carina',
+    title: 'Rooms in our townhouse',
+    subtitle: 'Design-led rooms with balconies and vintage details in the heart of Atrani.',
+    columns: 2,
+    stays: [
+      {
+        name: 'Vintage interior',
+        description:
+          'The room is designed with a vintage aesthetic in mind, featuring decor and furnishings that evoke a sense of nostalgia and timeless elegance. The room also comes equipped with a large closet, complete with a mirror, providing ample storage and a convenient space for getting ready. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
+        gallery: [5203],
+        calendar: 'Vintage Room',
+      },
+      {
+        name: 'Orange room',
+        description:
+          'This room evokes the nostalgia of the 1960s with its decor and furnishings. The room features a large multi-panel closet, providing ample storage space for guests. The room also comes with with couple of garden chairs and a table. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
+        gallery: [2251],
+        calendar: 'Orange Room',
+      },
+      {
+        name: 'Room in center',
+        description:
+          'This is the largest room in the house, providing plenty of space for guests to spread out and relax. The room features a large table, perfect for meals or working, and two chairs for comfortable seating. Additionally, the room has a small balcony that offers a view of the main street, perfect for enjoying the sights and sounds of the city. The closet is an original piece from the 1970s that is spacious and adds a vintage touch to the room.',
+        gallery: [5202],
+        calendar: 'Central Room',
+      },
+    ],
   },
   {
-    name: 'Suite Harmony',
-    gallery: [2464, 2422, 2461],
-    description:
-      'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
-    availability: 'Harmony Suite',
-  },
-]
-
-const townhouseRooms = [
-  {
-    name: 'Vintage interior',
-    image: 5203,
-    availability: 'Vintage Room',
-    description:
-      'The room is designed with a vintage aesthetic in mind, featuring decor and furnishings that evoke a sense of nostalgia and timeless elegance. The room also comes equipped with a large closet, complete with a mirror, providing ample storage and a convenient space for getting ready. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
-  },
-  {
-    name: 'Orange room',
-    image: 2251,
-    availability: 'Orange Room',
-    description:
-      'This room evokes the nostalgia of the 1960s with its decor and furnishings. The room features a large multi-panel closet, providing ample storage space for guests. The room also comes with with couple of garden chairs and a table. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
-  },
-  {
-    name: 'Room in center',
-    image: 5202,
-    availability: 'Central Room',
-    description:
-      'This is the largest room in the house, providing plenty of space for guests to spread out and relax. The room features a large table, perfect for meals or working, and two chairs for comfortable seating. Additionally, the room has a small balcony that offers a view of the main street, perfect for enjoying the sights and sounds of the city. The closet is an original piece from the 1970s that is spacious and adds a vintage touch to the room.',
-  },
-]
-
-const budgetRooms = [
-  {
-    name: 'Room for solo traveller',
-    image: 2285,
-    availability: 'Solo Room',
-    description:
-      'This room is designed to be cozy and comfortable, with a small bed that is perfect for one person. The room features a spacious balcony that offers a great place to sit and relax, with a chair that provides a comfortable seating option. The balcony also offers a beautiful view of the mountains, providing a serene and peaceful atmosphere. Additionally, the room is facing the main street of the town, which means that guests can enjoy the hustle and bustle of the city right from the comfort of their own room. The balcony can be accessed via the room and it is perfect for a morning coffee or a nightcap.',
-  },
-  {
-    name: 'Room for youngsters',
-    image: 2262,
-    availability: 'Bunkbed Room',
-    description:
-      'This room is designed to be functional and budget-friendly, perfect for travelers who are looking for a comfortable and affordable place to stay. The room features a bunk bed. The bunk bed is comfortable and convenient, providing a great place to rest after a long day of exploring. The room also features a big mural on the wall, which adds a unique and artistic touch to the space, making it more interesting and personalized. The room also comes with a large window that overlooks an inner street, providing natural light. The window can be opened to let fresh air in and to listen to the street sounds.',
+    title: 'Cost-effective stays',
+    subtitle: 'Smart, comfortable rooms for short stays and solo adventures.',
+    columns: 2,
+    stays: [
+      {
+        name: 'Room for solo traveller',
+        description:
+          'This room is designed to be cozy and comfortable, with a small bed that is perfect for one person. The room features a spacious balcony that offers a great place to sit and relax, with a chair that provides a comfortable seating option. The balcony also offers a beautiful view of the mountains, providing a serene and peaceful atmosphere. Additionally, the room is facing the main street of the town, which means that guests can enjoy the hustle and bustle of the city right from the comfort of their own room. The balcony can be accessed via the room and it is perfect for a morning coffee or a nightcap.',
+        gallery: [2285],
+        calendar: 'Solo Room',
+      },
+      {
+        name: 'Room for youngsters',
+        description:
+          'This room is designed to be functional and budget-friendly, perfect for travelers who are looking for a comfortable and affordable place to stay. The room features a bunk bed. The bunk bed is comfortable and convenient, providing a great place to rest after a long day of exploring. The room also features a big mural on the wall, which adds a unique and artistic touch to the space, making it more interesting and personalized. The room also comes with a large window that overlooks an inner street, providing natural light. The window can be opened to let fresh air in and to listen to the street sounds.',
+        gallery: [2262],
+        calendar: 'Bunkbed Room',
+      },
+    ],
   },
 ]
 
@@ -128,7 +145,9 @@ const testimonials = [
       <div class="apartments-hero__copy">
         <span class="eyebrow">Comfortable stays</span>
         <h1>
-          Apartments, rooms, and <span class="accent-italic">villa</span> near Atrani
+          <span class="accent-italic">Apartments</span>, rooms, and
+          <span class="accent-italic">villa</span> near
+          <span class="accent-italic">Atrani</span>
         </h1>
         <p class="lead">
           Most of our apartments are located in the center of Atrani, just a 2-minute walk from
@@ -145,10 +164,9 @@ const testimonials = [
       </div>
       <div class="apartments-hero__visual">
         <div class="image-stack">
-          <figure class="image-frame image-frame--tall">
+          <figure class="image-frame image-frame--tall image-frame--hero">
             <img
-              src={placeholder}
-              data-wp-id="5734"
+              src="/apartments/3-view-from-cristall-Pont.jpg"
               alt="View over Atrani rooftops"
               loading="lazy"
               decoding="async"
@@ -168,152 +186,126 @@ const testimonials = [
     </div>
   </section>
 
-  <section class="section section--highlight">
-    <div class="container highlight-card">
-      <div class="highlight-card__header">
-        <span class="badge">Signature stay</span>
-        <h2>{villaSusy.title}</h2>
+  {staySections.map((section) => (
+    <section
+      class={`section stay-section${section.columns === 2 ? ' stay-section--two' : ''}`}
+    >
+      <div class="container section__header">
+        <h2>{section.title}</h2>
+        {section.subtitle && <p>{section.subtitle}</p>}
       </div>
-      <div class="highlight-card__body">
-        <div class="highlight-card__details">
-          <h3>{villaSusy.name}</h3>
-          <p>{villaSusy.description}</p>
-          <div class="availability">
-            <i class="bi bi-calendar3"></i>
-            <span>Availability: {villaSusy.availability}</span>
-          </div>
-        </div>
-        <div class="gallery">
-          {villaSusy.gallery.map((imageId) => (
-            <div class="gallery__item">
-              <img
-                src={placeholder}
-                data-wp-id={String(imageId)}
-                alt={`${villaSusy.name} gallery`}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container section__header">
-      <h2>Suites by the sea</h2>
-      <p>Apartment options that keep you close to the beach and the Atrani rhythm.</p>
-    </div>
-    <div class="container grid grid--two">
-      {suites.map((suite) => (
-        <article class="card suite-card">
-          <div class="suite-card__media">
-            {suite.gallery.map((imageId) => (
-              <div class="suite-card__image">
-                <img
-                  src={placeholder}
-                  data-wp-id={String(imageId)}
-                  alt={`${suite.name} image`}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            ))}
-          </div>
-          <div class="suite-card__content">
-            <h3>{suite.name}</h3>
-            <p>{suite.description}</p>
-            <div class="suite-card__footer">
-              <div class="availability">
-                <i class="bi bi-calendar3"></i>
-                <span>Availability: {suite.availability}</span>
-              </div>
-              {suite.cta && (
-                <a class="button small" href={suite.cta.href} target="_blank" rel="noreferrer">
-                  <i class="bi bi-calendar-check"></i> {suite.cta.label}
-                </a>
+      <div class="container stay-grid">
+        {section.stays.map((stay) => (
+          <article
+            class={`stay-card${stay.galleryStyle === 'scroll' ? ' stay-card--scroll stay-card--villa' : ''}`}
+          >
+            <div
+              class={`stay-card__media${stay.galleryStyle === 'scroll' ? ' stay-card__media--scroll' : ''}`}
+              data-gallery
+              data-gallery-mode={stay.galleryStyle ?? 'cycle'}
+            >
+              {stay.galleryStyle === 'scroll' ? (
+                <>
+                  <div class="stay-card__track">
+                  {stay.gallery.map((imageId) => (
+                    <div class="stay-card__slide">
+                      <img
+                        class="stay-card__slide-image"
+                        src={placeholder}
+                        data-wp-id={String(imageId)}
+                        alt={`${stay.name} photo`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  ))}
+                  </div>
+                  <button
+                    class="gallery-control gallery-control--scroll"
+                    type="button"
+                    data-gallery-prev
+                    aria-label="Previous photo"
+                  >
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+                  <button
+                    class="gallery-control gallery-control--scroll"
+                    type="button"
+                    data-gallery-next
+                    aria-label="Next photo"
+                  >
+                    <i class="bi bi-chevron-right"></i>
+                  </button>
+                </>
+              ) : (
+                <>
+                  {stay.gallery.map((imageId, index) => (
+                    <img
+                      class={`stay-card__image${index === 0 ? ' is-active' : ''}`}
+                      src={placeholder}
+                      data-wp-id={String(imageId)}
+                      data-gallery-image
+                      alt={`${stay.name} photo`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ))}
+                  {stay.gallery.length > 1 && (
+                    <>
+                      <button
+                        class="gallery-control"
+                        type="button"
+                        data-gallery-prev
+                        aria-label="Previous photo"
+                      >
+                        <i class="bi bi-chevron-left"></i>
+                      </button>
+                      <button
+                        class="gallery-control"
+                        type="button"
+                        data-gallery-next
+                        aria-label="Next photo"
+                      >
+                        <i class="bi bi-chevron-right"></i>
+                      </button>
+                    </>
+                  )}
+                </>
               )}
             </div>
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container section__header">
-      <h2>Rooms in our townhouse</h2>
-      <p>Design-led rooms with balconies and vintage details in the heart of Atrani.</p>
-    </div>
-    <div class="container grid grid--three">
-      {townhouseRooms.map((room) => (
-        <article class="card room-card">
-          <div class="room-card__media">
-            <img
-              src={placeholder}
-              data-wp-id={String(room.image)}
-              alt={room.name}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-          <div class="room-card__content">
-            <h3>{room.name}</h3>
-            <p>{room.description}</p>
-            <div class="availability">
-              <i class="bi bi-calendar3"></i>
-              <span>Availability: {room.availability}</span>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="section section--budget">
-    <div class="container section__header">
-      <h2>Cost-effective stays</h2>
-      <p>Smart, comfortable rooms for short stays and solo adventures.</p>
-    </div>
-    <div class="container budget-grid">
-      <figure class="budget-hero">
-        <img
-          src={placeholder}
-          data-wp-id="2247"
-          alt="Budget-friendly stay in Atrani"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption>
-          Affordable rooms with the same Amalfi soul, just lighter on the budget.
-        </figcaption>
-      </figure>
-      <div class="budget-grid__rooms">
-        {budgetRooms.map((room) => (
-          <article class="card room-card room-card--compact">
-            <div class="room-card__media">
-              <img
-                src={placeholder}
-                data-wp-id={String(room.image)}
-                alt={room.name}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div class="room-card__content">
-              <h3>{room.name}</h3>
-              <p>{room.description}</p>
-              <div class="availability">
-                <i class="bi bi-calendar3"></i>
-                <span>Availability: {room.availability}</span>
+            {stay.galleryStyle === 'scroll' ? (
+              <div class="stay-card__details">
+                <div class="stay-card__content">
+                  <h3>{stay.name}</h3>
+                  <p>{stay.description}</p>
+                </div>
+                <div
+                  class="stay-calendar"
+                  data-calendar
+                  data-calendar-name={stay.calendar ?? ''}
+                >
+                  <span class="calendar__loading">Loading availability...</span>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div class="stay-card__content">
+                <h3>{stay.name}</h3>
+                <p>{stay.description}</p>
+                <div
+                  class="stay-calendar"
+                  data-calendar
+                  data-calendar-name={stay.calendar ?? ''}
+                >
+                  <span class="calendar__loading">Loading availability...</span>
+                </div>
+              </div>
+            )}
           </article>
         ))}
       </div>
-    </div>
-  </section>
+    </section>
+  ))}
 
   <section class="section section--adventure">
     <div class="container adventure-grid">
@@ -361,9 +353,9 @@ const testimonials = [
       <h2>Guest impressions</h2>
       <p>Recent words from travelers who stayed with us in Atrani.</p>
     </div>
-    <div class="container grid grid--two testimonials__grid">
+    <div class="container testimonials__grid">
       {testimonials.map((item) => (
-        <article class="card testimonial">
+        <article class="testimonial">
           <p>"{item.quote}"</p>
           <div class="testimonial__meta">
             <strong>{item.author}</strong>
@@ -373,7 +365,6 @@ const testimonials = [
       ))}
     </div>
   </section>
-
 </BaseLayout>
 
 <script is:inline>
@@ -416,9 +407,215 @@ const testimonials = [
   })()
 </script>
 
+<script is:inline>
+  ;(() => {
+    const galleries = Array.from(document.querySelectorAll('[data-gallery]'))
+
+    galleries.forEach((gallery) => {
+      const mode = gallery.dataset.galleryMode || 'cycle'
+      if (mode === 'scroll') {
+        const track = gallery.querySelector('.stay-card__track')
+        const slides = track ? Array.from(track.querySelectorAll('.stay-card__slide')) : []
+        const prevBtn = gallery.querySelector('[data-gallery-prev]')
+        const nextBtn = gallery.querySelector('[data-gallery-next]')
+
+        const getClosestIndex = () => {
+          if (!track || !slides.length) return 0
+          const center = track.scrollLeft + track.clientWidth / 2
+          let closestIndex = 0
+          let closestDistance = Infinity
+          slides.forEach((slide, index) => {
+            const slideCenter = slide.offsetLeft + slide.offsetWidth / 2
+            const distance = Math.abs(slideCenter - center)
+            if (distance < closestDistance) {
+              closestDistance = distance
+              closestIndex = index
+            }
+          })
+          return closestIndex
+        }
+
+        const scrollToIndex = (index) => {
+          if (!track || !slides.length) return
+          const clamped = Math.max(0, Math.min(index, slides.length - 1))
+          const slide = slides[clamped]
+          const left = slide.offsetLeft + slide.offsetWidth / 2 - track.clientWidth / 2
+          track.scrollTo({ left, behavior: 'smooth' })
+        }
+
+        nextBtn?.addEventListener('click', () => {
+          const current = getClosestIndex()
+          scrollToIndex(current + 1)
+        })
+
+        prevBtn?.addEventListener('click', () => {
+          const current = getClosestIndex()
+          scrollToIndex(current - 1)
+        })
+
+        return
+      }
+      const images = Array.from(gallery.querySelectorAll('[data-gallery-image]'))
+      if (images.length <= 1) return
+
+      let index = 0
+      const show = (nextIndex) => {
+        index = (nextIndex + images.length) % images.length
+        images.forEach((img, i) => {
+          img.classList.toggle('is-active', i === index)
+        })
+      }
+
+      const next = () => show(index + 1)
+      const prev = () => show(index - 1)
+
+      gallery.addEventListener('click', (event) => {
+        const target = event.target.closest('button[data-gallery-next], button[data-gallery-prev]')
+        if (target?.hasAttribute('data-gallery-next')) {
+          next()
+          return
+        }
+        if (target?.hasAttribute('data-gallery-prev')) {
+          prev()
+          return
+        }
+        if (event.target.closest('img[data-gallery-image]')) {
+          next()
+        }
+      })
+
+      let startX = 0
+      gallery.addEventListener('touchstart', (event) => {
+        startX = event.touches[0]?.clientX ?? 0
+      })
+      gallery.addEventListener('touchend', (event) => {
+        const endX = event.changedTouches[0]?.clientX ?? 0
+        const diff = endX - startX
+        if (Math.abs(diff) < 35) return
+        if (diff < 0) {
+          next()
+        } else {
+          prev()
+        }
+      })
+    })
+  })()
+</script>
+
+<script is:inline>
+  ;(() => {
+    const calendars = Array.from(document.querySelectorAll('[data-calendar]'))
+    if (!calendars.length) return
+
+    const monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ]
+    const dayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+    const formatDate = (date) => {
+      const year = date.getFullYear()
+      const month = `${date.getMonth() + 1}`.padStart(2, '0')
+      const day = `${date.getDate()}`.padStart(2, '0')
+      return `${year}-${month}-${day}`
+    }
+
+    const renderMonth = (year, month, busy, today) => {
+      const firstDay = new Date(year, month, 1)
+      const offset = (firstDay.getDay() + 6) % 7
+      const daysInMonth = new Date(year, month + 1, 0).getDate()
+      const cells = []
+
+      for (let i = 0; i < offset; i += 1) {
+        cells.push('<span class="calendar__cell is-empty"></span>')
+      }
+
+      for (let day = 1; day <= daysInMonth; day += 1) {
+        const date = new Date(year, month, day)
+        const key = formatDate(date)
+        const isBusy = busy.has(key)
+        const isPast = date < today
+        const classes = [
+          'calendar__cell',
+          isBusy ? 'is-busy' : 'is-free',
+          isPast ? 'is-past' : '',
+        ]
+          .filter(Boolean)
+          .join(' ')
+        cells.push(`<span class="${classes}">${day}</span>`)
+      }
+
+      return `
+        <div class="calendar__month">
+          <div class="calendar__month-title">${monthNames[month]} ${year}</div>
+          <div class="calendar__grid">
+            ${dayLabels.map((label) => `<span class="calendar__dow">${label}</span>`).join('')}
+            ${cells.join('')}
+          </div>
+        </div>
+      `
+    }
+
+    const renderCalendar = (el, busy) => {
+      const today = new Date()
+      const current = new Date(today.getFullYear(), today.getMonth(), 1)
+      const next = new Date(today.getFullYear(), today.getMonth() + 1, 1)
+
+      el.innerHTML = `
+        <div class="calendar">
+          ${renderMonth(current.getFullYear(), current.getMonth(), busy, today)}
+          ${renderMonth(next.getFullYear(), next.getMonth(), busy, today)}
+        </div>
+        <div class="calendar__legend">
+          <span><i class="legend legend--free"></i> Available</span>
+          <span><i class="legend legend--busy"></i> Booked</span>
+        </div>
+      `
+    }
+
+    const availabilityPromise = fetch('/calendars/availability.json', { cache: 'no-store' })
+      .then((res) => (res.ok ? res.json() : null))
+      .catch(() => null)
+
+    calendars.forEach(async (calendarEl) => {
+      const calendarName = calendarEl.dataset.calendarName
+      if (!calendarName) {
+        calendarEl.innerHTML = '<span class="calendar__empty">Calendar coming soon.</span>'
+        return
+      }
+
+      const availability = await availabilityPromise
+      if (!availability?.calendars) {
+        calendarEl.innerHTML = '<span class="calendar__empty">Calendar updating...</span>'
+        return
+      }
+
+      if (!(calendarName in availability.calendars)) {
+        calendarEl.innerHTML = '<span class="calendar__empty">Calendar coming soon.</span>'
+        return
+      }
+
+      const busyList = availability.calendars[calendarName] || []
+      const busy = new Set(busyList)
+      renderCalendar(calendarEl, busy)
+    })
+  })()
+</script>
+
 <style>
   .apartments-hero {
     position: relative;
+    padding-top: 5rem;
     background: linear-gradient(120deg, rgba(255, 89, 0, 0.08), rgba(0, 156, 255, 0.08));
   }
 
@@ -506,6 +703,19 @@ const testimonials = [
     height: 100%;
   }
 
+  .image-frame--hero {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    top: calc(-1 * (5rem + var(--header-space)));
+    height: calc(100% + 5rem + var(--header-space));
+  }
+
+  .image-frame--hero img {
+    border-radius: 0;
+  }
+
   .image-frame--wide {
     position: absolute;
     bottom: -4%;
@@ -515,60 +725,8 @@ const testimonials = [
     border: 8px solid var(--color-bg);
   }
 
-  .section--highlight {
-    padding-top: 0;
-  }
-
-  .highlight-card {
-    background: var(--color-card);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-soft);
-    padding: 2.5rem;
-    display: grid;
-    gap: 2rem;
-  }
-
-  .highlight-card__header h2 {
-    font-size: clamp(2rem, 3vw, 2.8rem);
-  }
-
-  .highlight-card__body {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  }
-
-  .availability {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--color-surface);
-    padding: 0.5rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    color: var(--color-text);
-    margin-top: 1rem;
-  }
-
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  .gallery__item {
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-  }
-
-  .gallery__item img {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+  .stay-section {
+    padding-top: 3rem;
   }
 
   .section__header {
@@ -578,115 +736,157 @@ const testimonials = [
     margin-bottom: 2rem;
   }
 
-  .grid {
-    display: grid;
-    gap: 2rem;
+  .stay-section .section__header h2 {
+    font-size: clamp(2.4rem, 3.6vw, 3.6rem);
   }
 
-  .grid--two {
+  .stay-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .stay-section--two .stay-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .grid--three {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .suite-card {
-    display: grid;
-    gap: 1.5rem;
-    padding: 1.5rem;
-  }
-
-  .suite-card__media {
-    display: grid;
-    gap: 0.8rem;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  }
-
-  .suite-card__image {
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
-  }
-
-  .suite-card__image img {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-  }
-
-  .suite-card__footer {
-    margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .button.small {
-    padding: 0.6rem 1.1rem;
-    font-size: 0.9rem;
-  }
-
-  .room-card {
-    display: grid;
-    gap: 1.2rem;
-    padding: 1.4rem;
-  }
-
-  .room-card__media img {
-    width: 100%;
-    border-radius: 16px;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border: 1px solid var(--color-border);
-  }
-
-  .room-card--compact .room-card__media img {
-    aspect-ratio: 3 / 2;
-  }
-
-  .section--budget {
-    background: linear-gradient(120deg, rgba(255, 195, 0, 0.1), rgba(255, 89, 0, 0.05));
-  }
-
-  .budget-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     align-items: start;
   }
 
-  .budget-hero {
-    margin: 0;
+  .stay-card {
     display: grid;
-    gap: 1rem;
-    background: var(--color-card);
-    border-radius: var(--radius-lg);
-    padding: 1.2rem;
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-soft);
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
   }
 
-  .budget-hero img {
+  .stay-card__media {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--color-surface);
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+  }
+
+  .stay-card__media--scroll {
+    aspect-ratio: auto;
+    cursor: grab;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
     width: 100%;
-    height: auto;
-    border-radius: 16px;
-    aspect-ratio: 3 / 4;
+    margin: 0;
+  }
+
+  .stay-card__image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .stay-card__image.is-active {
+    opacity: 1;
+  }
+
+  .stay-card__track {
+    display: flex;
+    gap: 1rem;
+    padding: 0 0.5rem 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .stay-card__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .stay-card__slide {
+    flex: 0 0 72%;
+    scroll-snap-align: center;
+  }
+
+  .stay-card__slide-image {
+    width: 100%;
+    height: clamp(200px, 24vw, 280px);
+    border-radius: 18px;
     object-fit: cover;
   }
 
-  .budget-hero figcaption {
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
+  .stay-card--scroll .stay-card__media {
+    background: transparent;
   }
 
-  .budget-grid__rooms {
+  .gallery-control--scroll {
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .stay-card__media--scroll .gallery-control--scroll {
+    position: absolute;
+  }
+
+  .stay-card__media--scroll .gallery-control--scroll[data-gallery-prev] {
+    left: 8px;
+  }
+
+  .stay-card__media--scroll .gallery-control--scroll[data-gallery-next] {
+    right: 8px;
+  }
+
+  .stay-card--villa .stay-card__details {
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    align-items: start;
+  }
+
+  .stay-card--villa .stay-card__content {
+    max-width: 520px;
+  }
+
+  .stay-card--villa .stay-calendar {
+    margin-top: 0;
+  }
+
+  .gallery-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .gallery-control[data-gallery-prev] {
+    left: 16px;
+  }
+
+  .gallery-control[data-gallery-next] {
+    right: 16px;
+  }
+
+  .stay-card__content h3 {
+    margin-bottom: 0.6rem;
   }
 
   .section--adventure {
@@ -705,7 +905,6 @@ const testimonials = [
     border-radius: var(--radius-lg);
     aspect-ratio: 3 / 4;
     object-fit: cover;
-    box-shadow: var(--shadow-lift);
   }
 
   .adventure-pillars {
@@ -716,25 +915,23 @@ const testimonials = [
   }
 
   .pillar {
-    padding: 1.2rem;
-    border-radius: 18px;
-    border: 1px solid var(--color-border);
-    background: var(--color-card);
-    box-shadow: var(--shadow-soft);
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .testimonials__grid {
-    align-items: stretch;
+    display: grid;
+    gap: 1.8rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .testimonial {
-    padding: 1.6rem;
-    display: grid;
-    gap: 1.4rem;
+    padding: 0;
+    border: none;
+    background: transparent;
   }
 
   .testimonial p {
-    font-size: 1rem;
     color: var(--color-text);
   }
 
@@ -746,29 +943,131 @@ const testimonials = [
     color: var(--color-text-muted);
   }
 
+  .stay-calendar {
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    border-radius: 18px;
+    background: #f7f7fa;
+  }
+
+  .calendar__loading,
+  .calendar__empty {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  :global(.calendar) {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  :global(.calendar__month-title) {
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  :global(.calendar__grid) {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.35rem;
+    font-size: 0.85rem;
+  }
+
+  :global(.calendar__dow) {
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  :global(.calendar__cell) {
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  :global(.calendar__cell.is-free) {
+    background: rgba(0, 156, 255, 0.12);
+    color: var(--color-text);
+  }
+
+  :global(.calendar__cell.is-busy) {
+    background: rgba(255, 89, 0, 0.2);
+    color: var(--color-text);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+
+  :global(.calendar__cell.is-past) {
+    opacity: 0.4;
+  }
+
+  :global(.calendar__cell.is-empty) {
+    background: transparent;
+  }
+
+  :global(.calendar__legend) {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.8rem;
+  }
+
+  :global(.legend) {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.35rem;
+  }
+
+  :global(.legend--free) {
+    background: rgba(0, 156, 255, 0.4);
+  }
+
+  :global(.legend--busy) {
+    background: rgba(255, 89, 0, 0.45);
+  }
+
   @media (max-width: 1100px) {
-    .apartments-hero__grid,
-    .highlight-card__body,
-    .budget-grid,
-    .adventure-grid {
+    .apartments-hero__grid {
       grid-template-columns: 1fr;
     }
 
     .image-stack {
       height: 420px;
     }
-  }
 
-  @media (max-width: 900px) {
-    .grid--two {
+    :global(.calendar) {
       grid-template-columns: 1fr;
     }
 
-    .grid--three {
+  }
+
+  @media (max-width: 900px) {
+    .stay-section--two .stay-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stay-card--villa .stay-card__details {
+      grid-template-columns: 1fr;
+    }
+
+    .adventure-grid {
       grid-template-columns: 1fr;
     }
 
     .adventure-pillars {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonials__grid {
       grid-template-columns: 1fr;
     }
   }
@@ -794,9 +1093,14 @@ const testimonials = [
       height: 320px;
     }
 
-    .suite-card__footer {
-      flex-direction: column;
-      align-items: flex-start;
+    .gallery-control {
+      width: 34px;
+      height: 34px;
+    }
+
+    .stay-card__slide {
+      flex: 0 0 82%;
     }
   }
+
 </style>
