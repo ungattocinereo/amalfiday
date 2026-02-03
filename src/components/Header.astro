@@ -67,61 +67,63 @@ const headerSocials = socialLinks.filter((item) =>
 </header>
 
 <script is:inline>
-  const root = document.documentElement
-  const header = document.querySelector('.header')
-  const themeToggle = document.querySelector('.theme-switch__input')
-  const menuToggle = document.querySelector('.menu-toggle')
-  const hero = document.querySelector('.hero--orange, .hero--dark')
+  ;(() => {
+    const root = document.documentElement
+    const header = document.querySelector('.header')
+    const themeToggle = document.querySelector('.theme-switch__input')
+    const menuToggle = document.querySelector('.menu-toggle')
+    const heroEl = document.querySelector('.hero--orange, .hero--dark')
 
-  const setTheme = (value) => {
-    root.dataset.theme = value
-    try {
-      localStorage.setItem('theme', value)
-    } catch (error) {
-      // ignore storage errors
+    const setTheme = (value) => {
+      root.dataset.theme = value
+      try {
+        localStorage.setItem('theme', value)
+      } catch (error) {
+        // ignore storage errors
+      }
+      syncSwitch(value)
     }
-    syncSwitch(value)
-  }
 
-  const syncSwitch = (value) => {
-    if (themeToggle) {
-      themeToggle.checked = value === 'night'
+    const syncSwitch = (value) => {
+      if (themeToggle) {
+        themeToggle.checked = value === 'night'
+      }
     }
-  }
 
-  syncSwitch(root.dataset.theme)
+    syncSwitch(root.dataset.theme)
 
-  themeToggle?.addEventListener('change', () => {
-    const next = themeToggle.checked ? 'night' : 'day'
-    setTheme(next)
-  })
-
-  menuToggle?.addEventListener('click', () => {
-    const isOpen = header?.classList.toggle('menu-open')
-    menuToggle?.setAttribute('aria-expanded', String(isOpen))
-  })
-
-  document.querySelectorAll('.mobile-panel__link').forEach((link) => {
-    link.addEventListener('click', () => {
-      header?.classList.remove('menu-open')
-      menuToggle?.setAttribute('aria-expanded', 'false')
+    themeToggle?.addEventListener('change', () => {
+      const next = themeToggle.checked ? 'night' : 'day'
+      setTheme(next)
     })
-  })
 
-  const onScroll = () => {
-    header?.classList.toggle('is-scrolled', window.scrollY > 12)
-    if (hero) {
-      const heroBottom = hero.getBoundingClientRect().bottom
-      const onHero = window.scrollY < 12 && heroBottom > 80
-      header?.classList.toggle('on-hero', onHero)
-    } else {
-      header?.classList.remove('on-hero')
+    menuToggle?.addEventListener('click', () => {
+      const isOpen = header?.classList.toggle('menu-open')
+      menuToggle?.setAttribute('aria-expanded', String(isOpen))
+    })
+
+    document.querySelectorAll('.mobile-panel__link').forEach((link) => {
+      link.addEventListener('click', () => {
+        header?.classList.remove('menu-open')
+        menuToggle?.setAttribute('aria-expanded', 'false')
+      })
+    })
+
+    const onScroll = () => {
+      header?.classList.toggle('is-scrolled', window.scrollY > 12)
+      if (heroEl) {
+        const heroBottom = heroEl.getBoundingClientRect().bottom
+        const onHero = window.scrollY < 12 && heroBottom > 80
+        header?.classList.toggle('on-hero', onHero)
+      } else {
+        header?.classList.remove('on-hero')
+      }
     }
-  }
 
-  window.addEventListener('scroll', onScroll, { passive: true })
-  window.addEventListener('load', onScroll)
-  onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('load', onScroll)
+    onScroll()
+  })()
 </script>
 
 <style>
@@ -142,10 +144,10 @@ const headerSocials = socialLinks.filter((item) =>
     border: 1px solid var(--color-nav-border);
     transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     overflow: hidden;
-    border-radius: 999px;
+    border-radius: 28px;
     margin: 0 auto;
-    width: min(1100px, calc(100% - 32px));
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    width: min(960px, calc(100% - 32px));
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
   }
 
   .header.is-scrolled {
@@ -196,6 +198,8 @@ const headerSocials = socialLinks.filter((item) =>
 
   .logo__mark {
     transition: transform 0.2s ease;
+    display: block;
+    color: currentColor;
   }
 
   .header.is-scrolled .logo__mark {
@@ -217,6 +221,10 @@ const headerSocials = socialLinks.filter((item) =>
   .logo__mark {
     height: 36px;
     width: auto;
+  }
+
+  .header.on-hero .logo__mark {
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
   }
 
   .nav {
