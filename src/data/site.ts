@@ -5,12 +5,9 @@ export const site = {
 }
 
 export const navigation = [
-  { label: 'Blog', href: '/blog' },
-  { label: 'Photoshoots', href: '/photo' },
-  { label: 'Guide', href: site.guideUrl, external: true },
-  { label: 'Experiences', href: '/experience' },
+  { label: 'Experience', href: '/experience' },
+  { label: 'News', href: '/blog' },
   { label: 'Apartments', href: '/apartments' },
-  { label: 'Contact', href: '/contact' },
 ]
 
 export const socialLinks = [
@@ -50,3 +47,32 @@ export const blogTags = [
   'tips',
   'events',
 ]
+
+export const footerLinks = {
+  transport: [
+    { label: 'Ferry timetables', href: '#ferry' },
+    { label: 'Bus timetables', href: '#bus' },
+    { label: 'Airport shuttle', href: '#airport' },
+    { label: "Gregory's guide", href: site.guideUrl, external: true },
+    { label: 'Our photoblog', href: '/blog' },
+  ],
+  apartments: [
+    { label: 'Booking.com', href: 'https://www.booking.com' },
+    { label: 'Airbnb', href: 'https://www.airbnb.com' },
+    { label: 'Apartments overview', href: '/apartments' },
+  ],
+  info: [
+    { label: 'How to get here', href: '/how-to-get' },
+    { label: 'What to do', href: '/what-to-do' },
+    { label: 'Parking tips', href: '/parking' },
+    { label: 'Beach reviews', href: '/beaches' },
+  ],
+}
+
+export const heroLinks = {
+  ferryPdf: '#ferry',
+  busPdf: '#bus',
+  apartments: '/apartments',
+}
+
+export const etsyUrl = 'https://www.etsy.com'

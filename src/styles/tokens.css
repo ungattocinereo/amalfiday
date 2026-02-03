@@ -16,7 +16,7 @@
   /* Typography */
   --font-display: "Libre Baskerville", "Times New Roman", serif;
   --font-body: "Roboto", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "MesloLGS", "Meslo", "Menlo", "Courier New", monospace;
+  --font-mono: "IBM Plex Mono", "Menlo", "Courier New", monospace;
 
   /* Sizing */
   --container-max: 1200px;
