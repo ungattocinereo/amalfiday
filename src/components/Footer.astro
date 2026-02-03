@@ -4,13 +4,16 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <img src="/brand/logo-dark.svg" alt="Amalfi.Day" />
+      <img class="logo--dark" src="/brand/logo-dark.svg" alt="Amalfi.Day" />
+      <img class="logo--light" src="/brand/logo-light.svg" alt="Amalfi.Day" />
       <div class="footer__social">
         {socialLinks
           .filter((item) => ['Instagram', 'Facebook', 'Twitter'].includes(item.label))
           .map((item) => (
             <a class="footer__social-link" href={item.href} target="_blank" rel="noreferrer">
-              {item.label[0]}
+              {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
+              {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
+              {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
             </a>
           ))}
       </div>
@@ -24,7 +27,7 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noreferrer' : undefined}
         >
-          <span class="footer__icon">↘</span>
+          <i class="bi bi-arrow-down-right footer__icon"></i>
           {item.label}
         </a>
       ))}
@@ -32,8 +35,13 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
 
     <div class="footer__column">
       {footerLinks.apartments.map((item) => (
-        <a class="footer__link" href={item.href} target="_blank" rel="noreferrer">
-          <span class="footer__icon">↗</span>
+        <a
+          class="footer__link"
+          href={item.href}
+          target={item.external ? '_blank' : undefined}
+          rel={item.external ? 'noreferrer' : undefined}
+        >
+          <i class="bi bi-house-heart footer__icon"></i>
           {item.label}
         </a>
       ))}
@@ -42,7 +50,7 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
     <div class="footer__column">
       {footerLinks.info.map((item) => (
         <a class="footer__link" href={item.href}>
-          <span class="footer__icon">✦</span>
+          <i class="bi bi-compass footer__icon"></i>
           {item.label}
         </a>
       ))}
@@ -51,7 +59,7 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
     <div class="footer__column">
       {featuredPhotoshoots.map((item) => (
         <a class="footer__link" href={item.href}>
-          <span class="footer__icon">✷</span>
+          <i class="bi bi-camera footer__icon"></i>
           {item.title}
         </a>
       ))}
@@ -70,8 +78,8 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
 <style>
   .footer {
     padding: 4rem 0 0;
-    background: #ffffff;
-    border-top: 1px solid var(--color-surface);
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
   }
 
   .footer__inner {
@@ -86,6 +94,18 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
     margin-bottom: 1.5rem;
   }
 
+  .footer__brand .logo--light {
+    display: none;
+  }
+
+  [data-theme='night'] .footer__brand .logo--dark {
+    display: none;
+  }
+
+  [data-theme='night'] .footer__brand .logo--light {
+    display: block;
+  }
+
   .footer__social {
     display: flex;
     gap: 0.8rem;
@@ -95,7 +115,7 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1px solid rgba(26, 26, 26, 0.2);
+    border: 1px solid var(--color-border);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -116,7 +136,7 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
     color: var(--color-text);
     font-size: 0.95rem;
     font-weight: 500;
-    border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 0.4rem;
   }
 
@@ -128,7 +148,7 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
   .footer__bottom {
     margin-top: 3rem;
     padding: 1.5rem 0;
-    border-top: 1px solid var(--color-surface);
+    border-top: 1px solid var(--color-border);
     color: var(--color-text-muted);
     font-size: 0.85rem;
   }

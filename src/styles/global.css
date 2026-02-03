@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap');
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 
 @import './tokens.css';
 
@@ -14,7 +15,7 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--color-text);
-  background: linear-gradient(180deg, #ffffff 0%, #ffffff 55%, #f7f8fb 100%);
+  background: var(--color-bg);
   min-height: 100vh;
 }
 
@@ -23,8 +24,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(circle at 20% 10%, rgba(255, 195, 0, 0.12), transparent 35%),
-    radial-gradient(circle at 80% 15%, rgba(0, 156, 255, 0.1), transparent 35%);
+    radial-gradient(circle at 20% 10%, var(--bg-glow-1), transparent 35%),
+    radial-gradient(circle at 80% 15%, var(--bg-glow-2), transparent 35%);
   pointer-events: none;
   z-index: -1;
 }
@@ -115,10 +116,10 @@ p {
 }
 
 .card {
-  background: #ffffff;
+  background: var(--color-card);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
-  border: 1px solid var(--color-surface);
+  border: 1px solid var(--color-border);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 

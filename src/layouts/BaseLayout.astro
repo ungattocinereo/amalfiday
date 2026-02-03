@@ -16,6 +16,12 @@ const { title = site.name, description = site.description } = Astro.props
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <script is:inline>
+      const stored = localStorage.getItem('theme')
+      const prefersDark =
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      document.documentElement.dataset.theme = stored || (prefersDark ? 'night' : 'day')
+    </script>
   </head>
   <body>
     <Header />

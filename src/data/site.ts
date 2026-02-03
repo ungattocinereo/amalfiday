@@ -57,8 +57,8 @@ export const footerLinks = {
     { label: 'Our photoblog', href: '/blog' },
   ],
   apartments: [
-    { label: 'Booking.com', href: 'https://www.booking.com' },
-    { label: 'Airbnb', href: 'https://www.airbnb.com' },
+    { label: 'Booking.com', href: 'https://www.booking.com', external: true },
+    { label: 'Airbnb', href: 'https://www.airbnb.com', external: true },
     { label: 'Apartments overview', href: '/apartments' },
   ],
   info: [
