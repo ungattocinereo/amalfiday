@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const heroCategories = [
+  {
+    key: 'influencer',
+    title: 'INFLUENCER PHOTOSHOOT',
+    subtitle: 'Stand out from the crowd and captivate your followers with high-quality images',
+  },
+  {
+    key: 'couple',
+    title: 'COUPLE PICTURE TAKING',
+    subtitle: 'Cherish your memories of Amalfi and your love forever with our tailored photo sessions',
+  },
+  {
+    key: 'personal',
+    title: 'PERSONAL PHOTO SHOOTING',
+    subtitle:
+      'The most picturesque locations and capture your personality in stunning, high-quality images',
+  },
+]
+
+const heroImages = {
+  influencer: [
+    '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg',
+    '/photoshootings/hero/influencer/bissa-ninfulenser-icecream.jpg',
+    '/photoshootings/hero/influencer/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
+  ],
+  couple: [
+    '/photoshootings/hero/couple/02-slideshow-regan-walk-ravello-love-1024x682.webp',
+    '/photoshootings/hero/couple/couple-photoshooting-amalfi.jpg',
+    '/photoshootings/hero/couple/katerina-kuznezova-praiano-2021-002.jpg',
+  ],
+  personal: [
+    '/photoshootings/hero/personal/Masha-Minchuck-Amalfi-day.jpg',
+    '/photoshootings/hero/personal/Silvia-Amalfi-day.jpg.jpg',
+    '/photoshootings/hero/personal/iiana-photo-hero-atrani-hat-2-1024x680.webp',
+  ],
+}
+
+const individualAlbum = [
+  '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
+  '/photoshootings/individual/Silvia-Amalfi-day.jpg.jpg',
+  '/photoshootings/individual/bissa-ninfulenser-icecream.jpg',
+  '/photoshootings/individual/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
+  '/photoshootings/individual/iiana-photo-hero-atrani-hat-2-1024x680.webp',
+  '/photoshootings/individual/berrasguy-Minchuck-Amalfi-day.jpg.jpg',
+]
+
+const coupleAlbum = [
+  '/photoshootings/couples/02-slideshow-regan-walk-ravello-love-1024x682.webp',
+  '/photoshootings/couples/couple-photoshooting-amalfi.jpg',
+  '/photoshootings/couples/DSC0789.jpg',
+  '/photoshootings/couples/DSC8503.jpg',
+  '/photoshootings/couples/img_5f68ca5842ca6.jpg',
+  '/photoshootings/couples/katerina-kuznezova-praiano-2021-002.jpg',
+]
+
+const testimonials = [
+  {
+    quote:
+      'I just wanted to say thank you again for making our families trip memorable. We have just spent a week with Taylor and Regan and the photos are incredible. They could not stop talking about your patience and how flexible you were. We maybe having an Amalfi wedding and you are top of our list. Thank you again',
+    author: 'Estrallita Bloss',
+    meta: 'Ravello, 2023',
+  },
+  {
+    quote:
+      "Greg's an excellent photographer. The angles, the lighting, the focus of the camera... all were amazing. He took such gorgeous photos of me on the Amalfi Coast that I'm obsessed with, and can't stop looking at. Definitely recommend to anyone looking for professionally done photos!",
+    author: 'Bisaan Hanouneh',
+    meta: 'Amalfi Coast, 2020',
+  },
+  {
+    quote:
+      'I express my deep gratitude to Gregory, for the fact that in addition to an exciting photo shoot, he gave us a fascinating tour and showed us those places that we could hardly find on our own. All love, kindness and amalfi mood☀️☀️☀️',
+    author: 'Alex Dolgov',
+    meta: 'Guest, 2020',
+  },
+  {
+    quote:
+      'Wonderful and rememberable journey, although it was only one night stay in the lovely and comfortable room with taste, taken care by the very kind and reliable host. The travel recommendations and even extra assist offered by Greg was really surprise.',
+    author: '吴昊游',
+    meta: 'Guest, 2019',
+  },
+]
+---
+
+<BaseLayout title="Photoshootings — Amalfi.Day">
+  <section class="ps-hero">
+    <div class="container">
+      <div class="ps-hero__header">
+        <h1>Photoshootings</h1>
+        <p>
+          A photographic journey through Southern Italy's treasures — crafted for influencer,
+          couple, and personal stories.
+        </p>
+      </div>
+
+      <div class="ps-hero__grid">
+        {heroCategories.map((cat) => (
+          <div class="ps-hero__card">
+            <div class="ps-hero__images">
+              {heroImages[cat.key].map((src) => (
+                <img src={src} alt={cat.title} loading="lazy" />
+              ))}
+            </div>
+            <div class="ps-hero__overlay">
+              <h2>{cat.title}</h2>
+              <p>{cat.subtitle}</p>
+              <button class="button">Book now!</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2>Individual photo sessions</h2>
+        <p>Capture your personality in stunning, high-quality images.</p>
+      </div>
+      <div class="album">
+        {individualAlbum.map((src) => (
+          <div class="album__item">
+            <img src={src} alt="Individual photoshoot" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials">
+    <div class="container">
+      <div class="section__header">
+        <h2>Testimonials</h2>
+        <p>Real words from guests who trusted Amalfi.Day.</p>
+      </div>
+      <div class="testimonials__grid">
+        {testimonials.map((item) => (
+          <article class="card testimonial">
+            <p>“{item.quote}”</p>
+            <strong>{item.author}</strong>
+            <span>{item.meta}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2>Couple photo sessions</h2>
+        <p>Preserve your love story against Amalfi's most romantic backdrops.</p>
+      </div>
+      <div class="album">
+        {coupleAlbum.map((src) => (
+          <div class="album__item">
+            <img src={src} alt="Couple photoshoot" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ps-hero {
+    padding: 5rem 0 4rem;
+    background: #0f1115;
+    color: #ffffff;
+  }
+
+  .ps-hero__header {
+    max-width: 720px;
+    margin-bottom: 2.5rem;
+  }
+
+  .ps-hero__header h1 {
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+  }
+
+  .ps-hero__header p {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .ps-hero__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .ps-hero__card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 280px;
+    background: #101418;
+  }
+
+  .ps-hero__images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 100%;
+  }
+
+  .ps-hero__images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.55);
+  }
+
+  .ps-hero__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    padding: 2rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 100%);
+  }
+
+  .ps-hero__overlay h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin: 0;
+  }
+
+  .ps-hero__overlay p {
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 560px;
+  }
+
+  .ps-hero__overlay .button {
+    width: fit-content;
+  }
+
+  .album {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .album__item {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .album__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .testimonials {
+    background: var(--color-surface);
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testimonial {
+    padding: 1.5rem;
+  }
+
+  .testimonial strong {
+    display: block;
+    margin-top: 1rem;
+    color: var(--color-text);
+  }
+
+  .testimonial span {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 720px) {
+    .ps-hero__images {
+      grid-template-columns: 1fr;
+    }
+
+    .ps-hero__card {
+      min-height: 360px;
+    }
+  }
+</style>

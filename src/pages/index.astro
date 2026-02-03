@@ -151,9 +151,24 @@ const staticPages = [
       </div>
       <div class="prefooter__media">
         <div class="prefooter__stack">
-          <div class="prefooter__photo"></div>
-          <div class="prefooter__photo"></div>
-          <div class="prefooter__photo"></div>
+          <img
+            class="prefooter__photo"
+            src="/pre-footer/boat-tours-in-amalfi.webp"
+            alt="Boat tours in Amalfi Coast"
+            loading="lazy"
+          />
+          <img
+            class="prefooter__photo"
+            src="/pre-footer/girl-on-moto-in-amalfi-small.webp"
+            alt="Amalfi scooter ride"
+            loading="lazy"
+          />
+          <img
+            class="prefooter__photo"
+            src="/pre-footer/2-food-in-amalfi-good.webp"
+            alt="Amalfi food experience"
+            loading="lazy"
+          />
         </div>
         <div class="prefooter__newsletter">
           <span>Get updates via email</span>
@@ -458,7 +473,9 @@ const staticPages = [
   .prefooter__photo {
     height: 120px;
     border-radius: 12px;
-    background: linear-gradient(135deg, rgba(255, 89, 0, 0.2), rgba(0, 156, 255, 0.2));
+    width: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .prefooter__newsletter {
