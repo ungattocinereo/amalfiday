@@ -1,5 +1,5 @@
 ---
-import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
+import { footerLinks, socialLinks } from '../data/site'
 import LogoMark from './LogoMark.astro'
 ---
 <footer class="footer">
@@ -27,20 +27,14 @@ import LogoMark from './LogoMark.astro'
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noreferrer' : undefined}
         >
-          {item.label === 'Ferry timetables' && (
-            <i class="bi bi-ship footer__icon"></i>
-          )}
-          {item.label === 'Bus timetables' && (
-            <i class="bi bi-bus-front footer__icon"></i>
+          {(item.label === 'Ferry timetables' || item.label === 'Bus timetables') && (
+            <i class="bi bi-download footer__icon"></i>
           )}
           {item.label === 'Airport shuttle' && (
             <i class="bi bi-airplane footer__icon"></i>
           )}
-          {item.label === "Gregory's guide" && (
+          {item.label === "Greg's guide" && (
             <i class="bi bi-map footer__icon"></i>
-          )}
-          {item.label === 'Our photoblog' && (
-            <i class="bi bi-journal-text footer__icon"></i>
           )}
           {item.label}
         </a>
@@ -90,23 +84,67 @@ import LogoMark from './LogoMark.astro'
     </div>
 
     <div class="footer__column">
-      {featuredPhotoshoots.map((item) => (
-        <a class="footer__link" href={item.href}>
-          <i class="bi bi-camera footer__icon"></i>
-          {item.title}
+      {footerLinks.blog.map((item) => (
+        <a
+          class="footer__link"
+          href={item.href}
+          data-bookmark={item.action === 'bookmark' ? 'true' : undefined}
+        >
+          {item.label === 'Latest post in blog' && (
+            <i class="bi bi-newspaper footer__icon"></i>
+          )}
+          {item.label === 'Random blog post' && (
+            <i class="bi bi-shuffle footer__icon"></i>
+          )}
+          {item.label === 'Add to bookmarks' && (
+            <i class="bi bi-bookmark-plus footer__icon"></i>
+          )}
+          {item.label}
         </a>
       ))}
     </div>
   </div>
   <div class="footer__bottom">
-    <div class="container">
-      <span>
-        © 2014-{new Date().getFullYear()} CrystalPont S.R.L. / P.IVA: 06863730650 /
-        <a href="/privacy"> Privacy Policy</a>
+    <div class="container footer__bottom-inner">
+      <span class="footer__legal">
+        © 2014-{new Date().getFullYear()} CristallPont S.R.L. / P.IVA: 06863730650 /
       </span>
+      <div class="footer__meta">
+        <a class="footer__policy" href="/privacy">Privacy Policy</a>
+        <span class="footer__divider" aria-hidden="true">•</span>
+        <span class="footer__credit">
+          Design & Developement Gregory '<a
+            class="footer__credit-link"
+            href="https://cinereo.it"
+            target="_blank"
+            rel="noreferrer"
+          >Cinereo</a>' Day
+        </span>
+      </div>
     </div>
   </div>
 </footer>
+
+<script is:inline>
+  const bookmarkLink = document.querySelector('[data-bookmark="true"]')
+  bookmarkLink?.addEventListener('click', (event) => {
+    event.preventDefault()
+    const url = window.location.origin
+    const title = document.title
+
+    if (window.sidebar && window.sidebar.addPanel) {
+      window.sidebar.addPanel(title, url, '')
+      return
+    }
+
+    if (window.external && 'AddFavorite' in window.external) {
+      window.external.AddFavorite(url, title)
+      return
+    }
+
+    alert('Press Ctrl+D (Windows) or ⌘+D (Mac) to bookmark this page.')
+  })
+</script>
 
 <style>
   .footer {
@@ -180,6 +218,37 @@ import LogoMark from './LogoMark.astro'
     font-size: 0.85rem;
   }
 
+  .footer__bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .footer__divider {
+    color: var(--color-text-muted);
+  }
+
+  .footer__credit {
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+
+  .footer__policy,
+  .footer__credit-link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
   .footer__bottom a {
     color: inherit;
   }
@@ -187,6 +256,26 @@ import LogoMark from './LogoMark.astro'
   @media (max-width: 1100px) {
     .footer__inner {
       grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .footer__bottom-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .footer__meta {
+      margin-left: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      gap: 0.4rem;
+    }
+
+    .footer__divider {
+      display: none;
     }
   }
 

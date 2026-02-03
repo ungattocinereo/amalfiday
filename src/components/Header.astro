@@ -1,7 +1,5 @@
 ---
 import { navigation, socialLinks, site } from '../data/site'
-import LogoMark from './LogoMark.astro'
-
 const headerSocials = socialLinks.filter((item) =>
   ['Instagram', 'Facebook', 'Twitter'].includes(item.label)
 )
@@ -9,59 +7,90 @@ const headerSocials = socialLinks.filter((item) =>
 <header class="header">
   <div class="header__shell">
     <div class="header__inner">
-    <nav class="nav">
+      <div class="header__primary">
+        <nav class="nav">
+          {navigation.map((item) => (
+            <a class="nav__link" href={item.href}>
+              <i class={`bi ${item.icon}`}></i>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <a class="logo" href="/" aria-label={`${site.name} home`}>
+          <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} />
+          <img
+            class="logo__mark logo__mark--night"
+            src="/brand/logo-light.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </a>
+
+        <div class="social">
+          {headerSocials.map((item) => (
+            <a class="social__link" href={item.href} target="_blank" rel="noreferrer">
+              <span class="sr-only">{item.label}</span>
+              {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
+              {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
+              {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="header__actions">
+        <label class="theme-switch" aria-label="Toggle theme">
+          <input class="theme-switch__input" type="checkbox" />
+          <span class="theme-switch__track">
+            <span class="theme-switch__thumb"></span>
+          </span>
+          <span class="theme-switch__icon" aria-hidden="true">
+            <i class="bi bi-sun"></i>
+            <i class="bi bi-moon-stars"></i>
+          </span>
+        </label>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+          <i class="bi bi-list"></i>
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-panel" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="mobile-panel__links">
       {navigation.map((item) => (
-        <a class="nav__link" href={item.href}>
-          {item.label}
+        <a class="mobile-panel__link" href={item.href}>
+          <span class="mobile-panel__link-label">
+            <i class={`bi ${item.icon}`}></i>
+            {item.label}
+          </span>
         </a>
       ))}
-    </nav>
-
-    <a class="logo" href="/" aria-label={`${site.name} home`}>
-      <LogoMark class="logo__mark" />
-    </a>
-
-    <div class="header__actions">
-      <div class="social">
-        {headerSocials.map((item) => (
-          <a class="social__link" href={item.href} target="_blank" rel="noreferrer">
-            <span class="sr-only">{item.label}</span>
-            {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
-            {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
-            {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
-          </a>
-        ))}
-      </div>
+    </div>
+    <div class="mobile-panel__theme">
       <label class="theme-switch" aria-label="Toggle theme">
         <input class="theme-switch__input" type="checkbox" />
         <span class="theme-switch__track">
           <span class="theme-switch__thumb"></span>
         </span>
+        <span class="theme-switch__icon" aria-hidden="true">
+          <i class="bi bi-sun"></i>
+          <i class="bi bi-moon-stars"></i>
+        </span>
       </label>
-      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-        <i class="bi bi-list"></i>
-        <i class="bi bi-x-lg"></i>
-      </button>
-    </div>
-    </div>
-    <div class="mobile-panel">
-    <div class="mobile-panel__links">
-      {navigation.map((item) => (
-        <a class="mobile-panel__link" href={item.href}>
-          {item.label}
-        </a>
-      ))}
     </div>
     <div class="mobile-panel__social">
       {headerSocials.map((item) => (
-        <a class="social__link" href={item.href} target="_blank" rel="noreferrer">
-          <span class="sr-only">{item.label}</span>
+        <a class="mobile-panel__social-link" href={item.href} target="_blank" rel="noreferrer">
           {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
           {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
           {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
+          <span>
+            {item.label === 'Twitter' ? 'X' : item.label}
+          </span>
         </a>
       ))}
-    </div>
     </div>
   </div>
 </header>
@@ -70,42 +99,85 @@ const headerSocials = socialLinks.filter((item) =>
   ;(() => {
     const root = document.documentElement
     const header = document.querySelector('.header')
-    const themeToggle = document.querySelector('.theme-switch__input')
+    const themeToggles = Array.from(document.querySelectorAll('.theme-switch__input'))
     const menuToggle = document.querySelector('.menu-toggle')
+    const mobilePanel = document.querySelector('.mobile-panel')
     const heroEl = document.querySelector('.hero--orange, .hero--dark')
 
-    const setTheme = (value) => {
-      root.dataset.theme = value
+    const getStoredTheme = () => {
       try {
-        localStorage.setItem('theme', value)
+        return localStorage.getItem('theme')
       } catch (error) {
-        // ignore storage errors
+        return null
+      }
+    }
+
+    const getSystemTheme = () => {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'night'
+      }
+      return 'day'
+    }
+
+    const syncSwitch = (value) => {
+      themeToggles.forEach((toggle) => {
+        toggle.checked = value === 'night'
+      })
+    }
+
+    const setTheme = (value, { persist = false } = {}) => {
+      root.dataset.theme = value
+      if (persist) {
+        try {
+          localStorage.setItem('theme', value)
+        } catch (error) {
+          // ignore storage errors
+        }
       }
       syncSwitch(value)
     }
 
-    const syncSwitch = (value) => {
-      if (themeToggle) {
-        themeToggle.checked = value === 'night'
+    const storedTheme = getStoredTheme()
+    const hasStoredTheme = storedTheme === 'day' || storedTheme === 'night'
+    const initialTheme = hasStoredTheme ? storedTheme : root.dataset.theme || getSystemTheme()
+    let allowSystemSync = !hasStoredTheme
+
+    setTheme(initialTheme, { persist: hasStoredTheme })
+
+    if (window.matchMedia) {
+      const media = window.matchMedia('(prefers-color-scheme: dark)')
+      const onSystemChange = (event) => {
+        if (!allowSystemSync) return
+        setTheme(event.matches ? 'night' : 'day')
+      }
+      if (media.addEventListener) {
+        media.addEventListener('change', onSystemChange)
+      } else if (media.addListener) {
+        media.addListener(onSystemChange)
       }
     }
 
-    syncSwitch(root.dataset.theme)
-
-    themeToggle?.addEventListener('change', () => {
-      const next = themeToggle.checked ? 'night' : 'day'
-      setTheme(next)
+    themeToggles.forEach((toggle) => {
+      toggle.addEventListener('change', () => {
+        const next = toggle.checked ? 'night' : 'day'
+        allowSystemSync = false
+        setTheme(next, { persist: true })
+      })
     })
 
     menuToggle?.addEventListener('click', () => {
       const isOpen = header?.classList.toggle('menu-open')
       menuToggle?.setAttribute('aria-expanded', String(isOpen))
+      mobilePanel?.setAttribute('aria-hidden', String(!isOpen))
+      document.body.style.overflow = isOpen ? 'hidden' : ''
     })
 
     document.querySelectorAll('.mobile-panel__link').forEach((link) => {
       link.addEventListener('click', () => {
         header?.classList.remove('menu-open')
         menuToggle?.setAttribute('aria-expanded', 'false')
+        mobilePanel?.setAttribute('aria-hidden', 'true')
+        document.body.style.overflow = ''
       })
     })
 
@@ -136,7 +208,7 @@ const headerSocials = socialLinks.filter((item) =>
     color: var(--color-text);
     --nav-underline: var(--gradient-sunset);
     --nav-outline: var(--color-border);
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   .header__shell {
@@ -148,7 +220,7 @@ const headerSocials = socialLinks.filter((item) =>
     overflow: hidden;
     border-radius: 999px;
     margin: 0 auto;
-    width: min(820px, calc(100% - 32px));
+    width: min(980px, calc(100% - 32px));
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
   }
 
@@ -163,8 +235,10 @@ const headerSocials = socialLinks.filter((item) =>
   }
 
   .header.on-hero .header__shell {
-    background: rgba(255, 89, 0, 0.12);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
   }
 
   .header.is-scrolled .header__shell {
@@ -174,9 +248,9 @@ const headerSocials = socialLinks.filter((item) =>
   }
 
   .header__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1.5rem;
     padding: 1rem 0;
     transition: padding 0.2s ease;
@@ -187,42 +261,57 @@ const headerSocials = socialLinks.filter((item) =>
     padding-right: 1.4rem;
   }
 
+  .header__primary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   .header.is-scrolled .header__inner {
     padding: 0.6rem 1.4rem;
   }
 
   .logo {
-    justify-self: center;
+    flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
   }
 
   .logo__mark {
     transition: transform 0.2s ease;
     display: block;
-    color: currentColor;
+    width: auto;
+    height: 44px;
   }
 
   .header.is-scrolled .logo__mark {
     transform: scale(0.92);
   }
 
-  .logo {
-    color: var(--color-text);
+  .logo__mark--night {
+    display: none;
   }
 
-  .header.on-hero .logo {
-    color: #ffffff;
+  [data-theme='night'] .logo__mark--day {
+    display: none;
   }
 
-  [data-theme='night'] .logo {
-    color: #ffffff;
+  [data-theme='night'] .logo__mark--night {
+    display: block;
   }
 
-  .logo__mark {
-    height: 44px;
-    width: auto;
+  .header.on-hero .logo__mark--day {
+    display: none;
+  }
+
+  .header.on-hero .logo__mark--night {
+    display: block;
   }
 
   .header.on-hero .logo__mark {
@@ -233,6 +322,9 @@ const headerSocials = socialLinks.filter((item) =>
     display: flex;
     gap: 1.2rem;
     justify-content: flex-start;
+    align-items: center;
+    flex: 0 1 auto;
+    min-width: 0;
   }
 
   .nav__link {
@@ -240,6 +332,10 @@ const headerSocials = socialLinks.filter((item) =>
     color: currentColor;
     position: relative;
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
   }
 
   .nav__link::after {
@@ -269,23 +365,23 @@ const headerSocials = socialLinks.filter((item) =>
   }
 
   .social__link {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--nav-outline);
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    border: none;
+    padding: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: currentColor;
-    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
   }
 
   .social__link i {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   .social__link:hover {
-    border-color: var(--color-aux);
     color: var(--color-aux);
     transform: translateY(-1px);
   }
@@ -295,12 +391,47 @@ const headerSocials = socialLinks.filter((item) =>
     align-items: center;
     justify-content: flex-end;
     gap: 0.7rem;
+    flex: 0 1 auto;
+    min-width: 0;
   }
 
   .theme-switch {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    gap: 0.45rem;
+    position: relative;
+  }
+
+  .theme-switch__icon {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: currentColor;
+  }
+
+  .theme-switch__icon i {
+    position: absolute;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .theme-switch__icon .bi-moon-stars {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  [data-theme='night'] .theme-switch__icon .bi-sun {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  [data-theme='night'] .theme-switch__icon .bi-moon-stars {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .theme-switch__input {
@@ -327,7 +458,13 @@ const headerSocials = socialLinks.filter((item) =>
     border-radius: 50%;
     background: #ffffff;
     transform: translateX(0);
-    transition: transform 0.2s ease, background 0.2s ease;
+    transition: transform 0.18s ease, background 0.2s ease;
+    display: block;
+    will-change: transform;
+  }
+
+  .theme-switch__input:checked + .theme-switch__track .theme-switch__thumb {
+    transform: translateX(14px);
   }
 
   [data-theme='night'] .theme-switch__track {
@@ -351,6 +488,16 @@ const headerSocials = socialLinks.filter((item) =>
     cursor: pointer;
     color: currentColor;
     transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .header.on-hero .menu-toggle {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .header.on-hero .theme-switch__track {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.35);
   }
 
   .menu-toggle i {
@@ -382,6 +529,11 @@ const headerSocials = socialLinks.filter((item) =>
     border-radius: 0 0 24px 24px;
   }
 
+  .mobile-panel__theme {
+    display: flex;
+    justify-content: center;
+  }
+
   .mobile-panel__links {
     display: flex;
     flex-direction: column;
@@ -395,11 +547,34 @@ const headerSocials = socialLinks.filter((item) =>
     color: var(--color-text);
   }
 
+  .mobile-panel__link-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .mobile-panel__link i {
+    font-size: 1rem;
+  }
+
   .mobile-panel__social {
     margin-top: 1rem;
     display: flex;
     gap: 0.8rem;
     justify-content: center;
+  }
+
+  .mobile-panel__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .mobile-panel__social-link i {
+    font-size: 1.1rem;
   }
 
   .sr-only {
@@ -416,28 +591,40 @@ const headerSocials = socialLinks.filter((item) =>
 
   @media (max-width: 900px) {
     .header__inner {
-      grid-template-columns: 1fr;
-      gap: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.6rem;
+      padding: 0.5rem 0.7rem;
+      width: auto;
+      max-width: none;
+    }
+
+    .header__primary {
+      display: none;
     }
 
     .nav {
       display: none;
     }
 
-    .logo {
-      order: -1;
+    .header__primary .social {
+      display: none;
     }
 
-    .social {
+    .header__actions .theme-switch {
       display: none;
     }
 
     .menu-toggle {
       display: inline-flex;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
     }
 
-    .header.menu-open .mobile-panel {
-      display: block;
+    .menu-toggle i {
+      font-size: 1.35rem;
     }
 
     .header {
@@ -445,8 +632,81 @@ const headerSocials = socialLinks.filter((item) =>
     }
 
     .header__shell {
-      width: calc(100% - 20px);
-      border-radius: 26px;
+      width: auto;
+      display: inline-flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 12px;
+      border-radius: 999px;
+      position: relative;
+      z-index: 30;
+    }
+
+    .logo__mark {
+      height: 36px;
+    }
+
+    .mobile-panel {
+      display: flex;
+      position: fixed;
+      inset: 0;
+      padding: calc(env(safe-area-inset-top) + 5.5rem) 1.5rem 2.5rem;
+      background: var(--color-bg);
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      flex-direction: column;
+      gap: 2.2rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      z-index: 20;
+    }
+
+    .header.menu-open .mobile-panel {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .mobile-panel__theme {
+      justify-content: flex-start;
+    }
+
+    .mobile-panel__links {
+      align-items: stretch;
+      gap: 1.2rem;
+    }
+
+    .mobile-panel__theme {
+      margin-top: 1.4rem;
+    }
+
+    .mobile-panel__link {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.4rem 0;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .mobile-panel__social {
+      margin-top: 1.2rem;
+      justify-content: flex-start;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .mobile-panel__social-link {
+      font-size: 1.05rem;
     }
   }
 </style>

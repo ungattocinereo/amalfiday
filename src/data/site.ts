@@ -5,9 +5,9 @@ export const site = {
 }
 
 export const navigation = [
-  { label: 'Experience', href: '/experience' },
-  { label: 'News', href: '/blog' },
-  { label: 'Apartments', href: '/apartments' },
+  { label: 'News', href: '/blog', icon: 'bi-newspaper' },
+  { label: 'Experience', href: '/experience', icon: 'bi-stars' },
+  { label: 'Apartments', href: '/apartments', icon: 'bi-house-door' },
 ]
 
 export const socialLinks = [
@@ -53,8 +53,7 @@ export const footerLinks = {
     { label: 'Ferry timetables', href: 'https://cnr.pw/ferry', external: true },
     { label: 'Bus timetables', href: 'https://cnr.pw/bus', external: true },
     { label: 'Airport shuttle', href: '#airport' },
-    { label: "Gregory's guide", href: site.guideUrl, external: true },
-    { label: 'Our photoblog', href: '/blog' },
+    { label: "Greg's guide", href: site.guideUrl, external: true },
   ],
   apartments: [
     { label: 'Booking.com', href: 'https://www.booking.com', external: true },
@@ -66,6 +65,11 @@ export const footerLinks = {
     { label: 'What to do', href: '/what-to-do' },
     { label: 'Parking tips', href: '/parking' },
     { label: 'Beach reviews', href: '/beaches' },
+  ],
+  blog: [
+    { label: 'Latest post in blog', href: '/blog' },
+    { label: 'Random blog post', href: '/blog?random=1' },
+    { label: 'Add to bookmarks', href: '#bookmark', action: 'bookmark' },
   ],
 }
 

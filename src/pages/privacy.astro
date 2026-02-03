@@ -3,12 +3,183 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 ---
 
 <BaseLayout title="Privacy Policy — Amalfi.Day">
-  <section class="section">
-    <div class="container">
-      <h1>
-        Privacy <span class="accent-italic">Policy</span>
-      </h1>
-      <p>Policy details will be added soon.</p>
+  <section class="section policy">
+    <div class="container policy__inner">
+      <div class="policy__intro">
+        <h1>
+          Privacy <span class="accent-italic">Policy</span>
+        </h1>
+        <p>
+          This policy explains how Amalfi.Day collects, uses, and protects your personal
+          information when you browse the site, request a photoshoot, or contact us.
+        </p>
+        <div class="policy__meta">
+          <span class="badge"><i class="bi bi-shield-check"></i> Data protection</span>
+          <span class="badge"><i class="bi bi-calendar3"></i> Last updated: February 3, 2026</span>
+        </div>
+      </div>
+
+      <div class="policy__grid">
+        <div class="card policy__card">
+          <h3>Data we collect</h3>
+          <ul>
+            <li>Contact details (name, email, phone) when you reach out.</li>
+            <li>Trip details you share for planning a session.</li>
+            <li>Website usage data such as device, browser, and pages visited.</li>
+          </ul>
+        </div>
+        <div class="card policy__card">
+          <h3>How we use it</h3>
+          <ul>
+            <li>Respond to your inquiries and plan your experience.</li>
+            <li>Improve the site content and navigation.</li>
+            <li>Send updates only if you request them.</li>
+          </ul>
+        </div>
+        <div class="card policy__card">
+          <h3>Cookies & analytics</h3>
+          <ul>
+            <li>Essential cookies keep the site working correctly.</li>
+            <li>Analytics help us understand what visitors enjoy.</li>
+            <li>You can disable cookies in your browser settings.</li>
+          </ul>
+        </div>
+        <div class="card policy__card">
+          <h3>Your choices</h3>
+          <ul>
+            <li>Request access or correction of your data.</li>
+            <li>Ask us to delete your information at any time.</li>
+            <li>Opt out of non-essential communications.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="policy__sections">
+        <article class="policy__section">
+          <h2>Who we are</h2>
+          <p>
+            Amalfi.Day is a local photography and travel experience brand. If you have any
+            questions about this policy, contact us at
+            <a href="mailto:hello@amalfi.day">hello@amalfi.day</a>.
+          </p>
+        </article>
+
+        <article class="policy__section">
+          <h2>Information you provide</h2>
+          <p>
+            When you send a request or message, we collect the details you choose to share
+            (name, contact information, travel dates, and preferences). We use these details to
+            reply, plan your shoot, and deliver the service you requested.
+          </p>
+        </article>
+
+        <article class="policy__section">
+          <h2>Information collected automatically</h2>
+          <p>
+            Like most websites, we collect basic usage data such as IP address, browser type,
+            and pages visited. This information helps us maintain site security and improve the
+            experience.
+          </p>
+        </article>
+
+        <article class="policy__section">
+          <h2>Sharing & third parties</h2>
+          <p>
+            We do not sell your personal information. We only share data with trusted service
+            providers (for example, email or hosting services) when needed to operate the site
+            or respond to you. These providers are required to safeguard your information.
+          </p>
+        </article>
+
+        <article class="policy__section">
+          <h2>Data retention</h2>
+          <p>
+            We keep your information only as long as needed for the purposes described above,
+            or as required by law. If you request deletion, we will remove your data unless we
+            must retain it for legal obligations.
+          </p>
+        </article>
+
+        <article class="policy__section">
+          <h2>Your rights</h2>
+          <p>
+            Depending on your location, you may have the right to access, correct, or delete
+            your personal data. To make a request, email
+            <a href="mailto:hello@amalfi.day">hello@amalfi.day</a>.
+          </p>
+        </article>
+
+        <article class="policy__section">
+          <h2>Policy updates</h2>
+          <p>
+            We may update this policy from time to time. Changes will be posted on this page
+            with a revised “Last updated” date.
+          </p>
+        </article>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .policy__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .policy__intro h1 {
+    font-size: clamp(2.6rem, 4vw, 3.8rem);
+  }
+
+  .policy__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .policy__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .policy__card {
+    padding: 1.5rem;
+  }
+
+  .policy__card h3 {
+    margin-bottom: 0.8rem;
+  }
+
+  .policy__card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--color-text-muted);
+  }
+
+  .policy__card li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .policy__sections {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .policy__section h2 {
+    font-size: 1.4rem;
+  }
+
+  .policy__section a {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 700px) {
+    .policy__inner {
+      gap: 2.2rem;
+    }
+  }
+</style>

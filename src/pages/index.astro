@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { featuredPhotoshoots, heroLinks, etsyUrl } from '../data/site'
+import { getGhostPosts } from '../data/ghost'
 
 const staticPages = [
   { title: 'How to get here', href: '/how-to-get', note: 'Routes, transfers, and arrival tips.' },
@@ -8,6 +9,8 @@ const staticPages = [
   { title: 'Parking tips', href: '/parking', note: 'Best places and timing strategies.' },
   { title: 'Beach reviews', href: '/beaches', note: 'Where to swim, relax, and shoot.' },
 ]
+
+const newsPosts = await getGhostPosts({ limit: 2 })
 
 ---
 <BaseLayout title="Amalfi.Day — CrystalPontomAlphiday">
@@ -116,6 +119,37 @@ const staticPages = [
               <h3>{item.title}</h3>
               <span><i class="bi bi-geo-alt"></i> {item.location}</span>
             </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--news">
+    <div class="container">
+      <div class="section__header news__header">
+        <h2>
+          Amalfi <span class="accent-italic">News</span>
+        </h2>
+        <div class="news__cta">
+          <p>Visit the news blog — fresh stories and local insights are always waiting there.</p>
+          <a class="button secondary" href="/blog">
+            <i class="bi bi-newspaper"></i> Go to blog
+          </a>
+        </div>
+      </div>
+      <div class="news-scroll" aria-label="Latest blog posts">
+        {newsPosts.map((post) => (
+          <a class="news-card" href={post.href}>
+            <div class="news-card__media">
+              {post.image ? (
+                <img src={post.image} alt={post.title} loading="lazy" decoding="async" />
+              ) : (
+                <div class="news-card__placeholder" aria-hidden="true"></div>
+              )}
+            </div>
+            <span class="news-card__date">{post.date}</span>
+            <h3>{post.title}</h3>
           </a>
         ))}
       </div>
@@ -471,6 +505,92 @@ const staticPages = [
     gap: 0.4rem;
   }
 
+  .section--news {
+    background: linear-gradient(120deg, rgba(1, 98, 255, 0.06), rgba(255, 195, 0, 0.08));
+  }
+
+  .news__header {
+    align-items: flex-end;
+  }
+
+  .news__cta {
+    max-width: 360px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .news__cta p {
+    margin: 0;
+  }
+
+  .news-scroll {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .news-card {
+    min-width: 260px;
+    flex: 0 0 260px;
+    background: var(--color-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    color: inherit;
+    text-decoration: none;
+    scroll-snap-align: start;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    text-decoration: none;
+  }
+
+  .news-card__media {
+    height: 180px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--color-surface);
+    position: relative;
+  }
+
+  .news-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .news-card__placeholder {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.18), rgba(1, 98, 255, 0.2));
+  }
+
+  .news-card__date {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .news-card h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
   .etsy {
     background: linear-gradient(120deg, rgba(255, 89, 0, 0.08), rgba(1, 98, 255, 0.08));
   }
@@ -565,6 +685,11 @@ const staticPages = [
   @media (max-width: 640px) {
     .section__header {
       flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .news__cta {
+      text-align: left;
       align-items: flex-start;
     }
 
