@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+    <link rel="stylesheet" href="{{asset "built/screen.css"}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap">
+    <link rel="stylesheet" href="{{asset "built/bootstrap-icons.css"}}">
+    <script>
+        try {
+            const stored = localStorage.getItem('theme')
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            document.documentElement.dataset.theme = stored || (prefersDark ? 'night' : 'day')
+        } catch (error) {
+            document.documentElement.dataset.theme = 'day'
+        }
+    </script>
+    <style>
+        :root {
+            --color-accent: #ff5900;
+            --color-accent-2: #ffc300;
+            --color-aux: #0162ff;
+            --color-aux-2: #009cff;
+            --color-bg: #ffffff;
+            --color-surface: #f0f2f6;
+            --color-card: #ffffff;
+            --color-border: rgba(26, 26, 26, 0.12);
+            --color-text: #1a1a1a;
+            --color-text-muted: #666666;
+            --color-nav-bg-strong: rgba(255, 255, 255, 0.95);
+            --color-nav-border: rgba(240, 242, 246, 0.9);
+            --gradient-sunset: linear-gradient(135deg, #ff5900 0%, #ffc300 100%);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --container-max: 1200px;
+            --font-body: "Roboto", "Helvetica Neue", Arial, sans-serif;
+            --font-mono: "IBM Plex Mono", "Menlo", "Courier New", monospace;
+        }
+
+        [data-theme='night'] {
+            --color-bg: #0f1115;
+            --color-surface: #171a20;
+            --color-card: #14171b;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --color-text: #f5f5f5;
+            --color-text-muted: #b3b7c0;
+            --color-nav-bg-strong: rgba(15, 17, 21, 0.96);
+            --color-nav-border: rgba(255, 255, 255, 0.06);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.45);
+        }
+
+        html {
+            color-scheme: light;
+        }
+
+        [data-theme='night'] {
+            color-scheme: dark;
+        }
+
+        .header {
+            position: fixed;
+            top: clamp(10px, 2vw, 18px);
+            left: 0;
+            right: 0;
+            z-index: 200;
+            color: var(--color-text);
+            --nav-underline: var(--gradient-sunset);
+            --nav-outline: var(--color-border);
+            font-family: var(--font-body);
+            pointer-events: auto;
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .header__shell {
+            pointer-events: auto;
+            background: transparent;
+            backdrop-filter: none;
+            border: 1px solid transparent;
+            transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease,
+                backdrop-filter 0.2s ease;
+            overflow: hidden;
+            border-radius: 999px;
+            margin: 0 auto;
+            width: min(980px, calc(100% - 32px));
+            box-shadow: none;
+        }
+
+        .header.on-hero {
+            color: #ffffff;
+            --nav-underline: rgba(255, 255, 255, 0.95);
+            --nav-outline: rgba(255, 255, 255, 0.35);
+        }
+
+        .header.on-hero .header__shell {
+            background: transparent;
+            border-color: transparent;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+
+        @media (min-width: 901px) {
+            .header.has-hero:not(.is-scrolled) {
+                color: #ffffff;
+                --nav-underline: rgba(255, 255, 255, 0.95);
+                --nav-outline: rgba(255, 255, 255, 0.35);
+            }
+
+            .header.has-hero:not(.is-scrolled) .logo__mark--day {
+                display: none;
+            }
+
+            .header.has-hero:not(.is-scrolled) .logo__mark--night {
+                display: block;
+            }
+        }
+
+        .header.is-scrolled .header__shell {
+            background: var(--color-nav-bg-strong);
+            box-shadow: var(--shadow-soft);
+            border-color: var(--color-nav-border);
+            backdrop-filter: blur(12px);
+        }
+
+        .header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            transition: padding 0.2s ease;
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding-left: 1.4rem;
+            padding-right: 1.4rem;
+        }
+
+        .header__primary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .header.is-scrolled .header__inner {
+            padding: 0.6rem 1.4rem;
+        }
+
+        .logo {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo__mark {
+            transition: transform 0.2s ease;
+            display: block;
+            width: auto;
+            height: 44px;
+        }
+
+        .header.is-scrolled .logo__mark {
+            transform: scale(0.92);
+        }
+
+        .logo__mark--night {
+            display: none;
+        }
+
+        [data-theme='night'] .logo__mark--day {
+            display: none;
+        }
+
+        [data-theme='night'] .logo__mark--night {
+            display: block;
+        }
+
+        .header.on-hero .logo__mark--day {
+            display: none;
+        }
+
+        .header.on-hero .logo__mark--night {
+            display: block;
+        }
+
+        .header.on-hero .logo__mark {
+            filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+        }
+
+        .header .nav {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: flex-start;
+            align-items: center;
+            flex: 0 1 auto;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .header .nav__link {
+            font-weight: 500;
+            color: currentColor;
+            position: relative;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .header .nav__link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: var(--nav-underline);
+            transition: width 0.2s ease;
+        }
+
+        .header .nav__link:hover::after {
+            width: 100%;
+        }
+
+        .header .nav__link:hover {
+            text-decoration: none;
+        }
+
+        .social {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .social__link {
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            border: none;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: currentColor;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .social__link i {
+            font-size: 1.05rem;
+        }
+
+        .social__link:hover {
+            color: var(--color-aux);
+            transform: translateY(-1px);
+        }
+
+        .header__actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.7rem;
+            flex: 0 1 auto;
+            min-width: 0;
+        }
+
+        .theme-switch {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .theme-switch__icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 21px;
+            pointer-events: none;
+            color: #ffffff;
+            z-index: 1;
+        }
+
+        .theme-switch__icon i {
+            position: absolute;
+            font-size: 0.68rem;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+        }
+
+        .theme-switch__icon .bi-moon-stars {
+            left: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .theme-switch__icon .bi-sun {
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .theme-switch__icon .bi-moon-stars {
+            opacity: 0;
+            transform: translateY(-50%) scale(0.8);
+            color: #ffffff;
+        }
+
+        [data-theme='night'] .theme-switch__icon .bi-sun {
+            opacity: 0;
+            transform: translateY(-50%) scale(0.8);
+        }
+
+        [data-theme='night'] .theme-switch__icon .bi-moon-stars {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+            color: #ffffff;
+        }
+
+        [data-theme='night'] .theme-switch__track {
+            background: #171c26;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+        }
+
+        .theme-switch__input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .theme-switch__track {
+            width: 42px;
+            height: 21px;
+            border-radius: 999px;
+            background: #1b1f27;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            padding: 2px;
+            transition: background 0.2s ease;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+            position: relative;
+            z-index: 0;
+        }
+
+        .theme-switch__thumb {
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            background: #ffffff;
+            transform: translateX(0);
+            transition: transform 0.18s ease, background 0.2s ease;
+            display: block;
+            will-change: transform;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+            position: relative;
+            z-index: 2;
+        }
+
+        .theme-switch__input:checked + .theme-switch__track .theme-switch__thumb {
+            transform: translateX(21px);
+        }
+
+        [data-theme='night'] .theme-switch__thumb {
+            transform: translateX(21px);
+            background: #ffffff;
+        }
+
+        .menu-toggle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--nav-outline);
+            background: var(--color-card);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: currentColor;
+            transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .header.on-hero .theme-switch__track {
+            background: #1b1f27;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+        }
+
+        .menu-toggle i {
+            font-size: 1.05rem;
+        }
+
+        .menu-toggle .bi-x-lg {
+            display: none;
+        }
+
+        .header.menu-open .menu-toggle .bi-list {
+            display: none;
+        }
+
+        .header.menu-open .menu-toggle .bi-x-lg {
+            display: inline;
+        }
+
+        .mobile-panel {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            border-top: 1px solid var(--color-nav-border);
+            background: var(--color-nav-bg-strong);
+            padding: 1.5rem 0 2rem;
+            box-shadow: var(--shadow-soft);
+            border-radius: 0 0 24px 24px;
+        }
+
+        .mobile-panel__theme {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mobile-panel__links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .mobile-panel__link {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .mobile-panel__link-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .mobile-panel__link i {
+            font-size: 1rem;
+        }
+
+        .mobile-panel__social {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .mobile-panel__social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .mobile-panel__social-link i {
+            font-size: 1.1rem;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width: 900px) {
+            .header__inner {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 0.6rem;
+                padding: 0.5rem 0.7rem;
+                width: auto;
+                max-width: none;
+            }
+
+            .header__primary {
+                display: none;
+            }
+
+            .header .nav {
+                display: none;
+            }
+
+            .header__primary .social {
+                display: none;
+            }
+
+            .header__actions .theme-switch {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+                width: 46px;
+                height: 46px;
+                border-radius: 999px;
+                border: none;
+                background: var(--color-card);
+                box-shadow: var(--shadow-soft);
+            }
+
+            .menu-toggle i {
+                font-size: 1.35rem;
+            }
+
+            .header {
+                top: 8px;
+            }
+
+            .header__shell {
+                width: auto;
+                display: inline-flex;
+                align-items: center;
+                margin-left: auto;
+                margin-right: 12px;
+                border-radius: 999px;
+                position: relative;
+                z-index: 30;
+            }
+
+            .logo__mark {
+                height: 36px;
+            }
+
+            .mobile-panel {
+                display: flex;
+                position: fixed;
+                inset: 0;
+                padding: calc(env(safe-area-inset-top) + 5.5rem) 1.5rem 2.5rem;
+                background: var(--color-bg);
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                flex-direction: column;
+                gap: 2.2rem;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-8px);
+                transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+                z-index: 20;
+            }
+
+            .header.menu-open .mobile-panel {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .mobile-panel__theme {
+                justify-content: flex-start;
+            }
+
+            .mobile-panel__links {
+                align-items: stretch;
+                gap: 1.2rem;
+            }
+
+            .mobile-panel__theme {
+                margin-top: 1.4rem;
+            }
+
+            .mobile-panel__link {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 0.4rem 0;
+                border-radius: 0;
+                background: transparent;
+                border: none;
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+
+            .mobile-panel__social {
+                margin-top: 1.2rem;
+                justify-content: flex-start;
+                gap: 1.2rem;
+                flex-wrap: wrap;
+            }
+
+            .mobile-panel__social-link {
+                font-size: 1.05rem;
+            }
+        }
+
+        .footer {
+            padding: 4rem 0 0;
+            background: var(--color-bg);
+            border-top: 1px solid var(--color-border);
+            font-family: var(--font-body);
+        }
+
+        .footer__inner {
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 1.2fr repeat(4, 1fr);
+            align-items: start;
+        }
+
+        .footer__logo {
+            height: 56px;
+            width: auto;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        [data-theme='night'] .footer__logo {
+            color: #ffffff;
+        }
+
+        .footer__social {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .footer__social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--color-border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .footer__column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer__link {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            color: var(--color-text);
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.4rem;
+        }
+
+        .footer__icon {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .footer__bottom {
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer__bottom-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer__meta {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .footer__divider {
+            color: var(--color-text-muted);
+        }
+
+        .footer__credit {
+            font-family: var(--font-mono);
+            letter-spacing: 0.02em;
+        }
+
+        .footer__policy,
+        .footer__credit-link {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .footer__bottom a {
+            color: inherit;
+        }
+
+        @media (max-width: 1100px) {
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .footer__bottom-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+
+            .footer__meta {
+                margin-left: 0;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+                gap: 0.4rem;
+            }
+
+            .footer__divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .footer__inner {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    {{ghost_head}}
+</head>
+
+<body class="{{body_class}}{{{block "body_class"}}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}{{#is "tag"}}{{#if tag.feature_image}} is-head-transparent{{/if}}{{/is}}{{#match @custom.header_style "Accent color"}} is-head-brand{{/match}}{{#match @custom.header_style "Dark"}} is-head-dark{{/match}}">
+<div class="gh-site">
+
+    <header class="header">
+        <div class="header__shell">
+            <div class="header__inner">
+                <div class="header__primary">
+                    <nav class="nav">
+                        {{#foreach navigation}}
+                            <a class="nav__link" href="{{url}}">
+                                {{#match label "News"}}<i class="bi bi-newspaper"></i>{{/match}}
+                                {{#match label "Experience"}}<i class="bi bi-stars"></i>{{/match}}
+                                {{#match label "Apartments"}}<i class="bi bi-house-door"></i>{{/match}}
+                                {{label}}
+                            </a>
+                        {{/foreach}}
+                    </nav>
+
+                    <a class="logo" href="/" aria-label="{{@site.title}} home">
+                        <img class="logo__mark logo__mark--day" src="{{asset "images/logo-dark.svg"}}" alt="{{@site.title}}">
+                        <img class="logo__mark logo__mark--night" src="{{asset "images/logo-light.svg"}}" alt="" aria-hidden="true">
+                    </a>
+
+                    <div class="social">
+                        <a class="social__link" href="https://instagram.com/amalfi.day" target="_blank" rel="noreferrer">
+                            <span class="sr-only">Instagram</span>
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a class="social__link" href="https://facebook.com/amalfi.day" target="_blank" rel="noreferrer">
+                            <span class="sr-only">Facebook</span>
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a class="social__link" href="https://twitter.com/amalfiday" target="_blank" rel="noreferrer">
+                            <span class="sr-only">Twitter</span>
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="header__actions">
+                    <label class="theme-switch" aria-label="Toggle theme">
+                        <input class="theme-switch__input" type="checkbox">
+                        <span class="theme-switch__track">
+                            <span class="theme-switch__thumb"></span>
+                        </span>
+                        <span class="theme-switch__icon" aria-hidden="true">
+                            <i class="bi bi-sun"></i>
+                            <i class="bi bi-moon-stars"></i>
+                        </span>
+                    </label>
+                    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+                        <i class="bi bi-list"></i>
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-panel" role="dialog" aria-modal="true" aria-hidden="true">
+            <div class="mobile-panel__links">
+                {{#foreach navigation}}
+                    <a class="mobile-panel__link" href="{{url}}">
+                        <span class="mobile-panel__link-label">
+                            {{#match label "News"}}<i class="bi bi-newspaper"></i>{{/match}}
+                            {{#match label "Experience"}}<i class="bi bi-stars"></i>{{/match}}
+                            {{#match label "Apartments"}}<i class="bi bi-house-door"></i>{{/match}}
+                            {{label}}
+                        </span>
+                    </a>
+                {{/foreach}}
+            </div>
+            <div class="mobile-panel__theme">
+                <label class="theme-switch" aria-label="Toggle theme">
+                    <input class="theme-switch__input" type="checkbox">
+                    <span class="theme-switch__track">
+                        <span class="theme-switch__thumb"></span>
+                    </span>
+                    <span class="theme-switch__icon" aria-hidden="true">
+                        <i class="bi bi-sun"></i>
+                        <i class="bi bi-moon-stars"></i>
+                    </span>
+                </label>
+            </div>
+            <div class="mobile-panel__social">
+                <a class="mobile-panel__social-link" href="https://instagram.com/amalfi.day" target="_blank" rel="noreferrer">
+                    <i class="bi bi-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a class="mobile-panel__social-link" href="https://facebook.com/amalfi.day" target="_blank" rel="noreferrer">
+                    <i class="bi bi-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a class="mobile-panel__social-link" href="https://twitter.com/amalfiday" target="_blank" rel="noreferrer">
+                    <i class="bi bi-twitter-x"></i>
+                    <span>X (Twitter)</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    {{{body}}}
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__brand">
+                <svg class="footer__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266.84 63.15" aria-hidden="true">
+                    <path fill="currentColor" d="M213.46,25.46c-.7-7.75-5.34-15.42-12.68-18.64-1.74-.77-3.96-1.53-5.76-.66-1.72,1.14-1.91,3.75-2.5,5.56-.63,2.48-1.18,5.01-1.74,7.52-2.43,10.59-4.25,20.81-5.9,31.59-1.58,10.22,4.54,7.57,10.95,4.61,3.13-1.74,6.24-3.84,8.58-6.62,5.86-6.2,9.73-14.54,9.07-23.2v-.18ZM206.18,28.42c-1.05,7.87-6.3,15.09-12.84,19.35-1.47.43-.75-2.13-.73-2.97.83-6.42,1.96-12.97,3.25-19.31.91-3.67,1.78-7.65,2.74-11.33.15-.46.37-.81.68-.94.78-.28,1.56.54,2.12,1.03,3.63,3.48,5.43,8.99,4.81,13.97l-.02.19ZM72.4,16.66c.39-2.62,1-7.86-2.96-7.12-2.59,1.01-4.13,3.82-5.88,5.87-2.76,3.86-5.59,7.62-8.05,11.73-.44.63-.82,1.8-1.52,1.95-.41.02-.72-.94-.95-1.98-.96-3.77-1.77-7.66-3.09-11.31-1.96-5.27-4.31-2.08-5.72,1.42-4.21,9.6-7.42,20.23-7.97,30.75.11,2.57,3,2.8,4.06.66,1.85-4.6,2.65-9.63,4.35-14.29,1.42-4.56,1.76-4.93,2.93.25,1,4.43,4.34,13.8,8.68,5.93,2.88-5.25,5.04-10.7,7.92-15.95.37-.63.78-1.19.66-.15-1.06,5.42-2.29,11.03-2.94,16.55-.11,2.62-.67,5.57.61,7.97.75,1.22,2.06,1.01,2.75-.17,2.38-4.7,2.98-10.06,4.29-15.15,1.02-5.55,2.29-11.19,2.81-16.8l.02-.18ZM32.15,37.72c-.1-4.33-.22-8.62-.14-13.1.07-5.73.23-11.03.33-16.49,0-.67-.04-1.37-.32-1.96-.9-1.98-3.47-1.37-4.95-.34-1.53,1.09-2.52,2.88-3.63,4.46-3.41,5.53-6.27,11.32-9.18,17.15-3.42,7.29-6.59,14.53-9.63,21.97-1.04,2.55-3.25,6.98-.23,8.83,1.72.53,2.91-1.44,3.67-2.71,1.77-3.13,3.38-6.43,5.06-9.63.52-.94,1.36-1.62,2.37-2,3.15-1.09,6.19-2.39,9.32-3.11,1.53-.14,1.39,1.77,1.49,2.83.19,3.59.43,7.26,1.34,10.82.27,1.8,2.89,5.15,4.39,2.61.35-.75.42-1.73.45-2.58.07-5.52-.19-11.06-.33-16.56v-.18ZM25.48,35.33c-1.59.74-3.87.82-5.62,1.29-.69.13-1.52.33-1.73.27-.09-.02-.11-.07-.08-.16.68-1.69,5.84-12.28,7.02-14.38.51-.65.41,1.34.43,2.01-.21,3.55.59,7.42.08,10.87l-.09.11ZM96.5,41.61c-.56-8.07-1.44-16.15-2.34-24.18-.3-3.21-.55-6.52-.93-9.76-.17-1.07-.23-2.27-.86-3.18-.29-.4-.71-.67-1.21-.74-2.66-.24-3.87,2.78-4.95,4.74-5.82,11.35-10.92,22.55-14,34.78-.18.89-.32,1.82-.23,2.71.1,2.1,2.27,3.12,3.68,1.53,2.16-2.38,2.87-5.73,4.26-8.57.46-1.02,1.37-1.7,2.43-1.99,1.85-.51,3.67-1.09,5.5-1.66.39-.1.86-.16,1.2,0,.45.19.64.7.74,1.19.41,2.42.67,5.08,1.2,7.63.26,2.24,3.13,6,5.01,2.94.76-1.62.47-3.52.5-5.25v-.18ZM85.99,30.48c-.46-.05-3.19,1.19-2.82,0,1.73-3.82,2.97-8.03,4.78-11.79.67-1.11.62,1.48.69,1.88.04,2.88.33,5.65.44,8.6.06,1.38-2.03.94-2.91,1.27l-.16.03ZM136.99,17.84c.55-.96,1.72-1.23,2.75-1.42,4.25-.79,8.46-1.59,12.58-2.67,1.8-.35,5.04-2.59,2.84-4.36-1.44-.86-3.32-.49-4.94-.43-5.66.46-11.21.87-16.72,2.28-3.57.59-4.25,4.33-4.98,7.28-2.52,8.66-3.79,17.75-5.2,26.66-.2,2.01-.56,4.05-.16,6.04.5,2.53,3.37,2.99,4.68.82,2.51-4.31,2.71-9.6,4.15-14.29.29-1.05.31-2.2,1.03-3.02,2.48-2.24,11.44-3.04,11.71-6.99-.78-3.27-6.76-.88-9.02-.59-.77.16-1.08-.42-.93-1.11.64-2.55,1.23-5.55,2.12-8.05l.08-.15ZM263.31,11.56c-2.74.35-4.86,2.62-6.91,4.29-2.3,2.11-4.49,4.3-6.68,6.56-.96.99-2.22,2.67-3.3.81-1.42-2.05-5.5-12.12-8.56-10.43-3.19,3.69.14,8.82,2.3,12.22,1.06,2.06,2.92,4,2.62,6.41-.71,4.47-1.76,9.17-2.34,13.55-.26,3.1-1.22,6.55.16,9.44,1,1.71,4.16,2.87,5.01.36.66-1.63.84-3.46,1.1-5.2.61-4.73,1.73-9.41,2.58-13.98.39-1.89.49-3.99,1.85-5.5,1.79-2.39,17.95-16.96,12.32-18.54h-.16ZM234.07,40.9c-.48-5.9-1.28-11.66-2.09-17.55-.42-2.71-.74-9.42-3.96-9.72-1.29.02-2.28,1.23-2.81,2.36-2.68,5.6-4.94,11.43-7.06,17.3-1.58,4.03-2.89,8.05-4.3,12.12-.43,1.27-.71,2.65-.3,3.96.34,1.36,1.71,3.06,3.08,2.68.48-.12.86-.47,1.14-.89,1.07-1.75,1.47-4.2,2.36-6.14.41-.91,1.2-1.52,2.08-1.92,1.56-.68,3.03-1.65,4.71-2.12.67-.17,1.15.23,1.27.87.36,1.88.47,4.13,1.22,5.94.74,1.9,3.25,2.54,4.34.57,1.29-2.18.48-4.91.34-7.27l-.02-.18ZM222.72,37.64c.94-3.07,2.33-6.08,3.4-9.06.05-.1.19-.52.3-.38.28.8,1,4.9.96,7.87-.36.83-1.55.7-2.32,1.05-.76.17-1.56.56-2.3.58l-.05-.06ZM118.5,41.4c-3.26-.7-6.6.72-9.78,1.39-1.03.3-1.88.03-1.63-1.21.56-3.59,1.26-7.19,1.78-10.82.32-2.45.6-4.88.98-7.37.15-3.05,2.44-10.86-1.82-11.48-1.66.03-2.38,2.15-2.73,3.56-.95,3.99-1.59,8.04-2.19,12.08-.77,6.29-1.64,12.45-2.39,18.72-.48,3.41.38,5.84,4.25,4.37,4.58-1.61,9.28-2.6,13.65-4.55,1.89-.84,1.87-3.94.03-4.65l-.16-.06ZM158.48,16.9c-4.16-2.28-5.32,6.71-6.16,9.31-1.26,5.59-2.43,11.32-3.37,16.92-.33,2.79-1.02,5.65-.25,8.4,1.2,3.1,4.59,2.45,5.31-.65,2.32-6.68,3.36-13.8,4.41-20.81.49-2.93.82-5.79,1.13-8.75.15-1.41.02-3.39-.95-4.32l-.12-.1ZM172.6,38.01c-4.95.05-7.55,8.93-2.81,11.08,6.41,2.01,10.83-10.31,2.99-11.08h-.18Z"/>
+                </svg>
+                <div class="footer__social">
+                    <a class="footer__social-link" href="https://instagram.com/amalfi.day" target="_blank" rel="noreferrer">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a class="footer__social-link" href="https://facebook.com/amalfi.day" target="_blank" rel="noreferrer">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a class="footer__social-link" href="https://twitter.com/amalfiday" target="_blank" rel="noreferrer">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer__column">
+                <a class="footer__link" href="https://cnr.pw/ferry" target="_blank" rel="noreferrer">
+                    <i class="bi bi-download footer__icon"></i>
+                    Ferry timetables
+                </a>
+                <a class="footer__link" href="https://cnr.pw/bus" target="_blank" rel="noreferrer">
+                    <i class="bi bi-download footer__icon"></i>
+                    Bus timetables
+                </a>
+                <a class="footer__link" href="#airport">
+                    <i class="bi bi-airplane footer__icon"></i>
+                    Airport shuttle
+                </a>
+                <a class="footer__link" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
+                    <i class="bi bi-map footer__icon"></i>
+                    Greg's guide
+                </a>
+            </div>
+
+            <div class="footer__column">
+                <a class="footer__link" href="https://www.booking.com" target="_blank" rel="noreferrer">
+                    <i class="bi bi-building footer__icon"></i>
+                    Booking.com
+                </a>
+                <a class="footer__link" href="https://www.airbnb.com" target="_blank" rel="noreferrer">
+                    <i class="bi bi-house-door footer__icon"></i>
+                    Airbnb
+                </a>
+                <a class="footer__link" href="/apartments">
+                    <i class="bi bi-house-heart footer__icon"></i>
+                    Apartments overview
+                </a>
+            </div>
+
+            <div class="footer__column">
+                <a class="footer__link" href="/how-to-get">
+                    <i class="bi bi-geo-alt footer__icon"></i>
+                    How to get here
+                </a>
+                <a class="footer__link" href="/what-to-do">
+                    <i class="bi bi-stars footer__icon"></i>
+                    What to do
+                </a>
+                <a class="footer__link" href="/parking">
+                    <i class="bi bi-p-circle footer__icon"></i>
+                    Parking tips
+                </a>
+                <a class="footer__link" href="/beaches">
+                    <i class="bi bi-umbrella footer__icon"></i>
+                    Beach reviews
+                </a>
+            </div>
+
+            <div class="footer__column">
+                <a class="footer__link" href="/blog">
+                    <i class="bi bi-newspaper footer__icon"></i>
+                    Latest post in blog
+                </a>
+                <a class="footer__link" href="/blog?random=1">
+                    <i class="bi bi-shuffle footer__icon"></i>
+                    Random blog post
+                </a>
+                <a class="footer__link" href="#bookmark" data-bookmark="true">
+                    <i class="bi bi-bookmark-plus footer__icon"></i>
+                    Add to bookmarks
+                </a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="container footer__bottom-inner">
+                <span class="footer__legal">
+                    © 2014-{{date format="YYYY"}} CristallPont S.R.L. / P.IVA: 06863730650 /
+                </span>
+                <div class="footer__meta">
+                    <a class="footer__policy" href="/privacy">Privacy Policy</a>
+                    <span class="footer__divider" aria-hidden="true">•</span>
+                    <span class="footer__credit">
+                        Design & Developement Gregory '<a class="footer__credit-link" href="https://cinereo.it" target="_blank" rel="noreferrer">Cinereo</a>' Day
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+{{#is "post, page"}}
+    {{> "pswp"}}
+{{/is}}
+
+<script src="{{asset "built/main.min.js"}}"></script>
+<script>
+    (() => {
+        const root = document.documentElement
+        const header = document.querySelector('.header')
+        if (!header) return
+        const themeToggles = Array.from(document.querySelectorAll('.theme-switch__input'))
+        const menuToggle = document.querySelector('.menu-toggle')
+        const mobilePanel = document.querySelector('.mobile-panel')
+        const heroEl = document.querySelector('.hero--orange, .hero--dark')
+
+        if (heroEl) {
+            header.classList.add('has-hero')
+        }
+
+        const getStoredTheme = () => {
+            try {
+                return localStorage.getItem('theme')
+            } catch (error) {
+                return null
+            }
+        }
+
+        const getSystemTheme = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'night'
+            }
+            return 'day'
+        }
+
+        const syncSwitch = (value) => {
+            themeToggles.forEach((toggle) => {
+                toggle.checked = value === 'night'
+            })
+        }
+
+        const setTheme = (value, { persist = false } = {}) => {
+            root.dataset.theme = value
+            if (persist) {
+                try {
+                    localStorage.setItem('theme', value)
+                } catch (error) {
+                    // ignore storage errors
+                }
+            }
+            syncSwitch(value)
+        }
+
+        const storedTheme = getStoredTheme()
+        const hasStoredTheme = storedTheme === 'day' || storedTheme === 'night'
+        const initialTheme = hasStoredTheme ? storedTheme : root.dataset.theme || getSystemTheme()
+        let allowSystemSync = !hasStoredTheme
+
+        setTheme(initialTheme, { persist: hasStoredTheme })
+
+        if (window.matchMedia) {
+            const media = window.matchMedia('(prefers-color-scheme: dark)')
+            const onSystemChange = (event) => {
+                if (!allowSystemSync) return
+                setTheme(event.matches ? 'night' : 'day')
+            }
+            if (media.addEventListener) {
+                media.addEventListener('change', onSystemChange)
+            } else if (media.addListener) {
+                media.addListener(onSystemChange)
+            }
+        }
+
+        themeToggles.forEach((toggle) => {
+            toggle.addEventListener('change', () => {
+                const next = toggle.checked ? 'night' : 'day'
+                allowSystemSync = false
+                setTheme(next, { persist: true })
+            })
+        })
+
+        menuToggle?.addEventListener('click', () => {
+            const isOpen = header?.classList.toggle('menu-open')
+            menuToggle?.setAttribute('aria-expanded', String(isOpen))
+            mobilePanel?.setAttribute('aria-hidden', String(!isOpen))
+            document.body.style.overflow = isOpen ? 'hidden' : ''
+        })
+
+        document.querySelectorAll('.mobile-panel__link').forEach((link) => {
+            link.addEventListener('click', () => {
+                header?.classList.remove('menu-open')
+                menuToggle?.setAttribute('aria-expanded', 'false')
+                mobilePanel?.setAttribute('aria-hidden', 'true')
+                document.body.style.overflow = ''
+            })
+        })
+
+        const onScroll = () => {
+            header?.classList.toggle('is-scrolled', window.scrollY > 12)
+            if (heroEl) {
+                const heroBottom = heroEl.getBoundingClientRect().bottom
+                const onHero = window.scrollY < 12 && heroBottom > 80
+                header?.classList.toggle('on-hero', onHero)
+            } else {
+                header?.classList.remove('on-hero')
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true })
+        window.addEventListener('load', onScroll)
+        onScroll()
+    })()
+
+    const bookmarkLink = document.querySelector('[data-bookmark="true"]')
+    bookmarkLink?.addEventListener('click', (event) => {
+        event.preventDefault()
+        const url = window.location.origin
+        const title = document.title
+
+        if (window.sidebar && window.sidebar.addPanel) {
+            window.sidebar.addPanel(title, url, '')
+            return
+        }
+
+        if (window.external && 'AddFavorite' in window.external) {
+            window.external.AddFavorite(url, title)
+            return
+        }
+
+        alert('Press Ctrl+D (Windows) or ⌘+D (Mac) to bookmark this page.')
+    })
+</script>
+
+{{ghost_foot}}
+
+</body>
+
+</html>
