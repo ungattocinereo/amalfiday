@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { featuredPhotoshoots, heroLinks, etsyUrl } from '../data/site'
+import { featuredPhotoshoots, heroLinks } from '../data/site'
 import { getGhostPosts } from '../data/ghost'
 
 export const revalidate = 60 * 60 * 12
@@ -166,15 +166,47 @@ const newsPosts = await getGhostPosts({ limit: 8 })
 
   <section class="section etsy">
     <div class="container etsy__inner">
-      <div>
+      <div class="etsy__copy">
         <h2>
-          Visit our <span class="accent-italic">Etsy</span> shop
+          Dress to <span class="accent-orange">express</span>
         </h2>
-        <p>Prints, presets, and handcrafted Amalfi souvenirs.</p>
+        <p>
+          Prints, presets, and handcrafted Amalfi souvenirs <strong>coming soon</strong>.
+        </p>
+        <p class="etsy__note">
+          Dress to express: my original T-Shirt creations available on Etsy!
+        </p>
       </div>
-      <a class="button secondary" href={etsyUrl} target="_blank" rel="noreferrer">
-        <i class="bi bi-bag-heart"></i> Open Etsy store
-      </a>
+      <div class="etsy__gallery" aria-label="Amalfi merch previews">
+        <img
+          class="etsy__photo"
+          src="/merch/t-shirt-0130.jpg"
+          alt="Amalfi t-shirt design preview"
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="etsy__photo"
+          src="/merch/t-shirt-che-cosa-new-3.webp"
+          alt="Amalfi t-shirt graphic in blue"
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="etsy__photo"
+          src="/merch/t-shirt-hastalavista-new.webp"
+          alt="Amalfi t-shirt print design"
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="etsy__photo"
+          src="/merch/t-shirt-pastaparty-00-new.webp"
+          alt="Amalfi pasta party t-shirt design"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
     </div>
   </section>
 
@@ -594,14 +626,42 @@ const newsPosts = await getGhostPosts({ limit: 8 })
   }
 
   .etsy {
-    background: linear-gradient(120deg, rgba(255, 89, 0, 0.08), rgba(1, 98, 255, 0.08));
+    background: #ffffff;
   }
 
   .etsy__inner {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+  }
+
+  .accent-orange {
+    color: var(--color-accent);
+  }
+
+  .etsy__note {
+    margin-bottom: 0;
+  }
+
+  .etsy__gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+
+  .etsy__photo {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    transition: transform 200ms ease;
+  }
+
+  .etsy__photo:hover {
+    transform: scale(1.06);
   }
 
   .prefooter {
@@ -683,8 +743,11 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     }
 
     .etsy__inner {
-      flex-direction: column;
-      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .etsy__gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
@@ -709,6 +772,10 @@ const newsPosts = await getGhostPosts({ limit: 8 })
 
     .hero__intro {
       text-align: left;
+    }
+
+    .etsy__gallery {
+      grid-template-columns: 1fr;
     }
   }
 </style>
