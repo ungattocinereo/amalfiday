@@ -25,6 +25,10 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+main {
+  padding-top: var(--header-space);
+}
+
 body::before {
   content: '';
   position: fixed;
@@ -143,5 +147,11 @@ p {
 @media (max-width: 640px) {
   .section {
     padding: 3rem 0;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --header-space: 84px;
   }
 }

@@ -187,11 +187,13 @@ const staticPages = [
 
 <style>
   .hero {
-    padding: 6rem 0 4.5rem;
+    padding: calc(6rem + var(--header-space)) 0 4.5rem;
+    margin-top: calc(-1 * var(--header-space));
     position: relative;
     background: #ff5900;
     color: #ffffff;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .hero::before {

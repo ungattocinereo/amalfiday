@@ -103,7 +103,7 @@ const testimonials = [
       ></div>
       <div class="ps-hero__layer"></div>
     </div>
-    <div class="container ps-hero__content">
+    <div class="ps-hero__content">
       <div class="ps-hero__text">
         <h1 id="ps-title">{heroCategories[0].title}</h1>
         <p id="ps-subtitle">{heroCategories[0].subtitle}</p>
@@ -127,7 +127,7 @@ const testimonials = [
       let imgIndex = -1
       let activeLayer = 0
 
-      const IMAGE_DURATION = 5200
+      const IMAGE_DURATION = 3000
       const zoomClass = 'is-zoom'
 
       const preload = (src) => {
@@ -175,7 +175,6 @@ const testimonials = [
         nextLayer.classList.add(zoomClass)
 
         currentLayer.classList.remove('is-active')
-        currentLayer.classList.remove(zoomClass)
 
         activeLayer = 1 - activeLayer
       }
@@ -201,7 +200,7 @@ const testimonials = [
         }
       }
 
-      sequence.flatMap((c) => c.images).forEach(preload)
+      sequence.forEach((cat) => cat.images.forEach(preload))
       setupDots(sequence[0]?.images?.length || 0)
       step()
       window.setInterval(step, IMAGE_DURATION)
@@ -262,11 +261,14 @@ const testimonials = [
 <style>
   .ps-hero {
     min-height: 100vh;
+    padding-top: var(--header-space);
+    margin-top: calc(-1 * var(--header-space));
     position: relative;
     color: #ffffff;
     display: flex;
     align-items: center;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .ps-hero__bg {
@@ -281,8 +283,9 @@ const testimonials = [
     background-size: cover;
     background-position: center;
     opacity: 0;
-    transition: opacity 1200ms ease;
+    transition: opacity 500ms ease;
     filter: brightness(0.65);
+    will-change: transform, opacity;
   }
 
   .ps-hero__layer.is-active {
@@ -290,16 +293,21 @@ const testimonials = [
   }
 
   .ps-hero__layer.is-zoom {
-    animation: ps-zoom 6.4s ease forwards;
+    animation: ps-zoom 2s ease-out forwards;
   }
 
   .ps-hero__content {
     position: relative;
     z-index: 2;
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
   .ps-hero__text {
-    max-width: 640px;
+    max-width: 720px;
+    text-align: left;
   }
 
   .ps-hero__text h1 {
@@ -345,10 +353,10 @@ const testimonials = [
 
   @keyframes ps-zoom {
     from {
-      transform: scale(1);
+      transform: scale(1.005) translate3d(0, 0, 0);
     }
     to {
-      transform: scale(1.08);
+      transform: scale(1.05) translate3d(-0.5%, -0.5%, 0);
     }
   }
 
