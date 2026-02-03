@@ -1,5 +1,6 @@
 ---
 import { navigation, socialLinks, site } from '../data/site'
+import LogoMark from './LogoMark.astro'
 
 const headerSocials = socialLinks.filter((item) =>
   ['Instagram', 'Facebook', 'Twitter'].includes(item.label)
@@ -16,8 +17,7 @@ const headerSocials = socialLinks.filter((item) =>
     </nav>
 
     <a class="logo" href="/" aria-label={`${site.name} home`}>
-      <img class="logo--dark" src="/brand/logo-dark.svg" alt="Amalfi.Day" />
-      <img class="logo--light" src="/brand/logo-light.svg" alt="Amalfi.Day" />
+      <LogoMark class="logo__mark" />
     </a>
 
     <div class="header__actions">
@@ -31,10 +31,12 @@ const headerSocials = socialLinks.filter((item) =>
           </a>
         ))}
       </div>
-      <button class="theme-toggle" type="button" aria-label="Toggle theme">
-        <i class="bi bi-moon-stars"></i>
-        <i class="bi bi-sun"></i>
-      </button>
+      <label class="theme-switch" aria-label="Toggle theme">
+        <input class="theme-switch__input" type="checkbox" />
+        <span class="theme-switch__track">
+          <span class="theme-switch__thumb"></span>
+        </span>
+      </label>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
         <i class="bi bi-list"></i>
         <i class="bi bi-x-lg"></i>
@@ -65,7 +67,7 @@ const headerSocials = socialLinks.filter((item) =>
 <script is:inline>
   const root = document.documentElement
   const header = document.querySelector('.header')
-  const themeToggle = document.querySelector('.theme-toggle')
+  const themeToggle = document.querySelector('.theme-switch__input')
   const menuToggle = document.querySelector('.menu-toggle')
   const hero = document.querySelector('.hero--orange')
 
@@ -76,10 +78,19 @@ const headerSocials = socialLinks.filter((item) =>
     } catch (error) {
       // ignore storage errors
     }
+    syncSwitch(value)
   }
 
-  themeToggle?.addEventListener('click', () => {
-    const next = root.dataset.theme === 'night' ? 'day' : 'night'
+  const syncSwitch = (value) => {
+    if (themeToggle) {
+      themeToggle.checked = value === 'night'
+    }
+  }
+
+  syncSwitch(root.dataset.theme)
+
+  themeToggle?.addEventListener('change', () => {
+    const next = themeToggle.checked ? 'night' : 'day'
     setTheme(next)
   })
 
@@ -156,37 +167,29 @@ const headerSocials = socialLinks.filter((item) =>
     justify-self: center;
   }
 
-  .logo img {
-    height: 36px;
+  .logo__mark {
     transition: transform 0.2s ease;
   }
 
-  .header.is-scrolled .logo img {
+  .header.is-scrolled .logo__mark {
     transform: scale(0.92);
   }
 
-  .logo--dark {
-    display: block;
+  .logo {
+    color: var(--color-text);
   }
 
-  .logo--light {
-    display: none;
+  .header.on-hero .logo {
+    color: #ffffff;
   }
 
-  .header.on-hero .logo--dark {
-    display: none;
+  [data-theme='night'] .logo {
+    color: #ffffff;
   }
 
-  .header.on-hero .logo--light {
-    display: block;
-  }
-
-  [data-theme='night'] .logo--dark {
-    display: none;
-  }
-
-  [data-theme='night'] .logo--light {
-    display: block;
+  .logo__mark {
+    height: 36px;
+    width: auto;
   }
 
   .nav {
@@ -257,45 +260,46 @@ const headerSocials = socialLinks.filter((item) =>
     gap: 0.8rem;
   }
 
-  .theme-toggle {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1px solid var(--nav-outline);
-    background: radial-gradient(
-      circle at top left,
-      rgba(255, 195, 0, 0.2),
-      rgba(255, 89, 0, 0.08)
-    );
+  .theme-switch {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     cursor: pointer;
-    color: currentColor;
-    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    box-shadow: inset 0 0 0 2px rgba(255, 89, 0, 0.08);
   }
 
-  .theme-toggle i {
-    font-size: 1rem;
+  .theme-switch__input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
   }
 
-  .theme-toggle .bi-sun {
-    display: none;
+  .theme-switch__track {
+    width: 34px;
+    height: 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid var(--nav-outline);
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
 
-  [data-theme='night'] .theme-toggle .bi-sun {
-    display: inline;
+  .theme-switch__thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffffff;
+    transform: translateX(0);
+    transition: transform 0.2s ease, background 0.2s ease;
   }
 
-  [data-theme='night'] .theme-toggle .bi-moon-stars {
-    display: none;
+  [data-theme='night'] .theme-switch__track {
+    background: rgba(1, 98, 255, 0.35);
   }
 
-  .theme-toggle:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-    transform: translateY(-1px);
+  [data-theme='night'] .theme-switch__thumb {
+    transform: translateX(16px);
+    background: #ffffff;
   }
 
   .menu-toggle {

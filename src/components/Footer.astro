@@ -1,11 +1,11 @@
 ---
 import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
+import LogoMark from './LogoMark.astro'
 ---
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <img class="logo--dark" src="/brand/logo-dark.svg" alt="Amalfi.Day" />
-      <img class="logo--light" src="/brand/logo-light.svg" alt="Amalfi.Day" />
+      <LogoMark class="footer__logo" />
       <div class="footer__social">
         {socialLinks
           .filter((item) => ['Instagram', 'Facebook', 'Twitter'].includes(item.label))
@@ -122,21 +122,15 @@ import { footerLinks, featuredPhotoshoots, socialLinks } from '../data/site'
     align-items: start;
   }
 
-  .footer__brand img {
+  .footer__logo {
     height: 56px;
+    width: auto;
     margin-bottom: 1.5rem;
+    color: var(--color-text);
   }
 
-  .footer__brand .logo--light {
-    display: none;
-  }
-
-  [data-theme='night'] .footer__brand .logo--dark {
-    display: none;
-  }
-
-  [data-theme='night'] .footer__brand .logo--light {
-    display: block;
+  [data-theme='night'] .footer__logo {
+    color: #ffffff;
   }
 
   .footer__social {

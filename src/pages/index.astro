@@ -21,11 +21,6 @@ const staticPages = [
           Here you can find public transport timetables. Information about parking in Amalfi &
           Atrani. Places to take perfect photos and much more...
         </p>
-        <div class="hero__lines">
-          <span><i class="bi bi-bus-front"></i> Public transport timetables</span>
-          <span><i class="bi bi-p-circle"></i> Parking in Amalfi & Atrani</span>
-          <span><i class="bi bi-camera"></i> Places to take perfect photos</span>
-        </div>
       </div>
 
       <div class="hero__grid">
@@ -222,23 +217,11 @@ const staticPages = [
 
   .hero__lead {
     color: rgba(255, 255, 255, 0.9);
-    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
     margin-bottom: 1.5rem;
+    font-family: var(--font-display);
   }
 
-  .hero__lines {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    align-items: center;
-    font-size: 1rem;
-  }
-
-  .hero__lines span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
 
   .hero__grid {
     display: grid;
@@ -511,11 +494,6 @@ const staticPages = [
 
     .hero {
       padding: 5rem 0 3rem;
-    }
-
-    .hero__lines {
-      align-items: flex-start;
-      text-align: left;
     }
 
     .hero__intro {
