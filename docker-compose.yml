@@ -5,7 +5,7 @@ services:
     depends_on:
       - db
     environment:
-      url: http://localhost:40001
+      url: https://day.cristallpont.com/blog
       NODE_ENV: production
       server__host: 0.0.0.0
       server__port: 40001
@@ -19,7 +19,8 @@ services:
     volumes:
       - ghost_content:/var/lib/ghost/content
     networks:
-      - ghost_net
+      - web-proxy
+      - default
 
   db:
     image: mariadb:10.11
@@ -32,12 +33,10 @@ services:
       MYSQL_PASSWORD: EuXORAZQaK-JBQ2VNH5Y1otG
     volumes:
       - ghost_db:/var/lib/mysql
-    networks:
-      - ghost_net
-
 volumes:
   ghost_content:
   ghost_db:
 
 networks:
-  ghost_net:
+  web-proxy:
+    external: true
