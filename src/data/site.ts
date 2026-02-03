@@ -50,8 +50,8 @@ export const blogTags = [
 
 export const footerLinks = {
   transport: [
-    { label: 'Ferry timetables', href: '#ferry' },
-    { label: 'Bus timetables', href: '#bus' },
+    { label: 'Ferry timetables', href: 'https://cnr.pw/ferry', external: true },
+    { label: 'Bus timetables', href: 'https://cnr.pw/bus', external: true },
     { label: 'Airport shuttle', href: '#airport' },
     { label: "Gregory's guide", href: site.guideUrl, external: true },
     { label: 'Our photoblog', href: '/blog' },
@@ -70,8 +70,8 @@ export const footerLinks = {
 }
 
 export const heroLinks = {
-  ferryPdf: '#ferry',
-  busPdf: '#bus',
+  ferryPdf: 'https://cnr.pw/ferry',
+  busPdf: 'https://cnr.pw/bus',
   apartments: '/apartments',
 }
 
