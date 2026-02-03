@@ -167,15 +167,14 @@ const newsPosts = await getGhostPosts({ limit: 8 })
   <section class="section etsy">
     <div class="container etsy__inner">
       <div class="etsy__copy">
-        <h2>
-          Dress to <span class="accent-orange">express</span>
-        </h2>
-        <p>
-          Prints, presets, and handcrafted Amalfi souvenirs <strong>coming soon</strong>.
-        </p>
-        <p class="etsy__note">
-          Dress to express: my original T-Shirt creations available on Etsy!
-        </p>
+        <div class="etsy__header">
+          <h2>
+            Dress to <span class="accent-orange">express</span>
+          </h2>
+          <span class="section__subtitle-link etsy__subtitle">
+            Prints, presets, and handcrafted Amalfi souvenirs <strong>coming soon</strong>.
+          </span>
+        </div>
       </div>
       <div class="etsy__gallery" aria-label="Amalfi merch previews">
         <img
@@ -636,6 +635,40 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     gap: 2.5rem;
   }
 
+  .etsy__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .etsy__subtitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    border-bottom: 1px dashed transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    text-align: right;
+  }
+
+  .etsy__subtitle::after {
+    content: '→';
+    transition: transform 0.2s ease;
+  }
+
+  .etsy__subtitle:hover {
+    color: var(--color-text);
+    border-color: var(--color-accent);
+    transform: translateX(4px);
+  }
+
+  .etsy__subtitle:hover::after {
+    transform: translateX(4px);
+  }
+
   .accent-orange {
     color: var(--color-accent);
   }
@@ -744,6 +777,15 @@ const newsPosts = await getGhostPosts({ limit: 8 })
 
     .etsy__inner {
       gap: 2rem;
+    }
+
+    .etsy__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .etsy__subtitle {
+      text-align: left;
     }
 
     .etsy__gallery {
