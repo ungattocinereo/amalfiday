@@ -1,0 +1,20 @@
+{
+  "name": "amalfi-day",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "optimize-images": "node scripts/optimize-images.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/node": "^9.0.0",
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.0"
+  }
+}

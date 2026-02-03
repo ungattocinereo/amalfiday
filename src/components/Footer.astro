@@ -1,0 +1,126 @@
+---
+import { navigation, socialLinks, featuredPhotoshoots, site } from '../data/site'
+---
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <img src="/brand/logo-with-circle.svg" alt="Amalfi.Day" />
+      <p>{site.description}</p>
+      <a class="button" href="/contact">Book Your Photoshoot</a>
+    </div>
+
+    <div class="footer__column">
+      <h4>Explore</h4>
+      <a href="/photo">Photoshoots</a>
+      <a href="/blog">Blog</a>
+      <a href={site.guideUrl} target="_blank" rel="noreferrer">
+        Amalfi Guide
+      </a>
+    </div>
+
+    <div class="footer__column">
+      <h4>Pages</h4>
+      {navigation
+        .filter((item) => !item.external)
+        .map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+    </div>
+
+    <div class="footer__column">
+      <h4>Featured Shoots</h4>
+      {featuredPhotoshoots.map((item) => (
+        <a href={item.href}>
+          <span>{item.title}</span>
+          <small>{item.location}</small>
+        </a>
+      ))}
+    </div>
+
+    <div class="footer__column">
+      <h4>Social</h4>
+      {socialLinks.map((item) => (
+        <a href={item.href} target="_blank" rel="noreferrer">
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <span>© {new Date().getFullYear()} Amalfi.Day. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 5rem 0 0;
+    background: #0f0f12;
+    color: #f5f5f5;
+  }
+
+  .footer__inner {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    align-items: start;
+  }
+
+  .footer__brand img {
+    height: 54px;
+    margin-bottom: 1rem;
+  }
+
+  .footer__brand p {
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 320px;
+  }
+
+  .footer__column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer__column h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+  }
+
+  .footer__column a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+  }
+
+  .footer__column a small {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .footer__column a:hover {
+    color: #ffffff;
+  }
+
+  .footer__bottom {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    background: #0a0a0d;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 1100px) {
+    .footer__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

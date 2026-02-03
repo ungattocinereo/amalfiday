@@ -1,0 +1,112 @@
+---
+import { navigation, socialLinks, site } from '../data/site'
+---
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="/" aria-label={`${site.name} home`}>
+      <img src="/brand/logo.svg" alt="Amalfi.Day" />
+    </a>
+
+    <nav class="nav">
+      {navigation.map((item) => (
+        <a
+          class="nav__link"
+          href={item.href}
+          target={item.external ? '_blank' : undefined}
+          rel={item.external ? 'noreferrer' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="social">
+      {socialLinks.map((item) => (
+        <a class="social__link" href={item.href} target="_blank" rel="noreferrer">
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(240, 242, 246, 0.8);
+  }
+
+  .header__inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.2rem 0;
+  }
+
+  .logo img {
+    height: 38px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+  }
+
+  .nav__link {
+    font-weight: 500;
+    color: var(--color-text);
+    position: relative;
+  }
+
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-sunset);
+    transition: width 0.2s ease;
+  }
+
+  .nav__link:hover::after {
+    width: 100%;
+  }
+
+  .social {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    font-size: 0.85rem;
+  }
+
+  .social__link {
+    color: var(--color-text-muted);
+  }
+
+  .social__link:hover {
+    color: var(--color-aux);
+  }
+
+  @media (max-width: 1024px) {
+    .header__inner {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .nav {
+      flex-wrap: wrap;
+    }
+
+    .social {
+      justify-content: center;
+    }
+  }
+</style>

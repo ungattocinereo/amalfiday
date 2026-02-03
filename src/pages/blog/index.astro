@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { blogCategories, blogTags } from '../../data/site'
+---
+
+<BaseLayout title="Blog — Amalfi.Day">
+  <section class="section">
+    <div class="container">
+      <h1>
+        Amalfi <span class="accent-italic">notes</span>
+      </h1>
+      <p>News, local routes, and photography stories from the coast.</p>
+
+      <div class="filters">
+        {blogCategories.map((cat) => (
+          <button class="chip">{cat}</button>
+        ))}
+      </div>
+
+      <div class="tag-row">
+        <span>Tags:</span>
+        {blogTags.map((tag) => (
+          <span class="tag">#{tag}</span>
+        ))}
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="media"></div>
+          <div class="content">
+            <div class="meta">Fashion • Oct 07, 2025</div>
+            <h3>Golden hour fashion shoot in Atrani</h3>
+            <p>Styling tips and the best light for late-season shoots.</p>
+            <a href="/blog/golden-hour-fashion">Read more →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media"></div>
+          <div class="content">
+            <div class="meta">Motorbike • Sep 21, 2025</div>
+            <h3>Best coastal roads for a sunrise ride</h3>
+            <p>Routes, stops, and photo spots for riders.</p>
+            <a href="/blog/sunrise-ride">Read more →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .chip {
+    border: 1px solid var(--color-surface);
+    background: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .chip:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .tag {
+    background: var(--color-surface);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .media {
+    height: 170px;
+    background: linear-gradient(140deg, rgba(255, 89, 0, 0.2), rgba(255, 195, 0, 0.2));
+  }
+
+  .content {
+    padding: 1.4rem;
+  }
+
+  .meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+</style>
