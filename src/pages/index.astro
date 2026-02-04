@@ -34,21 +34,40 @@ const newsPosts = await getGhostPosts({ limit: 8 })
       </div>
 
       <div class="hero__grid">
-        <a class="guide-card" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
-          <div class="guide-card__image"></div>
+        <a
+          class="guide-card"
+          data-scrub-container
+          href="https://guide.amalfi.day"
+          target="_blank"
+          rel="noreferrer"
+        >
           <div class="guide-card__content">
             <span class="guide-card__eyebrow">guide.amalfi.day</span>
             <h3>
               Take your <span class="accent-italic">Amalfi in a Pocket</span>
             </h3>
             <p>
-              Plan your perfect Amalfi Coast day with ready-to-use ideas for walks, swims, moto
-              rides, and food stops — with clear directions, offline-friendly maps, and
-              simplified transport timings.
+              Plan your perfect Amalfi Coast day with ready-to-use walks, swims, moto rides,
+              and food stops — plus offline-friendly maps and simplified transport timing.
             </p>
             <span class="guide-card__cta">
               <i class="bi bi-arrow-up-right"></i> Open the guide
             </span>
+          </div>
+          <div class="guide-card__media" aria-hidden="true">
+            <video
+              class="guide-card__video"
+              data-scrub-video
+              muted
+              playsinline
+              preload="metadata"
+              poster="/staticpages/video/hf_20260203_213145_8e960c33-c9cc-4d7f-b240-8b7b8ae321ad.png"
+            >
+              <source
+                src="/staticpages/video/hf_20260203_215431_a7308a04-3db2-4b7c-82ee-ece9ff887134.mp4"
+                type="video/mp4"
+              />
+            </video>
           </div>
         </a>
 
@@ -330,14 +349,17 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    padding: 2.2rem;
+    padding: 1.8rem;
     color: #1a1a1a;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
     min-height: 320px;
-    display: flex;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.8rem;
+    align-items: center;
+    --scroll-progress: 0;
     text-decoration: none;
   }
 
@@ -345,21 +367,14 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     text-decoration: none;
   }
 
-  .guide-card__image {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        120deg,
-        rgba(255, 195, 0, 0.2),
-        rgba(0, 156, 255, 0.2)
-      ),
-      radial-gradient(circle at 20% 30%, rgba(255, 89, 0, 0.2), transparent 60%);
-  }
-
   .guide-card__content {
     position: relative;
     z-index: 1;
     max-width: 520px;
+    padding: 1.2rem 0;
+    margin-right: -12%;
+    transform: translateY(calc((1 - var(--scroll-progress)) * 14px));
+    transition: transform 0.2s ease-out;
   }
 
   .guide-card__eyebrow {
@@ -385,6 +400,42 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     gap: 0.5rem;
     font-weight: 600;
     color: var(--color-aux);
+  }
+
+  .guide-card__media {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 200px;
+    aspect-ratio: 16 / 9;
+    align-self: stretch;
+    margin: -1.8rem -1.8rem -1.8rem 0;
+    transform: translateY(calc((1 - var(--scroll-progress)) * -10px));
+    transition: transform 0.2s ease-out;
+  }
+
+  .guide-card__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(255, 255, 255, 0.8) 38%,
+      rgba(255, 255, 255, 0.45) 62%,
+      rgba(255, 255, 255, 0) 80%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+  }
+
+  .guide-card__video {
+    width: 140%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    transform: translateX(-20%);
   }
 
   .hero__mini {
@@ -766,6 +817,22 @@ const newsPosts = await getGhostPosts({ limit: 8 })
       grid-template-columns: 1fr;
     }
 
+    .guide-card {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      padding: 1.6rem;
+    }
+
+    .guide-card__content {
+      margin-right: 0;
+      max-width: 100%;
+    }
+
+    .guide-card__media {
+      min-height: 200px;
+      margin: -1.6rem;
+    }
+
     .news-scroll {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -820,3 +887,63 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     }
   }
 </style>
+
+<script is:inline>
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  if (!prefersReducedMotion.matches) {
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
+    const scrubItems = [...document.querySelectorAll('[data-scrub-container]')]
+      .map((container) => {
+        const video = container.querySelector('[data-scrub-video]')
+        if (!video) return null
+        video.pause()
+        video.currentTime = 0
+        return { container, video, ready: false, duration: 0 }
+      })
+      .filter(Boolean)
+
+    const update = () => {
+      const viewport = window.innerHeight || document.documentElement.clientHeight
+      scrubItems.forEach((item) => {
+        const rect = item.container.getBoundingClientRect()
+        const progress = clamp((viewport - rect.top) / (rect.height + viewport), 0, 1)
+        item.container.style.setProperty('--scroll-progress', progress.toFixed(4))
+        if (item.ready) {
+          item.video.currentTime = item.duration * progress
+        }
+      })
+    }
+
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        update()
+        ticking = false
+      })
+    }
+
+    scrubItems.forEach((item) => {
+      item.video.addEventListener(
+        'loadedmetadata',
+        () => {
+          item.duration = item.video.duration || 0
+          item.ready = item.duration > 0
+          update()
+        },
+        { once: true }
+      )
+    })
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    window.addEventListener('load', onScroll)
+    update()
+  } else {
+    document
+      .querySelectorAll('[data-scrub-container]')
+      .forEach((container) => container.style.setProperty('--scroll-progress', '1'))
+  }
+</script>
