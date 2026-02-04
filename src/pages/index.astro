@@ -133,7 +133,7 @@ const fallbackQuatrain =
         <h2>
           Essential <span class="accent-italic">pages</span>
         </h2>
-        <p>Quick guides for getting around Amalfi.</p>
+        <span class="section__subtitle">Quick guides for getting around Amalfi.</span>
       </div>
       <div class="static-grid">
         {staticPages.map((item) => (
@@ -189,13 +189,9 @@ const fallbackQuatrain =
         <h2>
           Amalfi <span class="accent-italic">News</span>
         </h2>
-        <div class="news__cta">
-          <p>
-            <a class="section__subtitle-link" href="/blog">
-              Fresh stories and local insights are always waiting...
-            </a>
-          </p>
-        </div>
+        <a class="section__subtitle-link" href="/blog">
+          Fresh stories and local insights are always waiting...
+        </a>
       </div>
       <div class="news-scroll" aria-label="Latest blog posts">
         {newsPosts.map((post) => (
@@ -222,7 +218,7 @@ const fallbackQuatrain =
           <h2>
             Dress to <span class="accent-italic">express</span>
           </h2>
-          <span class="section__subtitle-link etsy__subtitle">
+          <span class="section__subtitle etsy__subtitle">
             Prints, presets, and handcrafted Amalfi souvenirs<br />
             <strong>coming soon</strong>
           </span>
@@ -567,6 +563,7 @@ const fallbackQuatrain =
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    flex-wrap: nowrap;
     gap: 2rem;
     margin-bottom: 2.5rem;
   }
@@ -579,6 +576,40 @@ const fallbackQuatrain =
   .section__subtitle-link {
     color: inherit;
     text-decoration: none;
+  }
+
+  .section__subtitle,
+  .section__subtitle-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    border-bottom: 1px dashed transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .section__header > .section__subtitle,
+  .section__header > .section__subtitle-link {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .section__subtitle-link::after {
+    content: '→';
+    transition: transform 0.2s ease;
+  }
+
+  .section__subtitle-link:hover {
+    color: var(--color-text);
+    border-color: var(--color-accent);
+    transform: translateX(4px);
+    text-decoration: none;
+  }
+
+  .section__subtitle-link:hover::after {
+    transform: translateX(4px);
   }
 
   .section--photos .section__title-link {
@@ -599,31 +630,6 @@ const fallbackQuatrain =
 
   .section--photos .section__title-link:hover::after {
     width: 100%;
-  }
-
-  .section--photos .section__subtitle-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--color-text-muted);
-    font-weight: 500;
-    border-bottom: 1px dashed transparent;
-    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-  }
-
-  .section--photos .section__subtitle-link::after {
-    content: '→';
-    transition: transform 0.2s ease;
-  }
-
-  .section--photos .section__subtitle-link:hover {
-    color: var(--color-text);
-    border-color: var(--color-accent);
-    transform: translateX(4px);
-  }
-
-  .section--photos .section__subtitle-link:hover::after {
-    transform: translateX(4px);
   }
 
   .static-grid {
@@ -724,18 +730,6 @@ const fallbackQuatrain =
     align-items: flex-end;
   }
 
-  .news__cta {
-    max-width: 360px;
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .news__cta p {
-    margin: 0;
-  }
-
   .news-scroll {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -814,14 +808,7 @@ const fallbackQuatrain =
   }
 
   .etsy__subtitle {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--color-text-muted);
-    font-weight: 500;
     margin-left: auto;
-    border-bottom: 1px dashed transparent;
-    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     text-align: right;
   }
 
@@ -993,6 +980,13 @@ const fallbackQuatrain =
     .section__header {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .section__subtitle,
+    .section__subtitle-link {
+      white-space: normal;
+      margin-left: 0;
+      text-align: left;
     }
 
     .news__cta {
