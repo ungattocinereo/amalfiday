@@ -1,0 +1,857 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const heroImage = '/photoshootings/hero/personal/Masha-Minchuck-Amalfi-day.jpg'
+const shootTitle = 'Line of Light'
+const shootDate = 'July · 24 · 2024'
+
+const articleTitle = {
+  lead: 'Chasing',
+  accent: 'Amber Light',
+  tail: 'at Sunrise',
+}
+const articleDescription =
+  'A short story about a quiet dawn, wet stone, and movement that turns a walk into cinema. This page is a template: swap the text, dates, and gallery set for each new shoot.'
+
+// Gallery 1: horizontal scroll (choose images here)
+const galleryOneImages = [
+  {
+    src: '/photoshootings/individual/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
+    alt: 'Портрет у моря, мягкий утренний свет',
+  },
+  {
+    src: '/photoshootings/individual/bissa-ninfulenser-icecream.jpg',
+    alt: 'Сцена с мороженым, живой кадр',
+  },
+  {
+    src: '/photoshootings/couples/02-slideshow-regan-walk-ravello-love-1024x682.webp',
+    alt: 'Прогулка по побережью',
+  },
+  {
+    src: '/photoshootings/individual/iiana-photo-hero-atrani-hat-2-1024x680.webp',
+    alt: 'Шляпа на ветру и каменный фон',
+  },
+  {
+    src: '/photoshootings/couples/couple-photoshooting-amalfi.jpg',
+    alt: 'Тёплый кадр в городской лестнице',
+  },
+  {
+    src: '/photoshootings/couples/DSC0789.jpg',
+    alt: 'Лёгкий портрет на лестнице',
+  },
+]
+
+// Gallery 2: scroll-driven sticky hero (choose images here)
+const galleryTwoImages = [
+  {
+    src: '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
+    alt: 'Портрет у моря, солнечный отблеск на воде',
+    label: 'Frame 01',
+    note: 'Мягкий свет и мокрые камни',
+  },
+  {
+    src: '/photoshootings/individual/Silvia-Amalfi-day.jpg.jpg',
+    alt: 'Тёплый портрет на фоне скал',
+    label: 'Frame 02',
+    note: 'Воздух, соль и движение',
+  },
+  {
+    src: '/photoshootings/individual/berrasguy-Minchuck-Amalfi-day.jpg.jpg',
+    alt: 'Кадр с легким ветром у побережья',
+    label: 'Frame 03',
+    note: 'Текстура камня и морской дымки',
+  },
+  {
+    src: '/photoshootings/hero/couple/katerina-kuznezova-praiano-2021-002.jpg',
+    alt: 'Пара на ступенях, мягкий контраст',
+    label: 'Frame 04',
+    note: 'Диалог в движении',
+  },
+  {
+    src: '/photoshootings/couples/DSC8503.jpg',
+    alt: 'Светлый кадр в узкой улице',
+    label: 'Frame 05',
+    note: 'Солнечные пятна на фасадах',
+  },
+  {
+    src: '/photoshootings/berra/00006-Berra-in-Atrani-amalfi-scaled.webp',
+    alt: 'Кадр у кафе с ярким акцентом',
+    label: 'Frame 06',
+    note: 'Графика цвета и тени',
+  },
+  {
+    src: '/photoshootings/berra/00001-Berra-in-Atrani-amalfi.webp',
+    alt: 'Портрет в городской среде',
+    label: 'Frame 07',
+    note: 'Контраст архитектуры и ткани',
+  },
+  {
+    src: '/photoshootings/berra/2-berra-new-red.webp',
+    alt: 'Красный акцент и открытый воздух',
+    label: 'Frame 08',
+    note: 'Фокус на деталях',
+  },
+  {
+    src: '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg',
+    alt: 'Динамичный кадр в утреннем свете',
+    label: 'Frame 09',
+    note: 'Тёплый градиент неба',
+  },
+  {
+    src: '/photoshootings/couples/img_5f68ca5842ca6.jpg',
+    alt: 'Силуэт на фоне моря',
+    label: 'Frame 10',
+    note: 'Финальный акцент серии',
+  },
+]
+
+
+---
+
+<BaseLayout
+  title="Photoshoot Template — Amalfi.Day"
+  description="Template for a cinematic photoshoot story with a hero image and custom gallery."
+>
+  <div class="shoot-template">
+    <section class="shoot-hero hero--dark">
+      <img
+        class="shoot-hero__img"
+        src={heroImage}
+        alt="Hero frame of the photoshoot"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="shoot-hero__veil" aria-hidden="true"></div>
+      <div class="container shoot-hero__content">
+        <div class="shoot-hero__meta">
+          <div class="shoot-hero__date">{shootDate}</div>
+          <h1 class="shoot-hero__title">{shootTitle}</h1>
+        </div>
+      </div>
+      <a class="scroll-indicator" href="#shoot-story" aria-label="Scroll to story">
+        <span class="scroll-indicator__dot"></span>
+        <span class="scroll-indicator__line"></span>
+      </a>
+    </section>
+
+    <section class="section shoot-story" id="shoot-story">
+      <div class="container">
+        <div class="shoot-story__intro">
+          <h2>
+            {articleTitle.lead} <span class="accent-italic">{articleTitle.accent}</span>{' '}
+            {articleTitle.tail}
+          </h2>
+          <p>{articleDescription}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--flush">
+      <div class="container">
+        <div class="shoot-gallery-label">Gallery 1</div>
+        <div class="shoot-pan" data-horizontal-gallery aria-label="Photoshoot gallery">
+          <div class="shoot-pan__sticky">
+            <div class="shoot-pan__track" data-horizontal-track>
+              {galleryOneImages.map((image, index) => (
+                <figure class="shoot-pan__card">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading={index < 2 ? 'eager' : 'lazy'}
+                  />
+                </figure>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shoot-bridge">
+      <div class="container">
+        <div class="shoot-bridge__wrap">
+          <div class="shoot-bridge__eyebrow">Moodboard Shift</div>
+          <h2>
+            Closer, quieter — <span class="accent-italic">soft dissolve</span>
+          </h2>
+          <p>
+            Scroll slowly and let each moment fill the frame. Below is a sequence where one
+            image dissolves into the next, keeping the subject large and centered.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--flush">
+      <div class="container">
+        <div class="shoot-gallery-label">Gallery 2</div>
+        <div class="shoot-scroll" data-scroll-gallery aria-label="Photoshoot scroll gallery">
+          <div class="shoot-scroll__media">
+            <div class="shoot-scroll__media-frame">
+              {galleryTwoImages.map((image, index) => (
+                <img
+                  class={index === 0 ? 'is-active' : ''}
+                  src={image.src}
+                  alt={image.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  data-scroll-image
+                />
+              ))}
+              <div class="shoot-scroll__fade" aria-hidden="true"></div>
+            </div>
+            <div class="shoot-scroll__dots" data-scroll-dots aria-hidden="true">
+              {galleryTwoImages.map((image, index) => (
+                <span class={index === 0 ? 'is-active' : ''} data-scroll-dot></span>
+              ))}
+            </div>
+          </div>
+          <div class="shoot-scroll__spacer" data-scroll-spacer aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shoot-cta-section">
+      <div class="container">
+        <div class="shoot-cta" style={`--cta-bg: url(${heroImage})`}>
+          <div class="shoot-cta__copy">
+            <div class="shoot-cta__tag">Ready to create your story?</div>
+            <h2>Let’s plan a photoshoot that feels like a film still.</h2>
+            <p>
+              Tell me your dates, mood, and locations — I’ll take care of the pacing,
+              light, and seamless direction on the day.
+            </p>
+          </div>
+          <a class="shoot-cta__button" href="/contact">
+            <i class="bi bi-camera2" aria-hidden="true"></i>
+            Request a photoshoot
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script is:inline>
+    ;(() => {
+      const hero = document.querySelector('.shoot-hero')
+      if (hero) {
+        const setHeroHeight = () => {
+          hero.style.setProperty('--hero-height', `${window.innerHeight}px`)
+        }
+        setHeroHeight()
+        window.addEventListener('resize', setHeroHeight)
+
+      }
+
+      const gallery = document.querySelector('[data-horizontal-gallery]')
+      if (gallery) {
+        const track = gallery.querySelector('[data-horizontal-track]')
+        if (track) {
+          let currentX = 0
+          let targetX = 0
+          let rafId = null
+
+          const updateLayout = () => {
+            const viewportWidth = gallery.clientWidth
+            const trackWidth = track.scrollWidth
+            const scrollDistance = Math.max(0, trackWidth - viewportWidth)
+            const height = scrollDistance + window.innerHeight
+            gallery.style.height = `${height}px`
+            gallery.dataset.scrollDistance = String(scrollDistance)
+            targetX = 0
+            currentX = 0
+            track.style.transform = 'translate3d(0, 0, 0)'
+          }
+
+          const animate = () => {
+            const delta = targetX - currentX
+            currentX += delta * 0.12
+            if (Math.abs(delta) < 0.5) {
+              currentX = targetX
+            }
+            track.style.transform = `translate3d(${currentX}px, 0, 0)`
+            if (currentX !== targetX) {
+              rafId = requestAnimationFrame(animate)
+            } else {
+              rafId = null
+            }
+          }
+
+          let ticking = false
+          const onScroll = () => {
+            const scrollDistance = Number(gallery.dataset.scrollDistance || 0)
+            if (scrollDistance <= 0) {
+              targetX = 0
+              if (!rafId) {
+                rafId = requestAnimationFrame(animate)
+              }
+              return
+            }
+            const rect = gallery.getBoundingClientRect()
+            const totalScroll = gallery.offsetHeight - window.innerHeight
+            const progress =
+              totalScroll > 0 ? Math.min(Math.max(-rect.top / totalScroll, 0), 1) : 0
+            targetX = -scrollDistance * progress
+            if (!rafId) {
+              rafId = requestAnimationFrame(animate)
+            }
+          }
+
+          const requestTick = () => {
+            if (ticking) return
+            ticking = true
+            requestAnimationFrame(() => {
+              onScroll()
+              ticking = false
+            })
+          }
+
+          updateLayout()
+          requestTick()
+
+          window.addEventListener('scroll', requestTick, { passive: true })
+          window.addEventListener('resize', () => {
+            updateLayout()
+            requestTick()
+          })
+
+          if ('ResizeObserver' in window) {
+            const observer = new ResizeObserver(() => {
+              updateLayout()
+              requestTick()
+            })
+            observer.observe(track)
+          }
+        }
+      }
+
+      const scrollGallery = document.querySelector('[data-scroll-gallery]')
+      if (scrollGallery) {
+        const images = Array.from(scrollGallery.querySelectorAll('[data-scroll-image]'))
+        const spacer = scrollGallery.querySelector('[data-scroll-spacer]')
+        const dots = Array.from(scrollGallery.querySelectorAll('[data-scroll-dot]'))
+        if (images.length && spacer) {
+          let activeIndex = 0
+          const setActive = (nextIndex) => {
+            if (nextIndex === activeIndex) return
+            activeIndex = nextIndex
+            images.forEach((image, index) => {
+              image.classList.toggle('is-active', index === activeIndex)
+            })
+            dots.forEach((dot, index) => {
+              dot.classList.toggle('is-active', index === activeIndex)
+            })
+          }
+
+          const updateLayout = () => {
+            const stepHeight = window.innerHeight * 0.7
+            const totalHeight = Math.max(images.length * stepHeight, window.innerHeight * 1.1)
+            spacer.style.height = `${totalHeight}px`
+          }
+
+          let ticking = false
+          const onScroll = () => {
+            const totalScroll = scrollGallery.offsetHeight - window.innerHeight
+            const rect = scrollGallery.getBoundingClientRect()
+            const progress =
+              totalScroll > 0 ? Math.min(Math.max(-rect.top / totalScroll, 0), 1) : 0
+            const nextIndex = Math.min(
+              images.length - 1,
+              Math.max(0, Math.round(progress * (images.length - 1)))
+            )
+            setActive(nextIndex)
+          }
+
+          const requestTick = () => {
+            if (ticking) return
+            ticking = true
+            requestAnimationFrame(() => {
+              onScroll()
+              ticking = false
+            })
+          }
+
+          updateLayout()
+          requestTick()
+
+          window.addEventListener('scroll', requestTick, { passive: true })
+          window.addEventListener('resize', () => {
+            updateLayout()
+            requestTick()
+          })
+        }
+      }
+
+    })()
+  </script>
+</BaseLayout>
+
+<style>
+  .shoot-template {
+    position: relative;
+  }
+
+  .shoot-hero {
+    position: relative;
+    height: var(--hero-height, 100svh);
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding: calc(var(--header-space) + 1.5rem) 0 3.75rem;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .shoot-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: saturate(1.05) contrast(1.05);
+  }
+
+  .shoot-hero__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 10, 14, 0.2) 0%,
+      rgba(8, 10, 14, 0.5) 45%,
+      rgba(8, 10, 14, 0.85) 100%
+    );
+  }
+
+
+  .shoot-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .shoot-hero__meta {
+    max-width: 40rem;
+  }
+
+  .shoot-hero__date {
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.9rem;
+    font-weight: 700;
+  }
+
+  .shoot-hero__title {
+    font-size: clamp(2.8rem, 6.4vw, 6.4rem);
+    line-height: 0.95;
+    text-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 1.4rem;
+    transform: translateX(-50%);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    z-index: 2;
+  }
+
+  .scroll-indicator__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: 2px solid currentColor;
+  }
+
+  .scroll-indicator__line {
+    width: 1px;
+    height: 34px;
+    background: linear-gradient(180deg, currentColor, rgba(255, 255, 255, 0));
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  .shoot-story__intro {
+    max-width: 46rem;
+  }
+
+  .shoot-story__intro h2 {
+    font-size: clamp(1.9rem, 3.2vw, 3.2rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .shoot-story__intro p {
+    font-size: 1.05rem;
+  }
+
+  .shoot-gallery-label {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .shoot-pan {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+
+  .shoot-pan__sticky {
+    position: sticky;
+    top: calc(var(--header-space) + 1.5rem);
+    height: clamp(320px, 70vh, 720px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .shoot-pan__track {
+    display: flex;
+    gap: 1.1rem;
+    align-items: center;
+    padding-left: 0;
+    padding-right: max(1.5rem, calc((100vw - var(--container-max)) / 2));
+    will-change: transform;
+  }
+
+  .shoot-pan__card {
+    flex: 0 0 auto;
+    width: clamp(260px, 70vw, 840px);
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #101219;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shoot-pan__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+
+  .section--flush {
+    padding-top: 0;
+  }
+
+  .shoot-bridge {
+    padding-top: 1.5rem;
+  }
+
+  .shoot-bridge__wrap {
+    max-width: 46rem;
+    padding: 0;
+  }
+
+  .shoot-bridge__eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .shoot-bridge__wrap h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 0.9rem;
+  }
+
+  .shoot-bridge__wrap p {
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .shoot-scroll {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .shoot-scroll__media {
+    position: sticky;
+    top: calc(var(--header-space) + 1.5rem);
+  }
+
+  .shoot-scroll__media-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    max-height: 85vh;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #0f1117;
+    box-shadow: 0 24px 60px rgba(10, 12, 18, 0.22);
+  }
+
+  .shoot-scroll__media-frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .shoot-scroll__media-frame img.is-active {
+    opacity: 1;
+  }
+
+  .shoot-scroll__fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(9, 10, 15, 0) 45%, rgba(9, 10, 15, 0.25) 100%);
+    pointer-events: none;
+  }
+
+  .shoot-scroll__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .shoot-scroll__dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(12, 16, 24, 0.22);
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+
+  .shoot-scroll__dots span.is-active {
+    background: rgba(12, 16, 24, 0.7);
+    transform: scale(1.35);
+  }
+
+  .shoot-scroll__spacer {
+    height: 60vh;
+  }
+
+  .shoot-cta-section {
+    padding-top: 1rem;
+  }
+
+  .shoot-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border-radius: 22px;
+    background-color: #0a0b10;
+    background-image: linear-gradient(
+        120deg,
+        rgba(9, 24, 54, 0.88),
+        rgba(4, 12, 28, 0.94)
+      ),
+      var(--cta-bg);
+    background-size: cover;
+    background-position: center;
+    color: #f6f1ea;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shoot-cta__copy {
+    position: relative;
+    z-index: 1;
+    max-width: 38rem;
+  }
+
+  .shoot-cta__tag {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.9rem;
+  }
+
+  .shoot-cta__copy h2 {
+    font-size: clamp(2rem, 3.4vw, 3.2rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .shoot-cta__copy p {
+    margin: 0;
+    color: rgba(246, 241, 234, 0.85);
+  }
+
+  .shoot-cta__button {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 2.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #ffffff;
+    background: var(--color-accent);
+    box-shadow: 0 12px 26px rgba(20, 12, 6, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    white-space: nowrap;
+    isolation: isolate;
+  }
+
+  .shoot-cta__button::after {
+    content: '';
+    position: absolute;
+    inset: -35%;
+    transform: scale(0.9);
+    z-index: -1;
+    filter: blur(22px);
+    background: radial-gradient(
+        circle,
+        rgba(255, 195, 0, 0.75) 0%,
+        rgba(255, 89, 0, 0.6) 38%,
+        rgba(255, 195, 0, 0.35) 58%,
+        rgba(255, 195, 0, 0) 72%
+      );
+    animation: cta-glow-pulse 2.8s ease-in-out infinite;
+    opacity: 0.9;
+  }
+
+  .shoot-cta__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px rgba(20, 12, 6, 0.4);
+  }
+
+  @keyframes scrollPulse {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 0.9;
+      transform: translateY(6px);
+    }
+  }
+
+  @keyframes cta-glow-pulse {
+    0%,
+    100% {
+      transform: scale(0.88);
+      opacity: 0.75;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 1;
+    }
+  }
+
+
+  @media (max-width: 900px) {
+    .shoot-hero {
+      padding-bottom: 3rem;
+    }
+
+    .shoot-pan__sticky {
+      top: calc(var(--header-space) + 1rem);
+      height: clamp(260px, 65vh, 520px);
+    }
+
+    .shoot-pan__track {
+      gap: 0.9rem;
+      padding-left: 0;
+      padding-right: 1.5rem;
+    }
+
+    .shoot-pan__card {
+      width: clamp(220px, 82vw, 520px);
+    }
+
+    .shoot-scroll__media {
+      position: sticky;
+      top: calc(var(--header-space) + 1rem);
+    }
+
+    .shoot-scroll__media-frame {
+      max-height: 78vh;
+    }
+
+    .shoot-cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+  }
+
+  @media (max-width: 640px) {
+    .shoot-hero__title {
+      font-size: clamp(2.4rem, 11vw, 3.5rem);
+    }
+
+    .shoot-hero__date {
+      letter-spacing: 0;
+    }
+
+    .scroll-indicator {
+      bottom: 1rem;
+    }
+
+    .shoot-pan__sticky {
+      height: clamp(220px, 60vh, 420px);
+    }
+
+    .shoot-pan__card {
+      width: clamp(200px, 88vw, 420px);
+    }
+
+    .shoot-scroll__media-frame {
+      max-height: 62vh;
+      border-radius: 14px;
+    }
+
+    .shoot-scroll__dots span {
+      width: 7px;
+      height: 7px;
+    }
+
+    .shoot-bridge__wrap {
+      padding: 0;
+    }
+
+    .shoot-cta {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-indicator__line {
+      animation: none;
+    }
+
+    .shoot-pan__track {
+      transition: none;
+    }
+
+    .shoot-scroll__media-frame img {
+      transition: none;
+    }
+
+    .shoot-cta__button::after {
+      animation: none;
+    }
+
+  }
+</style>
