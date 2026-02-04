@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
 const pageTitle = 'Contact — CristallPont Amalfi Day'
 const pageDescription =
-  'Contact Amalfi.Day to plan a photoshoot or trip: dates, locations, and personalized itineraries for the Amalfi Coast.'
+  'Contact Amalfi.Day for Booking.com & Airbnb stays, concierge services, and Amalfi Coast photoshoots.'
 const shareImage = '/photoshootings/hero/couple/02-slideshow-regan-walk-ravello-love-1024x682.webp'
 const heroImage = '/staticpages/contact/contact-us.webp'
 
@@ -14,14 +14,17 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
   <section class="contact-hero hero--dark">
-    <img
-      class="contact-hero__image"
-      src={heroImage}
-      alt="Amalfi coast cliffside and sea"
-      loading="eager"
-      fetchpriority="high"
-    />
+    <div class="contact-hero__media">
+      <img
+        class="contact-hero__image"
+        src={heroImage}
+        alt="Amalfi coast cliffside and sea"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
     <div class="contact-hero__veil" aria-hidden="true"></div>
+    <div class="contact-hero__glow" aria-hidden="true"></div>
     <div class="container contact-hero__content">
       <div class="contact-hero__copy">
         <span class="badge contact-hero__badge">
@@ -31,8 +34,8 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
           Contact us <span class="accent-italic">right now</span>
         </h1>
         <p class="contact-hero__lead">
-          Tell us your dates, mood, and priorities. We will reply with a custom plan and the
-          best locations for your Amalfi experience.
+          Tell us your dates, mood, and priorities. We will craft a custom plan for your Amalfi
+          Coast stay, photoshoot, or concierge request and reply within 24 hours.
         </p>
         <div class="contact-hero__actions">
           <a class="button" href="#contact-form">
@@ -42,108 +45,146 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
             <i class="bi bi-whatsapp"></i> WhatsApp
           </a>
         </div>
-      </div>
-      <div class="contact-hero__meta">
-        <div class="contact-hero__pill">
-          <span>Direct line</span>
-          <strong>hello@amalfi.day</strong>
-        </div>
-        <div class="contact-hero__pill">
-          <span>Response time</span>
-          <strong>Within 24 hours</strong>
-        </div>
+        <p class="contact-hero__note">
+          Prefer WhatsApp? <a href={whatsappHref} target="_blank" rel="noreferrer">Start a chat</a>.
+        </p>
       </div>
     </div>
   </section>
 
-  <section class="section contact-details">
-    <div class="container contact-form__shell">
-      <div class="contact-form__intro">
-        <div class="contact-eyebrow">Plan with us</div>
-        <h2 class="contact-intro__title">
+  <section class="section contact-book">
+    <div class="container contact-book__inner">
+      <div class="contact-eyebrow">WHERE WE BOOK</div>
+      <h1>
+        Amalfi Coast stays on <span class="accent-italic">Booking.com</span> &
+        <span class="accent-italic">Airbnb</span>
+      </h1>
+      <p>
+        Most accommodation reservations are arranged through
+        <a href="https://www.booking.com/" target="_blank" rel="noreferrer">Booking.com</a>
+        and
+        <a href="https://www.airbnb.com/" target="_blank" rel="noreferrer">Airbnb</a>.
+        Our apartments are listed on these platforms, so you can book them quickly and securely.
+        We send direct links to trusted listings and help compare options in Amalfi, Positano,
+        Ravello, and Atrani so you can book with confidence.
+      </p>
+      <p>
+        Beyond stays, we handle every detail: taxi and private transfers, porter support for
+        luggage, as well as masterclasses, local tastings, and curated experiences. Tell us what
+        you need and we will coordinate the rest.
+      </p>
+    </div>
+  </section>
+
+  <section class="section contact-help">
+    <div class="container">
+      <h1>How we can help</h1>
+      <div class="contact-help__grid">
+        <article class="contact-help__card">
+          <div class="contact-help__icon"><i class="bi bi-car-front"></i></div>
+          <h3>Transfers & taxis</h3>
+          <p>Private drivers, airport pickups, and day-trip routing built around your schedule.</p>
+        </article>
+        <article class="contact-help__card">
+          <div class="contact-help__icon"><i class="bi bi-luggage"></i></div>
+          <h3>Porters & luggage help</h3>
+          <p>Porter service for steep streets, ferry arrivals, and hotel transitions.</p>
+        </article>
+        <article class="contact-help__card">
+          <div class="contact-help__icon"><i class="bi bi-brush"></i></div>
+          <h3>Workshops & masterclasses</h3>
+          <p>Cooking classes, ceramic workshops, and tasting experiences with local artisans.</p>
+        </article>
+        <article class="contact-help__card">
+          <div class="contact-help__icon"><i class="bi bi-camera"></i></div>
+          <h3>Photo planning</h3>
+          <p>Golden-hour timing, location permits, and a calm, guided shoot experience.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-plan" id="contact-form">
+    <div class="container contact-plan__grid">
+      <div class="contact-plan__intro">
+        <div class="contact-eyebrow">PLAN WITH US</div>
+        <h1>
           Let’s design your <span class="accent-italic">Amalfi</span> story
-        </h2>
+        </h1>
         <p>
-          Tell us about your dates, vibe, and the experience you want. We will reply with a
-          tailored plan, the best light, and the right locations.
+          Share your dates, mood, and wishlist. We will build a tailored plan with the best light,
+          locations, and timing for an effortless Amalfi Coast experience.
         </p>
-        <div class="contact__note">
-          <strong>Direct line:</strong> hello@amalfi.day
-        </div>
         <div class="contact__links">
-          <a href={whatsappHref} target="_blank" rel="noreferrer">
-            <i class="bi bi-whatsapp"></i> WhatsApp
+          <a class="contact-link" href={whatsappHref} target="_blank" rel="noreferrer">
+            <span class="contact-link__icon"><i class="bi bi-whatsapp"></i></span>
+            <span class="contact-link__text">
+              <strong>WhatsApp</strong>
+              <span>Send a message on WhatsApp</span>
+            </span>
           </a>
-          <a href="mailto:hello@amalfi.day">
-            <i class="bi bi-envelope"></i> Email us
+          <a class="contact-link" href="mailto:hello@amalfi.day">
+            <span class="contact-link__icon"><i class="bi bi-envelope"></i></span>
+            <span class="contact-link__text">
+              <strong>Email</strong>
+              <span>Write us an email</span>
+            </span>
           </a>
-        </div>
-        <div class="contact-services">
-          <div class="contact-service">
-            <h1>Bookings on Booking.com & Airbnb</h1>
-            <p>
-              We handle most accommodation inquiries on
-              <a href="https://www.booking.com/" target="_blank" rel="noreferrer">Booking.com</a>
-              and
-              <a href="https://www.airbnb.com/" target="_blank" rel="noreferrer">Airbnb</a> —
-              verified listings, flexible dates, and trusted guest communication.
-            </p>
-          </div>
-          <div class="contact-service">
-            <h1>Concierge services</h1>
-            <p>
-              Need taxis, porters, private transfers, or a sunset boat ride? We can also arrange
-              cooking classes, ceramic workshops, and local tastings curated around your schedule.
-            </p>
-          </div>
-          <div class="contact-service">
-            <h1>Local support</h1>
-            <p>
-              We help with timing, routes, and logistics so your stay feels effortless — from
-              arrival to the last shoot location.
-            </p>
-          </div>
         </div>
       </div>
-      <div class="contact-form__panel" id="contact-form">
+
+      <form class="contact-form" action="/api/contact" method="post">
         <div class="contact-form__header">
-          <span class="badge"><i class="bi bi-stars"></i> Quick request</span>
+          <span class="badge"><i class="bi bi-stars"></i> Telegram-ready request</span>
           <h2>
-            Let’s plan your <span class="accent-italic">perfect</span> day
+            Send your <span class="accent-italic">plan</span> in minutes
           </h2>
-          <p>Send the details and we will answer with a clear plan and availability.</p>
-        </div>
-        <form class="contact-form" action="/api/contact" method="post">
-          <div class="contact-form__grid">
-            <label>
-              Your name
-              <input type="text" name="name" placeholder="Iana" required />
-            </label>
-            <label>
-              Email or WhatsApp
-              <input type="text" name="contact" placeholder="email or +39" required />
-            </label>
-            <label>
-              Dates & location
-              <input type="text" name="dates" placeholder="Oct 3–7, Atrani" />
-            </label>
-            <label>
-              Service
-              <input type="text" name="service" placeholder="Photoshoot, stay, transfer" />
-            </label>
-          </div>
-          <label>
-            Your message
-            <textarea name="message" rows="5" placeholder="Tell us about your plans" required></textarea>
-          </label>
-          <button class="button" type="submit">
-            <i class="bi bi-send"></i> Send request
-          </button>
-          <p class="form__status" aria-live="polite">
-            We will send your request directly to Telegram.
+          <p>
+            Fill in the details below. Your request goes straight to Telegram so we can reply
+            quickly with availability, pricing, and suggestions.
           </p>
-        </form>
-      </div>
+        </div>
+        <div class="contact-form__grid">
+          <label>
+            Your name
+            <input type="text" name="name" placeholder="Iana" autocomplete="name" />
+          </label>
+          <label>
+            Email or WhatsApp
+            <input
+              type="text"
+              name="contact"
+              placeholder="email or +39"
+              autocomplete="email"
+              required
+            />
+          </label>
+          <label>
+            Dates & location
+            <input type="text" name="dates" placeholder="Oct 3–7, Atrani" required />
+          </label>
+          <label>
+            Service
+            <select name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option value="Porters/taxi">Porters/taxi</option>
+              <option value="Photoshooting">Photoshooting</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          Your message
+          <textarea name="message" rows="5" placeholder="Tell us about your plans"></textarea>
+        </label>
+        <button class="button" type="submit">
+          <i class="bi bi-send"></i> Send request
+        </button>
+        <p class="form__status" aria-live="polite">
+          We will send your request directly to Telegram.
+        </p>
+      </form>
     </div>
   </section>
 
@@ -191,42 +232,58 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 <style>
   .contact-hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 100svh;
     display: grid;
-    align-items: end;
+    align-items: stretch;
     color: #ffffff;
     overflow: hidden;
+    background: #0f1115;
+  }
+
+  .contact-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
 
   .contact-hero__image {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(1.05);
-    transform: scale(1.02);
+    object-position: center top;
+    filter: saturate(1.05) contrast(1.02);
   }
 
   .contact-hero__veil {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(
       180deg,
-      rgba(10, 12, 15, 0.4) 0%,
-      rgba(10, 12, 15, 0.72) 60%,
+      rgba(10, 12, 15, 0.35) 0%,
+      rgba(10, 12, 15, 0.72) 55%,
       rgba(10, 12, 15, 0.92) 100%
     );
   }
 
+  .contact-hero__glow {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 195, 0, 0.35), transparent 45%),
+      radial-gradient(circle at 80% 10%, rgba(0, 156, 255, 0.28), transparent 45%);
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+
   .contact-hero__content {
     position: relative;
-    padding: calc(var(--header-space) + 3.5rem) 0 4.5rem;
+    z-index: 2;
+    min-height: 100svh;
+    padding: calc(var(--header-space) + 1.5rem) 0 4rem;
     display: grid;
-    gap: 2.5rem;
+    align-items: center;
     justify-items: start;
-    width: 100%;
-    justify-self: stretch;
   }
 
   .contact-hero__badge {
@@ -235,13 +292,18 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
+  .contact-hero__copy {
+    max-width: 640px;
+    justify-self: start;
+    text-align: left;
+  }
+
   .contact-hero__copy h1 {
-    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-size: clamp(3rem, 7vw, 4.8rem);
     margin-bottom: 1rem;
   }
 
   .contact-hero__lead {
-    max-width: 620px;
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.85);
   }
@@ -250,7 +312,17 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin-top: 1.6rem;
+  }
+
+  .contact-hero__note {
+    margin-top: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .contact-hero__note a {
+    color: #ffffff;
+    font-weight: 600;
   }
 
   .button--ghost {
@@ -259,32 +331,14 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     color: #ffffff;
   }
 
-  .contact-hero__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .contact-hero__pill {
-    padding: 0.9rem 1.2rem;
-    border-radius: 999px;
-    background: rgba(15, 17, 21, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    font-size: 0.9rem;
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .contact-hero__pill span {
-    color: rgba(255, 255, 255, 0.65);
-  }
-
-  .contact-form__shell {
+  .contact-book__inner {
+    max-width: 860px;
     display: grid;
-    grid-template-columns: 1fr 1.05fr;
-    gap: 3rem;
-    align-items: start;
+    gap: 1.2rem;
+  }
+
+  .contact-book__inner .contact-eyebrow {
+    margin-bottom: 0.4rem;
   }
 
   .contact-eyebrow {
@@ -296,75 +350,131 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     margin-bottom: 1rem;
   }
 
-  .contact__note {
-    margin-top: 2rem;
-    padding: 1rem 1.2rem;
-    background: var(--color-surface);
-    border-radius: var(--radius-md);
+  .contact-help h1 {
+    margin-bottom: 2rem;
+  }
+
+  .contact-help__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.4rem;
+  }
+
+  .contact-help__card {
+    padding: 1.6rem;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(255, 195, 0, 0.08), transparent 55%),
+      var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .contact-help__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: rgba(1, 98, 255, 0.12);
+    display: grid;
+    place-items: center;
+    font-size: 1.3rem;
+    color: var(--color-aux);
+  }
+
+  .contact-help__card h3 {
+    margin: 0;
+  }
+
+  .contact-plan__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    align-items: start;
   }
 
   .contact__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    gap: 1.2rem;
     margin-top: 1.5rem;
   }
 
-  .contact__links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 0.9rem;
-    border-radius: 999px;
-    border: 1px solid var(--color-border);
-    background: var(--color-card);
-    color: var(--color-text);
-    font-weight: 600;
-  }
-
-  .contact-services {
+  .contact-link {
     display: grid;
-    gap: 1.8rem;
-    margin-top: 2.5rem;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-text);
+    text-decoration: none;
   }
 
-  .contact-service h1 {
-    font-size: clamp(1.9rem, 3.2vw, 2.8rem);
-    margin-bottom: 0.6rem;
-  }
-
-  .contact-service a {
+  .contact-link__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    background: rgba(1, 98, 255, 0.12);
     color: var(--color-aux);
-    font-weight: 600;
   }
 
-  .contact-form__header p {
-    max-width: 520px;
+  .contact-link__text {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .contact-link__text strong {
+    font-size: 1rem;
+  }
+
+  .contact-link__text span {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
   }
 
   .contact-form {
-    width: min(720px, 100%);
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    padding: 2.8rem;
-    border-radius: 28px;
-    background: var(--color-card);
-    box-shadow: var(--shadow-lift);
+    padding: 3rem;
+    border-radius: 32px;
+    background: linear-gradient(140deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9));
+    box-shadow: 0 30px 60px rgba(10, 12, 15, 0.12);
     position: relative;
     text-align: left;
+    overflow: hidden;
+  }
+
+  .contact-form__header {
+    display: grid;
+    gap: 0.6rem;
+    justify-items: start;
   }
 
   .contact-form::before {
     content: '';
     position: absolute;
     inset: -1px;
-    border-radius: 30px;
+    border-radius: 34px;
     padding: 1px;
     background: linear-gradient(135deg, rgba(255, 89, 0, 0.45), rgba(0, 156, 255, 0.35));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .contact-form::after {
+    content: '';
+    position: absolute;
+    right: -20%;
+    top: -25%;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(255, 195, 0, 0.22), transparent 70%);
+    opacity: 0.8;
     pointer-events: none;
   }
 
@@ -383,21 +493,35 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
   }
 
   input,
-  textarea {
-    border: 1px solid var(--color-border);
+  textarea,
+  select {
+    border: 1px solid rgba(26, 26, 26, 0.12);
     border-radius: 14px;
     padding: 0.85rem 1rem;
     font-family: var(--font-body);
-    background: var(--color-bg);
+    background: rgba(255, 255, 255, 0.9);
     color: var(--color-text);
     transition: border 0.2s ease, box-shadow 0.2s ease;
   }
 
   input:focus,
-  textarea:focus {
+  textarea:focus,
+  select:focus {
     outline: none;
     border-color: rgba(1, 98, 255, 0.5);
     box-shadow: 0 0 0 3px rgba(1, 98, 255, 0.15);
+  }
+
+  select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, rgba(26, 26, 26, 0.6) 50%),
+      linear-gradient(135deg, rgba(26, 26, 26, 0.6) 50%, transparent 50%),
+      linear-gradient(to right, rgba(26, 26, 26, 0.08), rgba(26, 26, 26, 0.08));
+    background-position: calc(100% - 1.2rem) calc(50% + 2px), calc(100% - 0.95rem) calc(50% + 2px),
+      calc(100% - 2.4rem) 50%;
+    background-size: 8px 8px, 8px 8px, 1px 1.8rem;
+    background-repeat: no-repeat;
+    padding-right: 2.8rem;
   }
 
   .contact-form button {
@@ -425,12 +549,16 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     color: #c0352b;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 980px) {
     .contact-hero__content {
-      padding: calc(var(--header-space) + 2.5rem) 0 3rem;
+      padding: calc(var(--header-space) + 2rem) 0 3rem;
     }
 
-    .contact-form__shell {
+    .contact-help__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contact-plan__grid {
       grid-template-columns: 1fr;
     }
 
@@ -444,8 +572,8 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       padding: 2.2rem 1.5rem;
     }
 
-    .contact-hero__meta {
-      flex-direction: column;
+    .contact-help__grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
