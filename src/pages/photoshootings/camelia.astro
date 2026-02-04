@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const heroImage = '/photoshootings/camelia/4-camelia-photoshooting-moto.webp'
+const shareImageAlt = 'Camelia photoshoot on a motorbike in Tramonti'
 const shootTitle = 'Camelia: Beautiful Experience'
 const shootDate = 'September · 05 · 2017'
 
@@ -79,8 +80,10 @@ const galleryTwoImages = [
 ---
 
 <BaseLayout
-  title="Camelia Photoshoot — Amalfi.Day"
+  title="Camelia Photoshoot — CristallPont Amalfi Day"
   description="A photo journey through Tramonti and sunset — Camelia's beautiful experience on the Amalfi Coast."
+  image={heroImage}
+  imageAlt={shareImageAlt}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

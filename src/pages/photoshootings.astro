@@ -39,6 +39,11 @@ const heroImages = {
 }
 
 const firstHeroImage = heroImages[heroCategories[0].key][0]
+
+const pageTitle = 'Photoshootings — CristallPont Amalfi Day'
+const pageDescription =
+  'Photoshootings on the Amalfi Coast for couples, influencers, and solo travelers. Cinematic sessions in Amalfi, Atrani, Ravello, and Positano.'
+const shareImageAlt = 'Amalfi Coast photoshoot hero scene'
 const individualAlbum = [
   '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
   '/photoshootings/individual/Silvia-Amalfi-day.jpg.jpg',
@@ -85,7 +90,12 @@ const testimonials = [
 ]
 ---
 
-<BaseLayout title="Photoshootings — Amalfi.Day">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={firstHeroImage}
+  imageAlt={shareImageAlt}
+>
   <section
     class="ps-hero hero--dark"
     data-sequence={JSON.stringify(

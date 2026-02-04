@@ -4,6 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 const placeholder =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
 
+const pageTitle = 'Apartments — CristallPont Amalfi Day'
+const pageDescription =
+  'Apartments, suites, and rooms in Atrani near Amalfi beach. Browse stays, galleries, and availability for Amalfi Coast trips.'
+const shareImage = '/apartments/3-view-from-cristall-Pont.jpg'
+
 const stats = [
   { value: '15+', label: 'Years of experience' },
   { value: '1000+', label: 'Positive Airbnb and Booking reviews' },
@@ -139,7 +144,7 @@ const testimonials = [
 ]
 ---
 
-<BaseLayout title="Apartments - Amalfi.Day">
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
   <section class="section apartments-hero">
     <div class="container apartments-hero__grid">
       <div class="apartments-hero__copy">

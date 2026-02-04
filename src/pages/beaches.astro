@@ -1,14 +1,640 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+const pageTitle = 'Amalfi Beach Review — CristallPont Amalfi Day'
+const pageDescription =
+  'A personal beach guide to the Amalfi Coast: when to go, what to expect, and which beaches match your mood.'
+const heroImage = '/staticpages/beach/amalfi-beach-review.jpg'
+const shareImageAlt = 'Amalfi Coast shoreline and beach'
+
+const heroStats = [
+  { value: '11', label: 'Beaches reviewed' },
+  { value: 'Apr–Nov', label: 'Season window' },
+  { value: 'Jun–Sep', label: 'Warmest water' },
+]
+
+const quickFacts = [
+  {
+    title: 'Water',
+    accent: 'warmth',
+    icon: 'bi-thermometer-sun',
+    text: 'The most comfortable swim comes from June to September, when the sea hovers around 26–28°C (79–82°F).',
+  },
+  {
+    title: 'Beach',
+    accent: 'texture',
+    icon: 'bi-gem',
+    text: 'Most Amalfi beaches are pebbly. Big towns counter it with full service, smooth walkways, and shaded terraces.',
+  },
+  {
+    title: 'Sunbed',
+    accent: 'ritual',
+    icon: 'bi-umbrella',
+    text: 'A standard setup is two loungers plus one umbrella for the day. In July–August, reserve ahead in Amalfi and Positano.',
+  },
+]
+
+const beaches = [
+  {
+    icon: 'bi-geo-alt-fill',
+    name: 'Vietri Sul Mare',
+    accent: 'wide',
+    description:
+      'The widest and most accessible beach on the coast, with easy parking, democratic prices, and steady cleaning. A great base if you prefer to stay closer to the edge of the coast.',
+  },
+  {
+    icon: 'bi-compass',
+    name: 'Erchie',
+    accent: 'hidden',
+    description:
+      'A tiny fishing village tucked into a quiet bay. Boat-only coves hide along the cliffs, perfect for privacy and slow, quiet swims.',
+  },
+  {
+    icon: 'bi-people',
+    name: 'Maiori',
+    accent: 'long',
+    description:
+      'The longest beach on the Amalfi Coast, popular with families. You can find budget stays, but premium zones can charge higher to keep crowds down.',
+  },
+  {
+    icon: 'bi-heart',
+    name: 'Minori',
+    accent: 'cozy',
+    description:
+      'A smaller, softer cousin to Maiori. It feels intimate and sweet, but it fills up fast in peak season.',
+  },
+  {
+    icon: 'bi-signpost-split',
+    name: 'Castiglione',
+    accent: 'cliffside',
+    description:
+      'Ravello’s official beach, wedged between cliffs. Reach it via a 120-step staircase from the road. Motorcycle parking only, yet Atrani is an easy swim away.',
+  },
+  {
+    icon: 'bi-water',
+    name: 'Atrani',
+    accent: 'quiet',
+    description:
+      'Split by a small river, with clean water and a handful of bars. It stays calm most of the year but fills up in July and August.',
+  },
+  {
+    icon: 'bi-buildings',
+    name: 'Amalfi',
+    accent: 'central',
+    description:
+      'The main beach and the most crowded, especially near the cruise pier. Prices range from budget to premium, with private hotel clubs nearby and wilder cliffs beyond the port.',
+  },
+  {
+    icon: 'bi-stars',
+    name: 'Conca dei Marini',
+    accent: 'emerald',
+    description:
+      'Home to Grotta dello Smeraldo, the emerald-lit sea cave. The beach itself is small, cozy, and wrapped in rock and greenery.',
+  },
+  {
+    icon: 'bi-camera',
+    name: 'Furore (Fiordo di Furore)',
+    accent: 'dramatic',
+    description:
+      'One of the coast’s most photogenic spots. There’s no parking, so cars line the road with the risk of a fine. The view is the reward.',
+  },
+  {
+    icon: 'bi-sunset',
+    name: 'Praiano',
+    accent: 'sunset',
+    description:
+      'Praiano nails the golden hour. Marina di Praia is framed by cliffs and feels secluded. It also hosts one of the rare seaside discos with music right by the water.',
+  },
+  {
+    icon: 'bi-music-note-beamed',
+    name: 'Positano',
+    accent: 'iconic',
+    description:
+      'The most photographed town on the coast and the priciest beach scene. You’re paying for the name, the views, and the nightlife like Music on the Rocks.',
+  },
+]
+
+const practicalNotes = [
+  {
+    title: 'Free water',
+    accent: 'access',
+    icon: 'bi-water',
+    text: 'Every beach keeps a public strip where you can lay a towel and swim. For comfort, rent a set — especially if you plan to stay all day.',
+  },
+  {
+    title: 'Boat',
+    accent: 'rentals',
+    icon: 'bi-life-preserver',
+    text: 'Amalfi rentals often offer license-free boats within local limits. They are perfect for the Galli Islands, sea caves, and hidden coves. Keep distance from the shore and ask the operator about allowed zones.',
+  },
+  {
+    title: 'Beach',
+    accent: 'restaurants',
+    icon: 'bi-cup-hot',
+    text: 'Some trattorias are accessible only from the water. Arrive by boat, anchor, swim in, and enjoy a long, slow lunch between swims.',
+  },
+]
 ---
 
-<BaseLayout title="Beach reviews — Amalfi.Day">
-  <section class="section">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={heroImage}
+  imageAlt={shareImageAlt}
+>
+  <section class="beach-hero hero--dark">
+    <img
+      class="beach-hero__image"
+      src={heroImage}
+      alt="Amalfi Coast shoreline and beach"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="beach-hero__veil" aria-hidden="true"></div>
+    <div class="container beach-hero__content">
+      <div class="beach-hero__copy">
+        <span class="badge beach-hero__badge"><i class="bi bi-water"></i> Personal guide</span>
+        <h1>
+          Amalfi Beach <span class="accent-italic">review</span>
+        </h1>
+        <p class="beach-hero__lead">
+          A personal, photo-minded map of the Amalfi Coast shoreline — where to swim, where to
+          book a lounger, and which coves stay quiet.
+        </p>
+        <div class="beach-hero__stats">
+          {heroStats.map((item) => (
+            <div class="beach-stat">
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+        <div class="beach-hero__links">
+          <a href="#timing">When to go</a>
+          <a href="#beach-atlas">Beach atlas</a>
+          <a href="#practical">Practical notes</a>
+        </div>
+      </div>
+      <aside class="beach-hero__aside">
+        <div class="beach-eyebrow">Author note</div>
+        <p>
+          I keep a private beach log and decided to share it. It’s a personal opinion, meant to
+          give you a clear picture of the Amalfi Coast and help you choose a shore where your
+          vacation feels effortless.
+        </p>
+        <div class="beach-hero__author">
+          <strong>Gregory Day</strong>
+          <span>Author of Amalfi.Day</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section beach-intro" id="timing">
     <div class="container">
-      <h1>
-        Beach <span class="accent-italic">reviews</span>
-      </h1>
-      <p>Beach notes will be added soon.</p>
+      <div class="beach-intro__copy">
+        <div class="beach-eyebrow">Season timing</div>
+        <h2>
+          When to chase <span class="accent-italic">warm</span> water
+        </h2>
+        <p>
+          The coast wakes up around Easter, when the beaches are cleaned, sand is refreshed, and
+          the first umbrellas appear. The season runs into the first weeks of November, but the
+          most comfortable swims arrive between June and September.
+        </p>
+        <div class="beach-eyebrow">Beach rhythm</div>
+        <h2>
+          Pebbles, <span class="accent-italic">service</span>, and etiquette
+        </h2>
+        <p>
+          Most Amalfi beaches are pebbly, so bring water shoes if you love long shoreline walks.
+          City beaches are well equipped, and a day setup typically includes two loungers and one
+          umbrella. July and August are loud and full — reserve ahead for Amalfi and Positano.
+        </p>
+      </div>
+      <div class="beach-intro__facts">
+        {quickFacts.map((item) => (
+          <article class="card fact-card">
+            <div class="fact-card__icon">
+              <i class={`bi ${item.icon}`}></i>
+            </div>
+            <h3>
+              {item.title} <span class="accent-italic">{item.accent}</span>
+            </h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section beach-atlas" id="beach-atlas">
+    <div class="container">
+      <div class="section__header">
+        <h2>
+          Beaches of the <span class="accent-italic">Amalfi</span> Coast
+        </h2>
+        <p>Eleven shores, eleven moods — from wide promenades to hidden cliff coves.</p>
+      </div>
+      <div class="beach-list-shell">
+        <div class="beach-list">
+          {beaches.map((beach) => (
+            <article class="beach-row">
+              <div class="beach-row__icon" aria-hidden="true">
+                <i class={`bi ${beach.icon}`}></i>
+              </div>
+              <div class="beach-row__content">
+                <h3>
+                  {beach.name} <span class="accent-italic">{beach.accent}</span>
+                </h3>
+                <p>{beach.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section beach-notes" id="practical">
+    <div class="container">
+      <div class="section__header">
+        <h2>
+          Practical <span class="accent-italic">notes</span>
+        </h2>
+        <p>Small details that make the day smoother.</p>
+      </div>
+      <div class="beach-notes__grid">
+        {practicalNotes.map((item) => (
+          <article class="card note-card">
+            <div class="note-card__icon">
+              <i class={`bi ${item.icon}`}></i>
+            </div>
+            <h3>
+              {item.title} <span class="accent-italic">{item.accent}</span>
+            </h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section beach-summary">
+    <div class="container">
+      <div class="beach-summary__card">
+        <div class="beach-eyebrow">Summary</div>
+        <h2>
+          The coast is <span class="accent-italic">built</span> for comfort
+        </h2>
+        <p>
+          Amalfi is not just a postcard — it is a coastline shaped for real holidays. You can
+          pick a quiet cove for slow swims or a lively beach with bars and music. Choose the mood
+          that fits your trip, and let the scenery do the rest.
+        </p>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .beach-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: #ffffff;
+    padding: calc(var(--header-space) + 4rem) 0 4rem;
+  }
+
+  .beach-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.05) contrast(1.05);
+    z-index: -2;
+  }
+
+  .beach-hero__veil {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(120deg, rgba(12, 16, 20, 0.9) 0%, rgba(12, 16, 20, 0.35) 45%, rgba(12, 16, 20, 0.08) 70%),
+      radial-gradient(circle at 20% 20%, rgba(255, 195, 0, 0.35), transparent 45%);
+    z-index: -1;
+  }
+
+  .beach-hero__content {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr);
+    gap: 2.5rem;
+    align-items: end;
+  }
+
+  .beach-hero__badge {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .beach-hero__copy h1 {
+    font-size: clamp(2.8rem, 5vw, 4.6rem);
+    margin-top: 1.2rem;
+    color: #ffffff;
+  }
+
+  .beach-hero__lead {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    max-width: 40rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .beach-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .beach-stat {
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+  }
+
+  .beach-stat strong {
+    display: block;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .beach-stat span {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+  }
+
+  .beach-hero__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.8rem;
+  }
+
+  .beach-hero__links a {
+    color: #ffffff;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+  }
+
+  .beach-hero__links a:hover {
+    color: #ffffff;
+    border-bottom-color: rgba(255, 255, 255, 0.9);
+  }
+
+  .beach-hero__aside {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: rgba(12, 16, 20, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .beach-hero__aside p {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .beach-hero__author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 1.4rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .beach-hero__author strong {
+    color: #ffffff;
+    font-size: 1rem;
+  }
+
+  .beach-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .beach-hero .beach-eyebrow {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .beach-summary__card .beach-eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .beach-intro__copy h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+  }
+
+  .beach-intro__copy p {
+    max-width: 36rem;
+  }
+
+  .beach-intro__facts {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+  }
+
+  .fact-card {
+    padding: 1.6rem;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .fact-card__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    font-size: 1.2rem;
+  }
+
+  .section__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .section__header h2 {
+    font-size: clamp(2.1rem, 3.2vw, 3rem);
+    margin-bottom: 0.4rem;
+  }
+
+  .section__header p {
+    max-width: 28rem;
+  }
+
+  .beach-list-shell {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 2rem;
+  }
+
+  .beach-list {
+    grid-column: 2 / 4;
+    display: grid;
+    gap: 2.2rem;
+  }
+
+  .beach-row {
+    display: grid;
+    grid-template-columns: minmax(56px, 72px) minmax(0, 1fr);
+    column-gap: 2rem;
+    align-items: start;
+  }
+
+  .beach-row__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-aux);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    position: relative;
+  }
+
+  .beach-row__icon::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: calc(100% + 24px);
+    background: var(--color-border);
+    opacity: 0.6;
+  }
+
+  .beach-row:last-child .beach-row__icon::after {
+    display: none;
+  }
+
+  .beach-row__content h3 {
+    margin-bottom: 0.4rem;
+  }
+
+  .beach-notes__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .note-card {
+    padding: 1.8rem;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .note-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(0, 156, 255, 0.12);
+    color: var(--color-aux);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .beach-summary {
+    padding-top: 3rem;
+  }
+
+  .beach-summary__card {
+    padding: 2.8rem;
+    border-radius: var(--radius-lg);
+    background: var(--gradient-sunset);
+    color: #ffffff;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .beach-summary__card p {
+    color: rgba(255, 255, 255, 0.86);
+    max-width: 42rem;
+  }
+
+  .beach-summary__card h2 {
+    color: #ffffff;
+  }
+
+  @media (max-width: 1024px) {
+    .beach-hero__content {
+      grid-template-columns: 1fr;
+    }
+
+    .beach-list-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .beach-list {
+      grid-column: 1;
+    }
+
+    .beach-row {
+      grid-template-columns: 56px minmax(0, 1fr);
+    }
+
+    .beach-intro__facts {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .section__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .beach-hero {
+      padding: calc(var(--header-space) + 3rem) 0 3rem;
+    }
+
+    .beach-hero__aside {
+      padding: 1.6rem;
+    }
+
+    .beach-summary__card {
+      padding: 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      scroll-behavior: auto !important;
+    }
+  }
+</style>

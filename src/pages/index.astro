@@ -6,6 +6,12 @@ import heroQuatrains from '../../hero-quatrains.json'
 
 export const revalidate = 60 * 60 * 12
 
+const pageTitle = 'Amalfi.Day — CristallPont Amalfi Day'
+const pageDescription =
+  'Amalfi.Day is a local guide for Amalfi Coast photoshoots, apartments in Atrani, beach reviews, and curated experiences in Amalfi, Ravello, and Positano.'
+const shareImage = featuredPhotoshoots[0]?.image ?? '/pre-footer/boat-tours-in-amalfi.webp'
+const shareImageAlt = 'Amalfi Coast photoshoot highlights'
+
 const staticPages = [
   { title: 'How to get here', href: '/how-to-get', note: 'Routes, transfers, and arrival tips.' },
   { title: 'What to do', href: '/what-to-do', note: 'Ideas, experiences, and local gems.' },
@@ -26,7 +32,12 @@ const fallbackQuatrain =
     : ['', '', '', '']
 
 ---
-<BaseLayout title="Amalfi.Day — CrystalPontomAlphiday">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={shareImage}
+  imageAlt={shareImageAlt}
+>
   <section class="hero hero--orange">
     <div class="container hero__inner">
       <div class="hero__intro">
@@ -67,7 +78,7 @@ const fallbackQuatrain =
             target="_blank"
             rel="noreferrer"
           >
-            <i class="bi bi-bus-front"></i>
+            <i class="bi bi-bus-front hero__icon hero__icon--azure"></i>
             <strong>Bus timetables</strong>
           </a>
         </div>
@@ -79,7 +90,7 @@ const fallbackQuatrain =
             target="_blank"
             rel="noreferrer"
           >
-            <i class="bi bi-ticket-perforated"></i>
+            <i class="bi bi-ticket-perforated hero__icon hero__icon--sunset"></i>
             <strong>Ferry timetables</strong>
           </a>
         </div>
@@ -292,10 +303,10 @@ const fallbackQuatrain =
     content: '';
     position: absolute;
     left: 50%;
-    top: -40%;
+    top: 0;
     width: min(1200px, 140vw);
     height: min(1200px, 140vw);
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     background: radial-gradient(
       circle at 50% 50%,
       rgba(255, 195, 0, 0.95) 0%,
@@ -499,6 +510,22 @@ const fallbackQuatrain =
 
   .hero__mini > i {
     font-size: 2rem;
+  }
+
+  .hero__icon {
+    display: inline-block;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero__icon--sunset {
+    background-image: var(--gradient-sunset);
+  }
+
+  .hero__icon--azure {
+    background-image: var(--gradient-azure);
   }
 
   .hero__mini:hover {
@@ -937,31 +964,35 @@ const fallbackQuatrain =
     }
 
     .hero__mosaic {
-      grid-template-columns: 1fr;
-      grid-template-rows: minmax(200px, auto) minmax(140px, auto) minmax(140px, auto) minmax(180px, auto);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: auto auto auto;
     }
 
     .hero__tile--primary,
     .hero__tile--small-a,
     .hero__tile--small-b,
     .hero__tile--bottom {
-      grid-column: 1;
+      grid-column: auto;
     }
 
     .hero__tile--primary {
+      grid-column: 1 / span 2;
       grid-row: 1;
     }
 
     .hero__tile--small-a {
+      grid-column: 1;
       grid-row: 2;
     }
 
     .hero__tile--small-b {
-      grid-row: 3;
+      grid-column: 2;
+      grid-row: 2;
     }
 
     .hero__tile--bottom {
-      grid-row: 4;
+      grid-column: 1 / span 2;
+      grid-row: 3;
     }
 
     .etsy__gallery {

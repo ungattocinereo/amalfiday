@@ -1,13 +1,37 @@
 ---
+import { site } from '../../../data/site'
+
 const redirectTo = '/photoshootings'
+const pageTitle = 'Photoshootings — CristallPont Amalfi Day'
+const pageDescription =
+  'Photoshootings on the Amalfi Coast for couples, influencers, and solo travelers. Cinematic sessions in Amalfi, Atrani, Ravello, and Positano.'
+const shareImage = '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg'
+const shareImageAlt = 'Amalfi Coast photoshoot hero scene'
+const canonicalUrl = new URL(redirectTo, site.url).toString()
+const ogImage = new URL(shareImage, site.url).toString()
 ---
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="refresh" content={`0; url=${redirectTo}`} />
-    <link rel="canonical" href={redirectTo} />
-    <title>Redirecting…</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={shareImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {site.twitterHandle && <meta name="twitter:site" content={site.twitterHandle} />}
+    {site.twitterHandle && <meta name="twitter:creator" content={site.twitterHandle} />}
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={shareImageAlt} />
   </head>
   <body>
     <p>Redirecting to <a href={redirectTo}>{redirectTo}</a></p>

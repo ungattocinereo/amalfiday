@@ -1,8 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+
+const pageTitle = 'Experiences — CristallPont Amalfi Day'
+const pageDescription =
+  'Curated Amalfi Coast experiences: photo sessions, day tours, and local routes crafted around golden light and easy pacing.'
+const shareImage = '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg'
 ---
 
-<BaseLayout title="Experiences — Amalfi.Day">
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
   <section class="section">
     <div class="container">
       <h1>

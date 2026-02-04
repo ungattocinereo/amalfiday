@@ -1,8 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+
+const pageTitle = 'Privacy Policy — CristallPont Amalfi Day'
+const pageDescription =
+  'Privacy policy for Amalfi.Day: how we collect, use, and protect personal data for photoshoot and travel inquiries.'
+const shareImage = '/pre-footer/2-food-in-amalfi-good.webp'
 ---
 
-<BaseLayout title="Privacy Policy — Amalfi.Day">
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
   <section class="section policy">
     <div class="container policy__inner">
       <div class="policy__intro">

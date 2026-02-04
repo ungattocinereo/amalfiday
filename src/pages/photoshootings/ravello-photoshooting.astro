@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const heroImage =
   '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp'
+const shareImageAlt = 'Ravello fashion photoshoot with classic Amalfi light'
 const shootTitle = 'Ravello Light Elegance'
 const shootDate = 'June · 09 · 2024'
 
@@ -72,8 +73,10 @@ const seoSection = {
 ---
 
 <BaseLayout
-  title="Ravello Photoshoot — Amalfi.Day"
+  title="Ravello Photoshoot — CristallPont Amalfi Day"
   description="Stunning Ravello photoshoots: a fashion story of romance, light, and timeless Amalfi elegance."
+  image={heroImage}
+  imageAlt={shareImageAlt}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

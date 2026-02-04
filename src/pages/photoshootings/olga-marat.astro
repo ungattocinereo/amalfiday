@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const heroImage = '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp'
+const shareImageAlt = 'Olga and Marat in Atrani on the Amalfi Coast'
 const shootTitle = 'Symphony of Love'
 const shootDate = '2023 сентября 08'
 
@@ -56,8 +57,10 @@ const galleryOneImages = [
 ---
 
 <BaseLayout
-  title="Olga & Marat Photoshoot — Amalfi.Day"
+  title="Olga & Marat Photoshoot — CristallPont Amalfi Day"
   description="A Symphony of Love: Olga and Marat's idyllic Amalfi photoshoot in Atrani."
+  image={heroImage}
+  imageAlt={shareImageAlt}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

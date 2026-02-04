@@ -1,0 +1,889 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const pageTitle = 'Design Guidelines — CristallPont Amalfi Day'
+const pageDescription =
+  'Design system and visual guidelines for Amalfi.Day: typography, colors, components, grids, and page patterns.'
+const shareImage = '/pre-footer/boat-tours-in-amalfi.webp'
+
+const palette = [
+  { name: 'Accent', token: '--color-accent', role: 'Primary CTA, links, accents' },
+  { name: 'Accent 2', token: '--color-accent-2', role: 'Warm highlights, hover' },
+  { name: 'Aux', token: '--color-aux', role: 'Secondary emphasis, focus' },
+  { name: 'Aux 2', token: '--color-aux-2', role: 'Secondary highlight' },
+  { name: 'Background', token: '--color-bg', role: 'Page background' },
+  { name: 'Surface', token: '--color-surface', role: 'Soft panels' },
+  { name: 'Card', token: '--color-card', role: 'Cards & elevated blocks' },
+  { name: 'Border', token: '--color-border', role: 'Dividers, outlines' },
+  { name: 'Text', token: '--color-text', role: 'Primary text' },
+  { name: 'Muted', token: '--color-text-muted', role: 'Supporting text' },
+  { name: 'Nav bg', token: '--color-nav-bg', role: 'Header glass' },
+  { name: 'Nav strong', token: '--color-nav-bg-strong', role: 'Header on scroll' },
+  { name: 'Nav border', token: '--color-nav-border', role: 'Header line' },
+]
+
+const gradients = [
+  { name: 'Sunset', token: '--gradient-sunset', role: 'Primary hero energy' },
+  { name: 'Azure', token: '--gradient-azure', role: 'Secondary CTA / buttons' },
+  { name: 'Glow 1', token: '--bg-glow-1', role: 'Ambient background glow' },
+  { name: 'Glow 2', token: '--bg-glow-2', role: 'Ambient background glow' },
+]
+
+const typography = [
+  {
+    name: 'Display',
+    token: '--font-display',
+    role: 'Headlines, hero statements, section titles',
+    sample: 'Amalfi Day — cinematic escapes in the south',
+  },
+  {
+    name: 'Body',
+    token: '--font-body',
+    role: 'Paragraphs, UI copy, captions',
+    sample: 'Warm, clear, readable paragraphs for guides and storytelling blocks.',
+  },
+  {
+    name: 'Mono',
+    token: '--font-mono',
+    role: 'Specs, tokens, technical notes',
+    sample: '--color-accent / --radius-md / --shadow-soft',
+  },
+]
+
+const layoutRules = [
+  {
+    title: 'Container',
+    value: '1200px max',
+    note: 'Use `.container` for page width and horizontal padding.',
+  },
+  {
+    title: 'Section spacing',
+    value: '5rem / 4rem / 3rem',
+    note: '`.section` adapts for desktop / tablet / mobile.',
+  },
+  {
+    title: 'Header space',
+    value: '96px / 84px',
+    note: 'Reserve for sticky header via `--header-space`.',
+  },
+  {
+    title: 'Grid DNA',
+    value: 'auto-fit cards',
+    note: 'Common pattern: `repeat(auto-fit, minmax(220px, 1fr))`.',
+  },
+  {
+    title: 'Breakpoints',
+    value: '1100 / 1024 / 900 / 720 / 640',
+    note: 'Primary responsive cuts used across pages.',
+  },
+]
+
+const elevation = [
+  { name: 'Radius sm', token: '--radius-sm', role: 'Chips, small cards' },
+  { name: 'Radius md', token: '--radius-md', role: 'Cards, surfaces' },
+  { name: 'Radius lg', token: '--radius-lg', role: 'Hero blocks, form panels' },
+  { name: 'Shadow soft', token: '--shadow-soft', role: 'Default depth' },
+  { name: 'Shadow lift', token: '--shadow-lift', role: 'Hover / emphasis' },
+]
+
+const componentMap = [
+  {
+    title: 'Header & navigation',
+    classes: ['.header', '.nav', '.logo', '.theme-switch', '.mobile-panel'],
+    note: 'Sticky glass header, scroll-aware brightness, theme toggle.',
+  },
+  {
+    title: 'Hero systems',
+    classes: ['.hero', '.ps-hero', '.shoot-hero', '.apartments-hero'],
+    note: 'Each page type has a signature hero with custom composition.',
+  },
+  {
+    title: 'Cards & grids',
+    classes: ['.card', '.static-card', '.news-card', '.stay-card', '.testimonial'],
+    note: 'Rounded cards with soft shadow + hover lift.',
+  },
+  {
+    title: 'Scrolling media',
+    classes: ['.scroll', '.news-scroll', '.shoot-scroll'],
+    note: 'Horizontal galleries with overlay titles.',
+  },
+  {
+    title: 'Buttons & badges',
+    classes: ['.button', '.button.secondary', '.badge'],
+    note: 'Pill shape, bold color, subtle lift on hover.',
+  },
+  {
+    title: 'Forms',
+    classes: ['.contact__form', 'input, textarea'],
+    note: 'Rounded inputs, blue focus ring, airy spacing.',
+  },
+]
+
+const patterns = [
+  {
+    title: 'Home',
+    description: 'Hero mosaic + static cards + scroll galleries + news stream.',
+  },
+  {
+    title: 'Photoshootings',
+    description: 'Layered hero + testimonials grid + CTA button.',
+  },
+  {
+    title: 'Shoot story',
+    description: 'Full-bleed hero + pan cards + scroll gallery + CTA.',
+  },
+  {
+    title: 'Apartments',
+    description: 'Split hero + stay cards + calendars + testimonials.',
+  },
+  {
+    title: 'Blog / Photo',
+    description: 'Card grid with large imagery and tight metadata.',
+  },
+  {
+    title: 'Contact',
+    description: 'Two-column layout with form panel on surface card.',
+  },
+]
+
+const rules = [
+  'Use `.container` + `.section` as the base rhythm for every page.',
+  'Primary links and CTAs use `--color-accent`; secondary actions use azure.',
+  'Headings always use `--font-display`; body text stays muted.',
+  'Every heading must include 1–2 words in orange italic using `.accent-italic`.',
+  'Headings may have an eyebrow above them styled like “Moodboard Shift” in `/photoshootings/template` (`.shoot-bridge__eyebrow`).',
+  'Cards keep border + shadow; lift on hover with `--shadow-lift`.',
+  'Respect `prefers-reduced-motion` and keep animation subtle.',
+]
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
+  <section class="guide-hero">
+    <div class="container guide-hero__inner">
+      <span class="badge guide-hero__badge">
+        <i class="bi bi-compass"></i> Design system
+      </span>
+      <h1>Amalfi.Day Design Guidelines</h1>
+      <p>
+        This document captures the project’s visual language: tokens, typography, grid,
+        components, and page patterns. Use it as a map so new sections feel “native”
+        from the first pixel.
+      </p>
+      <div class="guide-hero__meta">
+        <div class="card guide-meta">
+          <h3>Foundation</h3>
+          <p>Core styles: <code>src/styles/tokens.css</code> and <code>src/styles/global.css</code>.</p>
+          <p>Header/Footer: <code>src/components/Header.astro</code> and <code>Footer.astro</code>.</p>
+        </div>
+        <div class="card guide-meta">
+          <h3>Theme</h3>
+          <p>Day/night toggles via <code>data-theme</code> on <code>html</code>.</p>
+          <p>Check colors in both themes before publishing.</p>
+        </div>
+        <div class="card guide-meta">
+          <h3>Icons</h3>
+          <p>We use Bootstrap Icons: <code>bi</code> + icon name.</p>
+          <div class="guide-icons">
+            <i class="bi bi-camera"></i>
+            <i class="bi bi-geo-alt"></i>
+            <i class="bi bi-stars"></i>
+            <i class="bi bi-sun"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <h2>Headlines & Eyebrows</h2>
+        <p>Site-wide rule: every headline must include 1–2 orange italic words.</p>
+      </div>
+      <div class="guide-headings">
+        <div class="card guide-heading-card">
+          <div class="guide-eyebrow">Moodboard Shift</div>
+          <h3 class="guide-heading-title">
+            Every heading needs <span class="accent-italic">orange italic</span> words
+          </h3>
+          <p class="guide-heading-body">
+            Wrap the emphasized words with <code>.accent-italic</code>.
+          </p>
+        </div>
+        <div class="card guide-heading-card">
+          <div class="guide-eyebrow">Eyebrow Label</div>
+          <h3 class="guide-heading-title">Optional eyebrow above headings</h3>
+          <p class="guide-heading-body">
+            Style matches <code>/photoshootings/template</code>
+            <code>.shoot-bridge__eyebrow</code>: uppercase mono, wide letter spacing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2>Color Palette</h2>
+        <p>All key colors live in CSS variables. Tokens automatically switch in night mode.</p>
+      </div>
+      <div class="guide-palette">
+        {palette.map((item) => (
+          <div class="guide-swatch card" data-token={item.token} style={`--swatch-fill: var(${item.token})`}>
+            <div class="guide-swatch__chip"></div>
+            <div>
+              <strong>{item.name}</strong>
+              <span class="guide-swatch__token">{item.token}</span>
+              <span class="guide-swatch__role">{item.role}</span>
+              <span class="guide-swatch__value" data-token-value>—</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <h2>Gradients & Atmosphere</h2>
+        <p>Gradients set the mood, while soft glow layers create depth.</p>
+      </div>
+      <div class="guide-palette guide-palette--wide">
+        {gradients.map((item) => (
+          <div class="guide-swatch card" data-token={item.token} style={`--swatch-fill: var(${item.token})`}>
+            <div class="guide-swatch__chip guide-swatch__chip--tall"></div>
+            <div>
+              <strong>{item.name}</strong>
+              <span class="guide-swatch__token">{item.token}</span>
+              <span class="guide-swatch__role">{item.role}</span>
+              <span class="guide-swatch__value" data-token-value>—</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2>Typography</h2>
+        <p>We blend editorial headline drama with calm body text for long stories.</p>
+        <p class="guide-note">
+          Requirement: every headline must include 1–2 orange italic words via
+          <code>.accent-italic</code>. Headings may also include an eyebrow above, styled
+          like “Moodboard Shift” in <code>/photoshootings/template</code>
+          (<code>.shoot-bridge__eyebrow</code>): uppercase mono, wide letter spacing.
+        </p>
+      </div>
+      <div class="guide-type">
+        {typography.map((item) => (
+          <div class="card guide-type__card" data-token={item.token}>
+            <div class="guide-type__meta">
+              <strong>{item.name}</strong>
+              <span class="guide-swatch__token">{item.token}</span>
+              <span class="guide-swatch__role">{item.role}</span>
+            </div>
+            <div class="guide-type__sample" style={`font-family: var(${item.token})`}>
+              {item.sample}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <h2>Grid, Spacing, Rhythm</h2>
+        <p>Rhythm is the main carrier of order. Keep it modular across all pages.</p>
+      </div>
+      <div class="guide-metrics">
+        {layoutRules.map((item) => (
+          <div class="card guide-metric">
+            <strong>{item.title}</strong>
+            <span class="guide-metric__value">{item.value}</span>
+            <span class="guide-metric__note">{item.note}</span>
+          </div>
+        ))}
+      </div>
+      <div class="guide-code">
+        <code>
+          .container &#123; max-width: var(--container-max); padding: 0 1.5rem; &#125;
+        </code>
+        <code>
+          .section &#123; padding: 5rem 0; &#125;
+        </code>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2>Radii & Shadows</h2>
+        <p>Soft geometry is a key part of the visual character.</p>
+      </div>
+      <div class="guide-elevation">
+        {elevation.map((item) => (
+          <div class="card guide-elevation__item" data-token={item.token}>
+            <div class="guide-elevation__chip"></div>
+            <div>
+              <strong>{item.name}</strong>
+              <span class="guide-swatch__token">{item.token}</span>
+              <span class="guide-swatch__role">{item.role}</span>
+              <span class="guide-swatch__value" data-token-value>—</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <h2>Components</h2>
+        <p>Base blocks that assemble most pages.</p>
+      </div>
+      <div class="guide-components">
+        <div class="card guide-components__card">
+          <h3>Buttons</h3>
+          <div class="guide-components__row">
+            <button class="button" type="button"><i class="bi bi-arrow-up-right"></i> Primary</button>
+            <button class="button secondary" type="button">Secondary</button>
+          </div>
+        </div>
+        <div class="card guide-components__card">
+          <h3>Badges</h3>
+          <div class="guide-components__row">
+            <span class="badge"><i class="bi bi-shield-check"></i> Trust</span>
+            <span class="badge"><i class="bi bi-heart"></i> Story</span>
+          </div>
+        </div>
+        <div class="card guide-components__card">
+          <h3>Cards</h3>
+          <div class="guide-components__stack">
+            <div class="card guide-card-sample">
+              <strong>Story card</strong>
+              <p>Soft shadow, gentle border, hover lift.</p>
+            </div>
+            <div class="card guide-card-sample">
+              <strong>Media card</strong>
+              <p>Grid with dense imagery and a caption.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card guide-components__card">
+          <h3>Form fields</h3>
+          <form class="guide-form">
+            <label>
+              Name
+              <input type="text" placeholder="Iana" />
+            </label>
+            <label>
+              Message
+              <textarea rows="3" placeholder="Tell us about the shoot..."></textarea>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2>Object Map</h2>
+        <p>Where each block lives and how key entities are named.</p>
+      </div>
+      <div class="guide-objects">
+        {componentMap.map((item) => (
+          <div class="card guide-object">
+            <h3>{item.title}</h3>
+            <p>{item.note}</p>
+            <div class="guide-tags">
+              {item.classes.map((className) => (
+                <span class="guide-tag"><code>{className}</code></span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section__header">
+        <h2>Page Patterns</h2>
+        <p>Repeatable structures help build new pages faster and cleaner.</p>
+      </div>
+      <div class="guide-patterns">
+        {patterns.map((item) => (
+          <div class="card guide-pattern">
+            <strong>{item.title}</strong>
+            <span>{item.description}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <h2>Default Rules</h2>
+        <p>A short checklist for every new block.</p>
+      </div>
+      <div class="guide-rules">
+        {rules.map((rule) => (
+          <div class="card guide-rule">
+            <i class="bi bi-check2"></i>
+            <span>{rule}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const updateTokenValues = () => {
+    const computed = getComputedStyle(document.documentElement)
+    document.querySelectorAll('[data-token]').forEach((node) => {
+      const token = node.getAttribute('data-token')
+      const value = token ? computed.getPropertyValue(token).trim() : ''
+      const target = node.querySelector('[data-token-value]')
+      if (target) {
+        target.textContent = value || '—'
+      }
+    })
+  }
+
+  updateTokenValues()
+
+  const observer = new MutationObserver(updateTokenValues)
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+</script>
+
+<style>
+  .guide-hero {
+    padding: 6rem 0 4rem;
+    background: var(--gradient-sunset);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .guide-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.35), transparent 45%);
+    pointer-events: none;
+  }
+
+  .guide-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 1.8rem;
+    max-width: 980px;
+  }
+
+  .guide-hero__badge {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.92);
+    color: #1a1a1a;
+  }
+
+  .guide-hero h1 {
+    font-size: clamp(2.6rem, 4.2vw, 4.4rem);
+    margin: 0;
+  }
+
+  .guide-hero p {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.05rem;
+  }
+
+  .guide-hero__meta {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .guide-meta {
+    padding: 1.4rem;
+    background: rgba(255, 255, 255, 0.96);
+    color: #1a1a1a;
+  }
+
+  .guide-meta h3 {
+    margin-bottom: 0.6rem;
+  }
+
+  .guide-meta p {
+    color: rgba(26, 26, 26, 0.7);
+  }
+
+  .guide-icons {
+    display: flex;
+    gap: 0.6rem;
+    font-size: 1.2rem;
+  }
+
+  .section__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .section__header h2 {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+  }
+
+  .guide-note {
+    margin-top: 0.4rem;
+    padding: 0.8rem 1rem;
+    background: var(--color-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .guide-note code {
+    font-family: var(--font-mono);
+  }
+
+  .guide-headings {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .guide-heading-card {
+    padding: 1.4rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .guide-heading-title {
+    margin: 0.4rem 0 0.2rem;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    line-height: 1.3;
+  }
+
+  .guide-eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .guide-heading-body {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .section--soft {
+    background: var(--color-surface);
+  }
+
+  .guide-palette {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .guide-palette--wide {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .guide-swatch {
+    padding: 1rem;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .guide-swatch__chip {
+    height: 56px;
+    border-radius: 14px;
+    background: var(--swatch-fill);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .guide-swatch__chip--tall {
+    height: 80px;
+  }
+
+  .guide-swatch__token {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin-top: 0.2rem;
+  }
+
+  .guide-swatch__role {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .guide-swatch__value {
+    display: block;
+    margin-top: 0.4rem;
+    font-weight: 600;
+  }
+
+  .guide-type {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .guide-type__card {
+    padding: 1.4rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .guide-type__meta {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .guide-type__sample {
+    font-size: 1.3rem;
+    line-height: 1.45;
+  }
+
+  .guide-metrics {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .guide-metric {
+    padding: 1.3rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .guide-metric__value {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .guide-metric__note {
+    color: var(--color-text-muted);
+  }
+
+  .guide-code {
+    margin-top: 1.6rem;
+    display: grid;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .guide-code code {
+    display: block;
+    padding: 0.9rem 1rem;
+    background: var(--color-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .guide-elevation {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .guide-elevation__item {
+    padding: 1rem;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .guide-elevation__chip {
+    height: 56px;
+    border-radius: 18px;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+  }
+
+  .guide-elevation__item[data-token='--radius-sm'] .guide-elevation__chip {
+    border-radius: var(--radius-sm);
+  }
+
+  .guide-elevation__item[data-token='--radius-md'] .guide-elevation__chip {
+    border-radius: var(--radius-md);
+  }
+
+  .guide-elevation__item[data-token='--radius-lg'] .guide-elevation__chip {
+    border-radius: var(--radius-lg);
+  }
+
+  .guide-elevation__item[data-token='--shadow-soft'] .guide-elevation__chip {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .guide-elevation__item[data-token='--shadow-lift'] .guide-elevation__chip {
+    box-shadow: var(--shadow-lift);
+  }
+
+  .guide-components {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .guide-components__card {
+    padding: 1.4rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .guide-components__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .guide-components__stack {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .guide-card-sample {
+    padding: 1rem;
+  }
+
+  .guide-card-sample p {
+    margin: 0.4rem 0 0;
+  }
+
+  .guide-form {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .guide-form label {
+    display: grid;
+    gap: 0.4rem;
+    font-weight: 500;
+  }
+
+  .guide-form input,
+  .guide-form textarea {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .guide-form input:focus,
+  .guide-form textarea:focus {
+    outline: 2px solid rgba(1, 98, 255, 0.2);
+    border-color: var(--color-aux);
+  }
+
+  .guide-objects {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .guide-object {
+    padding: 1.4rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .guide-object p {
+    margin: 0;
+  }
+
+  .guide-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .guide-tag {
+    background: var(--color-surface);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .guide-patterns {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .guide-pattern {
+    padding: 1.2rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .guide-pattern span {
+    color: var(--color-text-muted);
+  }
+
+  .guide-rules {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .guide-rule {
+    padding: 1rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .guide-rule i {
+    font-size: 1.1rem;
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 900px) {
+    .guide-hero {
+      padding: 5rem 0 3.5rem;
+    }
+
+    .guide-hero__inner {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .guide-hero {
+      padding: 4.5rem 0 3rem;
+    }
+
+    .guide-hero__meta {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  :global([data-theme='night']) .guide-hero {
+    background: linear-gradient(140deg, #b34c00 0%, #ff7a00 55%, #ffc300 120%);
+  }
+</style>

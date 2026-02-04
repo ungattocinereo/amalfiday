@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const heroImage = '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp'
+const shareImageAlt = 'Taylor and Regan engagement photoshoot in Ravello'
 const shootTitle = 'Ravello Romance Photoshoot'
 const shootDate = 'October · 05 · 2023'
 
@@ -86,8 +87,10 @@ const galleryTwoImages = [
 ---
 
 <BaseLayout
-  title="Ravello Romance Photoshoot — Amalfi.Day"
+  title="Ravello Romance Photoshoot — CristallPont Amalfi Day"
   description="Capturing Love: Taylor and Regan's engagement photoshoot in Ravello on the Amalfi Coast."
+  image={heroImage}
+  imageAlt={shareImageAlt}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

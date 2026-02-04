@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const heroImage = '/photoshootings/hero/personal/Masha-Minchuck-Amalfi-day.jpg'
+const shareImageAlt = 'Cinematic photoshoot template hero image'
 const shootTitle = 'Line of Light'
 const shootDate = 'July · 24 · 2024'
 
@@ -109,8 +110,10 @@ const galleryTwoImages = [
 ---
 
 <BaseLayout
-  title="Photoshoot Template — Amalfi.Day"
+  title="Photoshoot Template — CristallPont Amalfi Day"
   description="Template for a cinematic photoshoot story with a hero image and custom gallery."
+  image={heroImage}
+  imageAlt={shareImageAlt}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

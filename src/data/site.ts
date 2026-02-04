@@ -2,6 +2,9 @@ export const site = {
   name: 'Amalfi.Day',
   description: 'Epic photoshoots on the Amalfi Coast. Story-driven sessions with golden light and cinematic locations.',
   guideUrl: 'https://guide.amalfi.day',
+  url: 'https://amalfi.day',
+  defaultImage: '/pre-footer/boat-tours-in-amalfi.webp',
+  twitterHandle: '@amalfiday',
 }
 
 export const navigation = [

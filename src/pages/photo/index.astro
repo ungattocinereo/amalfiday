@@ -1,9 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { featuredPhotoshoots } from '../../data/site'
+
+const pageTitle = 'Photoshoots — CristallPont Amalfi Day'
+const pageDescription =
+  'Photo stories and galleries from Amalfi Coast sessions, featuring Atrani, Ravello, and Positano locations and light.'
+const shareImage = featuredPhotoshoots[0]?.image ?? '/pre-footer/boat-tours-in-amalfi.webp'
 ---
 
-<BaseLayout title="Photoshoots — Amalfi.Day">
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
   <section class="section">
     <div class="container">
       <h1>

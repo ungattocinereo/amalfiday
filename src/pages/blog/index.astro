@@ -4,9 +4,15 @@ import { blogCategories, blogTags } from '../../data/site'
 import { getGhostPosts } from '../../data/ghost'
 
 const posts = await getGhostPosts({ limit: 12 })
+
+const pageTitle = 'Blog — CristallPont Amalfi Day'
+const pageDescription =
+  'Amalfi Coast blog with travel notes, routes, photography tips, culture, and food. Stories from Atrani, Amalfi, Ravello, and beyond.'
+const shareImage =
+  posts.find((post) => post.image)?.image ?? '/pre-footer/boat-tours-in-amalfi.webp'
 ---
 
-<BaseLayout title="Blog — Amalfi.Day">
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
   <section class="section">
     <div class="container">
       <h1>
