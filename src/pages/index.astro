@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { featuredPhotoshoots, heroLinks } from '../data/site'
 import { getGhostPosts } from '../data/ghost'
+import heroQuatrains from '../../hero-quatrains.json'
 
 export const revalidate = 60 * 60 * 12
 
@@ -18,85 +19,80 @@ const staticPages = [
 ]
 
 const newsPosts = await getGhostPosts({ limit: 8 })
+const quatrains = Array.isArray(heroQuatrains) ? heroQuatrains : []
+const fallbackQuatrain =
+  Array.isArray(quatrains[0]) && quatrains[0].length === 4
+    ? quatrains[0]
+    : ['', '', '', '']
 
 ---
 <BaseLayout title="Amalfi.Day — CrystalPontomAlphiday">
   <section class="hero hero--orange">
     <div class="container hero__inner">
       <div class="hero__intro">
-        <h1 class="hero__title">
-          Cristall Pont <span class="hero__domain">/amalfi.day</span>
-        </h1>
-        <p class="hero__lead">
-          Here you can find public transport timetables. Information about parking in Amalfi &
-          Atrani. Places to take perfect photos and much more...
-        </p>
+        <div class="hero__quatrain" data-quatrains={JSON.stringify(quatrains)}>
+          <p class="hero__line" data-quatrain-line>{fallbackQuatrain[0]}</p>
+          <p class="hero__line" data-quatrain-line>{fallbackQuatrain[1]}</p>
+          <p class="hero__line" data-quatrain-line>{fallbackQuatrain[2]}</p>
+          <p class="hero__line" data-quatrain-line>{fallbackQuatrain[3]}</p>
+        </div>
+        <div class="hero__logo">
+          <img src="/brand/amalficarion_logo.svg" alt="The Amalfication" />
+        </div>
       </div>
 
-      <div class="hero__grid">
-        <a
-          class="guide-card"
-          data-scrub-container
-          href="https://guide.amalfi.day"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div class="guide-card__content">
-            <span class="guide-card__eyebrow">guide.amalfi.day</span>
-            <h3>
-              Take your <span class="accent-italic">Amalfi in a Pocket</span>
-            </h3>
-            <p>
-              Plan your perfect Amalfi Coast day with ready-to-use walks, swims, moto rides,
-              and food stops — plus offline-friendly maps and simplified transport timing.
-            </p>
-            <span class="guide-card__cta">
-              <i class="bi bi-arrow-up-right"></i> Open the guide
-            </span>
-          </div>
-          <div class="guide-card__media" aria-hidden="true">
-            <video
-              class="guide-card__video"
-              data-scrub-video
-              muted
-              playsinline
-              preload="metadata"
-              poster="/staticpages/video/hf_20260203_213145_8e960c33-c9cc-4d7f-b240-8b7b8ae321ad.png"
-            >
-              <source
-                src="/staticpages/video/hf_20260203_215431_a7308a04-3db2-4b7c-82ee-ece9ff887134.mp4"
-                type="video/mp4"
-              />
-            </video>
-          </div>
-        </a>
-
-        <a class="hero__mini" href={heroLinks.busPdf} id="bus">
-          <i class="bi bi-bus-front"></i>
-          <div>
+      <div class="hero__mosaic">
+        <div class="hero__tile hero__tile--primary">
+          <a class="guide-card" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
+            <div class="guide-card__content">
+              <span class="guide-card__eyebrow">guide.amalfi.day</span>
+              <h3>
+                Take your <span class="accent-italic">Amalfi in a Pocket</span>
+              </h3>
+              <p>
+                Plan your perfect Amalfi Coast day with ready-to-use walks, swims, moto rides,
+                and food stops — plus offline-friendly maps and simplified transport timing.
+              </p>
+              <span class="guide-card__cta">
+                <i class="bi bi-arrow-up-right"></i> Open the guide
+              </span>
+            </div>
+          </a>
+        </div>
+        <div class="hero__tile hero__tile--small hero__tile--small-a">
+          <a
+            class="hero__mini hero__mini--stack"
+            href={heroLinks.busPdf}
+            id="bus"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i class="bi bi-bus-front"></i>
             <strong>Bus timetables</strong>
-            <span>Download PDF</span>
-          </div>
-          <i class="bi bi-download"></i>
-        </a>
-
-        <a class="hero__mini" href={heroLinks.ferryPdf} id="ferry">
-          <i class="bi bi-ship"></i>
-          <div>
+          </a>
+        </div>
+        <div class="hero__tile hero__tile--small hero__tile--small-b">
+          <a
+            class="hero__mini hero__mini--stack"
+            href={heroLinks.ferryPdf}
+            id="ferry"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i class="bi bi-ticket-perforated"></i>
             <strong>Ferry timetables</strong>
-            <span>Download PDF</span>
-          </div>
-          <i class="bi bi-download"></i>
-        </a>
-
-        <a class="hero__mini" href="/apartments">
-          <i class="bi bi-building"></i>
-          <div>
-            <strong>Наши апартаменты</strong>
-            <span>Booking & Airbnb options</span>
-          </div>
-          <i class="bi bi-arrow-up-right"></i>
-        </a>
+          </a>
+        </div>
+        <div class="hero__tile hero__tile--bottom">
+          <a class="hero__mini" href="/apartments">
+            <i class="bi bi-building"></i>
+            <div>
+              <strong>Our apartments</strong>
+              <span>Booking & Airbnb options</span>
+            </div>
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -314,56 +310,124 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2.8rem;
+    align-items: center;
   }
 
   .hero__intro {
     text-align: center;
-    max-width: 960px;
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-top: 0.8rem;
+  }
+
+  .hero__quatrain {
+    font-family: var(--font-display);
+    font-size: clamp(0.81rem, 1.27vw, 1.04rem);
+    line-height: 1.44;
+    letter-spacing: 0.01em;
+    color: rgba(255, 255, 255, 0.92);
+    text-wrap: balance;
+    max-width: 760px;
     margin: 0 auto;
   }
 
-  .hero__title {
-    font-family: var(--font-display);
-    font-size: clamp(2.8rem, 5vw, 4.6rem);
-    margin-bottom: 1.2rem;
+  .hero__line {
+    margin: 0;
+    transition: opacity 0.25s ease;
   }
 
-  .hero__domain {
-    font-style: italic;
-    opacity: 0.9;
+  .hero__line.is-fading {
+    opacity: 0.2;
   }
 
-  .hero__lead {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-    margin-bottom: 1.5rem;
-    font-family: var(--font-display);
+  .hero__logo img {
+    width: min(560px, 82vw);
+    height: auto;
+    display: block;
+    transform: scale(1.2);
+    transform-origin: center;
+    pointer-events: none;
   }
 
+  .hero__logo {
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-  .hero__grid {
+  .hero__quatrain,
+  .hero__logo {
+    cursor: pointer;
+  }
+
+  .hero__mosaic {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: auto auto;
     gap: 1.2rem;
     align-items: stretch;
+    width: min(980px, 100%);
+    margin: 0 auto;
+  }
+
+  .hero__tile {
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .hero__tile > a {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__tile--primary {
+    grid-column: 1 / span 8;
+    grid-row: 1 / 3;
+  }
+
+  .hero__tile--small {
+  }
+
+  .hero__tile--small-a {
+    grid-column: 9 / span 2;
+    grid-row: 1;
+  }
+
+  .hero__tile--small-b {
+    grid-column: 11 / span 2;
+    grid-row: 1;
+  }
+
+  .hero__tile--bottom {
+    grid-column: 9 / span 4;
+    grid-row: 2;
+  }
+
+  .hero__intro :is(a, h1, h2, h3, h4, h5, h6, p, span, strong) {
+    color: #ffffff;
   }
 
   .guide-card {
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    padding: 1.8rem;
-    color: #1a1a1a;
+    padding: 1.4rem 1.6rem;
     background: #ffffff;
-    border: 1px solid #f0f0f0;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
-    min-height: 320px;
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    min-height: 100%;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.8rem;
-    align-items: center;
-    --scroll-progress: 0;
+    align-items: start;
     text-decoration: none;
   }
 
@@ -376,9 +440,6 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     z-index: 1;
     max-width: 520px;
     padding: 1.2rem 0;
-    margin-right: -12%;
-    transform: translateY(calc((1 - var(--scroll-progress)) * 14px));
-    transition: transform 0.2s ease-out;
   }
 
   .guide-card__eyebrow {
@@ -390,8 +451,9 @@ const newsPosts = await getGhostPosts({ limit: 8 })
   }
 
   .guide-card h3 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
     margin: 0.8rem 0;
+    color: #111111;
   }
 
   .guide-card p {
@@ -403,57 +465,40 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     align-items: center;
     gap: 0.5rem;
     font-weight: 600;
-    color: var(--color-aux);
+    color: #111111;
   }
 
-  .guide-card__media {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    min-height: 200px;
-    aspect-ratio: 16 / 9;
-    align-self: stretch;
-    margin: -1.8rem -1.8rem -1.8rem 0;
-    transform: translateY(calc((1 - var(--scroll-progress)) * -10px));
-    transition: transform 0.2s ease-out;
-  }
-
-  .guide-card__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.98) 0%,
-      rgba(255, 255, 255, 0.8) 38%,
-      rgba(255, 255, 255, 0.45) 62%,
-      rgba(255, 255, 255, 0) 80%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    pointer-events: none;
-  }
-
-  .guide-card__video {
-    width: 140%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    pointer-events: none;
-    transform: translateX(-20%);
+  .guide-card .accent-italic {
+    color: var(--color-accent);
   }
 
   .hero__mini {
     border-radius: 18px;
-    padding: 1.2rem 1.4rem;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    color: #ffffff;
+    padding: 1rem 1.2rem;
+    background: #ffffff;
+    border: 1px solid rgba(26, 26, 26, 0.08);
     display: flex;
     align-items: center;
     gap: 1rem;
     justify-content: space-between;
-    backdrop-filter: blur(8px);
     text-decoration: none;
+    height: 100%;
+    color: #1a1a1a;
+  }
+
+  .hero__mini--stack {
+    flex-direction: column;
+    gap: 0.8rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero__mini--stack i {
+    font-size: 2rem;
+  }
+
+  .hero__mini > i {
+    font-size: 2rem;
   }
 
   .hero__mini:hover {
@@ -467,7 +512,7 @@ const newsPosts = await getGhostPosts({ limit: 8 })
 
   .hero__mini span {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(26, 26, 26, 0.7);
   }
 
   .section__header {
@@ -809,24 +854,29 @@ const newsPosts = await getGhostPosts({ limit: 8 })
   }
 
   @media (max-width: 1000px) {
-    .hero__grid {
-      grid-template-columns: 1fr;
+    .hero__mosaic {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-rows: auto auto auto;
     }
 
-    .guide-card {
-      grid-template-columns: 1fr;
-      gap: 1.2rem;
-      padding: 1.6rem;
+    .hero__tile--primary {
+      grid-column: 1 / span 6;
+      grid-row: 1;
     }
 
-    .guide-card__content {
-      margin-right: 0;
-      max-width: 100%;
+    .hero__tile--small-a {
+      grid-column: 1 / span 3;
+      grid-row: 2;
     }
 
-    .guide-card__media {
-      min-height: 200px;
-      margin: -1.6rem;
+    .hero__tile--small-b {
+      grid-column: 4 / span 3;
+      grid-row: 2;
+    }
+
+    .hero__tile--bottom {
+      grid-column: 1 / span 6;
+      grid-row: 3;
     }
 
     .news-scroll {
@@ -883,7 +933,35 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     }
 
     .hero__intro {
-      text-align: left;
+      text-align: center;
+    }
+
+    .hero__mosaic {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(200px, auto) minmax(140px, auto) minmax(140px, auto) minmax(180px, auto);
+    }
+
+    .hero__tile--primary,
+    .hero__tile--small-a,
+    .hero__tile--small-b,
+    .hero__tile--bottom {
+      grid-column: 1;
+    }
+
+    .hero__tile--primary {
+      grid-row: 1;
+    }
+
+    .hero__tile--small-a {
+      grid-row: 2;
+    }
+
+    .hero__tile--small-b {
+      grid-row: 3;
+    }
+
+    .hero__tile--bottom {
+      grid-row: 4;
     }
 
     .etsy__gallery {
@@ -893,61 +971,60 @@ const newsPosts = await getGhostPosts({ limit: 8 })
 </style>
 
 <script is:inline>
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+  const quatrainRoot = document.querySelector('[data-quatrains]')
 
-  if (!prefersReducedMotion.matches) {
-    const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
-    const scrubItems = [...document.querySelectorAll('[data-scrub-container]')]
-      .map((container) => {
-        const video = container.querySelector('[data-scrub-video]')
-        if (!video) return null
-        video.pause()
-        video.currentTime = 0
-        return { container, video, ready: false, duration: 0 }
-      })
-      .filter(Boolean)
+  if (quatrainRoot) {
+    const lines = [...quatrainRoot.querySelectorAll('[data-quatrain-line]')]
+    const logo = document.querySelector('.hero__logo')
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    try {
+      const quatrains = JSON.parse(quatrainRoot.dataset.quatrains || '[]')
+      if (Array.isArray(quatrains) && quatrains.length && lines.length) {
+        let currentIndex = -1
 
-    const update = () => {
-      const viewport = window.innerHeight || document.documentElement.clientHeight
-      scrubItems.forEach((item) => {
-        const rect = item.container.getBoundingClientRect()
-        const progress = clamp((viewport - rect.top) / (rect.height + viewport), 0, 1)
-        item.container.style.setProperty('--scroll-progress', progress.toFixed(4))
-        if (item.ready) {
-          item.video.currentTime = item.duration * progress
+        const applyQuatrain = (index) => {
+          const pick = quatrains[index]
+          if (!Array.isArray(pick)) return
+          lines.forEach((line, i) => {
+            line.textContent = pick[i] || ''
+          })
+          currentIndex = index
         }
-      })
+
+        const pickNextIndex = () => {
+          if (quatrains.length === 1) return 0
+          let next = currentIndex
+          while (next === currentIndex) {
+            next = Math.floor(Math.random() * quatrains.length)
+          }
+          return next
+        }
+
+        const setLineFade = (value) => {
+          lines.forEach((line) => line.classList.toggle('is-fading', value))
+        }
+
+        const swapQuatrain = () => {
+          const nextIndex = pickNextIndex()
+          if (prefersReducedMotion.matches) {
+            applyQuatrain(nextIndex)
+            return
+          }
+          if (lines.some((line) => line.classList.contains('is-fading'))) return
+          setLineFade(true)
+          window.setTimeout(() => {
+            applyQuatrain(nextIndex)
+            setLineFade(false)
+          }, 220)
+        }
+
+        applyQuatrain(Math.floor(Math.random() * quatrains.length))
+        quatrainRoot.addEventListener('click', swapQuatrain)
+        logo?.addEventListener('click', swapQuatrain)
+      }
+    } catch (error) {
+      // no-op: keep fallback quatrain
     }
-
-    let ticking = false
-    const onScroll = () => {
-      if (ticking) return
-      ticking = true
-      window.requestAnimationFrame(() => {
-        update()
-        ticking = false
-      })
-    }
-
-    scrubItems.forEach((item) => {
-      item.video.addEventListener(
-        'loadedmetadata',
-        () => {
-          item.duration = item.video.duration || 0
-          item.ready = item.duration > 0
-          update()
-        },
-        { once: true }
-      )
-    })
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    window.addEventListener('load', onScroll)
-    update()
-  } else {
-    document
-      .querySelectorAll('[data-scrub-container]')
-      .forEach((container) => container.style.setProperty('--scroll-progress', '1'))
   }
+
 </script>
