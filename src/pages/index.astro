@@ -13,15 +13,34 @@ const shareImage = featuredPhotoshoots[0]?.image ?? '/pre-footer/boat-tours-in-a
 const shareImageAlt = 'Amalfi Coast photoshoot highlights'
 
 const staticPages = [
-  { title: 'How to get here', href: '/how-to-get', note: 'Routes, transfers, and arrival tips.' },
-  { title: 'What to do', href: '/what-to-do', note: 'Ideas, experiences, and local gems.' },
   {
-    title: 'Apartments',
+    title: 'Beach reviews',
+    href: '/beaches',
+    note: 'Best spots for swimming, sun, and photos.',
+    image: '/staticpages/mainpage/beach-reviews.webp',
+    imageAlt: 'Amalfi Coast beach overview',
+  },
+  {
+    title: 'Apartment rentals',
     href: '/apartments',
     note: 'Apartments, suites, and rooms near Atrani beach.',
+    image: '/staticpages/mainpage/rental-houses.webp',
+    imageAlt: 'Amalfi Coast apartments with sea view',
   },
-  { title: 'Parking tips', href: '/parking', note: 'Best places and timing strategies.' },
-  { title: 'Beach reviews', href: '/beaches', note: 'Where to swim, relax, and shoot.' },
+  {
+    title: 'Parking tips',
+    href: '/parking',
+    note: 'Where to park and how to avoid traffic.',
+    image: '/staticpages/mainpage/parking.webp',
+    imageAlt: 'Parking area on the Amalfi Coast',
+  },
+  {
+    title: 'Public transport',
+    href: '/timetables',
+    note: 'Buses, ferries, and regional routes in one place.',
+    image: '/staticpages/mainpage/allublictransport.webp',
+    imageAlt: 'Public transport connections along the Amalfi Coast',
+  },
 ]
 
 const newsPosts = await getGhostPosts({ limit: 8 })
@@ -119,11 +138,13 @@ const fallbackQuatrain =
       <div class="static-grid">
         {staticPages.map((item) => (
           <a class="card static-card" href={item.href}>
-            <h3>{item.title}</h3>
-            <p>{item.note}</p>
-            <span class="static-card__icon">
-              <i class="bi bi-arrow-up-right"></i>
-            </span>
+            <div class="static-card__media">
+              <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" />
+            </div>
+            <div class="static-card__body">
+              <h3>{item.title}</h3>
+              <p>{item.note}</p>
+            </div>
           </a>
         ))}
       </div>
@@ -612,16 +633,48 @@ const fallbackQuatrain =
   }
 
   .static-card {
-    padding: 1.8rem;
     position: relative;
     overflow: hidden;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    text-decoration: none;
   }
 
-  .static-card__icon {
-    position: absolute;
-    right: 1.2rem;
-    bottom: 1.2rem;
+  .static-card:hover {
+    text-decoration: none;
+  }
+
+  .static-card__media {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .static-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .static-card__body {
+    padding: 1.4rem 1.6rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .static-card h3 {
+    margin: 0;
     font-size: 1.2rem;
+  }
+
+  .static-card p {
+    margin: 0;
     color: var(--color-text-muted);
   }
 
