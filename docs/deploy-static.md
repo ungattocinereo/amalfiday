@@ -20,4 +20,4 @@ day.cristallpont.com {
 
 ## Notes
 - `output: "static"` is already set in `astro.config.mjs`.
-- Contact form opens the user's email client (no server endpoints).
+- Contact form now posts to `/api/contact` (serverless) to send Telegram messages. Static-only hosting must provide this endpoint separately.

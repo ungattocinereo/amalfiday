@@ -5,88 +5,295 @@ const pageTitle = 'Contact — CristallPont Amalfi Day'
 const pageDescription =
   'Contact Amalfi.Day to plan a photoshoot or trip: dates, locations, and personalized itineraries for the Amalfi Coast.'
 const shareImage = '/photoshootings/hero/couple/02-slideshow-regan-walk-ravello-love-1024x682.webp'
+const heroImage = '/staticpages/contact/contact-us.webp'
+
+const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_PHONE || ''
+const whatsappDigits = whatsappNumber ? whatsappNumber.replace(/[^\d]/g, '') : ''
+const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https://wa.me/'
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
-  <section class="section">
-    <div class="container contact">
-      <div class="contact__intro">
+  <section class="contact-hero hero--dark">
+    <img
+      class="contact-hero__image"
+      src={heroImage}
+      alt="Amalfi coast cliffside and sea"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="contact-hero__veil" aria-hidden="true"></div>
+    <div class="container contact-hero__content">
+      <div class="contact-hero__copy">
+        <span class="badge contact-hero__badge">
+          <i class="bi bi-chat-heart"></i> Contact Amalfi.Day
+        </span>
         <h1>
-          Let’s plan your <span class="accent-italic">Amalfi</span> session
+          Contact us <span class="accent-italic">right now</span>
         </h1>
+        <p class="contact-hero__lead">
+          Tell us your dates, mood, and priorities. We will reply with a custom plan and the
+          best locations for your Amalfi experience.
+        </p>
+        <div class="contact-hero__actions">
+          <a class="button" href="#contact-form">
+            <i class="bi bi-send"></i> Send a request
+          </a>
+          <a class="button button--ghost" href={whatsappHref} target="_blank" rel="noreferrer">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="contact-hero__meta">
+        <div class="contact-hero__pill">
+          <span>Direct line</span>
+          <strong>hello@amalfi.day</strong>
+        </div>
+        <div class="contact-hero__pill">
+          <span>Response time</span>
+          <strong>Within 24 hours</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-details">
+    <div class="container contact-form__shell">
+      <div class="contact-form__intro">
+        <div class="contact-eyebrow">Plan with us</div>
+        <h2 class="contact-intro__title">
+          Let’s design your <span class="accent-italic">Amalfi</span> story
+        </h2>
         <p>
-          Tell me about your dates, vibe, and the experience you want. I’ll reply with a
-          custom plan and the best locations.
+          Tell us about your dates, vibe, and the experience you want. We will reply with a
+          tailored plan, the best light, and the right locations.
         </p>
         <div class="contact__note">
           <strong>Direct line:</strong> hello@amalfi.day
         </div>
+        <div class="contact__links">
+          <a href={whatsappHref} target="_blank" rel="noreferrer">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+          <a href="mailto:hello@amalfi.day">
+            <i class="bi bi-envelope"></i> Email us
+          </a>
+        </div>
+        <div class="contact-services">
+          <div class="contact-service">
+            <h1>Bookings on Booking.com & Airbnb</h1>
+            <p>
+              We handle most accommodation inquiries on
+              <a href="https://www.booking.com/" target="_blank" rel="noreferrer">Booking.com</a>
+              and
+              <a href="https://www.airbnb.com/" target="_blank" rel="noreferrer">Airbnb</a> —
+              verified listings, flexible dates, and trusted guest communication.
+            </p>
+          </div>
+          <div class="contact-service">
+            <h1>Concierge services</h1>
+            <p>
+              Need taxis, porters, private transfers, or a sunset boat ride? We can also arrange
+              cooking classes, ceramic workshops, and local tastings curated around your schedule.
+            </p>
+          </div>
+          <div class="contact-service">
+            <h1>Local support</h1>
+            <p>
+              We help with timing, routes, and logistics so your stay feels effortless — from
+              arrival to the last shoot location.
+            </p>
+          </div>
+        </div>
       </div>
-
-      <form class="contact__form">
-        <label>
-          Your name
-          <input type="text" name="name" placeholder="Iana" required />
-        </label>
-        <label>
-          Email or WhatsApp
-          <input type="text" name="contact" placeholder="email or +39" required />
-        </label>
-        <label>
-          Dates & location
-          <input type="text" name="dates" placeholder="Oct 3–7, Atrani" />
-        </label>
-        <label>
-          Your message
-          <textarea name="message" rows="5" placeholder="Tell me about your shoot" required></textarea>
-        </label>
-        <button class="button" type="submit">
-          <i class="bi bi-send"></i> Send request
-        </button>
-        <p class="form__status" aria-live="polite">Opens your email client.</p>
-      </form>
+      <div class="contact-form__panel" id="contact-form">
+        <div class="contact-form__header">
+          <span class="badge"><i class="bi bi-stars"></i> Quick request</span>
+          <h2>
+            Let’s plan your <span class="accent-italic">perfect</span> day
+          </h2>
+          <p>Send the details and we will answer with a clear plan and availability.</p>
+        </div>
+        <form class="contact-form" action="/api/contact" method="post">
+          <div class="contact-form__grid">
+            <label>
+              Your name
+              <input type="text" name="name" placeholder="Iana" required />
+            </label>
+            <label>
+              Email or WhatsApp
+              <input type="text" name="contact" placeholder="email or +39" required />
+            </label>
+            <label>
+              Dates & location
+              <input type="text" name="dates" placeholder="Oct 3–7, Atrani" />
+            </label>
+            <label>
+              Service
+              <input type="text" name="service" placeholder="Photoshoot, stay, transfer" />
+            </label>
+          </div>
+          <label>
+            Your message
+            <textarea name="message" rows="5" placeholder="Tell us about your plans" required></textarea>
+          </label>
+          <button class="button" type="submit">
+            <i class="bi bi-send"></i> Send request
+          </button>
+          <p class="form__status" aria-live="polite">
+            We will send your request directly to Telegram.
+          </p>
+        </form>
+      </div>
     </div>
   </section>
 
   <script>
-    const form = document.querySelector('.contact__form')
+    const form = document.querySelector('.contact-form')
     const status = document.querySelector('.form__status')
+    const submitButton = form?.querySelector('button[type="submit"]')
+
+    const setStatus = (text, state) => {
+      if (!status) return
+      status.textContent = text
+      status.dataset.state = state || ''
+    }
 
     form?.addEventListener('submit', async (event) => {
       event.preventDefault()
-      status.textContent = 'Opening your email app...'
+      setStatus('Sending your request...')
+      if (submitButton) submitButton.disabled = true
+
       const formData = new FormData(form)
-      const name = formData.get('name') || ''
-      const contact = formData.get('contact') || ''
-      const dates = formData.get('dates') || ''
-      const message = formData.get('message') || ''
+      const payload = Object.fromEntries(formData.entries())
 
-      const body = [
-        `Name: ${name}`,
-        `Contact: ${contact}`,
-        dates ? `Dates/Location: ${dates}` : null,
-        `Message: ${message}`,
-      ]
-        .filter(Boolean)
-        .join('\n')
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
 
-      const mailto = `mailto:hello@amalfi.day?subject=${encodeURIComponent(
-        'Amalfi Day Inquiry'
-      )}&body=${encodeURIComponent(body)}`
-      window.location.href = mailto
+        if (!response.ok) {
+          throw new Error('Request failed')
+        }
+
+        form.reset()
+        setStatus('Thank you! We will get back to you shortly.', 'success')
+      } catch (error) {
+        setStatus('Sorry, something went wrong. Please email hello@amalfi.day.', 'error')
+      } finally {
+        if (submitButton) submitButton.disabled = false
+      }
     })
   </script>
 </BaseLayout>
 
 <style>
-  .contact {
+  .contact-hero {
+    position: relative;
+    min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    align-items: end;
+    color: #ffffff;
+    overflow: hidden;
   }
 
-  h1 {
-    font-size: clamp(2.5rem, 4vw, 3.8rem);
+  .contact-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.05);
+    transform: scale(1.02);
+  }
+
+  .contact-hero__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 12, 15, 0.4) 0%,
+      rgba(10, 12, 15, 0.72) 60%,
+      rgba(10, 12, 15, 0.92) 100%
+    );
+  }
+
+  .contact-hero__content {
+    position: relative;
+    padding: calc(var(--header-space) + 3.5rem) 0 4.5rem;
+    display: grid;
+    gap: 2.5rem;
+    justify-items: start;
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .contact-hero__badge {
+    background: rgba(15, 17, 21, 0.65);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .contact-hero__copy h1 {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .contact-hero__lead {
+    max-width: 620px;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .contact-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .button--ghost {
+    background: rgba(15, 17, 21, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+
+  .contact-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .contact-hero__pill {
+    padding: 0.9rem 1.2rem;
+    border-radius: 999px;
+    background: rgba(15, 17, 21, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.9rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .contact-hero__pill span {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .contact-form__shell {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
   }
 
   .contact__note {
@@ -96,44 +303,113 @@ const shareImage = '/photoshootings/hero/couple/02-slideshow-regan-walk-ravello-
     border-radius: var(--radius-md);
   }
 
-  .contact__form {
+  .contact__links {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    background: var(--color-card);
-    box-shadow: var(--shadow-soft);
+    margin-top: 1.5rem;
   }
 
-  .contact__form button {
+  .contact__links a {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .contact-services {
+    display: grid;
+    gap: 1.8rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-service h1 {
+    font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .contact-service a {
+    color: var(--color-aux);
+    font-weight: 600;
+  }
+
+  .contact-form__header p {
+    max-width: 520px;
+  }
+
+  .contact-form {
+    width: min(720px, 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 2.8rem;
+    border-radius: 28px;
+    background: var(--color-card);
+    box-shadow: var(--shadow-lift);
+    position: relative;
+    text-align: left;
+  }
+
+  .contact-form::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 30px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.45), rgba(0, 156, 255, 0.35));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .contact-form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.2rem;
   }
 
   label {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-text);
   }
 
   input,
   textarea {
     border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 0.8rem 1rem;
+    border-radius: 14px;
+    padding: 0.85rem 1rem;
     font-family: var(--font-body);
     background: var(--color-bg);
     color: var(--color-text);
+    transition: border 0.2s ease, box-shadow 0.2s ease;
   }
 
   input:focus,
   textarea:focus {
-    outline: 2px solid rgba(1, 98, 255, 0.2);
-    border-color: var(--color-aux);
+    outline: none;
+    border-color: rgba(1, 98, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(1, 98, 255, 0.15);
+  }
+
+  .contact-form button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+  }
+
+  .contact-form button:disabled {
+    opacity: 0.7;
+    cursor: progress;
   }
 
   .form__status {
@@ -141,9 +417,35 @@ const shareImage = '/photoshootings/hero/couple/02-slideshow-regan-walk-ravello-
     color: var(--color-text-muted);
   }
 
+  .form__status[data-state='success'] {
+    color: #1f8a3b;
+  }
+
+  .form__status[data-state='error'] {
+    color: #c0352b;
+  }
+
   @media (max-width: 900px) {
-    .contact {
+    .contact-hero__content {
+      padding: calc(var(--header-space) + 2.5rem) 0 3rem;
+    }
+
+    .contact-form__shell {
       grid-template-columns: 1fr;
+    }
+
+    .contact-form__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .contact-form {
+      padding: 2.2rem 1.5rem;
+    }
+
+    .contact-hero__meta {
+      flex-direction: column;
     }
   }
 </style>
