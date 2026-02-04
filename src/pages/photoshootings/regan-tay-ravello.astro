@@ -1,116 +1,93 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
-const heroImage = '/photoshootings/hero/personal/Masha-Minchuck-Amalfi-day.jpg'
-const shootTitle = 'Line of Light'
-const shootDate = 'July · 24 · 2024'
+const heroImage = '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp'
+const shootTitle = 'Ravello Romance Photoshoot'
+const shootDate = 'October · 05 · 2023'
 
-const articleTitle = {
-  lead: 'Chasing',
-  accent: 'Amber Light',
-  tail: 'at Sunrise',
+const storyIntro = {
+  eyebrow: 'Ravello Romance',
+  lead: 'A Timeless',
+  accent: 'Romance',
+  tail: 'in Ravello',
+  subtitle: 'Gorgeous Couple Engagement Amalfi Coast Photoshoot in Ravello',
+  quote:
+    'Enchanting engagement photoshoot in Ravello. A romantic Amalfi Coast photoshoot with historic villas, and the stunning panoramas of Italy.',
+  paragraph:
+    "In the embrace of Ravello's captivating scenery on the illustrious Amalfi Coast, a tale of love and commitment was beautifully captured in frames of everlasting memories. Taylor and Regan, a couple radiant with love, chose this enchanting setting to celebrate and capture their engagement, a sweet beginning marked by Regan's heartfelt proposal to Taylor.",
 }
-const articleDescription =
-  'A short story about a quiet dawn, wet stone, and movement that turns a walk into cinema. This page is a template: swap the text, dates, and gallery set for each new shoot.'
 
-// Gallery 1: horizontal scroll (choose images here)
+const storyCraft = {
+  eyebrow: 'Crafted Frames',
+  lead: 'Crafting',
+  accent: 'Visual Love Stories',
+  tail: 'by a Skilled Photographer',
+  paragraph:
+    'Guided by the adept hands of a skilled photographer, their love story was meticulously painted in each snapshot, turning moments into timeless treasures. The photographer, a maestro in leveraging natural light and scenery, wielded the camera with an artful touch, turning each moment, each glance, each smile, into a lovingly captured memory. Navigating through the woven paths flanked by lush gardens and historical villas, each photograph resonated with the natural romance of Ravello and the Amalfi Coast, turning the picturesque scenery into a canvas that mirrored their love and happiness.',
+}
+
+const storyAllure = {
+  eyebrow: 'October Light',
+  lead: 'The Amalfi',
+  accent: 'Allure',
+  tail: ': A Canvas of Romance',
+  paragraph:
+    'The sun, a golden artist in the October sky, bathed Taylor and Regan in warm, glowing hues, providing a natural illumination that heightened the romance and tenderness captured in each frame. The radiant sunshine complemented the outdoor beauty, making every color pop and every moment shine in the labyrinth of Ravello\'s charm.',
+}
+
+const storyCherished = {
+  eyebrow: 'Keepsake',
+  lead: 'The Most',
+  accent: 'Cherished Moments',
+  quote:
+    'The most cherished moments in life deserve to be eternally remembered. These fleeting instances are crafted once, leaving an indelible mark that never fades away…',
+  paragraph:
+    "One small detail: Overflowing with a delightful assortment of photos, Taylor and Regan's heart was set on turning these visual memories into a beautiful book — a cherished collection that tells the tale of their love amidst the enchanting allure of Ravello's romantic landscape. The couple's journey, marked by these visually arresting images, became a symphony of love, each photograph a note, a memory, a beautiful moment in their amorous melody.",
+  tagline: 'Capture memories that will last a lifetime!',
+}
+
 const galleryOneImages = [
   {
-    src: '/photoshootings/individual/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
-    alt: 'Портрет у моря, мягкий утренний свет',
+    src: '/photoshootings/regan-tay-ravello/01-slideshow-regan-walk-ravello-love.webp',
+    alt: 'Taylor and Regan in Ravello — frame 01',
   },
   {
-    src: '/photoshootings/individual/bissa-ninfulenser-icecream.jpg',
-    alt: 'Сцена с мороженым, живой кадр',
+    src: '/photoshootings/regan-tay-ravello/02-slideshow-regan-walk-ravello-love.webp',
+    alt: 'Taylor and Regan in Ravello — frame 02',
   },
   {
-    src: '/photoshootings/couples/02-slideshow-regan-walk-ravello-love-1024x682.webp',
-    alt: 'Прогулка по побережью',
+    src: '/photoshootings/regan-tay-ravello/03-slideshow-regan-walk-ravello-love.webp',
+    alt: 'Taylor and Regan in Ravello — frame 03',
   },
   {
-    src: '/photoshootings/individual/iiana-photo-hero-atrani-hat-2-1024x680.webp',
-    alt: 'Шляпа на ветру и каменный фон',
-  },
-  {
-    src: '/photoshootings/couples/couple-photoshooting-amalfi.jpg',
-    alt: 'Тёплый кадр в городской лестнице',
-  },
-  {
-    src: '/photoshootings/couples/DSC0789.jpg',
-    alt: 'Лёгкий портрет на лестнице',
+    src: '/photoshootings/regan-tay-ravello/04-slideshow-regan-walk-ravello-love.webp',
+    alt: 'Taylor and Regan in Ravello — frame 04',
   },
 ]
 
-// Gallery 2: scroll-driven sticky hero (choose images here)
 const galleryTwoImages = [
   {
-    src: '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
-    alt: 'Портрет у моря, солнечный отблеск на воде',
-    label: 'Frame 01',
-    note: 'Мягкий свет и мокрые камни',
+    src: '/photoshootings/regan-tay-ravello/05-slideshow-regan-walk-ravello-love.webp',
+    alt: 'Taylor and Regan in Ravello — frame 05',
   },
   {
-    src: '/photoshootings/individual/Silvia-Amalfi-day.jpg.jpg',
-    alt: 'Тёплый портрет на фоне скал',
-    label: 'Frame 02',
-    note: 'Воздух, соль и движение',
+    src: '/photoshootings/regan-tay-ravello/06-slideshow-regan-walk-ravello-love.webp',
+    alt: 'Taylor and Regan in Ravello — frame 06',
   },
   {
-    src: '/photoshootings/individual/berrasguy-Minchuck-Amalfi-day.jpg.jpg',
-    alt: 'Кадр с легким ветром у побережья',
-    label: 'Frame 03',
-    note: 'Текстура камня и морской дымки',
+    src: '/photoshootings/regan-tay-ravello/01-regan-walk-ravello-love.webp',
+    alt: 'Taylor and Regan in Ravello — finale frame',
   },
   {
-    src: '/photoshootings/hero/couple/katerina-kuznezova-praiano-2021-002.jpg',
-    alt: 'Пара на ступенях, мягкий контраст',
-    label: 'Frame 04',
-    note: 'Диалог в движении',
-  },
-  {
-    src: '/photoshootings/couples/DSC8503.jpg',
-    alt: 'Светлый кадр в узкой улице',
-    label: 'Frame 05',
-    note: 'Солнечные пятна на фасадах',
-  },
-  {
-    src: '/photoshootings/berra/00006-Berra-in-Atrani-amalfi-scaled.webp',
-    alt: 'Кадр у кафе с ярким акцентом',
-    label: 'Frame 06',
-    note: 'Графика цвета и тени',
-  },
-  {
-    src: '/photoshootings/berra/00001-Berra-in-Atrani-amalfi.webp',
-    alt: 'Портрет в городской среде',
-    label: 'Frame 07',
-    note: 'Контраст архитектуры и ткани',
-  },
-  {
-    src: '/photoshootings/berra/2-berra-new-red.webp',
-    alt: 'Красный акцент и открытый воздух',
-    label: 'Frame 08',
-    note: 'Фокус на деталях',
-  },
-  {
-    src: '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg',
-    alt: 'Динамичный кадр в утреннем свете',
-    label: 'Frame 09',
-    note: 'Тёплый градиент неба',
-  },
-  {
-    src: '/photoshootings/couples/img_5f68ca5842ca6.jpg',
-    alt: 'Силуэт на фоне моря',
-    label: 'Frame 10',
-    note: 'Финальный акцент серии',
+    src: '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp',
+    alt: 'Taylor and Regan in Ravello — hero frame',
   },
 ]
-
-
 ---
 
 <BaseLayout
-  title="Photoshoot Template — Amalfi.Day"
-  description="Template for a cinematic photoshoot story with a hero image and custom gallery."
+  title="Ravello Romance Photoshoot — Amalfi.Day"
+  description="Capturing Love: Taylor and Regan's engagement photoshoot in Ravello on the Amalfi Coast."
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">
@@ -137,28 +114,37 @@ const galleryTwoImages = [
     <section class="section shoot-story" id="shoot-story">
       <div class="container">
         <div class="shoot-story__intro">
+          <div class="shoot-bridge__eyebrow">{storyIntro.eyebrow}</div>
           <h2>
-            {articleTitle.lead} <span class="accent-italic">{articleTitle.accent}</span>{' '}
-            {articleTitle.tail}
+            {storyIntro.lead} <span class="accent-italic">{storyIntro.accent}</span>{' '}
+            {storyIntro.tail}
           </h2>
-          <p>{articleDescription}</p>
+          <p class="shoot-story__subtitle">
+            <em>{storyIntro.subtitle}</em>
+          </p>
+          <blockquote class="shoot-story__quote">{storyIntro.quote}</blockquote>
+          <p>{storyIntro.paragraph}</p>
+          <div class="shoot-bridge__eyebrow shoot-bridge__eyebrow--spaced">
+            {storyCraft.eyebrow}
+          </div>
+          <h2>
+            {storyCraft.lead} <span class="accent-italic">{storyCraft.accent}</span>{' '}
+            {storyCraft.tail}
+          </h2>
+          <p>{storyCraft.paragraph}</p>
         </div>
       </div>
     </section>
 
     <section class="section section--flush">
       <div class="container">
-        <div class="shoot-gallery-label">Gallery 1</div>
+        <div class="shoot-gallery-label">Photogallery</div>
         <div class="shoot-pan" data-horizontal-gallery aria-label="Photoshoot gallery">
           <div class="shoot-pan__sticky">
             <div class="shoot-pan__track" data-horizontal-track>
               {galleryOneImages.map((image, index) => (
                 <figure class="shoot-pan__card">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    loading={index < 2 ? 'eager' : 'lazy'}
-                  />
+                  <img src={image.src} alt={image.alt} loading={index < 2 ? 'eager' : 'lazy'} />
                 </figure>
               ))}
             </div>
@@ -167,24 +153,27 @@ const galleryTwoImages = [
       </div>
     </section>
 
-    <section class="section shoot-bridge">
+    <section class="section shoot-story">
       <div class="container">
-        <div class="shoot-bridge__wrap">
-          <div class="shoot-bridge__eyebrow">Moodboard Shift</div>
+        <div class="shoot-story__intro">
+          <div class="shoot-bridge__eyebrow">{storyAllure.eyebrow}</div>
           <h2>
-            Closer, quieter — <span class="accent-italic">soft dissolve</span>
+            {storyAllure.lead} <span class="accent-italic">{storyAllure.accent}</span>{' '}
+            {storyAllure.tail}
           </h2>
-          <p>
-            Scroll slowly and let each moment fill the frame. Below is a sequence where one
-            image dissolves into the next, keeping the subject large and centered.
-          </p>
+          <p>{storyAllure.paragraph}</p>
+          <div class="shoot-bridge__eyebrow">{storyCherished.eyebrow}</div>
+          <h2>
+            {storyCherished.lead} <span class="accent-italic">{storyCherished.accent}</span>
+          </h2>
+          <blockquote class="shoot-story__quote">{storyCherished.quote}</blockquote>
         </div>
       </div>
     </section>
 
     <section class="section section--flush">
       <div class="container">
-        <div class="shoot-gallery-label">Gallery 2</div>
+        <div class="shoot-gallery-label">Photogallery</div>
         <div class="shoot-scroll" data-scroll-gallery aria-label="Photoshoot scroll gallery">
           <div class="shoot-scroll__media">
             <div class="shoot-scroll__media-frame">
@@ -206,6 +195,17 @@ const galleryTwoImages = [
             </div>
           </div>
           <div class="shoot-scroll__spacer" data-scroll-spacer aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shoot-story">
+      <div class="container">
+        <div class="shoot-story__intro">
+          <p>{storyCherished.paragraph}</p>
+          <p class="shoot-story__subtitle">
+            <em>{storyCherished.tagline}</em>
+          </p>
         </div>
       </div>
     </section>
@@ -491,6 +491,56 @@ const galleryTwoImages = [
     font-size: 1.05rem;
   }
 
+  .shoot-bridge__eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .shoot-bridge__eyebrow--spaced {
+    margin-top: 1.8rem;
+  }
+
+  .shoot-story__subtitle {
+    margin: 0.6rem 0 0.2rem;
+    color: var(--color-text-muted);
+  }
+
+  .shoot-story__quote {
+    position: relative;
+    margin: 1.8rem 0 1.8rem;
+    padding-left: 4.6rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-size: 1.08rem;
+    font-family: 'Libre Baskerville', serif;
+  }
+
+  .shoot-story__quote::before {
+    content: '"';
+    position: absolute;
+    left: 0;
+    top: -0.6rem;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 5.6rem;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  .shoot-story__quote::after {
+    content: '';
+    position: absolute;
+    left: 2.8rem;
+    top: 0.3rem;
+    bottom: 0.3rem;
+    width: 2px;
+    background: rgba(15, 20, 30, 0.22);
+  }
+
   .shoot-gallery-label {
     font-family: var(--font-mono);
     text-transform: uppercase;
@@ -540,39 +590,6 @@ const galleryTwoImages = [
     height: 100%;
     object-fit: cover;
     display: block;
-  }
-
-
-  .section--flush {
-    padding-top: 0;
-  }
-
-  .shoot-bridge {
-    padding-top: 1.5rem;
-  }
-
-  .shoot-bridge__wrap {
-    max-width: 46rem;
-    padding: 0;
-  }
-
-  .shoot-bridge__eyebrow {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.7rem;
-    color: var(--color-text-muted);
-    margin-bottom: 0.8rem;
-  }
-
-  .shoot-bridge__wrap h2 {
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    margin-bottom: 0.9rem;
-  }
-
-  .shoot-bridge__wrap p {
-    font-size: 1.05rem;
-    margin: 0;
   }
 
   .shoot-scroll {
@@ -642,6 +659,11 @@ const galleryTwoImages = [
 
   .shoot-scroll__spacer {
     height: 60vh;
+  }
+
+
+  .section--flush {
+    padding-top: 0;
   }
 
   .shoot-cta-section {
@@ -826,10 +848,6 @@ const galleryTwoImages = [
     .shoot-scroll__dots span {
       width: 7px;
       height: 7px;
-    }
-
-    .shoot-bridge__wrap {
-      padding: 0;
     }
 
     .shoot-cta {

@@ -1,46 +1,63 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
-const heroImage = '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp'
-const shootTitle = "Ayuna's Photographic Memoir"
-const shootDate = 'August · 01 · 2023'
+const heroImage = '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp'
+const shootTitle = 'Symphony of Love'
+const shootDate = '2023 сентября 08'
 
+const articleTitle = {
+  lead: 'Atrani Morning',
+  accent: 'Photoshoot',
+  tail: '– Capturing Dreams at Sunrise',
+}
+const articleQuote =
+  'A sunrise photoshoot in Atrani, where beauty meets ambition. Discover the magic of morning light and timeless memories on the Amalfi Coast.'
+
+const articleSectionTitle = {
+  lead: 'Capture',
+  accent: 'Essential',
+  tail: 'Memories',
+}
 const articleDescriptionOne =
-  "Morning Elegance in Atrani tells Ayuna's story — a young model with a calm strength and a bright, curious gaze. She came to build her portfolio, carrying the fresh energy of a new day. As we walked Atrani's quiet lanes, her confidence opened naturally, and each frame revealed a softer, more luminous side of her personality."
+  'What started as a professional photoshoot soon transformed into a journey of discovery. As the sun climbed higher, the confidence shone brighter, and the pictures resonated with the spirit of the moment.'
 const articleDescriptionTwo =
-  "A Breathtaking Photoshoot focuses on the craft: sunrise light, textured stone, and the sea's gentle haze. We mixed casual and elegant looks, explored different lenses, and used angles that held both Ayuna and Atrani in balance. The result is a cinematic sequence of images that feels effortless, yet carefully composed."
+  'To the onlooker, it might seem like a regular photoshoot, but it was a memoir – one that would remind us of that beautiful morning in Atrani when dreams were captured, one snap at a time.'
 
 const galleryOneImages = [
   {
-    src: '/photoshootings/ayuna/2-Ayuna-Atrani-2023.webp',
-    alt: 'Ayuna in Atrani, morning light by the sea',
+    src: '/photoshootings/olga-marat/0001-olga-marat-atrani-2023.webp',
+    alt: 'Olga and Marat in Atrani 1',
   },
   {
-    src: '/photoshootings/ayuna/11-Ayuna-Atrani-2023.webp',
-    alt: 'Soft portrait on stone steps',
+    src: '/photoshootings/olga-marat/0002-olga-marat-atrani-2023.webp',
+    alt: 'Olga and Marat in Atrani 2',
   },
   {
-    src: '/photoshootings/ayuna/14-Ayuna-Atrani-2023.webp',
-    alt: 'Sunrise profile with coastal breeze',
+    src: '/photoshootings/olga-marat/0003-olga-marat-atrani-2023.webp',
+    alt: 'Olga and Marat in Atrani 3',
   },
   {
-    src: '/photoshootings/ayuna/22-Ayuna-Atrani-2023.webp',
-    alt: 'Elegant pose against pastel walls',
+    src: '/photoshootings/olga-marat/0004-olga-marat-atrani-2023.webp',
+    alt: 'Olga and Marat in Atrani 4',
   },
   {
-    src: '/photoshootings/ayuna/38-Ayuna-Atrani-2023.webp',
-    alt: 'Quiet moment in the Atrani streets',
+    src: '/photoshootings/olga-marat/0005-olga-marat-atrani-2023.webp',
+    alt: 'Olga and Marat in Atrani 5',
   },
   {
-    src: '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp',
-    alt: 'Cinematic frame with golden reflections',
+    src: '/photoshootings/olga-marat/0006-olga-marat-atrani-2023.webp',
+    alt: 'Olga and Marat in Atrani 6',
+  },
+  {
+    src: '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp',
+    alt: 'Olga and Marat in Atrani 28',
   },
 ]
 ---
 
 <BaseLayout
-  title="Ayuna Photoshoot — Amalfi.Day"
-  description="Bella Vita in Atrani: Ayuna's photographic memoir on the Amalfi Coast."
+  title="Olga & Marat Photoshoot — Amalfi.Day"
+  description="A Symphony of Love: Olga and Marat's idyllic Amalfi photoshoot in Atrani."
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">
@@ -69,14 +86,10 @@ const galleryOneImages = [
         <div class="shoot-story__intro">
           <div class="shoot-bridge__eyebrow">Morning Notes</div>
           <h2>
-            Morning <span class="accent-italic">Elegance</span> in Atrani
+            {articleTitle.lead} <span class="accent-italic">{articleTitle.accent}</span>{' '}
+            {articleTitle.tail}
           </h2>
-          <p>{articleDescriptionOne}</p>
-          <div class="shoot-bridge__eyebrow">Shoot Details</div>
-          <h2>
-            A <span class="accent-italic">Breathtaking</span> Photoshoot
-          </h2>
-          <p>{articleDescriptionTwo}</p>
+          <blockquote class="shoot-story__quote">{articleQuote}</blockquote>
         </div>
       </div>
     </section>
@@ -98,6 +111,33 @@ const galleryOneImages = [
               ))}
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shoot-story">
+      <div class="container">
+        <div class="shoot-story__intro">
+          <div class="shoot-bridge__eyebrow">Shoot Details</div>
+          <h2>
+            {articleSectionTitle.lead}{' '}
+            <span class="accent-italic">{articleSectionTitle.accent}</span>{' '}
+            {articleSectionTitle.tail}
+          </h2>
+          <p>{articleDescriptionOne}</p>
+          <p>{articleDescriptionTwo}</p>
+          <p>
+            If you are planning a couple photoshoot on the Amalfi Coast, Atrani is one of
+            the most romantic spots to start the day. The quiet streets and soft sunrise
+            light create a cinematic feel that works beautifully for engagement photos,
+            anniversary sessions, and intimate travel stories.
+          </p>
+          <p>
+            Every couple photoshoot here is paced to feel natural and effortless, with
+            gentle direction, flattering angles, and scenic backdrops that highlight real
+            connection. Whether you want classic romance or a modern, editorial look, we
+            shape the shoot to match your story.
+          </p>
         </div>
       </div>
     </section>
@@ -326,6 +366,24 @@ const galleryOneImages = [
     font-size: 1.05rem;
   }
 
+  .shoot-bridge__eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .shoot-story__quote {
+    margin: 1.4rem 0 0;
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(15, 20, 30, 0.22);
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-size: 1.05rem;
+  }
+
   .shoot-gallery-label {
     font-family: var(--font-mono);
     text-transform: uppercase;
@@ -347,7 +405,7 @@ const galleryOneImages = [
     height: clamp(320px, 70vh, 720px);
     display: flex;
     align-items: center;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .shoot-pan__track {
@@ -356,6 +414,7 @@ const galleryOneImages = [
     align-items: center;
     padding-left: 0;
     padding-right: max(1.5rem, calc((100vw - var(--container-max)) / 2));
+    padding-bottom: 24px;
     will-change: transform;
   }
 
@@ -418,151 +477,20 @@ const galleryOneImages = [
     letter-spacing: 0.22em;
     font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0.9rem;
-  }
-
-  .shoot-cta__copy h2 {
-    font-size: clamp(2rem, 3.4vw, 3.2rem);
-    margin-bottom: 0.8rem;
-  }
-
-  .shoot-cta__copy p {
-    margin: 0;
-    color: rgba(246, 241, 234, 0.85);
   }
 
   .shoot-cta__button {
     position: relative;
     z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    padding: 0.95rem 2.2rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: #ffffff;
-    background: var(--color-accent);
-    box-shadow: 0 12px 26px rgba(20, 12, 6, 0.35);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    white-space: nowrap;
-    isolation: isolate;
   }
-
-  .shoot-cta__button::after {
-    content: '';
-    position: absolute;
-    inset: -35%;
-    transform: scale(0.9);
-    z-index: -1;
-    filter: blur(22px);
-    background: radial-gradient(
-        circle,
-        rgba(255, 195, 0, 0.75) 0%,
-        rgba(255, 89, 0, 0.6) 38%,
-        rgba(255, 195, 0, 0.35) 58%,
-        rgba(255, 195, 0, 0) 72%
-      );
-    animation: cta-glow-pulse 2.8s ease-in-out infinite;
-    opacity: 0.9;
-  }
-
-  .shoot-cta__button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 34px rgba(20, 12, 6, 0.4);
-  }
-
-  @keyframes scrollPulse {
-    0%,
-    100% {
-      opacity: 0.35;
-      transform: translateY(0);
-    }
-    50% {
-      opacity: 0.9;
-      transform: translateY(6px);
-    }
-  }
-
-  @keyframes cta-glow-pulse {
-    0%,
-    100% {
-      transform: scale(0.88);
-      opacity: 0.75;
-    }
-    50% {
-      transform: scale(1.02);
-      opacity: 1;
-    }
-  }
-
 
   @media (max-width: 900px) {
-    .shoot-hero {
-      padding-bottom: 3rem;
-    }
-
-    .shoot-pan__sticky {
-      top: calc(var(--header-space) + 1rem);
-      height: clamp(260px, 65vh, 520px);
-    }
-
-    .shoot-pan__track {
-      gap: 0.9rem;
-      padding-left: 0;
-      padding-right: 1.5rem;
-    }
-
-    .shoot-pan__card {
-      width: clamp(220px, 82vw, 520px);
-    }
-
     .shoot-cta {
       flex-direction: column;
       align-items: flex-start;
     }
-
-  }
-
-  @media (max-width: 640px) {
-    .shoot-hero__title {
-      font-size: clamp(2.4rem, 11vw, 3.5rem);
-    }
-
-    .shoot-hero__date {
-      letter-spacing: 0;
-    }
-
-    .scroll-indicator {
-      bottom: 1rem;
-    }
-
-    .shoot-pan__sticky {
-      height: clamp(220px, 60vh, 420px);
-    }
-
-    .shoot-pan__card {
-      width: clamp(200px, 88vw, 420px);
-    }
-
-    .shoot-cta {
-      padding: 1.5rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-indicator__line {
-      animation: none;
-    }
-
-    .shoot-pan__track {
-      transition: none;
-    }
-
-    .shoot-cta__button::after {
-      animation: none;
-    }
-
   }
 </style>

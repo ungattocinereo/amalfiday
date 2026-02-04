@@ -1,116 +1,86 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
-const heroImage = '/photoshootings/hero/personal/Masha-Minchuck-Amalfi-day.jpg'
-const shootTitle = 'Line of Light'
-const shootDate = 'July · 24 · 2024'
+const heroImage = '/photoshootings/camelia/4-camelia-photoshooting-moto.webp'
+const shootTitle = 'Camelia: Beautiful Experience'
+const shootDate = 'September · 05 · 2017'
 
-const articleTitle = {
-  lead: 'Chasing',
-  accent: 'Amber Light',
-  tail: 'at Sunrise',
+const storyBlockOne = {
+  eyebrow: 'September ride',
+  lead: 'Journey Through',
+  accent: "Tramonti's",
+  tail: 'Scenic Splendor',
+  paragraphs: [
+    "As September whispered its last enchantments, a remarkable photographic journey was woven into the heart of Tramonti, a gem on the breathtaking Amalfi Coast. A ride on the winds of the open road, on my motorbike, through landscapes embroidered with vineyards and kissed by the Italian sun, marked the canvas of our unforgettable adventure.",
+    "Camelia, the muse of our photoshoot, embodied the essence of nature's grace. Her presence, a dance of joy amid the vibrant tapestry of Tramonti's vistas, turning each captured moment into a canvas of beauty and the warmth of Italian allure.",
+  ],
 }
-const articleDescription =
-  'A short story about a quiet dawn, wet stone, and movement that turns a walk into cinema. This page is a template: swap the text, dates, and gallery set for each new shoot.'
 
-// Gallery 1: horizontal scroll (choose images here)
-const galleryOneImages = [
-  {
-    src: '/photoshootings/individual/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
-    alt: 'Портрет у моря, мягкий утренний свет',
-  },
-  {
-    src: '/photoshootings/individual/bissa-ninfulenser-icecream.jpg',
-    alt: 'Сцена с мороженым, живой кадр',
-  },
-  {
-    src: '/photoshootings/couples/02-slideshow-regan-walk-ravello-love-1024x682.webp',
-    alt: 'Прогулка по побережью',
-  },
-  {
-    src: '/photoshootings/individual/iiana-photo-hero-atrani-hat-2-1024x680.webp',
-    alt: 'Шляпа на ветру и каменный фон',
-  },
-  {
-    src: '/photoshootings/couples/couple-photoshooting-amalfi.jpg',
-    alt: 'Тёплый кадр в городской лестнице',
-  },
-  {
-    src: '/photoshootings/couples/DSC0789.jpg',
-    alt: 'Лёгкий портрет на лестнице',
-  },
-]
+const storyBlockTwo = {
+  eyebrow: 'Guided paths',
+  lead: 'A Blend of',
+  accent: 'Photography',
+  tail: 'and Exploration',
+  paragraph:
+    "Our exploration was a harmonious marriage of photography and a guided tour through the enchanting pathways of Tramonti. Guided by me, Greg, the day unfurled as a delightful exploration, each snapshot taken weaving the story of the village's rich culture, history, and the mesmerizing embrace of nature's beauty.",
+}
 
-// Gallery 2: scroll-driven sticky hero (choose images here)
+const storyBlockThree = {
+  eyebrow: 'Belvedere view',
+  lead: 'Reaching New',
+  accent: 'Heights',
+  tail: ': Overlooking the Naples Valley',
+  paragraph:
+    "Guiding Camelia through the village's beauty, we reached the pinnacle at a belvedere over 880 meters above sea level, overlooking the stunning Naples Valley. A majestic view, where the Vesuvius stood as a guardian of history and natural wonder, crowned our photographic journey, leaving us with images and memories as vivid as the landscapes of Tramonti.",
+}
+
 const galleryTwoImages = [
   {
-    src: '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
-    alt: 'Портрет у моря, солнечный отблеск на воде',
-    label: 'Frame 01',
-    note: 'Мягкий свет и мокрые камни',
+    src: '/photoshootings/camelia/001-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 01',
   },
   {
-    src: '/photoshootings/individual/Silvia-Amalfi-day.jpg.jpg',
-    alt: 'Тёплый портрет на фоне скал',
-    label: 'Frame 02',
-    note: 'Воздух, соль и движение',
+    src: '/photoshootings/camelia/002-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 02',
   },
   {
-    src: '/photoshootings/individual/berrasguy-Minchuck-Amalfi-day.jpg.jpg',
-    alt: 'Кадр с легким ветром у побережья',
-    label: 'Frame 03',
-    note: 'Текстура камня и морской дымки',
+    src: '/photoshootings/camelia/003-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 03',
   },
   {
-    src: '/photoshootings/hero/couple/katerina-kuznezova-praiano-2021-002.jpg',
-    alt: 'Пара на ступенях, мягкий контраст',
-    label: 'Frame 04',
-    note: 'Диалог в движении',
+    src: '/photoshootings/camelia/004-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 04',
   },
   {
-    src: '/photoshootings/couples/DSC8503.jpg',
-    alt: 'Светлый кадр в узкой улице',
-    label: 'Frame 05',
-    note: 'Солнечные пятна на фасадах',
+    src: '/photoshootings/camelia/005-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 05',
   },
   {
-    src: '/photoshootings/berra/00006-Berra-in-Atrani-amalfi-scaled.webp',
-    alt: 'Кадр у кафе с ярким акцентом',
-    label: 'Frame 06',
-    note: 'Графика цвета и тени',
+    src: '/photoshootings/camelia/006-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 06',
   },
   {
-    src: '/photoshootings/berra/00001-Berra-in-Atrani-amalfi.webp',
-    alt: 'Портрет в городской среде',
-    label: 'Frame 07',
-    note: 'Контраст архитектуры и ткани',
+    src: '/photoshootings/camelia/007-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 07',
   },
   {
-    src: '/photoshootings/berra/2-berra-new-red.webp',
-    alt: 'Красный акцент и открытый воздух',
-    label: 'Frame 08',
-    note: 'Фокус на деталях',
+    src: '/photoshootings/camelia/4-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 08',
   },
   {
-    src: '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg',
-    alt: 'Динамичный кадр в утреннем свете',
-    label: 'Frame 09',
-    note: 'Тёплый градиент неба',
+    src: '/photoshootings/camelia/111-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 09',
   },
   {
-    src: '/photoshootings/couples/img_5f68ca5842ca6.jpg',
-    alt: 'Силуэт на фоне моря',
-    label: 'Frame 10',
-    note: 'Финальный акцент серии',
+    src: '/photoshootings/camelia/222-camelia-photoshooting-moto.webp',
+    alt: 'Camelia on a motorbike in Tramonti — frame 10',
   },
 ]
-
-
 ---
 
 <BaseLayout
-  title="Photoshoot Template — Amalfi.Day"
-  description="Template for a cinematic photoshoot story with a hero image and custom gallery."
+  title="Camelia Photoshoot — Amalfi.Day"
+  description="A photo journey through Tramonti and sunset — Camelia's beautiful experience on the Amalfi Coast."
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">
@@ -137,54 +107,21 @@ const galleryTwoImages = [
     <section class="section shoot-story" id="shoot-story">
       <div class="container">
         <div class="shoot-story__intro">
+          <div class="shoot-bridge__eyebrow">{storyBlockOne.eyebrow}</div>
           <h2>
-            {articleTitle.lead} <span class="accent-italic">{articleTitle.accent}</span>{' '}
-            {articleTitle.tail}
+            {storyBlockOne.lead} <span class="accent-italic">{storyBlockOne.accent}</span>{' '}
+            {storyBlockOne.tail}
           </h2>
-          <p>{articleDescription}</p>
+          {storyBlockOne.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
         </div>
       </div>
     </section>
 
     <section class="section section--flush">
       <div class="container">
-        <div class="shoot-gallery-label">Gallery 1</div>
-        <div class="shoot-pan" data-horizontal-gallery aria-label="Photoshoot gallery">
-          <div class="shoot-pan__sticky">
-            <div class="shoot-pan__track" data-horizontal-track>
-              {galleryOneImages.map((image, index) => (
-                <figure class="shoot-pan__card">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    loading={index < 2 ? 'eager' : 'lazy'}
-                  />
-                </figure>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section shoot-bridge">
-      <div class="container">
-        <div class="shoot-bridge__wrap">
-          <div class="shoot-bridge__eyebrow">Moodboard Shift</div>
-          <h2>
-            Closer, quieter — <span class="accent-italic">soft dissolve</span>
-          </h2>
-          <p>
-            Scroll slowly and let each moment fill the frame. Below is a sequence where one
-            image dissolves into the next, keeping the subject large and centered.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--flush">
-      <div class="container">
-        <div class="shoot-gallery-label">Gallery 2</div>
+        <div class="shoot-gallery-label">PHOTOGALLERY</div>
         <div class="shoot-scroll" data-scroll-gallery aria-label="Photoshoot scroll gallery">
           <div class="shoot-scroll__media">
             <div class="shoot-scroll__media-frame">
@@ -206,6 +143,34 @@ const galleryTwoImages = [
             </div>
           </div>
           <div class="shoot-scroll__spacer" data-scroll-spacer aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shoot-bridge">
+      <div class="container">
+        <div class="shoot-bridge__wrap">
+          <div class="shoot-bridge__eyebrow">{storyBlockTwo.eyebrow}</div>
+          <h2>
+            {storyBlockTwo.lead} <span class="accent-italic">{storyBlockTwo.accent}</span>{' '}
+            {storyBlockTwo.tail}
+          </h2>
+          <p>{storyBlockTwo.paragraph}</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="shoot-divider" aria-hidden="true"></div>
+
+    <section class="section shoot-bridge">
+      <div class="container">
+        <div class="shoot-bridge__wrap">
+          <div class="shoot-bridge__eyebrow">{storyBlockThree.eyebrow}</div>
+          <h2>
+            {storyBlockThree.lead} <span class="accent-italic">{storyBlockThree.accent}</span>{' '}
+            {storyBlockThree.tail}
+          </h2>
+          <p>{storyBlockThree.paragraph}</p>
         </div>
       </div>
     </section>
@@ -241,88 +206,6 @@ const galleryTwoImages = [
         setHeroHeight()
         window.addEventListener('resize', setHeroHeight)
 
-      }
-
-      const gallery = document.querySelector('[data-horizontal-gallery]')
-      if (gallery) {
-        const track = gallery.querySelector('[data-horizontal-track]')
-        if (track) {
-          let currentX = 0
-          let targetX = 0
-          let rafId = null
-
-          const updateLayout = () => {
-            const viewportWidth = gallery.clientWidth
-            const trackWidth = track.scrollWidth
-            const scrollDistance = Math.max(0, trackWidth - viewportWidth)
-            const height = scrollDistance + window.innerHeight
-            gallery.style.height = `${height}px`
-            gallery.dataset.scrollDistance = String(scrollDistance)
-            targetX = 0
-            currentX = 0
-            track.style.transform = 'translate3d(0, 0, 0)'
-          }
-
-          const animate = () => {
-            const delta = targetX - currentX
-            currentX += delta * 0.12
-            if (Math.abs(delta) < 0.5) {
-              currentX = targetX
-            }
-            track.style.transform = `translate3d(${currentX}px, 0, 0)`
-            if (currentX !== targetX) {
-              rafId = requestAnimationFrame(animate)
-            } else {
-              rafId = null
-            }
-          }
-
-          let ticking = false
-          const onScroll = () => {
-            const scrollDistance = Number(gallery.dataset.scrollDistance || 0)
-            if (scrollDistance <= 0) {
-              targetX = 0
-              if (!rafId) {
-                rafId = requestAnimationFrame(animate)
-              }
-              return
-            }
-            const rect = gallery.getBoundingClientRect()
-            const totalScroll = gallery.offsetHeight - window.innerHeight
-            const progress =
-              totalScroll > 0 ? Math.min(Math.max(-rect.top / totalScroll, 0), 1) : 0
-            targetX = -scrollDistance * progress
-            if (!rafId) {
-              rafId = requestAnimationFrame(animate)
-            }
-          }
-
-          const requestTick = () => {
-            if (ticking) return
-            ticking = true
-            requestAnimationFrame(() => {
-              onScroll()
-              ticking = false
-            })
-          }
-
-          updateLayout()
-          requestTick()
-
-          window.addEventListener('scroll', requestTick, { passive: true })
-          window.addEventListener('resize', () => {
-            updateLayout()
-            requestTick()
-          })
-
-          if ('ResizeObserver' in window) {
-            const observer = new ResizeObserver(() => {
-              updateLayout()
-              requestTick()
-            })
-            observer.observe(track)
-          }
-        }
       }
 
       const scrollGallery = document.querySelector('[data-scroll-gallery]')
@@ -500,49 +383,6 @@ const galleryTwoImages = [
     margin-bottom: 1rem;
   }
 
-  .shoot-pan {
-    position: relative;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-  }
-
-  .shoot-pan__sticky {
-    position: sticky;
-    top: calc(var(--header-space) + 1.5rem);
-    height: clamp(320px, 70vh, 720px);
-    display: flex;
-    align-items: flex-start;
-    padding-bottom: 1.5rem;
-    overflow: visible;
-  }
-
-  .shoot-pan__track {
-    display: flex;
-    gap: 1.1rem;
-    align-items: center;
-    padding-left: 0;
-    padding-right: max(1.5rem, calc((100vw - var(--container-max)) / 2));
-    will-change: transform;
-  }
-
-  .shoot-pan__card {
-    flex: 0 0 auto;
-    width: clamp(260px, 70vw, 840px);
-    aspect-ratio: 16 / 9;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #101219;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .shoot-pan__card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-
   .section--flush {
     padding-top: 0;
   }
@@ -573,6 +413,18 @@ const galleryTwoImages = [
   .shoot-bridge__wrap p {
     font-size: 1.05rem;
     margin: 0;
+  }
+
+  .shoot-divider {
+    width: min(100%, var(--container-max));
+    height: 1px;
+    margin: 0 auto;
+    background: linear-gradient(
+      90deg,
+      rgba(15, 20, 32, 0),
+      rgba(15, 20, 32, 0.25),
+      rgba(15, 20, 32, 0)
+    );
   }
 
   .shoot-scroll {
@@ -766,21 +618,6 @@ const galleryTwoImages = [
       padding-bottom: 3rem;
     }
 
-    .shoot-pan__sticky {
-      top: calc(var(--header-space) + 1rem);
-      height: clamp(260px, 65vh, 520px);
-    }
-
-    .shoot-pan__track {
-      gap: 0.9rem;
-      padding-left: 0;
-      padding-right: 1.5rem;
-    }
-
-    .shoot-pan__card {
-      width: clamp(220px, 82vw, 520px);
-    }
-
     .shoot-scroll__media {
       position: sticky;
       top: calc(var(--header-space) + 1rem);
@@ -810,14 +647,6 @@ const galleryTwoImages = [
       bottom: 1rem;
     }
 
-    .shoot-pan__sticky {
-      height: clamp(220px, 60vh, 420px);
-    }
-
-    .shoot-pan__card {
-      width: clamp(200px, 88vw, 420px);
-    }
-
     .shoot-scroll__media-frame {
       max-height: 62vh;
       border-radius: 14px;
@@ -828,10 +657,6 @@ const galleryTwoImages = [
       height: 7px;
     }
 
-    .shoot-bridge__wrap {
-      padding: 0;
-    }
-
     .shoot-cta {
       padding: 1.5rem;
     }
@@ -840,10 +665,6 @@ const galleryTwoImages = [
   @media (prefers-reduced-motion: reduce) {
     .scroll-indicator__line {
       animation: none;
-    }
-
-    .shoot-pan__track {
-      transition: none;
     }
 
     .shoot-scroll__media-frame img {

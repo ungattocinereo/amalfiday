@@ -1,116 +1,79 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 
-const heroImage = '/photoshootings/hero/personal/Masha-Minchuck-Amalfi-day.jpg'
-const shootTitle = 'Line of Light'
-const shootDate = 'July · 24 · 2024'
+const heroImage =
+  '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp'
+const shootTitle = 'Ravello Light Elegance'
+const shootDate = 'June · 09 · 2024'
 
-const articleTitle = {
-  lead: 'Chasing',
-  accent: 'Amber Light',
-  tail: 'at Sunrise',
+const storyIntro = {
+  eyebrow: 'Ravello notes',
+  lead: 'Capturing the Romance',
+  accent: 'of Ravello',
+  tail: 'in Classic Amalfi Dress',
+  paragraphs: [
+    "Ravello gives every frame a sense of elevation — terraces stacked above the sea, stone lanes that curve softly, and villas that feel like cinematic sets. The light moves slowly here, wrapping the subject in a glow that feels both elegant and natural, perfect for a fashion-forward story.",
+    "It is my favorite place because Ravello is quiet in the right way. You can hear the breeze in the gardens, feel the calm in the piazza, and create without distraction. That atmosphere turns a photoshoot into a ritual: unhurried, attentive, and full of poetic detail.",
+    "Any dress looks striking in Ravello because the palette is timeless — sun-washed stone, deep greens, and the endless blue of the coast. The fabrics pick up the light, the silhouettes stay crisp against the architecture, and every movement becomes dramatic without trying.",
+    'From classic Amalfi dresses to modern fashion looks, the town adds romance to every pose. It is a place where elegance feels effortless, and the images come out layered with history, light, and unmistakable beauty.',
+  ],
 }
-const articleDescription =
-  'A short story about a quiet dawn, wet stone, and movement that turns a walk into cinema. This page is a template: swap the text, dates, and gallery set for each new shoot.'
 
-// Gallery 1: horizontal scroll (choose images here)
 const galleryOneImages = [
   {
-    src: '/photoshootings/individual/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
-    alt: 'Портрет у моря, мягкий утренний свет',
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0000__CNR1568.webp',
+    alt: 'Fashion portrait in Ravello — frame 01',
   },
   {
-    src: '/photoshootings/individual/bissa-ninfulenser-icecream.jpg',
-    alt: 'Сцена с мороженым, живой кадр',
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293.webp',
+    alt: 'Fashion portrait in Ravello — frame 02',
   },
   {
-    src: '/photoshootings/couples/02-slideshow-regan-walk-ravello-love-1024x682.webp',
-    alt: 'Прогулка по побережью',
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0002__CNR1182.webp',
+    alt: 'Fashion portrait in Ravello — frame 03',
   },
   {
-    src: '/photoshootings/individual/iiana-photo-hero-atrani-hat-2-1024x680.webp',
-    alt: 'Шляпа на ветру и каменный фон',
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0003__CNR0839.webp',
+    alt: 'Fashion portrait in Ravello — frame 04',
   },
   {
-    src: '/photoshootings/couples/couple-photoshooting-amalfi.jpg',
-    alt: 'Тёплый кадр в городской лестнице',
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0004__CNR0757-2.webp',
+    alt: 'Fashion portrait in Ravello — frame 05',
   },
   {
-    src: '/photoshootings/couples/DSC0789.jpg',
-    alt: 'Лёгкий портрет на лестнице',
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0005__CNR0633.webp',
+    alt: 'Fashion portrait in Ravello — frame 06',
+  },
+  {
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0006__CNR0447.webp',
+    alt: 'Fashion portrait in Ravello — frame 07',
+  },
+  {
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0007__CNR0371.webp',
+    alt: 'Fashion portrait in Ravello — frame 08',
+  },
+  {
+    src: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0008_new-001.webp',
+    alt: 'Fashion portrait in Ravello — frame 09',
   },
 ]
 
-// Gallery 2: scroll-driven sticky hero (choose images here)
-const galleryTwoImages = [
-  {
-    src: '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
-    alt: 'Портрет у моря, солнечный отблеск на воде',
-    label: 'Frame 01',
-    note: 'Мягкий свет и мокрые камни',
-  },
-  {
-    src: '/photoshootings/individual/Silvia-Amalfi-day.jpg.jpg',
-    alt: 'Тёплый портрет на фоне скал',
-    label: 'Frame 02',
-    note: 'Воздух, соль и движение',
-  },
-  {
-    src: '/photoshootings/individual/berrasguy-Minchuck-Amalfi-day.jpg.jpg',
-    alt: 'Кадр с легким ветром у побережья',
-    label: 'Frame 03',
-    note: 'Текстура камня и морской дымки',
-  },
-  {
-    src: '/photoshootings/hero/couple/katerina-kuznezova-praiano-2021-002.jpg',
-    alt: 'Пара на ступенях, мягкий контраст',
-    label: 'Frame 04',
-    note: 'Диалог в движении',
-  },
-  {
-    src: '/photoshootings/couples/DSC8503.jpg',
-    alt: 'Светлый кадр в узкой улице',
-    label: 'Frame 05',
-    note: 'Солнечные пятна на фасадах',
-  },
-  {
-    src: '/photoshootings/berra/00006-Berra-in-Atrani-amalfi-scaled.webp',
-    alt: 'Кадр у кафе с ярким акцентом',
-    label: 'Frame 06',
-    note: 'Графика цвета и тени',
-  },
-  {
-    src: '/photoshootings/berra/00001-Berra-in-Atrani-amalfi.webp',
-    alt: 'Портрет в городской среде',
-    label: 'Frame 07',
-    note: 'Контраст архитектуры и ткани',
-  },
-  {
-    src: '/photoshootings/berra/2-berra-new-red.webp',
-    alt: 'Красный акцент и открытый воздух',
-    label: 'Frame 08',
-    note: 'Фокус на деталях',
-  },
-  {
-    src: '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg',
-    alt: 'Динамичный кадр в утреннем свете',
-    label: 'Frame 09',
-    note: 'Тёплый градиент неба',
-  },
-  {
-    src: '/photoshootings/couples/img_5f68ca5842ca6.jpg',
-    alt: 'Силуэт на фоне моря',
-    label: 'Frame 10',
-    note: 'Финальный акцент серии',
-  },
-]
-
-
+const seoSection = {
+  eyebrow: 'Amalfi signature',
+  lead: 'Ravello',
+  accent: 'Photoshoot',
+  tail: '— timeless frames',
+  paragraphs: [
+    'Ravello offers quiet, altitude, and air that set a perfect rhythm for photography. Every location feels like a ready-made set: narrow lanes, terraces above the sea, grand villas, and gardens where the light stays soft and even for most of the day.',
+    'If you are looking for a Ravello photoshoot, this place delivers a true cinematic feeling. The architecture sculpts the silhouette, while the natural landscape adds depth and drama. A photographer in Ravello can shape the route so the frames stay varied yet cohesive in mood.',
+    'Ravello is especially flattering for elegant looks: any dress appears striking here because the background never competes — it elevates. That is why Amalfi Coast photosessions, and Ravello in particular, become favorites: they preserve not only beauty, but the atmosphere of the place itself.',
+  ],
+}
 ---
 
 <BaseLayout
-  title="Photoshoot Template — Amalfi.Day"
-  description="Template for a cinematic photoshoot story with a hero image and custom gallery."
+  title="Ravello Photoshoot — Amalfi.Day"
+  description="Stunning Ravello photoshoots: a fashion story of romance, light, and timeless Amalfi elegance."
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">
@@ -137,11 +100,14 @@ const galleryTwoImages = [
     <section class="section shoot-story" id="shoot-story">
       <div class="container">
         <div class="shoot-story__intro">
+          <div class="shoot-bridge__eyebrow">{storyIntro.eyebrow}</div>
           <h2>
-            {articleTitle.lead} <span class="accent-italic">{articleTitle.accent}</span>{' '}
-            {articleTitle.tail}
+            {storyIntro.lead} <span class="accent-italic">{storyIntro.accent}</span>{' '}
+            {storyIntro.tail}
           </h2>
-          <p>{articleDescription}</p>
+          {storyIntro.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
         </div>
       </div>
     </section>
@@ -167,45 +133,17 @@ const galleryTwoImages = [
       </div>
     </section>
 
-    <section class="section shoot-bridge">
+    <section class="section shoot-story">
       <div class="container">
-        <div class="shoot-bridge__wrap">
-          <div class="shoot-bridge__eyebrow">Moodboard Shift</div>
+        <div class="shoot-story__intro">
+          <div class="shoot-bridge__eyebrow">{seoSection.eyebrow}</div>
           <h2>
-            Closer, quieter — <span class="accent-italic">soft dissolve</span>
+            {seoSection.lead} <span class="accent-italic">{seoSection.accent}</span>{' '}
+            {seoSection.tail}
           </h2>
-          <p>
-            Scroll slowly and let each moment fill the frame. Below is a sequence where one
-            image dissolves into the next, keeping the subject large and centered.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--flush">
-      <div class="container">
-        <div class="shoot-gallery-label">Gallery 2</div>
-        <div class="shoot-scroll" data-scroll-gallery aria-label="Photoshoot scroll gallery">
-          <div class="shoot-scroll__media">
-            <div class="shoot-scroll__media-frame">
-              {galleryTwoImages.map((image, index) => (
-                <img
-                  class={index === 0 ? 'is-active' : ''}
-                  src={image.src}
-                  alt={image.alt}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  data-scroll-image
-                />
-              ))}
-              <div class="shoot-scroll__fade" aria-hidden="true"></div>
-            </div>
-            <div class="shoot-scroll__dots" data-scroll-dots aria-hidden="true">
-              {galleryTwoImages.map((image, index) => (
-                <span class={index === 0 ? 'is-active' : ''} data-scroll-dot></span>
-              ))}
-            </div>
-          </div>
-          <div class="shoot-scroll__spacer" data-scroll-spacer aria-hidden="true"></div>
+          {seoSection.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
         </div>
       </div>
     </section>
@@ -322,63 +260,6 @@ const galleryTwoImages = [
             })
             observer.observe(track)
           }
-        }
-      }
-
-      const scrollGallery = document.querySelector('[data-scroll-gallery]')
-      if (scrollGallery) {
-        const images = Array.from(scrollGallery.querySelectorAll('[data-scroll-image]'))
-        const spacer = scrollGallery.querySelector('[data-scroll-spacer]')
-        const dots = Array.from(scrollGallery.querySelectorAll('[data-scroll-dot]'))
-        if (images.length && spacer) {
-          let activeIndex = 0
-          const setActive = (nextIndex) => {
-            if (nextIndex === activeIndex) return
-            activeIndex = nextIndex
-            images.forEach((image, index) => {
-              image.classList.toggle('is-active', index === activeIndex)
-            })
-            dots.forEach((dot, index) => {
-              dot.classList.toggle('is-active', index === activeIndex)
-            })
-          }
-
-          const updateLayout = () => {
-            const stepHeight = window.innerHeight * 0.7
-            const totalHeight = Math.max(images.length * stepHeight, window.innerHeight * 1.1)
-            spacer.style.height = `${totalHeight}px`
-          }
-
-          let ticking = false
-          const onScroll = () => {
-            const totalScroll = scrollGallery.offsetHeight - window.innerHeight
-            const rect = scrollGallery.getBoundingClientRect()
-            const progress =
-              totalScroll > 0 ? Math.min(Math.max(-rect.top / totalScroll, 0), 1) : 0
-            const nextIndex = Math.min(
-              images.length - 1,
-              Math.max(0, Math.round(progress * (images.length - 1)))
-            )
-            setActive(nextIndex)
-          }
-
-          const requestTick = () => {
-            if (ticking) return
-            ticking = true
-            requestAnimationFrame(() => {
-              onScroll()
-              ticking = false
-            })
-          }
-
-          updateLayout()
-          requestTick()
-
-          window.addEventListener('scroll', requestTick, { passive: true })
-          window.addEventListener('resize', () => {
-            updateLayout()
-            requestTick()
-          })
         }
       }
 
@@ -511,9 +392,8 @@ const galleryTwoImages = [
     top: calc(var(--header-space) + 1.5rem);
     height: clamp(320px, 70vh, 720px);
     display: flex;
-    align-items: flex-start;
-    padding-bottom: 1.5rem;
-    overflow: visible;
+    align-items: center;
+    overflow: hidden;
   }
 
   .shoot-pan__track {
@@ -545,103 +425,6 @@ const galleryTwoImages = [
 
   .section--flush {
     padding-top: 0;
-  }
-
-  .shoot-bridge {
-    padding-top: 1.5rem;
-  }
-
-  .shoot-bridge__wrap {
-    max-width: 46rem;
-    padding: 0;
-  }
-
-  .shoot-bridge__eyebrow {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.7rem;
-    color: var(--color-text-muted);
-    margin-bottom: 0.8rem;
-  }
-
-  .shoot-bridge__wrap h2 {
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    margin-bottom: 0.9rem;
-  }
-
-  .shoot-bridge__wrap p {
-    font-size: 1.05rem;
-    margin: 0;
-  }
-
-  .shoot-scroll {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(1.5rem, 4vw, 4rem);
-    align-items: start;
-  }
-
-  .shoot-scroll__media {
-    position: sticky;
-    top: calc(var(--header-space) + 1.5rem);
-  }
-
-  .shoot-scroll__media-frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    height: auto;
-    max-height: 85vh;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #0f1117;
-    box-shadow: 0 24px 60px rgba(10, 12, 18, 0.22);
-  }
-
-  .shoot-scroll__media-frame img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-  }
-
-  .shoot-scroll__media-frame img.is-active {
-    opacity: 1;
-  }
-
-  .shoot-scroll__fade {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(9, 10, 15, 0) 45%, rgba(9, 10, 15, 0.25) 100%);
-    pointer-events: none;
-  }
-
-  .shoot-scroll__dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .shoot-scroll__dots span {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: rgba(12, 16, 24, 0.22);
-    transition: transform 0.25s ease, background 0.25s ease;
-  }
-
-  .shoot-scroll__dots span.is-active {
-    background: rgba(12, 16, 24, 0.7);
-    transform: scale(1.35);
-  }
-
-  .shoot-scroll__spacer {
-    height: 60vh;
   }
 
   .shoot-cta-section {
@@ -736,6 +519,15 @@ const galleryTwoImages = [
     box-shadow: 0 16px 34px rgba(20, 12, 6, 0.4);
   }
 
+  .shoot-bridge__eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
   @keyframes scrollPulse {
     0%,
     100% {
@@ -781,15 +573,6 @@ const galleryTwoImages = [
       width: clamp(220px, 82vw, 520px);
     }
 
-    .shoot-scroll__media {
-      position: sticky;
-      top: calc(var(--header-space) + 1rem);
-    }
-
-    .shoot-scroll__media-frame {
-      max-height: 78vh;
-    }
-
     .shoot-cta {
       flex-direction: column;
       align-items: flex-start;
@@ -818,20 +601,6 @@ const galleryTwoImages = [
       width: clamp(200px, 88vw, 420px);
     }
 
-    .shoot-scroll__media-frame {
-      max-height: 62vh;
-      border-radius: 14px;
-    }
-
-    .shoot-scroll__dots span {
-      width: 7px;
-      height: 7px;
-    }
-
-    .shoot-bridge__wrap {
-      padding: 0;
-    }
-
     .shoot-cta {
       padding: 1.5rem;
     }
@@ -843,10 +612,6 @@ const galleryTwoImages = [
     }
 
     .shoot-pan__track {
-      transition: none;
-    }
-
-    .shoot-scroll__media-frame img {
       transition: none;
     }
 

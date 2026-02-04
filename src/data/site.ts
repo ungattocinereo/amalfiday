@@ -19,19 +19,29 @@ export const socialLinks = [
 
 export const featuredPhotoshoots = [
   {
-    title: 'Atrani golden session',
-    location: 'Atrani, Amalfi Coast',
-    href: '/photo/atrani-iana-session',
-  },
-  {
-    title: 'Ravello sunset walk',
+    title: 'Ravello Light Elegance',
     location: 'Ravello',
-    href: '/photo/ravello-sunset-walk',
+    href: '/photoshootings/ravello-photoshooting',
+    image:
+      '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp',
   },
   {
-    title: 'Amalfi rooftops',
-    location: 'Amalfi',
-    href: '/photo/amalfi-rooftops',
+    title: 'Ravello Romance (Taylor & Regan)',
+    location: 'Ravello',
+    href: '/photoshootings/regan-tay-ravello',
+    image: '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp',
+  },
+  {
+    title: 'Symphony of Love',
+    location: 'Atrani',
+    href: '/photoshootings/olga-marat',
+    image: '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp',
+  },
+  {
+    title: "Ayuna's Photographic Memoir",
+    location: 'Atrani',
+    href: '/photoshootings/ayuna',
+    image: '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp',
   },
 ]
 

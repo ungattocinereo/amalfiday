@@ -140,7 +140,11 @@ const newsPosts = await getGhostPosts({ limit: 8 })
       <div class="scroll" aria-label="Featured photoshoots">
         {featuredPhotoshoots.map((item, index) => (
           <a class="scroll__card" href={item.href}>
-            <div class="scroll__media" data-index={index}></div>
+            <div
+              class="scroll__media"
+              data-index={index}
+              style={`background-image: url(${item.image})`}
+            ></div>
             <div class="scroll__overlay">
               <h3>{item.title}</h3>
               <span><i class="bi bi-geo-alt"></i> {item.location}</span>
@@ -550,35 +554,27 @@ const newsPosts = await getGhostPosts({ limit: 8 })
   }
 
   .scroll {
-    display: flex;
+    display: grid;
     gap: 1.5rem;
-    overflow-x: auto;
-    padding-bottom: 1rem;
-    scroll-snap-type: x mandatory;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .scroll__card {
-    min-width: 280px;
+    width: 100%;
     height: 360px;
     border-radius: var(--radius-lg);
     position: relative;
     overflow: hidden;
-    scroll-snap-align: start;
     box-shadow: var(--shadow-soft);
   }
 
   .scroll__media {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255, 89, 0, 0.2), rgba(1, 98, 255, 0.25));
-  }
-
-  .scroll__media[data-index='1'] {
-    background: linear-gradient(135deg, rgba(255, 195, 0, 0.25), rgba(255, 89, 0, 0.2));
-  }
-
-  .scroll__media[data-index='2'] {
-    background: linear-gradient(135deg, rgba(0, 156, 255, 0.25), rgba(1, 98, 255, 0.2));
+    background-color: rgba(16, 16, 16, 0.35);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   .scroll__overlay {
@@ -837,6 +833,10 @@ const newsPosts = await getGhostPosts({ limit: 8 })
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .scroll {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .prefooter__inner {
       grid-template-columns: 1fr;
     }
@@ -868,6 +868,10 @@ const newsPosts = await getGhostPosts({ limit: 8 })
     .news__cta {
       text-align: left;
       align-items: flex-start;
+    }
+
+    .scroll {
+      grid-template-columns: 1fr;
     }
 
     .news-card:nth-child(n + 5) {
