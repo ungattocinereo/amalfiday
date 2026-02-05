@@ -150,56 +150,134 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       </div>
 
       <form class="contact-form" action="/api/contact" method="post">
-        <div class="contact-form__header">
-          <span class="badge"><i class="bi bi-stars"></i> Telegram-ready request</span>
-          <h2>
-            Send your <span class="accent-italic">plan</span> in minutes
-          </h2>
-          <p>
-            Fill in the details below. Your request goes straight to Telegram so we can reply
-            quickly with availability, pricing, and suggestions.
+        <div class="contact-form__body">
+          <div class="contact-form__header">
+            <span class="badge"><i class="bi bi-stars"></i> Telegram-ready request</span>
+            <h2>
+              Send your <span class="accent-italic">plan</span> in minutes
+            </h2>
+            <p>
+              Fill in the details below. Your request goes straight to Telegram so we can reply
+              quickly with availability, pricing, and suggestions.
+            </p>
+          </div>
+          <div class="contact-form__grid">
+            <label>
+              Your name
+              <input type="text" name="name" placeholder="Iana" autocomplete="name" />
+            </label>
+            <label>
+              Email or WhatsApp
+              <input
+                type="text"
+                name="contact"
+                placeholder="email or +39"
+                autocomplete="email"
+                required
+              />
+            </label>
+            <label>
+              Dates & location
+              <input type="text" name="dates" placeholder="Oct 3–7, Atrani" required />
+            </label>
+            <label class="service-field">
+              Service
+              <div class="service-select" data-placeholder="Select a service">
+                <span class="service-select__icon">
+                  <i class="bi bi-grid-3x3-gap"></i>
+                </span>
+                <input
+                  class="service-select__input"
+                  type="text"
+                  name="service"
+                  placeholder="Select a service"
+                  readonly
+                  required
+                />
+                <button
+                  class="service-select__toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-label="Open service list"
+                >
+                  <i class="bi bi-chevron-down"></i>
+                </button>
+                <div class="service-select__menu" role="listbox">
+                  <button
+                    class="service-select__option"
+                    type="button"
+                    data-value="Porters/taxi"
+                    data-icon="bi-car-front-fill"
+                    role="option"
+                    aria-selected="false"
+                  >
+                    <i class="bi bi-car-front-fill"></i>
+                    <span>Porters/taxi</span>
+                  </button>
+                  <button
+                    class="service-select__option"
+                    type="button"
+                    data-value="Photoshooting"
+                    data-icon="bi-camera"
+                    role="option"
+                    aria-selected="false"
+                  >
+                    <i class="bi bi-camera"></i>
+                    <span>Photoshooting</span>
+                  </button>
+                  <button
+                    class="service-select__option"
+                    type="button"
+                    data-value="Apartment"
+                    data-icon="bi-house-heart"
+                    role="option"
+                    aria-selected="false"
+                  >
+                    <i class="bi bi-house-heart"></i>
+                    <span>Apartment</span>
+                  </button>
+                  <button
+                    class="service-select__option"
+                    type="button"
+                    data-value="Other"
+                    data-icon="bi-stars"
+                    role="option"
+                    aria-selected="false"
+                  >
+                    <i class="bi bi-stars"></i>
+                    <span>Other</span>
+                  </button>
+                </div>
+              </div>
+            </label>
+          </div>
+          <label>
+            Your message
+            <textarea name="message" rows="5" placeholder="Tell us about your plans"></textarea>
+          </label>
+          <button class="button" type="submit">
+            <i class="bi bi-send"></i> Send request
+          </button>
+          <p class="form__status" aria-live="polite">
+            We will send your request directly to Telegram.
           </p>
         </div>
-        <div class="contact-form__grid">
-          <label>
-            Your name
-            <input type="text" name="name" placeholder="Iana" autocomplete="name" />
-          </label>
-          <label>
-            Email or WhatsApp
-            <input
-              type="text"
-              name="contact"
-              placeholder="email or +39"
-              autocomplete="email"
-              required
-            />
-          </label>
-          <label>
-            Dates & location
-            <input type="text" name="dates" placeholder="Oct 3–7, Atrani" required />
-          </label>
-          <label>
-            Service
-            <select name="service" required>
-              <option value="" disabled selected>Select a service</option>
-              <option value="Porters/taxi">Porters/taxi</option>
-              <option value="Photoshooting">Photoshooting</option>
-              <option value="Apartment">Apartment</option>
-              <option value="Other">Other</option>
-            </select>
-          </label>
+
+        <div class="contact-form__success" role="status" aria-live="polite" aria-hidden="true">
+          <div class="contact-form__success-inner">
+            <div class="contact-form__envelope" aria-hidden="true">
+              <div class="contact-form__envelope-letter"></div>
+              <div class="contact-form__envelope-seal">
+                <i class="bi bi-check-lg"></i>
+              </div>
+            </div>
+            <div class="contact-form__success-text">
+              <h3>Thank you</h3>
+              <p>Your form was submited and delivered.</p>
+              <a class="contact-form__reset" href="#">Do you want to send another one?</a>
+            </div>
+          </div>
         </div>
-        <label>
-          Your message
-          <textarea name="message" rows="5" placeholder="Tell us about your plans"></textarea>
-        </label>
-        <button class="button" type="submit">
-          <i class="bi bi-send"></i> Send request
-        </button>
-        <p class="form__status" aria-live="polite">
-          We will send your request directly to Telegram.
-        </p>
       </form>
     </div>
   </section>
@@ -208,6 +286,14 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     const form = document.querySelector('.contact-form')
     const status = document.querySelector('.form__status')
     const submitButton = form?.querySelector('button[type="submit"]')
+    const successPanel = form?.querySelector('.contact-form__success')
+    const resetLink = form?.querySelector('.contact-form__reset')
+
+    const serviceSelect = form?.querySelector('.service-select')
+    const serviceInput = serviceSelect?.querySelector('.service-select__input')
+    const serviceToggle = serviceSelect?.querySelector('.service-select__toggle')
+    const serviceIcon = serviceSelect?.querySelector('.service-select__icon i')
+    const serviceOptions = serviceSelect?.querySelectorAll('.service-select__option')
 
     const setStatus = (text, state) => {
       if (!status) return
@@ -215,8 +301,120 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       status.dataset.state = state || ''
     }
 
+    const openServiceSelect = () => {
+      if (!serviceSelect) return
+      serviceSelect.classList.add('is-open')
+      serviceToggle?.setAttribute('aria-expanded', 'true')
+    }
+
+    const closeServiceSelect = () => {
+      if (!serviceSelect) return
+      serviceSelect.classList.remove('is-open')
+      serviceToggle?.setAttribute('aria-expanded', 'false')
+    }
+
+    const resetServiceSelect = () => {
+      if (!serviceSelect || !serviceInput) return
+      serviceInput.value = ''
+      serviceInput.setCustomValidity('')
+      serviceSelect.classList.remove('has-value', 'is-invalid')
+      if (serviceIcon) {
+        serviceIcon.className = 'bi bi-grid-3x3-gap'
+      }
+      serviceOptions?.forEach((option) => option.setAttribute('aria-selected', 'false'))
+      closeServiceSelect()
+    }
+
+    const applyServiceChoice = (option) => {
+      if (!serviceSelect || !serviceInput) return
+      const value = option?.dataset?.value || option?.textContent?.trim()
+      const icon = option?.dataset?.icon
+      if (!value) return
+      serviceInput.value = value
+      serviceInput.setCustomValidity('')
+      serviceSelect.classList.add('has-value')
+      serviceSelect.classList.remove('is-invalid')
+      if (serviceIcon && icon) {
+        serviceIcon.className = `bi ${icon}`
+      }
+      serviceOptions?.forEach((item) => {
+        item.setAttribute('aria-selected', item === option ? 'true' : 'false')
+      })
+      closeServiceSelect()
+    }
+
+    serviceToggle?.addEventListener('click', (event) => {
+      event.preventDefault()
+      if (serviceSelect?.classList.contains('is-open')) {
+        closeServiceSelect()
+      } else {
+        openServiceSelect()
+      }
+    })
+
+    serviceInput?.addEventListener('click', (event) => {
+      event.preventDefault()
+      if (serviceSelect?.classList.contains('is-open')) {
+        closeServiceSelect()
+      } else {
+        openServiceSelect()
+      }
+    })
+
+    serviceOptions?.forEach((option) => {
+      option.addEventListener('click', () => applyServiceChoice(option))
+    })
+
+    document.addEventListener('click', (event) => {
+      if (!serviceSelect || serviceSelect.contains(event.target)) return
+      closeServiceSelect()
+    })
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeServiceSelect()
+      }
+    })
+
+    const showSuccessState = () => {
+      if (!form) return
+      form.classList.add('is-success')
+      successPanel?.setAttribute('aria-hidden', 'false')
+    }
+
+    const clearSuccessState = () => {
+      if (!form) return
+      form.classList.remove('is-success', 'is-resetting')
+      successPanel?.setAttribute('aria-hidden', 'true')
+    }
+
+    resetLink?.addEventListener('click', (event) => {
+      event.preventDefault()
+      if (!form) return
+      form.classList.add('is-resetting')
+      window.setTimeout(() => {
+        clearSuccessState()
+        setStatus('We will send your request directly to Telegram.')
+      }, 450)
+    })
+
     form?.addEventListener('submit', async (event) => {
       event.preventDefault()
+      if (serviceInput && !serviceInput.value) {
+        serviceInput.setCustomValidity('Please select a service.')
+        serviceSelect?.classList.add('is-invalid')
+      } else if (serviceInput) {
+        serviceInput.setCustomValidity('')
+        serviceSelect?.classList.remove('is-invalid')
+      }
+
+      if (!form.reportValidity()) {
+        if (serviceSelect?.classList.contains('is-invalid')) {
+          openServiceSelect()
+        }
+        return
+      }
+
       setStatus('Sending your request...')
       if (submitButton) submitButton.disabled = true
 
@@ -235,8 +433,11 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         }
 
         form.reset()
+        resetServiceSelect()
         setStatus('Thank you! We will get back to you shortly.', 'success')
+        showSuccessState()
       } catch (error) {
+        clearSuccessState()
         setStatus('Sorry, something went wrong. Please email hello@amalfi.day.', 'error')
       } finally {
         if (submitButton) submitButton.disabled = false
@@ -458,9 +659,6 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
   .contact-form {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
     padding: 3rem;
     border-radius: 32px;
     background: linear-gradient(140deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9));
@@ -468,6 +666,35 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     position: relative;
     text-align: left;
     overflow: hidden;
+    transition: background 0.6s ease, box-shadow 0.6s ease;
+  }
+
+  .contact-form.is-success {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(252, 244, 232, 0.95));
+    box-shadow: 0 35px 70px rgba(10, 12, 15, 0.16);
+  }
+
+  .contact-form__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    position: relative;
+    z-index: 2;
+    transition: opacity 0.45s ease, transform 0.6s ease, filter 0.6s ease;
+  }
+
+  .contact-form.is-success .contact-form__body {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    filter: blur(2px);
+    pointer-events: none;
+  }
+
+  .contact-form.is-resetting .contact-form__body {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: none;
+    pointer-events: auto;
   }
 
   .contact-form__header {
@@ -507,6 +734,112 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     gap: 1rem 1.2rem;
   }
 
+  .service-field {
+    position: relative;
+  }
+
+  .service-select {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .service-select__icon {
+    position: absolute;
+    left: 1rem;
+    font-size: 1.1rem;
+    color: var(--color-aux);
+    pointer-events: none;
+  }
+
+  .service-select__input {
+    width: 100%;
+    padding-left: 2.8rem;
+    padding-right: 3rem;
+    cursor: pointer;
+  }
+
+  .service-select:not(.has-value) .service-select__input {
+    color: var(--color-text-muted);
+  }
+
+  .service-select__toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: rgba(26, 26, 26, 0.6);
+    display: grid;
+    place-items: center;
+    font-size: 1.1rem;
+    padding: 0.2rem;
+    cursor: pointer;
+  }
+
+  .service-select__toggle i {
+    transition: transform 0.2s ease;
+  }
+
+  .service-select.is-open .service-select__toggle i {
+    transform: rotate(180deg);
+  }
+
+  .service-select__menu {
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    top: calc(100% + 0.6rem);
+    background: #ffffff;
+    border: 1px solid rgba(26, 26, 26, 0.1);
+    border-radius: 16px;
+    padding: 0.4rem;
+    box-shadow: 0 22px 40px rgba(10, 12, 15, 0.12);
+    display: grid;
+    gap: 0.2rem;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .service-select.is-open .service-select__menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .service-select__option {
+    border: none;
+    background: transparent;
+    border-radius: 12px;
+    padding: 0.65rem 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font: inherit;
+    color: var(--color-text);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .service-select__option i {
+    font-size: 1.1rem;
+    color: var(--color-aux);
+  }
+
+  .service-select__option:hover,
+  .service-select__option[aria-selected='true'] {
+    background: rgba(1, 98, 255, 0.08);
+  }
+
+  .service-select.is-invalid .service-select__input {
+    border-color: rgba(192, 53, 43, 0.6);
+    box-shadow: 0 0 0 3px rgba(192, 53, 43, 0.12);
+  }
+
   label {
     display: flex;
     flex-direction: column;
@@ -529,7 +862,8 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
   input:focus,
   textarea:focus,
-  select:focus {
+  select:focus,
+  .service-select:focus-within .service-select__input {
     outline: none;
     border-color: rgba(1, 98, 255, 0.5);
     box-shadow: 0 0 0 3px rgba(1, 98, 255, 0.15);
@@ -547,16 +881,156 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     padding-right: 2.8rem;
   }
 
-  .contact-form button {
+  .contact-form .button {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     width: fit-content;
   }
 
-  .contact-form button:disabled {
+  .contact-form .button:disabled {
     opacity: 0.7;
     cursor: progress;
+  }
+
+  .contact-form__success {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 2.4rem;
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    transition: opacity 0.5s ease, transform 0.6s ease;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .contact-form.is-success .contact-form__success {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .contact-form.is-resetting .contact-form__success {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    pointer-events: none;
+  }
+
+  .contact-form__success-inner {
+    display: grid;
+    gap: 1.4rem;
+    justify-items: center;
+  }
+
+  .contact-form__envelope {
+    width: min(360px, 78%);
+    aspect-ratio: 3 / 2;
+    border-radius: 20px;
+    background: linear-gradient(165deg, #fff7ed, #f1dfc9);
+    position: relative;
+    box-shadow: 0 24px 48px rgba(12, 8, 0, 0.18);
+    overflow: hidden;
+    transform: translateY(12px) scale(0.96);
+    transition: transform 0.7s ease;
+  }
+
+  .contact-form.is-success .contact-form__envelope {
+    transform: translateY(0) scale(1);
+  }
+
+  .contact-form__envelope::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 49%, rgba(232, 214, 193, 0.92) 51%) left
+        bottom / 50% 62% no-repeat,
+      linear-gradient(225deg, transparent 49%, rgba(232, 214, 193, 0.92) 51%) right bottom / 50%
+        62% no-repeat;
+  }
+
+  .contact-form__envelope::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.92) 51%) left top /
+        50% 58% no-repeat,
+      linear-gradient(-45deg, transparent 49%, rgba(255, 255, 255, 0.92) 51%) right top / 50% 58%
+        no-repeat;
+    transform-origin: top center;
+    transform: translateY(-8%) scaleY(0.9);
+    transition: transform 0.6s ease;
+  }
+
+  .contact-form.is-success .contact-form__envelope::after {
+    transform: translateY(-18%) scaleY(0.9);
+  }
+
+  .contact-form__envelope-letter {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 12%;
+    height: 50%;
+    border-radius: 14px;
+    background: #fffdf8;
+    box-shadow: inset 0 0 0 1px rgba(210, 188, 162, 0.5);
+  }
+
+  .contact-form__envelope-seal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 70px;
+    height: 70px;
+    transform: translate(-50%, -50%) scale(0.3);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffb37a, #ff7a1a 70%);
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    font-size: 2rem;
+    box-shadow: 0 14px 30px rgba(255, 122, 26, 0.45);
+    opacity: 0;
+    transition: transform 0.5s ease 0.2s, opacity 0.5s ease 0.2s;
+  }
+
+  .contact-form__envelope-seal::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .contact-form.is-success .contact-form__envelope-seal {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  .contact-form__success-text {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .contact-form__success-text h3 {
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  .contact-form__success-text p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .contact-form__reset {
+    color: var(--color-aux);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   .form__status {
@@ -593,6 +1067,14 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
   @media (max-width: 640px) {
     .contact-form {
       padding: 2.2rem 1.5rem;
+    }
+
+    .contact-form__envelope {
+      width: min(300px, 90%);
+    }
+
+    .contact-form__success-text h3 {
+      font-size: 1.6rem;
     }
 
     .contact-help__grid {

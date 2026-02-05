@@ -71,8 +71,12 @@ export const footerLinks = {
   apartments: [
     { label: "Greg's guide", href: site.guideUrl, external: true },
     { label: 'Apartment overview', href: '/apartments' },
-    { label: 'Booking.com', href: 'https://www.booking.com', external: true },
-    { label: 'Airbnb', href: 'https://www.airbnb.com', external: true },
+    {
+      label: 'Booking.com',
+      href: 'https://www.booking.com/hotel/it/cristallpont-amalfi-day.html',
+      external: true,
+    },
+    { label: 'AirBnb.com', href: 'https://airbnb.com/p/atrani', external: true },
   ],
   info: [
     { label: 'What to do', href: '/experience' },
