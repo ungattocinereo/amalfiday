@@ -74,19 +74,23 @@ const fallbackQuatrain =
       <div class="hero__mosaic">
         <div class="hero__tile hero__tile--primary">
           <a class="guide-card" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
-            <div class="guide-card__content">
-              <span class="guide-card__eyebrow">guide.amalfi.day</span>
-              <h3>
-                Take your <span class="accent-italic">Amalfi in a Pocket</span>
-              </h3>
-              <p>
-                Plan your perfect Amalfi Coast day with ready-to-use walks, swims, moto rides,
-                and food stops — plus offline-friendly maps and simplified transport timing.
-              </p>
-              <span class="guide-card__cta">
-                <i class="bi bi-arrow-up-right"></i> Open the guide
-              </span>
+            <div class="guide-card__media">
+              <video
+                class="guide-card__video"
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="/staticpages/video/atrani-sorrento-video.webp"
+              >
+                <source src="/staticpages/video/atrani-sorrento-video.mp4" type="video/mp4" />
+                <img src="/staticpages/video/atrani-sorrento-video.webp" alt="Atrani to Sorrento coast" />
+              </video>
             </div>
+            <span class="guide-card__badge">
+              <span class="guide-card__badge-text">guide.amalfi.day</span>
+              <i class="bi bi-arrow-up-right"></i>
+            </span>
           </a>
         </div>
         <div class="hero__tile hero__tile--small hero__tile--small-a">
@@ -445,14 +449,13 @@ const fallbackQuatrain =
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    padding: 1.4rem 1.6rem;
+    padding: 0;
     background: #ffffff;
-    border: 1px solid rgba(26, 26, 26, 0.08);
+    border: none;
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
     min-height: 100%;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 0.8rem;
     align-items: start;
     text-decoration: none;
   }
@@ -461,41 +464,46 @@ const fallbackQuatrain =
     text-decoration: none;
   }
 
-  .guide-card__content {
-    position: relative;
-    z-index: 1;
-    max-width: 520px;
-    padding: 1.2rem 0;
+  .guide-card__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
   }
 
-  .guide-card__eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: rgba(26, 26, 26, 0.6);
+  .guide-card__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  .guide-card h3 {
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
-    margin: 0.8rem 0;
-    color: #111111;
-  }
-
-  .guide-card p {
-    color: rgba(26, 26, 26, 0.7);
-  }
-
-  .guide-card__cta {
+  .guide-card__badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
+    gap: 0.35rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 999px;
+    background: #ffffff;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.02em;
     color: #111111;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    z-index: 2;
   }
 
-  .guide-card .accent-italic {
-    color: var(--color-accent);
+  .guide-card__badge i {
+    color: inherit;
+    font-size: 0.95em;
+  }
+
+  .guide-card:hover .guide-card__badge {
+    background: var(--color-accent);
+    color: #ffffff;
   }
 
   .hero__mini {
