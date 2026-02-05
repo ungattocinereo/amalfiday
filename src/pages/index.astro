@@ -81,9 +81,10 @@ const fallbackQuatrain =
                 muted
                 loop
                 playsinline
+                preload="none"
                 poster="/staticpages/video/atrani-sorrento-video.webp"
               >
-                <source src="/staticpages/video/atrani-sorrento-video.mp4" type="video/mp4" />
+                <source data-src="/staticpages/video/atrani-sorrento-video.mp4" type="video/mp4" />
                 <img src="/staticpages/video/atrani-sorrento-video.webp" alt="Atrani to Sorrento coast" />
               </video>
             </div>
@@ -102,6 +103,7 @@ const fallbackQuatrain =
             rel="noreferrer"
           >
             <img src="/staticpages/index/bus-timetables.webp" alt="Bus timetables" loading="lazy" />
+            <span class="hero__mini-badge">Bus timetables</span>
           </a>
         </div>
         <div class="hero__tile hero__tile--small hero__tile--small-b">
@@ -113,6 +115,7 @@ const fallbackQuatrain =
             rel="noreferrer"
           >
             <img src="/staticpages/index/ferry-timetables.webp" alt="Ferry timetables" loading="lazy" />
+            <span class="hero__mini-badge">Ferry timetables</span>
           </a>
         </div>
         <div class="hero__tile hero__tile--bottom">
@@ -405,6 +408,12 @@ const fallbackQuatrain =
     margin: 0 auto;
   }
 
+  @media (min-width: 1001px) {
+    .hero__logo img {
+      transform: scale(1.5) rotate(-5deg);
+    }
+  }
+
   .hero__tile {
     position: relative;
     border-radius: 26px;
@@ -535,6 +544,29 @@ const fallbackQuatrain =
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  .hero__mini-badge {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.6rem;
+    border-radius: 999px;
+    background: #ffffff;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 10px;
+    letter-spacing: 0.01em;
+    color: #111111;
+    white-space: nowrap;
+  }
+
+  .hero__mini--photo:hover .hero__mini-badge {
+    background: var(--color-accent);
+    color: #ffffff;
   }
 
 
@@ -1093,6 +1125,7 @@ const fallbackQuatrain =
 
 <script is:inline>
   const quatrainRoot = document.querySelector('[data-quatrains]')
+  const heroVideo = document.querySelector('.guide-card__video')
 
   if (quatrainRoot) {
     const lines = [...quatrainRoot.querySelectorAll('[data-quatrain-line]')]
@@ -1148,4 +1181,23 @@ const fallbackQuatrain =
     }
   }
 
+  if (heroVideo) {
+    const loadHeroVideo = () => {
+      const sources = heroVideo.querySelectorAll('source')
+      sources.forEach((source) => {
+        if (source.dataset.src) {
+          source.src = source.dataset.src
+          source.removeAttribute('data-src')
+        }
+      })
+      heroVideo.load()
+      heroVideo.play().catch(() => {})
+    }
+
+    if (document.readyState === 'complete') {
+      loadHeroVideo()
+    } else {
+      window.addEventListener('load', loadHeroVideo, { once: true })
+    }
+  }
 </script>
