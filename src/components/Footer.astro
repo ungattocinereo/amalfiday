@@ -75,7 +75,13 @@ import { footerLinks, socialLinks } from '../data/site'
           rel={item.external ? 'noreferrer' : undefined}
         >
           {item.label === 'Booking.com' && (
-            <i class="bi bi-building footer__icon"></i>
+            <img
+              class="footer__icon footer__icon--img"
+              src="/brand/booking.svg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+            />
           )}
           {item.label === 'AirBnb.com' && (
             <i class="fa-brands fa-airbnb footer__icon" aria-hidden="true"></i>
@@ -287,6 +293,13 @@ import { footerLinks, socialLinks } from '../data/site'
   .footer__icon {
     font-size: 0.85rem;
     color: var(--color-text-muted);
+  }
+
+  .footer__icon--img {
+    width: 1.1em;
+    height: 1.1em;
+    object-fit: contain;
+    display: inline-block;
   }
 
   .footer__bottom {

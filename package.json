@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "build:static": "astro build && node scripts/precompress.mjs",
+    "contact:api": "node scripts/contact-server.mjs",
     "update-calendars": "node scripts/update-calendars.mjs",
     "preview": "astro preview",
     "optimize-images": "node scripts/optimize-images.mjs",

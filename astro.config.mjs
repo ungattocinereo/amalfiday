@@ -5,4 +5,11 @@ export default defineConfig({
   site: 'https://amalfi.day',
   output: 'static',
   integrations: [mdx()],
+  vite: {
+    server: {
+      proxy: {
+        '/api': 'http://localhost:8787',
+      },
+    },
+  },
 })
