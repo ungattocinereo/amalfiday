@@ -49,6 +49,43 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
           Prefer WhatsApp? <a href={whatsappHref} target="_blank" rel="noreferrer">Start a chat</a>.
         </p>
       </div>
+      <div class="contact-hero__social">
+        <p class="contact-hero__social-title">
+          You can always text us on our social media
+        </p>
+        <div class="contact-hero__social-list">
+          <a
+            class="contact-hero__social-link contact-hero__social-link--instagram"
+            href="https://instagram.com/amalfi.day"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="contact-hero__social-icon">
+              <i class="bi bi-instagram"></i>
+            </span>
+            <span class="contact-hero__social-text">
+              <strong>Instagram</strong>
+              <span>@amalfi.day</span>
+            </span>
+            <span class="contact-hero__social-cta">DM</span>
+          </a>
+          <a
+            class="contact-hero__social-link contact-hero__social-link--facebook"
+            href="https://facebook.com/amalfi.day"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span class="contact-hero__social-icon">
+              <i class="bi bi-facebook"></i>
+            </span>
+            <span class="contact-hero__social-text">
+              <strong>Facebook</strong>
+              <span>Amalfi Day</span>
+            </span>
+            <span class="contact-hero__social-cta">Message</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -255,21 +292,23 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
             Your message
             <textarea name="message" rows="5" placeholder="Tell us about your plans"></textarea>
           </label>
-          <button class="button" type="submit">
-            <i class="bi bi-send"></i> Send request
-          </button>
-          <p class="form__status" aria-live="polite">
-            We will send your request directly to Telegram.
-          </p>
+          <div class="contact-form__submit-row">
+            <button class="button contact-form__submit-button" type="submit">
+              <i class="bi bi-send"></i> Send request
+            </button>
+            <p class="form__status" aria-live="polite">
+              We will send your request directly to Telegram.
+            </p>
+          </div>
         </div>
 
         <div class="contact-form__success" role="status" aria-live="polite" aria-hidden="true">
           <div class="contact-form__success-inner">
             <div class="contact-form__envelope" aria-hidden="true">
-              <div class="contact-form__envelope-letter"></div>
-              <div class="contact-form__envelope-seal">
+              <i class="bi bi-envelope-fill contact-form__envelope-icon"></i>
+              <span class="contact-form__envelope-check">
                 <i class="bi bi-check-lg"></i>
-              </div>
+              </span>
             </div>
             <div class="contact-form__success-text">
               <h3>Thank you</h3>
@@ -294,11 +333,33 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     const serviceToggle = serviceSelect?.querySelector('.service-select__toggle')
     const serviceIcon = serviceSelect?.querySelector('.service-select__icon i')
     const serviceOptions = serviceSelect?.querySelectorAll('.service-select__option')
+    const contactInput = form?.querySelector('input[name="contact"]')
 
     const setStatus = (text, state) => {
       if (!status) return
       status.textContent = text
       status.dataset.state = state || ''
+    }
+
+    const validateContact = () => {
+      if (!contactInput) return true
+      const value = contactInput.value.trim()
+      if (!value) {
+        contactInput.setCustomValidity('Please enter your email or WhatsApp number.')
+        return false
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const phoneDigits = value.replace(/\D/g, '')
+      const phoneOk = phoneDigits.length >= 7
+
+      if (!emailRegex.test(value) && !phoneOk) {
+        contactInput.setCustomValidity('Please enter a valid email or WhatsApp number.')
+        return false
+      }
+
+      contactInput.setCustomValidity('')
+      return true
     }
 
     const openServiceSelect = () => {
@@ -352,6 +413,14 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       }
     })
 
+    contactInput?.addEventListener('input', () => {
+      if (!contactInput.value.trim()) {
+        contactInput.setCustomValidity('')
+        return
+      }
+      validateContact()
+    })
+
     serviceInput?.addEventListener('click', (event) => {
       event.preventDefault()
       if (serviceSelect?.classList.contains('is-open')) {
@@ -400,6 +469,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
     form?.addEventListener('submit', async (event) => {
       event.preventDefault()
+      validateContact()
       if (serviceInput && !serviceInput.value) {
         serviceInput.setCustomValidity('Please select a service.')
         serviceSelect?.classList.add('is-invalid')
@@ -499,6 +569,8 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     min-height: 100svh;
     padding: calc(var(--header-space) + 1.5rem) 0 4rem;
     display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.65fr);
+    gap: clamp(2rem, 6vw, 4rem);
     align-items: center;
     justify-items: start;
   }
@@ -540,6 +612,104 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
   .contact-hero__note a {
     color: #ffffff;
     font-weight: 600;
+  }
+
+  .contact-hero__social {
+    width: min(380px, 100%);
+    justify-self: end;
+    position: relative;
+  }
+
+  .contact-hero__social::after {
+    content: '';
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: -16px;
+    height: 46px;
+    background: rgba(1, 98, 255, 0.35);
+    filter: blur(28px);
+    z-index: 0;
+  }
+
+  .contact-hero__social-title {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .contact-hero__social-list {
+    display: grid;
+    gap: 0.9rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-hero__social-link {
+    --social-color: rgba(255, 255, 255, 0.2);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    text-decoration: none;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  }
+
+  .contact-hero__social-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: var(--social-color);
+  }
+
+  .contact-hero__social-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.12);
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .contact-hero__social-link:hover .contact-hero__social-icon {
+    background: var(--social-color);
+    color: #ffffff;
+  }
+
+  .contact-hero__social-text {
+    display: grid;
+    gap: 0.15rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-hero__social-text strong {
+    font-size: 1rem;
+  }
+
+  .contact-hero__social-text span {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .contact-hero__social-cta {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .contact-hero__social-link--instagram {
+    --social-color: #e1306c;
+  }
+
+  .contact-hero__social-link--facebook {
+    --social-color: #1877f2;
   }
 
   .button--ghost {
@@ -855,6 +1025,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     border-radius: 14px;
     padding: 0.85rem 1rem;
     font-family: var(--font-body);
+    font-size: 1.05rem;
     background: rgba(255, 255, 255, 0.9);
     color: var(--color-text);
     transition: border 0.2s ease, box-shadow 0.2s ease;
@@ -886,6 +1057,53 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     align-items: center;
     gap: 0.5rem;
     width: fit-content;
+  }
+
+  .contact-form__submit-row {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-form__submit-button {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    padding: 1.05rem 1.9rem;
+    font-size: 1.05rem;
+    box-shadow: 0 12px 26px rgba(20, 12, 6, 0.35);
+    white-space: nowrap;
+  }
+
+  .contact-form__submit-button::after {
+    content: '';
+    position: absolute;
+    inset: -23%;
+    transform: scale(0.75);
+    z-index: -1;
+    filter: blur(22px);
+    background: radial-gradient(
+        circle,
+        rgba(255, 195, 0, 0.75) 0%,
+        rgba(255, 89, 0, 0.6) 38%,
+        rgba(255, 195, 0, 0.35) 58%,
+        rgba(255, 195, 0, 0) 72%
+      );
+    animation: cta-glow-pulse 2.8s ease-in-out infinite;
+    opacity: 0.9;
+  }
+
+  @keyframes cta-glow-pulse {
+    0%,
+    100% {
+      transform: scale(0.88);
+      opacity: 0.75;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 1;
+    }
   }
 
   .contact-form .button:disabled {
@@ -926,13 +1144,12 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
   }
 
   .contact-form__envelope {
-    width: min(360px, 78%);
-    aspect-ratio: 3 / 2;
-    border-radius: 20px;
-    background: linear-gradient(165deg, #fff7ed, #f1dfc9);
+    width: min(240px, 58%);
+    aspect-ratio: 1;
     position: relative;
-    box-shadow: 0 24px 48px rgba(12, 8, 0, 0.18);
-    overflow: hidden;
+    display: grid;
+    place-items: center;
+    color: var(--color-aux);
     transform: translateY(12px) scale(0.96);
     transition: transform 0.7s ease;
   }
@@ -941,51 +1158,18 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     transform: translateY(0) scale(1);
   }
 
-  .contact-form__envelope::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 49%, rgba(232, 214, 193, 0.92) 51%) left
-        bottom / 50% 62% no-repeat,
-      linear-gradient(225deg, transparent 49%, rgba(232, 214, 193, 0.92) 51%) right bottom / 50%
-        62% no-repeat;
+  .contact-form__envelope-icon {
+    font-size: clamp(5.2rem, 12vw, 8rem);
+    filter: drop-shadow(0 18px 32px rgba(1, 98, 255, 0.25));
   }
 
-  .contact-form__envelope::after {
-    content: '';
+  .contact-form__envelope-check {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.92) 51%) left top /
-        50% 58% no-repeat,
-      linear-gradient(-45deg, transparent 49%, rgba(255, 255, 255, 0.92) 51%) right top / 50% 58%
-        no-repeat;
-    transform-origin: top center;
-    transform: translateY(-8%) scaleY(0.9);
-    transition: transform 0.6s ease;
-  }
-
-  .contact-form.is-success .contact-form__envelope::after {
-    transform: translateY(-18%) scaleY(0.9);
-  }
-
-  .contact-form__envelope-letter {
-    position: absolute;
-    left: 10%;
-    right: 10%;
-    bottom: 12%;
-    height: 50%;
-    border-radius: 14px;
-    background: #fffdf8;
-    box-shadow: inset 0 0 0 1px rgba(210, 188, 162, 0.5);
-  }
-
-  .contact-form__envelope-seal {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 70px;
-    height: 70px;
-    transform: translate(-50%, -50%) scale(0.3);
+    right: 12%;
+    bottom: 18%;
+    width: 64px;
+    height: 64px;
+    transform: scale(0.3);
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, #ffb37a, #ff7a1a 70%);
     display: grid;
@@ -997,7 +1181,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     transition: transform 0.5s ease 0.2s, opacity 0.5s ease 0.2s;
   }
 
-  .contact-form__envelope-seal::after {
+  .contact-form__envelope-check::after {
     content: '';
     position: absolute;
     inset: 8px;
@@ -1005,8 +1189,8 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     border: 1px solid rgba(255, 255, 255, 0.7);
   }
 
-  .contact-form.is-success .contact-form__envelope-seal {
-    transform: translate(-50%, -50%) scale(1);
+  .contact-form.is-success .contact-form__envelope-check {
+    transform: scale(1);
     opacity: 1;
   }
 
@@ -1034,8 +1218,9 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
   }
 
   .form__status {
-    margin: 0.2rem 0 0;
-    color: var(--color-text-muted);
+    margin: 0;
+    color: rgba(26, 26, 26, 0.55);
+    font-size: 0.85rem;
   }
 
   .form__status[data-state='success'] {
@@ -1049,6 +1234,11 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
   @media (max-width: 980px) {
     .contact-hero__content {
       padding: calc(var(--header-space) + 2rem) 0 3rem;
+      grid-template-columns: 1fr;
+    }
+
+    .contact-hero__social {
+      justify-self: start;
     }
 
     .contact-help__grid {
@@ -1067,6 +1257,11 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
   @media (max-width: 640px) {
     .contact-form {
       padding: 2.2rem 1.5rem;
+    }
+
+    .contact-form__submit-row {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .contact-form__envelope {
