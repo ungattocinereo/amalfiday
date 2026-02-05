@@ -11,3 +11,5 @@ dist
 .opencode
 package-lock.json
 .vercel
+files
+

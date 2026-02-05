@@ -7,13 +7,14 @@ services:
     environment:
       url: https://day.cristallpont.com/blog
       NODE_ENV: production
-      server__host: 0.0.0.0
+      server__host: 127.0.0.1
       server__port: 40001
       database__client: mysql
       database__connection__host: db
       database__connection__user: ghost
       database__connection__password: EuXORAZQaK-JBQ2VNH5Y1otG
       database__connection__database: ghost
+      security__staffDeviceVerification: false
     ports:
       - "127.0.0.1:40001:40001"
     volumes:
