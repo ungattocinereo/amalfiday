@@ -5,15 +5,724 @@ const pageTitle = 'Moto roads — CristallPont Amalfi Day'
 const pageDescription =
   'Moto roads on the Amalfi Coast: scenic routes, viewpoints, and ride planning notes.'
 const shareImage = '/pre-footer/girl-on-moto-in-amalfi-small.webp'
+const mapEmbed =
+  'https://www.google.com/maps/d/u/0/embed?mid=1z8saTtHohjOPGR4ejlsJ_qT0a8KLg8g&ehbc=2E312F&ll=40.6805,14.623&z=11&output=embed'
+const mapShare =
+  'https://www.google.com/maps/d/u/0/edit?mid=1z8saTtHohjOPGR4ejlsJ_qT0a8KLg8g&usp=sharing'
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
-  <section class="section">
+  <section class="moto-hero section">
+    <svg class="moto-hero__track" viewBox="0 0 640 420" aria-hidden="true">
+      <path
+        d="M36 360C120 320 90 240 178 210C242 188 210 110 294 98C372 86 366 166 448 154C536 140 540 60 604 40"
+      />
+      <path
+        class="moto-hero__track-dash"
+        d="M36 360C120 320 90 240 178 210C242 188 210 110 294 98C372 86 366 166 448 154C536 140 540 60 604 40"
+      />
+    </svg>
+    <div class="container moto-hero__inner">
+      <div class="moto-hero__copy">
+        <div class="shoot-bridge__eyebrow moto-hero__eyebrow">
+          A mountain ride through Tramonti valley
+        </div>
+        <h1 class="moto-hero__title">
+          moto <span class="accent-italic">roads</span>
+        </h1>
+        <p class="moto-hero__lead">
+          A windiest way up. Road from Amalfi to Agerola, famous path of the gods and more…
+        </p>
+        <div class="moto-hero__actions">
+          <a class="button" href="#route-map">See the road</a>
+          <span class="moto-hero__soon">Coming soon</span>
+        </div>
+      </div>
+      <aside class="moto-hero__aside">
+        <div class="card moto-hero__stat">
+          <div class="moto-hero__stat-value">96%</div>
+          <div class="moto-hero__stat-label">Unknown by tourists</div>
+          <div class="moto-hero__stat-foot">Locations</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section moto-route" id="route-map">
+    <div class="container moto-route__grid">
+      <div class="moto-route__copy">
+        <div class="shoot-bridge__eyebrow">Route overview</div>
+        <div class="moto-route__stats">
+          <div class="moto-route__stat">
+            <div class="moto-route__stat-value">42.40</div>
+            <div class="moto-route__stat-unit">km</div>
+            <div class="moto-route__stat-label">Length of the road</div>
+          </div>
+          <div class="moto-route__stat">
+            <div class="moto-route__stat-value">694</div>
+            <div class="moto-route__stat-unit">m</div>
+            <div class="moto-route__stat-label">Maximum elevation</div>
+          </div>
+        </div>
+        <h2 class="moto-route__title">
+          Explore the Untold Beauty of the Amalfi Coast: Ride through
+          <span class="moto-route__highlight">
+            <span class="accent-italic">Tramonti</span> Valley
+          </span>
+        </h2>
+        <p>
+          Get ready to uncover the raw, untamed beauty of the Amalfi Coast as you navigate the
+          twists and turns of Tramonti Valley. This off-the-beaten-path route is a dream come true
+          for those seeking an authentic Italian experience away from the crowds. This is your
+          chance to see the Amalfi Coast through a new lens – one that’s unfiltered, unapologetic,
+          and absolutely unforgettable.
+        </p>
+        <p>
+          We have prepared this map in different formats that you can use on your navigators or
+          online.
+        </p>
+        <div class="moto-route__links">
+          <a
+            class="moto-route__link moto-route__link--primary"
+            href="https://amalfi.day/files/Maps/Tramonti-Valley-driving.kmz"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i class="bi bi-download"></i>
+            Download KMZ
+          </a>
+          <a
+            class="moto-route__link"
+            href="https://amalfi.day/files/Maps/Tramonti-Valley-driving.gpx"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i class="bi bi-download"></i>
+            Download GPX
+          </a>
+          <a
+            class="moto-route__link moto-route__link--maps"
+            href={mapShare}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i class="bi bi-map"></i>
+            Google Maps
+          </a>
+        </div>
+      </div>
+      <div class="moto-route__map">
+        <iframe
+          title="Tramonti Valley moto map"
+          src={mapEmbed}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section moto-notes">
     <div class="container">
-      <h1>
-        Moto <span class="accent-italic">roads</span>
-      </h1>
-      <p>Page content will be added soon.</p>
+      <div class="moto-notes__intro">
+        <div class="shoot-bridge__eyebrow">Route letters</div>
+        <h2>
+          Amalfi Coast’s Best-Kept <span class="accent-italic">Secret</span>
+        </h2>
+        <p class="moto-notes__lead">
+          Step by step Journey through this unusual Amalfi Coast motorbike Journey
+        </p>
+      </div>
+      <div class="moto-notes__list">
+        <article class="card moto-note">
+          <div class="moto-note__letter">A</div>
+          <div>
+            <h3>
+              Atrani: The <span class="accent-italic">Starting</span> Point
+            </h3>
+            <p>
+              Begin your adventure in the charming coastal town of Atrani, known for its
+              picturesque streets and historic architecture.
+            </p>
+          </div>
+        </article>
+        <article class="card moto-note">
+          <div class="moto-note__letter">B</div>
+          <div>
+            <h3>
+              Ravello: A <span class="accent-italic">Scenic</span> Viewpoint
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget bibendum libero.
+              Etiam id velit at enim porttitor facilisis. Vivamus tincidunt lectus at risus
+              pharetra ultrices. In tincidunt turpis at odio dapibus maximus.
+            </p>
+          </div>
+        </article>
+        <article class="card moto-note">
+          <div class="moto-note__letter">C</div>
+          <div>
+            <h3>
+              Caseificio Vicedomini: <span class="accent-italic">Mozzarella</span> Heaven
+            </h3>
+            <p>
+              At the crossroad, discover Caseificio Vicedomini, a renowned mozzarella factory
+              offering delectable, locally-made cheese. Located on the ground floor of a
+              building, this hidden gem can be a bit tricky to find. To enter, look to your right
+              and find the stairs leading down. At the bottom, you’ll see a door with a bell to
+              ring. Once inside, you can purchase their exquisite mozzarella, but keep in mind
+              that they only accept cash payments. Don’t miss the opportunity to taste some of the
+              finest mozzarella in the region!
+            </p>
+          </div>
+        </article>
+        <article class="card moto-note">
+          <div class="moto-note__letter">D</div>
+          <div>
+            <h3>
+              Cantina Apicella: <span class="accent-italic">Wine</span> Lover's Paradise
+            </h3>
+            <p>
+              Proceed to Cantina Apicella, one of the Amalfi Coast’s largest wine producers, known
+              for its impressive annual output of 70,000 bottles. Here, you can purchase local
+              wine in various sizes, from single bottles to massive 5-liter bottles. For a more
+              immersive experience, book a visit to organize wine tastings and excursions to the
+              winery and their picturesque garden.
+            </p>
+            <p class="moto-note__hint">Text us if you need help to book your visit.</p>
+            <p>
+              As you savor the flavors of the Amalfi Coast, remember to drink responsibly and
+              drive safely, ensuring a memorable and enjoyable journey through this stunning
+              region.
+            </p>
+          </div>
+        </article>
+        <article class="card moto-note">
+          <div class="moto-note__letter">E</div>
+          <div>
+            <h3>
+              Tramonti Cemetery: A <span class="accent-italic">Unique</span> Resting Place
+            </h3>
+            <p>
+              Encounter the distinctive Tramonti cemetery, nestled in the heart of the valley and
+              surrounded by stunning mountain scenery.
+            </p>
+          </div>
+        </article>
+        <article class="card moto-note">
+          <div class="moto-note__letter">G</div>
+          <div>
+            <h3>
+              Valico Chiunzi: An <span class="accent-italic">Iconic</span> Viewpoint
+            </h3>
+            <p>
+              Ascend to Valico Chiunzi, a restaurant and viewpoint 880 meters above sea level,
+              offering unparalleled vistas of the Naples Valley and Mount Vesuvius.
+            </p>
+          </div>
+        </article>
+        <article class="card moto-note">
+          <div class="moto-note__letter">H</div>
+          <div>
+            <h3>
+              Hidden Waterfall: A <span class="accent-italic">Natural</span> Wonder
+            </h3>
+            <p>
+              Near Maiori, take a short hike behind the mountain to uncover a magnificent waterfall
+              and a river
+            </p>
+          </div>
+        </article>
+        <article class="card moto-note">
+          <div class="moto-note__letter">I</div>
+          <div>
+            <h3>
+              Sal De Riso: <span class="accent-italic">Sweet</span> Delights in Minori
+            </h3>
+            <p>
+              Indulge your taste buds at Sal De Riso, Minori’s premier pastry shop, renowned for
+              its irresistible Italian desserts.
+            </p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .moto-hero {
+    --moto-hero-text: #1a1a1a;
+    --moto-hero-muted: rgba(26, 26, 26, 0.72);
+    --moto-hero-eyebrow: rgba(26, 26, 26, 0.7);
+    --moto-hero-track: rgba(255, 255, 255, 0.45);
+    --moto-hero-dash: rgba(26, 26, 26, 0.6);
+    --moto-hero-shadow: rgba(0, 0, 0, 0.2);
+    --moto-hero-card-bg: rgba(255, 255, 255, 0.82);
+    --moto-hero-card-border: rgba(255, 255, 255, 0.35);
+    --moto-hero-soon-border: rgba(26, 26, 26, 0.28);
+    --moto-hero-soon-bg: rgba(255, 255, 255, 0.35);
+    position: relative;
+    overflow: hidden;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-space) + clamp(2rem, 6vw, 4rem)) 0
+      clamp(3rem, 6vw, 5rem);
+    background: var(--gradient-sunset);
+    color: var(--moto-hero-text);
+  }
+
+  .moto-hero p {
+    color: var(--moto-hero-muted);
+  }
+
+  .moto-hero .container {
+    width: 100%;
+  }
+
+  .moto-hero .accent-italic {
+    text-shadow: 0 6px 16px var(--moto-hero-shadow);
+  }
+
+  .moto-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.35), transparent 55%),
+      radial-gradient(circle at 86% 8%, rgba(255, 255, 255, 0.28), transparent 48%),
+      radial-gradient(circle at 78% 80%, rgba(1, 98, 255, 0.18), transparent 45%);
+    z-index: 0;
+  }
+
+  .moto-hero__track {
+    position: absolute;
+    right: -8%;
+    top: -12%;
+    width: min(70%, 720px);
+    height: auto;
+    opacity: 0.7;
+    z-index: 0;
+    filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.18));
+  }
+
+  .moto-hero__track path {
+    stroke: var(--moto-hero-track);
+    stroke-width: 10;
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .moto-hero__track-dash {
+    stroke: var(--moto-hero-dash);
+    stroke-width: 3;
+    stroke-dasharray: 6 14;
+    animation: moto-dash 8s linear infinite;
+  }
+
+  .moto-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.7fr);
+    gap: clamp(2rem, 6vw, 4rem);
+    align-items: center;
+  }
+
+  .moto-hero__copy > * {
+    opacity: 0;
+    animation: moto-rise 0.9s ease forwards;
+  }
+
+  .moto-hero__copy > *:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+  .moto-hero__copy > *:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .moto-hero__copy > *:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .moto-hero__copy > *:nth-child(4) {
+    animation-delay: 0.45s;
+  }
+
+  .shoot-bridge__eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .moto-hero__eyebrow {
+    color: var(--moto-hero-eyebrow);
+    display: inline-flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .moto-hero__title {
+    margin: 1rem 0 1.2rem;
+    line-height: 0.95;
+    font-size: clamp(3rem, 8vw, 6.6rem);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-shadow: 0 18px 40px var(--moto-hero-shadow);
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.35em;
+  }
+
+  .moto-hero__title .accent-italic {
+    text-transform: uppercase;
+  }
+
+  .moto-hero__lead {
+    max-width: 34rem;
+    font-size: 1.1rem;
+  }
+
+  .moto-hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .moto-hero .button {
+    box-shadow: 0 12px 28px rgba(26, 26, 26, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+  }
+
+  .moto-hero__soon {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.72rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1px dashed var(--moto-hero-soon-border);
+    background: var(--moto-hero-soon-bg);
+    color: var(--moto-hero-text);
+  }
+
+  .moto-hero__aside {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .moto-hero__stat {
+    position: relative;
+    padding: 2.2rem;
+    border-radius: calc(var(--radius-lg) + 8px);
+    min-width: 220px;
+    background: var(--moto-hero-card-bg);
+    border: 1px solid var(--moto-hero-card-border);
+  }
+
+  .moto-hero__stat::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border-radius: calc(var(--radius-lg) - 4px);
+    border: 1px dashed rgba(255, 89, 0, 0.3);
+    pointer-events: none;
+  }
+
+  .moto-hero__stat-value {
+    font-size: clamp(2.6rem, 5vw, 4.4rem);
+    font-family: var(--font-display);
+    color: var(--moto-hero-text);
+  }
+
+  .moto-hero__stat-label {
+    font-weight: 600;
+    margin-top: 0.4rem;
+    color: var(--moto-hero-text);
+  }
+
+  .moto-hero__stat-foot {
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+    color: var(--moto-hero-muted);
+  }
+
+  .moto-route {
+    padding-top: 1rem;
+  }
+
+  .moto-route__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .moto-route__stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .moto-route__stat-value {
+    font-size: clamp(2.5rem, 5vw, 4.6rem);
+    font-family: var(--font-display);
+    color: var(--color-text);
+  }
+
+  .moto-route__stat-unit {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .moto-route__stat-label {
+    font-size: 0.95rem;
+    margin-top: 0.35rem;
+    color: var(--color-text-muted);
+  }
+
+  .moto-route__title {
+    font-size: clamp(2.1rem, 4.5vw, 3.6rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .moto-route__highlight {
+    position: relative;
+    display: inline-block;
+  }
+
+  .moto-route__highlight::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.05em;
+    height: 0.35em;
+    background: rgba(255, 89, 0, 0.2);
+    z-index: -1;
+    border-radius: 999px;
+  }
+
+  .moto-route__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .moto-route__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .moto-route__link--primary {
+    background: var(--gradient-sunset);
+    border: none;
+    color: #ffffff;
+  }
+
+  .moto-route__link--maps {
+    background: var(--gradient-azure);
+    border: none;
+    color: #ffffff;
+  }
+
+  .moto-route__link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+    text-decoration: none;
+  }
+
+  .moto-route__map {
+    position: sticky;
+    top: calc(var(--header-space) + 1.5rem);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    background: var(--color-card);
+    min-height: 480px;
+  }
+
+  .moto-route__map::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 46px;
+    background: var(--color-card);
+    opacity: 0.95;
+    pointer-events: none;
+  }
+
+  .moto-route__map iframe {
+    width: 100%;
+    height: 520px;
+    border: 0;
+    filter: grayscale(1) saturate(0) contrast(1.05) brightness(0.95);
+  }
+
+  .moto-notes__intro {
+    max-width: 720px;
+    margin-bottom: 2.5rem;
+  }
+
+  .moto-notes__lead {
+    font-size: 1.05rem;
+    margin-top: 0.6rem;
+  }
+
+  .moto-notes__list {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .moto-note {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    padding: 1.6rem;
+  }
+
+  .moto-note h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .moto-note__letter {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--gradient-sunset);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .moto-note__hint {
+    margin: 1rem 0 0.75rem;
+    padding: 0.8rem 1rem;
+    border-radius: 14px;
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  @keyframes moto-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes moto-dash {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: -120;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .moto-hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .moto-hero__aside {
+      justify-content: flex-start;
+    }
+
+    .moto-route__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .moto-route__map {
+      position: static;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .moto-hero__track {
+      display: none;
+    }
+
+    .moto-hero__title {
+      letter-spacing: 0.08em;
+    }
+
+    .moto-route__stats {
+      gap: 1.5rem;
+    }
+
+    .moto-route__map iframe {
+      height: 360px;
+    }
+
+    .moto-note {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .moto-hero__copy > * {
+      animation: none;
+      opacity: 1;
+    }
+
+    .moto-hero__track-dash {
+      animation: none;
+    }
+  }
+
+  :global([data-theme='night']) .moto-hero {
+    --moto-hero-text: #f5f5f5;
+    --moto-hero-muted: rgba(245, 245, 245, 0.72);
+    --moto-hero-eyebrow: rgba(245, 245, 245, 0.7);
+    --moto-hero-track: rgba(255, 255, 255, 0.25);
+    --moto-hero-dash: rgba(255, 255, 255, 0.65);
+    --moto-hero-shadow: rgba(0, 0, 0, 0.45);
+    --moto-hero-card-bg: rgba(15, 17, 21, 0.7);
+    --moto-hero-card-border: rgba(255, 255, 255, 0.1);
+    --moto-hero-soon-border: rgba(255, 255, 255, 0.35);
+    --moto-hero-soon-bg: rgba(15, 17, 21, 0.35);
+    background: linear-gradient(135deg, #4a1400 0%, #b34700 55%, #ffb300 100%);
+  }
+
+  :global([data-theme='night']) .moto-hero::before {
+    background:
+      radial-gradient(circle at 12% 18%, rgba(0, 0, 0, 0.35), transparent 58%),
+      radial-gradient(circle at 86% 8%, rgba(0, 0, 0, 0.3), transparent 52%),
+      radial-gradient(circle at 78% 80%, rgba(1, 98, 255, 0.25), transparent 45%);
+  }
+
+  :global([data-theme='night']) .moto-route__map iframe {
+    filter: grayscale(1) saturate(0) contrast(1.1) brightness(0.75);
+  }
+</style>

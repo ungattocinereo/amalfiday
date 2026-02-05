@@ -91,26 +91,24 @@ const fallbackQuatrain =
         </div>
         <div class="hero__tile hero__tile--small hero__tile--small-a">
           <a
-            class="hero__mini hero__mini--stack"
+            class="hero__mini hero__mini--photo"
             href={heroLinks.busPdf}
             id="bus"
             target="_blank"
             rel="noreferrer"
           >
-            <i class="bi bi-bus-front hero__icon hero__icon--azure"></i>
-            <strong>Bus timetables</strong>
+            <img src="/staticpages/index/bus-timetables.webp" alt="Bus timetables" loading="lazy" />
           </a>
         </div>
         <div class="hero__tile hero__tile--small hero__tile--small-b">
           <a
-            class="hero__mini hero__mini--stack"
+            class="hero__mini hero__mini--photo"
             href={heroLinks.ferryPdf}
             id="ferry"
             target="_blank"
             rel="noreferrer"
           >
-            <i class="bi bi-ticket-perforated hero__icon hero__icon--sunset"></i>
-            <strong>Ferry timetables</strong>
+            <img src="/staticpages/index/ferry-timetables.webp" alt="Ferry timetables" loading="lazy" />
           </a>
         </div>
         <div class="hero__tile hero__tile--bottom">
@@ -513,6 +511,24 @@ const fallbackQuatrain =
     height: 100%;
     color: #1a1a1a;
   }
+
+  .hero__mini--photo {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    color: #ffffff;
+    justify-content: stretch;
+    border: none;
+    background: transparent;
+  }
+
+  .hero__mini--photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
 
   .hero__mini--stack {
     flex-direction: column;

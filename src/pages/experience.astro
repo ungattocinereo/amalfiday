@@ -1,19 +1,576 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 
+const heroImages = [
+  '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg',
+  '/photoshootings/hero/couple/02-slideshow-regan-walk-ravello-love-1024x682.webp',
+  '/photoshootings/hero/personal/iiana-photo-hero-atrani-hat-2-1024x680.webp',
+]
+
+const photoshootingPreview = [
+  '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
+  '/photoshootings/individual/bissa-ninfulenser-icecream.jpg',
+  '/photoshootings/couples/DSC0789.jpg',
+  '/photoshootings/couples/katerina-kuznezova-praiano-2021-002.jpg',
+]
+
 const pageTitle = 'Experiences — CristallPont Amalfi Day'
 const pageDescription =
-  'Curated Amalfi Coast experiences: photo sessions, day tours, and local routes crafted around golden light and easy pacing.'
-const shareImage = '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg'
+  'Bespoke Amalfi Coast experiences: photo shoots, scenic rides, and curated local tastings hosted by a true local.'
+const shareImageAlt = 'Amalfi Coast experience hero'
+const shareImage = heroImages[0]
+
+const experienceCards = [
+  {
+    title: 'Mountain Drive & Wine Table Escape',
+    text:
+      'Ride the mountain road in a private car, stop for sweeping viewpoints, then linger over a slow wine tasting and local lunch. Scenic, unhurried, unforgettable.',
+  },
+  {
+    title: 'A Photographic Motorcycle Adventure',
+    text:
+      'Discover the coast on a private motorbike tour with a storyteller-guide. We trace cliffside roads, pause at cinematic overlooks, and capture candid moments in motion.',
+  },
+  {
+    title: 'Amalfi Unfiltered. Framing the Beauty',
+    text:
+      'A one-of-a-kind photo session led by a fashion‑magazine graphic designer. Expect editorial direction, bold composition, and light curated to the minute.',
+  },
+]
+
+const experienceTags = [
+  'Photo sessions',
+  'Private tours',
+  'Wine tastings',
+  'Motorbike adventures',
+  'Village routes',
+  'Hidden beaches',
+]
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
-  <section class="section">
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} imageAlt={shareImageAlt}>
+  <section class="experience-hero">
+    <div class="container experience-hero__inner">
+      <div class="experience-hero__content">
+        <span class="badge">Amalfi Day Experiences</span>
+        <h1>
+          Experiences from the <span class="accent-italic">Amalfi Coast</span>
+        </h1>
+        <p>
+          Tailored days of light, flavor, and motion — curated by a local guide who knows where the
+          coast is most alive.
+        </p>
+        <ul class="experience-hero__tags">
+          {experienceTags.map((tag) => (
+            <li class="experience-tag">{tag}</li>
+          ))}
+        </ul>
+        <div class="experience-hero__actions">
+          <a class="button" href="/contact">Plan your experience</a>
+          <a class="button secondary" href="/photoshootings">See photoshootings</a>
+        </div>
+      </div>
+      <div class="experience-hero__media" aria-hidden="true">
+        {heroImages.map((src, index) => (
+          <figure class="experience-hero__image">
+            <img src={src} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section photo-preview">
+    <div class="container photo-preview__grid">
+      <div class="photo-preview__content">
+        <div class="section__header">
+          <span class="guide-eyebrow">Photoshootings by Amalfi.Day</span>
+          <h2>A preview of the photo stories we create</h2>
+          <p>
+            Golden-hour walks, cinematic alleys, and quiet terraces — here’s a glimpse of the mood
+            and locations we build for every session.
+          </p>
+        </div>
+        <a class="link-arrow" href="/photoshootings">
+          Explore all photoshootings <i class="bi bi-arrow-up-right"></i>
+        </a>
+      </div>
+      <div class="photo-preview__gallery">
+        {photoshootingPreview.map((src) => (
+          <div class="photo-preview__tile">
+            <img src={src} alt="Amalfi Coast photoshooting" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section experience-list">
     <div class="container">
-      <h1>
-        Amalfi <span class="accent-italic">experiences</span>
-      </h1>
-      <p>This page will highlight curated photo experiences and tours.</p>
+      <div class="section__header experience-list__header">
+        <span class="guide-eyebrow guide-eyebrow--light">Experiences</span>
+        <h2>Experiences</h2>
+        <p>Three ways to feel the coast — from quiet panoramas to fast, photo‑ready adventures.</p>
+      </div>
+      <div class="experience-cards">
+        {experienceCards.map((item) => (
+          <article class="experience-card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section story">
+    <div class="container story__inner">
+      <span class="guide-eyebrow">Guided tours are the most enjoyable</span>
+      <h2>The man who knows</h2>
+      <p>
+        My name is Greg. I built this website to share my personal experience and deep knowledge of
+        the Amalfi Coast. After years living here and exploring every corner, I design tours that
+        feel effortless, intimate, and full of local secrets. Join me to discover the coast the way
+        locals do.
+      </p>
+    </div>
+  </section>
+
+  <section class="section expertise">
+    <div class="container expertise__grid">
+      <article class="card expertise__item">
+        <h3>I’m a photographer</h3>
+        <p>
+          Years of fashion‑magazine work trained my eye for light, color, and composition — perfect
+          for turning spontaneous moments into cinematic frames.
+        </p>
+      </article>
+      <article class="card expertise__item">
+        <h3>Eno‑gastronomy master</h3>
+        <p>
+          I know the wines, kitchens, and stories behind them. You’ll taste the coast with someone
+          who speaks the language of local food and wine.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section guide-section">
+    <div class="container guide-section__grid">
+      <div class="guide-section__content">
+        <span class="guide-eyebrow guide-eyebrow--dark">Only here you can find</span>
+        <h2>Greg's personal guide for guests</h2>
+        <p>
+          Inside my private guide I recommend every place I’ve tested myself: panoramic viewpoints,
+          hidden beaches, authentic kitchens, and the exact timing that makes each spot magical.
+        </p>
+        <a class="guide-button" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
+          Open the guide <i class="bi bi-arrow-up-right"></i>
+        </a>
+      </div>
+      <div class="guide-section__media">
+        <div class="guide-video">
+          <span class="guide-video__title">guide.amalfi.day</span>
+          <span class="guide-video__note">Video frame placeholder</span>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .guide-eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.6rem;
+    display: inline-flex;
+  }
+
+  .guide-eyebrow--light {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .guide-eyebrow--dark {
+    color: rgba(26, 26, 26, 0.7);
+  }
+
+  .section__header {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .section__header h2 {
+    font-size: clamp(1.9rem, 3.2vw, 3rem);
+  }
+
+  .section__header p {
+    max-width: 34rem;
+  }
+
+  .experience-hero {
+    position: relative;
+    padding: 7rem 0 5.5rem;
+    overflow: hidden;
+    background: #ff5900;
+    color: #ffffff;
+  }
+
+  .experience-hero::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: min(1200px, 140vw);
+    height: min(1200px, 140vw);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 195, 0, 0.95) 0%,
+      rgba(255, 126, 0, 0.9) 45%,
+      rgba(255, 89, 0, 1) 72%
+    );
+    opacity: 0.95;
+    pointer-events: none;
+  }
+
+  .experience-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .experience-hero__content h1 {
+    font-size: clamp(2.4rem, 4.8vw, 4.5rem);
+    line-height: 1.05;
+    color: #ffffff;
+  }
+
+  .experience-hero__content p {
+    max-width: 520px;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .experience-hero .accent-italic {
+    color: #ffc300;
+  }
+
+  .experience-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 1.8rem 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .experience-tag {
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #ffffff;
+    backdrop-filter: blur(6px);
+  }
+
+  .experience-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .experience-hero .button {
+    background: #ffffff;
+    color: #1a1a1a;
+  }
+
+  .experience-hero .button:hover {
+    background: #ffe9bf;
+    color: #1a1a1a;
+  }
+
+  .experience-hero .button.secondary {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+  }
+
+  .experience-hero .button.secondary:hover {
+    background: rgba(255, 255, 255, 0.28);
+    color: #ffffff;
+  }
+
+  .experience-hero__media {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, 200px);
+    gap: 1rem;
+  }
+
+  .experience-hero__image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lift);
+    position: relative;
+  }
+
+  .experience-hero__image:nth-child(1) {
+    grid-row: 1 / span 2;
+  }
+
+  .experience-hero__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-preview {
+    padding-top: 4.5rem;
+    background: var(--color-surface);
+  }
+
+  .photo-preview__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .photo-preview__gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .photo-preview__tile {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .photo-preview__tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .experience-list {
+    background: linear-gradient(140deg, #0f1115 0%, #1a1f27 50%, #10151b 100%);
+    color: #ffffff;
+  }
+
+  .experience-list__header {
+    max-width: 700px;
+    margin-bottom: 2.5rem;
+  }
+
+  .experience-list__header h2 {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+  }
+
+  .experience-list__header p {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .experience-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .experience-card {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+  }
+
+  .experience-card h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1.35rem;
+    color: #ffffff;
+  }
+
+  .experience-card p {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .story__inner {
+    max-width: 760px;
+  }
+
+  .story__inner h2 {
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+  }
+
+  .expertise__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .expertise__item {
+    padding: 2rem;
+  }
+
+  .expertise__item h3 {
+    margin-bottom: 0.8rem;
+  }
+
+  .guide-section {
+    background: var(--gradient-sunset);
+    color: #1a1a1a;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .guide-section::before {
+    content: '';
+    position: absolute;
+    inset: -40% 20% auto auto;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    filter: blur(0.5px);
+  }
+
+  .guide-section__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .guide-section p {
+    color: rgba(26, 26, 26, 0.75);
+  }
+
+  .guide-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.9rem 1.4rem;
+    border-radius: 999px;
+    background: #1a1a1a;
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .guide-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+    color: #ffffff;
+  }
+
+  .guide-section__media {
+    width: 100%;
+  }
+
+  .guide-video {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .guide-video::after {
+    content: '';
+    position: absolute;
+    inset: 12% 18% auto auto;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    filter: blur(2px);
+  }
+
+  .guide-video__title {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    color: #1a0e00;
+  }
+
+  .guide-video__note {
+    position: absolute;
+    bottom: 1.2rem;
+    right: 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(26, 14, 0, 0.65);
+  }
+
+  @media (max-width: 960px) {
+    .experience-hero__inner,
+    .photo-preview__grid,
+    .guide-section__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .experience-hero__media {
+      grid-template-rows: repeat(2, 180px);
+    }
+
+    .experience-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .expertise__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .experience-hero {
+      padding: 6rem 0 4rem;
+    }
+
+    .experience-hero__media {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 180px);
+    }
+
+    .experience-hero__image:nth-child(1) {
+      grid-row: auto;
+    }
+
+    .photo-preview__gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
