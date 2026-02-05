@@ -1054,6 +1054,53 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     padding-right: 2.8rem;
   }
 
+  :global([data-theme='night']) .contact-form {
+    background: linear-gradient(140deg, rgba(20, 22, 27, 0.95), rgba(16, 18, 23, 0.98));
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.55);
+  }
+
+  :global([data-theme='night']) .contact-form::before {
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.4), rgba(0, 156, 255, 0.3));
+  }
+
+  :global([data-theme='night']) input,
+  :global([data-theme='night']) textarea,
+  :global([data-theme='night']) select {
+    background: rgba(18, 21, 26, 0.95);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--color-text);
+  }
+
+  :global([data-theme='night']) input::placeholder,
+  :global([data-theme='night']) textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  :global([data-theme='night']) select {
+    background-image: linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.6) 50%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.6) 50%, transparent 50%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12));
+  }
+
+  :global([data-theme='night']) .service-select__toggle {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  :global([data-theme='night']) .service-select__menu {
+    background: #111319;
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  :global([data-theme='night']) .service-select__option {
+    color: var(--color-text);
+  }
+
+  :global([data-theme='night']) .service-select__option:hover,
+  :global([data-theme='night']) .service-select__option[aria-selected='true'] {
+    background: rgba(1, 98, 255, 0.18);
+  }
+
   .contact-form .button {
     display: inline-flex;
     align-items: center;
@@ -1227,6 +1274,10 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     margin: 0;
     color: rgba(26, 26, 26, 0.55);
     font-size: 0.85rem;
+  }
+
+  :global([data-theme='night']) .form__status {
+    color: rgba(245, 245, 245, 0.55);
   }
 
   .form__status[data-state='success'] {
