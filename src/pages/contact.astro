@@ -313,7 +313,9 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
             <div class="contact-form__success-text">
               <h3>Thank you</h3>
               <p>Your form was submited and delivered.</p>
-              <a class="contact-form__reset" href="#">Do you want to send another one?</a>
+              <p class="contact-form__reset-line">
+                Do you want to <a class="contact-form__reset" href="#">send another</a> one?
+              </p>
             </div>
           </div>
         </div>
@@ -1165,8 +1167,8 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
   .contact-form__envelope-check {
     position: absolute;
-    right: 12%;
-    bottom: 18%;
+    top: -6%;
+    right: -2%;
     width: 64px;
     height: 64px;
     transform: scale(0.3);
@@ -1196,7 +1198,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
   .contact-form__success-text {
     display: grid;
-    gap: 0.4rem;
+    gap: 0.2rem;
   }
 
   .contact-form__success-text h3 {
@@ -1207,6 +1209,10 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
   .contact-form__success-text p {
     margin: 0;
     color: var(--color-text-muted);
+  }
+
+  .contact-form__reset-line {
+    margin: 0;
   }
 
   .contact-form__reset {
