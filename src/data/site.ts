@@ -65,23 +65,25 @@ export const footerLinks = {
   transport: [
     { label: 'Ferry timetables', href: 'https://cnr.pw/ferry', external: true },
     { label: 'Bus timetables', href: 'https://cnr.pw/bus', external: true },
-    { label: 'Airport shuttle', href: '#airport' },
-    { label: "Greg's guide", href: site.guideUrl, external: true },
+    { label: 'Airport shuttle', href: '/how-to-get' },
+    { label: 'All public transport', href: '/timetables' },
   ],
   apartments: [
+    { label: "Greg's guide", href: site.guideUrl, external: true },
+    { label: 'Apartment overview', href: '/apartments' },
     { label: 'Booking.com', href: 'https://www.booking.com', external: true },
     { label: 'Airbnb', href: 'https://www.airbnb.com', external: true },
-    { label: 'Apartments overview', href: '/apartments' },
   ],
   info: [
-    { label: 'How to get here', href: '/how-to-get' },
-    { label: 'What to do', href: '/what-to-do' },
+    { label: 'What to do', href: '/experience' },
     { label: 'Parking tips', href: '/parking' },
     { label: 'Beach reviews', href: '/beaches' },
+    { label: 'Moto roads', href: '/moto' },
   ],
   blog: [
-    { label: 'Latest post in blog', href: '/blog' },
-    { label: 'Random blog post', href: '/blog?random=1' },
+    { label: 'Amalfi News', href: '/blog' },
+    { label: 'Contact us', href: '/contact' },
+    { label: '', href: '#', spacer: true },
     { label: 'Add to bookmarks', href: '#bookmark', action: 'bookmark' },
   ],
 }

@@ -1,16 +1,41 @@
 ---
 import { footerLinks, socialLinks } from '../data/site'
-import LogoMark from './LogoMark.astro'
 ---
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <LogoMark class="footer__logo" />
+      <div class="footer__logo-wrap" role="img" aria-label="Amalfi Day logo">
+        <img
+          class="footer__logo footer__logo--light"
+          src="/brand/logo-color-black.svg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
+        <img
+          class="footer__logo footer__logo--dark"
+          src="/brand/logo-color-white.svg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+        />
+      </div>
       <div class="footer__social">
         {socialLinks
           .filter((item) => ['Instagram', 'Facebook', 'Twitter'].includes(item.label))
           .map((item) => (
-            <a class="footer__social-link" href={item.href} target="_blank" rel="noreferrer">
+            <a
+              class={`footer__social-link ${
+                item.label === 'Instagram'
+                  ? 'footer__social-link--instagram'
+                  : item.label === 'Facebook'
+                    ? 'footer__social-link--facebook'
+                    : 'footer__social-link--twitter'
+              }`}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+            >
               {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
               {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
               {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
@@ -22,7 +47,7 @@ import LogoMark from './LogoMark.astro'
     <div class="footer__column">
       {footerLinks.transport.map((item) => (
         <a
-          class="footer__link"
+          class={`footer__link ${item.label === "Greg's guide" ? 'footer__link--nowrap' : ''}`}
           href={item.href}
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noreferrer' : undefined}
@@ -33,7 +58,7 @@ import LogoMark from './LogoMark.astro'
           {item.label === 'Airport shuttle' && (
             <i class="bi bi-airplane footer__icon"></i>
           )}
-          {item.label === "Greg's guide" && (
+          {item.label === 'All public transport' && (
             <i class="bi bi-map footer__icon"></i>
           )}
           {item.label}
@@ -55,8 +80,11 @@ import LogoMark from './LogoMark.astro'
           {item.label === 'Airbnb' && (
             <i class="bi bi-house-door footer__icon"></i>
           )}
-          {item.label === 'Apartments overview' && (
+          {item.label === 'Apartment overview' && (
             <i class="bi bi-house-heart footer__icon"></i>
+          )}
+          {item.label === "Greg's guide" && (
+            <i class="bi bi-signpost-split footer__icon"></i>
           )}
           {item.label}
         </a>
@@ -66,9 +94,6 @@ import LogoMark from './LogoMark.astro'
     <div class="footer__column">
       {footerLinks.info.map((item) => (
         <a class="footer__link" href={item.href}>
-          {item.label === 'How to get here' && (
-            <i class="bi bi-geo-alt footer__icon"></i>
-          )}
           {item.label === 'What to do' && (
             <i class="bi bi-stars footer__icon"></i>
           )}
@@ -78,6 +103,9 @@ import LogoMark from './LogoMark.astro'
           {item.label === 'Beach reviews' && (
             <i class="bi bi-umbrella footer__icon"></i>
           )}
+          {item.label === 'Moto roads' && (
+            <i class="bi bi-map footer__icon"></i>
+          )}
           {item.label}
         </a>
       ))}
@@ -85,22 +113,26 @@ import LogoMark from './LogoMark.astro'
 
     <div class="footer__column">
       {footerLinks.blog.map((item) => (
-        <a
-          class="footer__link"
-          href={item.href}
-          data-bookmark={item.action === 'bookmark' ? 'true' : undefined}
-        >
-          {item.label === 'Latest post in blog' && (
-            <i class="bi bi-newspaper footer__icon"></i>
-          )}
-          {item.label === 'Random blog post' && (
-            <i class="bi bi-shuffle footer__icon"></i>
-          )}
-          {item.label === 'Add to bookmarks' && (
-            <i class="bi bi-bookmark-plus footer__icon"></i>
-          )}
-          {item.label}
-        </a>
+        item.spacer ? (
+          <span class="footer__spacer" aria-hidden="true"></span>
+        ) : (
+          <a
+            class="footer__link"
+            href={item.href}
+            data-bookmark={item.action === 'bookmark' ? 'true' : undefined}
+          >
+            {item.label === 'Amalfi News' && (
+              <i class="bi bi-newspaper footer__icon"></i>
+            )}
+            {item.label === 'Contact us' && (
+              <i class="bi bi-envelope footer__icon"></i>
+            )}
+            {item.label === 'Add to bookmarks' && (
+              <i class="bi bi-bookmark-plus footer__icon"></i>
+            )}
+            {item.label}
+          </a>
+        )
       ))}
     </div>
   </div>
@@ -160,15 +192,31 @@ import LogoMark from './LogoMark.astro'
     align-items: start;
   }
 
-  .footer__logo {
-    height: 56px;
-    width: auto;
+  .footer__logo-wrap {
+    display: inline-flex;
+    align-items: center;
     margin-bottom: 1.5rem;
-    color: var(--color-text);
+    max-width: 100%;
   }
 
-  [data-theme='night'] .footer__logo {
-    color: #ffffff;
+  .footer__logo {
+    display: block;
+    height: 56px;
+    width: auto;
+    max-width: min(240px, 70vw);
+    object-fit: contain;
+  }
+
+  .footer__logo--dark {
+    display: none;
+  }
+
+  [data-theme='night'] .footer__logo--light {
+    display: none;
+  }
+
+  [data-theme='night'] .footer__logo--dark {
+    display: block;
   }
 
   .footer__social {
@@ -186,6 +234,33 @@ import LogoMark from './LogoMark.astro'
     justify-content: center;
     font-weight: 600;
     color: var(--color-text);
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      color 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .footer__social-link:hover,
+  .footer__social-link:focus-visible {
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-1px);
+  }
+
+  .footer__social-link--instagram:hover,
+  .footer__social-link--instagram:focus-visible {
+    background: #e1306c;
+  }
+
+  .footer__social-link--facebook:hover,
+  .footer__social-link--facebook:focus-visible {
+    background: #1877f2;
+  }
+
+  .footer__social-link--twitter:hover,
+  .footer__social-link--twitter:focus-visible {
+    background: #1d9bf0;
   }
 
   .footer__column {
@@ -203,6 +278,10 @@ import LogoMark from './LogoMark.astro'
     font-weight: 500;
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 0.4rem;
+  }
+
+  .footer__spacer {
+    height: 0.6rem;
   }
 
   .footer__icon {
@@ -260,6 +339,28 @@ import LogoMark from './LogoMark.astro'
   }
 
   @media (max-width: 720px) {
+    .footer__logo {
+      height: 75px;
+      max-width: min(360px, 96vw);
+    }
+
+    .footer__link {
+      font-size: 1.425rem;
+    }
+
+    .footer__link--nowrap {
+      white-space: nowrap;
+    }
+
+    .footer__icon {
+      font-size: 1.275rem;
+    }
+
+    .footer__policy,
+    .footer__credit-link {
+      font-size: 1.275rem;
+    }
+
     .footer__bottom-inner {
       flex-direction: column;
       align-items: flex-start;
