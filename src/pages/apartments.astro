@@ -11,6 +11,34 @@ const stats = [
   { value: '2000+', label: 'Positive reviews' },
 ]
 
+const heroSlides = [
+  {
+    image: '/apartments/3-view-from-cristall-Pont.jpg',
+    label: 'Atrani',
+  },
+  {
+    image: '/apartments/villa-ravello-amalfiday-rent-1500x770.webp',
+    label: 'Ravello',
+  },
+  {
+    image: '/apartments/dragone-2.webp',
+    label: 'Rooms',
+  },
+  {
+    image: '/apartments/aria-di-mare-for-amalfi-day-2.webp',
+    label: 'Suites',
+  },
+]
+
+const heroTags = [
+  'Beachfront',
+  'Historic center',
+  'Sea views',
+  'Private balconies',
+  'Full kitchens',
+  'Free Wi-Fi',
+]
+
 const staySections = [
   {
     title: 'Timeless Retreat in Ravello',
@@ -145,53 +173,69 @@ const testimonials = [
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
-  <section class="section apartments-hero">
-    <div class="container apartments-hero__grid">
-      <div class="apartments-hero__copy">
-        <span class="eyebrow">Comfortable stays</span>
-        <h1>
-          <span class="accent-italic">Apartments</span>, rooms, and
-          <span class="accent-italic">villa</span> near
-          <span class="accent-italic">Atrani</span>
-        </h1>
-        <p class="lead">
-          Most of our apartments are located in the center of Atrani, just a 2-minute walk from
-          the main square and Atrani's beach.
-        </p>
-        <div class="apartments-hero__stats">
-          {stats.map((item) => (
-            <div class="stat">
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-            </div>
-          ))}
+  <section class="apt-hero">
+    <div class="apt-hero__slides" aria-hidden="true">
+      {heroSlides.map((slide, i) => (
+        <div class={`apt-hero__slide ${i === 0 ? 'is-active' : ''}`}>
+          <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
         </div>
-      </div>
-      <div class="apartments-hero__visual">
-        <div class="image-stack">
-          <figure class="image-frame image-frame--tall image-frame--hero">
-            <img
-              src="/apartments/3-view-from-cristall-Pont.jpg"
-              alt="View over Atrani rooftops"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-          <figure class="image-frame image-frame--wide">
-            <img
-              src="/apartments/romfor-1-person.jpg.webp"
-              alt="Cozy apartment interior"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
+      ))}
+    </div>
+    <div class="apt-hero__vignette"></div>
+    <div class="apt-hero__content">
+      <div class="container">
+        <div class="apt-hero__grid">
+          <div class="apt-hero__copy">
+            <span class="apt-hero__eyebrow">Comfortable stays in Atrani</span>
+            <h1 class="apt-hero__title">
+              Apartments, rooms<br /><span class="apt-hero__title-accent">& villa</span>
+            </h1>
+            <p class="apt-hero__lead">
+              Most of our stays sit in the heart of Atrani — a 2-minute walk to the main square and the beach. Fifteen years of hosting, two thousand happy guests.
+            </p>
+            <div class="apt-hero__stats">
+              {stats.map((item) => (
+                <div class="apt-hero__stat">
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
+            <div class="apt-hero__actions">
+              <a class="apt-hero__btn apt-hero__btn--primary" href="/contact">Book your stay</a>
+              <a class="apt-hero__btn apt-hero__btn--ghost" href="#stays">Browse apartments</a>
+            </div>
+          </div>
+          <div class="apt-hero__aside">
+            <ul class="apt-hero__tags">
+              {heroTags.map((tag, i) => (
+                <li class="apt-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+              ))}
+            </ul>
+            <div class="apt-hero__progress">
+              {heroSlides.map((slide, i) => (
+                <button
+                  class={`apt-hero__dot ${i === 0 ? 'is-active' : ''}`}
+                  data-slide={i}
+                  aria-label={`Show ${slide.label}`}
+                >
+                  <span class="apt-hero__dot-label">{slide.label}</span>
+                  <span class="apt-hero__dot-bar"><span class="apt-hero__dot-fill"></span></span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="apt-hero__scroll-hint" aria-hidden="true">
+      <span></span>
+    </div>
   </section>
 
-  {staySections.map((section) => (
+  {staySections.map((section, sIdx) => (
     <section
+      id={sIdx === 0 ? 'stays' : undefined}
       class={`section stay-section${section.columns === 2 ? ' stay-section--two' : ''}`}
     >
       <div class="container section__header">
@@ -375,6 +419,35 @@ const testimonials = [
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  ;(function () {
+    const slides = document.querySelectorAll('.apt-hero__slide')
+    const dots = document.querySelectorAll('.apt-hero__dot')
+    if (!slides.length) return
+
+    let current = 0
+    const DURATION = 6000
+
+    function go(next) {
+      slides[current].classList.remove('is-active')
+      dots[current].classList.remove('is-active')
+      current = next
+      slides[current].classList.add('is-active')
+      dots[current].classList.add('is-active')
+    }
+
+    let timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        clearInterval(timer)
+        go(Number(dot.dataset.slide))
+        timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+      })
+    })
+  })()
+</script>
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
@@ -579,147 +652,354 @@ const testimonials = [
 </script>
 
 <style>
-  .apartments-hero {
+  /* ===== APARTMENTS HERO — Full-viewport cinematic ===== */
+
+  .apt-hero {
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
-    align-items: center;
-    padding-top: 5rem;
-    padding-bottom: 3rem;
-    background: #ff5900;
-    color: #fff;
+    align-items: flex-end;
     overflow: hidden;
+    background: #0a0a0a;
+    color: #ffffff;
   }
 
-  .apartments-hero::before {
-    content: '';
+  /* --- Slide images --- */
+  .apt-hero__slides {
     position: absolute;
-    left: 50%;
-    top: 0;
-    width: min(1200px, 140vw);
-    height: min(1200px, 140vw);
-    transform: translate(-50%, -50%);
-    background: radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 195, 0, 0.95) 0%,
-      rgba(255, 126, 0, 0.9) 45%,
-      rgba(255, 89, 0, 1) 72%
-    );
-    opacity: 0.95;
-  }
-
-  .apartments-hero__grid {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    gap: 3rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: center;
-  }
-
-  .apartments-hero__copy h1 {
-    font-size: clamp(2.5rem, 4vw, 3.6rem);
-    margin-bottom: 1rem;
-    color: #fff;
-  }
-
-  .apartments-hero__copy h1 .accent-italic {
-    color: #fff;
-  }
-
-  .lead {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .eyebrow {
-    display: inline-block;
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 0.8rem;
-  }
-
-  .apartments-hero__stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .stat {
-    min-width: 160px;
-    padding: 1rem 1.4rem;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(8px);
-  }
-
-  .stat strong {
-    font-size: 1.6rem;
-    display: block;
-    color: #fff;
-  }
-
-  .stat span {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  .apartments-hero__visual {
-    display: flex;
-    justify-content: center;
-  }
-
-  .image-stack {
-    position: relative;
-    width: min(540px, 100%);
-    height: 600px;
-  }
-
-  .image-frame {
+    inset: -2px;
+    z-index: 0;
     overflow: hidden;
-    border-radius: 22px;
-    box-shadow: var(--shadow-lift);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    background: var(--color-surface);
   }
 
-  .image-frame img {
+  .apt-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+  }
+
+  .apt-hero__slide.is-active {
+    opacity: 1;
+  }
+
+  .apt-hero__slide img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transform: scale(1.01);
+    backface-visibility: hidden;
   }
 
-  .image-frame--tall {
+  .apt-hero__slide.is-active img {
+    animation: apt-ken-burns 6.5s cubic-bezier(0.25, 0, 0.4, 1) forwards;
+  }
+
+  @keyframes apt-ken-burns {
+    from { transform: scale(1.01); }
+    to { transform: scale(1.06); }
+  }
+
+  /* --- Vignette overlay --- */
+  .apt-hero__vignette {
     position: absolute;
-    inset: 0 auto auto 0;
-    width: 70%;
-    height: 100%;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 45%, transparent 65%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, transparent 50%, rgba(0, 0, 0, 0.18) 100%);
+    pointer-events: none;
   }
 
-  .image-frame--hero {
-    border-radius: 0;
-    box-shadow: none;
+  /* --- Content layer --- */
+  .apt-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  }
+
+  .apt-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
+  }
+
+  /* --- Copy block --- */
+  .apt-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: apt-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__title {
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__title-accent {
+    font-style: italic;
+    color: #ff5900;
+    display: inline-block;
+  }
+
+  .apt-hero__lead {
+    max-width: 30rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__stat {
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .apt-hero__stat strong {
+    font-size: 1.1rem;
+    color: #ff5900;
+  }
+
+  .apt-hero__stat span {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .apt-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* --- Buttons --- */
+  .apt-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
     border: none;
-    background: transparent;
-    top: calc(-1 * (5rem + var(--header-space)));
-    height: calc(100% + 5rem + var(--header-space));
   }
 
-  .image-frame--hero img {
-    border-radius: 0;
+  .apt-hero__btn--primary {
+    background: #ff5900;
+    color: #ffffff;
   }
 
-  .image-frame--wide {
+  .apt-hero__btn--primary:hover {
+    background: #ff7a33;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .apt-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .apt-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  /* --- Aside: tags + progress --- */
+  .apt-hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 260px;
+  }
+
+  .apt-hero__tag {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    opacity: 0;
+    animation: apt-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* --- Slide progress dots --- */
+  .apt-hero__progress {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .apt-hero__dot {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .apt-hero__dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  .apt-hero__dot.is-active .apt-hero__dot-label {
+    opacity: 1;
+  }
+
+  .apt-hero__dot-bar {
+    width: 36px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .apt-hero__dot-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ff5900;
+    border-radius: 2px;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .apt-hero__dot.is-active .apt-hero__dot-fill {
+    animation: apt-fill-bar 6s linear forwards;
+  }
+
+  @keyframes apt-fill-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* --- Scroll hint --- */
+  .apt-hero__scroll-hint {
     position: absolute;
-    bottom: -4%;
-    right: 0;
-    width: 58%;
-    height: 45%;
-    border: 6px solid rgba(255, 255, 255, 0.3);
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    animation: apt-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: apt-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes apt-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  /* --- Entrance animations --- */
+  @keyframes apt-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    .apt-hero__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .apt-hero__aside {
+      align-items: flex-start;
+    }
+
+    .apt-hero__tags {
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    .apt-hero__title {
+      font-size: clamp(2.4rem, 10vw, 3.8rem);
+    }
+
+    .apt-hero__progress {
+      align-self: flex-start;
+    }
   }
 
   .stay-section {
@@ -1050,14 +1330,6 @@ const testimonials = [
   }
 
   @media (max-width: 1100px) {
-    .apartments-hero__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .image-stack {
-      height: 420px;
-    }
-
     :global(.cal) {
       grid-template-columns: 1fr;
     }
@@ -1086,26 +1358,6 @@ const testimonials = [
   }
 
   @media (max-width: 640px) {
-    .image-frame--wide {
-      position: static;
-      width: 100%;
-      height: 40%;
-      margin-top: 1rem;
-      border: 0;
-    }
-
-    .image-stack {
-      height: auto;
-      display: grid;
-      gap: 1rem;
-    }
-
-    .image-frame--tall {
-      position: static;
-      width: 100%;
-      height: 320px;
-    }
-
     .gallery-control {
       width: 34px;
       height: 34px;
