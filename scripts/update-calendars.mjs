@@ -2,37 +2,36 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 const CAL_URLS = {
-  'Casa Carina': [
-    'https://www.airbnb.com/calendar/ical/20551225.ics?s=dbbc3c718fa519684c8b4bc62d4e0708',
-  ],
   'Awesome Apts': [
     'https://www.airbnb.com/calendar/ical/3456236.ics?s=b68c893b2de331892cf36544c1c12e63',
   ],
   'Solo Room': [
-    'https://www.airbnb.com/calendar/ical/40656947.ics?s=32a0a26548f45a0cfd7ceef309386670',
-    'https://ical.booking.com/v1/export?t=4c59c943-cb74-4bb7-8a82-8705e8817040',
+    'https://ical.booking.com/v1/export?t=50eb167d-a617-4f6e-862b-7b474516e903',
   ],
   'Central Room': [
-    'https://www.airbnb.com/calendar/ical/51476440.ics?s=8aa4cfd91b03146a7c1d0964082103fc',
-    'https://ical.booking.com/v1/export?t=a1a50e38-9d9b-429f-89f2-be213d3274a4',
+    'https://ical.booking.com/v1/export?t=66c7dc38-0d5e-45dc-b22a-9d8e075ec149',
+    'https://ical.booking.com/v1/export?t=9dc9bc5e-c0d8-4727-9a6d-9a769afc138c',
   ],
   'Bunkbed Room': [
-    'https://www.airbnb.com/calendar/ical/40275407.ics?s=bb8ad032ac08619aa22ff7c02f71a995',
     'https://ical.booking.com/v1/export?t=b7023f35-c3ae-44bb-b122-ddc15f4d7e26',
   ],
   'Vintage Room': [
-    'https://www.airbnb.com/calendar/ical/44026120.ics?s=2bb0f9f20b0e70aae7fad507a9e435b2',
     'https://ical.booking.com/v1/export?t=e7b18790-16b3-4000-b2e0-c4b5076f20d5',
   ],
   'Orange Room': [
-    'https://www.airbnb.com/calendar/ical/44055993.ics?s=5d6018e52f24ff88c62007a9033c9e79',
-    'https://ical.booking.com/v1/export?t=adda9f47-765e-4342-9bd3-632f0bfe031e',
+    'https://ical.booking.com/v1/export?t=ac4e5066-83f2-4720-8d10-dd865612e91d',
+  ],
+  'Casa Carina': [
+    'https://www.airbnb.com/calendar/ical/20551225.ics?s=dbbc3c718fa519684c8b4bc62d4e0708',
   ],
   'Harmony Suite': [
     'https://www.airbnb.com/calendar/ical/37988248.ics?s=6146074b67a4454d6bb616ce31309606',
   ],
   'Royal Suite': [
     'https://www.airbnb.com/calendar/ical/973032288955949308.ics?s=bca25b1a63503b216e54dd0d673c9e31',
+  ],
+  'Aria di Mare': [
+    'https://www.airbnb.com/calendar/ical/565787701411415824.ics?s=19f46a3833e061da73c9f76c96c9a6d3',
   ],
   'Villa Susy': [
     'https://ical.booking.com/v1/export?t=d1d7f32f-23b9-4914-b348-07719a6bd239',

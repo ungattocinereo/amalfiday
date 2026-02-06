@@ -1,9 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 
-const placeholder =
-  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='
-
 const pageTitle = 'Apartments — CristallPont Amalfi Day'
 const pageDescription =
   'Apartments, suites, and rooms in Atrani near Amalfi beach. Browse stays, galleries, and availability for Amalfi Coast trips.'
@@ -11,7 +8,7 @@ const shareImage = '/apartments/3-view-from-cristall-Pont.jpg'
 
 const stats = [
   { value: '15+', label: 'Years of experience' },
-  { value: '1000+', label: 'Positive Airbnb and Booking reviews' },
+  { value: '2000+', label: 'Positive reviews' },
 ]
 
 const staySections = [
@@ -24,7 +21,10 @@ const staySections = [
         name: 'Villa Susy',
         description:
           "This villa, located just a mile from Amalfi, offers a unique blend of authenticity and comfort. As you step inside, you'll be transported to a world where the past comes alive, and the present moment is savored.",
-        gallery: [5124, 5123, 5121, 5122],
+        gallery: [
+          '/apartments/villa-ravello-amalfiday-rent-1500x770.webp',
+          '/apartments/villa-ravello-amalfiday-rent-2-1500x770.webp',
+        ],
         calendar: 'Villa Susy',
         galleryStyle: 'scroll',
       },
@@ -39,28 +39,28 @@ const staySections = [
         name: 'Awesome apartments',
         description:
           'Our location is just above the city center, a 5-7 minute walk uphill via 350 steps. The apartment features a separate kitchen, shower room, and a spacious room.',
-        gallery: [2076],
+        gallery: ['/apartments/awesomeapts.jpg.avif'],
         calendar: 'Awesome Apts',
       },
       {
         name: 'Aria di Mare',
         description:
           'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
-        gallery: [5114, 5115],
-        calendar: null,
+        gallery: ['/apartments/aria-di-mare-for-amalfi-day-2.webp'],
+        calendar: 'Aria di Mare',
       },
       {
         name: 'Suite Carina',
         description:
           'This is a double-level apartment located in the heart of the city. There are no steps to access the apartment. The windows offer views of the main street in Atrani.',
-        gallery: [2258, 2257, 2256],
+        gallery: ['/apartments/casa-carina.jpeg.avif'],
         calendar: 'Casa Carina',
       },
       {
         name: 'Suite Harmony',
         description:
           'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
-        gallery: [2464, 2422, 2461],
+        gallery: ['/apartments/harmony.jpg.avif'],
         calendar: 'Harmony Suite',
       },
     ],
@@ -74,21 +74,21 @@ const staySections = [
         name: 'Vintage interior',
         description:
           'The room is designed with a vintage aesthetic in mind, featuring decor and furnishings that evoke a sense of nostalgia and timeless elegance. The room also comes equipped with a large closet, complete with a mirror, providing ample storage and a convenient space for getting ready. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
-        gallery: [5203],
+        gallery: ['/apartments/room-in-atrani-vintage.webp'],
         calendar: 'Vintage Room',
       },
       {
         name: 'Orange room',
         description:
           'This room evokes the nostalgia of the 1960s with its decor and furnishings. The room features a large multi-panel closet, providing ample storage space for guests. The room also comes with with couple of garden chairs and a table. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
-        gallery: [2251],
+        gallery: ['/apartments/orange-room.jpg'],
         calendar: 'Orange Room',
       },
       {
         name: 'Room in center',
         description:
           'This is the largest room in the house, providing plenty of space for guests to spread out and relax. The room features a large table, perfect for meals or working, and two chairs for comfortable seating. Additionally, the room has a small balcony that offers a view of the main street, perfect for enjoying the sights and sounds of the city. The closet is an original piece from the 1970s that is spacious and adds a vintage touch to the room.',
-        gallery: [5202],
+        gallery: ['/apartments/2room-in-atrani-in-center.webp'],
         calendar: 'Central Room',
       },
     ],
@@ -102,14 +102,14 @@ const staySections = [
         name: 'Room for solo traveller',
         description:
           'This room is designed to be cozy and comfortable, with a small bed that is perfect for one person. The room features a spacious balcony that offers a great place to sit and relax, with a chair that provides a comfortable seating option. The balcony also offers a beautiful view of the mountains, providing a serene and peaceful atmosphere. Additionally, the room is facing the main street of the town, which means that guests can enjoy the hustle and bustle of the city right from the comfort of their own room. The balcony can be accessed via the room and it is perfect for a morning coffee or a nightcap.',
-        gallery: [2285],
+        gallery: ['/apartments/romfor-1-person.jpg.webp'],
         calendar: 'Solo Room',
       },
       {
         name: 'Room for youngsters',
         description:
           'This room is designed to be functional and budget-friendly, perfect for travelers who are looking for a comfortable and affordable place to stay. The room features a bunk bed. The bunk bed is comfortable and convenient, providing a great place to rest after a long day of exploring. The room also features a big mural on the wall, which adds a unique and artistic touch to the space, making it more interesting and personalized. The room also comes with a large window that overlooks an inner street, providing natural light. The window can be opened to let fresh air in and to listen to the street sounds.',
-        gallery: [2262],
+        gallery: ['/apartments/casa-bunkbed-room.jpg'],
         calendar: 'Bunkbed Room',
       },
     ],
@@ -179,8 +179,7 @@ const testimonials = [
           </figure>
           <figure class="image-frame image-frame--wide">
             <img
-              src={placeholder}
-              data-wp-id="2285"
+              src="/apartments/romfor-1-person.jpg.webp"
               alt="Cozy apartment interior"
               loading="lazy"
               decoding="async"
@@ -212,12 +211,11 @@ const testimonials = [
               {stay.galleryStyle === 'scroll' ? (
                 <>
                   <div class="stay-card__track">
-                  {stay.gallery.map((imageId) => (
+                  {stay.gallery.map((src) => (
                     <div class="stay-card__slide">
                       <img
                         class="stay-card__slide-image"
-                        src={placeholder}
-                        data-wp-id={String(imageId)}
+                        src={src}
                         alt={`${stay.name} photo`}
                         loading="lazy"
                         decoding="async"
@@ -225,30 +223,33 @@ const testimonials = [
                     </div>
                   ))}
                   </div>
-                  <button
-                    class="gallery-control gallery-control--scroll"
-                    type="button"
-                    data-gallery-prev
-                    aria-label="Previous photo"
-                  >
-                    <i class="bi bi-chevron-left"></i>
-                  </button>
-                  <button
-                    class="gallery-control gallery-control--scroll"
-                    type="button"
-                    data-gallery-next
-                    aria-label="Next photo"
-                  >
-                    <i class="bi bi-chevron-right"></i>
-                  </button>
+                  {stay.gallery.length > 1 && (
+                    <>
+                      <button
+                        class="gallery-control gallery-control--scroll"
+                        type="button"
+                        data-gallery-prev
+                        aria-label="Previous photo"
+                      >
+                        <i class="bi bi-chevron-left"></i>
+                      </button>
+                      <button
+                        class="gallery-control gallery-control--scroll"
+                        type="button"
+                        data-gallery-next
+                        aria-label="Next photo"
+                      >
+                        <i class="bi bi-chevron-right"></i>
+                      </button>
+                    </>
+                  )}
                 </>
               ) : (
                 <>
-                  {stay.gallery.map((imageId, index) => (
+                  {stay.gallery.map((src, index) => (
                     <img
                       class={`stay-card__image${index === 0 ? ' is-active' : ''}`}
-                      src={placeholder}
-                      data-wp-id={String(imageId)}
+                      src={src}
                       data-gallery-image
                       alt={`${stay.name} photo`}
                       loading="lazy"
@@ -285,25 +286,29 @@ const testimonials = [
                   <h3>{stay.name}</h3>
                   <p>{stay.description}</p>
                 </div>
-                <div
-                  class="stay-calendar"
-                  data-calendar
-                  data-calendar-name={stay.calendar ?? ''}
-                >
-                  <span class="calendar__loading">Loading availability...</span>
-                </div>
+                {stay.calendar && (
+                  <div
+                    class="stay-calendar"
+                    data-calendar
+                    data-calendar-name={stay.calendar}
+                  >
+                    <span class="calendar__loading">Loading availability...</span>
+                  </div>
+                )}
               </div>
             ) : (
               <div class="stay-card__content">
                 <h3>{stay.name}</h3>
                 <p>{stay.description}</p>
-                <div
-                  class="stay-calendar"
-                  data-calendar
-                  data-calendar-name={stay.calendar ?? ''}
-                >
-                  <span class="calendar__loading">Loading availability...</span>
-                </div>
+                {stay.calendar && (
+                  <div
+                    class="stay-calendar"
+                    data-calendar
+                    data-calendar-name={stay.calendar}
+                  >
+                    <span class="calendar__loading">Loading availability...</span>
+                  </div>
+                )}
               </div>
             )}
           </article>
@@ -343,8 +348,7 @@ const testimonials = [
       </div>
       <div class="adventure-media">
         <img
-          src={placeholder}
-          data-wp-id="3898"
+          src="/apartments/3-view-from-cristall-Pont.jpg"
           alt="Atrani townscape at sunset"
           loading="lazy"
           decoding="async"
@@ -373,47 +377,7 @@ const testimonials = [
 </BaseLayout>
 
 <script is:inline>
-  ;(() => {
-    const images = Array.from(document.querySelectorAll('img[data-wp-id]'))
-    if (!images.length) return
-
-    const ids = [...new Set(images.map((img) => img.dataset.wpId).filter(Boolean))]
-    const apiBase = 'https://amalfi.day/wp-json/wp/v2/media/'
-    const cache = new Map()
-
-    const fetchMedia = async (id) => {
-      if (cache.has(id)) return cache.get(id)
-      try {
-        const res = await fetch(`${apiBase}${id}`)
-        if (!res.ok) throw new Error(`media ${id} not found`)
-        const data = await res.json()
-        const media = { url: data.source_url, alt: data.alt_text }
-        cache.set(id, media)
-        return media
-      } catch (error) {
-        console.warn(error)
-        cache.set(id, null)
-        return null
-      }
-    }
-
-    ids.forEach(async (id) => {
-      const media = await fetchMedia(id)
-      if (!media) return
-      images
-        .filter((img) => img.dataset.wpId === id)
-        .forEach((img) => {
-          img.src = media.url
-          if (!img.alt && media.alt) {
-            img.alt = media.alt
-          }
-        })
-    })
-  })()
-</script>
-
-<script is:inline>
-  ;(() => {
+  document.addEventListener('DOMContentLoaded', () => {
     const galleries = Array.from(document.querySelectorAll('[data-gallery]'))
 
     galleries.forEach((gallery) => {
@@ -504,29 +468,19 @@ const testimonials = [
         }
       })
     })
-  })()
+  })
 </script>
 
 <script is:inline>
-  ;(() => {
+  document.addEventListener('DOMContentLoaded', () => {
     const calendars = Array.from(document.querySelectorAll('[data-calendar]'))
     if (!calendars.length) return
 
     const monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
     ]
-    const dayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    const dayLabels = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 
     const formatDate = (date) => {
       const year = date.getFullYear()
@@ -535,6 +489,11 @@ const testimonials = [
       return `${year}-${month}-${day}`
     }
 
+    const isToday = (date, today) =>
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+
     const renderMonth = (year, month, busy, today) => {
       const firstDay = new Date(year, month, 1)
       const offset = (firstDay.getDay() + 6) % 7
@@ -542,18 +501,20 @@ const testimonials = [
       const cells = []
 
       for (let i = 0; i < offset; i += 1) {
-        cells.push('<span class="calendar__cell is-empty"></span>')
+        cells.push('<span class="cal__cell cal__cell--empty"></span>')
       }
 
       for (let day = 1; day <= daysInMonth; day += 1) {
         const date = new Date(year, month, day)
         const key = formatDate(date)
         const isBusy = busy.has(key)
-        const isPast = date < today
+        const isPast = date < today && !isToday(date, today)
+        const isTodayDate = isToday(date, today)
         const classes = [
-          'calendar__cell',
-          isBusy ? 'is-busy' : 'is-free',
-          isPast ? 'is-past' : '',
+          'cal__cell',
+          isBusy ? 'cal__cell--busy' : 'cal__cell--free',
+          isPast ? 'cal__cell--past' : '',
+          isTodayDate ? 'cal__cell--today' : '',
         ]
           .filter(Boolean)
           .join(' ')
@@ -561,10 +522,10 @@ const testimonials = [
       }
 
       return `
-        <div class="calendar__month">
-          <div class="calendar__month-title">${monthNames[month]} ${year}</div>
-          <div class="calendar__grid">
-            ${dayLabels.map((label) => `<span class="calendar__dow">${label}</span>`).join('')}
+        <div class="cal__month">
+          <div class="cal__month-title">${monthNames[month]} ${year}</div>
+          <div class="cal__grid">
+            ${dayLabels.map((label) => `<span class="cal__dow">${label}</span>`).join('')}
             ${cells.join('')}
           </div>
         </div>
@@ -577,13 +538,13 @@ const testimonials = [
       const next = new Date(today.getFullYear(), today.getMonth() + 1, 1)
 
       el.innerHTML = `
-        <div class="calendar">
+        <div class="cal">
           ${renderMonth(current.getFullYear(), current.getMonth(), busy, today)}
           ${renderMonth(next.getFullYear(), next.getMonth(), busy, today)}
         </div>
-        <div class="calendar__legend">
-          <span><i class="legend legend--free"></i> Available</span>
-          <span><i class="legend legend--busy"></i> Booked</span>
+        <div class="cal__legend">
+          <span class="cal__legend-item"><span class="cal__dot cal__dot--free"></span>Available</span>
+          <span class="cal__legend-item"><span class="cal__dot cal__dot--busy"></span>Booked</span>
         </div>
       `
     }
@@ -595,18 +556,18 @@ const testimonials = [
     calendars.forEach(async (calendarEl) => {
       const calendarName = calendarEl.dataset.calendarName
       if (!calendarName) {
-        calendarEl.innerHTML = '<span class="calendar__empty">Calendar coming soon.</span>'
+        calendarEl.remove()
         return
       }
 
       const availability = await availabilityPromise
       if (!availability?.calendars) {
-        calendarEl.innerHTML = '<span class="calendar__empty">Calendar updating...</span>'
+        calendarEl.innerHTML = '<span class="cal__status">Calendar updating...</span>'
         return
       }
 
       if (!(calendarName in availability.calendars)) {
-        calendarEl.innerHTML = '<span class="calendar__empty">Calendar coming soon.</span>'
+        calendarEl.innerHTML = '<span class="cal__status">Calendar coming soon.</span>'
         return
       }
 
@@ -614,17 +575,42 @@ const testimonials = [
       const busy = new Set(busyList)
       renderCalendar(calendarEl, busy)
     })
-  })()
+  })
 </script>
 
 <style>
   .apartments-hero {
     position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
     padding-top: 5rem;
-    background: linear-gradient(120deg, rgba(255, 89, 0, 0.08), rgba(0, 156, 255, 0.08));
+    padding-bottom: 3rem;
+    background: #ff5900;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .apartments-hero::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: min(1200px, 140vw);
+    height: min(1200px, 140vw);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 195, 0, 0.95) 0%,
+      rgba(255, 126, 0, 0.9) 45%,
+      rgba(255, 89, 0, 1) 72%
+    );
+    opacity: 0.95;
   }
 
   .apartments-hero__grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: 3rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -634,10 +620,16 @@ const testimonials = [
   .apartments-hero__copy h1 {
     font-size: clamp(2.5rem, 4vw, 3.6rem);
     margin-bottom: 1rem;
+    color: #fff;
+  }
+
+  .apartments-hero__copy h1 .accent-italic {
+    color: #fff;
   }
 
   .lead {
     font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   .eyebrow {
@@ -645,7 +637,7 @@ const testimonials = [
     font-size: 0.85rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 0.8rem;
   }
 
@@ -660,20 +652,20 @@ const testimonials = [
     min-width: 160px;
     padding: 1rem 1.4rem;
     border-radius: 16px;
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-soft);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
   }
 
   .stat strong {
     font-size: 1.6rem;
     display: block;
-    color: var(--color-text);
+    color: #fff;
   }
 
   .stat span {
     font-size: 0.95rem;
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .apartments-hero__visual {
@@ -683,8 +675,8 @@ const testimonials = [
 
   .image-stack {
     position: relative;
-    width: min(460px, 100%);
-    height: 520px;
+    width: min(540px, 100%);
+    height: 600px;
   }
 
   .image-frame {
@@ -727,7 +719,7 @@ const testimonials = [
     right: 0;
     width: 58%;
     height: 45%;
-    border: 8px solid var(--color-bg);
+    border: 6px solid rgba(255, 255, 255, 0.3);
   }
 
   .stay-section {
@@ -948,96 +940,113 @@ const testimonials = [
     color: var(--color-text-muted);
   }
 
+  /* Calendar */
   .stay-calendar {
     margin-top: 1.5rem;
-    padding: 1.2rem;
-    border-radius: 18px;
-    background: #f7f7fa;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
   }
 
-  .calendar__loading,
-  .calendar__empty {
-    font-size: 0.9rem;
+  :global(.cal__status),
+  .calendar__loading {
+    font-size: 0.85rem;
     color: var(--color-text-muted);
   }
 
-  :global(.calendar) {
+  :global(.cal) {
     display: grid;
-    gap: 1.2rem;
+    gap: 1rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  :global(.calendar__month-title) {
+  :global(.cal__month-title) {
+    font-family: var(--font-body);
     font-weight: 600;
-    margin-bottom: 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
   }
 
-  :global(.calendar__grid) {
+  :global(.cal__grid) {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: 0.35rem;
-    font-size: 0.85rem;
+    gap: 2px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
   }
 
-  :global(.calendar__dow) {
-    text-transform: uppercase;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
+  :global(.cal__dow) {
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
     color: var(--color-text-muted);
     text-align: center;
+    padding-bottom: 4px;
   }
 
-  :global(.calendar__cell) {
-    height: 30px;
+  :global(.cal__cell) {
+    height: 26px;
     display: grid;
     place-items: center;
-    border-radius: 999px;
-    background: transparent;
+    border-radius: 4px;
     color: var(--color-text);
+    transition: background 0.15s;
   }
 
-  :global(.calendar__cell.is-free) {
-    background: rgba(0, 156, 255, 0.12);
-    color: var(--color-text);
-  }
-
-  :global(.calendar__cell.is-busy) {
-    background: rgba(255, 89, 0, 0.2);
-    color: var(--color-text);
-    text-decoration: line-through;
-    text-decoration-thickness: 1px;
-  }
-
-  :global(.calendar__cell.is-past) {
-    opacity: 0.4;
-  }
-
-  :global(.calendar__cell.is-empty) {
+  :global(.cal__cell--empty) {
     background: transparent;
   }
 
-  :global(.calendar__legend) {
+  :global(.cal__cell--free) {
+    background: rgba(0, 156, 255, 0.1);
+  }
+
+  :global(.cal__cell--busy) {
+    background: var(--color-accent);
+    color: #fff;
+    opacity: 0.7;
+  }
+
+  :global(.cal__cell--past) {
+    opacity: 0.3;
+  }
+
+  :global(.cal__cell--today) {
+    outline: 2px solid var(--color-text);
+    outline-offset: -2px;
+  }
+
+  :global(.cal__legend) {
     display: flex;
     gap: 1rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--color-text-muted);
-    margin-top: 0.8rem;
+    margin-top: 0.6rem;
   }
 
-  :global(.legend) {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+  :global(.cal__legend-item) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  :global(.cal__dot) {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
     display: inline-block;
-    margin-right: 0.35rem;
   }
 
-  :global(.legend--free) {
-    background: rgba(0, 156, 255, 0.4);
+  :global(.cal__dot--free) {
+    background: rgba(0, 156, 255, 0.35);
   }
 
-  :global(.legend--busy) {
-    background: rgba(255, 89, 0, 0.45);
+  :global(.cal__dot--busy) {
+    background: var(--color-accent);
+    opacity: 0.7;
   }
 
   @media (max-width: 1100px) {
@@ -1049,10 +1058,9 @@ const testimonials = [
       height: 420px;
     }
 
-    :global(.calendar) {
+    :global(.cal) {
       grid-template-columns: 1fr;
     }
-
   }
 
   @media (max-width: 900px) {
@@ -1107,5 +1115,4 @@ const testimonials = [
       flex: 0 0 82%;
     }
   }
-
 </style>
