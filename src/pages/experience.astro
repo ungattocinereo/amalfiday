@@ -1,10 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 
-const heroImages = [
-  '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg',
-  '/photoshootings/hero/couple/02-slideshow-regan-walk-ravello-love-1024x682.webp',
-  '/photoshootings/hero/personal/iiana-photo-hero-atrani-hat-2-1024x680.webp',
+const heroSlides = [
+  {
+    image: '/photoshootings/ayuna/11-Ayuna-Atrani-2023.webp',
+    label: 'Atrani',
+  },
+  {
+    image: '/photoshootings/regan-tay-ravello/03-slideshow-regan-walk-ravello-love.webp',
+    label: 'Ravello',
+  },
+  {
+    image: '/photoshootings/couples/img_5f68ca5842ca6.jpg',
+    label: 'Amalfi',
+  },
+  {
+    image: '/photoshootings/camelia/004-camelia-photoshooting-moto.webp',
+    label: 'Tramonti',
+  },
 ]
 
 const photoshootings = [
@@ -38,7 +51,7 @@ const pageTitle = 'Experiences — CristallPont Amalfi Day'
 const pageDescription =
   'Bespoke Amalfi Coast experiences: photo shoots, scenic rides, and curated local tastings hosted by a true local.'
 const shareImageAlt = 'Amalfi Coast experience hero'
-const shareImage = heroImages[0]
+const shareImage = heroSlides[0].image
 
 const experienceCards = [
   {
@@ -69,34 +82,55 @@ const experienceTags = [
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage} imageAlt={shareImageAlt}>
-  <section class="experience-hero">
-    <div class="container experience-hero__inner">
-      <div class="experience-hero__content">
-        <span class="badge">Amalfi Day Experiences</span>
-        <h1>
-          Experiences from the <span class="accent-italic">Amalfi Coast</span>
-        </h1>
-        <p>
-          Tailored days of light, flavor, and motion — curated by a local guide who knows where the
-          coast is most alive.
-        </p>
-        <ul class="experience-hero__tags">
-          {experienceTags.map((tag) => (
-            <li class="experience-tag">{tag}</li>
-          ))}
-        </ul>
-        <div class="experience-hero__actions">
-          <a class="button" href="/contact">Plan your experience</a>
-          <a class="button secondary" href="/photoshootings">See photoshootings</a>
+  <section class="xp-hero">
+    <div class="xp-hero__slides" aria-hidden="true">
+      {heroSlides.map((slide, i) => (
+        <div class={`xp-hero__slide ${i === 0 ? 'is-active' : ''}`}>
+          <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+        </div>
+      ))}
+    </div>
+    <div class="xp-hero__vignette"></div>
+    <div class="xp-hero__content">
+      <div class="container">
+        <div class="xp-hero__grid">
+          <div class="xp-hero__copy">
+            <span class="xp-hero__eyebrow">Amalfi Day Experiences</span>
+            <h1 class="xp-hero__title">
+              Feel the coast<br /><span class="xp-hero__title-accent">as locals do</span>
+            </h1>
+            <p class="xp-hero__lead">
+              Tailored days of light, flavor, and motion — curated by a local guide who knows where the coast is most alive.
+            </p>
+            <div class="xp-hero__actions">
+              <a class="xp-hero__btn xp-hero__btn--primary" href="/contact">Plan your experience</a>
+              <a class="xp-hero__btn xp-hero__btn--ghost" href="/photoshootings">See photoshootings</a>
+            </div>
+          </div>
+          <div class="xp-hero__aside">
+            <ul class="xp-hero__tags">
+              {experienceTags.map((tag, i) => (
+                <li class="xp-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+              ))}
+            </ul>
+            <div class="xp-hero__progress">
+              {heroSlides.map((slide, i) => (
+                <button
+                  class={`xp-hero__dot ${i === 0 ? 'is-active' : ''}`}
+                  data-slide={i}
+                  aria-label={`Show ${slide.label}`}
+                >
+                  <span class="xp-hero__dot-label">{slide.label}</span>
+                  <span class="xp-hero__dot-bar"><span class="xp-hero__dot-fill"></span></span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-      <div class="experience-hero__media" aria-hidden="true">
-        {heroImages.map((src, index) => (
-          <figure class="experience-hero__image">
-            <img src={src} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
-          </figure>
-        ))}
-      </div>
+    </div>
+    <div class="xp-hero__scroll-hint" aria-hidden="true">
+      <span></span>
     </div>
   </section>
 
@@ -173,21 +207,31 @@ const experienceTags = [
 
   <section class="section expertise expertise--tight">
     <div class="container expertise__grid">
-      <article class="card expertise__item">
-        <span class="expertise__icon"><i class="bi bi-camera2"></i></span>
-        <h3>I’m a photographer</h3>
-        <p>
-          Years of fashion‑magazine work trained my eye for light, color, and composition — perfect
-          for turning spontaneous moments into cinematic frames.
-        </p>
+      <article class="card expertise__item expertise__item--photo">
+        <div class="expertise__icon-wrap">
+          <i class="bi bi-camera-reels"></i>
+        </div>
+        <div class="expertise__body">
+          <h3>I'm a photographer</h3>
+          <p>
+            Years of fashion‑magazine work trained my eye for light, color, and composition — perfect
+            for turning spontaneous moments into cinematic frames.
+          </p>
+          <span class="expertise__accent-line"></span>
+        </div>
       </article>
-      <article class="card expertise__item">
-        <span class="expertise__icon"><i class="bi bi-wine-glass"></i></span>
-        <h3>Eno‑gastronomy master</h3>
-        <p>
-          I know the wines, kitchens, and stories behind them. You’ll taste the coast with someone
-          who speaks the language of local food and wine.
-        </p>
+      <article class="card expertise__item expertise__item--wine">
+        <div class="expertise__icon-wrap">
+          <i class="bi bi-cup-hot"></i>
+        </div>
+        <div class="expertise__body">
+          <h3>Eno‑gastronomy master</h3>
+          <p>
+            I know the wines, kitchens, and stories behind them. You'll taste the coast with someone
+            who speaks the language of local food and wine.
+          </p>
+          <span class="expertise__accent-line"></span>
+        </div>
       </article>
     </div>
   </section>
@@ -235,6 +279,34 @@ const experienceTags = [
 </BaseLayout>
 
 <script is:inline>
+  ;(function () {
+    const slides = document.querySelectorAll('.xp-hero__slide')
+    const dots = document.querySelectorAll('.xp-hero__dot')
+    if (!slides.length) return
+
+    let current = 0
+    const DURATION = 6000
+
+    function go(next) {
+      slides[current].classList.remove('is-active')
+      dots[current].classList.remove('is-active')
+      current = next
+      slides[current].classList.add('is-active')
+      dots[current].classList.add('is-active')
+    }
+
+    let timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        clearInterval(timer)
+        go(Number(dot.dataset.slide))
+        timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+      })
+    })
+  })()
+
+  /* Guide video lazy load (unchanged) */
   const heroVideo = document.querySelector('.guide-card__video')
   if (heroVideo) {
     const loadHeroVideo = () => {
@@ -258,6 +330,320 @@ const experienceTags = [
 </script>
 
 <style>
+  /* ===== EXPERIENCE HERO — Full-viewport cinematic ===== */
+
+  .xp-hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #0a0a0a;
+    color: #ffffff;
+  }
+
+  /* --- Slide images --- */
+  .xp-hero__slides {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .xp-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .xp-hero__slide.is-active {
+    opacity: 1;
+  }
+
+  .xp-hero__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    animation: none;
+  }
+
+  .xp-hero__slide.is-active img {
+    animation: xp-ken-burns 6.5s cubic-bezier(0.25, 0, 0.4, 1) forwards;
+  }
+
+  @keyframes xp-ken-burns {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+  }
+
+  /* --- Vignette overlay --- */
+  .xp-hero__vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 45%, transparent 65%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, transparent 50%, rgba(0, 0, 0, 0.18) 100%);
+    pointer-events: none;
+  }
+
+  /* --- Content layer --- */
+  .xp-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  }
+
+  .xp-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
+  }
+
+  /* --- Copy block --- */
+  .xp-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: xp-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__title {
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    opacity: 0;
+    animation: xp-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__title-accent {
+    font-style: italic;
+    color: #ffc300;
+    display: inline-block;
+  }
+
+  .xp-hero__lead {
+    max-width: 30rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: xp-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+    opacity: 0;
+    animation: xp-fade-up 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* --- Buttons --- */
+  .xp-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    border: none;
+  }
+
+  .xp-hero__btn--primary {
+    background: #ff5900;
+    color: #ffffff;
+  }
+
+  .xp-hero__btn--primary:hover {
+    background: #ff7a33;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .xp-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+  }
+
+  .xp-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  /* --- Aside: tags + progress --- */
+  .xp-hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+    opacity: 0;
+    animation: xp-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 260px;
+  }
+
+  .xp-hero__tag {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    animation: xp-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* --- Slide progress dots --- */
+  .xp-hero__progress {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .xp-hero__dot {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .xp-hero__dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.35);
+    transition: color 0.4s;
+  }
+
+  .xp-hero__dot.is-active .xp-hero__dot-label {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .xp-hero__dot-bar {
+    width: 36px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .xp-hero__dot-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #ff5900;
+    border-radius: 2px;
+    transition: width 0s;
+  }
+
+  .xp-hero__dot.is-active .xp-hero__dot-fill {
+    width: 100%;
+    transition: width 6s linear;
+  }
+
+  /* --- Scroll hint --- */
+  .xp-hero__scroll-hint {
+    position: absolute;
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    animation: xp-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: xp-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes xp-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  /* --- Entrance animations --- */
+  @keyframes xp-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    .xp-hero__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .xp-hero__aside {
+      align-items: flex-start;
+    }
+
+    .xp-hero__tags {
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    .xp-hero__title {
+      font-size: clamp(2.4rem, 10vw, 3.8rem);
+    }
+
+    .xp-hero__progress {
+      align-self: flex-start;
+    }
+  }
+
+  /* ===== SHARED UTILITIES ===== */
+
   .guide-eyebrow {
     font-family: var(--font-mono);
     text-transform: uppercase;
@@ -290,128 +676,7 @@ const experienceTags = [
     max-width: 34rem;
   }
 
-  .experience-hero {
-    position: relative;
-    padding: 7rem 0 5.5rem;
-    overflow: hidden;
-    background: #ff5900;
-    color: #ffffff;
-  }
-
-  .experience-hero::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: min(1200px, 140vw);
-    height: min(1200px, 140vw);
-    transform: translate(-50%, -50%);
-    background: radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 195, 0, 0.95) 0%,
-      rgba(255, 126, 0, 0.9) 45%,
-      rgba(255, 89, 0, 1) 72%
-    );
-    opacity: 0.95;
-    pointer-events: none;
-  }
-
-  .experience-hero__inner {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: 3rem;
-    align-items: center;
-  }
-
-  .experience-hero__content h1 {
-    font-size: clamp(2.4rem, 4.8vw, 4.5rem);
-    line-height: 1.05;
-    color: #ffffff;
-  }
-
-  .experience-hero__content p {
-    max-width: 520px;
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.88);
-  }
-
-  .experience-hero .accent-italic {
-    color: #ffc300;
-  }
-
-  .experience-hero__tags {
-    list-style: none;
-    padding: 0;
-    margin: 1.8rem 0 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .experience-tag {
-    padding: 0.45rem 0.9rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #ffffff;
-    backdrop-filter: blur(6px);
-  }
-
-  .experience-hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .experience-hero .button {
-    background: #ffffff;
-    color: #1a1a1a;
-  }
-
-  .experience-hero .button:hover {
-    background: #ffe9bf;
-    color: #1a1a1a;
-  }
-
-  .experience-hero .button.secondary {
-    background: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-  }
-
-  .experience-hero .button.secondary:hover {
-    background: rgba(255, 255, 255, 0.28);
-    color: #ffffff;
-  }
-
-  .experience-hero__media {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(2, 200px);
-    gap: 1rem;
-  }
-
-  .experience-hero__image {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-lift);
-    position: relative;
-  }
-
-  .experience-hero__image:nth-child(1) {
-    grid-row: 1 / span 2;
-  }
-
-  .experience-hero__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  /* ===== REST OF PAGE ===== */
 
   .photo-preview {
     padding-top: 4.5rem;
@@ -567,34 +832,84 @@ const experienceTags = [
   }
 
   .expertise__item {
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 1rem;
-    row-gap: 0.4rem;
-    align-items: start;
+    padding: 2.2rem;
+    display: flex;
+    gap: 1.4rem;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
 
-  .expertise__item h3 {
-    margin-bottom: 0.8rem;
-    grid-column: 2;
+  .expertise__item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
   }
 
-  .expertise__item p {
-    grid-column: 2;
-  }
-
-  .expertise__icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--color-surface);
-    color: var(--color-accent);
-    display: inline-flex;
+  .expertise__icon-wrap {
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    border-radius: 16px;
+    display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.4rem;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .expertise__item:hover .expertise__icon-wrap {
+    transform: scale(1.08);
+  }
+
+  .expertise__item--photo .expertise__icon-wrap {
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.12) 0%, rgba(255, 195, 0, 0.12) 100%);
+    color: var(--color-accent);
+    box-shadow: 0 4px 16px rgba(255, 89, 0, 0.1);
+  }
+
+  .expertise__item--wine .expertise__icon-wrap {
+    background: linear-gradient(135deg, rgba(1, 98, 255, 0.1) 0%, rgba(0, 156, 255, 0.1) 100%);
+    color: var(--color-aux);
+    box-shadow: 0 4px 16px rgba(1, 98, 255, 0.08);
+  }
+
+  .expertise__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .expertise__body h3 {
+    margin: 0;
     font-size: 1.2rem;
-    box-shadow: var(--shadow-soft);
+  }
+
+  .expertise__body p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .expertise__accent-line {
+    display: block;
+    width: 32px;
+    height: 2px;
+    border-radius: 2px;
+    margin-top: 0.4rem;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .expertise__item--photo .expertise__accent-line {
+    background: linear-gradient(90deg, #ff5900, #ffc300);
+  }
+
+  .expertise__item--wine .expertise__accent-line {
+    background: linear-gradient(90deg, #0162ff, #009cff);
+  }
+
+  .expertise__item:hover .expertise__accent-line {
+    width: 56px;
   }
 
   .guide-section {
@@ -721,15 +1036,10 @@ const experienceTags = [
   }
 
   @media (max-width: 960px) {
-    .experience-hero__inner,
     .photo-preview__grid,
     .guide-section__grid,
     .story__grid {
       grid-template-columns: 1fr;
-    }
-
-    .experience-hero__media {
-      grid-template-rows: repeat(2, 180px);
     }
 
     .experience-cards {
@@ -746,19 +1056,6 @@ const experienceTags = [
   }
 
   @media (max-width: 640px) {
-    .experience-hero {
-      padding: 6rem 0 4rem;
-    }
-
-    .experience-hero__media {
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(3, 180px);
-    }
-
-    .experience-hero__image:nth-child(1) {
-      grid-row: auto;
-    }
-
     .photo-preview__gallery {
       grid-template-columns: 1fr;
     }
