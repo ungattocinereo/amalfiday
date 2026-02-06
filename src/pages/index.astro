@@ -128,27 +128,12 @@ const fallbackQuatrain =
           </a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section__header">
-        <h2>
-          Essential <span class="accent-italic">pages</span>
-        </h2>
-        <span class="section__subtitle">Quick guides for getting around Amalfi.</span>
-      </div>
-      <div class="static-grid">
+      <div class="hero__essentials">
         {staticPages.map((item) => (
-          <a class="card static-card" href={item.href}>
-            <div class="static-card__media">
-              <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" />
-            </div>
-            <div class="static-card__body">
-              <h3>{item.title}</h3>
-              <p>{item.note}</p>
-            </div>
+          <a class="hero__essential" href={item.href}>
+            <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" />
+            <span class="hero__mini-badge">{item.title}</span>
           </a>
         ))}
       </div>
@@ -312,12 +297,12 @@ const fallbackQuatrain =
 
 <style>
   .hero {
-    padding: 6rem 0 4.5rem;
+    padding: 6rem 0 3rem;
     position: relative;
-    background: #ff5900;
     color: #ffffff;
-    overflow: hidden;
     box-sizing: border-box;
+    background: #ff5900;
+    overflow: hidden;
   }
 
   .hero::before {
@@ -337,9 +322,21 @@ const fallbackQuatrain =
     opacity: 0.95;
   }
 
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(3rem + 11vw);
+    background: var(--color-bg);
+    z-index: 1;
+    pointer-events: none;
+  }
+
   .hero__inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     gap: 2.8rem;
@@ -568,6 +565,41 @@ const fallbackQuatrain =
     color: #ffffff;
   }
 
+  .hero__essentials {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.2rem;
+    width: min(980px, 100%);
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__essential {
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    aspect-ratio: 1 / 1;
+  }
+
+  .hero__essential img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .hero__essential:hover img {
+    transform: scale(1.05);
+  }
+
+  .hero__essential:hover .hero__mini-badge {
+    background: var(--color-accent);
+    color: #ffffff;
+  }
 
   .hero__mini--stack {
     flex-direction: column;
@@ -687,57 +719,6 @@ const fallbackQuatrain =
     width: 100%;
   }
 
-  .static-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .static-card {
-    position: relative;
-    overflow: hidden;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .static-card:hover {
-    text-decoration: none;
-  }
-
-  .static-card__media {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    overflow: hidden;
-    background: var(--color-surface);
-  }
-
-  .static-card__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .static-card__body {
-    padding: 1.4rem 1.6rem 1.6rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .static-card h3 {
-    margin: 0;
-    font-size: 1.2rem;
-  }
-
-  .static-card p {
-    margin: 0;
-    color: var(--color-text-muted);
-  }
 
   .scroll {
     display: grid;
@@ -1006,6 +987,10 @@ const fallbackQuatrain =
       min-height: 320px;
     }
 
+    .hero__essentials {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .news-scroll {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -1087,6 +1072,10 @@ const fallbackQuatrain =
     .hero__mosaic {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: auto auto auto;
+    }
+
+    .hero__essentials {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .hero__tile--primary,
