@@ -346,8 +346,9 @@ const experienceTags = [
   /* --- Slide images --- */
   .xp-hero__slides {
     position: absolute;
-    inset: 0;
+    inset: -2px;
     z-index: 0;
+    overflow: hidden;
   }
 
   .xp-hero__slide {
@@ -355,6 +356,7 @@ const experienceTags = [
     inset: 0;
     opacity: 0;
     transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
   }
 
   .xp-hero__slide.is-active {
@@ -362,12 +364,14 @@ const experienceTags = [
   }
 
   .xp-hero__slide img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(1);
-    animation: none;
+    transform: scale(1.01);
+    backface-visibility: hidden;
   }
 
   .xp-hero__slide.is-active img {
@@ -375,7 +379,7 @@ const experienceTags = [
   }
 
   @keyframes xp-ken-burns {
-    from { transform: scale(1); }
+    from { transform: scale(1.01); }
     to { transform: scale(1.06); }
   }
 
@@ -463,7 +467,7 @@ const experienceTags = [
     font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
     cursor: pointer;
     border: none;
   }
@@ -482,10 +486,9 @@ const experienceTags = [
   }
 
   .xp-hero__btn--ghost {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.14);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(8px);
   }
 
   .xp-hero__btn--ghost:hover {
@@ -519,12 +522,11 @@ const experienceTags = [
   .xp-hero__tag {
     padding: 0.35rem 0.75rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.18);
     font-size: 0.75rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(6px);
     opacity: 0;
     animation: xp-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
@@ -551,12 +553,13 @@ const experienceTags = [
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.35);
-    transition: color 0.4s;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
   }
 
   .xp-hero__dot.is-active .xp-hero__dot-label {
-    color: rgba(255, 255, 255, 0.9);
+    opacity: 1;
   }
 
   .xp-hero__dot-bar {
@@ -569,16 +572,21 @@ const experienceTags = [
 
   .xp-hero__dot-fill {
     display: block;
-    width: 0;
+    width: 100%;
     height: 100%;
     background: #ff5900;
     border-radius: 2px;
-    transition: width 0s;
+    transform-origin: left center;
+    transform: scaleX(0);
   }
 
   .xp-hero__dot.is-active .xp-hero__dot-fill {
-    width: 100%;
-    transition: width 6s linear;
+    animation: xp-fill-bar 6s linear forwards;
+  }
+
+  @keyframes xp-fill-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
   }
 
   /* --- Scroll hint --- */

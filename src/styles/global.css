@@ -12,6 +12,7 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  overflow-x: hidden;
 }
 
 [data-theme='night'] {
