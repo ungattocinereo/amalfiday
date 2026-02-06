@@ -162,7 +162,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       <div class="contact-plan__intro">
         <div class="contact-eyebrow">PLAN WITH US</div>
         <h1>
-          Let's design your <span class="accent-italic">Amalfi</span> story
+          Let’s design your <span class="accent-italic">Amalfi</span> story
         </h1>
         <p>
           Share your dates, mood, and wishlist. We will build a tailored plan with the best light,
@@ -186,7 +186,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         </div>
       </div>
 
-      <form class="contact-form" action="/hooks/send-telegram-amalfiday" method="post">
+      <form class="contact-form" action="/api/contact" method="post">
         <div class="contact-form__body">
           <div class="contact-form__header">
             <span class="badge"><i class="bi bi-stars"></i> Telegram-ready request</span>
@@ -312,7 +312,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
             </div>
             <div class="contact-form__success-text">
               <h3>Thank you</h3>
-              <p>Your form was submitted and delivered.</p>
+              <p>Your form was submited and delivered.</p>
               <p class="contact-form__reset-line">
                 Do you want to <a class="contact-form__reset" href="#">send another</a> one?
               </p>
@@ -471,24 +471,19 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
     form?.addEventListener('submit', async (event) => {
       event.preventDefault()
-      
-      // Валидация контакта
-      const isContactValid = validateContact()
-      
-      // Строгая проверка service - блокируем отправку если не выбран
-      if (!serviceInput?.value) {
-        serviceInput?.setCustomValidity('Please select a service.')
+      validateContact()
+      if (serviceInput && !serviceInput.value) {
+        serviceInput.setCustomValidity('Please select a service.')
         serviceSelect?.classList.add('is-invalid')
-        openServiceSelect()
-        setStatus('Please select a service', 'error')
-        return
-      } else {
-        serviceInput?.setCustomValidity('')
+      } else if (serviceInput) {
+        serviceInput.setCustomValidity('')
         serviceSelect?.classList.remove('is-invalid')
       }
 
-      // Проверка остальных полей
-      if (!form.reportValidity() || !isContactValid) {
+      if (!form.reportValidity()) {
+        if (serviceSelect?.classList.contains('is-invalid')) {
+          openServiceSelect()
+        }
         return
       }
 
@@ -499,25 +494,14 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       const payload = Object.fromEntries(formData.entries())
 
       try {
-        const response = await fetch('/hooks/send-telegram-amalfiday', {
+        const response = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         })
 
-        // Всегда пытаемся распарсить JSON первым делом
-        let result
-        try {
-          result = await response.json()
-        } catch (parseError) {
-          // Если не удалось распарсить JSON (например, HTML-ошибка 500), читаем как текст
-          const text = await response.text()
-          throw new Error(text || `Server error: ${response.status}`)
-        }
-
-        // Теперь проверяем статус и содержимое ответа
-        if (!response.ok || result.error) {
-          throw new Error(result.error || 'Request failed')
+        if (!response.ok) {
+          throw new Error('Request failed')
         }
 
         form.reset()
@@ -526,8 +510,6 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         showSuccessState()
       } catch (error) {
         clearSuccessState()
-        console.error('Webhook error:', error)
-        // Показываем пользователю понятное сообщение
         setStatus('Sorry, something went wrong. Please email hello@amalfi.day.', 'error')
       } finally {
         if (submitButton) submitButton.disabled = false
