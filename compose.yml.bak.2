@@ -2,13 +2,15 @@ services:
   ghost:
     image: ghost:6-alpine
     restart: unless-stopped
+    depends_on:
+      - db
     environment:
       url: https://amalfi.day/blog
       NODE_ENV: production
       server__host: 0.0.0.0
       server__port: 40001
       database__client: mysql
-      database__connection__host: shared-mysql
+      database__connection__host: db
       database__connection__user: ghost
       database__connection__password: EuXORAZQaK-JBQ2VNH5Y1otG
       database__connection__database: ghost
@@ -19,13 +21,23 @@ services:
       - ghost_content:/var/lib/ghost/content
     networks:
       - web-proxy
-      - shared_mysql
+      - default
 
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ZKgAxn9eba5799oskPgcO_5bvqys
+      MYSQL_DATABASE: ghost
+      MYSQL_USER: ghost
+      MYSQL_PASSWORD: EuXORAZQaK-JBQ2VNH5Y1otG
+    volumes:
+      - ghost_db:/var/lib/mysql
 volumes:
   ghost_content:
+  ghost_db:
 
 networks:
   web-proxy:
-    external: true
-  shared_mysql:
     external: true
