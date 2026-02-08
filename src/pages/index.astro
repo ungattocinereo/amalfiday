@@ -70,6 +70,8 @@ const fallbackQuatrain =
   imageAlt={shareImageAlt}
 >
   <section class="hero hero--orange">
+    <canvas class="hero__caustics" id="heroCaustics"></canvas>
+    <div class="hero__spot" id="heroSpot"></div>
     <div class="container hero__inner">
       <div class="hero__intro">
         <div class="hero__quatrain" data-quatrains={JSON.stringify(quatrains)}>
@@ -332,6 +334,29 @@ const fallbackQuatrain =
       rgba(255, 89, 0, 1) 72%
     );
     opacity: 0.95;
+  }
+
+  .hero__caustics {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    mix-blend-mode: soft-light;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .hero__spot {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(
+      700px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 200, 0.4) 0%,
+      transparent 55%
+    );
   }
 
   .hero::after {
@@ -1216,4 +1241,81 @@ const fallbackQuatrain =
       window.addEventListener('load', loadHeroVideo, { once: true })
     }
   }
+
+  // ── Water caustics effect ──
+  ;(function () {
+    const canvas = document.getElementById('heroCaustics')
+    const heroEl = document.querySelector('.hero')
+    const spot = document.getElementById('heroSpot')
+    if (!canvas || !heroEl) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    let W, H, t = 0, raf
+
+    function resize() {
+      W = canvas.width = heroEl.offsetWidth
+      H = canvas.height = heroEl.offsetHeight
+    }
+
+    function draw() {
+      t += 0.006
+      const img = ctx.createImageData(W, H)
+      const d = img.data
+      const step = 4
+
+      for (let y = 0; y < H; y += step) {
+        for (let x = 0; x < W; x += step) {
+          const nx = x / W * 8
+          const ny = y / H * 8
+
+          let v = 0
+          v += Math.sin(nx * 2.5 + t * 1.2 + Math.sin(ny * 2.0 + t * 0.8) * 2.0)
+          v += Math.sin(ny * 3.0 - t * 1.0 + Math.cos(nx * 2.2 + t * 0.6) * 1.5)
+          v += Math.sin((nx + ny) * 1.8 + t * 1.5)
+          v += Math.sin(Math.sqrt(nx * nx + ny * ny) * 3.0 - t)
+
+          v = (v + 4) / 8
+          const b = Math.pow(v, 3) * 255
+
+          for (let dy = 0; dy < step && y + dy < H; dy++) {
+            for (let dx = 0; dx < step && x + dx < W; dx++) {
+              const i = ((y + dy) * W + (x + dx)) * 4
+              d[i] = b
+              d[i + 1] = b * 0.92
+              d[i + 2] = b * 0.7
+              d[i + 3] = b
+            }
+          }
+        }
+      }
+
+      ctx.putImageData(img, 0, 0)
+      raf = requestAnimationFrame(draw)
+    }
+
+    // Spotlight follows cursor
+    heroEl.addEventListener('mousemove', function (e) {
+      const r = heroEl.getBoundingClientRect()
+      if (spot) {
+        spot.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%')
+        spot.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%')
+      }
+    })
+
+    // Only run when hero is visible
+    const observer = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        resize()
+        draw()
+      } else if (raf) {
+        cancelAnimationFrame(raf)
+        raf = null
+      }
+    }, { threshold: 0.05 })
+
+    observer.observe(heroEl)
+    window.addEventListener('resize', resize)
+  })()
 </script>
