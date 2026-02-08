@@ -11,7 +11,8 @@
     "update-calendars": "node scripts/update-calendars.mjs",
     "preview": "astro preview",
     "optimize-images": "node scripts/optimize-images.mjs",
-    "precompress": "node scripts/precompress.mjs"
+    "precompress": "node scripts/precompress.mjs",
+    "ghost:rebuild": "node scripts/ghost-rebuild.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",
