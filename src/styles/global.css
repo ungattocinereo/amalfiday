@@ -158,3 +158,26 @@ p {
     --header-space: 84px;
   }
 }
+
+/* Mobile-only logo — sits in document flow, scrolls with content */
+.mobile-logo {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-logo {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 21;
+    line-height: 0;
+  }
+
+  .mobile-logo img {
+    height: 38px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+  }
+}

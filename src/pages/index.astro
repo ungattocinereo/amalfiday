@@ -12,11 +12,18 @@ const shareImageAlt = 'Atrani to Sorrento coast'
 
 const staticPages = [
   {
-    title: 'Beach reviews',
-    href: '/beaches',
-    note: 'Best spots for swimming, sun, and photos.',
-    image: '/staticpages/mainpage/beach-reviews.webp',
-    imageAlt: 'Amalfi Coast beach overview',
+    title: 'Amalfi news',
+    href: '/blog',
+    note: 'Latest news and stories from the Amalfi Coast.',
+    image: '/staticpages/index/blog-of-amalfi-coast.webp',
+    imageAlt: 'Amalfi Coast blog and news',
+  },
+  {
+    title: 'Public transport',
+    href: '/timetables',
+    note: 'Buses, ferries, and regional routes in one place.',
+    image: '/staticpages/mainpage/allublictransport.webp',
+    imageAlt: 'Public transport connections along the Amalfi Coast',
   },
   {
     title: 'Apartment rentals',
@@ -33,11 +40,18 @@ const staticPages = [
     imageAlt: 'Parking area on the Amalfi Coast',
   },
   {
-    title: 'Public transport',
-    href: '/timetables',
-    note: 'Buses, ferries, and regional routes in one place.',
-    image: '/staticpages/mainpage/allublictransport.webp',
-    imageAlt: 'Public transport connections along the Amalfi Coast',
+    title: 'Beach reviews',
+    href: '/beaches',
+    note: 'Best spots for swimming, sun, and photos.',
+    image: '/staticpages/mainpage/beach-reviews.webp',
+    imageAlt: 'Amalfi Coast beach overview',
+  },
+  {
+    title: 'Moto roads',
+    href: '/moto',
+    note: 'Scenic motorcycle routes along the coast.',
+    image: '/staticpages/index/moto-roads-in-amalfi.webp',
+    imageAlt: 'Motorcycle roads on the Amalfi Coast',
   },
 ]
 
@@ -326,7 +340,7 @@ const fallbackQuatrain =
     left: 0;
     right: 0;
     bottom: 0;
-    height: calc(3rem + 11vw);
+    height: calc(1.5rem + 5vw);
     background: var(--color-bg);
     z-index: 1;
     pointer-events: none;
@@ -337,7 +351,7 @@ const fallbackQuatrain =
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 2.8rem;
+    gap: 1.2rem;
     align-items: center;
   }
 
@@ -349,6 +363,7 @@ const fallbackQuatrain =
     flex-direction: column;
     gap: 1.1rem;
     margin-top: 0.8rem;
+    margin-bottom: 1.6rem;
   }
 
   .hero__quatrain {
@@ -424,6 +439,7 @@ const fallbackQuatrain =
   .hero__tile--primary {
     grid-column: 1 / span 8;
     grid-row: 1 / 3;
+    aspect-ratio: 16 / 9;
   }
 
   .hero__tile--small {
@@ -472,6 +488,9 @@ const fallbackQuatrain =
     position: absolute;
     inset: 0;
     z-index: 0;
+    background-image: url('/staticpages/video/atrani-sorrento-video.webp');
+    background-size: cover;
+    background-position: center;
   }
 
   .guide-card__video {
@@ -538,6 +557,11 @@ const fallbackQuatrain =
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .hero__mini--photo:hover img {
+    transform: scale(1.05);
   }
 
   .hero__mini-badge {
@@ -565,7 +589,7 @@ const fallbackQuatrain =
 
   .hero__essentials {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1.2rem;
     width: min(980px, 100%);
     margin: 0 auto;
@@ -964,6 +988,7 @@ const fallbackQuatrain =
       grid-column: 1 / span 6;
       grid-row: 1;
       min-height: 320px;
+      aspect-ratio: 16 / 9;
     }
 
     .hero__tile--small-a {
@@ -987,6 +1012,10 @@ const fallbackQuatrain =
 
     .hero__essentials {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero__essential {
+      aspect-ratio: 1 / 1;
     }
 
     .news-scroll {
@@ -1022,6 +1051,7 @@ const fallbackQuatrain =
   @media (max-width: 640px) {
     .hero__tile--primary {
       min-height: 260px;
+      aspect-ratio: 16 / 9;
     }
 
     .guide-card {
@@ -1070,10 +1100,6 @@ const fallbackQuatrain =
     .hero__mosaic {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: auto auto auto;
-    }
-
-    .hero__essentials {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .hero__tile--primary,
