@@ -250,22 +250,23 @@ const headerSocials = socialLinks.filter((item) =>
   }
 
   @media (min-width: 901px) {
-    .header:not(.is-scrolled) {
+    .header.on-hero:not(.is-scrolled) {
       color: #ffffff;
       --nav-underline: rgba(255, 255, 255, 0.95);
       --nav-outline: rgba(255, 255, 255, 0.35);
     }
 
-    .header:not(.is-scrolled) .logo__mark--day {
+    .header.on-hero:not(.is-scrolled) .logo__mark--day {
       display: none;
     }
 
-    .header:not(.is-scrolled) .logo__mark--night {
+    .header.on-hero:not(.is-scrolled) .logo__mark--night {
       display: block;
     }
   }
 
-  .header.is-scrolled .header__shell {
+  .header.is-scrolled .header__shell,
+  .header:not(.on-hero) .header__shell {
     background: var(--color-nav-bg);
     box-shadow: var(--shadow-soft);
     border-color: var(--color-nav-border);
