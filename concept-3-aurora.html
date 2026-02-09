@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept 3 — Lava Blobs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Libre Baskerville", Georgia, serif;
+    background: #111;
+    color: #fff;
+    min-height: 300vh;
+  }
+
+  .label {
+    position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+    z-index: 999; background: #000; color: #fff;
+    padding: 8px 20px; border-radius: 999px; font-size: 13px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid #333;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background: #ff5900;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero__base {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 50% 30%,
+      #ffcc00 0%,
+      #ff8800 40%,
+      #ff5900 70%,
+      #cc3300 100%
+    );
+  }
+
+  /* ── BLOBS — large blurred circles floating around ── */
+  .hero__blobs {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    filter: blur(100px);
+    opacity: 0.8;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .blob--1 {
+    width: 50vw; height: 50vw;
+    top: -15%; left: -10%;
+    background: rgba(255, 220, 50, 0.7);
+    animation: float1 10s ease-in-out infinite;
+  }
+
+  .blob--2 {
+    width: 40vw; height: 40vw;
+    bottom: -10%; right: -10%;
+    background: rgba(255, 60, 0, 0.6);
+    animation: float2 13s ease-in-out infinite;
+  }
+
+  .blob--3 {
+    width: 35vw; height: 35vw;
+    top: 25%; right: 15%;
+    background: rgba(255, 180, 0, 0.5);
+    animation: float3 16s ease-in-out infinite;
+  }
+
+  .blob--4 {
+    width: 30vw; height: 30vw;
+    bottom: 15%; left: 10%;
+    background: rgba(255, 100, 20, 0.5);
+    animation: float4 12s ease-in-out infinite;
+  }
+
+  /* Mouse-following blob */
+  .blob--mouse {
+    width: 45vw; height: 45vw;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 180, 0.35);
+    animation: none;
+    transition: left 1.2s cubic-bezier(0.23, 1, 0.32, 1),
+                top 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(10vw, 8vh) scale(1.15); }
+    66% { transform: translate(-5vw, 12vh) scale(0.9); }
+  }
+
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    40% { transform: translate(-8vw, -6vh) scale(1.1); }
+    70% { transform: translate(5vw, -10vh) scale(0.85); }
+  }
+
+  @keyframes float3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-7vw, 8vh) scale(1.2); }
+    50% { transform: translate(5vw, -5vh) scale(0.85); }
+    75% { transform: translate(10vw, 3vh) scale(1.05); }
+  }
+
+  @keyframes float4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(7vw, -7vh) scale(1.15); }
+  }
+
+  /* ── Shimmer on hover — rotating conic gradient ── */
+  .hero__shimmer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .hero:hover .hero__shimmer {
+    opacity: 1;
+  }
+
+  .hero__shimmer-inner {
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(
+      from 0deg at 50% 50%,
+      transparent 0deg,
+      rgba(255,240,200,0.12) 40deg,
+      transparent 80deg,
+      rgba(255,200,100,0.08) 160deg,
+      transparent 200deg,
+      rgba(255,220,150,0.1) 280deg,
+      transparent 320deg,
+      rgba(255,180,80,0.06) 350deg,
+      transparent 360deg
+    );
+    animation: shimmerSpin 15s linear infinite;
+  }
+
+  @keyframes shimmerSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .hero__title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.3);
+  }
+  .hero__title em { font-weight: 400; }
+
+  .hero__sub {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-style: italic;
+    opacity: 0.85;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+  }
+
+  /* Demo tiles with iridescent border */
+  .tiles {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @property --border-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .tile {
+    width: 180px;
+    height: 120px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.15);
+    position: relative;
+    cursor: pointer;
+    overflow: visible;
+    transition: transform 0.4s cubic-bezier(0.23,1,0.32,1),
+                box-shadow 0.4s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+  }
+
+  .tile:hover {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow:
+      0 20px 50px rgba(0,0,0,0.3),
+      0 0 60px rgba(255,150,50,0.15);
+  }
+
+  /* Animated iridescent border on hover */
+  .tile::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 20px;
+    padding: 3px;
+    background: conic-gradient(
+      from var(--border-angle, 0deg),
+      #ffd700,
+      #ff8c00,
+      #ff4500,
+      #ffd700,
+      #fff4b0,
+      #ffd700
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    animation: borderSpin 3s linear infinite;
+    z-index: -1;
+  }
+
+  .tile:hover::before {
+    opacity: 1;
+  }
+
+  @keyframes borderSpin {
+    to { --border-angle: 360deg; }
+  }
+
+  .tile span {
+    position: relative;
+    z-index: 2;
+    font-size: 12px;
+    font-style: italic;
+    background: #fff;
+    color: #111;
+    padding: 4px 12px;
+    border-radius: 999px;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  }
+
+  .tile:hover span {
+    background: #ff5900;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(255,89,0,0.4);
+  }
+
+  /* INFO */
+  .info {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 0 2rem;
+    text-align: center;
+  }
+  .info h2 { font-size: 1.5rem; color: #ff5900; margin-bottom: 1rem; }
+  .info p { color: #888; line-height: 1.7; font-size: 0.95rem; }
+  .info ul { list-style: none; margin-top: 1.5rem; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .info li {
+    background: rgba(255,89,0,0.12);
+    color: #ffc300;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="label">Concept 3 — Lava Blobs</div>
+
+<section class="hero" id="hero">
+  <div class="hero__base"></div>
+  <div class="hero__blobs">
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+    <div class="blob blob--3"></div>
+    <div class="blob blob--4"></div>
+    <div class="blob blob--mouse" id="mouseBlob"></div>
+  </div>
+  <div class="hero__shimmer"><div class="hero__shimmer-inner"></div></div>
+
+  <div class="hero__content">
+    <p class="hero__sub">Where lemon groves meet the sea</p>
+    <h1 class="hero__title">Amalfi.<em>Day</em></h1>
+    <div class="tiles">
+      <div class="tile"><span>Guide</span></div>
+      <div class="tile"><span>Bus</span></div>
+      <div class="tile"><span>Ferry</span></div>
+      <div class="tile"><span>Beaches</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="info">
+  <h2>What you should see</h2>
+  <p>
+    Large blurred color blobs slowly float across the hero like a lava lamp.
+    One blob follows your cursor with a slow, organic delay.
+    On hover, a spinning conic-gradient shimmer appears.
+    Tiles get an animated golden iridescent spinning border.
+  </p>
+  <ul>
+    <li>Floating lava blobs</li>
+    <li>Mouse-following blob</li>
+    <li>Conic shimmer on hover</li>
+    <li>@property iridescent borders</li>
+  </ul>
+</div>
+
+<script>
+const hero = document.getElementById('hero');
+const blob = document.getElementById('mouseBlob');
+
+hero.addEventListener('mousemove', e => {
+  const r = hero.getBoundingClientRect();
+  const x = ((e.clientX - r.left) / r.width * 100);
+  const y = ((e.clientY - r.top) / r.height * 100);
+  blob.style.left = x + '%';
+  blob.style.top = y + '%';
+});
+</script>
+</body>
+</html>

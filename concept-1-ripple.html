@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept 1 — Water Caustics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Libre Baskerville", Georgia, serif;
+    background: #111;
+    color: #fff;
+    min-height: 300vh;
+  }
+
+  .label {
+    position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+    z-index: 999; background: #000; color: #fff;
+    padding: 8px 20px; border-radius: 999px; font-size: 13px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid #333;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background: #ff5900;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Base gradient */
+  .hero__base {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 50% 30%,
+      #ffcc00 0%,
+      #ff8800 40%,
+      #ff5900 70%,
+      #cc3300 100%
+    );
+  }
+
+  /* CANVAS — water caustics */
+  #caustics {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    mix-blend-mode: soft-light;
+    opacity: 0.7;
+  }
+
+  /* Mouse-following spotlight */
+  .hero__spot {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(
+      700px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 200, 0.4) 0%,
+      transparent 55%
+    );
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .hero__title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.3);
+  }
+  .hero__title em { font-weight: 400; }
+
+  .hero__sub {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-style: italic;
+    opacity: 0.85;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+  }
+
+  /* Demo tiles */
+  .tiles {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .tile {
+    width: 180px;
+    height: 120px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+  }
+  .tile:hover {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+
+  /* Per-tile ripple glow */
+  .tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at var(--tx, 50%) var(--ty, 50%),
+      rgba(255,255,150,0.5) 0%,
+      transparent 45%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+  .tile:hover::after { opacity: 1; }
+
+  .tile span {
+    position: relative;
+    z-index: 2;
+    font-size: 12px;
+    font-style: italic;
+    background: #fff;
+    color: #111;
+    padding: 4px 12px;
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .tile:hover span { background: #ff5900; color: #fff; }
+
+  /* INFO */
+  .info {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 0 2rem;
+    text-align: center;
+  }
+  .info h2 { font-size: 1.5rem; color: #ff5900; margin-bottom: 1rem; }
+  .info p { color: #888; line-height: 1.7; font-size: 0.95rem; }
+  .info ul { list-style: none; margin-top: 1.5rem; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .info li {
+    background: rgba(255,89,0,0.12);
+    color: #ffc300;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="label">Concept 1 — Water Caustics</div>
+
+<section class="hero" id="hero">
+  <div class="hero__base"></div>
+  <canvas id="caustics"></canvas>
+  <div class="hero__spot" id="spot"></div>
+
+  <div class="hero__content">
+    <p class="hero__sub">Where lemon groves meet the sea</p>
+    <h1 class="hero__title">Amalfi.<em>Day</em></h1>
+    <div class="tiles">
+      <div class="tile" data-tile><span>Guide</span></div>
+      <div class="tile" data-tile><span>Bus</span></div>
+      <div class="tile" data-tile><span>Ferry</span></div>
+      <div class="tile" data-tile><span>Beaches</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="info">
+  <h2>What you should see</h2>
+  <p>
+    Animated water-caustic pattern covers the entire hero. A bright
+    spotlight follows your cursor. Each tile glows from the mouse
+    position on hover.
+  </p>
+  <ul>
+    <li>Canvas 2D caustics</li>
+    <li>Mouse spotlight</li>
+    <li>Tile hover glow</li>
+  </ul>
+</div>
+
+<script>
+// === CAUSTICS ===
+const canvas = document.getElementById('caustics');
+const ctx = canvas.getContext('2d');
+let W, H, t = 0;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function draw() {
+  t += 0.006;
+  const img = ctx.createImageData(W, H);
+  const d = img.data;
+  const step = 3; // skip pixels for perf
+
+  for (let y = 0; y < H; y += step) {
+    for (let x = 0; x < W; x += step) {
+      const nx = x / W * 8;
+      const ny = y / H * 8;
+
+      let v = 0;
+      v += Math.sin(nx * 2.5 + t * 1.2 + Math.sin(ny * 2.0 + t * 0.8) * 2.0);
+      v += Math.sin(ny * 3.0 - t * 1.0 + Math.cos(nx * 2.2 + t * 0.6) * 1.5);
+      v += Math.sin((nx + ny) * 1.8 + t * 1.5);
+      v += Math.sin(Math.sqrt(nx * nx + ny * ny) * 3.0 - t);
+
+      v = (v + 4) / 8;
+      const b = Math.pow(v, 3) * 255;
+
+      for (let dy = 0; dy < step && y + dy < H; dy++) {
+        for (let dx = 0; dx < step && x + dx < W; dx++) {
+          const i = ((y + dy) * W + (x + dx)) * 4;
+          d[i] = b;
+          d[i+1] = b * 0.92;
+          d[i+2] = b * 0.7;
+          d[i+3] = b;
+        }
+      }
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+  requestAnimationFrame(draw);
+}
+draw();
+
+// === SPOTLIGHT ===
+const hero = document.getElementById('hero');
+const spot = document.getElementById('spot');
+
+hero.addEventListener('mousemove', e => {
+  const r = hero.getBoundingClientRect();
+  spot.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+  spot.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+});
+
+// === TILE GLOW ===
+document.querySelectorAll('[data-tile]').forEach(tile => {
+  tile.addEventListener('mousemove', e => {
+    const r = tile.getBoundingClientRect();
+    tile.style.setProperty('--tx', ((e.clientX - r.left) / r.width * 100) + '%');
+    tile.style.setProperty('--ty', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+</script>
+</body>
+</html>

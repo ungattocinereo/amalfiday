@@ -89,6 +89,16 @@ const fallbackQuatrain =
         <div class="hero__tile hero__tile--primary">
           <a class="guide-card" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
             <div class="guide-card__media">
+              <img
+                class="guide-card__poster"
+                src="/staticpages/video/atrani-sorrento-video.webp"
+                alt="Atrani to Sorrento coast"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                width="1500"
+                height="1072"
+              />
               <video
                 class="guide-card__video"
                 muted
@@ -98,7 +108,6 @@ const fallbackQuatrain =
                 poster="/staticpages/video/atrani-sorrento-video.webp"
               >
                 <source data-src="/staticpages/video/atrani-sorrento-video.mp4" type="video/mp4" />
-                <img src="/staticpages/video/atrani-sorrento-video.webp" alt="Atrani to Sorrento coast" />
               </video>
             </div>
             <span class="guide-card__badge">
@@ -115,7 +124,14 @@ const fallbackQuatrain =
             target="_blank"
             rel="noreferrer"
           >
-            <img src="/staticpages/index/bus-timetables.webp" alt="Bus timetables" loading="lazy" />
+            <img
+              src="/staticpages/index/bus-timetables.webp"
+              alt="Bus timetables"
+              loading="lazy"
+              decoding="async"
+              width="1000"
+              height="1000"
+            />
             <span class="hero__mini-badge">Bus timetables</span>
           </a>
         </div>
@@ -127,7 +143,14 @@ const fallbackQuatrain =
             target="_blank"
             rel="noreferrer"
           >
-            <img src="/staticpages/index/ferry-timetables.webp" alt="Ferry timetables" loading="lazy" />
+            <img
+              src="/staticpages/index/ferry-timetables.webp"
+              alt="Ferry timetables"
+              loading="lazy"
+              decoding="async"
+              width="1000"
+              height="1000"
+            />
             <span class="hero__mini-badge">Ferry timetables</span>
           </a>
         </div>
@@ -146,7 +169,14 @@ const fallbackQuatrain =
       <div class="hero__essentials">
         {staticPages.map((item) => (
           <a class="hero__essential" href={item.href}>
-            <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" />
+            <img
+              src={item.image}
+              alt={item.imageAlt}
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="1200"
+            />
             <span class="hero__mini-badge">{item.title}</span>
           </a>
         ))}
@@ -171,11 +201,9 @@ const fallbackQuatrain =
       <div class="scroll" aria-label="Featured photoshoots">
         {featuredPhotoshoots.map((item, index) => (
           <a class="scroll__card" href={item.href}>
-            <div
-              class="scroll__media"
-              data-index={index}
-              style={`background-image: url(${item.image})`}
-            ></div>
+            <div class="scroll__media" data-index={index}>
+              <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+            </div>
             <div class="scroll__overlay">
               <h3>{item.title}</h3>
               <span><i class="bi bi-geo-alt"></i> {item.location}</span>
@@ -513,9 +541,16 @@ const fallbackQuatrain =
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url('/staticpages/video/atrani-sorrento-video.webp');
-    background-size: cover;
-    background-position: center;
+  }
+
+  .guide-card__poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.25s ease;
+    z-index: 1;
   }
 
   .guide-card__video {
@@ -523,6 +558,12 @@ const fallbackQuatrain =
     height: 100%;
     object-fit: cover;
     display: block;
+    z-index: 2;
+    position: relative;
+  }
+
+  .guide-card.is-video-ready .guide-card__poster {
+    opacity: 0;
   }
 
   .guide-card__badge {
@@ -786,9 +827,13 @@ const fallbackQuatrain =
     position: absolute;
     inset: 0;
     background-color: rgba(16, 16, 16, 0.35);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  }
+
+  .scroll__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .scroll__overlay {
@@ -1167,11 +1212,11 @@ const fallbackQuatrain =
 <script is:inline>
   const quatrainRoot = document.querySelector('[data-quatrains]')
   const heroVideo = document.querySelector('.guide-card__video')
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
   if (quatrainRoot) {
     const lines = [...quatrainRoot.querySelectorAll('[data-quatrain-line]')]
     const logo = document.querySelector('.hero__logo')
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     try {
       const quatrains = JSON.parse(quatrainRoot.dataset.quatrains || '[]')
       if (Array.isArray(quatrains) && quatrains.length && lines.length) {
@@ -1223,6 +1268,13 @@ const fallbackQuatrain =
   }
 
   if (heroVideo) {
+    const prefersStaticHeroMedia =
+      window.matchMedia('(max-width: 900px)').matches ||
+      prefersReducedMotion.matches ||
+      navigator.connection?.saveData ||
+      navigator.connection?.effectiveType === 'slow-2g' ||
+      navigator.connection?.effectiveType === '2g'
+
     const loadHeroVideo = () => {
       const sources = heroVideo.querySelectorAll('source')
       sources.forEach((source) => {
@@ -1232,13 +1284,18 @@ const fallbackQuatrain =
         }
       })
       heroVideo.load()
-      heroVideo.play().catch(() => {})
+      heroVideo.play().then(() => {
+        heroVideo.closest('.guide-card')?.classList.add('is-video-ready')
+      }).catch(() => {})
     }
 
-    if (document.readyState === 'complete') {
-      loadHeroVideo()
-    } else {
-      window.addEventListener('load', loadHeroVideo, { once: true })
+    if (!prefersStaticHeroMedia) {
+      const videoObserver = new IntersectionObserver((entries, observer) => {
+        if (!entries[0]?.isIntersecting) return
+        observer.disconnect()
+        loadHeroVideo()
+      }, { rootMargin: '180px 0px', threshold: 0.05 })
+      videoObserver.observe(heroVideo)
     }
   }
 
@@ -1247,6 +1304,13 @@ const fallbackQuatrain =
     const canvas = document.getElementById('heroCaustics')
     const heroEl = document.querySelector('.hero')
     const spot = document.getElementById('heroSpot')
+    const skipHeavyHeroFx =
+      window.matchMedia('(max-width: 900px)').matches || prefersReducedMotion.matches
+    if (skipHeavyHeroFx) {
+      if (canvas) canvas.style.display = 'none'
+      if (spot) spot.style.display = 'none'
+      return
+    }
     if (!canvas || !heroEl) return
 
     const ctx = canvas.getContext('2d')
