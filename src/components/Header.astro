@@ -1,45 +1,46 @@
 ---
 import { navigation, socialLinks, site } from '../data/site'
 const headerSocials = socialLinks.filter((item) =>
-  ['Instagram', 'Facebook', 'Twitter'].includes(item.label)
+  ['Instagram', 'Facebook'].includes(item.label)
 )
 ---
-<header class="header">
-  <div class="header__shell">
+
+<header class="header" id="header">
+  <!-- Mobile: logo outside pill, centered -->
+  <a class="logo mobile-logo" href="/" aria-label={`${site.name} home`}>
+    <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} />
+    <img class="logo__mark logo__mark--night" src="/brand/logo-light.svg" alt="" aria-hidden="true" />
+  </a>
+
+  <div class="header__pill">
     <div class="header__inner">
-      <div class="header__primary">
-        <nav class="nav">
-          {navigation.map((item) => (
-            <a class="nav__link" href={item.href}>
-              <i class={`bi ${item.icon}`}></i>
-              {item.label}
-            </a>
-          ))}
-        </nav>
+      <!-- Desktop: logo inside pill, left -->
+      <a class="logo desktop-logo" href="/" aria-label={`${site.name} home`}>
+        <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} />
+        <img class="logo__mark logo__mark--night" src="/brand/logo-light.svg" alt="" aria-hidden="true" />
+      </a>
 
-        <a class="logo" href="/" aria-label={`${site.name} home`}>
-          <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} />
-          <img
-            class="logo__mark logo__mark--night"
-            src="/brand/logo-light.svg"
-            alt=""
-            aria-hidden="true"
-          />
-        </a>
+      <nav class="nav">
+        {navigation.map((item) => (
+          <a class="nav__link" href={item.href}>
+            <i class={`bi ${item.icon}`}></i>
+            {item.label}
+          </a>
+        ))}
+      </nav>
 
-        <div class="social">
+      <div class="header__actions">
+        <div class="header__social">
           {headerSocials.map((item) => (
-            <a class="social__link" href={item.href} target="_blank" rel="noreferrer">
-              <span class="sr-only">{item.label}</span>
+            <a class="header__social-link" href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
               {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
               {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
-              {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
             </a>
           ))}
         </div>
-      </div>
-
-      <div class="header__actions">
+        <span class="header__divider"></span>
+        <a class="cta-btn" href="/contact">Contact</a>
+        <span class="header__divider"></span>
         <label class="theme-switch" aria-label="Toggle theme">
           <input class="theme-switch__input" type="checkbox" />
           <span class="theme-switch__track">
@@ -50,31 +51,37 @@ const headerSocials = socialLinks.filter((item) =>
             <i class="bi bi-moon-stars"></i>
           </span>
         </label>
-        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-          <i class="bi bi-list"></i>
-          <i class="bi bi-x-lg"></i>
-        </button>
       </div>
     </div>
   </div>
+
+  <!-- Mobile: hamburger -->
+  <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+    <i class="bi bi-list"></i>
+    <i class="bi bi-x-lg"></i>
+  </button>
+
+  <!-- Full-screen mobile menu -->
   <div class="mobile-panel" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="mobile-panel__logo">
+      <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} />
+      <img class="logo__mark logo__mark--night" src="/brand/logo-light.svg" alt="" aria-hidden="true" />
+    </div>
+
     <div class="mobile-panel__links">
       <a class="mobile-panel__link" href="/">
-        <span class="mobile-panel__link-label">
-          <i class="bi bi-house-door-fill"></i>
-          Home
-        </span>
+        <i class="bi bi-house-door-fill"></i> Home
       </a>
       {navigation.map((item) => (
         <a class="mobile-panel__link" href={item.href}>
-          <span class="mobile-panel__link-label">
-            <i class={`bi ${item.icon}`}></i>
-            {item.label}
-          </span>
+          <i class={`bi ${item.icon}`}></i> {item.label}
         </a>
       ))}
     </div>
-    <div class="mobile-panel__theme">
+
+    <div class="mobile-panel__divider"></div>
+
+    <div class="mobile-panel__theme-row">
       <label class="theme-switch" aria-label="Toggle theme">
         <input class="theme-switch__input" type="checkbox" />
         <span class="theme-switch__track">
@@ -85,18 +92,22 @@ const headerSocials = socialLinks.filter((item) =>
           <i class="bi bi-moon-stars"></i>
         </span>
       </label>
+      <span class="mobile-panel__theme-label">Day / Night</span>
     </div>
-    <div class="mobile-panel__social">
-      {headerSocials.map((item) => (
-        <a class="mobile-panel__social-link" href={item.href} target="_blank" rel="noreferrer">
-          {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
-          {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
-          {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
-          <span>
-            {item.label === 'Twitter' ? 'X (Twitter)' : item.label}
-          </span>
-        </a>
-      ))}
+
+    <div class="mobile-panel__bottom">
+      <div class="mobile-panel__social">
+        {socialLinks.filter(s => s.label !== 'Email').map((item) => (
+          <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
+            {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
+            {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
+            {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
+          </a>
+        ))}
+      </div>
+      <a class="mobile-panel__whatsapp" href="/contact">
+        <i class="bi bi-whatsapp"></i> WhatsApp
+      </a>
     </div>
   </div>
 </header>
@@ -104,42 +115,37 @@ const headerSocials = socialLinks.filter((item) =>
 <script is:inline>
   ;(() => {
     const root = document.documentElement
-    const header = document.querySelector('.header')
+    const header = document.getElementById('header')
     const themeToggles = Array.from(document.querySelectorAll('.theme-switch__input'))
     const menuToggle = document.querySelector('.menu-toggle')
     const mobilePanel = document.querySelector('.mobile-panel')
-    const heroEl = document.querySelector('.hero--orange, .hero--dark')
+    const desktopLogo = document.querySelector('.desktop-logo')
+    const scrim = document.getElementById('topScrim')
 
+    /* ── Responsive logo visibility ── */
+    const mq = window.matchMedia('(min-width:901px)')
+    const syncLogo = () => {
+      if (desktopLogo) desktopLogo.style.display = mq.matches ? 'inline-flex' : 'none'
+      const mobileLogo = header?.querySelector(':scope > .mobile-logo')
+      if (mobileLogo) mobileLogo.style.display = mq.matches ? 'none' : 'inline-flex'
+    }
+    syncLogo()
+    mq.addEventListener('change', syncLogo)
+
+    /* ── Theme ── */
     const getStoredTheme = () => {
-      try {
-        return localStorage.getItem('theme')
-      } catch (error) {
-        return null
-      }
+      try { return localStorage.getItem('theme') } catch { return null }
     }
 
-    const getSystemTheme = () => {
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'night'
-      }
-      return 'day'
-    }
+    const getSystemTheme = () =>
+      window.matchMedia?.('(prefers-color-scheme:dark)').matches ? 'night' : 'day'
 
-    const syncSwitch = (value) => {
-      themeToggles.forEach((toggle) => {
-        toggle.checked = value === 'night'
-      })
-    }
+    const syncSwitch = (value) =>
+      themeToggles.forEach((t) => { t.checked = value === 'night' })
 
     const setTheme = (value, { persist = false } = {}) => {
       root.dataset.theme = value
-      if (persist) {
-        try {
-          localStorage.setItem('theme', value)
-        } catch (error) {
-          // ignore storage errors
-        }
-      }
+      if (persist) try { localStorage.setItem('theme', value) } catch {}
       syncSwitch(value)
     }
 
@@ -156,24 +162,21 @@ const headerSocials = socialLinks.filter((item) =>
         if (!allowSystemSync) return
         setTheme(event.matches ? 'night' : 'day')
       }
-      if (media.addEventListener) {
-        media.addEventListener('change', onSystemChange)
-      } else if (media.addListener) {
-        media.addListener(onSystemChange)
-      }
+      if (media.addEventListener) media.addEventListener('change', onSystemChange)
+      else if (media.addListener) media.addListener(onSystemChange)
     }
 
     themeToggles.forEach((toggle) => {
       toggle.addEventListener('change', () => {
-        const next = toggle.checked ? 'night' : 'day'
         allowSystemSync = false
-        setTheme(next, { persist: true })
+        setTheme(toggle.checked ? 'night' : 'day', { persist: true })
       })
     })
 
+    /* ── Mobile menu ── */
     menuToggle?.addEventListener('click', () => {
       const isOpen = header?.classList.toggle('menu-open')
-      menuToggle?.setAttribute('aria-expanded', String(isOpen))
+      menuToggle.setAttribute('aria-expanded', String(isOpen))
       mobilePanel?.setAttribute('aria-hidden', String(!isOpen))
       document.body.style.overflow = isOpen ? 'hidden' : ''
     })
@@ -187,12 +190,17 @@ const headerSocials = socialLinks.filter((item) =>
       })
     })
 
+    /* ── Scroll + on-hero + scrim ── */
+    const heroEl = document.querySelector('.hero--orange, .hero--dark, .hero--azure')
+    if (!heroEl && scrim) scrim.classList.add('top-scrim--hidden')
+
     const onScroll = () => {
       header?.classList.toggle('is-scrolled', window.scrollY > 12)
       if (heroEl) {
         const heroBottom = heroEl.getBoundingClientRect().bottom
         const onHero = window.scrollY < 12 && heroBottom > 80
         header?.classList.toggle('on-hero', onHero)
+        if (scrim) scrim.classList.toggle('top-scrim--hidden', heroBottom < 120)
       } else {
         header?.classList.remove('on-hero')
       }
@@ -205,119 +213,79 @@ const headerSocials = socialLinks.filter((item) =>
 </script>
 
 <style>
+  /* ═══════════════════════════════════════════
+     HEADER — Logo-First Pill (Concept A)
+     ═══════════════════════════════════════════ */
+
   .header {
     position: fixed;
     top: clamp(10px, 2vw, 18px);
     left: 0;
     right: 0;
     z-index: 20;
+    pointer-events: none;
     color: var(--color-text);
-    --nav-underline: var(--gradient-sunset);
-    --nav-outline: var(--color-border);
-    pointer-events: auto;
   }
 
-  .header__shell {
+  /* ─── Pill shell ─── */
+  .header__pill {
     pointer-events: auto;
+    width: min(var(--container-max), calc(100% - 32px));
+    margin: 0 auto;
+    border-radius: 999px;
+    border: 1px solid transparent;
     background: transparent;
     backdrop-filter: none;
-    border: 1px solid transparent;
-    transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease,
-      backdrop-filter 0.2s ease;
-    overflow: hidden;
-    border-radius: 999px;
-    margin: 0 auto;
-    width: min(var(--container-max), calc(100% - 32px));
-    display: block;
-    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, backdrop-filter 0.25s;
   }
 
-  .header.is-scrolled {
-    box-shadow: none;
+  .header.is-scrolled .header__pill,
+  .header:not(.on-hero) .header__pill {
+    background: var(--color-nav-bg);
+    border-color: var(--color-nav-border);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
-  .header.on-hero {
-    color: #ffffff;
-    --nav-underline: rgba(255, 255, 255, 0.95);
-    --nav-outline: rgba(255, 255, 255, 0.35);
-  }
-
-  .header.on-hero .header__shell {
+  .header.on-hero:not(.is-scrolled) .header__pill {
     background: transparent;
     border-color: transparent;
     box-shadow: none;
     backdrop-filter: none;
-  }
-
-  @media (min-width: 901px) {
-    .header.on-hero:not(.is-scrolled) {
-      color: #ffffff;
-      --nav-underline: rgba(255, 255, 255, 0.95);
-      --nav-outline: rgba(255, 255, 255, 0.35);
-    }
-
-    .header.on-hero:not(.is-scrolled) .logo__mark--day {
-      display: none;
-    }
-
-    .header.on-hero:not(.is-scrolled) .logo__mark--night {
-      display: block;
-    }
-  }
-
-  .header.is-scrolled .header__shell,
-  .header:not(.on-hero) .header__shell {
-    background: var(--color-nav-bg);
-    box-shadow: var(--shadow-soft);
-    border-color: var(--color-nav-border);
-    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: none;
   }
 
   .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
-    padding: 1rem 0;
-    transition: padding 0.2s ease;
-    width: 100%;
-    max-width: none;
-    margin: 0 auto;
-    padding-left: 1.4rem;
-    padding-right: 1.4rem;
-  }
-
-  .header__primary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex: 1 1 auto;
-    min-width: 0;
+    padding: 1rem 1.6rem;
+    transition: padding 0.25s;
   }
 
   .header.is-scrolled .header__inner {
-    padding: 0.6rem 1.4rem;
+    padding: 0.55rem 1.4rem;
   }
 
+  /* ─── Logo ─── */
   .logo {
     flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
+    text-decoration: none;
   }
 
   .logo__mark {
-    transition: transform 0.2s ease;
-    display: block;
-    width: auto;
     height: 44px;
+    width: auto;
+    display: block;
+    transition: transform 0.2s;
   }
 
   .header.is-scrolled .logo__mark {
-    transform: scale(0.92);
+    transform: scale(0.9);
   }
 
   .logo__mark--night {
@@ -332,47 +300,50 @@ const headerSocials = socialLinks.filter((item) =>
     display: block;
   }
 
-  .header.on-hero .logo__mark--day {
+  /* Mobile logo: hidden by default, shown by JS + media query */
+  .mobile-logo {
+    display: none;
+    pointer-events: auto;
+  }
+
+  /* Desktop logo: shown by JS on >=901 */
+  .desktop-logo {
     display: none;
   }
 
-  .header.on-hero .logo__mark--night {
-    display: block;
-  }
-
-  .header.on-hero .logo__mark {
-    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
-  }
-
+  /* ─── Nav ─── */
   .nav {
     display: flex;
-    gap: 1.2rem;
-    justify-content: flex-start;
+    gap: 1.4rem;
     align-items: center;
-    flex: 0 1 auto;
-    min-width: 0;
   }
 
   .nav__link {
     font-weight: 500;
+    font-size: 0.95rem;
     color: currentColor;
-    position: relative;
     text-decoration: none;
+    position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
     white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .nav__link i {
+    font-size: 1rem;
   }
 
   .nav__link::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -6px;
+    bottom: -5px;
     width: 0;
     height: 2px;
-    background: var(--nav-underline);
-    transition: width 0.2s ease;
+    background: var(--gradient-sunset);
+    transition: width 0.2s;
   }
 
   .nav__link:hover::after {
@@ -383,101 +354,95 @@ const headerSocials = socialLinks.filter((item) =>
     text-decoration: none;
   }
 
-  .social {
-    display: flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .social__link {
-    width: auto;
-    height: auto;
-    border-radius: 0;
-    border: none;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: currentColor;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-
-  .social__link i {
-    font-size: 1.05rem;
-  }
-
-  .social__link:hover {
-    color: var(--color-aux);
-    transform: translateY(-1px);
-  }
-
+  /* ─── Actions (right side) ─── */
   .header__actions {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 0.7rem;
-    flex: 0 1 auto;
-    min-width: 0;
+    gap: 0.8rem;
   }
 
+  /* ─── Desktop social icons ─── */
+  .header__social {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .header__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: currentColor;
+    opacity: 0.7;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+    position: relative;
+  }
+
+  .header__social-link:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  .header__social-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .header__social-link:hover::after {
+    opacity: 0.06;
+  }
+
+  .header__social-link i {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── Dividers ─── */
+  .header__divider {
+    width: 1px;
+    height: 18px;
+    background: var(--color-border);
+    margin: 0 0.4rem;
+  }
+
+  /* ─── CTA button ─── */
+  .cta-btn {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1.5px solid var(--color-accent);
+    color: var(--color-accent);
+    background: transparent;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .cta-btn:hover {
+    background: var(--color-accent);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  /* ─── Theme toggle ─── */
   .theme-switch {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
     position: relative;
-  }
-
-  .theme-switch__icon {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 42px;
-    height: 21px;
-    pointer-events: none;
-    color: #ffffff;
-    z-index: 1;
-  }
-
-  .theme-switch__icon i {
-    position: absolute;
-    font-size: 0.68rem;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-  }
-
-  .theme-switch__icon .bi-moon-stars {
-    left: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .theme-switch__icon .bi-sun {
-    right: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .theme-switch__icon .bi-moon-stars {
-    opacity: 0;
-    transform: translateY(-50%) scale(0.8);
-    color: #ffffff;
-  }
-
-  :global([data-theme='night']) .theme-switch__icon .bi-sun {
-    opacity: 0;
-    transform: translateY(-50%) scale(0.8);
-  }
-
-  :global([data-theme='night']) .theme-switch__icon .bi-moon-stars {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-    color: #ffffff;
-  }
-
-  :global([data-theme='night']) .theme-switch__track {
-    background: #171c26;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
   }
 
   .theme-switch__input {
@@ -491,26 +456,29 @@ const headerSocials = socialLinks.filter((item) =>
     height: 21px;
     border-radius: 999px;
     background: #1b1f27;
-    border: none;
     display: inline-flex;
     align-items: center;
     padding: 2px;
-    transition: background 0.2s ease;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
     position: relative;
     z-index: 0;
+    transition: background 0.2s;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  :global([data-theme='night']) .theme-switch__track {
+    background: #171c26;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
   }
 
   .theme-switch__thumb {
     width: 17px;
     height: 17px;
     border-radius: 50%;
-    background: #ffffff;
-    transform: translateX(0);
-    transition: transform 0.18s ease, background 0.2s ease;
+    background: #fff;
     display: block;
-    will-change: transform;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    transform: translateX(0);
+    transition: transform 0.18s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     position: relative;
     z-index: 2;
   }
@@ -521,30 +489,69 @@ const headerSocials = socialLinks.filter((item) =>
 
   :global([data-theme='night']) .theme-switch__thumb {
     transform: translateX(21px);
-    background: #ffffff;
   }
 
+  .theme-switch__icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 42px;
+    height: 21px;
+    pointer-events: none;
+    color: #fff;
+    z-index: 1;
+  }
+
+  .theme-switch__icon i {
+    position: absolute;
+    font-size: 0.68rem;
+    transition: opacity 0.2s, transform 0.2s;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+
+  .theme-switch__icon .bi-sun {
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .theme-switch__icon .bi-moon-stars {
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.8);
+    opacity: 0;
+  }
+
+  :global([data-theme='night']) .theme-switch__icon .bi-sun {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+  }
+
+  :global([data-theme='night']) .theme-switch__icon .bi-moon-stars {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+
+  /* ─── Hamburger ─── */
   .menu-toggle {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: 1px solid var(--nav-outline);
-    background: var(--color-card);
     display: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: currentColor;
-    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    color: var(--color-text);
+    font-size: 1.35rem;
+    transition: transform 0.15s, background 0.2s, color 0.2s;
+    pointer-events: auto;
   }
 
-  .header.on-hero .theme-switch__track {
-    background: #1b1f27;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
-  }
-
-  .menu-toggle i {
-    font-size: 1.05rem;
+  .menu-toggle:active {
+    transform: scale(0.94);
   }
 
   .menu-toggle .bi-x-lg {
@@ -559,65 +566,264 @@ const headerSocials = socialLinks.filter((item) =>
     display: inline;
   }
 
-  .mobile-panel {
-    display: none;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    border-top: 1px solid var(--color-nav-border);
-    background: var(--color-nav-bg-strong);
-    padding: 1.5rem 0 2rem;
-    box-shadow: var(--shadow-soft);
-    border-radius: 0 0 24px 24px;
+  /* ═══════════════════════════════════════════
+     ON-HERO STATE (light theme only)
+     White navbar content over dark/gradient heroes
+     ═══════════════════════════════════════════ */
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) {
+    color: #fff;
   }
 
-  .mobile-panel__theme {
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .logo__mark--day {
+    display: none;
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .logo__mark--night {
+    display: block;
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .logo__mark {
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .nav__link::after {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .cta-btn {
+    border-color: rgba(255, 255, 255, 0.85);
+    color: #fff;
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .cta-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #fff;
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .theme-switch__track {
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .header__social-link {
+    color: #fff;
+    opacity: 0.85;
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .header__social-link:hover {
+    opacity: 1;
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .header__divider {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .menu-toggle {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Night theme on-hero: just logo shadow, everything else stays as-is */
+  .header.on-hero .logo__mark {
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+  }
+
+  .header.on-hero .logo__mark--day {
+    display: none;
+  }
+
+  .header.on-hero .logo__mark--night {
+    display: block;
+  }
+
+  .header.on-hero .theme-switch__track {
+    background: #1b1f27;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE PANEL (full-screen overlay)
+     ═══════════════════════════════════════════ */
+
+  .mobile-panel {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 18;
+    background: var(--color-bg);
+    flex-direction: column;
+    padding: calc(env(safe-area-inset-top, 0px) + 80px) 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0.25s;
+  }
+
+  .header.menu-open .mobile-panel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobile-panel__logo {
     display: flex;
     justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .mobile-panel__logo .logo__mark {
+    height: 48px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
   }
 
   .mobile-panel__links {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    align-items: center;
+    gap: 10px;
   }
 
   .mobile-panel__link {
-    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1.2rem;
+    height: 68px;
+    border-radius: 16px;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    font-size: 1.3rem;
     font-weight: 600;
     color: var(--color-text);
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s;
   }
 
-  .mobile-panel__link-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
+  .mobile-panel__link:active {
+    transform: scale(0.97);
+    background: var(--color-surface);
   }
 
   .mobile-panel__link i {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    width: 2rem;
+    text-align: center;
+  }
+
+  .mobile-panel__divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 1.2rem 0;
+  }
+
+  .mobile-panel__theme-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .mobile-panel__theme-label {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  /* Larger toggle for mobile */
+  .mobile-panel .theme-switch__track {
+    width: 56px;
+    height: 28px;
+  }
+
+  .mobile-panel .theme-switch__thumb {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobile-panel .theme-switch__input:checked + .theme-switch__track .theme-switch__thumb {
+    transform: translateX(28px);
+  }
+
+  :global([data-theme='night']) .mobile-panel .theme-switch__thumb {
+    transform: translateX(28px);
+  }
+
+  .mobile-panel .theme-switch__icon {
+    width: 56px;
+    height: 28px;
+  }
+
+  .mobile-panel .theme-switch__icon i {
+    font-size: 0.82rem;
+  }
+
+  .mobile-panel .theme-switch__icon .bi-sun {
+    right: 8px;
+  }
+
+  .mobile-panel .theme-switch__icon .bi-moon-stars {
+    left: 8px;
+  }
+
+  .mobile-panel__bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .mobile-panel__social {
-    margin-top: 1rem;
     display: flex;
-    gap: 0.8rem;
+    gap: 1rem;
     justify-content: center;
   }
 
-  .mobile-panel__social-link {
+  .mobile-panel__social a {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
     color: var(--color-text);
-    font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.3rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: background 0.15s;
   }
 
-  .mobile-panel__social-link i {
-    font-size: 1.1rem;
+  .mobile-panel__social a:active {
+    background: var(--color-surface);
+  }
+
+  .mobile-panel__whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.15s, opacity 0.15s;
+  }
+
+  .mobile-panel__whatsapp:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+
+  .mobile-panel__whatsapp i {
+    font-size: 1.4rem;
   }
 
   .sr-only {
@@ -632,173 +838,60 @@ const headerSocials = socialLinks.filter((item) =>
     border: 0;
   }
 
-  @media (max-width: 1024px) {
-    .header {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .header__shell {
-      margin-left: auto;
-      margin-right: 12px;
-    }
-  }
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════ */
 
   @media (max-width: 900px) {
-    .header__inner {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.6rem;
-      padding: 0.5rem 0.7rem;
-      width: auto;
-      max-width: none;
-    }
-
-    .header__primary {
-      display: none;
-    }
-
-    .nav {
-      display: none;
-    }
-
-    .header__primary .social {
-      display: none;
-    }
-
-    .header__actions .theme-switch {
-      display: none;
-    }
-
-    .menu-toggle {
-      display: inline-flex;
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      border: none;
-      background: var(--color-card);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .menu-toggle i {
-      font-size: 1.35rem;
-    }
-
     .header {
       top: 8px;
-    }
-
-    .header.is-scrolled .header__inner {
-      padding: 0.5rem 0.7rem;
-    }
-
-    .header__shell {
-      width: auto;
-      display: inline-flex;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      margin-left: auto;
-      margin-right: 12px;
-      border-radius: 999px;
-      position: relative;
-      z-index: 30;
-      background: transparent;
-      border-color: transparent;
-      box-shadow: none;
-      backdrop-filter: none;
+      padding: 0 12px;
+      pointer-events: auto;
     }
 
-    .header.is-scrolled .header__shell {
-      background: transparent;
-      border-color: transparent;
-      box-shadow: none;
-      backdrop-filter: none;
+    .header__pill {
+      width: auto;
+      margin: 0;
+      border-radius: 999px;
+      background: transparent !important;
+      border-color: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .header__inner {
+      padding: 0.35rem 0.1rem;
+      gap: 0.5rem;
+    }
+
+    .nav,
+    .cta-btn,
+    .header__actions .theme-switch,
+    .header__social,
+    .header__divider {
+      display: none;
     }
 
     .logo__mark {
       height: 36px;
     }
 
+    .menu-toggle {
+      display: inline-flex;
+    }
+
     .mobile-panel {
       display: flex;
-      position: fixed;
-      inset: 0;
-      padding: calc(env(safe-area-inset-top) + 5.5rem) 1.5rem 2.5rem;
-      background: var(--color-bg);
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-      flex-direction: column;
-      gap: 2.2rem;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: translateY(-8px);
-      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-      z-index: 20;
     }
+  }
 
-    .header.menu-open .mobile-panel {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .mobile-panel__theme {
-      justify-content: flex-start;
-    }
-
-    .mobile-panel__links {
-      align-items: stretch;
-      gap: 0.6rem;
-    }
-
-    .mobile-panel__theme {
-      margin-top: 1rem;
-    }
-
-    .mobile-panel__link {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 1rem 1.2rem;
-      border-radius: 16px;
-      background: var(--color-card);
-      border: 1px solid var(--color-border);
-      font-size: 1.25rem;
-      font-weight: 600;
-      min-height: 56px;
-      text-decoration: none;
-      color: var(--color-text);
-      transition: background 0.15s ease, transform 0.15s ease;
-    }
-
-    .mobile-panel__link:active {
-      transform: scale(0.98);
-      background: var(--color-border);
-    }
-
-    .mobile-panel__link-label {
-      gap: 1rem;
-    }
-
-    .mobile-panel__link i {
-      font-size: 1.3rem;
-      width: 1.6rem;
-      text-align: center;
-    }
-
-    .mobile-panel__social {
-      margin-top: 1.2rem;
-      justify-content: flex-start;
-      gap: 1.2rem;
-      flex-wrap: wrap;
-    }
-
-    .mobile-panel__social-link {
-      font-size: 1.05rem;
+  @media (min-width: 901px) {
+    .mobile-panel {
+      display: none !important;
     }
   }
 </style>
