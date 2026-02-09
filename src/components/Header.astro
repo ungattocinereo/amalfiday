@@ -635,17 +635,27 @@ const headerSocials = socialLinks.filter((item) =>
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 
-  /* Night theme on-hero: just logo shadow, everything else stays as-is */
-  .header.on-hero .logo__mark {
+  /* Night theme on-hero: logo shadow + white CTA */
+  .header.on-hero:not(.is-scrolled) .logo__mark {
     filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
   }
 
-  .header.on-hero .logo__mark--day {
+  .header.on-hero:not(.is-scrolled) .logo__mark--day {
     display: none;
   }
 
-  .header.on-hero .logo__mark--night {
+  .header.on-hero:not(.is-scrolled) .logo__mark--night {
     display: block;
+  }
+
+  :global([data-theme='night']) .header.on-hero:not(.is-scrolled) .cta-btn {
+    border-color: rgba(255, 255, 255, 0.85);
+    color: #fff;
+  }
+
+  :global([data-theme='night']) .header.on-hero:not(.is-scrolled) .cta-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #fff;
   }
 
   .header.on-hero .theme-switch__track {
