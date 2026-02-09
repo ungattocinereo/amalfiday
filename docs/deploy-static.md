@@ -10,7 +10,7 @@ This generates `dist/` and precompressed `.br` + `.gz` files.
 
 ## Caddy (example)
 ```caddyfile
-day.cristallpont.com {
+amalfi.day {
   root * /var/www/amalfi-day/dist
   file_server {
     precompressed br gzip

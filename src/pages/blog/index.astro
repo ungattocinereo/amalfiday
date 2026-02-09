@@ -1,158 +1,454 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { blogCategories, blogTags } from '../../data/site'
 import { getGhostPosts } from '../../data/ghost'
 
-const posts = await getGhostPosts({ limit: 12 })
+const posts = await getGhostPosts({ limit: 20 })
 
-const pageTitle = 'Blog — CristallPont Amalfi Day'
+const featured = posts[0] ?? null
+const sidebar = posts.slice(1, 4)
+const grid = posts.slice(4)
+
+const pageTitle = 'Amalfi Notes — Blog'
 const pageDescription =
   'Amalfi Coast blog with travel notes, routes, photography tips, culture, and food. Stories from Atrani, Amalfi, Ravello, and beyond.'
 const shareImage =
   posts.find((post) => post.image)?.image ?? '/pre-footer/boat-tours-in-amalfi.webp'
+
+const currentYear = new Date().getFullYear()
+const currentSeason = (() => {
+  const m = new Date().getMonth()
+  if (m >= 2 && m <= 4) return 'Spring'
+  if (m >= 5 && m <= 7) return 'Summer'
+  if (m >= 8 && m <= 10) return 'Autumn'
+  return 'Winter'
+})()
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
-  <section class="section">
+
+  <!-- MASTHEAD -->
+  <section class="masthead">
     <div class="container">
-      <h1>
-        Amalfi <span class="accent-italic">notes</span>
-      </h1>
-      <p>News, local routes, and photography stories from the coast.</p>
-
-      <div class="filters">
-        {blogCategories.map((cat) => (
-          <button class="chip">
-            <i class="bi bi-tag"></i> {cat}
-          </button>
-        ))}
-      </div>
-
-      <div class="tag-row">
-        <span>Tags:</span>
-        {blogTags.map((tag) => (
-          <span class="tag">
-            <i class="bi bi-hash"></i>
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      <div class="grid">
-        {posts.map((post) => (
-          <article class="card">
-            <div class="media">
-              {post.image ? (
-                <img src={post.image} alt={post.title} loading="lazy" decoding="async" />
-              ) : (
-                <div class="media__placeholder" aria-hidden="true"></div>
-              )}
-            </div>
-            <div class="content">
-              <div class="meta">
-                <i class="bi bi-calendar3"></i> {post.date}
-              </div>
-              <h3>{post.title}</h3>
-              <p>{post.excerpt}</p>
-              <a href={post.href}>
-                <i class="bi bi-arrow-up-right"></i> Read more
-              </a>
-            </div>
-          </article>
-        ))}
-      </div>
+      <h1 class="masthead__title">Amalfi <span class="accent-italic">notes</span></h1>
+      <hr class="masthead__rule" />
+      <p class="masthead__sub">Stories, routes, and photography from the coast</p>
+      <p class="masthead__date">{currentSeason} {currentYear}</p>
     </div>
   </section>
+
+  <!-- FEATURED + SIDEBAR -->
+  {featured && (
+    <section class="container">
+      <div class="featured">
+        <div class="featured__main">
+          <span class="featured__cat">{featured.tag ?? 'Notes'}</span>
+          <h2 class="featured__title"><a href={featured.href}>{featured.title}</a></h2>
+          {featured.image && (
+            <div class="featured__img">
+              <img src={featured.image} alt={featured.title} loading="eager" decoding="async" />
+            </div>
+          )}
+          <p class="featured__excerpt">{featured.excerpt}</p>
+          <div class="featured__meta">
+            <span>{featured.date}</span>
+            {featured.readingTime && <span>{featured.readingTime} min read</span>}
+          </div>
+        </div>
+
+        {sidebar.length > 0 && (
+          <div class="featured__sidebar">
+            {sidebar.map((post) => (
+              <div class="side-story">
+                <span class="side-story__cat">{post.tag ?? 'Notes'}</span>
+                <h3 class="side-story__title"><a href={post.href}>{post.title}</a></h3>
+                <p class="side-story__excerpt">{post.excerpt}</p>
+                <div class="side-story__meta">
+                  {post.date}{post.readingTime ? ` · ${post.readingTime} min` : ''}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- MORE STORIES GRID -->
+  {grid.length > 0 && (
+    <section class="container">
+      <div class="section-label">More stories</div>
+      <div class="editorial-grid">
+        {grid.map((post) => (
+          <div class="editorial-card">
+            <div class="editorial-card__row">
+              {post.image && (
+                <a href={post.href} class="editorial-card__thumb">
+                  <img src={post.image} alt={post.title} loading="lazy" decoding="async" />
+                </a>
+              )}
+              <div class="editorial-card__content">
+                <span class="editorial-card__cat">{post.tag ?? 'Notes'}</span>
+                <h3 class="editorial-card__title"><a href={post.href}>{post.title}</a></h3>
+                <p class="editorial-card__excerpt">{post.excerpt}</p>
+                <div class="editorial-card__meta">
+                  {post.date}{post.readingTime ? ` · ${post.readingTime} min` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- EMPTY STATE -->
+  {posts.length === 0 && (
+    <section class="section container empty-state">
+      <p class="empty-state__icon"><i class="bi bi-journal-text"></i></p>
+      <h2>Coming soon</h2>
+      <p>Stories from the coast are on their way. Check back soon.</p>
+    </section>
+  )}
+
 </BaseLayout>
 
 <style>
-  h1 {
-    font-size: clamp(2.4rem, 4vw, 3.8rem);
+  /* === MASTHEAD === */
+  .masthead {
+    padding-top: calc(var(--header-space) + 2.5rem);
+    padding-bottom: 0;
+    text-align: center;
+    border-bottom: 3px double var(--color-border);
   }
 
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin: 1.5rem 0 1rem;
+  .masthead__title {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    margin-bottom: 0.3rem;
+    line-height: 1;
   }
 
-  .chip {
-    border: 1px solid var(--color-surface);
-    background: var(--color-card);
-    padding: 0.5rem 1rem;
-    border-radius: 999px;
-    cursor: pointer;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
+  .masthead__rule {
+    height: 2px;
+    background: var(--color-accent);
+    width: 60px;
+    margin: 0 auto 1.5rem;
+    border: none;
   }
 
-  .chip:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-
-  .tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    align-items: center;
-    margin-bottom: 2rem;
+  .masthead__sub {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
     color: var(--color-text-muted);
-    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
   }
 
-  .tag {
-    background: var(--color-surface);
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
+  .masthead__date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-text-muted);
+    padding-bottom: 1.5rem;
   }
 
-  .grid {
+  /* === FEATURED SECTION === */
+  .featured {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: 2fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .card {
-    overflow: hidden;
+  .featured__main {
+    padding: 2.5rem 2.5rem 2.5rem 0;
+    border-right: 1px solid var(--color-border);
   }
 
-  .media {
-    height: 170px;
-    background: linear-gradient(140deg, rgba(255, 89, 0, 0.2), rgba(255, 195, 0, 0.2));
-    position: relative;
-  }
-
-  .media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .featured__cat {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-accent);
+    margin-bottom: 0.8rem;
     display: block;
   }
 
-  .media__placeholder {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(140deg, rgba(255, 89, 0, 0.2), rgba(1, 98, 255, 0.2));
+  .featured__title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
   }
 
-  .content {
-    padding: 1.4rem;
+  .featured__title a {
+    color: var(--color-text);
+    text-decoration: none;
   }
 
-  .meta {
-    font-size: 0.75rem;
+  .featured__title a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .featured__img {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    max-height: 320px;
+  }
+
+  .featured__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .featured__excerpt {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .featured__meta {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* === SIDEBAR === */
+  .featured__sidebar {
+    padding: 2.5rem 0 2.5rem 2.5rem;
+  }
+
+  .side-story {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .side-story:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .side-story__cat {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .side-story__title {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+
+  .side-story__title a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .side-story__title a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .side-story__excerpt {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .side-story__meta {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
+  }
+
+  /* === SECTION LABEL === */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    padding: 2rem 0 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* === EDITORIAL GRID === */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-bottom: 4rem;
+  }
+
+  .editorial-card {
+    padding: 1.8rem 1.8rem 1.8rem 0;
+    border-bottom: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+  }
+
+  .editorial-card:nth-child(3n) {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .editorial-card:nth-child(3n+2),
+  .editorial-card:nth-child(3n+3) {
+    padding-left: 1.8rem;
+  }
+
+  .editorial-card__row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .editorial-card__thumb {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .editorial-card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .editorial-card__thumb:hover img {
+    transform: scale(1.05);
+  }
+
+  .editorial-card__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .editorial-card__cat {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .editorial-card__title {
+    font-size: 1.05rem;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  .editorial-card__title a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .editorial-card__title a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .editorial-card__excerpt {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0.4rem;
+  }
+
+  .editorial-card__meta {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  /* === EMPTY STATE === */
+  .empty-state {
+    text-align: center;
+    padding: 6rem 0;
+  }
+
+  .empty-state__icon {
+    font-size: 2.5rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .empty-state h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .featured {
+      grid-template-columns: 1fr;
+    }
+
+    .featured__main {
+      border-right: none;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .featured__sidebar {
+      padding: 2rem 0;
+    }
+
+    .editorial-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .editorial-card {
+      border-right: none;
+      padding: 1.5rem 0;
+    }
+
+    .editorial-card:nth-child(3n+2),
+    .editorial-card:nth-child(3n+3) {
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .masthead__title {
+      font-size: clamp(2.2rem, 10vw, 3rem);
+    }
+
+    .editorial-card__thumb {
+      width: 80px;
+      height: 80px;
+    }
   }
 </style>

@@ -11,7 +11,7 @@ docker compose -f dockercompose.yml up -d
 ```
 
 2. Admin setup:
-Open `https://day.cristallpont.com/blog/ghost` and complete the Ghost setup wizard.
+Open `https://amalfi.day/blog/ghost` and complete the Ghost setup wizard.
 
 ## Notes
 - Database: MariaDB (same env vars as MySQL).
