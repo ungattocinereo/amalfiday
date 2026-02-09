@@ -409,6 +409,14 @@ const related = allPosts
     border-radius: 0;
   }
 
+  /* === Wide breakout for galleries and wide cards === */
+  .article__content :global(.kg-width-wide) {
+    width: 85vw;
+    max-width: 1080px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
   /* Ghost gallery cards */
   .article__content :global(.kg-gallery-card) {
     margin: 2.5rem 0;
@@ -416,20 +424,34 @@ const related = allPosts
 
   .article__content :global(.kg-gallery-container) {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .article__content :global(.kg-gallery-row) {
     display: flex;
-    gap: 0.5rem;
+    gap: 6px;
     width: 100%;
+  }
+
+  .article__content :global(.kg-gallery-image) {
+    flex: 1 1 0%;
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
   }
 
   .article__content :global(.kg-gallery-image img) {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     margin: 0;
+    border-radius: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .article__content :global(.kg-gallery-image:hover img) {
+    transform: scale(1.03);
   }
 
   /* Ghost callout card */
@@ -473,12 +495,215 @@ const related = allPosts
     padding: 0 1.2rem 1rem;
   }
 
-  /* Ghost video / audio */
-  .article__content :global(.kg-video-card),
+  /* === Ghost video card === */
+  .article__content :global(.kg-video-card) {
+    margin: 2.5rem 0;
+    position: relative;
+    background: #000;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .article__content :global(.kg-video-container) {
+    position: relative;
+    width: 100%;
+  }
+
+  .article__content :global(.kg-video-container video) {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  /* Large play button overlay */
+  .article__content :global(.kg-video-overlay) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: opacity 0.25s ease;
+  }
+
+  .article__content :global(.kg-video-large-play-icon) {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    color: #fff;
+    padding: 0;
+  }
+
+  .article__content :global(.kg-video-large-play-icon:hover) {
+    transform: scale(1.1);
+    background: rgba(255, 89, 0, 0.75);
+  }
+
+  .article__content :global(.kg-video-large-play-icon svg) {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+    margin-left: 3px;
+  }
+
+  /* Bottom player bar */
+  .article__content :global(.kg-video-player-container) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 2rem 1rem 0.8rem;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .article__content :global(.kg-video-container:hover .kg-video-player-container) {
+    opacity: 1;
+  }
+
+  .article__content :global(.kg-video-player) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  .article__content :global(.kg-video-play-icon),
+  .article__content :global(.kg-video-pause-icon),
+  .article__content :global(.kg-video-unmute-icon),
+  .article__content :global(.kg-video-mute-icon) {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .article__content :global(.kg-video-play-icon svg),
+  .article__content :global(.kg-video-pause-icon svg),
+  .article__content :global(.kg-video-unmute-icon svg),
+  .article__content :global(.kg-video-mute-icon svg) {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+  }
+
+  .article__content :global(.kg-video-hide) {
+    display: none !important;
+  }
+
+  .article__content :global(.kg-video-current-time),
+  .article__content :global(.kg-video-duration) {
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .article__content :global(.kg-video-time) {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Seek slider */
+  .article__content :global(.kg-video-seek-slider) {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .article__content :global(.kg-video-seek-slider::-webkit-slider-thumb) {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .article__content :global(.kg-video-seek-slider::-moz-range-thumb) {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Playback rate button */
+  .article__content :global(.kg-video-playback-rate) {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .article__content :global(.kg-video-playback-rate:hover) {
+    border-color: #fff;
+  }
+
+  /* Volume slider */
+  .article__content :global(.kg-video-volume-slider) {
+    width: 60px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .article__content :global(.kg-video-volume-slider::-webkit-slider-thumb) {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .article__content :global(.kg-video-volume-slider::-moz-range-thumb) {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Ghost audio card */
   .article__content :global(.kg-audio-card) {
     margin: 2rem 0;
   }
 
+  /* Iframes (YouTube, Vimeo embeds) */
   .article__content :global(iframe) {
     width: 100%;
     border: none;
@@ -598,6 +823,103 @@ const related = allPosts
     color: var(--color-accent-2);
   }
 
+  /* === LIGHTBOX === */
+  :global(.gallery-lightbox) {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    padding: 2rem;
+  }
+
+  :global(.gallery-lightbox.is-visible) {
+    opacity: 1;
+  }
+
+  :global(.gallery-lightbox img) {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    transition: transform 0.25s ease;
+    margin: 0;
+  }
+
+  :global(.gallery-lightbox.is-visible img) {
+    transform: scale(1);
+  }
+
+  :global(.gallery-lightbox__close) {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  :global(.gallery-lightbox__close:hover) {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  :global(.gallery-lightbox__nav) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  :global(.gallery-lightbox__nav:hover) {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  :global(.gallery-lightbox__prev) {
+    left: 1rem;
+  }
+
+  :global(.gallery-lightbox__next) {
+    right: 1rem;
+  }
+
+  :global(.gallery-lightbox__counter) {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.1em;
+  }
+
   /* === RESPONSIVE === */
   @media (max-width: 640px) {
     .post-header__title {
@@ -624,5 +946,225 @@ const related = allPosts
       width: 100%;
       height: 180px;
     }
+
+    .article__content :global(.kg-width-wide) {
+      width: 100vw;
+      max-width: 100vw;
+    }
+
+    .article__content :global(.kg-video-large-play-icon) {
+      width: 56px;
+      height: 56px;
+    }
+
+    .article__content :global(.kg-video-player-container) {
+      opacity: 1;
+    }
+
+    .article__content :global(.kg-video-volume-slider) {
+      display: none;
+    }
+
+    :global(.gallery-lightbox__nav) {
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+    }
   }
 </style>
+
+<script is:inline>
+  // === Gallery Lightbox ===
+  ;(function () {
+    const galleryImages = document.querySelectorAll('.kg-gallery-image img')
+    if (!galleryImages.length) return
+
+    // Collect all gallery images as flat array
+    const allImages = Array.from(galleryImages)
+    let currentIndex = 0
+    let lightbox = null
+
+    function createLightbox() {
+      lightbox = document.createElement('div')
+      lightbox.className = 'gallery-lightbox'
+      lightbox.innerHTML = `
+        <button class="gallery-lightbox__close" aria-label="Close">&times;</button>
+        <button class="gallery-lightbox__nav gallery-lightbox__prev" aria-label="Previous">&lsaquo;</button>
+        <img src="" alt="" />
+        <button class="gallery-lightbox__nav gallery-lightbox__next" aria-label="Next">&rsaquo;</button>
+        <div class="gallery-lightbox__counter"></div>
+      `
+      document.body.appendChild(lightbox)
+
+      const img = lightbox.querySelector('img')
+      const counter = lightbox.querySelector('.gallery-lightbox__counter')
+      const prev = lightbox.querySelector('.gallery-lightbox__prev')
+      const next = lightbox.querySelector('.gallery-lightbox__next')
+      const close = lightbox.querySelector('.gallery-lightbox__close')
+
+      function show(index) {
+        currentIndex = index
+        const src = allImages[index].src
+        // Try to get highest resolution from srcset
+        const srcset = allImages[index].getAttribute('srcset')
+        if (srcset) {
+          const sources = srcset.split(',').map(s => s.trim().split(/\s+/))
+          const best = sources.reduce((a, b) => {
+            const aw = parseInt(a[1]) || 0
+            const bw = parseInt(b[1]) || 0
+            return bw > aw ? b : a
+          })
+          img.src = best[0]
+        } else {
+          img.src = src
+        }
+        img.alt = allImages[index].alt || ''
+        counter.textContent = `${index + 1} / ${allImages.length}`
+        prev.style.display = allImages.length > 1 ? '' : 'none'
+        next.style.display = allImages.length > 1 ? '' : 'none'
+      }
+
+      function open(index) {
+        show(index)
+        lightbox.style.display = 'flex'
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => lightbox.classList.add('is-visible'))
+        })
+        document.body.style.overflow = 'hidden'
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('is-visible')
+        setTimeout(() => {
+          lightbox.style.display = 'none'
+          document.body.style.overflow = ''
+        }, 250)
+      }
+
+      close.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox() })
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox() })
+      prev.addEventListener('click', (e) => {
+        e.stopPropagation()
+        show((currentIndex - 1 + allImages.length) % allImages.length)
+      })
+      next.addEventListener('click', (e) => {
+        e.stopPropagation()
+        show((currentIndex + 1) % allImages.length)
+      })
+
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display !== 'flex') return
+        if (e.key === 'Escape') closeLightbox()
+        if (e.key === 'ArrowLeft') show((currentIndex - 1 + allImages.length) % allImages.length)
+        if (e.key === 'ArrowRight') show((currentIndex + 1) % allImages.length)
+      })
+
+      return open
+    }
+
+    let openFn = null
+    allImages.forEach((img, i) => {
+      img.closest('.kg-gallery-image').addEventListener('click', () => {
+        if (!openFn) openFn = createLightbox()
+        openFn(i)
+      })
+    })
+  })()
+
+  // === Ghost Video Player ===
+  ;(function () {
+    document.querySelectorAll('.kg-video-card').forEach((card) => {
+      const video = card.querySelector('video')
+      if (!video) return
+
+      const overlay = card.querySelector('.kg-video-overlay')
+      const playBtn = card.querySelector('.kg-video-play-icon')
+      const pauseBtn = card.querySelector('.kg-video-pause-icon')
+      const muteBtn = card.querySelector('.kg-video-mute-icon')
+      const unmuteBtn = card.querySelector('.kg-video-unmute-icon')
+      const seekSlider = card.querySelector('.kg-video-seek-slider')
+      const volumeSlider = card.querySelector('.kg-video-volume-slider')
+      const currentTimeEl = card.querySelector('.kg-video-current-time')
+      const durationEl = card.querySelector('.kg-video-duration')
+      const rateBtn = card.querySelector('.kg-video-playback-rate')
+
+      function fmt(sec) {
+        const m = Math.floor(sec / 60)
+        const s = Math.floor(sec % 60)
+        return m + ':' + String(s).padStart(2, '0')
+      }
+
+      function togglePlay() {
+        if (video.paused) {
+          video.play()
+        } else {
+          video.pause()
+        }
+      }
+
+      function updatePlayState() {
+        if (video.paused) {
+          playBtn && playBtn.classList.remove('kg-video-hide')
+          pauseBtn && pauseBtn.classList.add('kg-video-hide')
+          overlay && (overlay.style.display = '')
+        } else {
+          playBtn && playBtn.classList.add('kg-video-hide')
+          pauseBtn && pauseBtn.classList.remove('kg-video-hide')
+          overlay && (overlay.style.display = 'none')
+        }
+      }
+
+      overlay && overlay.addEventListener('click', togglePlay)
+      playBtn && playBtn.addEventListener('click', togglePlay)
+      pauseBtn && pauseBtn.addEventListener('click', togglePlay)
+
+      video.addEventListener('play', updatePlayState)
+      video.addEventListener('pause', updatePlayState)
+
+      video.addEventListener('loadedmetadata', () => {
+        if (durationEl) durationEl.textContent = fmt(video.duration)
+      })
+
+      video.addEventListener('timeupdate', () => {
+        if (currentTimeEl) currentTimeEl.textContent = fmt(video.currentTime)
+        if (seekSlider && video.duration) {
+          seekSlider.value = (video.currentTime / video.duration) * 100
+        }
+      })
+
+      seekSlider && seekSlider.addEventListener('input', () => {
+        if (video.duration) {
+          video.currentTime = (seekSlider.value / 100) * video.duration
+        }
+      })
+
+      function updateMuteState() {
+        if (video.muted) {
+          muteBtn && muteBtn.classList.add('kg-video-hide')
+          unmuteBtn && unmuteBtn.classList.remove('kg-video-hide')
+        } else {
+          muteBtn && muteBtn.classList.remove('kg-video-hide')
+          unmuteBtn && unmuteBtn.classList.add('kg-video-hide')
+        }
+      }
+
+      muteBtn && muteBtn.addEventListener('click', () => { video.muted = true; updateMuteState() })
+      unmuteBtn && unmuteBtn.addEventListener('click', () => { video.muted = false; updateMuteState() })
+      updateMuteState()
+
+      volumeSlider && volumeSlider.addEventListener('input', () => {
+        video.volume = volumeSlider.value / 100
+        video.muted = video.volume === 0
+        updateMuteState()
+      })
+
+      const rates = [1, 1.25, 1.5, 2]
+      let rateIndex = 0
+      rateBtn && rateBtn.addEventListener('click', () => {
+        rateIndex = (rateIndex + 1) % rates.length
+        video.playbackRate = rates[rateIndex]
+        rateBtn.textContent = rates[rateIndex] + '×'
+      })
+    })
+  })()
+</script>
