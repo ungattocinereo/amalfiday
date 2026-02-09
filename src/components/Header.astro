@@ -191,27 +191,39 @@ const headerSocials = socialLinks.filter((item) =>
     })
 
     /* ── Scroll + on-hero + scrim ── */
-    const heroEl = document.querySelector('.hero--orange, .hero--dark, .hero--azure')
+    /* Hero element lives inside <main><slot/></main> which is parsed AFTER
+       this inline script.  We must wait for the full DOM before querying it. */
+    const initHero = () => {
+      const heroEl = document.querySelector('.hero--orange, .hero--dark, .hero--azure')
 
-    const onScroll = () => {
-      const scrolled = window.scrollY > 12
-      header?.classList.toggle('is-scrolled', scrolled)
-      if (heroEl) {
-        const heroBottom = heroEl.getBoundingClientRect().bottom
-        const onHero = !scrolled && heroBottom > 80
-        header?.classList.toggle('on-hero', onHero)
-        if (scrim) scrim.classList.toggle('visible', onHero)
-      } else {
-        header?.classList.remove('on-hero')
-        if (scrim) scrim.classList.remove('visible')
+      const onScroll = () => {
+        const scrolled = window.scrollY > 12
+        header?.classList.toggle('is-scrolled', scrolled)
+        if (heroEl) {
+          const heroBottom = heroEl.getBoundingClientRect().bottom
+          const onHero = !scrolled && heroBottom > 80
+          header?.classList.toggle('on-hero', onHero)
+          if (scrim) scrim.classList.toggle('visible', onHero)
+        } else {
+          header?.classList.remove('on-hero')
+          if (scrim) scrim.classList.remove('visible')
+        }
       }
+
+      window.addEventListener('scroll', onScroll, { passive: true })
+      onScroll()
+      /* Mark header as JS-initialised so CSS :not(.on-hero) rule only applies
+         after the class has had a chance to be set */
+      header?.setAttribute('data-ready', '')
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    /* Mark header as JS-initialised so CSS :not(.on-hero) rule only applies
-       after the class has had a chance to be set */
-    header?.setAttribute('data-ready', '')
+    /* If DOM is already complete (e.g. deferred execution), run immediately;
+       otherwise wait for DOMContentLoaded */
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHero)
+    } else {
+      initHero()
+    }
   })()
 </script>
 
