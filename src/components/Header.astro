@@ -192,23 +192,26 @@ const headerSocials = socialLinks.filter((item) =>
 
     /* ── Scroll + on-hero + scrim ── */
     const heroEl = document.querySelector('.hero--orange, .hero--dark, .hero--azure')
-    if (!heroEl && scrim) scrim.classList.add('top-scrim--hidden')
 
     const onScroll = () => {
-      header?.classList.toggle('is-scrolled', window.scrollY > 12)
+      const scrolled = window.scrollY > 12
+      header?.classList.toggle('is-scrolled', scrolled)
       if (heroEl) {
         const heroBottom = heroEl.getBoundingClientRect().bottom
-        const onHero = window.scrollY < 12 && heroBottom > 80
+        const onHero = !scrolled && heroBottom > 80
         header?.classList.toggle('on-hero', onHero)
-        if (scrim) scrim.classList.toggle('top-scrim--hidden', heroBottom < 120)
+        if (scrim) scrim.classList.toggle('visible', onHero)
       } else {
         header?.classList.remove('on-hero')
+        if (scrim) scrim.classList.remove('visible')
       }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('load', onScroll)
     onScroll()
+    /* Mark header as JS-initialised so CSS :not(.on-hero) rule only applies
+       after the class has had a chance to be set */
+    header?.setAttribute('data-ready', '')
   })()
 </script>
 
@@ -240,21 +243,14 @@ const headerSocials = socialLinks.filter((item) =>
     transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, backdrop-filter 0.25s;
   }
 
-  .header.is-scrolled .header__pill,
-  .header:not(.on-hero) .header__pill {
+  /* Show pill background only after JS init (data-ready) — prevents flash on hero pages */
+  .header[data-ready].is-scrolled .header__pill,
+  .header[data-ready]:not(.on-hero) .header__pill {
     background: var(--color-nav-bg);
     border-color: var(--color-nav-border);
     box-shadow: var(--shadow-soft);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-  }
-
-  .header.on-hero:not(.is-scrolled) .header__pill {
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
 
   .header__inner {
