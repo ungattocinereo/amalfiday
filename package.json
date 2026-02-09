@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",
+    "@astrojs/sitemap": "^3.7.0",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "astro": "^5.0.0",
     "bootstrap-icons": "^1.11.3"
