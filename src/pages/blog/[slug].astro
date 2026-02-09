@@ -411,13 +411,14 @@ const related = allPosts
 
   /* === Wide breakout for galleries and wide cards === */
   .article__content :global(.kg-width-wide) {
-    width: min(85vw, 1080px);
-    /* Center in viewport regardless of parent width.
-       50% = half of parent content width (puts us at parent center).
-       Subtract half of own width to center self at that same point.
-       Parent is centered in viewport, so this centers in viewport. */
-    margin-left: calc(50% - min(85vw, 1080px) / 2);
-    margin-right: calc(50% - min(85vw, 1080px) / 2);
+    /* Center a wider element within the narrow article column.
+       margin-left: 50% positions left edge at parent center (accounts for padding).
+       translateX(-50%) shifts back by half element width → perfectly centered.
+       max-width prevents overflow; 100vw includes scrollbar so subtract extra. */
+    width: 1080px;
+    max-width: calc(100vw - 3rem);
+    margin-left: 50%;
+    transform: translateX(-50%);
   }
 
   /* Ghost gallery cards */
@@ -952,8 +953,9 @@ const related = allPosts
 
     .article__content :global(.kg-width-wide) {
       width: calc(100vw - 1rem);
-      margin-left: calc(50% - (100vw - 1rem) / 2);
-      margin-right: calc(50% - (100vw - 1rem) / 2);
+      max-width: calc(100vw - 1rem);
+      margin-left: 50%;
+      transform: translateX(-50%);
     }
 
     .article__content :global(.kg-video-large-play-icon) {
