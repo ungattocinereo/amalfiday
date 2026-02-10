@@ -251,7 +251,7 @@ const parkingOptions = [
               Look for Amalfi Porters at the seaport or bus station in Amalfi. They'll drive you and your luggage to Atrani in a golf cart. Perfect for heavy bags or anyone wanting an effortless transfer.
             </p>
             <div class="dir-porters__meta">
-              <div class="dir-porters__price"><strong>10€</strong> per person</div>
+              <div class="dir-porters__price"><strong>From 20€</strong> per person</div>
               <div class="dir-porters__hours"><i class="bi bi-clock"></i> Every day 7:00–20:00</div>
             </div>
             <div class="dir-porters__links">
@@ -1038,10 +1038,21 @@ const parkingOptions = [
 
     .dir-porters__card {
       grid-template-columns: 1fr;
+      padding: 0 !important;
+    }
+
+    .dir-porters__content {
+      padding: 2rem;
     }
 
     .dir-porters__image {
-      height: 280px;
+      height: auto;
+    }
+
+    .dir-porters__image img {
+      height: auto;
+      width: 100%;
+      object-fit: contain;
     }
   }
 
