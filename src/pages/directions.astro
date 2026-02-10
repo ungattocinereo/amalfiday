@@ -38,6 +38,7 @@ const ferryBus = [
     mode: 'Ferry',
     accent: 'scenic route',
     time: '~35 min',
+    image: '/staticpages/directions/get-here-by-ferry.webp',
     description:
       'Walk two blocks from the station towards the sea to reach Salerno seaport Concordia. The ferry is the fastest and most scenic way to Amalfi — no stop in Atrani. Once in Amalfi, turn right as you exit the ferry terminal and follow the waterfront road. The walk to Atrani takes about 10 minutes.',
     link: { text: 'Ferry timetables (PDF)', url: '/files/FERRY-timetables.pdf' },
@@ -47,6 +48,7 @@ const ferryBus = [
     mode: 'Bus',
     accent: 'budget route',
     time: '~75 min',
+    image: '/staticpages/directions/get-here-by-bus.webp',
     description:
       'Right outside the train station you\'ll find a SITA bus stop. Look for line 5120 heading to Amalfi (shown on Google Maps or the Moovit app). The bus destination is displayed at the top. Important: buy your ticket before boarding at any Tabacchi shop (look for the "T" sign).',
     link: { text: 'Bus timetables (PDF)', url: '/files/BUS-timetables.pdf' },
@@ -216,6 +218,11 @@ const parkingOptions = [
           <div class="dir-options">
             {ferryBus.map((opt) => (
               <article class="dir-option card">
+                {opt.image && (
+                  <div class="dir-option__image">
+                    <img src={opt.image} alt={`${opt.mode} to Amalfi`} loading="lazy" />
+                  </div>
+                )}
                 <div class="dir-option__head">
                   <div class="dir-option__icon">
                     <i class={`bi ${opt.icon}`}></i>
@@ -674,8 +681,22 @@ const parkingOptions = [
 
   .dir-option {
     padding: 1.8rem;
+    padding-top: 0;
     display: grid;
     gap: 0.8rem;
+    overflow: hidden;
+  }
+
+  .dir-option__image {
+    margin: 0 -1.8rem;
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .dir-option__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .dir-option__head {
