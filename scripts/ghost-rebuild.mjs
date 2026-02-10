@@ -6,7 +6,7 @@
  *
  * Ghost Admin → Settings → Integrations → Add webhook:
  *   Event:  Site changed (rebuild all)  — or —  Post published / Post updated
- *   URL:    http://127.0.0.1:4400/rebuild
+ *   URL:    http://host.docker.internal:4400/rebuild
  *   Secret: <GHOST_WEBHOOK_SECRET>
  *
  * Auth: Ghost HMAC-SHA256 via x-ghost-signature header,
@@ -79,7 +79,7 @@ const server = http.createServer((req, res) => {
       if (querySecret === SECRET) {
         authorized = true
       } else if (ghostSig) {
-        const match = ghostSig.match(/sha256=([a-f0-9]+)/)
+        const match = ghostSig.match(/sha256=([a-f0-9]+)/i)
         if (match) {
           const expected = crypto
             .createHmac('sha256', SECRET)

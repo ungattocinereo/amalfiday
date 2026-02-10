@@ -1,0 +1,1080 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const pageTitle = 'Directions to Atrani — Amalfi.Day'
+const pageDescription =
+  'How to reach Atrani on the Amalfi Coast: trains from Naples to Salerno, ferry and bus options, walking directions from Amalfi, driving routes, and parking tips.'
+const shareImage = '/pre-footer/boat-tours-in-amalfi.webp'
+
+const transportSteps = [
+  {
+    step: '01',
+    icon: 'bi-train-front',
+    title: 'Naples',
+    accent: 'to Salerno',
+    mapSrc:
+      'https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d193401.59623369444!2d14.382212835982248!3d40.76422540917123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x133b081659811bf3%3A0x26f7eaf2d2c03d87!2sNapoli+Centrale%2C+Piazza+Giuseppe+Garibaldi%2C+Naples%2C+Metropolitan+City+of+Naples!3m2!1d40.8529221!2d14.2723433!4m5!1s0x133bc238feb9bccd%3A0x69268f1bf0331971!2sSalerno%2C+Salerno%2C+Province+of+Salerno!3m2!1d40.6752834!2d14.772289599999999!5e0!3m2!1sen!2sit!4v1552303528152',
+    description:
+      'Start at Napoli Centrale and take a train to Salerno. Multiple trains run daily and the ride takes roughly the same time on all of them. Check schedules and buy tickets at trenitalia.com. Coming from other Italian cities? italotreno.it offers faster, more comfortable options.',
+    links: [
+      { text: 'trenitalia.com', url: 'https://www.trenitalia.com', icon: 'bi-arrow-up-right' },
+      { text: 'italotreno.it', url: 'https://www.italotreno.it/en', icon: 'bi-arrow-up-right' },
+    ],
+  },
+  {
+    step: '02',
+    icon: 'bi-water',
+    title: 'Salerno',
+    accent: 'to Amalfi',
+    mapSrc: null,
+    description: 'From Salerno you have two options to reach Amalfi: ferry or bus. Both depart near the train station. The ferry is faster and scenic; the bus is cheaper and runs more frequently. Choose whichever suits your schedule.',
+    links: [],
+  },
+]
+
+const ferryBus = [
+  {
+    icon: 'bi-tsunami',
+    mode: 'Ferry',
+    accent: 'scenic route',
+    time: '~35 min',
+    description:
+      'Walk two blocks from the station towards the sea to reach Salerno seaport Concordia. The ferry is the fastest and most scenic way to Amalfi — no stop in Atrani. Once in Amalfi, turn right as you exit the ferry terminal and follow the waterfront road. The walk to Atrani takes about 10 minutes.',
+    link: { text: 'Ferry timetables (PDF)', url: '/files/FERRY-timetables.pdf' },
+  },
+  {
+    icon: 'bi-bus-front',
+    mode: 'Bus',
+    accent: 'budget route',
+    time: '~75 min',
+    description:
+      'Right outside the train station you\'ll find a SITA bus stop. Look for line 5120 heading to Amalfi (shown on Google Maps or the Moovit app). The bus destination is displayed at the top. Important: buy your ticket before boarding at any Tabacchi shop (look for the "T" sign).',
+    link: { text: 'Bus timetables (PDF)', url: '/files/BUS-timetables.pdf' },
+  },
+]
+
+const walkingMapSrc =
+  'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d3027.783177685797!2d14.602921515089081!3d40.63466340028073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e2!4m5!1s0x133b95adeeb3beb1%3A0xce3612645bf68968!2sFlavio%20Gioia%2C%20Via%20Lungomare%20dei%20Cavalieri%2C%20Amalfi%2C%20SA!3m2!1d40.633595899999996!2d14.6015562!4m5!1s0x133b95764da04449%3A0x4e2b19b97e30cee9!2sdejavu%20Amalfi%2C%20Piazza%20Municipio%2C%20Amalfi%2C%20SA!3m2!1d40.6343113!2d14.6044869!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C%2084010%20SA!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1600799650925!5m2!1sen!2sit'
+
+const drivingRoutes = [
+  {
+    icon: 'bi-signpost-split',
+    name: 'Via Vietri Sul Mare',
+    tag: 'Recommended',
+    tagColor: 'green',
+    description: 'Best and easiest way to get here. Mostly autostrada, then 40 minutes on the scenic Amalfi Drive.',
+    mapSrc:
+      'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d193406.8796035415!2d14.368275172026657!3d40.7624097678548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x133ba81e8986d9e3%3A0xbf48c58ba6c9356d!2sNaples+International+Airport%2C+Viale+F.+Ruffo+di+Calabria%2C+80144+Napoli+NA!3m2!1d40.884749299999996!2d14.289242999999999!4m5!1s0x133bc1c1b213bded%3A0x1c97dd0bbf1cf787!2sVietri+Sul+Mare%2C+Province+of+Salerno!3m2!1d40.667944899999995!2d14.7278743!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C+Province+of+Salerno!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1549449540895',
+  },
+  {
+    icon: 'bi-flower2',
+    name: 'Via Sorrento',
+    tag: 'Scenic',
+    tagColor: 'blue',
+    description: 'One of the curliest roads in Italy. Heavy traffic near Positano, but the views are extraordinary.',
+    mapSrc:
+      'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d193444.73588044615!2d14.306266970445343!3d40.749398424498246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x133ba81e8986d9e3%3A0xbf48c58ba6c9356d!2sNaples+International+Airport%2C+Viale+F.+Ruffo+di+Calabria%2C+80144+Napoli+NA!3m2!1d40.884749299999996!2d14.289242999999999!4m5!1s0x133b9908fa0c0919%3A0xb396785a92762205!2sMeta%2C+Metropolitan+City+of+Naples!3m2!1d40.6428867!2d14.417339799999999!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C+Province+of+Salerno!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1549451299042',
+  },
+  {
+    icon: 'bi-exclamation-triangle',
+    name: 'Via Chiunzi & Ravello',
+    tag: 'Challenging',
+    tagColor: 'orange',
+    description: 'The most demanding route. Narrow mountain road climbing to 880m. Not recommended for nervous drivers.',
+    mapSrc:
+      'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d193404.54078998204!2d14.312590722124368!3d40.76321351435591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x133ba81e8986d9e3%3A0xbf48c58ba6c9356d!2sNaples+International+Airport%2C+Viale+F.+Ruffo+di+Calabria%2C+80144+Napoli+NA!3m2!1d40.884749299999996!2d14.289242999999999!4m5!1s0x133bbf1b74ad1205%3A0x31c12e12f653d572!2sValico+di+Chiunzi%2C+SP2b%2C+Sant%27Egidio+del+Monte+Albino%2C+Province+of+Salerno!3m2!1d40.7188042!2d14.619424799999999!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C+Province+of+Salerno!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1549452336042',
+  },
+]
+
+const parkingOptions = [
+  {
+    icon: 'bi-p-circle',
+    title: 'Street parking outside Atrani',
+    accent: 'cheapest',
+    price: '24€/24h',
+    note: 'Free 22:00–08:00',
+    description: 'Parking on the street along the coast road, just outside Atrani. The cheapest option on the entire Amalfi Coast.',
+    link: {
+      text: 'Open in Google Maps',
+      url: 'https://maps.app.goo.gl/p6JhZaNCqfMnYoe78',
+    },
+  },
+  {
+    icon: 'bi-geo-alt',
+    title: 'Parcheggio Luna Rossa',
+    accent: 'closest',
+    price: 'from 40€/day',
+    note: 'Open 24 hours',
+    description: 'The closest paid parking garage to Atrani, a 5-minute walk away. If full, follow signs to the Amalfi seaport parking.',
+    link: {
+      text: 'Open in Google Maps',
+      url: 'https://www.google.com/maps/place/Luna+Rossa/@40.6340223,14.6069911,15z/data=!4m5!3m4!1s0x0:0x4e0d420597d2f73d!8m2!3d40.6340223!4d14.6069911',
+    },
+  },
+  {
+    icon: 'bi-clock-history',
+    title: 'Atrani town parking',
+    accent: 'limited',
+    price: '3€/hr',
+    note: 'No overnight parking',
+    description: 'There is a small public lot in Atrani itself, but overnight parking is forbidden. You must move your car out by 23:00.',
+    link: {
+      text: 'Open in Google Maps',
+      url: 'https://maps.app.goo.gl/Vq8DE8haYbBivReL7',
+    },
+  },
+]
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
+  <!-- ─── HERO ─── -->
+  <section class="dir-hero hero--dark">
+    <img
+      class="dir-hero__image"
+      src="/staticpages/directions/directions-hero.webp"
+      alt="Amalfi Coast aerial view"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="dir-hero__veil" aria-hidden="true"></div>
+    <div class="container dir-hero__inner">
+      <div class="dir-hero__content">
+        <span class="dir-eyebrow"><i class="bi bi-compass"></i> Two-step guide</span>
+        <h1>
+          Find Gregory's B&B in <span class="accent-italic">Atrani</span>
+        </h1>
+        <p class="dir-hero__lead">
+          Reach the Amalfi Coast in two simple steps: train to Salerno, then ferry or bus to Amalfi. Atrani is a 10-minute walk from there.
+        </p>
+        <div class="dir-hero__tldr">
+          <strong>TL;DR</strong> — Go to <strong>Salerno</strong> by train, then take a bus or ferry to <strong>Amalfi</strong>. Atrani is right next to Amalfi. Skip Sorrento or Vietri Sul Mare station — they take longer.
+        </div>
+        <nav class="dir-hero__nav">
+          <a href="#public-transport"><i class="bi bi-train-front"></i> Public transport</a>
+          <a href="#walking"><i class="bi bi-signpost"></i> Walking route</a>
+          <a href="#driving"><i class="bi bi-car-front"></i> Driving</a>
+          <a href="#parking"><i class="bi bi-p-circle"></i> Parking</a>
+        </nav>
+      </div>
+      <aside class="dir-hero__aside">
+        <div class="dir-hero__aside-badge"><i class="bi bi-lightbulb"></i></div>
+        <p>
+          Watch out for Google Maps errors — it sometimes routes you through Sorrento, which adds hours. Always route via <strong>Salerno</strong>.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ─── STEP 1 & 2: PUBLIC TRANSPORT ─── -->
+  <section class="section dir-transport" id="public-transport">
+    <div class="container">
+      <div class="dir-eyebrow">Step-by-step</div>
+      <h1>Getting to Atrani with <span class="accent-italic">public</span> transport</h1>
+      <p class="dir-transport__sub">The journey has two legs. Both are straightforward.</p>
+
+      <!-- Step 1: Naples to Salerno -->
+      <div class="dir-step">
+        <div class="dir-step__number">{transportSteps[0].step}</div>
+        <div class="dir-step__body">
+          <div class="dir-step__header">
+            <i class={`bi ${transportSteps[0].icon}`}></i>
+            <h3>{transportSteps[0].title} <span class="accent-italic">{transportSteps[0].accent}</span></h3>
+          </div>
+          <p>{transportSteps[0].description}</p>
+          <div class="dir-step__links">
+            {transportSteps[0].links.map((l) => (
+              <a href={l.url} target="_blank" rel="noopener">
+                {l.text} <i class={`bi ${l.icon}`}></i>
+              </a>
+            ))}
+          </div>
+          <div class="dir-map">
+            <iframe
+              src={transportSteps[0].mapSrc}
+              width="100%"
+              height="280"
+              style="border:0; border-radius: var(--radius-md);"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Map: Naples to Salerno train route"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Salerno to Amalfi -->
+      <div class="dir-step">
+        <div class="dir-step__number">{transportSteps[1].step}</div>
+        <div class="dir-step__body">
+          <div class="dir-step__header">
+            <i class={`bi ${transportSteps[1].icon}`}></i>
+            <h3>{transportSteps[1].title} <span class="accent-italic">{transportSteps[1].accent}</span></h3>
+          </div>
+          <p>{transportSteps[1].description}</p>
+
+          <div class="dir-options">
+            {ferryBus.map((opt) => (
+              <article class="dir-option card">
+                <div class="dir-option__head">
+                  <div class="dir-option__icon">
+                    <i class={`bi ${opt.icon}`}></i>
+                  </div>
+                  <div>
+                    <h4>{opt.mode} <span class="accent-italic">{opt.accent}</span></h4>
+                    <span class="dir-option__time"><i class="bi bi-clock"></i> {opt.time}</span>
+                  </div>
+                </div>
+                <p>{opt.description}</p>
+                {opt.link && (
+                  <a class="dir-option__dl" href={opt.link.url} target="_blank" rel="noopener">
+                    <i class="bi bi-file-earmark-pdf"></i> {opt.link.text}
+                  </a>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PORTERS ─── -->
+  <section class="section dir-porters">
+    <div class="container">
+      <div class="dir-porters__border">
+        <div class="dir-porters__card">
+          <div class="dir-porters__content">
+            <div class="dir-eyebrow">Luggage service</div>
+            <h2>Hassle-free Amalfi to Atrani <span class="accent-italic">porters</span></h2>
+            <p>
+              Look for Amalfi Porters at the seaport or bus station in Amalfi. They'll drive you and your luggage to Atrani in a golf cart. Perfect for heavy bags or anyone wanting an effortless transfer.
+            </p>
+            <div class="dir-porters__meta">
+              <div class="dir-porters__price"><strong>10€</strong> per person</div>
+              <div class="dir-porters__hours"><i class="bi bi-clock"></i> Every day 7:00–20:00</div>
+            </div>
+            <div class="dir-porters__links">
+              <a href="https://amalfiporters.it" target="_blank" rel="noopener">
+                <i class="bi bi-globe"></i> amalfiporters.it
+              </a>
+              <a href="https://wa.me/393392768989" target="_blank" rel="noopener">
+                <i class="bi bi-whatsapp"></i> +39 339 2768989
+              </a>
+            </div>
+          </div>
+          <div class="dir-porters__image">
+            <img
+              src="/staticpages/directions/amalf-porter-illustraion-in-amalfi.webp"
+              alt="Amalfi porter illustration"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WALKING ─── -->
+  <section class="section dir-walking" id="walking">
+    <div class="container">
+      <div class="dir-eyebrow">On foot</div>
+      <h1>Walking from Amalfi to <span class="accent-italic">Atrani</span></h1>
+      <div class="dir-walking__grid">
+        <div class="dir-walking__text">
+          <p>
+            From the Amalfi bus stop or seaport, walk along the shore until you find a pedestrian tunnel on your left near <a href="https://goo.gl/maps/PjaTgYN1spVb1N9Y6" target="_blank" rel="noopener">Dejavu Amalfi</a>. This tunnel is always open and exclusively for pedestrians — the safest route between the two towns.
+          </p>
+          <p>
+            Once you exit the tunnel, cross the road. You'll see the entrance to <a href="https://goo.gl/maps/nHHAdCS92NtrXi9D8" target="_blank" rel="noopener">Cantina Nostromo</a> restaurant on your left. Walk through it and down the steps to arrive in Atrani, just below the bus stop.
+          </p>
+          <p>
+            From the main parking lot, head up to the <a href="https://goo.gl/maps/ocBVhiLBmwF2oKer5" target="_blank" rel="noopener">fruits and vegetables shop</a>. Continue to the tunnel and turn inside it toward the ring. After climbing about 10 steps, you'll arrive at your destination.
+          </p>
+        </div>
+        <div class="dir-walking__map">
+          <iframe
+            src={walkingMapSrc}
+            width="100%"
+            height="360"
+            style="border:0; border-radius: var(--radius-md);"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map: Walking from Amalfi to Atrani"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FINDING THE HOUSE ─── -->
+  <section class="section dir-house" id="house">
+    <div class="container">
+      <div class="dir-house__card">
+        <div class="dir-house__content">
+          <div class="dir-eyebrow" style="color: rgba(255,255,255,0.7);">Final destination</div>
+          <h2>How to find the <span style="color:#ffc300; font-style:italic;">house</span> in Atrani</h2>
+          <p>
+            We've prepared a detailed PDF with step-by-step photo instructions to help you locate the house once you're in Atrani. It includes landmarks, turns, and what to look for at each point.
+          </p>
+          <a class="dir-house__btn" href="/files/directions/directions-gregs-house.pdf" target="_blank" rel="noopener">
+            <i class="bi bi-file-earmark-pdf"></i> Download PDF with instructions
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DRIVING ─── -->
+  <section class="section dir-driving" id="driving">
+    <div class="container">
+      <div class="dir-eyebrow">By car</div>
+      <h1>How to drive to Atrani and <span class="accent-italic">park with ease</span></h1>
+      <p class="dir-driving__sub">Three routes from Naples airport. Each has a different character.</p>
+
+      <div class="dir-routes">
+        {drivingRoutes.map((route) => (
+          <article class="dir-route card">
+            <div class="dir-route__head">
+              <div class="dir-route__icon"><i class={`bi ${route.icon}`}></i></div>
+              <div>
+                <h3>{route.name}</h3>
+                <span class={`dir-route__tag dir-route__tag--${route.tagColor}`}>{route.tag}</span>
+              </div>
+            </div>
+            <p>{route.description}</p>
+            <div class="dir-map">
+              <iframe
+                src={route.mapSrc}
+                width="100%"
+                height="240"
+                style="border:0; border-radius: var(--radius-sm);"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title={`Map: Driving via ${route.name}`}
+              ></iframe>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PARKING ─── -->
+  <section class="section dir-parking" id="parking">
+    <div class="container">
+      <div class="dir-eyebrow">Parking</div>
+      <h1>Parking in <span class="accent-italic">Atrani</span></h1>
+      <p class="dir-parking__sub">
+        Parking on the Amalfi Coast is a general challenge. Here are the options closest to Atrani.
+      </p>
+
+      <div class="dir-parking__grid">
+        {parkingOptions.map((opt) => (
+          <article class="dir-parking__card card">
+            <div class="dir-parking__icon"><i class={`bi ${opt.icon}`}></i></div>
+            <h3>{opt.title} <span class="accent-italic">{opt.accent}</span></h3>
+            <div class="dir-parking__detail">
+              <span class="dir-parking__price">{opt.price}</span>
+              <span class="dir-parking__note">{opt.note}</span>
+            </div>
+            <p>{opt.description}</p>
+            {opt.link && (
+              <a class="dir-parking__link" href={opt.link.url} target="_blank" rel="noopener">
+                <i class="bi bi-geo-alt"></i> {opt.link.text}
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Hero ─────────────────────────── */
+  .dir-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: #ffffff;
+    padding: calc(var(--header-space) + 4rem) 0 4rem;
+  }
+
+  .dir-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    filter: saturate(1.08) contrast(1.05);
+    z-index: -2;
+  }
+
+  .dir-hero__veil {
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 16, 20, 0.25);
+    z-index: -1;
+  }
+
+  :global([data-theme='night']) .dir-hero__veil {
+    background: rgba(12, 16, 20, 0.45);
+  }
+
+  .dir-hero__inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: end;
+  }
+
+  .dir-hero__content h1 {
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    margin-top: 1rem;
+    color: #ffffff;
+  }
+
+  .dir-hero__content h1 .accent-italic {
+    color: #FBBF00;
+  }
+
+  .dir-hero__lead {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 38rem;
+    line-height: 1.65;
+  }
+
+  .dir-hero__tldr {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    line-height: 1.6;
+    backdrop-filter: blur(16px);
+  }
+
+  .dir-hero__tldr strong {
+    color: #c74400;
+  }
+
+  :global([data-theme='night']) .dir-hero__tldr {
+    background: rgba(12, 16, 20, 0.48);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  :global([data-theme='night']) .dir-hero__tldr strong {
+    color: #ffc300;
+  }
+
+  .dir-hero__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .dir-hero__nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .dir-hero__nav a:hover {
+    background: rgba(255, 255, 255, 0.64);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  :global([data-theme='night']) .dir-hero__nav a {
+    background: rgba(12, 16, 20, 0.45);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+  }
+
+  :global([data-theme='night']) .dir-hero__nav a:hover {
+    background: rgba(12, 16, 20, 0.55);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .dir-hero__aside {
+    align-self: start;
+    padding: 1.6rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.59);
+    border: 1px solid rgba(200, 160, 0, 0.3);
+    backdrop-filter: blur(16px);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #000000;
+  }
+
+  .dir-hero__aside-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b38600;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .dir-hero__aside p {
+    color: #000000;
+  }
+
+  .dir-hero__aside strong {
+    color: #c74400;
+  }
+
+  :global([data-theme='night']) .dir-hero__aside {
+    background: rgba(12, 16, 20, 0.55);
+    border-color: rgba(255, 195, 0, 0.25);
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  :global([data-theme='night']) .dir-hero__aside-badge {
+    background: rgba(255, 195, 0, 0.2);
+    color: #ffc300;
+  }
+
+  :global([data-theme='night']) .dir-hero__aside p {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  :global([data-theme='night']) .dir-hero__aside strong {
+    color: #ffc300;
+  }
+
+  /* ── Shared ───────────────────────── */
+  .dir-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .dir-map iframe {
+    display: block;
+    width: 100%;
+  }
+
+  /* ── Transport Steps ──────────────── */
+  .dir-transport__sub {
+    max-width: 32rem;
+    margin-bottom: 3rem;
+  }
+
+  .dir-step {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .dir-step__number {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gradient-sunset);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.2rem;
+    position: relative;
+  }
+
+  .dir-step:not(:last-child) .dir-step__number::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% + 60px);
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    opacity: 0.3;
+  }
+
+  .dir-step__header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .dir-step__header i {
+    font-size: 1.3rem;
+    color: var(--color-accent);
+  }
+
+  .dir-step__header h3 {
+    margin: 0;
+  }
+
+  .dir-step__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .dir-step__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 500;
+    color: var(--color-aux);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .dir-step__links a:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Ferry / Bus Options ──────────── */
+  .dir-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .dir-option {
+    padding: 1.8rem;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .dir-option__head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .dir-option__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-aux);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .dir-option__head h4 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  .dir-option__time {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .dir-option__dl {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 0.4rem;
+  }
+
+  .dir-option__dl:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Porters ──────────────────────── */
+  .dir-porters__border {
+    padding: 6px;
+    border-radius: var(--radius-lg);
+    background: var(--gradient-sunset);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .dir-porters__card {
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    border-radius: calc(var(--radius-lg) - 6px);
+    background: var(--color-card);
+    overflow: hidden;
+  }
+
+  .dir-porters__content {
+    padding: 3rem;
+  }
+
+  .dir-porters__card h2 {
+    color: var(--color-text);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+  }
+
+  .dir-porters__card .accent-italic {
+    color: var(--color-accent);
+  }
+
+  .dir-porters__card p {
+    color: var(--color-text-muted);
+    max-width: 40rem;
+  }
+
+  .dir-porters__image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dir-porters__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dir-porters__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .dir-porters__meta strong {
+    font-size: 1.5rem;
+    color: var(--color-accent);
+  }
+
+  .dir-porters__hours {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .dir-porters__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .dir-porters__links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.3rem;
+    border-radius: 100px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .dir-porters__links a:hover {
+    background: var(--color-border);
+  }
+
+  /* ── Walking ──────────────────────── */
+  .dir-walking__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 2rem;
+    align-items: start;
+  }
+
+  .dir-walking__text p {
+    margin-bottom: 1rem;
+  }
+
+  .dir-walking__text a {
+    color: var(--color-aux);
+    font-weight: 500;
+  }
+
+  /* ── House ────────────────────────── */
+  .dir-house__card {
+    padding: 3.5rem;
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255, 89, 0, 0.25), transparent 50%),
+      linear-gradient(150deg, #111318 0%, #1a1e26 100%);
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .dir-house__card h2 {
+    color: #ffffff;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+  }
+
+  .dir-house__card p {
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
+  .dir-house__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    background: var(--gradient-sunset);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .dir-house__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(255, 89, 0, 0.45);
+  }
+
+  /* ── Driving Routes ───────────────── */
+  .dir-driving__sub {
+    max-width: 32rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .dir-routes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .dir-route {
+    padding: 1.6rem;
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .dir-route__head {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .dir-route__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .dir-route__head h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .dir-route__tag {
+    display: inline-block;
+    padding: 0.15em 0.65em;
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .dir-route__tag--green {
+    background: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+  }
+
+  .dir-route__tag--blue {
+    background: rgba(59, 130, 246, 0.12);
+    color: #3b82f6;
+  }
+
+  .dir-route__tag--orange {
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--color-accent);
+  }
+
+  /* ── Parking ──────────────────────── */
+  .dir-parking__sub {
+    max-width: 32rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .dir-parking__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .dir-parking__card {
+    padding: 1.8rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .dir-parking__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--color-aux);
+  }
+
+  .dir-parking__detail {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.2rem 0;
+  }
+
+  .dir-parking__price {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-accent);
+  }
+
+  .dir-parking__note {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    padding: 0.15em 0.6em;
+    border-radius: 100px;
+    background: var(--color-surface);
+  }
+
+  .dir-parking__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--color-aux);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 0.4rem;
+  }
+
+  .dir-parking__link:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Responsive ───────────────────── */
+  @media (max-width: 1024px) {
+    .dir-hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .dir-options {
+      grid-template-columns: 1fr;
+    }
+
+    .dir-routes {
+      grid-template-columns: 1fr;
+    }
+
+    .dir-parking__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dir-walking__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dir-porters__card {
+      grid-template-columns: 1fr;
+    }
+
+    .dir-porters__image {
+      height: 280px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .dir-hero {
+      padding: calc(var(--header-space) + 3rem) 0 3rem;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    .dir-step {
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 1.2rem;
+    }
+
+    .dir-step__number {
+      width: 48px;
+      height: 48px;
+      font-size: 1rem;
+    }
+
+    .dir-porters__card {
+      padding: 2rem;
+    }
+
+    .dir-house__card {
+      padding: 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
