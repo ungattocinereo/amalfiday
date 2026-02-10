@@ -6,7 +6,11 @@
  *
  * Ghost Admin → Settings → Integrations → Add webhook:
  *   Event:  Site changed (rebuild all)  — or —  Post published / Post updated
- *   URL:    http://127.0.0.1:4400/rebuild?secret=<GHOST_WEBHOOK_SECRET>
+ *   URL:    http://127.0.0.1:4400/rebuild
+ *   Secret: <GHOST_WEBHOOK_SECRET>
+ *
+ * Auth: Ghost HMAC-SHA256 via x-ghost-signature header,
+ *       or ?secret= query param for manual curl testing.
  *
  * Run:
  *   GHOST_WEBHOOK_SECRET=mysecret node scripts/ghost-rebuild.mjs
@@ -15,6 +19,7 @@
  */
 
 import http from 'node:http'
+import crypto from 'node:crypto'
 import { execFile } from 'node:child_process'
 
 const PROJECT_ROOT = '/home/greg/amalfiday'
@@ -56,24 +61,56 @@ const server = http.createServer((req, res) => {
     return
   }
 
-  if (SECRET) {
-    const provided = url.searchParams.get('secret') || req.headers['x-ghost-secret']
-    if (provided !== SECRET) {
-      res.writeHead(401)
-      res.end('Unauthorized')
+  // Collect request body for HMAC verification
+  const chunks = []
+  req.on('data', (chunk) => chunks.push(chunk))
+  req.on('end', () => {
+    const body = Buffer.concat(chunks)
+
+    if (SECRET) {
+      // Ghost sends HMAC-SHA256 signature in x-ghost-signature header:
+      //   "sha256=HEX_SIGNATURE, t=TIMESTAMP"
+      // Also support ?secret= query param for manual curl testing
+      const querySecret = url.searchParams.get('secret')
+      const ghostSig = req.headers['x-ghost-signature']
+
+      let authorized = false
+
+      if (querySecret === SECRET) {
+        authorized = true
+      } else if (ghostSig) {
+        const match = ghostSig.match(/sha256=([a-f0-9]+)/)
+        if (match) {
+          const expected = crypto
+            .createHmac('sha256', SECRET)
+            .update(body)
+            .digest('hex')
+          authorized = match[1] === expected
+        }
+      }
+
+      if (!authorized) {
+        console.log(`[ghost-rebuild] 401 — invalid secret or signature`)
+        res.writeHead(401)
+        res.end('Unauthorized')
+        return
+      }
+    }
+
+    handleRebuild(res)
+  })
+
+  function handleRebuild(res) {
+    if (building) {
+      res.writeHead(429, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ ok: true, status: 'already_building' }))
       return
     }
-  }
 
-  if (building) {
-    res.writeHead(429, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify({ ok: true, status: 'already_building' }))
-    return
+    rebuild()
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify({ ok: true, status: 'build_started' }))
   }
-
-  rebuild()
-  res.writeHead(200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify({ ok: true, status: 'build_started' }))
 })
 
 server.listen(PORT, '0.0.0.0', () => {
