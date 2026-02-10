@@ -76,7 +76,7 @@ const server = http.createServer((req, res) => {
   res.end(JSON.stringify({ ok: true, status: 'build_started' }))
 })
 
-server.listen(PORT, '127.0.0.1', () => {
-  console.log(`[ghost-rebuild] listening on http://127.0.0.1:${PORT}/rebuild`)
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`[ghost-rebuild] listening on http://0.0.0.0:${PORT}/rebuild`)
   if (!SECRET) console.log('[ghost-rebuild] WARNING: no GHOST_WEBHOOK_SECRET, set it for security')
 })

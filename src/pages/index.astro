@@ -155,11 +155,11 @@ const fallbackQuatrain =
           </a>
         </div>
         <div class="hero__tile hero__tile--bottom">
-          <a class="hero__mini" href="/apartments">
-            <i class="bi bi-building"></i>
+          <a class="hero__mini" href="/contact">
+            <i class="bi bi-camera2"></i>
             <div>
-              <strong>Our apartments</strong>
-              <span>Booking & Airbnb options</span>
+              <strong>Photoshoots</strong>
+              <span>Get the best professional photos of yourself.</span>
             </div>
             <i class="bi bi-arrow-up-right"></i>
           </a>
@@ -210,6 +210,12 @@ const fallbackQuatrain =
             </div>
           </a>
         ))}
+      </div>
+      <div class="photos-cta">
+        <a class="photos-cta__btn" href="/contact">
+          <i class="bi bi-camera"></i>
+          Book a photoshoot
+        </a>
       </div>
     </div>
   </section>
@@ -774,6 +780,12 @@ const fallbackQuatrain =
     position: relative;
     overflow: hidden;
     box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .scroll__card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
   }
 
   .scroll__media {
@@ -787,6 +799,11 @@ const fallbackQuatrain =
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .scroll__card:hover .scroll__media img {
+    transform: scale(1.06);
   }
 
   .scroll__overlay {
@@ -795,12 +812,56 @@ const fallbackQuatrain =
     padding: 1.5rem;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
     color: #ffffff;
+    transition: padding-bottom 0.3s ease;
+  }
+
+  .scroll__card:hover .scroll__overlay {
+    padding-bottom: 1.8rem;
   }
 
   .scroll__overlay span {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
+  }
+
+  .photos-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .photos-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2.4rem;
+    background: var(--color-accent);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(255, 89, 0, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .photos-cta__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(255, 89, 0, 0.45);
+    background: #e64f00;
+    text-decoration: none;
+  }
+
+  .photos-cta__btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(255, 89, 0, 0.3);
+  }
+
+  .photos-cta__btn i {
+    font-size: 1.2em;
   }
 
   .section--news {

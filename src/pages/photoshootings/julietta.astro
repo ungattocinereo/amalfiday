@@ -1,0 +1,1188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const heroImage = '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp'
+const shareImageAlt = 'Julietta — sunset photoshoot in Maiori, Amalfi Coast, July 2024'
+const shootTitle = 'Gifted Sunset Memories'
+const shootDate = 'July · 20 · 2024'
+
+const articleTitle = {
+  lead: 'An Evening That Became',
+  accent: 'a Gift',
+}
+const articleDescription =
+  'On July 20, 2024, in Maiori, the atmosphere was light, natural, and full of real emotions. This photoshoot was a gift from Juliet to her friend — that\'s why most of the photos feature her. At the end, we also captured photos of them together to preserve the feeling of their trip and friendship.\n\nIt was a story about two friends traveling along the Amalfi Coast — walking through the town, talking, laughing at simple things, and feeling time slow down for a while. These sessions always feel authentic because people are simply living their moment, while I capture it.\n\nA photoshoot as a gift is different from a physical present. It gives an experience, emotions, and professional photos that stay with you for years.'
+
+const articleQuote = {
+  text: 'The best photos happen when you are simply living the moment.',
+  author: 'Greg, Amalfi Day',
+}
+
+// Gallery 1: Mosaic grid (asymmetric) — 9 images
+const mosaicImages = [
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20242.webp', alt: 'Evening walk through Maiori streets' },
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20243.webp', alt: 'Warm sunset light on the promenade' },
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20244.webp', alt: 'Laughter between friends' },
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp', alt: 'Golden hour portrait' },
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20247.webp', alt: 'Seaside moment at dusk' },
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20249.webp', alt: 'Sun disappearing behind the mountains' },
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-202410.webp', alt: 'Strong backlight silhouette' },
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-202411.webp', alt: 'Friendship captured in the last rays' },
+  { src: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20241.webp', alt: 'Natural pose in the evening glow' },
+]
+
+// Gallery 2: Scroll-dissolve (cinematic) — 4 images
+const dissolveImages = [
+  { src: '/photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202412.webp', alt: 'Frame 01 — Sunset over Maiori', label: '01' },
+  { src: '/photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202413.webp', alt: 'Frame 02 — Unplanned dog moment', label: '02' },
+  { src: '/photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202414.webp', alt: 'Frame 03 — Friends together', label: '03' },
+  { src: '/photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202415.webp', alt: 'Frame 04 — Evening finale', label: '04' },
+]
+
+// All images for lightbox (combined)
+const allImages = [
+  ...mosaicImages,
+  ...dissolveImages,
+]
+---
+
+<BaseLayout
+  title="Julietta — Gifted Sunset Memories in Maiori — Amalfi Day"
+  description="A sunset photoshoot in Maiori — a gift between friends on the Amalfi Coast. Natural light, real emotions, and memories that last for years."
+  image={heroImage}
+  imageAlt={shareImageAlt}
+>
+  <div class="ed">
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="ed-hero hero--dark">
+      <img
+        class="ed-hero__img"
+        src={heroImage}
+        alt="Hero frame — Gifted Sunset Memories in Maiori"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="ed-hero__veil" aria-hidden="true"></div>
+      <div class="ed-hero__grain" aria-hidden="true"></div>
+      <div class="container ed-hero__content">
+        <div class="ed-hero__date">{shootDate}</div>
+        <h1 class="ed-hero__title">{shootTitle}</h1>
+      </div>
+      <a class="ed-scroll-cue" href="#ed-story" aria-label="Scroll to story">
+        <svg width="18" height="28" viewBox="0 0 18 28" fill="none">
+          <rect x="1" y="1" width="16" height="26" rx="8" stroke="currentColor" stroke-width="1.5"/>
+          <circle class="ed-scroll-cue__dot" cx="9" cy="8" r="2" fill="currentColor"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- ═══════ STORY BLOCK 1 — An Evening That Became a Gift ═══════ -->
+    <section class="section ed-story" id="ed-story">
+      <div class="container">
+        <div class="ed-story__grid">
+          <div class="ed-story__lead">
+            <div class="ed-eyebrow">The Story</div>
+            <h2>
+              {articleTitle.lead}{' '}
+              <span class="accent-italic">{articleTitle.accent}</span>
+            </h2>
+            <p>On July 20, 2024, in Maiori, the atmosphere was light, natural, and full of real emotions. This photoshoot was a gift from Juliet to her friend — that's why most of the photos feature her. At the end, we also captured photos of them together to preserve the feeling of their trip and friendship.</p>
+            <p>It was a story about two friends traveling along the Amalfi Coast — walking through the town, talking, laughing at simple things, and feeling time slow down for a while. These sessions always feel authentic because people are simply living their moment, while I capture it.</p>
+            <p>A photoshoot as a gift is different from a physical present. It gives an experience, emotions, and professional photos that stay with you for years.</p>
+          </div>
+          <blockquote class="ed-quote">
+            <div class="ed-quote__mark" aria-hidden="true">&ldquo;</div>
+            <p>{articleQuote.text}</p>
+            <cite>— {articleQuote.author}</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ GALLERY 1 — MOSAIC ═══════ -->
+    <section class="section section--flush">
+      <div class="container">
+        <div class="ed-mosaic ed-mosaic--9" aria-label="Mosaic gallery">
+          {mosaicImages.map((image, index) => (
+            <figure
+              class={`ed-mosaic__item ed-mosaic__item--${index + 1}`}
+              data-lightbox-trigger
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                loading="lazy"
+              />
+              <div class="ed-mosaic__overlay">
+                <span class="ed-mosaic__number">{String(index + 1).padStart(2, '0')}</span>
+              </div>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ BRIDGE — Block 2 ═══════ -->
+    <section class="section ed-bridge">
+      <div class="container">
+        <div class="ed-bridge__line" aria-hidden="true"></div>
+        <div class="ed-bridge__text">
+          <div class="ed-eyebrow">Behind the Lens</div>
+          <h3>Unplanned moments that became <span class="accent-italic">the best ones</span></h3>
+          <p>During the session, many moments happened naturally: the last sunset rays, the sun disappearing behind the mountains, creating strong backlight that made us keep shooting non-stop.</p>
+          <p>At one point, a random dog ran straight into our photoshoot just to get some attention — and instantly became part of the story of that evening. These moments can't be planned, but they are what make a photoshoot feel alive.</p>
+          <p>An Amalfi Coast photoshoot works especially well as a gift for a friend or loved one because it combines:</p>
+          <ul class="ed-bridge__list">
+            <li>travel and experience</li>
+            <li>professional photography in a unique location</li>
+            <li>memories you can return to years later</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ GALLERY 2 — DISSOLVE ═══════ -->
+    <section class="section section--flush">
+      <div class="container">
+        <div class="ed-dissolve" data-dissolve aria-label="Dissolve gallery">
+          <div class="ed-dissolve__viewport">
+            <div class="ed-dissolve__sticky">
+              <div class="ed-dissolve__frame">
+                {dissolveImages.map((image, index) => (
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    data-dissolve-img={String(index)}
+                    data-lightbox-trigger
+                    style={`opacity: ${index === 0 ? 1 : 0}; z-index: ${dissolveImages.length - index};`}
+                  />
+                ))}
+                <div class="ed-dissolve__vignette" aria-hidden="true"></div>
+              </div>
+              <div class="ed-dissolve__controls">
+                <div class="ed-dissolve__progress-line">
+                  <div class="ed-dissolve__progress-fill" data-dissolve-fill></div>
+                </div>
+                <div class="ed-dissolve__steps" data-dissolve-steps>
+                  {dissolveImages.map((image, index) => (
+                    <button
+                      class={`ed-dissolve__step ${index === 0 ? 'is-active' : ''}`}
+                      data-dissolve-step={String(index)}
+                      aria-label={`View frame ${image.label}`}
+                    >
+                      <span class="ed-dissolve__step-num">{image.label}</span>
+                    </button>
+                  ))}
+                </div>
+                <div class="ed-dissolve__current-label" data-dissolve-label aria-live="polite">
+                  Frame <span data-dissolve-current-num>01</span> of {String(dissolveImages.length).padStart(2, '0')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ CTA ═══════ -->
+    <section class="section ed-cta-section">
+      <div class="container">
+        <div class="ed-cta" style={`--cta-bg: url(${heroImage})`}>
+          <div class="ed-cta__inner">
+            <div class="ed-cta__tag">Ready to create your story?</div>
+            <h2>Let's plan a photoshoot that feels like a film still.</h2>
+            <p>
+              Tell me your dates, mood, and locations — I'll take care of the pacing,
+              light, and seamless direction on the day.
+            </p>
+            <a class="ed-cta__button" href="/contact">
+              <i class="bi bi-camera2" aria-hidden="true"></i>
+              Request a photoshoot
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ═══════ LIGHTBOX ═══════ -->
+  <div class="ed-lightbox" id="edLightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <div class="ed-lightbox__backdrop"></div>
+    <button class="ed-lightbox__close" aria-label="Close viewer">&times;</button>
+    <div class="ed-lightbox__body">
+      <img class="ed-lightbox__img" src="" alt="" />
+    </div>
+    <button class="ed-lightbox__nav ed-lightbox__nav--prev" aria-label="Previous image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="ed-lightbox__nav ed-lightbox__nav--next" aria-label="Next image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="ed-lightbox__counter" aria-hidden="true">
+      <span data-lb-current>1</span> / <span data-lb-total>1</span>
+    </div>
+  </div>
+
+  <!-- ═══════ SCRIPTS ═══════ -->
+  <script is:inline>
+    ;(() => {
+      /* ——— Hero height ——— */
+      const hero = document.querySelector('.ed-hero')
+      if (hero) {
+        const set = () => hero.style.setProperty('--hero-height', `${window.innerHeight}px`)
+        set()
+        window.addEventListener('resize', set)
+      }
+
+      /* ═══════════════════════════════════════════════
+         GALLERY — Scroll-linked dissolve
+         ═══════════════════════════════════════════════ */
+      const dissolve = document.querySelector('[data-dissolve]')
+      if (dissolve) {
+        const viewport = dissolve.querySelector('.ed-dissolve__viewport')
+        const images = Array.from(dissolve.querySelectorAll('[data-dissolve-img]'))
+        const steps = Array.from(dissolve.querySelectorAll('[data-dissolve-step]'))
+        const fill = dissolve.querySelector('[data-dissolve-fill]')
+        const currentNum = dissolve.querySelector('[data-dissolve-current-num]')
+        const count = images.length
+
+        if (count > 0 && viewport) {
+          const segmentVH = 80
+          const totalHeight = count * segmentVH
+          viewport.style.height = `${totalHeight}vh`
+
+          let lastActive = 0
+
+          const onScroll = () => {
+            const vpRect = viewport.getBoundingClientRect()
+            const vpH = viewport.offsetHeight
+            const windowH = window.innerHeight
+
+            const scrolled = -vpRect.top
+            const totalScroll = vpH - windowH
+            if (totalScroll <= 0) return
+
+            const progress = Math.min(Math.max(scrolled / totalScroll, 0), 1)
+            const floatIndex = progress * (count - 1)
+            const lowerIdx = Math.floor(floatIndex)
+            const upperIdx = Math.min(lowerIdx + 1, count - 1)
+            const blend = floatIndex - lowerIdx
+
+            images.forEach((img, i) => {
+              let opacity = 0
+              if (i === lowerIdx && i === upperIdx) {
+                opacity = 1
+              } else if (i === lowerIdx) {
+                opacity = 1 - blend
+              } else if (i === upperIdx) {
+                opacity = blend
+              }
+              img.style.opacity = String(opacity)
+            })
+
+            const active = Math.round(floatIndex)
+            if (active !== lastActive) {
+              lastActive = active
+              steps.forEach((s, i) => s.classList.toggle('is-active', i === active))
+              if (currentNum) currentNum.textContent = String(active + 1).padStart(2, '0')
+            }
+
+            if (fill) {
+              fill.style.transform = `scaleX(${progress})`
+            }
+          }
+
+          steps.forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+              const vpRect = viewport.getBoundingClientRect()
+              const vpTop = window.scrollY + vpRect.top
+              const totalScroll = viewport.offsetHeight - window.innerHeight
+              const targetProgress = count > 1 ? i / (count - 1) : 0
+              const targetY = vpTop + totalScroll * targetProgress
+              window.scrollTo({ top: targetY, behavior: 'smooth' })
+            })
+          })
+
+          let ticking = false
+          const tick = () => {
+            if (ticking) return
+            ticking = true
+            requestAnimationFrame(() => {
+              onScroll()
+              ticking = false
+            })
+          }
+
+          window.addEventListener('scroll', tick, { passive: true })
+          window.addEventListener('resize', () => {
+            viewport.style.height = `${totalHeight}vh`
+            tick()
+          })
+
+          onScroll()
+        }
+      }
+
+      /* ——— Lightbox ——— */
+      const lightbox = document.getElementById('edLightbox')
+      if (lightbox) {
+        const img = lightbox.querySelector('.ed-lightbox__img')
+        const prevBtn = lightbox.querySelector('.ed-lightbox__nav--prev')
+        const nextBtn = lightbox.querySelector('.ed-lightbox__nav--next')
+        const closeBtn = lightbox.querySelector('.ed-lightbox__close')
+        const backdrop = lightbox.querySelector('.ed-lightbox__backdrop')
+        const currentEl = lightbox.querySelector('[data-lb-current]')
+        const totalEl = lightbox.querySelector('[data-lb-total]')
+
+        const triggers = Array.from(document.querySelectorAll('[data-lightbox-trigger]'))
+        const srcs = []
+        triggers.forEach(el => {
+          const imgEl = el.tagName === 'IMG' ? el : el.querySelector('img')
+          if (imgEl) srcs.push({ src: imgEl.src, alt: imgEl.alt || '' })
+        })
+
+        let currentIndex = 0
+        const show = (index) => {
+          currentIndex = (index + srcs.length) % srcs.length
+          img.src = srcs[currentIndex].src
+          img.alt = srcs[currentIndex].alt
+          currentEl.textContent = currentIndex + 1
+          totalEl.textContent = srcs.length
+        }
+        const open = (index) => {
+          show(index)
+          lightbox.classList.add('is-open')
+          lightbox.setAttribute('aria-hidden', 'false')
+          document.body.style.overflow = 'hidden'
+        }
+        const close = () => {
+          lightbox.classList.remove('is-open')
+          lightbox.setAttribute('aria-hidden', 'true')
+          document.body.style.overflow = ''
+        }
+
+        triggers.forEach((el, i) => {
+          el.style.cursor = 'zoom-in'
+          el.addEventListener('click', (e) => {
+            e.preventDefault()
+            open(i)
+          })
+        })
+
+        closeBtn.addEventListener('click', close)
+        backdrop.addEventListener('click', close)
+        prevBtn.addEventListener('click', () => show(currentIndex - 1))
+        nextBtn.addEventListener('click', () => show(currentIndex + 1))
+
+        document.addEventListener('keydown', (e) => {
+          if (!lightbox.classList.contains('is-open')) return
+          if (e.key === 'Escape') close()
+          if (e.key === 'ArrowLeft') show(currentIndex - 1)
+          if (e.key === 'ArrowRight') show(currentIndex + 1)
+        })
+
+        let touchStartX = 0
+        lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX }, { passive: true })
+        lightbox.addEventListener('touchend', (e) => {
+          const diff = e.changedTouches[0].clientX - touchStartX
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) show(currentIndex - 1)
+            else show(currentIndex + 1)
+          }
+        })
+      }
+
+      /* ——— Scroll-triggered fade-in ——— */
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      }, { threshold: 0.15 })
+
+      document.querySelectorAll('.ed-story, .ed-bridge, .ed-gallery-header, .ed-cta').forEach(el => {
+        observer.observe(el)
+      })
+    })()
+  </script>
+</BaseLayout>
+
+<style>
+  /* ═══════════════════════════════════════
+     EDITORIAL — Julietta page-scoped styles
+     ═══════════════════════════════════════ */
+
+  .ed {
+    position: relative;
+  }
+
+  /* ——— HERO ——— */
+  .ed-hero {
+    position: relative;
+    height: var(--hero-height, 100svh);
+    min-height: 100svh;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .ed-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    filter: saturate(1.08) contrast(1.04);
+    transform: scale(1.02);
+    animation: heroZoom 18s ease-in-out alternate infinite;
+  }
+
+  @keyframes heroZoom {
+    from { transform: scale(1.02); }
+    to   { transform: scale(1.08); }
+  }
+
+  .ed-hero__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6, 8, 12, 0.3) 0%,
+      rgba(6, 8, 12, 0.15) 40%,
+      rgba(6, 8, 12, 0.6) 75%,
+      rgba(6, 8, 12, 0.88) 100%
+    );
+  }
+
+  .ed-hero__grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .ed-hero__content {
+    position: absolute;
+    bottom: clamp(4rem, 8vh, 7rem);
+    left: 0;
+    right: 0;
+    z-index: 2;
+    text-align: left;
+  }
+
+  .ed-hero__date {
+    font-family: var(--font-mono);
+    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .ed-hero__title {
+    font-size: clamp(3.2rem, 8vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    text-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0;
+  }
+
+  /* Scroll cue */
+  .ed-scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    z-index: 2;
+    transition: color 0.3s;
+  }
+
+  .ed-scroll-cue:hover {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+  }
+
+  .ed-scroll-cue__dot {
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { cy: 8; opacity: 0.5; }
+    50%      { cy: 18; opacity: 1; }
+  }
+
+  /* ——— SHARED TYPOGRAPHY ——— */
+  .ed-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--color-accent);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* ——— STORY BLOCK ——— */
+  .ed-story {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .ed-story.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ed-story__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .ed-story__lead h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 1rem;
+  }
+
+  .ed-story__lead p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .ed-quote {
+    position: relative;
+    margin: 0;
+    padding: 2.5rem 2rem 2rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    align-self: center;
+  }
+
+  .ed-quote__mark {
+    position: absolute;
+    top: -0.2rem;
+    left: 1.2rem;
+    font-family: var(--font-display);
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.25;
+  }
+
+  .ed-quote p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 0.8rem;
+  }
+
+  .ed-quote cite {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+  }
+
+  /* ——— GALLERY HEADER ——— */
+  .ed-gallery-header {
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .ed-gallery-header.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section--flush {
+    padding-top: 0;
+  }
+
+  /* ——— MOSAIC — 9-image layout ——— */
+  .ed-mosaic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 0.75rem;
+  }
+
+  .ed-mosaic__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    margin: 0;
+    background: #0f1117;
+  }
+
+  .ed-mosaic__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .ed-mosaic__item:hover img {
+    transform: scale(1.05);
+  }
+
+  .ed-mosaic__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+
+  .ed-mosaic__item:hover .ed-mosaic__overlay {
+    opacity: 1;
+  }
+
+  .ed-mosaic__number {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Asymmetric layout for 9 images */
+  .ed-mosaic__item--1 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .ed-mosaic__item--2 { grid-column: span 1; grid-row: span 1; }
+  .ed-mosaic__item--3 { grid-column: span 1; grid-row: span 1; }
+  .ed-mosaic__item--4 { grid-column: span 1; grid-row: span 1; }
+  .ed-mosaic__item--5 { grid-column: span 1; grid-row: span 1; }
+  .ed-mosaic__item--6 { grid-column: span 1; grid-row: span 1; }
+  .ed-mosaic__item--7 { grid-column: span 2; grid-row: span 1; }
+  .ed-mosaic__item--8 { grid-column: span 1; grid-row: span 1; }
+  .ed-mosaic__item--9 { grid-column: span 1; grid-row: span 1; }
+
+  /* ——— BRIDGE SECTION ——— */
+  .ed-bridge {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .ed-bridge.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ed-bridge__line {
+    width: 60px;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0.4;
+    margin-bottom: 2rem;
+  }
+
+  .ed-bridge__text {
+    max-width: 42rem;
+  }
+
+  .ed-bridge__text h3 {
+    font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .ed-bridge__text p {
+    font-size: 1rem;
+    margin: 0 0 0.8rem;
+  }
+
+  .ed-bridge__list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+
+  .ed-bridge__list li {
+    position: relative;
+    padding-left: 1.2rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .ed-bridge__list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+
+  /* ——— DISSOLVE — scroll-linked ——— */
+  .ed-dissolve {
+    position: relative;
+  }
+
+  .ed-dissolve__viewport {
+    position: relative;
+  }
+
+  .ed-dissolve__sticky {
+    position: sticky;
+    top: calc(var(--header-space) + 1.5rem);
+  }
+
+  .ed-dissolve__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #0a0c12;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+  }
+
+  .ed-dissolve__frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: opacity;
+    cursor: zoom-in;
+  }
+
+  .ed-dissolve__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(6, 8, 12, 0.25) 100%);
+    pointer-events: none;
+  }
+
+  .ed-dissolve__controls {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .ed-dissolve__progress-line {
+    width: 100%;
+    height: 3px;
+    background: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ed-dissolve__progress-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+  }
+
+  .ed-dissolve__steps {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ed-dissolve__step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+    padding: 0;
+  }
+
+  .ed-dissolve__step:hover {
+    background: var(--color-surface);
+  }
+
+  .ed-dissolve__step.is-active {
+    background: var(--color-accent);
+    transform: scale(1.15);
+  }
+
+  .ed-dissolve__step-num {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    line-height: 1;
+    transition: color 0.25s ease;
+  }
+
+  .ed-dissolve__step.is-active .ed-dissolve__step-num {
+    color: #fff;
+  }
+
+  .ed-dissolve__current-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* ——— CTA ——— */
+  .ed-cta-section {
+    padding-top: 2rem;
+  }
+
+  .ed-cta {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: #080a10;
+    background-image:
+      linear-gradient(135deg, rgba(12, 20, 40, 0.92), rgba(6, 10, 22, 0.96)),
+      var(--cta-bg);
+    background-size: cover;
+    background-position: center;
+    color: #f2ede6;
+    padding: clamp(2.5rem, 5vw, 4.5rem);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .ed-cta.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ed-cta__inner {
+    max-width: 38rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ed-cta__tag {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 1rem;
+  }
+
+  .ed-cta__inner h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 0.8rem;
+    color: #f2ede6;
+  }
+
+  .ed-cta__inner p {
+    color: rgba(242, 237, 230, 0.75);
+    margin-bottom: 1.8rem;
+  }
+
+  .ed-cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 2.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-accent);
+    box-shadow: 0 10px 30px rgba(255, 89, 0, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    isolation: isolate;
+    position: relative;
+  }
+
+  .ed-cta__button::after {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    z-index: -1;
+    filter: blur(20px);
+    background: radial-gradient(circle, rgba(255, 195, 0, 0.6) 0%, rgba(255, 89, 0, 0.45) 40%, transparent 70%);
+    animation: ctaPulse 3s ease-in-out infinite;
+    opacity: 0.7;
+  }
+
+  .ed-cta__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(255, 89, 0, 0.4);
+    text-decoration: none;
+    color: #fff;
+  }
+
+  @keyframes ctaPulse {
+    0%, 100% { transform: scale(0.85); opacity: 0.6; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+  }
+
+  /* ——— LIGHTBOX ——— */
+  .ed-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .ed-lightbox.is-open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .ed-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.94);
+    backdrop-filter: blur(12px);
+  }
+
+  .ed-lightbox__body {
+    position: relative;
+    z-index: 1;
+    max-width: 92vw;
+    max-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ed-lightbox__img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.2s ease;
+  }
+
+  .ed-lightbox__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    z-index: 2;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .ed-lightbox__close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  .ed-lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .ed-lightbox__nav:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+
+  .ed-lightbox__nav--prev { left: 1.5rem; }
+  .ed-lightbox__nav--next { right: 1.5rem; }
+
+  .ed-lightbox__counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ——— RESPONSIVE ——— */
+  @media (max-width: 900px) {
+    .ed-story__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .ed-mosaic {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(160px, auto);
+    }
+
+    .ed-mosaic__item--1 {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .ed-mosaic__item--7 {
+      grid-column: span 2;
+    }
+
+    .ed-dissolve__frame {
+      max-height: 75vh;
+    }
+
+    .ed-dissolve__steps {
+      gap: 0.15rem;
+    }
+
+    .ed-dissolve__step {
+      width: 28px;
+      height: 28px;
+    }
+
+    .ed-lightbox__nav--prev { left: 0.5rem; }
+    .ed-lightbox__nav--next { right: 0.5rem; }
+  }
+
+  @media (max-width: 640px) {
+    .ed-hero__content {
+      bottom: clamp(3rem, 6vh, 5rem);
+    }
+
+    .ed-hero__title {
+      font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+
+    .ed-mosaic {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+
+    .ed-mosaic__item--1 {
+      grid-column: span 1;
+    }
+
+    .ed-mosaic__item--7 {
+      grid-column: span 1;
+    }
+
+    .ed-dissolve__frame {
+      border-radius: var(--radius-md);
+      max-height: 60vh;
+    }
+
+    .ed-dissolve__step {
+      width: 26px;
+      height: 26px;
+    }
+
+    .ed-dissolve__step-num {
+      font-size: 0.52rem;
+    }
+
+    .ed-quote {
+      padding: 1.5rem 1.2rem 1.2rem;
+    }
+
+    .ed-lightbox__nav {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Touch device: no hover effects on mosaic */
+  @media (hover: none) {
+    .ed-mosaic__item:hover img {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ed-hero__img {
+      animation: none;
+    }
+
+    .ed-scroll-cue__dot {
+      animation: none;
+    }
+
+    .ed-story,
+    .ed-bridge,
+    .ed-gallery-header,
+    .ed-cta {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .ed-mosaic__item img {
+      transition: none;
+    }
+
+    .ed-dissolve__step {
+      transition: none;
+    }
+
+    .ed-cta__button::after {
+      animation: none;
+    }
+  }
+
+  /* ——— Night theme tweaks ——— */
+  :global([data-theme='night']) .ed-dissolve__progress-line {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  :global([data-theme='night']) .ed-dissolve__step:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+</style>

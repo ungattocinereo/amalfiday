@@ -22,11 +22,28 @@ export const socialLinks = [
 
 export const featuredPhotoshoots = [
   {
+    title: 'Amalfi Influencer Photoshoot',
+    location: 'Amalfi',
+    href: '/photoshootings/shifa',
+    image: '/photoshootings/individual/Shifa/Hero.webp',
+  },
+  {
+    title: 'The Perfect Gift to Yourself',
+    location: 'Ravello',
+    href: '/photoshootings/loreana',
+    image: '/photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp',
+  },
+  {
+    title: 'Morning Glow. True Atrani.',
+    location: 'Atrani',
+    href: '/photoshootings/lashada',
+    image: '/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp',
+  },
+  {
     title: 'Ravello Light Elegance',
     location: 'Ravello',
     href: '/photoshootings/ravello-photoshooting',
-    image:
-      '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp',
+    image: '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp',
   },
   {
     title: 'Ravello Romance (Taylor & Regan)',
@@ -45,6 +62,12 @@ export const featuredPhotoshoots = [
     location: 'Atrani',
     href: '/photoshootings/ayuna',
     image: '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp',
+  },
+  {
+    title: 'Camelia: Beautiful Experience',
+    location: 'Tramonti',
+    href: '/photoshootings/camelia',
+    image: '/photoshootings/camelia/4-camelia-photoshooting-moto.webp',
   },
 ]
 

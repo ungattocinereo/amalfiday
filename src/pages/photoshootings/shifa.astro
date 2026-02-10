@@ -1,0 +1,1572 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const heroImage = '/photoshootings/individual/Shifa/Hero.webp'
+const shareImageAlt = 'Shifa — private sunrise photoshoot in Amalfi harbor, September 2025'
+const shootTitle = 'Amalfi Influencer Photoshoot'
+const shootDate = 'September · 20 · 2025'
+
+const articleTitle = {
+  lead: 'Before the',
+  accent: 'World Wakes Up',
+}
+const articleDescription =
+  'That morning started before sunrise — the quietest time in Amalfi. No traffic, no beach activity, no crowds. Only soft sea light and empty streets. We met for the first time on the staircase of the Amalfi Cathedral — the easiest and most recognizable meeting point in town. The plan was clear: a private individual photoshoot with classic Amalfi atmosphere and architectural background.'
+
+const articleQuote = {
+  text: 'Great photos are not only memories. They are ready-to-use visual stories you can keep for life.',
+  author: 'Greg, Amalfi Day',
+}
+
+// Gallery 1: Horizontal filmstrip (scroll-driven) — 6 images
+const filmstripImages = [
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-7.webp', alt: 'Shifa on the Amalfi Cathedral steps at dawn' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-8.webp', alt: 'First light on the empty streets' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-10.webp', alt: 'Soft reflected light from the harbor' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-13.webp', alt: 'Walking toward the pier at sunrise' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-19.webp', alt: 'Editorial fashion in natural Amalfi light' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-24.webp', alt: 'Golden morning glow on the coastline' },
+]
+
+// Gallery 2: Mosaic grid (asymmetric) — 6 images
+const mosaicImages = [
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-3.webp', alt: 'Sunrise portrait at Amalfi harbor' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-6.webp', alt: 'Confident pose on the pier' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-9.webp', alt: 'Calm water reflections behind Shifa' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-11.webp', alt: 'Coastal lifestyle moment on the beach' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-12.webp', alt: 'Movement between pier and shoreline' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-16.webp', alt: 'Warm tones on the Amalfi waterfront' },
+]
+
+// Gallery 3: Scroll-dissolve (cinematic) — 7 images
+const dissolveImages = [
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-1.webp', alt: 'Frame 01 — Dawn over Amalfi', label: '01' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-2.webp', alt: 'Frame 02 — Cathedral backdrop', label: '02' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-14.webp', alt: 'Frame 03 — Harbor light', label: '03' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-15.webp', alt: 'Frame 04 — Shoreline editorial', label: '04' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-25.webp', alt: 'Frame 05 — Sea and sand', label: '05' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-27.webp', alt: 'Frame 06 — Swimwear on the coast', label: '06' },
+  { src: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-29.webp', alt: 'Frame 07 — Final sunrise frame', label: '07' },
+]
+
+// All images for lightbox (combined)
+const allImages = [
+  ...filmstripImages,
+  ...mosaicImages,
+  ...dissolveImages,
+]
+---
+
+<BaseLayout
+  title="Shifa — Amalfi Influencer Photoshoot — Amalfi Day"
+  description="Private sunrise photoshoot in Amalfi harbor. A premium experience and a meaningful gift for partners, friends, or special occasions."
+  image={heroImage}
+  imageAlt={shareImageAlt}
+>
+  <div class="ed">
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="ed-hero hero--dark">
+      <img
+        class="ed-hero__img"
+        src={heroImage}
+        alt="Shifa — sunrise photoshoot in Amalfi harbor"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="ed-hero__veil" aria-hidden="true"></div>
+      <div class="ed-hero__grain" aria-hidden="true"></div>
+      <div class="container ed-hero__content">
+        <div class="ed-hero__date">{shootDate}</div>
+        <h1 class="ed-hero__title">{shootTitle}</h1>
+      </div>
+      <a class="ed-scroll-cue" href="#ed-story" aria-label="Scroll to story">
+        <svg width="18" height="28" viewBox="0 0 18 28" fill="none">
+          <rect x="1" y="1" width="16" height="26" rx="8" stroke="currentColor" stroke-width="1.5"/>
+          <circle class="ed-scroll-cue__dot" cx="9" cy="8" r="2" fill="currentColor"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- ═══════ STORY BLOCK ═══════ -->
+    <section class="section ed-story" id="ed-story">
+      <div class="container">
+        <div class="ed-story__grid">
+          <div class="ed-story__lead">
+            <div class="ed-eyebrow">The Story</div>
+            <h2>
+              {articleTitle.lead}{' '}
+              <span class="accent-italic">{articleTitle.accent}</span>
+            </h2>
+            <p>{articleDescription}</p>
+          </div>
+          <blockquote class="ed-quote">
+            <div class="ed-quote__mark" aria-hidden="true">&ldquo;</div>
+            <p>{articleQuote.text}</p>
+            <cite>— {articleQuote.author}</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ GALLERY 1 — FILMSTRIP (scroll-driven) ═══════ -->
+    <section class="section section--flush">
+      <div class="container">
+        <div class="ed-gallery-header">
+          <div class="ed-eyebrow">Gallery I</div>
+          <h3 class="ed-gallery-header__title">The Filmstrip</h3>
+          <p class="ed-gallery-header__sub">Scroll to browse the sequence</p>
+        </div>
+      </div>
+      <div class="ed-filmstrip" data-filmstrip aria-label="Filmstrip gallery" role="region">
+        <div class="ed-filmstrip__sticky">
+          <div class="ed-filmstrip__track" data-filmstrip-track>
+            {filmstripImages.map((image, index) => (
+              <figure class="ed-filmstrip__frame" data-lightbox-trigger data-filmstrip-item>
+                <div class="ed-filmstrip__sprocket" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading={index < 2 ? 'eager' : 'lazy'}
+                  draggable="false"
+                />
+                <div class="ed-filmstrip__counter" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+                <div class="ed-filmstrip__sprocket ed-filmstrip__sprocket--bottom" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </figure>
+            ))}
+          </div>
+          <div class="ed-filmstrip__progress" data-filmstrip-progress aria-hidden="true">
+            <div class="ed-filmstrip__progress-fill" data-filmstrip-fill></div>
+          </div>
+          <div class="ed-filmstrip__nav" aria-hidden="true">
+            <div class="ed-filmstrip__dots" data-filmstrip-dots>
+              {filmstripImages.map((_, index) => (
+                <span class={index === 0 ? 'is-active' : ''} data-filmstrip-dot></span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ BRIDGE ═══════ -->
+    <section class="section ed-bridge">
+      <div class="container">
+        <div class="ed-bridge__line" aria-hidden="true"></div>
+        <div class="ed-bridge__text">
+          <div class="ed-eyebrow">Sunrise Session</div>
+          <h3>When the harbor <span class="accent-italic">belongs to you</span></h3>
+          <p>Sunrise in the port creates conditions impossible later in the day — soft reflected light from the sea, clean backgrounds without tourists, and full freedom to move between pier, sand, and shoreline.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ GALLERY 2 — MOSAIC ═══════ -->
+    <section class="section section--flush">
+      <div class="container">
+        <div class="ed-gallery-header">
+          <div class="ed-eyebrow">Gallery II</div>
+          <h3 class="ed-gallery-header__title">The Mosaic</h3>
+          <p class="ed-gallery-header__sub">Click any image to view it large</p>
+        </div>
+        <div class="ed-mosaic" aria-label="Mosaic gallery">
+          {mosaicImages.map((image, index) => (
+            <figure
+              class={`ed-mosaic__item ed-mosaic__item--${index + 1}`}
+              data-lightbox-trigger
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                loading="lazy"
+              />
+              <div class="ed-mosaic__overlay">
+                <span class="ed-mosaic__number">{String(index + 1).padStart(2, '0')}</span>
+              </div>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ BRIDGE 2 ═══════ -->
+    <section class="section ed-bridge">
+      <div class="container">
+        <div class="ed-bridge__line" aria-hidden="true"></div>
+        <div class="ed-bridge__text">
+          <div class="ed-eyebrow">A Gift That Lasts</div>
+          <h3>More than memories — <span class="accent-italic">visual stories for life</span></h3>
+          <p>A professional photoshoot on the Amalfi Coast creates visual assets for years — social media, personal branding, or printed keepsakes. Sunrise sessions are especially valuable for iconic locations without crowds.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ GALLERY 3 — DISSOLVE ═══════ -->
+    <section class="section section--flush">
+      <div class="container">
+        <div class="ed-gallery-header">
+          <div class="ed-eyebrow">Gallery III</div>
+          <h3 class="ed-gallery-header__title">The Dissolve</h3>
+          <p class="ed-gallery-header__sub">Scroll slowly to reveal each frame</p>
+        </div>
+        <div class="ed-dissolve" data-dissolve aria-label="Dissolve gallery">
+          <div class="ed-dissolve__viewport">
+            <div class="ed-dissolve__sticky">
+              <div class="ed-dissolve__frame">
+                {dissolveImages.map((image, index) => (
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    data-dissolve-img={String(index)}
+                    data-lightbox-trigger
+                    style={`opacity: ${index === 0 ? 1 : 0}; z-index: ${dissolveImages.length - index};`}
+                  />
+                ))}
+                <div class="ed-dissolve__vignette" aria-hidden="true"></div>
+              </div>
+              <div class="ed-dissolve__controls">
+                <div class="ed-dissolve__progress-line">
+                  <div class="ed-dissolve__progress-fill" data-dissolve-fill></div>
+                </div>
+                <div class="ed-dissolve__steps" data-dissolve-steps>
+                  {dissolveImages.map((image, index) => (
+                    <button
+                      class={`ed-dissolve__step ${index === 0 ? 'is-active' : ''}`}
+                      data-dissolve-step={String(index)}
+                      aria-label={`View frame ${image.label}`}
+                    >
+                      <span class="ed-dissolve__step-num">{image.label}</span>
+                    </button>
+                  ))}
+                </div>
+                <div class="ed-dissolve__current-label" data-dissolve-label aria-live="polite">
+                  Frame <span data-dissolve-current-num>01</span> of {String(dissolveImages.length).padStart(2, '0')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ CTA ═══════ -->
+    <section class="section ed-cta-section">
+      <div class="container">
+        <div class="ed-cta" style={`--cta-bg: url(${heroImage})`}>
+          <div class="ed-cta__inner">
+            <div class="ed-cta__tag">Ready to create your story?</div>
+            <h2>Book a sunrise photoshoot that becomes your visual portfolio.</h2>
+            <p>
+              Tell me your dates, mood, and vision — I'll handle the location scouting,
+              timing, and seamless direction on the day.
+            </p>
+            <a class="ed-cta__button" href="/contact">
+              <i class="bi bi-camera2" aria-hidden="true"></i>
+              Request a photoshoot
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ═══════ LIGHTBOX ═══════ -->
+  <div class="ed-lightbox" id="edLightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <div class="ed-lightbox__backdrop"></div>
+    <button class="ed-lightbox__close" aria-label="Close viewer">&times;</button>
+    <div class="ed-lightbox__body">
+      <img class="ed-lightbox__img" src="" alt="" />
+    </div>
+    <button class="ed-lightbox__nav ed-lightbox__nav--prev" aria-label="Previous image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="ed-lightbox__nav ed-lightbox__nav--next" aria-label="Next image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="ed-lightbox__counter" aria-hidden="true">
+      <span data-lb-current>1</span> / <span data-lb-total>1</span>
+    </div>
+  </div>
+
+  <!-- ═══════ SCRIPTS ═══════ -->
+  <script is:inline>
+    ;(() => {
+      /* ——— Hero height ——— */
+      const hero = document.querySelector('.ed-hero')
+      if (hero) {
+        const set = () => hero.style.setProperty('--hero-height', `${window.innerHeight}px`)
+        set()
+        window.addEventListener('resize', set)
+      }
+
+      /* ═══════════════════════════════════════════════
+         GALLERY I — Filmstrip (page-scroll-driven)
+         ═══════════════════════════════════════════════ */
+      const filmstrip = document.querySelector('[data-filmstrip]')
+      if (filmstrip) {
+        const track = filmstrip.querySelector('[data-filmstrip-track]')
+        const items = Array.from(filmstrip.querySelectorAll('[data-filmstrip-item]'))
+        const dots = Array.from(filmstrip.querySelectorAll('[data-filmstrip-dot]'))
+        const progressFill = filmstrip.querySelector('[data-filmstrip-fill]')
+
+        if (track && items.length) {
+          let currentX = 0
+          let targetX = 0
+          let rafId = null
+          let scrollDistance = 0
+          let activeIndex = 0
+
+          const updateLayout = () => {
+            const viewportWidth = filmstrip.clientWidth
+            const trackWidth = track.scrollWidth
+            scrollDistance = Math.max(0, trackWidth - viewportWidth)
+            const height = scrollDistance + window.innerHeight
+            filmstrip.style.height = height + 'px'
+            filmstrip.dataset.scrollDistance = String(scrollDistance)
+          }
+
+          const syncActive = (progress) => {
+            if (!items.length) return
+            const totalItems = items.length
+            const idx = Math.min(Math.round(progress * (totalItems - 1)), totalItems - 1)
+            if (idx !== activeIndex) {
+              activeIndex = idx
+              dots.forEach((d, i) => d.classList.toggle('is-active', i === activeIndex))
+              items.forEach((it, i) => it.classList.toggle('is-center', i === activeIndex))
+            }
+            if (progressFill) {
+              progressFill.style.transform = 'scaleX(' + progress + ')'
+            }
+          }
+
+          const animate = () => {
+            const delta = targetX - currentX
+            currentX += delta * 0.12
+            if (Math.abs(delta) < 0.5) {
+              currentX = targetX
+            }
+            track.style.transform = 'translate3d(' + currentX + 'px, 0, 0)'
+
+            const progress = scrollDistance > 0 ? Math.min(Math.max(-currentX / scrollDistance, 0), 1) : 0
+            syncActive(progress)
+
+            if (currentX !== targetX) {
+              rafId = requestAnimationFrame(animate)
+            } else {
+              rafId = null
+            }
+          }
+
+          let ticking = false
+          const onScroll = () => {
+            if (scrollDistance <= 0) {
+              targetX = 0
+              if (!rafId) rafId = requestAnimationFrame(animate)
+              return
+            }
+            const rect = filmstrip.getBoundingClientRect()
+            const totalScroll = filmstrip.offsetHeight - window.innerHeight
+            const progress = totalScroll > 0
+              ? Math.min(Math.max(-rect.top / totalScroll, 0), 1)
+              : 0
+            targetX = -scrollDistance * progress
+            if (!rafId) rafId = requestAnimationFrame(animate)
+          }
+
+          const requestTick = () => {
+            if (ticking) return
+            ticking = true
+            requestAnimationFrame(() => {
+              onScroll()
+              ticking = false
+            })
+          }
+
+          dots.forEach((dot, i) => {
+            dot.style.cursor = 'pointer'
+            dot.addEventListener('click', () => {
+              const rect = filmstrip.getBoundingClientRect()
+              const filmTop = window.scrollY + rect.top
+              const totalScroll = filmstrip.offsetHeight - window.innerHeight
+              const targetProgress = items.length > 1 ? i / (items.length - 1) : 0
+              const targetY = filmTop + totalScroll * targetProgress
+              window.scrollTo({ top: targetY, behavior: 'smooth' })
+            })
+          })
+
+          updateLayout()
+          requestTick()
+
+          window.addEventListener('scroll', requestTick, { passive: true })
+          window.addEventListener('resize', () => {
+            updateLayout()
+            requestTick()
+          })
+
+          if ('ResizeObserver' in window) {
+            const ro = new ResizeObserver(() => {
+              updateLayout()
+              requestTick()
+            })
+            ro.observe(track)
+          }
+        }
+      }
+
+
+      /* ═══════════════════════════════════════════════
+         GALLERY III — Scroll-linked dissolve
+         ═══════════════════════════════════════════════ */
+      const dissolve = document.querySelector('[data-dissolve]')
+      if (dissolve) {
+        const viewport = dissolve.querySelector('.ed-dissolve__viewport')
+        const images = Array.from(dissolve.querySelectorAll('[data-dissolve-img]'))
+        const steps = Array.from(dissolve.querySelectorAll('[data-dissolve-step]'))
+        const fill = dissolve.querySelector('[data-dissolve-fill]')
+        const currentNum = dissolve.querySelector('[data-dissolve-current-num]')
+        const count = images.length
+
+        if (count > 0 && viewport) {
+          const segmentVH = 80
+          const totalHeight = count * segmentVH
+          viewport.style.height = `${totalHeight}vh`
+
+          let lastActive = 0
+
+          const onScroll = () => {
+            const vpRect = viewport.getBoundingClientRect()
+            const vpH = viewport.offsetHeight
+            const windowH = window.innerHeight
+
+            const scrolled = -vpRect.top
+            const totalScroll = vpH - windowH
+            if (totalScroll <= 0) return
+
+            const progress = Math.min(Math.max(scrolled / totalScroll, 0), 1)
+
+            const floatIndex = progress * (count - 1)
+            const lowerIdx = Math.floor(floatIndex)
+            const upperIdx = Math.min(lowerIdx + 1, count - 1)
+            const blend = floatIndex - lowerIdx
+
+            images.forEach((img, i) => {
+              let opacity = 0
+              if (i === lowerIdx && i === upperIdx) {
+                opacity = 1
+              } else if (i === lowerIdx) {
+                opacity = 1 - blend
+              } else if (i === upperIdx) {
+                opacity = blend
+              }
+              img.style.opacity = String(opacity)
+            })
+
+            const active = Math.round(floatIndex)
+            if (active !== lastActive) {
+              lastActive = active
+              steps.forEach((s, i) => s.classList.toggle('is-active', i === active))
+              if (currentNum) currentNum.textContent = String(active + 1).padStart(2, '0')
+            }
+
+            if (fill) {
+              fill.style.transform = `scaleX(${progress})`
+            }
+          }
+
+          steps.forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+              const vpRect = viewport.getBoundingClientRect()
+              const vpTop = window.scrollY + vpRect.top
+              const totalScroll = viewport.offsetHeight - window.innerHeight
+              const targetProgress = count > 1 ? i / (count - 1) : 0
+              const targetY = vpTop + totalScroll * targetProgress
+              window.scrollTo({ top: targetY, behavior: 'smooth' })
+            })
+          })
+
+          let ticking = false
+          const tick = () => {
+            if (ticking) return
+            ticking = true
+            requestAnimationFrame(() => {
+              onScroll()
+              ticking = false
+            })
+          }
+
+          window.addEventListener('scroll', tick, { passive: true })
+          window.addEventListener('resize', () => {
+            viewport.style.height = `${totalHeight}vh`
+            tick()
+          })
+
+          onScroll()
+        }
+      }
+
+
+      /* ——— Lightbox ——— */
+      const lightbox = document.getElementById('edLightbox')
+      if (lightbox) {
+        const img = lightbox.querySelector('.ed-lightbox__img')
+        const prevBtn = lightbox.querySelector('.ed-lightbox__nav--prev')
+        const nextBtn = lightbox.querySelector('.ed-lightbox__nav--next')
+        const closeBtn = lightbox.querySelector('.ed-lightbox__close')
+        const backdrop = lightbox.querySelector('.ed-lightbox__backdrop')
+        const currentEl = lightbox.querySelector('[data-lb-current]')
+        const totalEl = lightbox.querySelector('[data-lb-total]')
+
+        const triggers = Array.from(document.querySelectorAll('[data-lightbox-trigger]'))
+        const srcs = []
+        triggers.forEach(el => {
+          const imgEl = el.tagName === 'IMG' ? el : el.querySelector('img')
+          if (imgEl) srcs.push({ src: imgEl.src, alt: imgEl.alt || '' })
+        })
+
+        let currentIndex = 0
+        const show = (index) => {
+          currentIndex = (index + srcs.length) % srcs.length
+          img.src = srcs[currentIndex].src
+          img.alt = srcs[currentIndex].alt
+          currentEl.textContent = currentIndex + 1
+          totalEl.textContent = srcs.length
+        }
+        const open = (index) => {
+          show(index)
+          lightbox.classList.add('is-open')
+          lightbox.setAttribute('aria-hidden', 'false')
+          document.body.style.overflow = 'hidden'
+        }
+        const close = () => {
+          lightbox.classList.remove('is-open')
+          lightbox.setAttribute('aria-hidden', 'true')
+          document.body.style.overflow = ''
+        }
+
+        triggers.forEach((el, i) => {
+          el.style.cursor = 'zoom-in'
+          el.addEventListener('click', (e) => {
+            e.preventDefault()
+            open(i)
+          })
+        })
+
+        closeBtn.addEventListener('click', close)
+        backdrop.addEventListener('click', close)
+        prevBtn.addEventListener('click', () => show(currentIndex - 1))
+        nextBtn.addEventListener('click', () => show(currentIndex + 1))
+
+        document.addEventListener('keydown', (e) => {
+          if (!lightbox.classList.contains('is-open')) return
+          if (e.key === 'Escape') close()
+          if (e.key === 'ArrowLeft') show(currentIndex - 1)
+          if (e.key === 'ArrowRight') show(currentIndex + 1)
+        })
+
+        let touchStartX = 0
+        lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX }, { passive: true })
+        lightbox.addEventListener('touchend', (e) => {
+          const diff = e.changedTouches[0].clientX - touchStartX
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) show(currentIndex - 1)
+            else show(currentIndex + 1)
+          }
+        })
+      }
+
+      /* ——— Scroll-triggered fade-in ——— */
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      }, { threshold: 0.15 })
+
+      document.querySelectorAll('.ed-story, .ed-bridge, .ed-gallery-header, .ed-cta').forEach(el => {
+        observer.observe(el)
+      })
+    })()
+  </script>
+</BaseLayout>
+
+<style>
+  /* ═══════════════════════════════════════
+     EDITORIAL CONCEPT — unique page-scoped styles
+     ═══════════════════════════════════════ */
+
+  .ed {
+    position: relative;
+  }
+
+  /* ——— HERO ——— */
+  .ed-hero {
+    position: relative;
+    height: var(--hero-height, 100svh);
+    min-height: 100svh;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .ed-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    filter: saturate(1.08) contrast(1.04);
+    transform: scale(1.02);
+    animation: heroZoom 18s ease-in-out alternate infinite;
+  }
+
+  @keyframes heroZoom {
+    from { transform: scale(1.02); }
+    to   { transform: scale(1.08); }
+  }
+
+  .ed-hero__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6, 8, 12, 0.3) 0%,
+      rgba(6, 8, 12, 0.15) 40%,
+      rgba(6, 8, 12, 0.6) 75%,
+      rgba(6, 8, 12, 0.88) 100%
+    );
+  }
+
+  .ed-hero__grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .ed-hero__content {
+    position: absolute;
+    bottom: clamp(4rem, 8vh, 7rem);
+    left: 0;
+    right: 0;
+    z-index: 2;
+    text-align: left;
+  }
+
+  .ed-hero__date {
+    font-family: var(--font-mono);
+    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .ed-hero__title {
+    font-size: clamp(3.2rem, 8vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    text-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0;
+  }
+
+  /* Scroll cue */
+  .ed-scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    z-index: 2;
+    transition: color 0.3s;
+  }
+
+  .ed-scroll-cue:hover {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+  }
+
+  .ed-scroll-cue__dot {
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { cy: 8; opacity: 0.5; }
+    50%      { cy: 18; opacity: 1; }
+  }
+
+  /* ——— SHARED TYPOGRAPHY ——— */
+  .ed-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--color-accent);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+
+  /* ——— STORY BLOCK ——— */
+  .ed-story {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .ed-story.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ed-story__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .ed-story__lead h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 1rem;
+  }
+
+  .ed-story__lead p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .ed-quote {
+    position: relative;
+    margin: 0;
+    padding: 2.5rem 2rem 2rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    align-self: center;
+  }
+
+  .ed-quote__mark {
+    position: absolute;
+    top: -0.2rem;
+    left: 1.2rem;
+    font-family: var(--font-display);
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.25;
+  }
+
+  .ed-quote p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 0.8rem;
+  }
+
+  .ed-quote cite {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+  }
+
+  /* ——— GALLERY HEADER ——— */
+  .ed-gallery-header {
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .ed-gallery-header.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ed-gallery-header__title {
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    margin-bottom: 0.3rem;
+  }
+
+  .ed-gallery-header__sub {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .section--flush {
+    padding-top: 0;
+  }
+
+  /* ——— GALLERY 1: FILMSTRIP — page-scroll-driven ——— */
+  .ed-filmstrip {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+
+  .ed-filmstrip__sticky {
+    position: sticky;
+    top: calc(var(--header-space) + 1rem);
+    overflow: visible;
+    padding-bottom: 1.5rem;
+  }
+
+  .ed-filmstrip__track {
+    display: flex;
+    gap: 0.75rem;
+    align-items: stretch;
+    padding: 0 max(1.5rem, calc((100vw - var(--container-max)) / 2));
+    will-change: transform;
+  }
+
+  .ed-filmstrip__frame {
+    flex: 0 0 auto;
+    position: relative;
+    width: clamp(300px, 52vw, 680px);
+    background: #0c0e14;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.4s ease;
+    opacity: 0.7;
+  }
+
+  .ed-filmstrip__frame.is-center,
+  .ed-filmstrip__frame:hover {
+    opacity: 1;
+    transform: scale(1.02);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+  }
+
+  .ed-filmstrip__frame img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .ed-filmstrip__sprocket {
+    display: flex;
+    justify-content: space-around;
+    padding: 3px 12px;
+    background: #0c0e14;
+  }
+
+  .ed-filmstrip__sprocket span {
+    width: 10px;
+    height: 5px;
+    border-radius: 1px;
+    background: #2a2e38;
+  }
+
+  .ed-filmstrip__counter {
+    position: absolute;
+    bottom: 18px;
+    right: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.15em;
+    pointer-events: none;
+  }
+
+  /* Progress bar */
+  .ed-filmstrip__progress {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0.8rem auto 0;
+    padding: 0 1.5rem;
+    height: 3px;
+  }
+
+  .ed-filmstrip__progress::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--color-border);
+    border-radius: 2px;
+  }
+
+  .ed-filmstrip__progress-fill {
+    position: absolute;
+    top: 0;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+  }
+
+  /* Nav: dots */
+  .ed-filmstrip__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  .ed-filmstrip__dots {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  .ed-filmstrip__dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--color-border);
+    transition: background 0.25s, transform 0.25s;
+  }
+
+  .ed-filmstrip__dots span.is-active {
+    background: var(--color-accent);
+    transform: scale(1.4);
+  }
+
+  /* ——— BRIDGE SECTION ——— */
+  .ed-bridge {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .ed-bridge.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ed-bridge__line {
+    width: 60px;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0.4;
+    margin-bottom: 2rem;
+  }
+
+  .ed-bridge__text {
+    max-width: 42rem;
+  }
+
+  .ed-bridge__text h3 {
+    font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .ed-bridge__text p {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  /* ——— GALLERY 2: MOSAIC ——— */
+  .ed-mosaic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 0.75rem;
+  }
+
+  .ed-mosaic__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    margin: 0;
+    background: #0f1117;
+  }
+
+  .ed-mosaic__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .ed-mosaic__item:hover img {
+    transform: scale(1.05);
+  }
+
+  .ed-mosaic__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+
+  .ed-mosaic__item:hover .ed-mosaic__overlay {
+    opacity: 1;
+  }
+
+  .ed-mosaic__number {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Asymmetric layout */
+  .ed-mosaic__item--1 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .ed-mosaic__item--2 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .ed-mosaic__item--3 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .ed-mosaic__item--4 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .ed-mosaic__item--5 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .ed-mosaic__item--6 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  /* ——— GALLERY 3: DISSOLVE — scroll-linked ——— */
+  .ed-dissolve {
+    position: relative;
+  }
+
+  .ed-dissolve__viewport {
+    position: relative;
+  }
+
+  .ed-dissolve__sticky {
+    position: sticky;
+    top: calc(var(--header-space) + 1.5rem);
+  }
+
+  .ed-dissolve__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #0a0c12;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+  }
+
+  .ed-dissolve__frame img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: opacity;
+    cursor: zoom-in;
+  }
+
+  .ed-dissolve__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(6, 8, 12, 0.25) 100%);
+    pointer-events: none;
+  }
+
+  /* Controls bar below the frame */
+  .ed-dissolve__controls {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  /* Progress line */
+  .ed-dissolve__progress-line {
+    width: 100%;
+    height: 3px;
+    background: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ed-dissolve__progress-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+  }
+
+  /* Step buttons */
+  .ed-dissolve__steps {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ed-dissolve__step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+    padding: 0;
+  }
+
+  .ed-dissolve__step:hover {
+    background: var(--color-surface);
+  }
+
+  .ed-dissolve__step.is-active {
+    background: var(--color-accent);
+    transform: scale(1.15);
+  }
+
+  .ed-dissolve__step-num {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    line-height: 1;
+    transition: color 0.25s ease;
+  }
+
+  .ed-dissolve__step.is-active .ed-dissolve__step-num {
+    color: #fff;
+  }
+
+  .ed-dissolve__current-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* ——— CTA ——— */
+  .ed-cta-section {
+    padding-top: 2rem;
+  }
+
+  .ed-cta {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: #080a10;
+    background-image:
+      linear-gradient(135deg, rgba(12, 20, 40, 0.92), rgba(6, 10, 22, 0.96)),
+      var(--cta-bg);
+    background-size: cover;
+    background-position: center;
+    color: #f2ede6;
+    padding: clamp(2.5rem, 5vw, 4.5rem);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .ed-cta.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ed-cta__inner {
+    max-width: 38rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ed-cta__tag {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 1rem;
+  }
+
+  .ed-cta__inner h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 0.8rem;
+    color: #f2ede6;
+  }
+
+  .ed-cta__inner p {
+    color: rgba(242, 237, 230, 0.75);
+    margin-bottom: 1.8rem;
+  }
+
+  .ed-cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 2.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-accent);
+    box-shadow: 0 10px 30px rgba(255, 89, 0, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    isolation: isolate;
+    position: relative;
+  }
+
+  .ed-cta__button::after {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    z-index: -1;
+    filter: blur(20px);
+    background: radial-gradient(circle, rgba(255, 195, 0, 0.6) 0%, rgba(255, 89, 0, 0.45) 40%, transparent 70%);
+    animation: ctaPulse 3s ease-in-out infinite;
+    opacity: 0.7;
+  }
+
+  .ed-cta__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(255, 89, 0, 0.4);
+    text-decoration: none;
+    color: #fff;
+  }
+
+  @keyframes ctaPulse {
+    0%, 100% { transform: scale(0.85); opacity: 0.6; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+  }
+
+  /* ——— LIGHTBOX ——— */
+  .ed-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .ed-lightbox.is-open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .ed-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.94);
+    backdrop-filter: blur(12px);
+  }
+
+  .ed-lightbox__body {
+    position: relative;
+    z-index: 1;
+    max-width: 92vw;
+    max-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ed-lightbox__img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.2s ease;
+  }
+
+  .ed-lightbox__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    z-index: 2;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .ed-lightbox__close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  .ed-lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .ed-lightbox__nav:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+
+  .ed-lightbox__nav--prev { left: 1.5rem; }
+  .ed-lightbox__nav--next { right: 1.5rem; }
+
+  .ed-lightbox__counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ——— RESPONSIVE ——— */
+  @media (max-width: 900px) {
+    .ed-story__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .ed-filmstrip__sticky {
+      top: calc(var(--header-space) + 0.5rem);
+    }
+
+    .ed-filmstrip__track {
+      gap: 0.6rem;
+      padding: 0 1.2rem;
+    }
+
+    .ed-filmstrip__frame {
+      width: clamp(260px, 78vw, 520px);
+    }
+
+    .ed-mosaic {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(160px, auto);
+    }
+
+    .ed-mosaic__item--1 {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .ed-dissolve__frame {
+      max-height: 75vh;
+    }
+
+    .ed-dissolve__steps {
+      gap: 0.15rem;
+    }
+
+    .ed-dissolve__step {
+      width: 28px;
+      height: 28px;
+    }
+
+    .ed-lightbox__nav--prev { left: 0.5rem; }
+    .ed-lightbox__nav--next { right: 0.5rem; }
+  }
+
+  @media (max-width: 640px) {
+    .ed-hero__content {
+      bottom: clamp(3rem, 6vh, 5rem);
+    }
+
+    .ed-hero__title {
+      font-size: clamp(2.4rem, 12vw, 4rem);
+    }
+
+    .ed-filmstrip__track {
+      gap: 0.5rem;
+      padding: 0 0.75rem;
+    }
+
+    .ed-filmstrip__frame {
+      width: clamp(220px, 85vw, 380px);
+      opacity: 1;
+    }
+
+    .ed-filmstrip__progress {
+      margin: 0.6rem 0.75rem 0;
+      padding: 0;
+    }
+
+    .ed-filmstrip__progress-fill {
+      left: 0;
+      right: 0;
+    }
+
+    .ed-filmstrip__nav {
+      gap: 0.5rem;
+    }
+
+    .ed-mosaic {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+
+    .ed-mosaic__item--1 {
+      grid-column: span 1;
+    }
+
+    .ed-dissolve__frame {
+      border-radius: var(--radius-md);
+      max-height: 60vh;
+    }
+
+    .ed-dissolve__step {
+      width: 26px;
+      height: 26px;
+    }
+
+    .ed-dissolve__step-num {
+      font-size: 0.52rem;
+    }
+
+    .ed-quote {
+      padding: 1.5rem 1.2rem 1.2rem;
+    }
+
+    .ed-lightbox__nav {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Touch device: no hover effects on filmstrip */
+  @media (hover: none) {
+    .ed-filmstrip__frame {
+      opacity: 1;
+    }
+
+    .ed-filmstrip__frame:hover {
+      transform: none;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ed-hero__img {
+      animation: none;
+    }
+
+    .ed-scroll-cue__dot {
+      animation: none;
+    }
+
+    .ed-story,
+    .ed-bridge,
+    .ed-gallery-header,
+    .ed-cta {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .ed-filmstrip__frame {
+      transition: none;
+      opacity: 1;
+    }
+
+    .ed-mosaic__item img {
+      transition: none;
+    }
+
+    .ed-dissolve__step {
+      transition: none;
+    }
+
+    .ed-cta__button::after {
+      animation: none;
+    }
+  }
+
+  /* ——— Night theme tweaks ——— */
+  :global([data-theme='night']) .ed-filmstrip__sprocket {
+    background: #0a0c12;
+  }
+
+  :global([data-theme='night']) .ed-filmstrip__sprocket span {
+    background: #1e222c;
+  }
+
+  :global([data-theme='night']) .ed-filmstrip__progress::before {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  :global([data-theme='night']) .ed-dissolve__progress-line {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  :global([data-theme='night']) .ed-dissolve__step:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+</style>
