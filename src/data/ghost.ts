@@ -18,6 +18,7 @@ type GhostAuthor = {
 }
 
 type GhostPostResponse = {
+  id: string
   title: string
   slug: string
   excerpt: string
@@ -47,6 +48,7 @@ export type GhostPost = {
 }
 
 export type GhostPostFull = GhostPost & {
+  id: string
   html: string
   readingTime: number
   tag: string
@@ -150,6 +152,7 @@ export const getGhostPostsFull = async ({ limit = 'all' }: { limit?: number | 'a
 
     const data = (await response.json()) as { posts?: GhostPostResponse[] }
     return (data.posts ?? []).map((post): GhostPostFull => ({
+      id: post.id,
       title: post.title,
       slug: post.slug,
       excerpt: post.excerpt,

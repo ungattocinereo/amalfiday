@@ -1,0 +1,25 @@
+---
+import { getGhostPostsFull } from '../../../data/ghost'
+
+export async function getStaticPaths() {
+  const posts = await getGhostPostsFull()
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { ghostId: post.id },
+  }))
+}
+
+const { ghostId } = Astro.props
+const adminUrl = `${import.meta.env.GHOST_API_URL || process.env.GHOST_API_URL || 'https://amalfi.day/blog'}/ghost/#/editor/post/${ghostId}`
+---
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0;url=${adminUrl}`} />
+    <title>Redirecting to editor…</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href={adminUrl}>Ghost editor</a>…</p>
+  </body>
+</html>
