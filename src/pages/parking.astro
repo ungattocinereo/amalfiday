@@ -1,19 +1,1774 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+const heroImage = '/pre-footer/girl-on-moto-in-amalfi-small.webp'
 
-const pageTitle = 'Parking tips — CristallPont Amalfi Day'
+const pageTitle = 'Parking Amalfi Coast 2026 — Complete Guide'
 const pageDescription =
-  'Parking tips for Amalfi Coast towns: best garages, ZTL zones, prices, timing, and motorbike spots in Amalfi, Atrani, Ravello, and Positano.'
-const shareImage = '/pre-footer/girl-on-moto-in-amalfi-small.webp'
+  'Complete 2026 guide to parking on the Amalfi Coast: official prices, ZTL zones, garage locations, and money-saving strategies for Positano, Amalfi, Ravello, and beyond.'
+const shareImageAlt = 'Cars parked along the Amalfi Coast road'
+
+const towns = [
+  {
+    name: 'Amalfi',
+    icon: 'bi-building',
+    badge: 'Best for overnight',
+    options: [
+      {
+        name: 'Luna Rossa (multi-level garage)',
+        hourly: '2-4',
+        daily: '25-45',
+        notes: 'Official: 170 car spots + 30 moto. Long-stay (lunga sosta): 40/day Apr-Nov, 45/day Aug, 25/day winter. Check-in/out tied to 12:00.',
+        restrictions: 'No gas/methane vehicles. Max height 2m. Tunnel connects to Atrani.',
+        source: 'official',
+      },
+      {
+        name: 'Il Porto (Piazza Flavio Gioia)',
+        hourly: '3-6',
+        daily: '-',
+        notes: 'Port area. First 2 hours may have surcharge (anti-turnover pricing).',
+        restrictions: 'Prices vary by season. Check signage carefully.',
+        source: 'aggregate',
+      },
+    ],
+    tip: 'Luna Rossa is the most predictable option for multi-day stays. Official "lunga sosta" rate removes hourly guessing.',
+  },
+  {
+    name: 'Positano',
+    icon: 'bi-geo-alt',
+    badge: 'Most difficult',
+    options: [
+      {
+        name: 'Central private garages',
+        hourly: '8-12',
+        daily: '50-90',
+        notes: 'Extremely limited. Often full by 10:00 in summer. Prices are highest on the coast.',
+        restrictions: 'Each started hour charged in full. Watch for unclear pricing.',
+        source: 'private',
+      },
+      {
+        name: 'Nocelle / Montepertuso (free)',
+        hourly: 'Free',
+        daily: 'Free',
+        notes: 'Park in the hills above Positano. Take the Flavio Gioia bus down (1.60). Or walk ~35 min downhill via steps.',
+        restrictions: 'Limited spaces in peak season even here.',
+        source: 'local',
+      },
+    ],
+    tip: 'Arrive before 9:00 or park above town and take the bus. Negotiate parking with your hotel in advance.',
+  },
+  {
+    name: 'Ravello',
+    icon: 'bi-music-note-beamed',
+    badge: 'Mountain town',
+    options: [
+      {
+        name: 'Parcheggio Auditorium (Oscar Niemeyer)',
+        hourly: '4',
+        daily: '40',
+        notes: 'Official: 4/hr (08:00-24:00), 2.50/hr overnight. 80 spots.',
+        restrictions: 'Different sections have different rules (lato monte/valle). Check signage.',
+        source: 'official',
+      },
+      {
+        name: 'Piazza Duomo area',
+        hourly: '2.50-5',
+        daily: '15-30',
+        notes: '~140 spots. Prices fluctuate seasonally.',
+        restrictions: 'May close for festivals, weddings, or holidays.',
+        source: 'aggregate',
+      },
+    ],
+    tip: 'Budget 4/hr or 40/day as baseline. Street sections vary, so always verify on-site markings.',
+  },
+  {
+    name: 'Atrani',
+    icon: 'bi-water',
+    badge: 'Strict limits',
+    options: [
+      {
+        name: 'Municipal blue zones',
+        hourly: '3',
+        daily: '-',
+        notes: 'Official: Jun-Sep non-residents 3/hr, max 4 hours only (08:00-20:00).',
+        restrictions: 'Overnight parking banned 20:00-08:00 in summer. Not viable as a day base.',
+        source: 'official',
+      },
+    ],
+    tip: 'Do NOT plan Atrani as your parking base in summer. The 4-hour limit and overnight ban make it impractical.',
+  },
+  {
+    name: 'Praiano',
+    icon: 'bi-sunset',
+    badge: 'Clear pricing',
+    options: [
+      {
+        name: 'Blue zones (strisce blu)',
+        hourly: '3',
+        daily: '30',
+        notes: 'Official: 3/hr year-round. Day passes: 15 for 6 hrs, 30 for 14 hrs. Monthly non-resident pass: 100.',
+        restrictions: 'Apr-Oct: 08:00-22:00. Nov-Mar: 08:00-20:00. Applies on holidays too.',
+        source: 'official',
+      },
+    ],
+    tip: 'If staying 6+ hours, the 15 day pass saves money vs. hourly rate. Monthly pass is great for repeat visitors.',
+  },
+  {
+    name: 'Maiori',
+    icon: 'bi-shop',
+    badge: 'More accessible',
+    options: [
+      {
+        name: 'Waterfront blue zones',
+        hourly: '3',
+        daily: '-',
+        notes: 'More availability than Positano or Amalfi.',
+        restrictions: 'Seasonal pricing applies.',
+        source: 'aggregate',
+      },
+      {
+        name: "Costa d'Angolo Pietra di Luna",
+        hourly: '3-5',
+        daily: '20-30',
+        notes: '100+ spots, gated, video surveillance. Weekdays 3/hr (20-25/day). Weekends 5/hr (25-30/day).',
+        restrictions: 'Supervised parking with clear pricing.',
+        source: 'private',
+      },
+    ],
+    tip: 'One of the easier towns for parking. Good base for exploring nearby Minori and Amalfi.',
+  },
+  {
+    name: 'Minori',
+    icon: 'bi-cup-hot',
+    badge: 'Small town',
+    options: [
+      {
+        name: 'Via Pioppi / Waterfront',
+        hourly: '3',
+        daily: '-',
+        notes: 'Limited spots but more accessible than neighboring towns.',
+        restrictions: 'Few spaces overall.',
+        source: 'aggregate',
+      },
+    ],
+    tip: 'Quieter alternative to Amalfi with decent bus connections.',
+  },
+  {
+    name: 'Cetara',
+    icon: 'bi-fish',
+    badge: 'Fishing village',
+    options: [
+      {
+        name: 'Port area blue zones',
+        hourly: '1.50-4',
+        daily: '-',
+        notes: 'Spaces vanish quickly during peak restaurant/port hours.',
+        restrictions: 'Very limited capacity.',
+        source: 'aggregate',
+      },
+    ],
+    tip: 'Great for a meal, but don\'t count on finding a spot after noon in summer.',
+  },
+  {
+    name: 'Vietri sul Mare',
+    icon: 'bi-palette',
+    badge: 'Budget pick',
+    options: [
+      {
+        name: 'Piazza Matteotti / Marina',
+        hourly: '1.50-2',
+        daily: '-',
+        notes: 'Lowest prices on the entire coast. Two large municipal lots near the beach.',
+        restrictions: 'Close to Salerno, excellent bus/ferry connections.',
+        source: 'aggregate',
+      },
+    ],
+    tip: 'Best budget strategy: park here and take ferries or buses along the coast. Save 30-50/day vs. Positano.',
+  },
+  {
+    name: 'Conca dei Marini',
+    icon: 'bi-signpost-split',
+    badge: 'Limited',
+    options: [
+      {
+        name: 'Municipal blue zones',
+        hourly: '-',
+        daily: '20',
+        notes: 'Very few spots available. Narrow roads.',
+        restrictions: '"Parking by luck" - spaces are genuinely scarce.',
+        source: 'official',
+      },
+    ],
+    tip: 'Don\'t rely on finding parking here. Plan an alternative.',
+  },
+  {
+    name: 'Furore',
+    icon: 'bi-arrow-down-circle',
+    badge: 'Remote',
+    options: [
+      {
+        name: 'La Praia',
+        hourly: '2.50',
+        daily: '-',
+        notes: '2 km walk to the fjord.',
+        restrictions: 'Limited spaces.',
+        source: 'aggregate',
+      },
+    ],
+    tip: 'Be prepared for a walk. The fjord is worth it.',
+  },
+]
+
+const strategies = [
+  {
+    icon: 'bi-geo-alt-fill',
+    title: 'Park & Ride',
+    accent: 'Strategy',
+    description:
+      'Leave your car in a cheaper, high-capacity location (Salerno, Vietri sul Mare, or Sorrento) and travel along the coast by ferry or SITA bus. In peak season, the problem is often not price but availability.',
+  },
+  {
+    icon: 'bi-clock-history',
+    title: 'Arrive Early',
+    accent: 'Before 9 AM',
+    description:
+      'After 10:00 in summer, even paid garages in Positano and Amalfi are full. Early arrival is the single most effective trick for securing a spot.',
+  },
+  {
+    icon: 'bi-phone',
+    title: 'Use EasyPark App',
+    accent: 'Remotely',
+    description:
+      'Pay and extend parking time remotely in blue zones across Italy. No need to run back to the meter. Works in most Amalfi Coast towns.',
+  },
+  {
+    icon: 'bi-house-check',
+    title: 'Book Hotels with Parking',
+    accent: 'Included',
+    description:
+      'Many hotels and B&Bs offer parking (sometimes free, sometimes 15-25/day). This alone can save 25-50/day compared to public garages in popular towns.',
+  },
+]
+
+const warnings = [
+  {
+    icon: 'bi-exclamation-triangle',
+    text: 'Never park on the shoulder of SS163 (the coastal highway). Mass towing operations happen regularly. Fine + towing = 150-250+.',
+  },
+  {
+    icon: 'bi-square',
+    text: 'White lines = residents only. Yellow lines = local services only. Parking there guarantees a fine. Always look for "Solo Residenti" signs.',
+  },
+  {
+    icon: 'bi-fuel-pump',
+    text: 'Almost no gas stations on the coast. Fill up in Salerno or before entering the coastal road.',
+  },
+  {
+    icon: 'bi-cash-stack',
+    text: 'Many parking meters and small lots are cash-only. Keep small bills and coins handy.',
+  },
+]
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
-  <section class="section">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={heroImage}
+  imageAlt={shareImageAlt}
+>
+  <!-- Hero -->
+  <section class="parking-hero hero--dark">
+    <img
+      class="parking-hero__image"
+      src={heroImage}
+      alt="Driving along the Amalfi Coast"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="parking-hero__veil" aria-hidden="true"></div>
+    <div class="container parking-hero__content">
+      <div class="parking-hero__copy">
+        <span class="badge parking-hero__badge">
+          <i class="bi bi-car-front"></i>
+          Updated 2026
+        </span>
+        <h1>
+          Parking <span class="accent-italic">Amalfi Coast</span> 2026
+        </h1>
+        <p class="parking-hero__lead">
+          The only guide you need. Official prices, garage locations, ZTL zones, and practical strategies for every town on the coast.
+        </p>
+        <div class="parking-hero__actions">
+          <a class="parking-hero__cta" href="#prices">
+            <i class="bi bi-arrow-down-circle"></i>
+            See prices by town
+          </a>
+          <a class="parking-hero__cta parking-hero__cta--ghost" href="#ztl">
+            <i class="bi bi-camera-video"></i>
+            ZTL zones
+          </a>
+        </div>
+      </div>
+      <div class="parking-hero__stats">
+        <div class="parking-hero__stat">
+          <span class="parking-hero__stat-num">11</span>
+          <span class="parking-hero__stat-label">Towns covered</span>
+        </div>
+        <div class="parking-hero__stat-divider"></div>
+        <div class="parking-hero__stat">
+          <span class="parking-hero__stat-num">1.50-12</span>
+          <span class="parking-hero__stat-label">/hour range</span>
+        </div>
+        <div class="parking-hero__stat-divider"></div>
+        <div class="parking-hero__stat">
+          <span class="parking-hero__stat-num">2026</span>
+          <span class="parking-hero__stat-label">Season prices</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reality check intro -->
+  <section class="section parking-intro-section">
+    <div class="container parking-intro">
+      <div class="parking-intro__text">
+        <span class="parking-eyebrow">Honest overview</span>
+        <h2>
+          Parking here is <span class="accent-italic">genuinely hard</span>
+        </h2>
+        <p>
+          The Amalfi Coast remains one of the most challenging places to park in all of Italy. Towns are built vertically into cliffs with almost no flat ground for cars. In peak season (April-October), average rates run 5-8/hour, and after 10 AM finding any spot in Positano or Amalfi is nearly impossible.
+        </p>
+        <p>
+          This guide compiles official municipal rates, verified private garage prices, and tested strategies to help you save money and avoid fines. We update it every season.
+        </p>
+      </div>
+      <div class="parking-intro__legend">
+        <h3>Line colors on the road</h3>
+        <div class="legend-items">
+          <div class="legend-item">
+            <span class="legend-line legend-line--blue"></span>
+            <div>
+              <strong>Blue lines</strong>
+              <span>Paid parking (strisce blu)</span>
+            </div>
+          </div>
+          <div class="legend-item">
+            <span class="legend-line legend-line--white"></span>
+            <div>
+              <strong>White lines</strong>
+              <span>Free, but usually residents only</span>
+            </div>
+          </div>
+          <div class="legend-item">
+            <span class="legend-line legend-line--yellow"></span>
+            <div>
+              <strong>Yellow lines</strong>
+              <span>Local services only. Fine guaranteed.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prices by town -->
+  <section class="section parking-prices-section" id="prices">
     <div class="container">
-      <h1>
-        Parking <span class="accent-italic">tips</span>
-      </h1>
-      <p>Parking guidance will be added soon.</p>
+      <span class="parking-eyebrow">2026 prices by town</span>
+      <h2>
+        Every town, <span class="accent-italic">every price</span>
+      </h2>
+      <p class="parking-prices-lead">
+        Prices below reflect 2025-2026 official municipal rates where published, and verified aggregate ranges for private garages. High-season prices may fluctuate.
+      </p>
+
+      <div class="town-grid">
+        {towns.map((town) => (
+          <article class="town-card" id={town.name.toLowerCase().replace(/\s+/g, '-')}>
+            <div class="town-card__header">
+              <div class="town-card__icon">
+                <i class={`bi ${town.icon}`}></i>
+              </div>
+              <div>
+                <h3>{town.name}</h3>
+                <span class={`town-badge town-badge--${town.badge.toLowerCase().replace(/\s+/g, '-')}`}>
+                  {town.badge}
+                </span>
+              </div>
+            </div>
+            <div class="town-card__options">
+              {town.options.map((opt) => (
+                <div class="parking-option">
+                  <div class="parking-option__name">
+                    <span>{opt.name}</span>
+                    {opt.source === 'official' && (
+                      <span class="source-tag source-tag--official">Official</span>
+                    )}
+                    {opt.source === 'private' && (
+                      <span class="source-tag source-tag--private">Private</span>
+                    )}
+                  </div>
+                  <div class="parking-option__prices">
+                    <div class="price-cell">
+                      <span class="price-label">Per hour</span>
+                      <span class="price-value">{opt.hourly === 'Free' ? 'Free' : opt.hourly === '-' ? '—' : `${opt.hourly}`}</span>
+                    </div>
+                    <div class="price-cell">
+                      <span class="price-label">Per day</span>
+                      <span class="price-value">{opt.daily === '-' ? '—' : `${opt.daily}`}</span>
+                    </div>
+                  </div>
+                  <p class="parking-option__notes">{opt.notes}</p>
+                  {opt.restrictions && (
+                    <p class="parking-option__restrictions">
+                      <i class="bi bi-exclamation-circle"></i>
+                      {opt.restrictions}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div class="town-card__tip">
+              <i class="bi bi-lightbulb"></i>
+              <span>{town.tip}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ZTL Section -->
+  <section class="section parking-ztl-section" id="ztl">
+    <div class="container">
+      <div class="ztl-grid">
+        <div class="ztl-content">
+          <span class="parking-eyebrow">
+            <i class="bi bi-camera-video"></i>
+            Critical to know
+          </span>
+          <h2>
+            ZTL: Limited Traffic <span class="accent-italic">Zones</span>
+          </h2>
+          <p>
+            Limited Traffic Zones (Zona a Traffico Limitato) operate in the historic centers of <strong>Amalfi, Positano, Ravello, and Atrani</strong>. They are monitored by cameras that automatically check your plates.
+          </p>
+          <div class="ztl-checks">
+            <div class="ztl-check">
+              <i class="bi bi-clock"></i>
+              <span><strong>Restriction times</strong> are posted on signs at each zone entrance. Read them carefully.</span>
+            </div>
+            <div class="ztl-check">
+              <i class="bi bi-car-front"></i>
+              <span><strong>Vehicle class</strong> restrictions apply. Euro 0-3 vehicles are typically prohibited.</span>
+            </div>
+            <div class="ztl-check">
+              <i class="bi bi-house-door"></i>
+              <span><strong>Hotel guests</strong> with pre-registration can be exempted. Contact your hotel or ask at reception.</span>
+            </div>
+          </div>
+        </div>
+        <div class="ztl-alert-card">
+          <div class="ztl-alert-icon">
+            <i class="bi bi-shield-exclamation"></i>
+          </div>
+          <h3>Fine: from 150 and up</h3>
+          <p>
+            Violations are punished with a fine starting from 150 euros plus towing expenses if necessary.
+          </p>
+          <div class="ztl-tip">
+            <i class="bi bi-info-circle"></i>
+            <p>
+              <strong>Good to know:</strong> Even if you've already left the hotel, your accommodation can usually register your plate retroactively. Guest registration documents are typically collected by the commune within 1-2 months.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Strategies -->
+  <section class="section parking-strategies-section">
+    <div class="container">
+      <span class="parking-eyebrow">Save money & stress</span>
+      <h2>
+        Smart parking <span class="accent-italic">strategies</span>
+      </h2>
+
+      <div class="strategies-grid">
+        {strategies.map((s) => (
+          <div class="strategy-card">
+            <div class="strategy-icon">
+              <i class={`bi ${s.icon}`}></i>
+            </div>
+            <h3>
+              {s.title} <span class="accent-italic">{s.accent}</span>
+            </h3>
+            <p>{s.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommended routes -->
+  <section class="section parking-routes-section">
+    <div class="container">
+      <span class="parking-eyebrow">Suggested approaches</span>
+      <h2>
+        Three ways to <span class="accent-italic">do it right</span>
+      </h2>
+
+      <div class="routes-grid">
+        <article class="route-card route-card--recommended">
+          <div class="route-card__label">Recommended</div>
+          <div class="route-card__icon"><i class="bi bi-star-fill"></i></div>
+          <h3>Budget + Comfort</h3>
+          <p class="route-card__base">Base: <strong>Maiori or Minori</strong></p>
+          <ul>
+            <li>Affordable parking (3/hr)</li>
+            <li>Good bus & ferry connections</li>
+            <li>Less crowded beaches</li>
+            <li>Plenty of restaurants</li>
+          </ul>
+        </article>
+        <article class="route-card">
+          <div class="route-card__icon"><i class="bi bi-ship"></i></div>
+          <h3>No Car Needed</h3>
+          <p class="route-card__base">Base: <strong>Salerno or Vietri sul Mare</strong></p>
+          <ul>
+            <li>Cheapest parking (1.50-2/hr)</li>
+            <li>Travel by TravelMar ferry</li>
+            <li>Save 30-50/day on parking</li>
+            <li>Avoid coastal road stress</li>
+          </ul>
+        </article>
+        <article class="route-card">
+          <div class="route-card__icon"><i class="bi bi-car-front-fill"></i></div>
+          <h3>Full Mobility</h3>
+          <p class="route-card__base">Base: <strong>Hotel with parking in Ravello</strong></p>
+          <ul>
+            <li>Parking often included</li>
+            <li>Quiet mountain base</li>
+            <li>Stunning views</li>
+            <li>Drive to any town</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warnings -->
+  <section class="section parking-warnings-section">
+    <div class="container">
+      <span class="parking-eyebrow">Don't learn the hard way</span>
+      <h2>
+        Important <span class="accent-italic">warnings</span>
+      </h2>
+
+      <div class="warnings-grid">
+        {warnings.map((w) => (
+          <div class="warning-item">
+            <div class="warning-icon">
+              <i class={`bi ${w.icon}`}></i>
+            </div>
+            <p>{w.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Alternatives to driving -->
+  <section class="section parking-alternatives-section">
+    <div class="container">
+      <span class="parking-eyebrow">Skip the car entirely</span>
+      <h2>
+        Alternatives to <span class="accent-italic">driving</span>
+      </h2>
+      <p class="alternatives-lead">
+        Honestly, the best parking strategy on the Amalfi Coast is to not need parking at all. Here are your options:
+      </p>
+
+      <div class="alternatives-grid">
+        <article class="alt-card">
+          <div class="alt-card__image">
+            <!-- placeholder for ferry photo -->
+            <div class="alt-card__placeholder">
+              <i class="bi bi-water"></i>
+            </div>
+          </div>
+          <div class="alt-card__content">
+            <h3><i class="bi bi-water"></i> TravelMar Ferries</h3>
+            <p>Connect Salerno, Cetara, Maiori, Minori, Amalfi, and Positano. Running April through October. From 5 per ride.</p>
+            <a class="alt-card__link" href="/timetables">
+              <i class="bi bi-arrow-right"></i>
+              See ferry timetables
+            </a>
+          </div>
+        </article>
+        <article class="alt-card">
+          <div class="alt-card__image">
+            <!-- placeholder for bus photo -->
+            <div class="alt-card__placeholder">
+              <i class="bi bi-bus-front"></i>
+            </div>
+          </div>
+          <div class="alt-card__content">
+            <h3><i class="bi bi-bus-front"></i> SITA Buses</h3>
+            <p>Cover the entire coast for 1.50-2.40 per ride. Frequent service. Can be very crowded in summer, but reliable year-round.</p>
+            <a class="alt-card__link" href="/timetables">
+              <i class="bi bi-arrow-right"></i>
+              See bus timetables
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Useful apps & contacts -->
+  <section class="section parking-apps-section">
+    <div class="container">
+      <div class="apps-grid">
+        <div class="apps-text">
+          <span class="parking-eyebrow">Before you go</span>
+          <h2>
+            Useful <span class="accent-italic">tools</span>
+          </h2>
+          <div class="apps-list">
+            <div class="app-item">
+              <div class="app-icon"><i class="bi bi-phone"></i></div>
+              <div>
+                <strong>EasyPark</strong>
+                <span>Pay & extend parking remotely across Italy</span>
+              </div>
+            </div>
+            <div class="app-item">
+              <div class="app-icon"><i class="bi bi-search"></i></div>
+              <div>
+                <strong>Parkopedia</strong>
+                <span>Find parking spots and compare prices</span>
+              </div>
+            </div>
+            <div class="app-item">
+              <div class="app-icon"><i class="bi bi-ship"></i></div>
+              <div>
+                <strong>TravelMar App</strong>
+                <span>Ferry schedules and ticket booking</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contacts-card">
+          <h3><i class="bi bi-telephone"></i> Useful contacts</h3>
+          <div class="contact-row">
+            <span class="contact-label">Luna Rossa (Amalfi)</span>
+            <a href="tel:+39089871082" class="contact-phone">+39 089 871 082</a>
+          </div>
+          <div class="contact-row">
+            <span class="contact-label">Parcheggio MA.CRI (Positano)</span>
+            <a href="https://wa.me/393338146221" class="contact-phone" target="_blank" rel="noreferrer">
+              <i class="bi bi-whatsapp"></i> +39 333 814 6221
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* ====== Hero ====== */
+  .parking-hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding: calc(var(--header-space) + 3.5rem) 0 4rem;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .parking-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.05) contrast(1.05);
+    z-index: -2;
+  }
+
+  .parking-hero__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(10, 14, 18, 0.82) 0%,
+      rgba(10, 14, 18, 0.55) 40%,
+      rgba(10, 14, 18, 0.38) 100%
+    );
+    z-index: -1;
+  }
+
+  .parking-hero__content {
+    display: grid;
+    gap: 2.5rem;
+    width: 100%;
+  }
+
+  .parking-hero__copy {
+    display: grid;
+    gap: 1.4rem;
+    max-width: 44rem;
+  }
+
+  .parking-hero__badge {
+    width: max-content;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(14px);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .parking-hero__content h1 {
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    color: #ffffff;
+    line-height: 1.1;
+  }
+
+  .parking-hero__lead {
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 38rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .parking-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.4rem;
+  }
+
+  .parking-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.5rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 89, 0, 0.85);
+    border: 1px solid rgba(255, 89, 0, 0.6);
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    backdrop-filter: blur(14px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .parking-hero__cta:hover {
+    color: #ffffff;
+    background: rgba(255, 89, 0, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(255, 89, 0, 0.35);
+  }
+
+  .parking-hero__cta--ghost {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .parking-hero__cta--ghost:hover {
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .parking-hero__stats {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.4rem 2rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(20px);
+    width: max-content;
+  }
+
+  .parking-hero__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .parking-hero__stat-num {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .parking-hero__stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .parking-hero__stat-divider {
+    width: 1px;
+    height: 2.4rem;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  /* ====== Eyebrow ====== */
+  .parking-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
+  }
+
+  /* ====== Intro Section ====== */
+  .parking-intro-section {
+    position: relative;
+  }
+
+  .parking-intro-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255, 195, 0, 0.06), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(0, 156, 255, 0.06), transparent 40%);
+    pointer-events: none;
+  }
+
+  .parking-intro {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .parking-intro__text h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 1.2rem;
+  }
+
+  .parking-intro__text p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .parking-intro__legend {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .parking-intro__legend h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .legend-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .legend-line {
+    flex-shrink: 0;
+    width: 40px;
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  .legend-line--blue {
+    background: #2563eb;
+  }
+
+  .legend-line--white {
+    background: #e5e7eb;
+    border: 1px solid #d1d5db;
+  }
+
+  .legend-line--yellow {
+    background: #eab308;
+  }
+
+  .legend-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .legend-item strong {
+    font-size: 0.95rem;
+  }
+
+  .legend-item span {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ====== Prices Section ====== */
+  .parking-prices-section {
+    position: relative;
+  }
+
+  .parking-prices-section h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .parking-prices-lead {
+    max-width: 56rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .town-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.8rem;
+  }
+
+  .town-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.8rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .town-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .town-card__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .town-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 89, 0, 0.1);
+    color: var(--color-accent);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .town-card__header h3 {
+    font-size: 1.35rem;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .town-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    background: rgba(255, 89, 0, 0.08);
+    color: var(--color-accent);
+    margin-top: 0.2rem;
+  }
+
+  .town-badge--budget-pick {
+    background: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+  }
+
+  .town-badge--most-difficult {
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+  }
+
+  .town-badge--strict-limits {
+    background: rgba(220, 38, 38, 0.08);
+    color: #dc2626;
+  }
+
+  .town-badge--best-for-overnight {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+  }
+
+  [data-theme='night'] .town-badge--budget-pick {
+    background: rgba(22, 163, 74, 0.18);
+    color: #4ade80;
+  }
+
+  [data-theme='night'] .town-badge--most-difficult {
+    background: rgba(220, 38, 38, 0.18);
+    color: #f87171;
+  }
+
+  [data-theme='night'] .town-badge--strict-limits {
+    background: rgba(220, 38, 38, 0.15);
+    color: #f87171;
+  }
+
+  [data-theme='night'] .town-badge--best-for-overnight {
+    background: rgba(37, 99, 235, 0.18);
+    color: #60a5fa;
+  }
+
+  .town-card__options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .parking-option {
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .parking-option__name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .source-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.12rem 0.45rem;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  .source-tag--official {
+    background: rgba(22, 163, 74, 0.12);
+    color: #16a34a;
+  }
+
+  .source-tag--private {
+    background: rgba(156, 163, 175, 0.15);
+    color: var(--color-text-muted);
+  }
+
+  [data-theme='night'] .source-tag--official {
+    background: rgba(22, 163, 74, 0.22);
+    color: #4ade80;
+  }
+
+  .parking-option__prices {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .price-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .price-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+  }
+
+  .price-value {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .parking-option__notes {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .parking-option__restrictions {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    margin: 0.5rem 0 0;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .parking-option__restrictions i {
+    color: #eab308;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .town-card__tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 89, 0, 0.06);
+    border: 1px solid rgba(255, 89, 0, 0.12);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-top: auto;
+  }
+
+  .town-card__tip i {
+    color: var(--color-accent);
+    font-size: 1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+  }
+
+  /* ====== ZTL Section ====== */
+  .parking-ztl-section {
+    background: var(--color-surface);
+  }
+
+  .ztl-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .ztl-content h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 1rem;
+  }
+
+  .ztl-content p {
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .ztl-checks {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ztl-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .ztl-check i {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .ztl-alert-card {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .ztl-alert-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  [data-theme='night'] .ztl-alert-icon {
+    background: rgba(220, 38, 38, 0.18);
+    color: #f87171;
+  }
+
+  .ztl-alert-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .ztl-alert-card > p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .ztl-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    background: rgba(37, 99, 235, 0.06);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .ztl-tip i {
+    color: var(--color-aux);
+    font-size: 1rem;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .ztl-tip p {
+    margin: 0;
+  }
+
+  /* ====== Strategies ====== */
+  .parking-strategies-section h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 2rem;
+  }
+
+  .strategies-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .strategy-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.8rem 1.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .strategy-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .strategy-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 89, 0, 0.1);
+    color: var(--color-accent);
+    font-size: 1.3rem;
+  }
+
+  .strategy-card h3 {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .strategy-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ====== Routes ====== */
+  .parking-routes-section h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 2rem;
+  }
+
+  .routes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .route-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 1.8rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .route-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .route-card--recommended {
+    border-color: rgba(255, 89, 0, 0.3);
+    background: linear-gradient(
+      135deg,
+      var(--color-card) 0%,
+      rgba(255, 89, 0, 0.04) 100%
+    );
+  }
+
+  .route-card__label {
+    position: absolute;
+    top: -0.6rem;
+    left: 1.5rem;
+    padding: 0.2rem 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--gradient-sunset);
+    color: #ffffff;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .route-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 89, 0, 0.1);
+    color: var(--color-accent);
+    font-size: 1.3rem;
+  }
+
+  .route-card h3 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .route-card__base {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .route-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .route-card li {
+    position: relative;
+    padding-left: 1.2rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .route-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  /* ====== Warnings ====== */
+  .parking-warnings-section h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 2rem;
+  }
+
+  .warnings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .warning-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .warning-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(234, 179, 8, 0.12);
+    color: #eab308;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  [data-theme='night'] .warning-icon {
+    background: rgba(234, 179, 8, 0.18);
+    color: #facc15;
+  }
+
+  .warning-item p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  /* ====== Alternatives ====== */
+  .parking-alternatives-section h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .alternatives-lead {
+    max-width: 56rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .alternatives-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.8rem;
+  }
+
+  .alt-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .alt-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .alt-card__image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .alt-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: 2.5rem;
+  }
+
+  .alt-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.6rem;
+  }
+
+  .alt-card__content h3 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.15rem;
+    margin: 0;
+  }
+
+  .alt-card__content h3 i {
+    color: var(--color-accent);
+  }
+
+  .alt-card__content p {
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .alt-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.92rem;
+    margin-top: auto;
+    transition: gap 0.2s ease;
+  }
+
+  .alt-card__link:hover {
+    gap: 0.7rem;
+    color: var(--color-accent-2);
+  }
+
+  /* ====== Apps & Contacts ====== */
+  .parking-apps-section {
+    background: var(--color-surface);
+  }
+
+  .apps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .apps-text h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .apps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .app-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .app-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 89, 0, 0.1);
+    color: var(--color-accent);
+    font-size: 1.15rem;
+    flex-shrink: 0;
+  }
+
+  .app-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .app-item strong {
+    font-size: 0.95rem;
+  }
+
+  .app-item span {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+  }
+
+  .contacts-card {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .contacts-card h3 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.15rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .contacts-card h3 i {
+    color: var(--color-accent);
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contact-row:last-child {
+    border-bottom: 0;
+  }
+
+  .contact-label {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+
+  .contact-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .contact-phone:hover {
+    color: var(--color-accent-2);
+  }
+
+  /* ====== Responsive ====== */
+  @media (max-width: 1024px) {
+    .town-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .strategies-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .routes-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .parking-hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      padding-top: calc(var(--header-space) + 2.5rem);
+    }
+
+    .parking-intro {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ztl-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .alternatives-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .apps-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .warnings-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .parking-hero__stats {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .strategies-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .parking-hero__stats {
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+    }
+
+    .parking-hero__stat-divider {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .parking-hero__actions {
+      flex-direction: column;
+    }
+
+    .parking-hero__cta {
+      justify-content: center;
+    }
+
+    .contact-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .town-card,
+    .strategy-card,
+    .route-card,
+    .alt-card {
+      transition: none;
+    }
+
+    .town-card:hover,
+    .strategy-card:hover,
+    .route-card:hover,
+    .alt-card:hover {
+      transform: none;
+    }
+  }
+</style>
