@@ -593,10 +593,11 @@ const warnings = [
       <div class="alternatives-grid">
         <article class="alt-card">
           <div class="alt-card__image">
-            <!-- placeholder for ferry photo -->
-            <div class="alt-card__placeholder">
-              <i class="bi bi-water"></i>
-            </div>
+            <img
+              src="/staticpages/directions/get-here-by-ferry.webp"
+              alt="Ferry on the Amalfi Coast"
+              loading="lazy"
+            />
           </div>
           <div class="alt-card__content">
             <h3><i class="bi bi-water"></i> TravelMar Ferries</h3>
@@ -609,10 +610,11 @@ const warnings = [
         </article>
         <article class="alt-card">
           <div class="alt-card__image">
-            <!-- placeholder for bus photo -->
-            <div class="alt-card__placeholder">
-              <i class="bi bi-bus-front"></i>
-            </div>
+            <img
+              src="/staticpages/directions/get-here-by-bus.webp"
+              alt="SITA bus on the Amalfi Coast"
+              loading="lazy"
+            />
           </div>
           <div class="alt-card__content">
             <h3><i class="bi bi-bus-front"></i> SITA Buses</h3>
@@ -637,27 +639,30 @@ const warnings = [
             Useful <span class="accent-italic">tools</span>
           </h2>
           <div class="apps-list">
-            <div class="app-item">
+            <a class="app-item" href="https://www.easypark.com/" target="_blank" rel="noreferrer">
               <div class="app-icon"><i class="bi bi-phone"></i></div>
               <div>
-                <strong>EasyPark</strong>
+                <strong>EasyPark App</strong>
                 <span>Pay & extend parking remotely across Italy</span>
               </div>
-            </div>
-            <div class="app-item">
-              <div class="app-icon"><i class="bi bi-search"></i></div>
-              <div>
-                <strong>Parkopedia</strong>
-                <span>Find parking spots and compare prices</span>
-              </div>
-            </div>
-            <div class="app-item">
+              <i class="bi bi-box-arrow-up-right app-item__arrow"></i>
+            </a>
+            <a class="app-item" href="https://www.travelmar.it/en/index" target="_blank" rel="noreferrer">
               <div class="app-icon"><i class="bi bi-ship"></i></div>
               <div>
-                <strong>TravelMar App</strong>
+                <strong>TravelMar Website</strong>
                 <span>Ferry schedules and ticket booking</span>
               </div>
-            </div>
+              <i class="bi bi-box-arrow-up-right app-item__arrow"></i>
+            </a>
+            <a class="app-item" href="/timetables">
+              <div class="app-icon"><i class="bi bi-clock"></i></div>
+              <div>
+                <strong>All timetables</strong>
+                <span>Our dedicated page for public transport timetables</span>
+              </div>
+              <i class="bi bi-arrow-right app-item__arrow"></i>
+            </a>
           </div>
         </div>
         <div class="contacts-card">
@@ -1511,25 +1516,22 @@ const warnings = [
 
   .alt-card__image {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    height: 200px;
     overflow: hidden;
   }
 
-  .alt-card__placeholder {
+  .alt-card__image img {
     width: 100%;
     height: 100%;
-    display: grid;
-    place-items: center;
-    background: var(--color-surface);
-    color: var(--color-text-muted);
-    font-size: 2.5rem;
+    object-fit: cover;
+    display: block;
   }
 
   .alt-card__content {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    padding: 1.6rem;
+    padding: 1.2rem 1.6rem 1.6rem;
   }
 
   .alt-card__content h3 {
@@ -1595,6 +1597,29 @@ const warnings = [
     display: flex;
     align-items: center;
     gap: 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s ease;
+  }
+
+  .app-item:hover {
+    background: var(--color-surface);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .app-item__arrow {
+    margin-left: auto;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    transition: color 0.15s ease;
+  }
+
+  .app-item:hover .app-item__arrow {
+    color: var(--color-accent);
   }
 
   .app-icon {
