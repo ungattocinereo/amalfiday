@@ -84,17 +84,38 @@ const getApiKey = () =>
 
 // --- Listing: lightweight posts for index / homepage ---
 
-export const getGhostPosts = async ({ limit = 6 }: { limit?: number } = {}) => {
+export type GhostPagination = {
+  page: number
+  pages: number
+  total: number
+  limit: number
+}
+
+export type GhostPostsResult = {
+  posts: GhostPost[]
+  pagination: GhostPagination
+}
+
+export const getGhostPosts = async ({
+  limit = 6,
+  page = 1,
+}: { limit?: number; page?: number } = {}): Promise<GhostPostsResult> => {
   const apiKey = getApiKey()
   const url = buildGhostUrl('ghost/api/content/posts/')
 
+  const empty: GhostPostsResult = {
+    posts: [],
+    pagination: { page: 1, pages: 1, total: 0, limit },
+  }
+
   if (!apiKey || !url) {
     console.warn('Ghost API env vars missing: GHOST_API_URL / GHOST_CONTENT_API_KEY')
-    return [] as GhostPost[]
+    return empty
   }
 
   url.searchParams.set('key', apiKey)
   url.searchParams.set('limit', String(limit))
+  url.searchParams.set('page', String(page))
   url.searchParams.set('order', 'published_at desc')
   url.searchParams.set(
     'fields',
@@ -106,11 +127,15 @@ export const getGhostPosts = async ({ limit = 6 }: { limit?: number } = {}) => {
     const response = await fetch(url.toString(), { headers: { Accept: 'application/json' } })
     if (!response.ok) {
       console.warn(`Ghost API error: ${response.status}`)
-      return [] as GhostPost[]
+      return empty
     }
 
-    const data = (await response.json()) as { posts?: GhostPostResponse[] }
-    return (data.posts ?? []).map((post): GhostPost => ({
+    const data = (await response.json()) as {
+      posts?: GhostPostResponse[]
+      meta?: { pagination?: { page: number; pages: number; total: number; limit: number } }
+    }
+
+    const posts = (data.posts ?? []).map((post): GhostPost => ({
       title: post.title,
       slug: post.slug,
       excerpt: post.excerpt,
@@ -121,9 +146,20 @@ export const getGhostPosts = async ({ limit = 6 }: { limit?: number } = {}) => {
       readingTime: post.reading_time ?? undefined,
       tag: post.primary_tag?.name ?? post.tags?.[0]?.name ?? undefined,
     }))
+
+    const pagination: GhostPagination = data.meta?.pagination
+      ? {
+          page: data.meta.pagination.page,
+          pages: data.meta.pagination.pages,
+          total: data.meta.pagination.total,
+          limit: data.meta.pagination.limit,
+        }
+      : { page: 1, pages: 1, total: posts.length, limit }
+
+    return { posts, pagination }
   } catch (error) {
     console.warn('Ghost API fetch failed', error)
-    return [] as GhostPost[]
+    return empty
   }
 }
 

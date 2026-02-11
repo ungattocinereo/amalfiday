@@ -55,7 +55,7 @@ const staticPages = [
   },
 ]
 
-const newsPosts = await getGhostPosts({ limit: 8 })
+const { posts: newsPosts } = await getGhostPosts({ limit: 8 })
 const quatrains = Array.isArray(heroQuatrains) ? heroQuatrains : []
 const fallbackQuatrain =
   Array.isArray(quatrains[0]) && quatrains[0].length === 4

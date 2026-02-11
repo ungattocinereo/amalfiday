@@ -1,18 +1,37 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { getGhostPosts } from '../../data/ghost'
+import type { GetStaticPaths } from 'astro'
 
-const posts = await getGhostPosts({ limit: 20 })
+export const getStaticPaths = (async () => {
+  const postsPerPage = 12
+  // Fetch first page to learn total count
+  const { pagination } = await getGhostPosts({ limit: postsPerPage, page: 1 })
+  const totalPages = pagination.pages
 
-const featured = posts[0] ?? null
-const sidebar = posts.slice(1, 4)
-const grid = posts.slice(4)
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: i === 0 ? undefined : String(i + 1) },
+    props: { currentPage: i + 1, totalPages },
+  }))
+}) satisfies GetStaticPaths
 
-const pageTitle = 'Amalfi Notes — Blog'
+const { currentPage, totalPages } = Astro.props
+const { posts } = await getGhostPosts({ limit: 12, page: currentPage })
+
+const isFirstPage = currentPage === 1
+const featured = isFirstPage ? (posts[0] ?? null) : null
+const sidebar = isFirstPage ? posts.slice(1, 4) : []
+const grid = isFirstPage ? posts.slice(4) : posts
+
+const pageLabel = currentPage > 1 ? ` — Page ${currentPage}` : ''
+const pageTitle = `Amalfi Notes — Blog${pageLabel}`
 const pageDescription =
   'Amalfi Coast blog with travel notes, routes, photography tips, culture, and food. Stories from Atrani, Amalfi, Ravello, and beyond.'
 const shareImage =
   posts.find((post) => post.image)?.image ?? '/pre-footer/boat-tours-in-amalfi.webp'
+
+const prevUrl = currentPage === 1 ? null : currentPage === 2 ? '/blog' : `/blog/${currentPage - 1}`
+const nextUrl = currentPage < totalPages ? `/blog/${currentPage + 1}` : null
 
 const currentYear = new Date().getFullYear()
 const currentSeason = (() => {
@@ -73,10 +92,17 @@ const currentSeason = (() => {
     </section>
   )}
 
+  <!-- PAGE LABEL (pages 2+) -->
+  {!isFirstPage && grid.length > 0 && (
+    <section class="container">
+      <div class="section-label">Page {currentPage} of {totalPages}</div>
+    </section>
+  )}
+
   <!-- MORE STORIES GRID -->
   {grid.length > 0 && (
     <section class="container">
-      <div class="section-label">More stories</div>
+      {isFirstPage && <div class="section-label">More stories</div>}
       <div class="editorial-grid">
         {grid.map((post) => (
           <div class="editorial-card">
@@ -99,6 +125,35 @@ const currentSeason = (() => {
         ))}
       </div>
     </section>
+  )}
+
+  <!-- PAGINATION -->
+  {totalPages > 1 && (
+    <nav class="container pagination" aria-label="Blog pagination">
+      <div class="pagination__inner">
+        {prevUrl ? (
+          <a href={prevUrl} class="pagination__link pagination__prev">
+            <span class="pagination__arrow">&larr;</span> Newer
+          </a>
+        ) : (
+          <span class="pagination__link pagination__prev pagination__disabled">
+            <span class="pagination__arrow">&larr;</span> Newer
+          </span>
+        )}
+
+        <span class="pagination__current">{currentPage} / {totalPages}</span>
+
+        {nextUrl ? (
+          <a href={nextUrl} class="pagination__link pagination__next">
+            Older <span class="pagination__arrow">&rarr;</span>
+          </a>
+        ) : (
+          <span class="pagination__link pagination__next pagination__disabled">
+            Older <span class="pagination__arrow">&rarr;</span>
+          </span>
+        )}
+      </div>
+    </nav>
   )}
 
   <!-- EMPTY STATE -->
@@ -390,6 +445,55 @@ const currentSeason = (() => {
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  /* === PAGINATION === */
+  .pagination {
+    padding: 2.5rem 0 4rem;
+  }
+
+  .pagination__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+  }
+
+  .pagination__link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .pagination__link:hover {
+    color: var(--color-accent);
+  }
+
+  .pagination__disabled {
+    color: var(--color-text-muted);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .pagination__arrow {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .pagination__current {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--color-text-muted);
   }
 
