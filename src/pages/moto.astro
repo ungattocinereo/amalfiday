@@ -3,12 +3,53 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
 const pageTitle = 'Moto roads — CristallPont Amalfi Day'
 const pageDescription =
-  'Moto roads on the Amalfi Coast: scenic routes, viewpoints, and ride planning notes.'
+  'Two scenic motorcycle routes on the Amalfi Coast: Tramonti Valley and the winding road from Amalfi to Agerola. Viewpoints, stops, and ride planning notes.'
 const shareImage = '/pre-footer/girl-on-moto-in-amalfi-small.webp'
 const mapEmbed =
   'https://www.google.com/maps/d/u/0/embed?mid=1z8saTtHohjOPGR4ejlsJ_qT0a8KLg8g&ehbc=2E312F&ll=40.6805,14.623&z=11&output=embed'
 const mapShare =
   'https://www.google.com/maps/d/u/0/edit?mid=1z8saTtHohjOPGR4ejlsJ_qT0a8KLg8g&usp=sharing'
+
+const mapEmbed2 =
+  'https://www.google.com/maps/d/u/0/embed?mid=1hgoMDsmnVBDd15Y38Vp5fPrUbXoP7So&ehbc=2E312F&noprof=1'
+const mapShare2 =
+  'https://www.google.com/maps/d/u/0/edit?mid=1hgoMDsmnVBDd15Y38Vp5fPrUbXoP7So&usp=sharing'
+
+const stops2 = [
+  {
+    letter: 'A',
+    title: 'GAS Bar',
+    subtitle: 'The Perfect Start',
+    text: 'This bar is a beloved haunt of every cyclist and biker on the Amalfi Coast. The cornetti with cream and cherry are exquisite, the views are breathtaking, and the coffee is superb. In the evenings, they serve pizza and inventive cocktails.',
+  },
+  {
+    letter: 'B',
+    title: 'Monastero Santa Rosa',
+    subtitle: 'A Hidden Balcony',
+    text: 'One of the most beautiful monasteries on the coast, now a luxury hotel. Just before it, you\'ll pass through a tunnel — look for a small opening on the left side. It leads to a magnificent balcony hidden inside the tunnel. Park your motorcycle near the monastery, walk back, and step onto this secret viewpoint. You\'ll be speechless.',
+  },
+  {
+    letter: 'C',
+    title: 'Marisa Cuomo',
+    subtitle: 'Legendary Winery',
+    text: 'One of the most famous wineries on the entire Amalfi Coast. If you want truly exceptional (and expensive) wine, you can buy directly from them. Book a visit to their garden and winery in advance on their website for an unforgettable experience. A good bottle starts from \u20AC50 and up.',
+    hint: 'Book your visit in advance — it\u2019s worth every minute.',
+    hintLink: { url: 'https://www.marisacuomo.com/wine-tastings-amalfi-coast-salerno.php', label: 'Book a visit' },
+  },
+  {
+    letter: 'D',
+    title: 'L\'Incanto',
+    subtitle: 'Cliffside Restaurant',
+    text: 'A magnificent restaurant perched on the cliff edge right before Agerola. Stunning panoramic views, excellent cuisine, and a large parking area for both cars and motorcycles. Highly recommended.',
+  },
+  {
+    letter: 'E',
+    title: 'Path of the Gods',
+    subtitle: 'Trail Starting Point',
+    text: 'This is where the famous Path of the Gods begins. You can ride further through Agerola and enjoy the views, or park your motorcycle here and walk a good stretch of this legendary trail on foot. Then return, hop back on the bike, and ride the winding road back down.',
+    hint: 'In summer, this curvy road has incredible light and often hosts vintage Italian car parades.',
+  },
+]
 
 const stops = [
   {
@@ -249,6 +290,200 @@ const stops = [
                   <i class="bi bi-chat-dots"></i>
                   {stop.hint}
                 </p>
+              )}
+            </div>
+          </article>
+        ))}
+        <div class="mt__end">
+          <i class="bi bi-flag-fill"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ROUTE 2 — HERO ====== -->
+  <section class="mh2 section hero--dark" id="route2">
+    <div class="mh2__bg" aria-hidden="true">
+      <svg class="mh__road" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="roadGrad2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="rgba(1,98,255,0.5)" />
+            <stop offset="100%" stop-color="rgba(255,89,0,0.2)" />
+          </linearGradient>
+        </defs>
+        <path
+          class="mh__road-base"
+          d="M-20 100 C100 200, 180 600, 380 500 S520 180, 700 280 S880 600, 1000 450 S1150 200, 1260 350"
+        />
+        <path
+          class="mh2__road-center"
+          d="M-20 100 C100 200, 180 600, 380 500 S520 180, 700 280 S880 600, 1000 450 S1150 200, 1260 350"
+        />
+        <path
+          class="mh2__road-glow"
+          d="M-20 100 C100 200, 180 600, 380 500 S520 180, 700 280 S880 600, 1000 450 S1150 200, 1260 350"
+        />
+      </svg>
+      <div class="mh__grain"></div>
+    </div>
+    <div class="container mh__content">
+      <div class="mh__top mh2__fade" style="--fade-delay: 0.1s">
+        <span class="mh__eyebrow">
+          <span class="mh__eyebrow-dot mh2__dot"></span>
+          Amalfi — Agerola Route
+        </span>
+      </div>
+      <h1 class="mh__title">
+        <span class="mh2__title-line">The windiest</span>
+        <span class="mh2__title-line"><em>road</em> from Amalfi</span>
+        <span class="mh2__title-line">to Agerola</span>
+      </h1>
+      <p class="mh__lead mh2__fade" style="--fade-delay: 0.2s">
+        Get ready to uncover the raw, untamed beauty of the Amalfi Coast as you navigate the
+        twists and turns of Tramonti Valley. This off-the-beaten-path route is a dream come true
+        for those seeking an authentic Italian experience away from the crowds.
+      </p>
+      <div class="mh__actions mh2__fade" style="--fade-delay: 0.3s">
+        <a class="button" href="#route2-map">
+          <i class="bi bi-arrow-down-circle"></i>
+          Explore the route
+        </a>
+        <a class="mh__ghost-btn" href={mapShare2} target="_blank" rel="noreferrer">
+          <i class="bi bi-map"></i>
+          Open in Google Maps
+        </a>
+      </div>
+      <div class="mh__stats mh2__fade" style="--fade-delay: 0.4s" data-stats>
+        <div class="mh__stat">
+          <div class="mh__stat-num">
+            <span class="mh__counter" data-target="25.7" data-decimals="1">0</span>
+          </div>
+          <div class="mh__stat-unit">km</div>
+          <div class="mh__stat-label">Length of the road</div>
+        </div>
+        <div class="mh__stat-divider"></div>
+        <div class="mh__stat">
+          <div class="mh__stat-num">
+            <span class="mh__counter" data-target="661" data-decimals="0">0</span>
+          </div>
+          <div class="mh__stat-unit">m</div>
+          <div class="mh__stat-label">Maximum elevation</div>
+        </div>
+        <div class="mh__stat-divider"></div>
+        <div class="mh__stat">
+          <div class="mh__stat-num">
+            <span class="mh__counter" data-target="5" data-decimals="0">0</span>
+          </div>
+          <div class="mh__stat-unit">stops</div>
+          <div class="mh__stat-label">Points of interest</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUTE 2 — MAP + ROUTE INFO -->
+  <section class="mr section" id="route2-map">
+    <div class="container">
+      <div class="mr__header">
+        <span class="mr__eyebrow">Route overview</span>
+        <h2 class="mr__title">
+          The winding road to <em>Agerola</em>
+        </h2>
+        <p class="mr__lead">
+          This is your chance to see the Amalfi Coast through a new lens — one that's unfiltered,
+          unapologetic, and absolutely unforgettable. We have prepared this map in different formats
+          that you can use on your navigators or online.
+        </p>
+      </div>
+
+      <div class="mr__card">
+        <div class="mr__card-inner">
+          <div class="mr__map-wrap">
+            <iframe
+              title="Amalfi to Agerola moto map"
+              src={mapEmbed2}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <div class="mr__card-bar">
+            <div class="mr__downloads">
+              <a
+                class="mr__dl-btn mr__dl-btn--primary"
+                href="https://amalfi.day/files/Maps/moto-road-to-agerola.kmz"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i class="bi bi-download"></i>
+                KMZ
+              </a>
+              <a
+                class="mr__dl-btn"
+                href="https://amalfi.day/files/Maps/moto-road-to-agerola.gpx"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i class="bi bi-download"></i>
+                GPX
+              </a>
+              <a
+                class="mr__dl-btn mr__dl-btn--maps"
+                href={mapShare2}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i class="bi bi-map"></i>
+                Google Maps
+              </a>
+            </div>
+            <div class="mr__route-tag">
+              <i class="bi bi-signpost-2"></i>
+              Amalfi → Conca dei Marini → Agerola
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUTE 2 — TIMELINE STOPS -->
+  <section class="mt section">
+    <div class="container">
+      <div class="mt__header">
+        <span class="mr__eyebrow">Route letters</span>
+        <h2 class="mt__title">
+          From Sea Level to the <em>Path of the Gods</em>
+        </h2>
+        <p class="mt__lead">
+          A step by step journey through this legendary coastal road to Agerola
+        </p>
+      </div>
+      <div class="mt__timeline">
+        <div class="mt__line" aria-hidden="true"></div>
+        {stops2.map((stop, i) => (
+          <article class="mt__stop" style={`--delay: ${i * 0.06}s`}>
+            <div class="mt__marker">
+              <span class="mt__letter">{stop.letter}</span>
+            </div>
+            <div class="mt__card">
+              <div class="mt__card-head">
+                <h3 class="mt__card-title">{stop.title}</h3>
+                <span class="mt__card-sub">{stop.subtitle}</span>
+              </div>
+              <p class="mt__card-text">{stop.text}</p>
+              {stop.hint && (
+                <div class="mt__card-hint">
+                  <span class="mt__card-hint-text">
+                    <i class="bi bi-chat-dots"></i>
+                    {stop.hint}
+                  </span>
+                  {stop.hintLink && (
+                    <a class="mt__card-link" href={stop.hintLink.url} target="_blank" rel="noreferrer">
+                      {stop.hintLink.label}
+                      <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                  )}
+                </div>
               )}
             </div>
           </article>
@@ -794,14 +1029,46 @@ const stops = [
   .mt__card-hint {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
+    gap: 0.8rem;
     margin: 1rem 0 0;
-    padding: 0.7rem 1rem;
+    padding: 0.6rem 0.6rem 0.6rem 1rem;
     border-radius: 12px;
     background: rgba(255, 89, 0, 0.08);
     color: var(--color-accent);
     font-weight: 600;
     font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .mt__card-hint-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mt__card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    background: var(--color-accent);
+    color: #fff;
+    transition: all 0.2s ease;
+  }
+
+  .mt__card-link:hover {
+    background: #e94f00;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 89, 0, 0.3);
   }
 
   .mt__end {
@@ -816,6 +1083,148 @@ const stops = [
     border: 2px solid var(--color-border);
     color: var(--color-accent);
     font-size: 1rem;
+  }
+
+  /* ===== ROUTE 2 HERO ===== */
+  .mh2 {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    background: #0c0a10;
+    color: #f5f5f5;
+    overflow: hidden;
+  }
+
+  .mh2__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .mh2__bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(1, 98, 255, 0.16), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(255, 89, 0, 0.12), transparent),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(120, 60, 200, 0.08), transparent);
+    z-index: 1;
+  }
+
+  .mh2__bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, #0c0a10, transparent);
+    z-index: 2;
+  }
+
+  .mh2__road-center {
+    fill: none;
+    stroke: url(#roadGrad2);
+    stroke-width: 3;
+    stroke-dasharray: 16 24;
+    stroke-linecap: round;
+    animation: roadDash 8s linear infinite;
+  }
+
+  .mh2__road-glow {
+    fill: none;
+    stroke: rgba(1, 98, 255, 0.12);
+    stroke-width: 80;
+    stroke-linecap: round;
+    filter: blur(40px);
+  }
+
+  .mh2__dot {
+    background: #4a90ff;
+    animation: pulse2 2s ease-in-out infinite;
+  }
+
+  .mh2__title-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mh2__title-line:nth-child(1) { transition-delay: 0.15s; }
+  .mh2__title-line:nth-child(2) { transition-delay: 0.25s; }
+  .mh2__title-line:nth-child(3) { transition-delay: 0.35s; }
+
+  .mh2__title-line.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mh2__fade {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--fade-delay, 0s);
+  }
+
+  .mh2__fade.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Route 2 stats: 3-column layout */
+  .mh2 .mh__stats {
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+  }
+
+  @keyframes pulse2 {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  @media (max-width: 768px) {
+    .mh2 .mh__stats {
+      grid-template-columns: 1fr auto 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mh2 .mh__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  :global([data-theme='night']) .mh2 {
+    background: #080610;
+  }
+
+  :global([data-theme='night']) .mh2__bg::before {
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(1, 98, 255, 0.1), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(255, 89, 0, 0.08), transparent),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(120, 60, 200, 0.05), transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mh2__title-line,
+    .mh2__fade {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .mh2__road-center {
+      animation: none;
+    }
+
+    .mh2__dot {
+      animation: none;
+    }
   }
 
   /* ===== SCROLL-REVEAL ===== */
@@ -1087,8 +1496,35 @@ const stops = [
     items.forEach((el) => observer.observe(el));
   }
 
+  // Scroll-reveal for route 2 hero elements (title lines + fade elements)
+  function scrollRevealHero2() {
+    const items = document.querySelectorAll('.mh2__title-line, .mh2__fade');
+    if (!items.length) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      items.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    items.forEach((el) => observer.observe(el));
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     animateCounters();
     scrollReveal();
+    scrollRevealHero2();
   });
 </script>
