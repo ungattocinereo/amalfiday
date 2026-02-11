@@ -44,22 +44,70 @@ const pageTitle = 'Photoshootings — CristallPont Amalfi Day'
 const pageDescription =
   'Photoshootings on the Amalfi Coast for couples, influencers, and solo travelers. Cinematic sessions in Amalfi, Atrani, Ravello, and Positano.'
 const shareImageAlt = 'Amalfi Coast photoshoot hero scene'
-const individualAlbum = [
-  '/photoshootings/individual/Masha-Minchuck-Amalfi-day.jpg',
-  '/photoshootings/individual/Silvia-Amalfi-day.jpg.jpg',
-  '/photoshootings/individual/bissa-ninfulenser-icecream.jpg',
-  '/photoshootings/individual/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
-  '/photoshootings/individual/iiana-photo-hero-atrani-hat-2-1024x680.webp',
-  '/photoshootings/individual/berrasguy-Minchuck-Amalfi-day.jpg.jpg',
+const individualShoots = [
+  {
+    title: 'Amalfi Influencer Photoshoot',
+    location: 'Amalfi',
+    href: '/photoshootings/shifa',
+    image: '/photoshootings/individual/Shifa/Hero.webp',
+  },
+  {
+    title: 'The Perfect Gift to Yourself',
+    location: 'Ravello',
+    href: '/photoshootings/loreana',
+    image: '/photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp',
+  },
+  {
+    title: 'Morning Glow. True Atrani.',
+    location: 'Atrani',
+    href: '/photoshootings/lashada',
+    image: '/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp',
+  },
+  {
+    title: 'Gifted Sunset Memories',
+    location: 'Maiori',
+    href: '/photoshootings/julietta',
+    image: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp',
+  },
+  {
+    title: 'Ravello Light Elegance',
+    location: 'Ravello',
+    href: '/photoshootings/ravello-photoshooting',
+    image: '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp',
+  },
+  {
+    title: "Ayuna's Photographic Memoir",
+    location: 'Atrani',
+    href: '/photoshootings/ayuna',
+    image: '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp',
+  },
+  {
+    title: 'Camelia: Beautiful Experience',
+    location: 'Tramonti',
+    href: '/photoshootings/camelia',
+    image: '/photoshootings/camelia/4-camelia-photoshooting-moto.webp',
+  },
+  {
+    title: 'Colours of Atrani',
+    location: 'Atrani',
+    href: '/photoshootings/concept-editorial',
+    image: '/photoshootings/individual/iiana-photo-hero-atrani-hat-2-1024x680.webp',
+  },
 ]
 
-const coupleAlbum = [
-  '/photoshootings/couples/02-slideshow-regan-walk-ravello-love-1024x682.webp',
-  '/photoshootings/couples/couple-photoshooting-amalfi.jpg',
-  '/photoshootings/couples/DSC0789.jpg',
-  '/photoshootings/couples/DSC8503.jpg',
-  '/photoshootings/couples/img_5f68ca5842ca6.jpg',
-  '/photoshootings/couples/katerina-kuznezova-praiano-2021-002.jpg',
+const coupleShoots = [
+  {
+    title: 'Ravello Romance (Taylor & Regan)',
+    location: 'Ravello',
+    href: '/photoshootings/regan-tay-ravello',
+    image: '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp',
+  },
+  {
+    title: 'Symphony of Love',
+    location: 'Atrani',
+    href: '/photoshootings/olga-marat',
+    image: '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp',
+  },
 ]
 
 const testimonials = [
@@ -217,17 +265,28 @@ const testimonials = [
     })()
   </script>
 
-  <section class="section">
+  <section class="section section--individual">
     <div class="container">
-      <div class="section__header">
-        <h2>Individual photo sessions</h2>
-        <p>Capture your personality in stunning, high-quality images.</p>
+      <div class="cat-header">
+        <h1>
+          Individual <span class="accent-italic">Sessions</span>
+        </h1>
+        <p class="cat-header__desc">
+          Every solo session is a private journey through the Amalfi Coast's most cinematic corners.
+          No rush, no groups — just you, golden light, and a story waiting to be told.
+        </p>
       </div>
-      <div class="album">
-        {individualAlbum.map((src) => (
-          <div class="album__item">
-            <img src={src} alt="Individual photoshoot" loading="lazy" />
-          </div>
+      <div class="shoot-grid">
+        {individualShoots.map((item) => (
+          <a class="shoot-card" href={item.href}>
+            <div class="shoot-card__media">
+              <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+            </div>
+            <div class="shoot-card__overlay">
+              <h3>{item.title}</h3>
+              <span><i class="bi bi-geo-alt"></i> {item.location}</span>
+            </div>
+          </a>
         ))}
       </div>
     </div>
@@ -235,33 +294,58 @@ const testimonials = [
 
   <section class="section testimonials">
     <div class="container">
-      <div class="section__header">
-        <h2>Testimonials</h2>
-        <p>Real words from guests who trusted Amalfi.Day.</p>
+      <div class="cat-header cat-header--center">
+        <h1>
+          What Guests <span class="accent-italic">Say</span>
+        </h1>
+        <p class="cat-header__desc">
+          Real stories from real people who trusted us with their most precious moments on the coast.
+        </p>
       </div>
       <div class="testimonials__grid">
         {testimonials.map((item) => (
           <article class="card testimonial">
-            <p>“{item.quote}”</p>
-            <strong>{item.author}</strong>
-            <span>{item.meta}</span>
+            <div class="testimonial__stars" aria-label="5 stars">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <blockquote class="testimonial__quote">{item.quote}</blockquote>
+            <footer class="testimonial__footer">
+              <strong>{item.author}</strong>
+              <span>{item.meta}</span>
+            </footer>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--couples">
     <div class="container">
-      <div class="section__header">
-        <h2>Couple photo sessions</h2>
-        <p>Preserve your love story against Amalfi's most romantic backdrops.</p>
+      <div class="cat-header">
+        <h1>
+          Couple <span class="accent-italic">Sessions</span>
+        </h1>
+        <p class="cat-header__desc">
+          Two people, one coast, and light that makes everything feel timeless.
+          Whether it's an engagement, anniversary, or simply being in love — the Amalfi Coast
+          turns every glance into a frame worth keeping forever.
+        </p>
       </div>
-      <div class="album">
-        {coupleAlbum.map((src) => (
-          <div class="album__item">
-            <img src={src} alt="Couple photoshoot" loading="lazy" />
-          </div>
+      <div class="shoot-grid shoot-grid--couple">
+        {coupleShoots.map((item) => (
+          <a class="shoot-card shoot-card--wide" href={item.href}>
+            <div class="shoot-card__media">
+              <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+            </div>
+            <div class="shoot-card__overlay">
+              <h3>{item.title}</h3>
+              <span><i class="bi bi-geo-alt"></i> {item.location}</span>
+            </div>
+          </a>
         ))}
       </div>
     </div>
@@ -376,48 +460,194 @@ const testimonials = [
     }
   }
 
-  .album {
+  /* ── Category header ── */
+  .cat-header {
+    margin-bottom: 3rem;
+  }
+
+  .cat-header h1 {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .cat-header__desc {
+    max-width: 640px;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Shoot card grid ── */
+  .shoot-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
+    gap: 1.5rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .album__item {
-    border-radius: 16px;
+  .shoot-grid--couple {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shoot-card {
+    position: relative;
     overflow: hidden;
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-soft);
+    height: 380px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+    text-decoration: none;
   }
 
-  .album__item img {
+  .shoot-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+    text-decoration: none;
+  }
+
+  .shoot-card--wide {
+    height: 440px;
+  }
+
+  .shoot-card__media {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(16, 16, 16, 0.35);
+  }
+
+  .shoot-card__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s ease;
   }
 
+  .shoot-card:hover .shoot-card__media img {
+    transform: scale(1.06);
+  }
+
+  .shoot-card__overlay {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 1.5rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+    color: #ffffff;
+    transition: padding-bottom 0.3s ease;
+  }
+
+  .shoot-card:hover .shoot-card__overlay {
+    padding-bottom: 1.8rem;
+  }
+
+  .shoot-card__overlay h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    margin: 0 0 0.3rem;
+    color: #ffffff;
+  }
+
+  .shoot-card__overlay span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    opacity: 0.85;
+    color: #ffffff;
+  }
+
+  @media (max-width: 1024px) {
+    .shoot-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .shoot-grid--couple {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .shoot-grid,
+    .shoot-grid--couple {
+      grid-template-columns: 1fr;
+    }
+    .shoot-card {
+      height: 320px;
+    }
+    .shoot-card--wide {
+      height: 360px;
+    }
+  }
+
+  /* ── Centered variant for cat-header ── */
+  .cat-header--center {
+    text-align: center;
+  }
+
+  .cat-header--center .cat-header__desc {
+    margin-inline: auto;
+  }
+
+  /* ── Testimonials ── */
   .testimonials {
     background: var(--color-surface);
   }
 
   .testimonials__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
   }
 
   .testimonial {
-    padding: 1.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .testimonial strong {
-    display: block;
-    margin-top: 1rem;
-    color: var(--color-text);
+  .testimonial__stars {
+    display: flex;
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-accent-2);
+    font-size: 0.9rem;
   }
 
-  .testimonial span {
+  .testimonial__quote {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.75;
     color: var(--color-text-muted);
-    font-size: 0.85rem;
+    font-style: italic;
+    flex: 1;
+  }
+
+  .testimonial__footer {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .testimonial__footer strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--color-text);
+    margin-bottom: 0.15rem;
+  }
+
+  .testimonial__footer span {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 768px) {
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 720px) {
