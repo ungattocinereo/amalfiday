@@ -343,6 +343,58 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       status.dataset.state = state || ''
     }
 
+    const withTimeout = async (promise, timeoutMs) => {
+      let timeoutId
+      const timeoutPromise = new Promise((_, reject) => {
+        timeoutId = window.setTimeout(() => reject(new Error('timeout')), timeoutMs)
+      })
+      try {
+        return await Promise.race([promise, timeoutPromise])
+      } finally {
+        window.clearTimeout(timeoutId)
+      }
+    }
+
+    const fetchIpMeta = async () => {
+      const endpoints = [
+        'https://ipapi.co/json/',
+        'https://ipwho.is/',
+      ]
+
+      for (const url of endpoints) {
+        try {
+          const response = await withTimeout(
+            fetch(url, {
+              method: 'GET',
+              headers: { Accept: 'application/json' },
+              cache: 'no-store',
+            }),
+            1800,
+          )
+          if (!response.ok) continue
+          const data = await response.json()
+
+          const ip = data?.ip || ''
+          const city = data?.city || ''
+          const region = data?.region || data?.region_name || ''
+          const country = data?.country_name || data?.country || ''
+          const latitude = data?.latitude ?? data?.lat ?? ''
+          const longitude = data?.longitude ?? data?.lon ?? ''
+          const location = [city, region, country].filter(Boolean).join(', ')
+          const coords =
+            latitude !== '' && longitude !== '' ? `${latitude}, ${longitude}` : ''
+
+          if (ip || location || coords) {
+            return { ip, location, coords }
+          }
+        } catch (_error) {
+          // silently try the next endpoint
+        }
+      }
+
+      return { ip: '', location: '', coords: '' }
+    }
+
     const validateContact = () => {
       if (!contactInput) return true
       const value = contactInput.value.trim()
@@ -497,7 +549,11 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
       const formData = new FormData(form)
       const payload = Object.fromEntries(formData.entries())
+      const ipMeta = await fetchIpMeta()
       const clientMeta = {
+        ip: ipMeta.ip,
+        location: ipMeta.location,
+        coords: ipMeta.coords,
         language: navigator.language || '',
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
         userAgent: navigator.userAgent || '',
