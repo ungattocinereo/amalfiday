@@ -39,6 +39,13 @@ CONTACT=$(echo "$PAYLOAD" | jq -r '.contact // empty')
 DATES=$(echo "$PAYLOAD" | jq -r '.dates // empty')
 MESSAGE=$(echo "$PAYLOAD" | jq -r '.message // empty')
 SERVICE=$(echo "$PAYLOAD" | jq -r '.service // empty')
+PAYLOAD_IP=$(echo "$PAYLOAD" | jq -r '.ip // empty')
+PAYLOAD_LOCATION=$(echo "$PAYLOAD" | jq -r '.location // empty')
+PAYLOAD_COORDS=$(echo "$PAYLOAD" | jq -r '.coords // empty')
+PAYLOAD_USER_AGENT=$(echo "$PAYLOAD" | jq -r '.userAgent // .user_agent // empty')
+PAYLOAD_REFERRER=$(echo "$PAYLOAD" | jq -r '.referrer // .referer // .page // empty')
+PAYLOAD_LANGUAGE=$(echo "$PAYLOAD" | jq -r '.language // .locale // empty')
+PAYLOAD_TIMEZONE=$(echo "$PAYLOAD" | jq -r '.timezone // empty')
 
 if [[ -z "$CONTACT" || -z "$DATES" || -z "$SERVICE" ]]; then
   echo '{"error":"Missing required fields (contact, dates, or service)"}'
@@ -52,20 +59,39 @@ get_val() { [ -z "$1" ] && echo "unknown" || echo "$1"; }
 
 IP=$(get_val "${HTTP_X_FORWARDED_FOR:-${REMOTE_ADDR}}")
 IP="${IP%%,*}"
+if [[ "$IP" == "unknown" && -n "$PAYLOAD_IP" ]]; then
+  IP="$PAYLOAD_IP"
+fi
 
 CITY=$(get_val "${HTTP_X_VERCEL_IP_CITY:-${HTTP_CF_IPCITY}}")
 REGION=$(get_val "${HTTP_X_VERCEL_IP_COUNTRY_REGION:-${HTTP_X_VERCEL_IP_REGION}}")
 COUNTRY=$(get_val "${HTTP_X_VERCEL_IP_COUNTRY:-${HTTP_CF_IPCOUNTRY}}")
 LOCATION="$CITY, $REGION, $COUNTRY"
 [[ "$LOCATION" == "unknown, unknown, unknown" ]] && LOCATION="unknown"
+if [[ "$LOCATION" == "unknown" && -n "$PAYLOAD_LOCATION" ]]; then
+  LOCATION="$PAYLOAD_LOCATION"
+fi
 
 LAT="${HTTP_X_VERCEL_IP_LATITUDE}"
 LON="${HTTP_X_VERCEL_IP_LONGITUDE}"
 [[ -n "$LAT" && -n "$LON" ]] && COORDS="$LAT, $LON" || COORDS="unknown"
+if [[ "$COORDS" == "unknown" && -n "$PAYLOAD_COORDS" ]]; then
+  COORDS="$PAYLOAD_COORDS"
+fi
 
 USER_AGENT=$(get_val "${HTTP_USER_AGENT}")
+if [[ "$USER_AGENT" == "unknown" && -n "$PAYLOAD_USER_AGENT" ]]; then
+  USER_AGENT="$PAYLOAD_USER_AGENT"
+fi
 REFERER=$(get_val "${HTTP_REFERER}")
+if [[ "$REFERER" == "unknown" && -n "$PAYLOAD_REFERRER" ]]; then
+  REFERER="$PAYLOAD_REFERRER"
+fi
 LANGUAGE=$(get_val "${HTTP_ACCEPT_LANGUAGE}")
+if [[ "$LANGUAGE" == "unknown" && -n "$PAYLOAD_LANGUAGE" ]]; then
+  LANGUAGE="$PAYLOAD_LANGUAGE"
+fi
+TIMEZONE=$(get_val "${PAYLOAD_TIMEZONE}")
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
 
 # ==========================================
@@ -87,6 +113,7 @@ coords: $COORDS
 user_agent: $USER_AGENT
 referrer: $REFERER
 locale: $LANGUAGE
+timezone: $TIMEZONE
 time: $TIMESTAMP"
 
 SAFE_TECH=$(escape_html "$TECH_LINES")
