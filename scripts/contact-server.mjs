@@ -1,11 +1,19 @@
 import http from 'node:http'
-import handler from '../api/contact.js'
+import contactHandler from '../api/contact.js'
+import subscribeHandler from '../api/subscribe.js'
 
 const port = Number(process.env.CONTACT_API_PORT || process.env.PORT || 8787)
 
+const routes = {
+  '/api/contact': contactHandler,
+  '/api/subscribe': subscribeHandler,
+}
+
 const server = http.createServer((req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`)
-  if (url.pathname !== '/api/contact') {
+  const handler = routes[url.pathname]
+
+  if (!handler) {
     res.statusCode = 404
     res.end('Not Found')
     return

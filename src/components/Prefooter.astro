@@ -40,9 +40,29 @@
           loading="lazy"
         />
       </div>
-      <div class="prefooter__newsletter">
-        <span>Get updates via email</span>
-        <button class="button secondary" type="button">Subscribe</button>
+      <div class="prefooter__newsletter" id="newsletter">
+        <form class="newsletter__form" id="newsletter-form" novalidate>
+          <span class="newsletter__label">Get updates via email</span>
+          <div class="newsletter__fields">
+            <input
+              type="email"
+              class="newsletter__input"
+              id="newsletter-email"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+              aria-label="Email address"
+            />
+            <!-- Honeypot — hidden from humans, bots fill it -->
+            <input type="text" name="website" class="newsletter__hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button class="button secondary newsletter__btn" type="submit">Subscribe</button>
+          </div>
+          <span class="newsletter__error" id="newsletter-error" role="alert"></span>
+        </form>
+        <div class="newsletter__success" id="newsletter-success" aria-live="polite">
+          <svg class="newsletter__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Thank you for subscribing</span>
+        </div>
       </div>
     </div>
   </div>
@@ -105,13 +125,103 @@
   }
 
   .prefooter__newsletter {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
     padding: 1rem 1.2rem;
     border-radius: 16px;
     background: var(--color-surface);
-    justify-content: space-between;
+  }
+
+  .newsletter__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .newsletter__label {
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .newsletter__fields {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .newsletter__input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .newsletter__input:focus {
+    border-color: var(--color-aux-2);
+  }
+
+  .newsletter__input.is-invalid {
+    border-color: #e53e3e;
+  }
+
+  .newsletter__hp {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    pointer-events: none;
+  }
+
+  .newsletter__btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .newsletter__btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .newsletter__error {
+    font-size: 0.8rem;
+    color: #e53e3e;
+    min-height: 1.1em;
+    padding-left: 0.2rem;
+  }
+
+  .newsletter__success {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 0;
+    font-weight: 600;
+    color: var(--color-text);
+    animation: newsletter-fadein 0.5s ease;
+  }
+
+  .newsletter__success.is-visible {
+    display: flex;
+  }
+
+  .newsletter__check {
+    width: 22px;
+    height: 22px;
+    color: #38a169;
+    flex-shrink: 0;
+  }
+
+  @keyframes newsletter-fadein {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (max-width: 1000px) {
@@ -119,4 +229,77 @@
       grid-template-columns: 1fr;
     }
   }
+
+  @media (max-width: 500px) {
+    .newsletter__fields {
+      flex-direction: column;
+    }
+    .newsletter__input,
+    .newsletter__btn {
+      width: 100%;
+    }
+  }
 </style>
+
+<script>
+  const form = document.getElementById('newsletter-form');
+  const input = document.getElementById('newsletter-email');
+  const error = document.getElementById('newsletter-error');
+  const success = document.getElementById('newsletter-success');
+  const loadedAt = Date.now();
+
+  if (form && input && error && success) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = input.value.trim();
+      const hp = form.querySelector('[name="website"]').value;
+      const btn = form.querySelector('.newsletter__btn');
+
+      // Clear previous error
+      error.textContent = '';
+      input.classList.remove('is-invalid');
+
+      // Client-side validation
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email) {
+        error.textContent = 'Please enter your email address';
+        input.classList.add('is-invalid');
+        input.focus();
+        return;
+      }
+      if (!re.test(email)) {
+        error.textContent = 'Please enter a valid email address';
+        input.classList.add('is-invalid');
+        input.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = '...';
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, hp, t: loadedAt }),
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.ok) {
+          form.style.display = 'none';
+          success.classList.add('is-visible');
+        } else {
+          error.textContent = data.error || 'Something went wrong. Please try again.';
+          btn.disabled = false;
+          btn.textContent = 'Subscribe';
+        }
+      } catch {
+        error.textContent = 'Connection error. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Subscribe';
+      }
+    });
+  }
+</script>
