@@ -50,11 +50,25 @@ export default async function handler(req, res) {
     return Array.isArray(value) ? value[0] : value
   }
 
+  const payloadValue = (key) => {
+    const value = payload?.[key]
+    if (typeof value !== 'string') return ''
+    return value.trim()
+  }
+
+  const pickValue = (...values) => {
+    for (const value of values) {
+      if (typeof value === 'string' && value.trim()) return value.trim()
+    }
+    return ''
+  }
+
   const forwardedFor = headerValue('x-forwarded-for')
   const ip =
     (forwardedFor ? forwardedFor.split(',')[0].trim() : '') ||
     headerValue('x-real-ip') ||
     headerValue('cf-connecting-ip') ||
+    payloadValue('ip') ||
     req.socket?.remoteAddress ||
     'unknown'
   const city = headerValue('x-vercel-ip-city') || headerValue('cf-ipcity')
@@ -62,11 +76,23 @@ export default async function handler(req, res) {
   const country = headerValue('x-vercel-ip-country') || headerValue('cf-ipcountry')
   const latitude = headerValue('x-vercel-ip-latitude')
   const longitude = headerValue('x-vercel-ip-longitude')
-  const location = [city, region, country].filter(Boolean).join(', ') || 'unknown'
-  const coords = latitude && longitude ? `${latitude}, ${longitude}` : 'unknown'
-  const userAgent = headerValue('user-agent') || 'unknown'
-  const referer = headerValue('referer') || 'unknown'
-  const language = headerValue('accept-language') || 'unknown'
+  const payloadLocation = payloadValue('location')
+  const payloadCoords = payloadValue('coords')
+  const location = pickValue([city, region, country].filter(Boolean).join(', '), payloadLocation) || 'unknown'
+  const coords = pickValue(
+    latitude && longitude ? `${latitude}, ${longitude}` : '',
+    payloadCoords,
+  ) || 'unknown'
+  const userAgent =
+    pickValue(headerValue('user-agent'), payloadValue('userAgent'), payloadValue('user_agent')) ||
+    'unknown'
+  const referer =
+    pickValue(headerValue('referer'), payloadValue('referrer'), payloadValue('referer'), payloadValue('page')) ||
+    'unknown'
+  const language =
+    pickValue(headerValue('accept-language'), payloadValue('language'), payloadValue('locale')) ||
+    'unknown'
+  const timezone = payloadValue('timezone') || 'unknown'
   const timestamp = new Date().toISOString()
 
   const safeName = escapeHtml(name || '—')
@@ -82,6 +108,7 @@ export default async function handler(req, res) {
     `user_agent: ${userAgent}`,
     `referrer: ${referer}`,
     `locale: ${language}`,
+    `timezone: ${timezone}`,
     `time: ${timestamp}`,
   ].join('\n')
 

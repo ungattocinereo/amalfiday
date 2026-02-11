@@ -497,12 +497,19 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
 
       const formData = new FormData(form)
       const payload = Object.fromEntries(formData.entries())
+      const clientMeta = {
+        language: navigator.language || '',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+        userAgent: navigator.userAgent || '',
+        referrer: document.referrer || window.location.href || '',
+        page: window.location.href || '',
+      }
 
       try {
         const response = await fetch('/hooks/send-telegram-amalfiday', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({ ...payload, ...clientMeta }),
         })
 
         // Всегда пытаемся распарсить JSON первым делом
