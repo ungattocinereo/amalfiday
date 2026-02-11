@@ -38,6 +38,8 @@ const ferryBus = [
     mode: 'Ferry',
     accent: 'scenic route',
     time: '~35 min',
+    price: 'from 12€',
+    priceNote: 'Luggage +3€ · Pets +5€',
     image: '/staticpages/directions/get-here-by-ferry.webp',
     description:
       'Walk two blocks from the station towards the sea to reach Salerno seaport Concordia. The ferry is the fastest and most scenic way to Amalfi — no stop in Atrani. Once in Amalfi, turn right as you exit the ferry terminal and follow the waterfront road. The walk to Atrani takes about 10 minutes.',
@@ -48,6 +50,8 @@ const ferryBus = [
     mode: 'Bus',
     accent: 'budget route',
     time: '~75 min',
+    price: 'from 2.80€',
+    priceNote: 'Luggage included',
     image: '/staticpages/directions/get-here-by-bus.webp',
     description:
       'Right outside the train station you\'ll find a SITA bus stop. Look for line 5120 heading to Amalfi (shown on Google Maps or the Moovit app). The bus destination is displayed at the top. Important: buy your ticket before boarding at any Tabacchi shop (look for the "T" sign).',
@@ -172,7 +176,7 @@ const parkingOptions = [
     <div class="container">
       <div class="dir-eyebrow">Step-by-step</div>
       <h1>Getting to Atrani with <span class="accent-italic">public</span> transport</h1>
-      <p class="dir-transport__sub">The journey has two legs. Both are straightforward.</p>
+      <p class="dir-transport__sub">The journey has three legs. All are straightforward.</p>
 
       <!-- Step 1: Naples to Salerno -->
       <div class="dir-step">
@@ -233,16 +237,93 @@ const parkingOptions = [
                   </div>
                 </div>
                 <p>{opt.description}</p>
-                {opt.link && (
-                  <a class="dir-option__dl" href={opt.link.url} target="_blank" rel="noopener">
-                    <i class="bi bi-file-earmark-pdf"></i> {opt.link.text}
-                  </a>
+                {opt.price && (
+                  <div class="dir-option__pricing">
+                    <span class="dir-option__price"><strong>{opt.price}</strong></span>
+                    {opt.priceNote && <span class="dir-option__price-note">{opt.priceNote}</span>}
+                  </div>
                 )}
+                <div class="dir-option__links">
+                  {opt.link && (
+                    <a class="dir-option__dl" href={opt.link.url} target="_blank" rel="noopener">
+                      <i class="bi bi-file-earmark-pdf"></i> {opt.link.text}
+                    </a>
+                  )}
+                  {opt.bookLink && (
+                    <a class="dir-option__book" href={opt.bookLink.url} target="_blank" rel="noopener">
+                      <i class="bi bi-ticket-perforated"></i> {opt.bookLink.text}
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
+
+          <div class="dir-useful-links">
+            <h4>Useful links</h4>
+            <div class="dir-useful-links__grid">
+              <a href="https://www.travelmar.it/en/index" target="_blank" rel="noopener" class="dir-useful-link">
+                <span class="dir-useful-link__icon"><i class="bi bi-water"></i></span>
+                <span class="dir-useful-link__body">
+                  <span class="dir-useful-link__name">Travelmar</span>
+                  <span class="dir-useful-link__desc">Ferry tickets & schedules</span>
+                </span>
+                <i class="bi bi-arrow-up-right dir-useful-link__arrow"></i>
+              </a>
+              <a href="https://www.unicocampania.it" target="_blank" rel="noopener" class="dir-useful-link">
+                <span class="dir-useful-link__icon"><i class="bi bi-credit-card-2-front"></i></span>
+                <span class="dir-useful-link__body">
+                  <span class="dir-useful-link__name">Unico Campania</span>
+                  <span class="dir-useful-link__desc">Regional transport passes</span>
+                </span>
+                <i class="bi bi-arrow-up-right dir-useful-link__arrow"></i>
+              </a>
+              <a href="https://moovitapp.com/" target="_blank" rel="noopener" class="dir-useful-link">
+                <span class="dir-useful-link__icon"><i class="bi bi-phone"></i></span>
+                <span class="dir-useful-link__body">
+                  <span class="dir-useful-link__name">Moovit</span>
+                  <span class="dir-useful-link__desc">Live bus & ferry tracker</span>
+                </span>
+                <i class="bi bi-arrow-up-right dir-useful-link__arrow"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Step 3: Amalfi to Atrani -->
+      <div class="dir-step" id="walking">
+        <div class="dir-step__number">03</div>
+        <div class="dir-step__body">
+          <div class="dir-step__header">
+            <i class="bi bi-signpost-split"></i>
+            <h3>Amalfi <span class="accent-italic">to Atrani</span></h3>
+          </div>
+          <div class="dir-eyebrow" style="margin-top: -0.5rem;">On foot · ~10 min</div>
+          <p>
+            From the Amalfi bus stop or seaport, walk along the shore until you find a pedestrian tunnel on your left near <a href="https://goo.gl/maps/PjaTgYN1spVb1N9Y6" target="_blank" rel="noopener">Dejavu Amalfi</a>. This tunnel is always open and exclusively for pedestrians — the safest route between the two towns.
+          </p>
+          <p>
+            Once you exit the tunnel, cross the road. You'll see the entrance to <a href="https://goo.gl/maps/nHHAdCS92NtrXi9D8" target="_blank" rel="noopener">Cantina Nostromo</a> restaurant on your left. Walk through it and down the steps to arrive in Atrani, just below the bus stop.
+          </p>
+          <p>
+            From the main parking lot, head up to the <a href="https://goo.gl/maps/ocBVhiLBmwF2oKer5" target="_blank" rel="noopener">fruits and vegetables shop</a>. Continue to the tunnel and turn inside it toward the ring. After climbing about 10 steps, you'll arrive at your destination.
+          </p>
+          <div class="dir-walking__map">
+            <iframe
+              src={walkingMapSrc}
+              width="100%"
+              height="360"
+              style="border:0; border-radius: var(--radius-md);"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Map: Walking from Amalfi to Atrani"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -282,38 +363,6 @@ const parkingOptions = [
     </div>
   </section>
 
-  <!-- ─── WALKING ─── -->
-  <section class="section dir-walking" id="walking">
-    <div class="container">
-      <div class="dir-eyebrow">On foot</div>
-      <h1>Walking from Amalfi to <span class="accent-italic">Atrani</span></h1>
-      <div class="dir-walking__grid">
-        <div class="dir-walking__text">
-          <p>
-            From the Amalfi bus stop or seaport, walk along the shore until you find a pedestrian tunnel on your left near <a href="https://goo.gl/maps/PjaTgYN1spVb1N9Y6" target="_blank" rel="noopener">Dejavu Amalfi</a>. This tunnel is always open and exclusively for pedestrians — the safest route between the two towns.
-          </p>
-          <p>
-            Once you exit the tunnel, cross the road. You'll see the entrance to <a href="https://goo.gl/maps/nHHAdCS92NtrXi9D8" target="_blank" rel="noopener">Cantina Nostromo</a> restaurant on your left. Walk through it and down the steps to arrive in Atrani, just below the bus stop.
-          </p>
-          <p>
-            From the main parking lot, head up to the <a href="https://goo.gl/maps/ocBVhiLBmwF2oKer5" target="_blank" rel="noopener">fruits and vegetables shop</a>. Continue to the tunnel and turn inside it toward the ring. After climbing about 10 steps, you'll arrive at your destination.
-          </p>
-        </div>
-        <div class="dir-walking__map">
-          <iframe
-            src={walkingMapSrc}
-            width="100%"
-            height="360"
-            style="border:0; border-radius: var(--radius-md);"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Map: Walking from Amalfi to Atrani"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ─── FINDING THE HOUSE ─── -->
   <section class="section dir-house" id="house">
@@ -621,7 +670,7 @@ const parkingOptions = [
     position: relative;
   }
 
-  .dir-step:not(:last-child) .dir-step__number::after {
+  .dir-step .dir-step__number::after {
     content: '';
     position: absolute;
     top: calc(100% + 10px);
@@ -743,11 +792,137 @@ const parkingOptions = [
     margin-top: 0.4rem;
   }
 
-  .dir-option__dl:hover {
+  .dir-option__dl:hover,
+  .dir-option__book:hover {
     text-decoration: underline;
   }
 
+  .dir-option__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .dir-option__price {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--color-accent);
+  }
+
+  .dir-option__price-note {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .dir-option__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: auto;
+  }
+
+  .dir-option__book {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--color-aux);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* ── Useful links ────────────────── */
+  .dir-useful-links {
+    margin-top: 2.5rem;
+  }
+
+  .dir-useful-links h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .dir-useful-links__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .dir-useful-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  }
+
+  .dir-useful-link:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 89, 0, 0.1);
+  }
+
+  .dir-useful-link__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--gradient-sunset);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dir-useful-link__icon i {
+    font-size: 1.2rem;
+    color: #ffffff;
+  }
+
+  .dir-useful-link__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .dir-useful-link__name {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .dir-useful-link__desc {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+  }
+
+  .dir-useful-link__arrow {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    transition: color 0.25s, transform 0.25s;
+    flex-shrink: 0;
+  }
+
+  .dir-useful-link:hover .dir-useful-link__arrow {
+    color: var(--color-accent);
+    transform: translate(2px, -2px);
+  }
+
   /* ── Porters ──────────────────────── */
+  .dir-porters {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
   .dir-porters__border {
     padding: 6px;
     border-radius: var(--radius-lg);
@@ -839,20 +1014,12 @@ const parkingOptions = [
     background: var(--color-border);
   }
 
-  /* ── Walking ──────────────────────── */
-  .dir-walking__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    margin-top: 2rem;
-    align-items: start;
+  /* ── Walking (Step 03) ────────────── */
+  .dir-walking__map {
+    margin-top: 1rem;
   }
 
-  .dir-walking__text p {
-    margin-bottom: 1rem;
-  }
-
-  .dir-walking__text a {
+  .dir-step__body a:not([class]) {
     color: var(--color-aux);
     font-weight: 500;
   }
@@ -1054,7 +1221,7 @@ const parkingOptions = [
       grid-template-columns: 1fr;
     }
 
-    .dir-walking__grid {
+    .dir-useful-links__grid {
       grid-template-columns: 1fr;
     }
 
