@@ -1,0 +1,1597 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+
+const pageTitle = 'Private Car Tours on the Amalfi Coast — Full-Day Trips with a Local Guide'
+const pageDescription =
+  'Book a private 8-hour car tour on the Amalfi Coast. Visit Positano, Amalfi, Ravello, and Tramonti with a local guide. Wine tastings, hidden beaches, and flexible itineraries for groups up to 6.'
+const shareImageAlt = 'Private car tour on the Amalfi Coast — red vintage car on a mountain road'
+
+const heroSlides = [
+  { image: '/staticpages/car-tours/Sorrento-Hero-tours-amalfi-coast-by-car-4.webp', label: 'Sorrento' },
+  { image: '/staticpages/car-tours/Praiano-Hero-tours-amalfi-coast-by-car-2.webp', label: 'Praiano' },
+  { image: '/staticpages/car-tours/positano-Hero-tours-amalfi-coast-by-car-3.webp', label: 'Positano' },
+  { image: '/staticpages/car-tours/Tramonti-Hero-tours-amalfi-coast-by-car-5.webp', label: 'Tramonti' },
+  { image: '/staticpages/car-tours/Chiunzi-Hero-tours-amalfi-coast-by-car-9.webp', label: 'Chiunzi' },
+  { image: '/staticpages/car-tours/Ravello-Hero-tours-amalfi-coast-by-car-11.webp', label: 'Ravello' },
+]
+
+const heroTags = [
+  '8-hour tour',
+  'Private car',
+  'Up to 6 people',
+  'Local guide',
+  'Flexible start',
+  'Hidden gems',
+]
+
+const scenicImages = [
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-1.webp', alt: 'Guest on the Amalfi waterfront at sunset', focus: '50% 18%' },
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-2.webp', alt: 'Tour guide with a guest in a coastal town', focus: '50% 25%' },
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-3.webp', alt: 'Lemon stand stop on the Amalfi Coast road', focus: '55% 22%' },
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-4.webp', alt: 'Family photo on Positano beach', focus: '50% 30%' },
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp', alt: 'Couple at the Sorrento pier at golden hour', focus: '50% 22%' },
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-6.webp', alt: 'Guests at the Ravello Terrace of Infinity viewpoint', focus: '50% 30%' },
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-7.webp', alt: 'Guests at an ivy-covered villa garden on the coast', focus: '50% 40%' },
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-8.webp', alt: 'Riding in a convertible on a mountain road', focus: '50% 38%' },
+  { src: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-9.webp', alt: 'Guest enjoying the panoramic view above Amalfi harbor', focus: '50% 15%' },
+]
+
+const tramontiImages = [
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-1.webp', alt: 'Guest at the Chiunzi Pass viewpoint at sunset', focus: '50% 28%' },
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-2.webp', alt: 'Guest among the marble statues at Villa Cimbrone in Ravello', focus: '38% 30%' },
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-3.webp', alt: 'Guests at a mountain viewpoint overlooking the Amalfi Coast', focus: '50% 22%' },
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-4.webp', alt: 'Couple at a scenic overlook in the Tramonti mountains at sunset', focus: '50% 22%' },
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-5.webp', alt: 'Guests at the Chiunzi Pass with Vesuvius in the background', focus: '50% 30%' },
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-6.webp', alt: 'Family overlooking Sorrento and the Bay of Naples', focus: '50% 22%' },
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp', alt: 'Couple silhouette on a cliff edge at sunset over the coast', focus: '50% 32%' },
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-8.webp', alt: 'Wine tasting with guests at a family winery in Tramonti', focus: '50% 18%' },
+  { src: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-9.webp', alt: 'Couple under the grapevines at a Tramonti vineyard', focus: '55% 22%' },
+]
+
+const allImages = [...scenicImages, ...tramontiImages]
+
+const pricingCards = [
+  {
+    title: 'Scenic Coast',
+    subtitle: 'Sorrento → Positano → Amalfi → Ravello',
+    description: 'The classic Amalfi Coast route: cliff-top viewpoints, charming villages, limoncello tasting, and a local lunch by the sea.',
+    priceSmall: '€400',
+    priceLarge: '€600',
+    labelSmall: '1–3 ppl',
+    labelLarge: '4–6 ppl',
+    icon: 'bi-geo-alt',
+  },
+  {
+    title: 'Peak Flavors',
+    subtitle: 'Coast → Tramonti Valley → Mountains',
+    description: 'A food-focused day in the mountains: buffalo mozzarella at a local farm, wine from hillside vineyards, and Michelin-star desserts.',
+    priceSmall: '€450',
+    priceLarge: '€650',
+    labelSmall: '1–3 ppl',
+    labelLarge: '4–6 ppl',
+    icon: 'bi-cup-hot',
+  },
+  {
+    title: 'Amalfi Your Way',
+    subtitle: 'Fully personalized itinerary',
+    description: 'Tell us what you love — hidden beaches, hilltop towns, cooking classes — and we build a custom route around your interests.',
+    priceSmall: 'from €550',
+    priceLarge: '',
+    labelSmall: 'depends on itinerary',
+    labelLarge: '',
+    icon: 'bi-compass',
+    isCustom: true,
+  },
+]
+
+const stops = [
+  { name: 'Positano', icon: 'bi-house', desc: 'Cliffside village' },
+  { name: 'Amalfi', icon: 'bi-building', desc: 'Historic harbor' },
+  { name: 'Atrani', icon: 'bi-camera-reels', desc: 'Hidden gem' },
+  { name: 'Ravello', icon: 'bi-music-note-beamed', desc: 'Mountain terrace' },
+  { name: 'Tramonti', icon: 'bi-cup-hot', desc: 'Wine experience' },
+  { name: 'Chiunzi', icon: 'bi-binoculars', desc: 'Mountain panorama' },
+]
+
+const tramontiStops = [
+  { name: 'Tramonti', icon: 'bi-tree', desc: 'Mountain valley' },
+  { name: 'Winery', icon: 'bi-cup-hot', desc: 'Hillside vineyard' },
+  { name: 'Farm', icon: 'bi-flower1', desc: 'Buffalo mozzarella' },
+  { name: 'Restaurant', icon: 'bi-star', desc: 'Michelin desserts' },
+]
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={heroSlides[0].image}
+  imageAlt={shareImageAlt}
+>
+  <div class="car-tours">
+
+    <!-- ═══ HERO — Slideshow ═══ -->
+    <section class="ct-hero hero--dark">
+      <div class="ct-hero__slides" aria-hidden="true">
+        {heroSlides.map((slide, i) => (
+          <div class={`ct-hero__slide ${i === 0 ? 'is-active' : ''}`}>
+            <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+          </div>
+        ))}
+      </div>
+      <div class="ct-hero__vignette"></div>
+      <div class="ct-hero__content">
+        <div class="container">
+          <div class="ct-hero__grid">
+            <div class="ct-hero__copy">
+              <span class="ct-hero__eyebrow">Private Car Tours</span>
+              <h1 class="ct-hero__title">
+                Breezing Through<br/><span class="ct-hero__title-accent">the Amalfi Coast</span>
+              </h1>
+              <p class="ct-hero__lead">
+                Private full-day car tours from Sorrento to Ravello.
+                A local guide, a flexible route, and 8 hours of coast, culture, and flavor.
+              </p>
+              <div class="ct-hero__actions">
+                <a class="ct-btn ct-btn--primary" href="/contact">
+                  <i class="bi bi-send" aria-hidden="true"></i> Request a tour
+                </a>
+                <a class="ct-btn ct-btn--ghost" href="#pricing">
+                  See pricing
+                </a>
+              </div>
+            </div>
+            <div class="ct-hero__aside">
+              <ul class="ct-hero__tags">
+                {heroTags.map((tag, i) => (
+                  <li class="ct-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+                ))}
+              </ul>
+              <div class="ct-hero__progress">
+                {heroSlides.map((slide, i) => (
+                  <button
+                    class={`ct-hero__dot ${i === 0 ? 'is-active' : ''}`}
+                    data-slide={i}
+                    aria-label={`Show ${slide.label}`}
+                  >
+                    <span class="ct-hero__dot-label">{slide.label}</span>
+                    <span class="ct-hero__dot-bar"><span class="ct-hero__dot-fill"></span></span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ct-hero__scroll-hint" aria-hidden="true">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ═══ INTRO ═══ -->
+    <section class="section ct-intro" id="intro">
+      <div class="container">
+        <div class="ct-intro__grid">
+          <div class="ct-intro__copy">
+            <span class="ct-eyebrow">Why tour the Amalfi Coast by car</span>
+            <h2>
+              See the coast <span class="accent-italic">like a local</span>
+            </h2>
+            <p>
+              Public buses are crowded. Taxis run on fixed routes. A private car tour
+              gives you the freedom to stop wherever you want — at a cliffside viewpoint,
+              a quiet beach, or a family-run trattoria the guidebooks don't mention.
+            </p>
+            <p>
+              We've lived on the Amalfi Coast since 2014. We know which roads are empty
+              at noon, which bakery opens at sunrise, and where to stand for the best
+              photo of Positano. This tour puts all of that local knowledge to work for you.
+            </p>
+          </div>
+          <div class="ct-intro__route">
+            <div class="ct-route">
+              {stops.map((stop, i) => (
+                <div class="ct-route__stop" style={`animation-delay: ${0.3 + i * 0.12}s`}>
+                  {i > 0 && <div class="ct-route__connector" aria-hidden="true"><svg viewBox="0 0 2 24" preserveAspectRatio="none"><line x1="1" y1="0" x2="1" y2="24" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/></svg></div>}
+                  <div class="ct-route__card">
+                    <span class="ct-route__num">{String(i + 1).padStart(2, '0')}</span>
+                    <div class="ct-route__icon">
+                      <i class={`bi ${stop.icon}`} aria-hidden="true"></i>
+                    </div>
+                    <div class="ct-route__text">
+                      <span class="ct-route__name">{stop.name}</span>
+                      <span class="ct-route__desc">{stop.desc}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TOUR 1: SCENIC COAST ═══ -->
+    <section class="section ct-tour ct-tour--scenic" id="tour-scenic">
+      <div class="container">
+        <div class="ct-tour__header">
+          <span class="ct-eyebrow">Tour 01</span>
+          <h2>Scenic Coast:<br/><span class="ct-tour__accent">From the Sea to the Mountain</span></h2>
+          <p class="ct-tour__lead">
+            The classic Amalfi Coast road trip. We pick you up in Sorrento, Salerno,
+            or any point along the coast and spend 8 hours exploring Positano, Amalfi,
+            Atrani, and Ravello — with stops for food, photos, and swimming.
+          </p>
+        </div>
+
+        <div class="ct-mosaic" aria-label="Scenic Coast photo gallery — click any image to enlarge">
+          {scenicImages.map((img, i) => (
+            <figure class={`ct-mosaic__item ct-mosaic__item--${i + 1}`} data-lightbox-trigger>
+              <img src={img.src} alt={img.alt} loading={i < 2 ? 'eager' : 'lazy'} style={`object-position: ${img.focus}`} />
+              <div class="ct-mosaic__overlay">
+                <span class="ct-mosaic__number">{String(i + 1).padStart(2, '0')}</span>
+              </div>
+            </figure>
+          ))}
+        </div>
+
+        <div class="ct-stops">
+          <article class="ct-stop">
+            <div class="ct-stop__marker">
+              <span class="ct-stop__num">01</span>
+            </div>
+            <div class="ct-stop__body">
+              <h3>Sorrento to Positano — The Coastal Road</h3>
+              <p>
+                The SS163 is one of the most scenic drives in Italy. Every bend opens
+                a new view: limestone cliffs dropping into the sea, tiny fishing harbors,
+                and the hidden Fiordo di Furore gorge. In Positano, we walk the narrow
+                lanes lined with bougainvillea, browse local ceramics, and stop for lemon
+                granita overlooking the beach.
+              </p>
+            </div>
+          </article>
+          <article class="ct-stop">
+            <div class="ct-stop__marker">
+              <span class="ct-stop__num">02</span>
+            </div>
+            <div class="ct-stop__body">
+              <h3>Amalfi — Cathedral, Limoncello, and Sea Views</h3>
+              <p>
+                Amalfi was once a powerful maritime republic, and its grand cathedral
+                still dominates the piazza. We visit a local limoncello distillery to
+                taste the real thing — made from Sfusato lemons that grow only here.
+                Then we climb to a hidden viewpoint above town for panoramic photos
+                of the coastline.
+              </p>
+            </div>
+          </article>
+          <article class="ct-stop">
+            <div class="ct-stop__marker">
+              <span class="ct-stop__num">03</span>
+            </div>
+            <div class="ct-stop__body">
+              <h3>Atrani — The Smallest Town in Southern Italy</h3>
+              <p>
+                Just around the corner from Amalfi, Atrani feels like a movie set — because
+                it is one. The Equalizer 3, Only You, and Netflix's Ripley were all filmed
+                here. We have lunch at a family-run trattoria (the fried seafood is excellent),
+                then walk down to Atrani's small, uncrowded beach.
+              </p>
+            </div>
+          </article>
+          <article class="ct-stop">
+            <div class="ct-stop__marker">
+              <span class="ct-stop__num">04</span>
+            </div>
+            <div class="ct-stop__body">
+              <h3>Ravello — Gardens, Music, and Gulf Panoramas</h3>
+              <p>
+                At 350 meters above sea level, Ravello offers the best views on the
+                entire coast. We visit the gardens of Villa Rufolo, walk the quiet
+                streets, and — if it's summer — check the schedule for the Ravello
+                Festival, which hosts open-air concerts above the cliffs.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ BRIDGE ═══ -->
+    <section class="section ct-bridge">
+      <div class="container">
+        <div class="ct-bridge__inner">
+          <span class="ct-eyebrow">Beyond the coastline</span>
+          <h2>
+            The Tramonti Valley — <span class="accent-italic">food, wine, and mountains</span>
+          </h2>
+          <p>
+            Most tourists never leave the coast. Our second tour takes you inland
+            to Tramonti — a valley of vineyards, buffalo farms, and small restaurants
+            where the chef knows every guest by name.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ DIVIDER ═══ -->
+    <div class="ct-divider" aria-hidden="true">
+      <div class="ct-divider__line"></div>
+      <div class="ct-divider__icon"><i class="bi bi-arrow-down-short"></i></div>
+      <div class="ct-divider__line"></div>
+    </div>
+
+    <!-- ═══ TOUR 2: TRAMONTI VALLEY ═══ -->
+    <section class="section ct-tour ct-tour--tramonti" id="tour-tramonti">
+      <div class="container">
+        <div class="ct-tour__header">
+          <span class="ct-eyebrow">Tour 02</span>
+          <h2>Peak Flavors:<br/><span class="ct-tour__accent">The Tramonti Valley</span></h2>
+          <p class="ct-tour__lead">
+            An 8-hour food and wine tour through the mountains behind the Amalfi Coast.
+            Buffalo mozzarella straight from the farm, wine from terraced vineyards,
+            and a dessert created by a Michelin-starred pastry chef — all in one day.
+          </p>
+        </div>
+
+        <div class="ct-mosaic ct-mosaic--tramonti" aria-label="Tramonti Valley photo gallery — click any image to enlarge">
+          {tramontiImages.map((img, i) => (
+            <figure class={`ct-mosaic__item ct-mosaic__item--${i + 1}`} data-lightbox-trigger>
+              <img src={img.src} alt={img.alt} loading="lazy" style={`object-position: ${img.focus}`} />
+              <div class="ct-mosaic__overlay">
+                <span class="ct-mosaic__number">{String(i + 1).padStart(2, '0')}</span>
+              </div>
+            </figure>
+          ))}
+        </div>
+
+        <div class="ct-stops">
+          <article class="ct-stop">
+            <div class="ct-stop__marker">
+              <span class="ct-stop__num">01</span>
+            </div>
+            <div class="ct-stop__body">
+              <h3>Into the Valley — Tramonti's Mountain Roads</h3>
+              <p>
+                Leaving the coast behind, the road climbs through chestnut forests
+                and hairpin turns. Tramonti is actually 13 small villages scattered
+                across a valley — each with its own church, its own dialect, and its
+                own recipe for pizza. We start with a drive through the quietest of them,
+                stopping at viewpoints where you can see both the coast and the mountains.
+              </p>
+            </div>
+          </article>
+          <article class="ct-stop">
+            <div class="ct-stop__marker">
+              <span class="ct-stop__num">02</span>
+            </div>
+            <div class="ct-stop__body">
+              <h3>The Winery — Grapes on Terraced Hillsides</h3>
+              <p>
+                Tramonti's vineyards grow at 400–600 meters above sea level, producing
+                wines you won't find outside Campania. We visit a family winery where
+                the vines are still trained on chestnut poles in the old way. You'll
+                taste three to four wines, paired with local salami and bread baked
+                in a wood-fired oven that morning.
+              </p>
+            </div>
+          </article>
+          <article class="ct-stop">
+            <div class="ct-stop__marker">
+              <span class="ct-stop__num">03</span>
+            </div>
+            <div class="ct-stop__body">
+              <h3>Buffalo Farm — Mozzarella Made That Morning</h3>
+              <p>
+                A small farm keeps about 40 water buffalo. They make mozzarella, ricotta,
+                and scamorza every day before dawn. We arrive mid-morning and taste the
+                cheese while it's still warm. If timing is right, you can watch the
+                cheesemaker stretch the curd by hand — it takes less than a minute
+                from pot to plate.
+              </p>
+            </div>
+          </article>
+          <article class="ct-stop">
+            <div class="ct-stop__marker">
+              <span class="ct-stop__num">04</span>
+            </div>
+            <div class="ct-stop__body">
+              <h3>Lunch and Dessert — Michelin Stars in the Mountains</h3>
+              <p>
+                We finish the day at a restaurant where the pastry chef has earned
+                a Michelin star for his desserts. The tasting menu uses ingredients
+                from within a 10-kilometer radius: hand-rolled pasta, grilled vegetables
+                from the garden, and a dessert that changes every week. Coffee is served
+                on the terrace, with a panorama of the valley below.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PRICING ═══ -->
+    <section class="section ct-pricing" id="pricing">
+      <div class="ct-pricing__bg" aria-hidden="true">
+        <img src="/experience/car-tours/scenic-09.jpg" alt="" loading="lazy" />
+      </div>
+      <div class="container">
+        <div class="ct-pricing__header">
+          <span class="ct-eyebrow ct-eyebrow--light">Tour prices</span>
+          <h2>How Much Does an Amalfi Coast <span class="accent-italic">Car Tour</span> Cost?</h2>
+          <p>
+            All tours are private, last 8 hours, and include a local guide with a car.
+            Pick-up and drop-off anywhere on the Amalfi Coast or in Sorrento.
+          </p>
+        </div>
+        <div class="ct-pricing__grid">
+          {pricingCards.map((card) => (
+            <article class={`ct-price-card ${card.isCustom ? 'ct-price-card--custom' : ''}`}>
+              <div class="ct-price-card__icon">
+                <i class={`bi ${card.icon}`} aria-hidden="true"></i>
+              </div>
+              <h3 class="ct-price-card__title">{card.title}</h3>
+              <p class="ct-price-card__subtitle">{card.subtitle}</p>
+              <p class="ct-price-card__desc">{card.description}</p>
+              <div class="ct-price-card__prices">
+                {card.isCustom ? (
+                  <div class="ct-price-card__amount">
+                    <span class="ct-price-card__value">{card.priceSmall}</span>
+                    <span class="ct-price-card__label">{card.labelSmall}</span>
+                  </div>
+                ) : (
+                  <>
+                    <div class="ct-price-card__amount">
+                      <span class="ct-price-card__value">{card.priceSmall}</span>
+                      <span class="ct-price-card__label">{card.labelSmall}</span>
+                    </div>
+                    <div class="ct-price-card__divider"></div>
+                    <div class="ct-price-card__amount">
+                      <span class="ct-price-card__value">{card.priceLarge}</span>
+                      <span class="ct-price-card__label">{card.labelLarge}</span>
+                    </div>
+                  </>
+                )}
+              </div>
+              <a class="ct-btn ct-btn--primary ct-price-card__btn" href="/contact">
+                Request This Tour
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ═══ LIGHTBOX ═══ -->
+  <div class="ct-lightbox" id="ctLightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <div class="ct-lightbox__backdrop"></div>
+    <button class="ct-lightbox__close" aria-label="Close viewer">&times;</button>
+    <div class="ct-lightbox__body">
+      <img class="ct-lightbox__img" src="" alt="" />
+    </div>
+    <button class="ct-lightbox__nav ct-lightbox__nav--prev" aria-label="Previous image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="ct-lightbox__nav ct-lightbox__nav--next" aria-label="Next image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="ct-lightbox__counter" aria-hidden="true">
+      <span data-lb-current>1</span> / <span data-lb-total>1</span>
+    </div>
+  </div>
+
+  <script is:inline>
+    ;(() => {
+      /* ── Hero slideshow ── */
+      const slides = document.querySelectorAll('.ct-hero__slide')
+      const dots = document.querySelectorAll('.ct-hero__dot')
+      if (slides.length) {
+        let current = 0
+        const DURATION = 6000
+
+        function go(next) {
+          slides[current].classList.remove('is-active')
+          dots[current].classList.remove('is-active')
+          current = next
+          slides[current].classList.add('is-active')
+          dots[current].classList.add('is-active')
+        }
+
+        let timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+
+        dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            clearInterval(timer)
+            go(Number(dot.dataset.slide))
+            timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+          })
+        })
+      }
+
+      /* ── Lightbox ── */
+      const lightbox = document.getElementById('ctLightbox')
+      if (lightbox) {
+        const img = lightbox.querySelector('.ct-lightbox__img')
+        const prevBtn = lightbox.querySelector('.ct-lightbox__nav--prev')
+        const nextBtn = lightbox.querySelector('.ct-lightbox__nav--next')
+        const closeBtn = lightbox.querySelector('.ct-lightbox__close')
+        const backdrop = lightbox.querySelector('.ct-lightbox__backdrop')
+        const currentEl = lightbox.querySelector('[data-lb-current]')
+        const totalEl = lightbox.querySelector('[data-lb-total]')
+
+        const triggers = Array.from(document.querySelectorAll('[data-lightbox-trigger]'))
+        const srcs = []
+        triggers.forEach(el => {
+          const imgEl = el.tagName === 'IMG' ? el : el.querySelector('img')
+          if (imgEl) srcs.push({ src: imgEl.src, alt: imgEl.alt || '' })
+        })
+
+        let currentIndex = 0
+        const show = (index) => {
+          currentIndex = (index + srcs.length) % srcs.length
+          img.src = srcs[currentIndex].src
+          img.alt = srcs[currentIndex].alt
+          currentEl.textContent = currentIndex + 1
+          totalEl.textContent = srcs.length
+        }
+        const open = (index) => {
+          show(index)
+          lightbox.classList.add('is-open')
+          lightbox.setAttribute('aria-hidden', 'false')
+          document.body.style.overflow = 'hidden'
+        }
+        const close = () => {
+          lightbox.classList.remove('is-open')
+          lightbox.setAttribute('aria-hidden', 'true')
+          document.body.style.overflow = ''
+        }
+
+        triggers.forEach((el, i) => {
+          el.style.cursor = 'zoom-in'
+          el.addEventListener('click', (e) => {
+            e.preventDefault()
+            open(i)
+          })
+        })
+
+        closeBtn.addEventListener('click', close)
+        backdrop.addEventListener('click', close)
+        prevBtn.addEventListener('click', () => show(currentIndex - 1))
+        nextBtn.addEventListener('click', () => show(currentIndex + 1))
+
+        document.addEventListener('keydown', (e) => {
+          if (!lightbox.classList.contains('is-open')) return
+          if (e.key === 'Escape') close()
+          if (e.key === 'ArrowLeft') show(currentIndex - 1)
+          if (e.key === 'ArrowRight') show(currentIndex + 1)
+        })
+
+        let touchStartX = 0
+        lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX }, { passive: true })
+        lightbox.addEventListener('touchend', (e) => {
+          const diff = e.changedTouches[0].clientX - touchStartX
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) show(currentIndex - 1)
+            else show(currentIndex + 1)
+          }
+        })
+      }
+
+      /* ── Scroll-triggered fade-in ── */
+      const obs = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target) } }),
+        { threshold: 0.15 }
+      )
+      document.querySelectorAll('.ct-stop, .ct-mosaic__item, .ct-price-card, .ct-route__stop').forEach((el) => obs.observe(el))
+    })()
+  </script>
+</BaseLayout>
+
+<style>
+  .car-tours { position: relative; }
+
+  /* ═══════════════════════════════════════════
+     HERO — Slideshow with Ken Burns
+     ═══════════════════════════════════════════ */
+  .ct-hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #0a0a0a;
+    color: #ffffff;
+  }
+
+  .ct-hero__slides {
+    position: absolute;
+    inset: -2px;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .ct-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+  }
+
+  .ct-hero__slide.is-active { opacity: 1; }
+
+  .ct-hero__slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.01);
+    backface-visibility: hidden;
+  }
+
+  .ct-hero__slide.is-active img {
+    animation: ct-ken-burns 6.5s cubic-bezier(0.25, 0, 0.4, 1) forwards;
+  }
+
+  @keyframes ct-ken-burns {
+    from { transform: scale(1.01); }
+    to { transform: scale(1.06); }
+  }
+
+  .ct-hero__vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 45%, transparent 65%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, transparent 50%, rgba(0, 0, 0, 0.18) 100%);
+    pointer-events: none;
+  }
+
+  .ct-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  }
+
+  .ct-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
+  }
+
+  .ct-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: ct-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .ct-hero__title {
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    opacity: 0;
+    animation: ct-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .ct-hero__title-accent {
+    font-style: italic;
+    color: #ffc300;
+    display: inline-block;
+  }
+
+  .ct-hero__lead {
+    max-width: 30rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: ct-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .ct-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+    opacity: 0;
+    animation: ct-fade-up 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .ct-hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+    opacity: 0;
+    animation: ct-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .ct-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 260px;
+  }
+
+  .ct-hero__tag {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    opacity: 0;
+    animation: ct-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .ct-hero__progress { display: flex; gap: 0.6rem; }
+
+  .ct-hero__dot {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .ct-hero__dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  .ct-hero__dot.is-active .ct-hero__dot-label { opacity: 1; }
+
+  .ct-hero__dot-bar {
+    width: 36px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .ct-hero__dot-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ff5900;
+    border-radius: 2px;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .ct-hero__dot.is-active .ct-hero__dot-fill {
+    animation: ct-fill-bar 6s linear forwards;
+  }
+
+  @keyframes ct-fill-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .ct-hero__scroll-hint {
+    position: absolute;
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    animation: ct-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .ct-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: ct-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes ct-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  /* ── Buttons ── */
+  .ct-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .ct-btn--primary { background: var(--color-accent); color: #ffffff; }
+
+  .ct-btn--primary:hover {
+    background: #ff7a33;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .ct-btn--ghost {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .ct-btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  /* ── Eyebrow ── */
+  .ct-eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .ct-eyebrow--light { color: rgba(255, 255, 255, 0.6); }
+
+  /* ═══════════════════════════════════════════
+     INTRO
+     ═══════════════════════════════════════════ */
+  .ct-intro { padding-top: 5rem; }
+
+  .ct-intro__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.6fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .ct-intro__copy h2 {
+    font-size: clamp(1.9rem, 3.2vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  .ct-intro__copy p {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  /* ── Route visualization ── */
+  .ct-route {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ct-route__stop {
+    position: relative;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .ct-route__stop.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ct-route__connector {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 1.65rem;
+    height: 22px;
+    color: var(--color-border);
+  }
+
+  .ct-route__connector svg {
+    width: 2px;
+    height: 100%;
+  }
+
+  .ct-route__card {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.7rem 1rem;
+    border-radius: 14px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+
+  .ct-route__card:hover {
+    border-color: rgba(255, 89, 0, 0.25);
+    box-shadow: 0 4px 20px rgba(255, 89, 0, 0.06);
+  }
+
+  .ct-route__num {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+    opacity: 0.45;
+  }
+
+  .ct-route__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.1), rgba(255, 165, 0, 0.08));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .ct-route__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .ct-route__name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .ct-route__desc {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  /* ═══════════════════════════════════════════
+     TOUR SECTIONS
+     ═══════════════════════════════════════════ */
+  .ct-tour {
+    position: relative;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .ct-tour--scenic {
+    background: #f7f4ef;
+    color: var(--color-text);
+  }
+
+  [data-theme='night'] .ct-tour--scenic {
+    background: #191c22;
+    color: #f5f5f5;
+  }
+
+  .ct-tour--tramonti {
+    background: #eceef2;
+    color: var(--color-text);
+  }
+
+  [data-theme='night'] .ct-tour--tramonti {
+    background: #13161b;
+    color: #f5f5f5;
+  }
+
+  .ct-tour__header {
+    max-width: 38rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .ct-tour__header h2 {
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .ct-tour__accent { font-style: italic; color: var(--color-accent); }
+
+  .ct-tour__lead {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  [data-theme='night'] .ct-tour__lead { color: rgba(255, 255, 255, 0.72); }
+
+  /* ═══════════════════════════════════════════
+     MOSAIC GALLERY — compact 3-column
+     ═══════════════════════════════════════════ */
+  .ct-mosaic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(120px, 150px);
+    gap: 0.5rem;
+  }
+
+  .ct-mosaic__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    margin: 0;
+    background: #d8d8d8;
+    cursor: zoom-in;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .ct-mosaic__item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ct-mosaic__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .ct-mosaic__item:hover img { transform: scale(1.05); }
+
+  .ct-mosaic__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.6rem;
+  }
+
+  .ct-mosaic__item:hover .ct-mosaic__overlay { opacity: 1; }
+
+  .ct-mosaic__number {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Asymmetric layout — 9 images */
+  .ct-mosaic__item--1 { grid-column: span 2; grid-row: span 2; }
+  .ct-mosaic__item--5 { grid-column: span 2; grid-row: span 2; }
+
+  /* Tramonti variant */
+  .ct-mosaic--tramonti .ct-mosaic__item--1 { grid-column: span 1; grid-row: span 1; }
+  .ct-mosaic--tramonti .ct-mosaic__item--2 { grid-column: span 2; grid-row: span 2; }
+  .ct-mosaic--tramonti .ct-mosaic__item--5 { grid-column: span 1; grid-row: span 1; }
+  .ct-mosaic--tramonti .ct-mosaic__item--7 { grid-column: span 2; grid-row: span 2; }
+
+  /* ── Tour stops ── */
+  .ct-stops {
+    display: grid;
+    gap: 0;
+    padding: 3rem 0 4rem;
+    max-width: 42rem;
+  }
+
+  .ct-stop {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1.2rem;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--color-border);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .ct-stop.is-visible { opacity: 1; transform: translateY(0); }
+  .ct-stop:last-child { border-bottom: none; }
+
+  .ct-stop__marker {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 0.25rem;
+  }
+
+  .ct-stop__num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    background: rgba(255, 89, 0, 0.1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+  }
+
+  .ct-stop__body h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+    color: var(--color-text);
+  }
+
+  [data-theme='night'] .ct-stop__body h3 { color: #ffffff; }
+
+  .ct-stop__body p {
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  [data-theme='night'] .ct-stop__body p { color: rgba(255, 255, 255, 0.72); }
+
+  /* ═══════════════════════════════════════════
+     BRIDGE
+     ═══════════════════════════════════════════ */
+  .ct-bridge {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background: #f0ece6;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  [data-theme='night'] .ct-bridge {
+    background: #16191f;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .ct-bridge__inner { max-width: 42rem; }
+
+  .ct-bridge__inner h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 0.8rem;
+  }
+
+  .ct-bridge__inner p {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+
+  /* ═══════════════════════════════════════════
+     DIVIDER between tours
+     ═══════════════════════════════════════════ */
+  .ct-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    background: linear-gradient(180deg, #eceef2 0%, #e2e4ea 100%);
+    height: 3.5rem;
+  }
+
+  [data-theme='night'] .ct-divider {
+    background: linear-gradient(180deg, #13161b 0%, #101318 100%);
+  }
+
+  .ct-divider__line {
+    width: 4rem;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .ct-divider__icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    background: var(--color-bg);
+    flex-shrink: 0;
+  }
+
+  [data-theme='night'] .ct-divider__icon {
+    background: #191c22;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* ═══════════════════════════════════════════
+     PRICING
+     ═══════════════════════════════════════════ */
+  .ct-pricing {
+    position: relative;
+    background: #0f1115;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .ct-pricing__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .ct-pricing__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.12;
+    filter: grayscale(0.4);
+  }
+
+  .ct-pricing > .container { position: relative; z-index: 1; }
+
+  .ct-pricing__header {
+    max-width: 36rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .ct-pricing__header h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .ct-pricing__header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.05rem;
+  }
+
+  .ct-pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+
+  .ct-price-card {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ct-price-card.is-visible { opacity: 1; transform: translateY(0); }
+
+  .ct-price-card:hover {
+    border-color: rgba(255, 89, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .ct-price-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.15), rgba(255, 195, 0, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .ct-price-card__title { font-size: 1.35rem; margin: 0; color: #ffffff; }
+
+  .ct-price-card__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+  }
+
+  .ct-price-card__desc {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.55;
+    font-size: 0.95rem;
+    margin: 0;
+    flex: 1;
+  }
+
+  .ct-price-card__prices {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ct-price-card__amount { display: flex; flex-direction: column; gap: 0.15rem; }
+
+  .ct-price-card__value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .ct-price-card__label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .ct-price-card__divider { width: 1px; height: 2.2rem; background: rgba(255, 255, 255, 0.12); }
+
+  .ct-price-card__btn { margin-top: 0.8rem; text-align: center; justify-content: center; }
+
+  .ct-price-card--custom {
+    border-color: rgba(255, 195, 0, 0.2);
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.06), rgba(255, 195, 0, 0.04));
+  }
+
+  /* ═══════════════════════════════════════════
+     LIGHTBOX
+     ═══════════════════════════════════════════ */
+  .ct-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .ct-lightbox.is-open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .ct-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.94);
+    backdrop-filter: blur(12px);
+  }
+
+  .ct-lightbox__body {
+    position: relative;
+    z-index: 1;
+    max-width: 92vw;
+    max-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ct-lightbox__img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.2s ease;
+  }
+
+  .ct-lightbox__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    z-index: 2;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .ct-lightbox__close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  .ct-lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .ct-lightbox__nav:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+
+  .ct-lightbox__nav--prev { left: 1.5rem; }
+  .ct-lightbox__nav--next { right: 1.5rem; }
+
+  .ct-lightbox__counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ═══════════════════════════════════════════
+     ANIMATIONS
+     ═══════════════════════════════════════════ */
+  @keyframes ct-fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .ct-intro__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .ct-route {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .ct-route__connector { display: none; }
+
+    .ct-pricing__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .ct-mosaic {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(110px, 140px);
+    }
+
+    .ct-mosaic__item--1,
+    .ct-mosaic__item--5 {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .ct-mosaic--tramonti .ct-mosaic__item--2,
+    .ct-mosaic--tramonti .ct-mosaic__item--7 {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .ct-mosaic--tramonti .ct-mosaic__item--1 { grid-column: span 1; }
+    .ct-mosaic--tramonti .ct-mosaic__item--5 { grid-column: span 1; }
+
+    .ct-lightbox__nav--prev { left: 0.5rem; }
+    .ct-lightbox__nav--next { right: 0.5rem; }
+  }
+
+  @media (max-width: 768px) {
+    .ct-hero__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .ct-hero__aside { align-items: flex-start; }
+    .ct-hero__tags { justify-content: flex-start; max-width: none; }
+    .ct-hero__title { font-size: clamp(2.4rem, 10vw, 3.8rem); }
+    .ct-hero__progress { align-self: flex-start; }
+  }
+
+  @media (max-width: 640px) {
+    .ct-hero__title { font-size: clamp(2.2rem, 11vw, 3.4rem); }
+
+    .ct-stop { grid-template-columns: 1fr; gap: 0.6rem; }
+    .ct-stop__marker { display: none; }
+
+    .ct-mosaic {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: minmax(90px, 110px);
+      gap: 0.4rem;
+    }
+
+    .ct-mosaic__item--1,
+    .ct-mosaic__item--5 {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .ct-mosaic--tramonti .ct-mosaic__item--2,
+    .ct-mosaic--tramonti .ct-mosaic__item--7 {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .ct-lightbox__nav { width: 40px; height: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ct-hero__scroll-hint span { animation: none; }
+    .ct-hero__slide { transition: none; }
+    .ct-hero__slide.is-active img { animation: none; }
+    .ct-stop,
+    .ct-mosaic__item,
+    .ct-price-card,
+    .ct-route__stop {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .ct-hero__eyebrow,
+    .ct-hero__title,
+    .ct-hero__lead,
+    .ct-hero__actions,
+    .ct-hero__aside,
+    .ct-hero__tag,
+    .ct-hero__scroll-hint {
+      opacity: 1;
+      animation: none;
+    }
+    .ct-hero__dot.is-active .ct-hero__dot-fill {
+      animation: none;
+      transform: scaleX(1);
+    }
+  }
+</style>

@@ -1,0 +1,1606 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+
+const pageTitle = 'Scooter Photo Tour on the Amalfi Coast — Ride, Explore, and Get Stunning Photos'
+const pageDescription =
+  'Book an individual scooter photo tour on the Amalfi Coast. Ride through legendary coastal roads or mountain valleys with a local guide and professional photographer. One rider, two routes to choose from.'
+const shareImageAlt = 'Scooter photo tour on the Amalfi Coast — riding along the coastal road with stunning sea views'
+
+const heroSlides = [
+  { image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-3.webp', label: 'The Ride' },
+  { image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp', label: 'The Coast' },
+  { image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-8.webp', label: 'The Views' },
+  { image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-13.webp', label: 'The Story' },
+]
+
+const heroTags = [
+  '4 hours',
+  'Photo & ride',
+  'You ride, we shoot',
+  'Local guide',
+  'Pro photography',
+  'Helmet included',
+]
+
+const mosaicImages = [
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-1.webp', alt: 'Scooter rider on the Amalfi Coast road with sea panorama' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-2.webp', alt: 'Portrait photoshoot stop at a scenic viewpoint' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-5.webp', alt: 'Rider posing on a vintage scooter in front of colorful houses' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-6.webp', alt: 'Cruising through the coastal village streets' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-7.webp', alt: 'Golden hour portrait on a clifftop overlooking the sea' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-9.webp', alt: 'Scenic stop along the winding mountain road' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-10.webp', alt: 'Rider on a scooter with coast panorama behind' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-11.webp', alt: 'Rider on the famous Amalfi Coast road' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-12.webp', alt: 'Coastal cafe break during the photo tour' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-14.webp', alt: 'Dramatic cliffside viewpoint at golden hour' },
+  { src: '/staticpages/moto/photogallery/moto-ride-with-photographer-in-amalfi-coast-15.webp', alt: 'Final frame — sunset over the Amalfi Coast' },
+]
+
+const allImages = [...mosaicImages]
+
+const audienceCards = [
+  {
+    num: '01',
+    title: 'Relaxed Explorers',
+    desc: 'You have a few free days on the coast and want to see the real Amalfi — not from a tour bus window, but from the saddle of a scooter, stopping wherever the view catches your eye.',
+  },
+  {
+    num: '02',
+    title: 'Content Creators & Influencers',
+    desc: 'You need a library of stunning, share-ready photos and reels in iconic Amalfi locations. We know every angle, every golden-hour spot, and every empty road that makes the perfect backdrop.',
+  },
+  {
+    num: '03',
+    title: 'Solo Adventurers',
+    desc: 'This tour is just for you — one rider, one scooter, one photographer. No compromise on pace or stops. Ride through cliff-top villages, pause for espresso in hidden piazzas, and come home with professional photos that tell your story.',
+  },
+  {
+    num: '04',
+    title: 'Photographers & Models',
+    desc: 'Professional photographers looking for unique coastal backdrops, or models building a portfolio under the Amalfi sun — we handle logistics, locations, and local permits so you can focus on the shot.',
+  },
+]
+
+const pricingCards = [
+  {
+    title: 'Coastal Cruise',
+    subtitle: 'Amalfi → Furore → Positano & back',
+    description: 'The iconic coastal road. We ride the SS163 through the most famous villages, stopping at hidden viewpoints, scenic tunnels, and cliffside cafes. Includes 40–60 professionally edited photos and short video clips for social media.',
+    price: '€280',
+    icon: 'bi-tsunami',
+    features: ['4-hour guided ride', '40–60 edited photos', 'Video clips for reels', 'Cafe stop included', 'Helmet & insurance'],
+  },
+  {
+    title: 'Valley Explorer',
+    subtitle: 'Coast → Tramonti → Valico di Chiunzi',
+    description: 'The road less traveled. We climb through the Tramonti Valley to 880 meters, passing lemon groves, chestnut forests, and a sacred mountain cemetery. Stop at a mozzarella farm and local winery along the way.',
+    price: '€350',
+    icon: 'bi-signpost-split',
+    features: ['4-hour guided ride', '50–70 edited photos', 'Video clips for reels', 'Farm & winery visits', 'Helmet & insurance'],
+  },
+]
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={heroSlides[0].image}
+  imageAlt={shareImageAlt}
+>
+  <div class="sc">
+
+    <!-- ═══ HERO — Slideshow ═══ -->
+    <section class="sc-hero hero--dark">
+      <div class="sc-hero__slides" aria-hidden="true">
+        {heroSlides.map((slide, i) => (
+          <div class={`sc-hero__slide ${i === 0 ? 'is-active' : ''}`}>
+            <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+          </div>
+        ))}
+      </div>
+      <div class="sc-hero__vignette"></div>
+      <div class="sc-hero__grain" aria-hidden="true"></div>
+      <div class="sc-hero__content">
+        <div class="container">
+          <div class="sc-hero__grid">
+            <div class="sc-hero__copy">
+              <span class="sc-hero__eyebrow">Scooter Photo Tours</span>
+              <h1 class="sc-hero__title">
+                Ride the Coast.<br/><span class="sc-hero__title-accent">Own Every Frame.</span>
+              </h1>
+              <p class="sc-hero__lead">
+                An individual scooter tour with a professional photographer — just you and the road.
+                Legendary routes, hidden stops, and up to 70 cinematic photos — all in a 4-hour ride.
+              </p>
+              <div class="sc-hero__actions">
+                <a class="sc-btn sc-btn--primary" href="/contact">
+                  <i class="bi bi-send" aria-hidden="true"></i> Book your ride
+                </a>
+                <a class="sc-btn sc-btn--ghost" href="#pricing">
+                  See pricing
+                </a>
+              </div>
+            </div>
+            <div class="sc-hero__aside">
+              <ul class="sc-hero__tags">
+                {heroTags.map((tag, i) => (
+                  <li class="sc-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+                ))}
+              </ul>
+              <div class="sc-hero__progress">
+                {heroSlides.map((slide, i) => (
+                  <button
+                    class={`sc-hero__dot ${i === 0 ? 'is-active' : ''}`}
+                    data-slide={i}
+                    aria-label={`Show ${slide.label}`}
+                  >
+                    <span class="sc-hero__dot-label">{slide.label}</span>
+                    <span class="sc-hero__dot-bar"><span class="sc-hero__dot-fill"></span></span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sc-hero__scroll-hint" aria-hidden="true">
+        <span></span>
+      </div>
+    </section>
+
+    <!-- ═══ INTRO ═══ -->
+    <section class="section sc-intro" id="intro">
+      <div class="container">
+        <div class="sc-intro__grid">
+          <div class="sc-intro__copy">
+            <span class="sc-eyebrow">Why a scooter photo tour</span>
+            <h2>
+              The Amalfi Coast <span class="accent-italic">was made for two wheels</span>
+            </h2>
+            <p>
+              To truly experience the Amalfi Coast, you need to feel the road beneath you — the warm coastal wind, the scent of lemon groves, the sudden reveal of a turquoise cove around every hairpin turn. A scooter gives you something no car or bus ever can: the freedom to stop anywhere, anytime, and the thrill of riding one of the most beautiful roads in the world.
+            </p>
+            <p>
+              But here's the thing — capturing that experience in photos requires serious skill, heavy gear, and local knowledge. That's exactly what we bring. Your guide is both a seasoned rider who knows every curve of these roads and a professional photographer who knows exactly where the light falls at every hour. You ride, we shoot, and every stop becomes a frame worth keeping.
+            </p>
+          </div>
+          <blockquote class="sc-quote">
+            <div class="sc-quote__mark" aria-hidden="true">&ldquo;</div>
+            <p>Creating unforgettable memories, one tour at a time. The coast is different from the saddle — you don't just see it, you feel it.</p>
+            <cite>— Gregory Day, Amalfi Coast Enthusiast & Founder</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ AUDIENCE ═══ -->
+    <section class="section sc-audience" id="audience">
+      <div class="container">
+        <span class="sc-eyebrow">Who this is for</span>
+        <h2>Perfect for <span class="accent-italic">adventurous spirits</span></h2>
+        <div class="sc-audience__grid">
+          {audienceCards.map((card) => (
+            <article class="sc-audience__card">
+              <span class="sc-audience__num">{card.num}</span>
+              <h3>{card.title}</h3>
+              <p>{card.desc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ GALLERY — MOSAIC ═══ -->
+    <section class="section sc-gallery" id="gallery">
+      <div class="container">
+        <div class="sc-gallery__header">
+          <span class="sc-eyebrow">Photo Gallery</span>
+          <h2>Moments from <span class="accent-italic">the Road</span></h2>
+          <p class="sc-gallery__sub">Click any image to view it large</p>
+        </div>
+        <div class="sc-mosaic" aria-label="Scooter tour photo gallery — click any image to enlarge">
+          {mosaicImages.map((img, i) => (
+            <figure class={`sc-mosaic__item sc-mosaic__item--${i + 1}`} data-lightbox-trigger>
+              <img src={img.src} alt={img.alt} loading={i < 2 ? 'eager' : 'lazy'} />
+              <div class="sc-mosaic__overlay">
+                <span class="sc-mosaic__number">{String(i + 1).padStart(2, '0')}</span>
+              </div>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TOUR ROUTES ═══ -->
+    <section class="section sc-routes" id="routes">
+      <div class="container">
+        <span class="sc-eyebrow">Two routes to choose from</span>
+        <h2>Pick Your <span class="accent-italic">Adventure</span></h2>
+
+        <div class="sc-routes__grid">
+          <!-- Route 1: Coastal -->
+          <article class="sc-route-card">
+            <div class="sc-route-card__header">
+              <div class="sc-route-card__icon">
+                <i class="bi bi-tsunami" aria-hidden="true"></i>
+              </div>
+              <span class="sc-route-card__label">Route 01</span>
+              <h3>Coastal Cruise</h3>
+              <p class="sc-route-card__subtitle">Towards Sorrento or Salerno and back along the coast</p>
+            </div>
+            <div class="sc-route-card__body">
+              <p>
+                Depending on your location, we head towards Salerno or Sorrento and back along the legendary SS163. This scenic route includes famous villages such as Amalfi, Furore, and Positano. The road offers stunning viewpoints where we stop to take beautiful photos and videos. We also take a break at a charming seaside cafe to enjoy espresso and local pastries while the golden afternoon light paints the cliffs.
+              </p>
+              <p>
+                This route is perfect for those who love the sea, sunshine, and the classic dolce vita atmosphere. Every tunnel exit opens a new panorama, every village has a story, and every curve deserves its own frame.
+              </p>
+              <ul class="sc-route-card__highlights">
+                <li><i class="bi bi-clock" aria-hidden="true"></i> 4 hours</li>
+                <li><i class="bi bi-camera" aria-hidden="true"></i> 40–60 photos</li>
+                <li><i class="bi bi-cup-hot" aria-hidden="true"></i> Cafe break included</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Route 2: Valley -->
+          <article class="sc-route-card">
+            <div class="sc-route-card__header">
+              <div class="sc-route-card__icon">
+                <i class="bi bi-signpost-split" aria-hidden="true"></i>
+              </div>
+              <span class="sc-route-card__label">Route 02</span>
+              <h3>Valley Explorer</h3>
+              <p class="sc-route-card__subtitle">Coast → Tramonti Valley → Valico di Chiunzi (880m)</p>
+            </div>
+            <div class="sc-route-card__body">
+              <p>
+                Starting from Atrani or Maiori, we ride through the Tramonti Valley to reach Valico di Chiunzi — a mountain pass at 880 meters above sea level offering breathtaking panoramas of the Naples Valley and Vesuvius volcano. Along the way, we weave through lemon and wine gardens, cruise beneath a canopy of ancient chestnut trees, and stop at a sacred hilltop cemetery with views that stretch to the horizon.
+              </p>
+              <p>
+                On our way back, we visit a mozzarella factory where the cheese is still warm, a family winery with wines you won't find outside this valley, and a local liquor distillery. This tour is perfect for those who love nature, history, culture, and the Italy that most tourists never see.
+              </p>
+              <ul class="sc-route-card__highlights">
+                <li><i class="bi bi-clock" aria-hidden="true"></i> 4 hours</li>
+                <li><i class="bi bi-camera" aria-hidden="true"></i> 50–70 photos</li>
+                <li><i class="bi bi-flower1" aria-hidden="true"></i> Farm & winery visits</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PRICING ═══ -->
+    <section class="section sc-pricing" id="pricing">
+      <div class="sc-pricing__bg" aria-hidden="true">
+        <img src="/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-8.webp" alt="" loading="lazy" />
+      </div>
+      <div class="container">
+        <div class="sc-pricing__header">
+          <span class="sc-eyebrow sc-eyebrow--light">Tour prices</span>
+          <h2>How Much Does a Scooter <span class="accent-italic">Photo Tour</span> Cost?</h2>
+          <p>
+            Both tours are individual (one rider) and include a personal guide, scooter, helmet, insurance, and professional photography with full editing and delivery within 5 days.
+          </p>
+        </div>
+        <div class="sc-pricing__grid">
+          {pricingCards.map((card) => (
+            <article class="sc-price-card">
+              <div class="sc-price-card__icon">
+                <i class={`bi ${card.icon}`} aria-hidden="true"></i>
+              </div>
+              <h3 class="sc-price-card__title">{card.title}</h3>
+              <p class="sc-price-card__subtitle">{card.subtitle}</p>
+              <p class="sc-price-card__desc">{card.description}</p>
+              <ul class="sc-price-card__features">
+                {card.features.map((f) => (
+                  <li><i class="bi bi-check2" aria-hidden="true"></i> {f}</li>
+                ))}
+              </ul>
+              <div class="sc-price-card__prices">
+                <div class="sc-price-card__amount">
+                  <span class="sc-price-card__value">{card.price}</span>
+                  <span class="sc-price-card__label">per tour</span>
+                </div>
+              </div>
+              <a class="sc-btn sc-btn--primary sc-price-card__btn" href="/contact">
+                Book This Tour
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="section sc-cta-section">
+      <div class="container">
+        <div class="sc-cta" style={`--cta-bg: url(${heroSlides[0].image})`}>
+          <div class="sc-cta__inner">
+            <div class="sc-cta__tag">Ready to ride?</div>
+            <h2>Book your Amalfi Coast scooter adventure and ride home with photos worth a thousand words.</h2>
+            <p>
+              Tell us your dates and preferred route — we'll handle the rest. Scooter, helmet, guide, photographer, edited photos: it's all included.
+            </p>
+            <a class="sc-cta__button" href="/contact">
+              <i class="bi bi-send" aria-hidden="true"></i>
+              Request your ride
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ═══ LIGHTBOX ═══ -->
+  <div class="sc-lightbox" id="scLightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <div class="sc-lightbox__backdrop"></div>
+    <button class="sc-lightbox__close" aria-label="Close viewer">&times;</button>
+    <div class="sc-lightbox__body">
+      <img class="sc-lightbox__img" src="" alt="" />
+    </div>
+    <button class="sc-lightbox__nav sc-lightbox__nav--prev" aria-label="Previous image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="sc-lightbox__nav sc-lightbox__nav--next" aria-label="Next image">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="sc-lightbox__counter" aria-hidden="true">
+      <span data-lb-current>1</span> / <span data-lb-total>1</span>
+    </div>
+  </div>
+
+  <script is:inline>
+    ;(() => {
+      /* ── Hero slideshow ── */
+      const slides = document.querySelectorAll('.sc-hero__slide')
+      const dots = document.querySelectorAll('.sc-hero__dot')
+      if (slides.length) {
+        let current = 0
+        const DURATION = 6000
+
+        function go(next) {
+          slides[current].classList.remove('is-active')
+          dots[current].classList.remove('is-active')
+          current = next
+          slides[current].classList.add('is-active')
+          dots[current].classList.add('is-active')
+        }
+
+        let timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+
+        dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            clearInterval(timer)
+            go(Number(dot.dataset.slide))
+            timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+          })
+        })
+      }
+
+      /* ── Lightbox ── */
+      const lightbox = document.getElementById('scLightbox')
+      if (lightbox) {
+        const img = lightbox.querySelector('.sc-lightbox__img')
+        const prevBtn = lightbox.querySelector('.sc-lightbox__nav--prev')
+        const nextBtn = lightbox.querySelector('.sc-lightbox__nav--next')
+        const closeBtn = lightbox.querySelector('.sc-lightbox__close')
+        const backdrop = lightbox.querySelector('.sc-lightbox__backdrop')
+        const currentEl = lightbox.querySelector('[data-lb-current]')
+        const totalEl = lightbox.querySelector('[data-lb-total]')
+
+        const triggers = Array.from(document.querySelectorAll('[data-lightbox-trigger]'))
+        const srcs = []
+        triggers.forEach(el => {
+          const imgEl = el.tagName === 'IMG' ? el : el.querySelector('img')
+          if (imgEl) srcs.push({ src: imgEl.src, alt: imgEl.alt || '' })
+        })
+
+        let currentIndex = 0
+        const show = (index) => {
+          currentIndex = (index + srcs.length) % srcs.length
+          img.src = srcs[currentIndex].src
+          img.alt = srcs[currentIndex].alt
+          currentEl.textContent = currentIndex + 1
+          totalEl.textContent = srcs.length
+        }
+        const open = (index) => {
+          show(index)
+          lightbox.classList.add('is-open')
+          lightbox.setAttribute('aria-hidden', 'false')
+          document.body.style.overflow = 'hidden'
+        }
+        const close = () => {
+          lightbox.classList.remove('is-open')
+          lightbox.setAttribute('aria-hidden', 'true')
+          document.body.style.overflow = ''
+        }
+
+        triggers.forEach((el, i) => {
+          el.style.cursor = 'zoom-in'
+          el.addEventListener('click', (e) => {
+            e.preventDefault()
+            open(i)
+          })
+        })
+
+        closeBtn.addEventListener('click', close)
+        backdrop.addEventListener('click', close)
+        prevBtn.addEventListener('click', () => show(currentIndex - 1))
+        nextBtn.addEventListener('click', () => show(currentIndex + 1))
+
+        document.addEventListener('keydown', (e) => {
+          if (!lightbox.classList.contains('is-open')) return
+          if (e.key === 'Escape') close()
+          if (e.key === 'ArrowLeft') show(currentIndex - 1)
+          if (e.key === 'ArrowRight') show(currentIndex + 1)
+        })
+
+        let touchStartX = 0
+        lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX }, { passive: true })
+        lightbox.addEventListener('touchend', (e) => {
+          const diff = e.changedTouches[0].clientX - touchStartX
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) show(currentIndex - 1)
+            else show(currentIndex + 1)
+          }
+        })
+      }
+
+      /* ── Scroll-triggered fade-in ── */
+      const obs = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target) } }),
+        { threshold: 0.15 }
+      )
+      document.querySelectorAll('.sc-audience__card, .sc-mosaic__item, .sc-price-card, .sc-route-card, .sc-cta').forEach((el) => obs.observe(el))
+    })()
+  </script>
+</BaseLayout>
+
+<style>
+  .sc { position: relative; }
+
+  /* ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ */
+  .sc-hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #0a0a0a;
+    color: #ffffff;
+  }
+
+  .sc-hero__slides {
+    position: absolute;
+    inset: -2px;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .sc-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+  }
+
+  .sc-hero__slide.is-active { opacity: 1; }
+
+  .sc-hero__slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+    transform: scale(1.01);
+    backface-visibility: hidden;
+  }
+
+  .sc-hero__slide.is-active img {
+    animation: sc-ken-burns 6.5s cubic-bezier(0.25, 0, 0.4, 1) forwards;
+  }
+
+  @keyframes sc-ken-burns {
+    from { transform: scale(1.01); }
+    to   { transform: scale(1.06); }
+  }
+
+  .sc-hero__vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 45%, transparent 65%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, transparent 50%, rgba(0, 0, 0, 0.2) 100%);
+    pointer-events: none;
+  }
+
+  .sc-hero__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .sc-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  }
+
+  .sc-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
+  }
+
+  .sc-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: sc-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .sc-hero__title {
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    opacity: 0;
+    animation: sc-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .sc-hero__title-accent {
+    font-style: italic;
+    color: var(--color-accent);
+    display: inline-block;
+  }
+
+  .sc-hero__lead {
+    max-width: 30rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: sc-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .sc-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+    opacity: 0;
+    animation: sc-fade-up 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .sc-hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+    opacity: 0;
+    animation: sc-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .sc-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 260px;
+  }
+
+  .sc-hero__tag {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    opacity: 0;
+    animation: sc-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .sc-hero__progress { display: flex; gap: 0.6rem; }
+
+  .sc-hero__dot {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .sc-hero__dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  .sc-hero__dot.is-active .sc-hero__dot-label { opacity: 1; }
+
+  .sc-hero__dot-bar {
+    width: 36px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .sc-hero__dot-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ff5900;
+    border-radius: 2px;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .sc-hero__dot.is-active .sc-hero__dot-fill {
+    animation: sc-fill-bar 6s linear forwards;
+  }
+
+  @keyframes sc-fill-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .sc-hero__scroll-hint {
+    position: absolute;
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    animation: sc-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .sc-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: sc-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes sc-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  /* ── Buttons ── */
+  .sc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  }
+
+  .sc-btn--primary { background: var(--color-accent); color: #ffffff; }
+
+  .sc-btn--primary:hover {
+    background: #ff7a33;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .sc-btn--ghost {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .sc-btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  /* ── Eyebrow ── */
+  .sc-eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.7rem;
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .sc-eyebrow--light { color: rgba(255, 255, 255, 0.6); }
+
+  /* ═══════════════════════════════════════════
+     INTRO
+     ═══════════════════════════════════════════ */
+  .sc-intro { padding-top: 5rem; }
+
+  .sc-intro__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .sc-intro__copy h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 1rem;
+  }
+
+  .sc-intro__copy p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .sc-quote {
+    position: relative;
+    margin: 0;
+    padding: 2.5rem 2rem 2rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-surface);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    align-self: center;
+  }
+
+  .sc-quote__mark {
+    position: absolute;
+    top: -0.2rem;
+    left: 1.2rem;
+    font-family: var(--font-display);
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.25;
+  }
+
+  .sc-quote p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 0.8rem;
+  }
+
+  .sc-quote cite {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+  }
+
+  /* ═══════════════════════════════════════════
+     AUDIENCE
+     ═══════════════════════════════════════════ */
+  .sc-audience {
+    background: #f7f4ef;
+    color: var(--color-text);
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  :global([data-theme='night']) .sc-audience {
+    background: #191c22;
+    color: #f5f5f5;
+  }
+
+  .sc-audience h2 {
+    font-size: clamp(1.9rem, 3.2vw, 3rem);
+    margin-bottom: 2rem;
+  }
+
+  .sc-audience__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .sc-audience__card {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .sc-audience__card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sc-audience__card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  :global([data-theme='night']) .sc-audience__card {
+    background: #22262e;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  :global([data-theme='night']) .sc-audience__card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .sc-audience__num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    background: rgba(255, 89, 0, 0.1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+  }
+
+  .sc-audience__card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sc-audience__card p {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  :global([data-theme='night']) .sc-audience__card p {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  /* ═══════════════════════════════════════════
+     MOSAIC GALLERY
+     ═══════════════════════════════════════════ */
+  .sc-gallery {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .sc-gallery__header {
+    margin-bottom: 1.5rem;
+  }
+
+  .sc-gallery__header h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 0.3rem;
+  }
+
+  .sc-gallery__sub {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .sc-mosaic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(140px, 180px);
+    gap: 0.6rem;
+  }
+
+  .sc-mosaic__item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    margin: 0;
+    background: #d8d8d8;
+    cursor: zoom-in;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  :global([data-theme='night']) .sc-mosaic__item {
+    background: #0f1117;
+  }
+
+  .sc-mosaic__item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sc-mosaic__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .sc-mosaic__item:hover img { transform: scale(1.05); }
+
+  .sc-mosaic__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 0.6rem;
+  }
+
+  .sc-mosaic__item:hover .sc-mosaic__overlay { opacity: 1; }
+
+  .sc-mosaic__number {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Asymmetric layout — 11 images, 4 columns
+     Row 1:   [1]  [2 ——wide——]  [3]
+     Row 2-3: [4 tall] [5] [6]  [7]
+              [4 cont] [8] [9 ——wide——]
+     Row 4:   [10 ——wide——] [11 ——wide——]
+  */
+  .sc-mosaic__item--2  { grid-column: span 2; }
+  .sc-mosaic__item--4  { grid-row: span 2; }
+  .sc-mosaic__item--9  { grid-column: span 2; }
+  .sc-mosaic__item--10 { grid-column: span 2; }
+  .sc-mosaic__item--11 { grid-column: span 2; }
+
+  /* ═══════════════════════════════════════════
+     ROUTE CARDS
+     ═══════════════════════════════════════════ */
+  .sc-routes {
+    background: #eceef2;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  :global([data-theme='night']) .sc-routes {
+    background: #13161b;
+  }
+
+  .sc-routes h2 {
+    font-size: clamp(1.9rem, 3.2vw, 3rem);
+    margin-bottom: 2rem;
+  }
+
+  .sc-routes__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .sc-route-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .sc-route-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sc-route-card:hover {
+    border-color: rgba(255, 89, 0, 0.3);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.08);
+  }
+
+  :global([data-theme='night']) .sc-route-card {
+    background: #1e2128;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  :global([data-theme='night']) .sc-route-card:hover {
+    border-color: rgba(255, 89, 0, 0.3);
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.3);
+  }
+
+  .sc-route-card__header {
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  :global([data-theme='night']) .sc-route-card__header {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .sc-route-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.15), rgba(255, 195, 0, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .sc-route-card__label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .sc-route-card__header h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .sc-route-card__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .sc-route-card__body {
+    padding: 1.5rem 2rem 2rem;
+  }
+
+  .sc-route-card__body p {
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  :global([data-theme='night']) .sc-route-card__body p {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .sc-route-card__highlights {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .sc-route-card__highlights li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .sc-route-card__highlights li i {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+  }
+
+  /* ═══════════════════════════════════════════
+     PRICING
+     ═══════════════════════════════════════════ */
+  .sc-pricing {
+    position: relative;
+    background: #0f1115;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .sc-pricing__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .sc-pricing__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.12;
+    filter: grayscale(0.4);
+  }
+
+  .sc-pricing > .container { position: relative; z-index: 1; }
+
+  .sc-pricing__header {
+    max-width: 36rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .sc-pricing__header h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .sc-pricing__header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.05rem;
+  }
+
+  .sc-pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .sc-price-card {
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .sc-price-card.is-visible { opacity: 1; transform: translateY(0); }
+
+  .sc-price-card:hover {
+    border-color: rgba(255, 89, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .sc-price-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255, 89, 0, 0.15), rgba(255, 195, 0, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .sc-price-card__title { font-size: 1.35rem; margin: 0; color: #ffffff; }
+
+  .sc-price-card__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+  }
+
+  .sc-price-card__desc {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.55;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .sc-price-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .sc-price-card__features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .sc-price-card__features li i {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+  }
+
+  .sc-price-card__prices {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .sc-price-card__amount { display: flex; flex-direction: column; gap: 0.15rem; }
+
+  .sc-price-card__value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .sc-price-card__label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .sc-price-card__divider { width: 1px; height: 2.2rem; background: rgba(255, 255, 255, 0.12); }
+
+  .sc-price-card__btn { margin-top: 0.8rem; text-align: center; justify-content: center; }
+
+  /* ═══════════════════════════════════════════
+     CTA
+     ═══════════════════════════════════════════ */
+  .sc-cta-section {
+    padding-top: 2rem;
+  }
+
+  .sc-cta {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: #080a10;
+    background-image:
+      linear-gradient(135deg, rgba(12, 20, 40, 0.92), rgba(6, 10, 22, 0.96)),
+      var(--cta-bg);
+    background-size: cover;
+    background-position: center;
+    color: #f2ede6;
+    padding: clamp(2.5rem, 5vw, 4.5rem);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .sc-cta.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sc-cta__inner {
+    max-width: 38rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sc-cta__tag {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 1rem;
+  }
+
+  .sc-cta__inner h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 0.8rem;
+    color: #f2ede6;
+  }
+
+  .sc-cta__inner p {
+    color: rgba(242, 237, 230, 0.75);
+    margin-bottom: 1.8rem;
+  }
+
+  .sc-cta__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 2.2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-accent);
+    box-shadow: 0 10px 30px rgba(255, 89, 0, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    isolation: isolate;
+    position: relative;
+  }
+
+  .sc-cta__button::after {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    z-index: -1;
+    filter: blur(20px);
+    background: radial-gradient(circle, rgba(255, 195, 0, 0.6) 0%, rgba(255, 89, 0, 0.45) 40%, transparent 70%);
+    animation: sc-cta-pulse 3s ease-in-out infinite;
+    opacity: 0.7;
+  }
+
+  .sc-cta__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(255, 89, 0, 0.4);
+    text-decoration: none;
+    color: #fff;
+  }
+
+  @keyframes sc-cta-pulse {
+    0%, 100% { transform: scale(0.85); opacity: 0.6; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+  }
+
+  /* ═══════════════════════════════════════════
+     LIGHTBOX
+     ═══════════════════════════════════════════ */
+  .sc-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .sc-lightbox.is-open {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .sc-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.94);
+    backdrop-filter: blur(12px);
+  }
+
+  .sc-lightbox__body {
+    position: relative;
+    z-index: 1;
+    max-width: 92vw;
+    max-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sc-lightbox__img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.2s ease;
+  }
+
+  .sc-lightbox__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    z-index: 2;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .sc-lightbox__close:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  .sc-lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .sc-lightbox__nav:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+
+  .sc-lightbox__nav--prev { left: 1.5rem; }
+  .sc-lightbox__nav--next { right: 1.5rem; }
+
+  .sc-lightbox__counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ═══════════════════════════════════════════
+     ANIMATIONS
+     ═══════════════════════════════════════════ */
+  @keyframes sc-fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .sc-intro__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .sc-audience__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sc-mosaic {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(120px, 160px);
+    }
+
+    .sc-mosaic__item--2 { grid-column: span 2; }
+    .sc-mosaic__item--4 { grid-row: span 1; }
+    .sc-mosaic__item--9 { grid-column: span 1; }
+    .sc-mosaic__item--10 { grid-column: span 1; }
+    .sc-mosaic__item--11 { grid-column: span 2; }
+
+    .sc-routes__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sc-pricing__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .sc-lightbox__nav--prev { left: 0.5rem; }
+    .sc-lightbox__nav--next { right: 0.5rem; }
+  }
+
+  @media (max-width: 768px) {
+    .sc-hero__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .sc-hero__aside { align-items: flex-start; }
+    .sc-hero__tags { justify-content: flex-start; max-width: none; }
+    .sc-hero__title { font-size: clamp(2.4rem, 10vw, 3.8rem); }
+    .sc-hero__progress { align-self: flex-start; }
+  }
+
+  @media (max-width: 640px) {
+    .sc-hero__title { font-size: clamp(2.2rem, 11vw, 3.4rem); }
+
+    .sc-mosaic {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: minmax(100px, 130px);
+      gap: 0.4rem;
+    }
+
+    .sc-mosaic__item--2,
+    .sc-mosaic__item--11 {
+      grid-column: span 2;
+    }
+    .sc-mosaic__item--4 { grid-row: span 1; }
+    .sc-mosaic__item--9 { grid-column: span 1; }
+    .sc-mosaic__item--10 { grid-column: span 1; }
+
+    .sc-quote {
+      padding: 1.5rem 1.2rem 1.2rem;
+    }
+
+    .sc-route-card__header,
+    .sc-route-card__body {
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+    }
+
+    .sc-lightbox__nav { width: 40px; height: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sc-hero__scroll-hint span { animation: none; }
+    .sc-hero__slide { transition: none; }
+    .sc-hero__slide.is-active img { animation: none; }
+    .sc-audience__card,
+    .sc-mosaic__item,
+    .sc-price-card,
+    .sc-route-card,
+    .sc-cta {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .sc-hero__eyebrow,
+    .sc-hero__title,
+    .sc-hero__lead,
+    .sc-hero__actions,
+    .sc-hero__aside,
+    .sc-hero__tag,
+    .sc-hero__scroll-hint {
+      opacity: 1;
+      animation: none;
+    }
+    .sc-hero__dot.is-active .sc-hero__dot-fill {
+      animation: none;
+      transform: scaleX(1);
+    }
+    .sc-cta__button::after {
+      animation: none;
+    }
+  }
+</style>

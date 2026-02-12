@@ -4,20 +4,20 @@ import { featuredPhotoshoots } from '../data/site'
 
 const heroSlides = [
   {
-    image: '/photoshootings/ayuna/11-Ayuna-Atrani-2023.webp',
-    label: 'Atrani',
+    image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-3.webp',
+    label: 'Moto Ride',
   },
   {
-    image: '/photoshootings/regan-tay-ravello/03-slideshow-regan-walk-ravello-love.webp',
-    label: 'Ravello',
+    image: '/photoshootings/regan-tay-ravello/01-slideshow-regan-walk-ravello-love.webp',
+    label: 'Scenic Coast',
   },
   {
-    image: '/photoshootings/couples/img_5f68ca5842ca6.jpg',
-    label: 'Amalfi',
+    image: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp',
+    label: 'Peak Flavors',
   },
   {
-    image: '/photoshootings/camelia/004-camelia-photoshooting-moto.webp',
-    label: 'Tramonti',
+    image: '/photoshootings/ayuna/14-Ayuna-Atrani-2023.webp',
+    label: 'Photoshoots',
   },
 ]
 
@@ -29,19 +29,28 @@ const shareImage = heroSlides[0].image
 
 const experienceCards = [
   {
-    title: 'Mountain Drive & Wine Table Escape',
-    text:
-      'Ride the mountain road in a private car, stop for sweeping viewpoints, then linger over a slow wine tasting and local lunch. Scenic, unhurried, unforgettable.',
+    title: 'Scenic Coast',
+    subtitle: 'From the Sea to the Mountain',
+    text: 'The classic Amalfi Coast route — cliff-top viewpoints, charming villages, limoncello tasting, and a local lunch by the sea.',
+    image: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp',
+    href: '/experience/car-tours',
+    tags: ['8 hours', 'Private car', 'Up to 6 ppl'],
   },
   {
-    title: 'A Photographic Motorcycle Adventure',
-    text:
-      'Discover the coast on a private motorbike tour with a storyteller-guide. We trace cliffside roads, pause at cinematic overlooks, and capture candid moments in motion.',
+    title: 'Peak Flavors',
+    subtitle: 'The Tramonti Valley',
+    text: 'A food-focused day in the mountains — buffalo mozzarella at a local farm, wine from hillside vineyards, and panoramic views you won\'t find in any guidebook.',
+    image: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp',
+    href: '/experience/car-tours',
+    tags: ['8 hours', 'Wine & food', 'Mountains'],
   },
   {
-    title: 'Amalfi Unfiltered. Framing the Beauty',
-    text:
-      'A one-of-a-kind photo session led by a fashion‑magazine graphic designer. Expect editorial direction, bold composition, and light curated to the minute.',
+    title: 'Scooter Photo Tour',
+    subtitle: 'Ride, Explore & Get Stunning Photos',
+    text: 'Discover the coast on a private motorbike tour with a storyteller-guide. Cliffside roads, cinematic overlooks, and 50+ professional photos to take home.',
+    image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp',
+    href: '/experience/scooter',
+    tags: ['4 hours', 'Photo included', '1–2 riders'],
   },
 ]
 
@@ -108,6 +117,42 @@ const experienceTags = [
     </div>
   </section>
 
+  <section class="section experience-list">
+    <div class="container">
+      <div class="section__header experience-list__header">
+        <span class="guide-eyebrow">Experiences</span>
+        <h1 class="experience-list__title">Let's explore<br /><span class="accent-italic">Amalfi Coast</span></h1>
+        <p class="experience-list__lead">
+          Skip the tourist traps and see the coast through the eyes of a local. Every route is hand-picked, every stop is personal — this is how the Amalfi Coast was meant to be discovered.
+        </p>
+      </div>
+      <div class="experience-cards">
+        {experienceCards.map((item) => (
+          <a class="experience-card" href={item.href}>
+            <div class="experience-card__media">
+              <img src={item.image} alt={item.title} loading="lazy" />
+            </div>
+            <div class="experience-card__overlay">
+              <div class="experience-card__tags">
+                {item.tags.map((tag) => (
+                  <span class="experience-card__tag">{tag}</span>
+                ))}
+              </div>
+              <div class="experience-card__copy">
+                <span class="experience-card__subtitle">{item.subtitle}</span>
+                <h3 class="experience-card__title">{item.title}</h3>
+                <p class="experience-card__text">{item.text}</p>
+              </div>
+              <span class="experience-card__cta">
+                Explore <i class="bi bi-arrow-right"></i>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section class="section photo-preview">
     <div class="container">
       <div class="photo-preview__header">
@@ -134,24 +179,6 @@ const experienceTags = [
               <h3 class="mosaic-card__title">{item.title}</h3>
             </div>
           </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section experience-list">
-    <div class="container">
-      <div class="section__header experience-list__header">
-        <span class="guide-eyebrow guide-eyebrow--light">Experiences</span>
-        <h2>Experiences</h2>
-        <p>Three ways to feel the coast — from quiet panoramas to fast, photo‑ready adventures.</p>
-      </div>
-      <div class="experience-cards">
-        {experienceCards.map((item) => (
-          <article class="experience-card">
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </article>
         ))}
       </div>
     </div>
@@ -778,21 +805,26 @@ const experienceTags = [
   }
 
   .experience-list {
-    background: linear-gradient(140deg, #0f1115 0%, #1a1f27 50%, #10151b 100%);
-    color: #ffffff;
+    background: var(--color-surface);
   }
 
   .experience-list__header {
     max-width: 700px;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
 
-  .experience-list__header h2 {
-    font-size: clamp(2rem, 4vw, 3.4rem);
+  .experience-list__title {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.05;
+    margin: 0;
+    color: var(--color-text);
   }
 
-  .experience-list__header p {
-    color: rgba(255, 255, 255, 0.7);
+  .experience-list__lead {
+    max-width: 34rem;
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 
   .experience-cards {
@@ -802,22 +834,115 @@ const experienceTags = [
   }
 
   .experience-card {
-    padding: 2rem;
+    position: relative;
+    display: block;
     border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(12px);
+    overflow: hidden;
+    text-decoration: none;
+    color: #ffffff;
+    min-height: 480px;
   }
 
-  .experience-card h3 {
-    margin-bottom: 0.8rem;
-    font-size: 1.35rem;
+  .experience-card:hover {
+    text-decoration: none;
+  }
+
+  .experience-card__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .experience-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .experience-card:hover .experience-card__media img {
+    transform: scale(1.05);
+  }
+
+  .experience-card__overlay {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    padding: 1.8rem;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.3) 45%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+  }
+
+  .experience-card__tags {
+    position: absolute;
+    top: 1.4rem;
+    left: 1.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .experience-card__tag {
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .experience-card__copy {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .experience-card__subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .experience-card__title {
+    margin: 0;
+    font-size: clamp(1.4rem, 2vw, 1.7rem);
+    line-height: 1.15;
     color: #ffffff;
   }
 
-  .experience-card p {
-    color: rgba(255, 255, 255, 0.72);
+  .experience-card__text {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 28rem;
+  }
+
+  .experience-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    transition: gap 0.3s ease;
+  }
+
+  .experience-card:hover .experience-card__cta {
+    gap: 0.7rem;
   }
 
   .story__grid {
@@ -1069,6 +1194,11 @@ const experienceTags = [
 
     .experience-cards {
       grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .experience-card {
+      min-height: 380px;
     }
 
     .expertise__grid {

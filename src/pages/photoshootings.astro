@@ -1,112 +1,132 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 
-const heroCategories = [
+const heroSlides = [
   {
-    key: 'influencer',
-    title: 'INFLUENCER PHOTOSHOOT',
-    subtitle: 'Stand out from the crowd and captivate your followers with high-quality images',
+    image: '/photoshootings/ayuna/11-Ayuna-Atrani-2023.webp',
+    label: 'Atrani',
   },
   {
-    key: 'couple',
-    title: 'COUPLE PICTURE TAKING',
-    subtitle: 'Cherish your memories of Amalfi and your love forever with our tailored photo sessions',
+    image: '/photoshootings/regan-tay-ravello/03-slideshow-regan-walk-ravello-love.webp',
+    label: 'Ravello',
   },
   {
-    key: 'personal',
-    title: 'PERSONAL PHOTO SHOOTING',
-    subtitle:
-      'The most picturesque locations and capture your personality in stunning, high-quality images',
+    image: '/photoshootings/couples/img_5f68ca5842ca6.jpg',
+    label: 'Amalfi',
+  },
+  {
+    image: '/photoshootings/camelia/004-camelia-photoshooting-moto.webp',
+    label: 'Tramonti',
   },
 ]
-
-const heroImages = {
-  influencer: [
-    '/photoshootings/hero/influencer/3-berra-influenser-slider-slider.jpg',
-    '/photoshootings/hero/influencer/bissa-ninfulenser-icecream.jpg',
-    '/photoshootings/hero/influencer/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
-  ],
-  couple: [
-    '/photoshootings/hero/couple/02-slideshow-regan-walk-ravello-love-1024x682.webp',
-    '/photoshootings/hero/couple/couple-photoshooting-amalfi.jpg',
-    '/photoshootings/hero/couple/katerina-kuznezova-praiano-2021-002.jpg',
-  ],
-  personal: [
-    '/photoshootings/hero/personal/Masha-Minchuck-Amalfi-day.jpg',
-    '/photoshootings/hero/personal/Silvia-Amalfi-day.jpg.jpg',
-    '/photoshootings/hero/personal/iiana-photo-hero-atrani-hat-2-1024x680.webp',
-  ],
-}
-
-const firstHeroImage = heroImages[heroCategories[0].key][0]
 
 const pageTitle = 'Photoshootings — CristallPont Amalfi Day'
 const pageDescription =
   'Photoshootings on the Amalfi Coast for couples, influencers, and solo travelers. Cinematic sessions in Amalfi, Atrani, Ravello, and Positano.'
 const shareImageAlt = 'Amalfi Coast photoshoot hero scene'
+const shareImage = heroSlides[0].image
+
+const heroTags = [
+  'Couples',
+  'Solo portraits',
+  'Influencers',
+  'Golden hour',
+  'Cinematic style',
+  'Hidden locations',
+]
 const individualShoots = [
   {
     title: 'Amalfi Influencer Photoshoot',
     location: 'Amalfi',
+    desc: 'Bold poses, sun-kissed streets, and content that stops the scroll.',
     href: '/photoshootings/shifa',
     image: '/photoshootings/individual/Shifa/Hero.webp',
+    hoverImage: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-2.webp',
+    tag: 'Influencer',
   },
   {
     title: 'The Perfect Gift to Yourself',
     location: 'Ravello',
+    desc: 'A solo escape through Ravello\'s gardens and terraces at golden hour.',
     href: '/photoshootings/loreana',
     image: '/photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp',
+    hoverImage: '/photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-05.webp',
+    tag: 'Personal',
   },
   {
     title: 'Morning Glow. True Atrani.',
     location: 'Atrani',
+    desc: 'Early light on pastel walls — Atrani before the world wakes up.',
     href: '/photoshootings/lashada',
     image: '/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp',
+    hoverImage: '/photoshootings/individual/Lashada/gallery-1/Lashanda_Brown-August-2025_14.webp',
+    tag: 'Personal',
   },
   {
     title: 'Gifted Sunset Memories',
     location: 'Maiori',
+    desc: 'Warm tones and forest paths — a gift wrapped in golden coastal light.',
     href: '/photoshootings/julietta',
     image: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp',
+    hoverImage: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20242.webp',
+    tag: 'Personal',
   },
   {
     title: 'Ravello Light Elegance',
     location: 'Ravello',
+    desc: 'Villa Rufolo backdrop, soft drapery, and Mediterranean elegance.',
     href: '/photoshootings/ravello-photoshooting',
     image: '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp',
+    hoverImage: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293.webp',
+    tag: 'Editorial',
   },
   {
     title: "Ayuna's Photographic Memoir",
     location: 'Atrani',
+    desc: 'A visual diary through the alleyways and staircases of Atrani.',
     href: '/photoshootings/ayuna',
     image: '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp',
+    hoverImage: '/photoshootings/ayuna/14-Ayuna-Atrani-2023.webp',
+    tag: 'Personal',
   },
   {
     title: 'Camelia: Beautiful Experience',
     location: 'Tramonti',
+    desc: 'Mountain roads, vintage Vespa, and cinematic countryside frames.',
     href: '/photoshootings/camelia',
     image: '/photoshootings/camelia/4-camelia-photoshooting-moto.webp',
+    hoverImage: '/photoshootings/camelia/002-camelia-photoshooting-moto.webp',
+    tag: 'Moto',
   },
   {
     title: 'Colours of Atrani',
     location: 'Atrani',
+    desc: 'Concept editorial — bold styling against the coast\'s most colourful village.',
     href: '/photoshootings/concept-editorial',
     image: '/photoshootings/individual/iiana-photo-hero-atrani-hat-2-1024x680.webp',
+    hoverImage: '/photoshootings/individual/tag-preview-photoshooting-in-ravello-2024-1024x766.webp',
+    tag: 'Editorial',
   },
 ]
 
 const coupleShoots = [
   {
-    title: 'Ravello Romance (Taylor & Regan)',
+    title: 'Ravello Romance',
     location: 'Ravello',
+    desc: 'Taylor & Regan — a love story among Ravello\'s infinite views and ancient gardens.',
     href: '/photoshootings/regan-tay-ravello',
     image: '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp',
+    hoverImage: '/photoshootings/regan-tay-ravello/02-slideshow-regan-walk-ravello-love.webp',
+    tag: 'Couple',
   },
   {
     title: 'Symphony of Love',
     location: 'Atrani',
+    desc: 'Olga & Marat — stolen glances and laughter in the heart of Atrani.',
     href: '/photoshootings/olga-marat',
     image: '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp',
+    hoverImage: '/photoshootings/olga-marat/0002-olga-marat-atrani-2023.webp',
+    tag: 'Couple',
   },
 ]
 
@@ -138,130 +158,85 @@ const testimonials = [
 ]
 ---
 
-<BaseLayout
-  title={pageTitle}
-  description={pageDescription}
-  image={firstHeroImage}
-  imageAlt={shareImageAlt}
->
-  <section
-    class="ps-hero hero--dark"
-    data-sequence={JSON.stringify(
-      heroCategories.map((cat) => ({
-        title: cat.title,
-        subtitle: cat.subtitle,
-        images: heroImages[cat.key],
-      }))
-    )}
-  >
-    <div class="ps-hero__bg">
-      <div
-        class="ps-hero__layer is-active"
-        style={`background-image:url('${firstHeroImage}')`}
-      ></div>
-      <div class="ps-hero__layer"></div>
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} imageAlt={shareImageAlt}>
+  <section class="xp-hero hero--dark">
+    <div class="xp-hero__slides" aria-hidden="true">
+      {heroSlides.map((slide, i) => (
+        <div class={`xp-hero__slide ${i === 0 ? 'is-active' : ''}`}>
+          <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+        </div>
+      ))}
     </div>
-    <div class="ps-hero__content">
-      <div class="ps-hero__text">
-        <h1 id="ps-title">{heroCategories[0].title}</h1>
-        <p id="ps-subtitle">{heroCategories[0].subtitle}</p>
-        <div class="ps-hero__dots" aria-hidden="true"></div>
-        <a class="button" href="/contact">Book now!</a>
+    <div class="xp-hero__vignette"></div>
+    <div class="xp-hero__content">
+      <div class="container">
+        <div class="xp-hero__grid">
+          <div class="xp-hero__copy">
+            <span class="xp-hero__eyebrow">Amalfi Day Photoshootings</span>
+            <h1 class="xp-hero__title">
+              Your story<br /><span class="xp-hero__title-accent">in golden light</span>
+            </h1>
+            <p class="xp-hero__lead">
+              Cinematic photo sessions on the Amalfi Coast — couples, solo portraits, and influencer shoots in the most beautiful locations.
+            </p>
+            <div class="xp-hero__actions">
+              <a class="xp-hero__btn xp-hero__btn--primary" href="/contact">Book your session</a>
+              <a class="xp-hero__btn xp-hero__btn--ghost" href="/experience">See experiences</a>
+            </div>
+          </div>
+          <div class="xp-hero__aside">
+            <ul class="xp-hero__tags">
+              {heroTags.map((tag, i) => (
+                <li class="xp-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+              ))}
+            </ul>
+            <div class="xp-hero__progress">
+              {heroSlides.map((slide, i) => (
+                <button
+                  class={`xp-hero__dot ${i === 0 ? 'is-active' : ''}`}
+                  data-slide={i}
+                  aria-label={`Show ${slide.label}`}
+                >
+                  <span class="xp-hero__dot-label">{slide.label}</span>
+                  <span class="xp-hero__dot-bar"><span class="xp-hero__dot-fill"></span></span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="xp-hero__scroll-hint" aria-hidden="true">
+      <span></span>
     </div>
   </section>
 
   <script is:inline>
-    ;(() => {
-      const heroEl = document.querySelector('.ps-hero')
-      if (!heroEl) return
-      const sequence = JSON.parse(heroEl.dataset.sequence || '[]')
-      const layers = Array.from(document.querySelectorAll('.ps-hero__layer'))
-      const titleEl = document.getElementById('ps-title')
-      const subtitleEl = document.getElementById('ps-subtitle')
-      const dotsWrap = document.querySelector('.ps-hero__dots')
+    ;(function () {
+      const slides = document.querySelectorAll('.xp-hero__slide')
+      const dots = document.querySelectorAll('.xp-hero__dot')
+      if (!slides.length) return
 
-      let catIndex = 0
-      let imgIndex = -1
-      let activeLayer = 0
+      let current = 0
+      const DURATION = 6000
 
-      const IMAGE_DURATION = 3000
-      const zoomClass = 'is-zoom'
-
-      const preload = (src) => {
-        const img = new Image()
-        img.src = src
+      function go(next) {
+        slides[current].classList.remove('is-active')
+        dots[current].classList.remove('is-active')
+        current = next
+        slides[current].classList.add('is-active')
+        dots[current].classList.add('is-active')
       }
 
-      const setupDots = (count) => {
-        if (!dotsWrap) return
-        dotsWrap.innerHTML = ''
-        for (let i = 0; i < count; i += 1) {
-          const dot = document.createElement('span')
-          dot.className = 'ps-hero__dot'
-          dotsWrap.appendChild(dot)
-        }
-      }
+      let timer = setInterval(() => go((current + 1) % slides.length), DURATION)
 
-      const updateDots = (index) => {
-        if (!dotsWrap) return
-        const dots = dotsWrap.querySelectorAll('.ps-hero__dot')
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('is-active', i === index)
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          clearInterval(timer)
+          go(Number(dot.dataset.slide))
+          timer = setInterval(() => go((current + 1) % slides.length), DURATION)
         })
-      }
-
-      const setText = (cat) => {
-        titleEl.classList.add('is-fading')
-        subtitleEl.classList.add('is-fading')
-        window.setTimeout(() => {
-          titleEl.textContent = cat.title
-          subtitleEl.textContent = cat.subtitle
-          titleEl.classList.remove('is-fading')
-          subtitleEl.classList.remove('is-fading')
-        }, 300)
-      }
-
-      const showImage = (src) => {
-        const nextLayer = layers[1 - activeLayer]
-        const currentLayer = layers[activeLayer]
-
-        nextLayer.style.backgroundImage = `url(\"${src}\")`
-        nextLayer.classList.add('is-active')
-        nextLayer.classList.remove(zoomClass)
-        void nextLayer.offsetWidth
-        nextLayer.classList.add(zoomClass)
-
-        currentLayer.classList.remove('is-active')
-
-        activeLayer = 1 - activeLayer
-      }
-
-      const step = () => {
-        if (!sequence.length) return
-        const cat = sequence[catIndex]
-        imgIndex = (imgIndex + 1) % cat.images.length
-
-        if (imgIndex === 0) {
-          setText(cat)
-          setupDots(cat.images.length)
-        }
-
-        showImage(cat.images[imgIndex])
-        updateDots(imgIndex)
-
-        const nextImg = cat.images[(imgIndex + 1) % cat.images.length]
-        preload(nextImg)
-
-        if (imgIndex === cat.images.length - 1) {
-          catIndex = (catIndex + 1) % sequence.length
-        }
-      }
-
-      sequence.forEach((cat) => cat.images.forEach(preload))
-      setupDots(sequence[0]?.images?.length || 0)
-      step()
-      window.setInterval(step, IMAGE_DURATION)
+      })
     })()
   </script>
 
@@ -280,11 +255,19 @@ const testimonials = [
         {individualShoots.map((item) => (
           <a class="shoot-card" href={item.href}>
             <div class="shoot-card__media">
-              <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+              <img class="shoot-card__img shoot-card__img--main" src={item.image} alt={item.title} loading="lazy" decoding="async" />
+              <img class="shoot-card__img shoot-card__img--hover" src={item.hoverImage} alt="" loading="lazy" decoding="async" />
             </div>
+            <span class="shoot-card__tag">{item.tag}</span>
             <div class="shoot-card__overlay">
-              <h3>{item.title}</h3>
-              <span><i class="bi bi-geo-alt"></i> {item.location}</span>
+              <div class="shoot-card__location">
+                <i class="bi bi-geo-alt"></i> {item.location}
+              </div>
+              <h3 class="shoot-card__title">{item.title}</h3>
+              <p class="shoot-card__desc">{item.desc}</p>
+              <span class="shoot-card__cta">
+                View story <i class="bi bi-arrow-right"></i>
+              </span>
             </div>
           </a>
         ))}
@@ -339,11 +322,19 @@ const testimonials = [
         {coupleShoots.map((item) => (
           <a class="shoot-card shoot-card--wide" href={item.href}>
             <div class="shoot-card__media">
-              <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+              <img class="shoot-card__img shoot-card__img--main" src={item.image} alt={item.title} loading="lazy" decoding="async" />
+              <img class="shoot-card__img shoot-card__img--hover" src={item.hoverImage} alt="" loading="lazy" decoding="async" />
             </div>
+            <span class="shoot-card__tag">{item.tag}</span>
             <div class="shoot-card__overlay">
-              <h3>{item.title}</h3>
-              <span><i class="bi bi-geo-alt"></i> {item.location}</span>
+              <div class="shoot-card__location">
+                <i class="bi bi-geo-alt"></i> {item.location}
+              </div>
+              <h3 class="shoot-card__title">{item.title}</h3>
+              <p class="shoot-card__desc">{item.desc}</p>
+              <span class="shoot-card__cta">
+                View story <i class="bi bi-arrow-right"></i>
+              </span>
             </div>
           </a>
         ))}
@@ -353,110 +344,313 @@ const testimonials = [
 </BaseLayout>
 
 <style>
-  .ps-hero {
-    min-height: 100vh;
-    padding-top: 0;
+  /* ===== HERO — Full-viewport cinematic ===== */
+
+  .xp-hero {
     position: relative;
-    color: #ffffff;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     overflow: hidden;
-    box-sizing: border-box;
+    background: #0a0a0a;
+    color: #ffffff;
   }
 
-  .ps-hero__bg {
+  .xp-hero__slides {
     position: absolute;
-    inset: 0;
-    background: #0f1115;
+    inset: -2px;
+    z-index: 0;
+    overflow: hidden;
   }
 
-  .ps-hero__layer {
+  .xp-hero__slide {
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-position: center;
     opacity: 0;
-    transition: opacity 500ms ease;
-    filter: brightness(0.65);
-    will-change: transform, opacity;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
   }
 
-  .ps-hero__layer.is-active {
+  .xp-hero__slide.is-active {
     opacity: 1;
   }
 
-  .ps-hero__layer.is-zoom {
-    animation: ps-zoom 2s ease-out forwards;
+  .xp-hero__slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.01);
+    backface-visibility: hidden;
   }
 
-  .ps-hero__content {
+  .xp-hero__slide.is-active img {
+    animation: xp-ken-burns 6.5s cubic-bezier(0.25, 0, 0.4, 1) forwards;
+  }
+
+  @keyframes xp-ken-burns {
+    from { transform: scale(1.01); }
+    to { transform: scale(1.06); }
+  }
+
+  .xp-hero__vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 45%, transparent 65%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, transparent 50%, rgba(0, 0, 0, 0.18) 100%);
+    pointer-events: none;
+  }
+
+  .xp-hero__content {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 1.5rem;
+    padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
   }
 
-  .ps-hero__text {
-    max-width: 720px;
-    text-align: left;
+  .xp-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
   }
 
-  .ps-hero__text h1 {
-    font-size: clamp(2.6rem, 5vw, 4.2rem);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  .xp-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: xp-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .ps-hero__text p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.1rem;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  .xp-hero__title {
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    opacity: 0;
+    animation: xp-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .ps-hero__text h1.is-fading,
-  .ps-hero__text p.is-fading {
-    opacity: 0.4;
-    transform: translateY(6px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  .xp-hero__title-accent {
+    font-style: italic;
+    color: #ffc300;
+    display: inline-block;
   }
 
-  .ps-hero__dots {
+  .xp-hero__lead {
+    max-width: 30rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: xp-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__actions {
     display: flex;
-    gap: 0.5rem;
-    margin: 1.2rem 0 0.4rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+    opacity: 0;
+    animation: xp-fade-up 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .ps-hero__dot {
-    width: 8px;
-    height: 8px;
+  .xp-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.35);
-    transition: transform 0.3s ease, background 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+    border: none;
   }
 
-  .ps-hero__dot.is-active {
-    background: #ffffff;
-    transform: scale(1.3);
+  .xp-hero__btn--primary {
+    background: #ff5900;
+    color: #ffffff;
   }
 
-  .ps-hero__text .button {
-    margin-top: 1.5rem;
+  .xp-hero__btn--primary:hover {
+    background: #ff7a33;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    text-decoration: none;
+    color: #ffffff;
   }
 
-  @keyframes ps-zoom {
+  .xp-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .xp-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .xp-hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+    opacity: 0;
+    animation: xp-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 260px;
+  }
+
+  .xp-hero__tag {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    opacity: 0;
+    animation: xp-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__progress {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .xp-hero__dot {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .xp-hero__dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  .xp-hero__dot.is-active .xp-hero__dot-label {
+    opacity: 1;
+  }
+
+  .xp-hero__dot-bar {
+    width: 36px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .xp-hero__dot-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ff5900;
+    border-radius: 2px;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .xp-hero__dot.is-active .xp-hero__dot-fill {
+    animation: xp-fill-bar 6s linear forwards;
+  }
+
+  @keyframes xp-fill-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .xp-hero__scroll-hint {
+    position: absolute;
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    animation: xp-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .xp-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: xp-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes xp-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  @keyframes xp-fade-up {
     from {
-      transform: scale(1.005) translate3d(0, 0, 0);
+      opacity: 0;
+      transform: translateY(18px);
     }
     to {
-      transform: scale(1.05) translate3d(-0.5%, -0.5%, 0);
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .ps-hero__layer {
-      transition: none;
-      animation: none !important;
+  @media (max-width: 768px) {
+    .xp-hero__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .xp-hero__aside {
+      align-items: flex-start;
+    }
+
+    .xp-hero__tags {
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    .xp-hero__title {
+      font-size: clamp(2.4rem, 10vw, 3.8rem);
+    }
+
+    .xp-hero__progress {
+      align-self: flex-start;
     }
   }
 
@@ -492,68 +686,167 @@ const testimonials = [
     position: relative;
     overflow: hidden;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-    height: 380px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 440px;
     display: block;
     text-decoration: none;
+    color: #ffffff;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
   }
 
   .shoot-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-lift);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
     text-decoration: none;
   }
 
   .shoot-card--wide {
-    height: 440px;
+    height: 480px;
   }
 
+  /* --- Media: dual image with hover swap --- */
   .shoot-card__media {
     position: absolute;
     inset: 0;
-    background-color: rgba(16, 16, 16, 0.35);
+    background-color: #111;
   }
 
-  .shoot-card__media img {
+  .shoot-card__img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
     display: block;
-    transition: transform 0.4s ease;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 6s cubic-bezier(0.25, 0, 0.4, 1);
   }
 
-  .shoot-card:hover .shoot-card__media img {
-    transform: scale(1.06);
+  .shoot-card__img--main {
+    opacity: 1;
+    z-index: 1;
   }
 
+  .shoot-card__img--hover {
+    opacity: 0;
+    z-index: 2;
+    transform: scale(1.04);
+  }
+
+  .shoot-card:hover .shoot-card__img--main {
+    opacity: 0;
+  }
+
+  .shoot-card:hover .shoot-card__img--hover {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  /* --- Tag badge --- */
+  .shoot-card__tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 4;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.9);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .shoot-card:hover .shoot-card__tag {
+    background: rgba(255, 89, 0, 0.75);
+    border-color: rgba(255, 89, 0, 0.3);
+  }
+
+  /* --- Overlay with gradient + content --- */
   .shoot-card__overlay {
     position: absolute;
-    inset: auto 0 0;
-    padding: 1.5rem;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
-    color: #ffffff;
-    transition: padding-bottom 0.3s ease;
-  }
-
-  .shoot-card:hover .shoot-card__overlay {
-    padding-bottom: 1.8rem;
-  }
-
-  .shoot-card__overlay h3 {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    margin: 0 0 0.3rem;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.6rem;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.25) 40%,
+      rgba(0, 0, 0, 0.03) 70%,
+      transparent 100%
+    );
     color: #ffffff;
   }
 
-  .shoot-card__overlay span {
+  .shoot-card__location {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-    opacity: 0.85;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.4rem;
+  }
+
+  .shoot-card__title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.25;
+    margin: 0;
     color: #ffffff;
+    transition: color 0.3s ease;
+  }
+
+  .shoot-card--wide .shoot-card__title {
+    font-size: 1.35rem;
+  }
+
+  .shoot-card__desc {
+    margin: 0.5rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin 0.35s ease;
+  }
+
+  .shoot-card:hover .shoot-card__desc {
+    max-height: 4rem;
+    opacity: 1;
+    margin-top: 0.5rem;
+  }
+
+  .shoot-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.8rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.35s ease 0.05s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, gap 0.3s ease;
+  }
+
+  .shoot-card:hover .shoot-card__cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .shoot-card:hover .shoot-card__cta:hover {
+    gap: 0.6rem;
   }
 
   @media (max-width: 1024px) {
@@ -571,10 +864,22 @@ const testimonials = [
       grid-template-columns: 1fr;
     }
     .shoot-card {
-      height: 320px;
+      height: 380px;
     }
     .shoot-card--wide {
-      height: 360px;
+      height: 400px;
+    }
+
+    /* Show desc on mobile since no hover */
+    .shoot-card__desc {
+      max-height: 4rem;
+      opacity: 1;
+      margin-top: 0.4rem;
+    }
+
+    .shoot-card__cta {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
@@ -650,9 +955,4 @@ const testimonials = [
     }
   }
 
-  @media (max-width: 720px) {
-    .ps-hero__text {
-      max-width: 100%;
-    }
-  }
 </style>
