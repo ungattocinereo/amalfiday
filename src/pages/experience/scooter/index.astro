@@ -286,27 +286,96 @@ const pricingCards = [
         </div>
         <div class="sc-pricing__grid">
           {pricingCards.map((card) => (
-            <article class="sc-price-card">
-              <div class="sc-price-card__icon">
-                <i class={`bi ${card.icon}`} aria-hidden="true"></i>
-              </div>
-              <h3 class="sc-price-card__title">{card.title}</h3>
-              <p class="sc-price-card__subtitle">{card.subtitle}</p>
-              <p class="sc-price-card__desc">{card.description}</p>
-              <ul class="sc-price-card__features">
-                {card.features.map((f) => (
-                  <li><i class="bi bi-check2" aria-hidden="true"></i> {f}</li>
-                ))}
-              </ul>
-              <div class="sc-price-card__prices">
-                <div class="sc-price-card__amount">
-                  <span class="sc-price-card__value">{card.price}</span>
-                  <span class="sc-price-card__label">per tour</span>
+            <article class="sc-price-card" data-tour-name={card.title} data-tour-price={card.price}>
+              <!-- Default card content -->
+              <div class="sc-price-card__default">
+                <div class="sc-price-card__icon">
+                  <i class={`bi ${card.icon}`} aria-hidden="true"></i>
                 </div>
+                <h3 class="sc-price-card__title">{card.title}</h3>
+                <p class="sc-price-card__subtitle">{card.subtitle}</p>
+                <p class="sc-price-card__desc">{card.description}</p>
+                <ul class="sc-price-card__features">
+                  {card.features.map((f) => (
+                    <li><i class="bi bi-check2" aria-hidden="true"></i> {f}</li>
+                  ))}
+                </ul>
+                <div class="sc-price-card__prices">
+                  <div class="sc-price-card__amount">
+                    <span class="sc-price-card__value">{card.price}</span>
+                    <span class="sc-price-card__label">per tour</span>
+                  </div>
+                </div>
+                <button class="sc-btn sc-btn--primary sc-price-card__btn" type="button" data-tour-trigger>
+                  Request This Tour
+                </button>
               </div>
-              <a class="sc-btn sc-btn--primary sc-price-card__btn" href="/contact">
-                Book This Tour
-              </a>
+
+              <!-- Inline request form -->
+              <form class="sc-tour-form" aria-hidden="true">
+                <div class="sc-tour-form__header">
+                  <span class="sc-tour-form__tour-name">{card.title}</span>
+                  <button class="sc-tour-form__back" type="button" aria-label="Back to tour info">
+                    <i class="bi bi-x-lg" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <label class="sc-tour-form__label">
+                  <span>Email or phone <span class="sc-tour-form__req">*</span></span>
+                  <input
+                    class="sc-tour-form__input"
+                    type="text"
+                    name="contact"
+                    placeholder="email or +39..."
+                    autocomplete="email"
+                    required
+                  />
+                </label>
+                <label class="sc-tour-form__label">
+                  <span>Preferred date <span class="sc-tour-form__opt">(optional)</span></span>
+                  <div class="sc-tour-form__date-wrap">
+                    <input
+                      class="sc-tour-form__input sc-tour-form__date-input"
+                      type="text"
+                      name="date"
+                      placeholder="Pick a date..."
+                      readonly
+                    />
+                    <button class="sc-tour-form__date-toggle" type="button" aria-label="Open calendar">
+                      <i class="bi bi-calendar3" aria-hidden="true"></i>
+                    </button>
+                    <div class="sc-calendar" aria-hidden="true">
+                      <div class="sc-calendar__nav">
+                        <button class="sc-calendar__arrow" type="button" data-cal-prev aria-label="Previous month">
+                          <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                        </button>
+                        <span class="sc-calendar__month-year"></span>
+                        <button class="sc-calendar__arrow" type="button" data-cal-next aria-label="Next month">
+                          <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                      <div class="sc-calendar__weekdays">
+                        <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+                      </div>
+                      <div class="sc-calendar__days"></div>
+                    </div>
+                  </div>
+                </label>
+                <div class="sc-tour-form__actions">
+                  <button class="sc-btn sc-btn--primary sc-tour-form__submit" type="submit">
+                    <i class="bi bi-send" aria-hidden="true"></i> Request
+                  </button>
+                  <span class="sc-tour-form__status"></span>
+                </div>
+              </form>
+
+              <!-- Success state -->
+              <div class="sc-tour-form__success" aria-hidden="true">
+                <div class="sc-tour-form__success-icon">
+                  <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                </div>
+                <h4 class="sc-tour-form__success-title">Thank you!</h4>
+                <p class="sc-tour-form__success-text">Your request has been sent. We'll get back to you shortly.</p>
+              </div>
             </article>
           ))}
         </div>
@@ -455,6 +524,207 @@ const pricingCards = [
         { threshold: 0.15 }
       )
       document.querySelectorAll('.sc-audience__card, .sc-mosaic__item, .sc-price-card, .sc-route-card, .sc-cta').forEach((el) => obs.observe(el))
+
+      /* ═══ Tour Request Forms ═══ */
+      const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+      function initCalendar(calEl, dateInput) {
+        const monthYearEl = calEl.querySelector('.sc-calendar__month-year')
+        const daysEl = calEl.querySelector('.sc-calendar__days')
+        const prevBtn = calEl.querySelector('[data-cal-prev]')
+        const nextBtn = calEl.querySelector('[data-cal-next]')
+        const today = new Date()
+        let viewYear = today.getFullYear()
+        let viewMonth = today.getMonth()
+
+        function render() {
+          monthYearEl.textContent = `${MONTHS[viewMonth]} ${viewYear}`
+          daysEl.innerHTML = ''
+          const firstDay = new Date(viewYear, viewMonth, 1).getDay()
+          const offset = (firstDay + 6) % 7
+          const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate()
+
+          for (let i = 0; i < offset; i++) {
+            const empty = document.createElement('span')
+            empty.className = 'sc-calendar__day sc-calendar__day--empty'
+            daysEl.appendChild(empty)
+          }
+
+          for (let d = 1; d <= daysInMonth; d++) {
+            const btn = document.createElement('button')
+            btn.type = 'button'
+            btn.className = 'sc-calendar__day'
+            btn.textContent = d
+            const cellDate = new Date(viewYear, viewMonth, d)
+            if (cellDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+              btn.disabled = true
+              btn.classList.add('sc-calendar__day--past')
+            }
+            btn.addEventListener('click', () => {
+              const mm = String(viewMonth + 1).padStart(2, '0')
+              const dd = String(d).padStart(2, '0')
+              dateInput.value = `${dd}/${mm}/${viewYear}`
+              calEl.classList.remove('is-open')
+              calEl.setAttribute('aria-hidden', 'true')
+            })
+            daysEl.appendChild(btn)
+          }
+        }
+
+        prevBtn.addEventListener('click', () => {
+          viewMonth--
+          if (viewMonth < 0) { viewMonth = 11; viewYear-- }
+          render()
+        })
+        nextBtn.addEventListener('click', () => {
+          viewMonth++
+          if (viewMonth > 11) { viewMonth = 0; viewYear++ }
+          render()
+        })
+
+        render()
+      }
+
+      async function fetchIpMeta() {
+        const endpoints = ['https://ipapi.co/json/', 'https://ipwho.is/']
+        for (const url of endpoints) {
+          try {
+            const ctrl = new AbortController()
+            const tid = setTimeout(() => ctrl.abort(), 1800)
+            const r = await fetch(url, { method: 'GET', headers: { Accept: 'application/json' }, cache: 'no-store', signal: ctrl.signal })
+            clearTimeout(tid)
+            if (!r.ok) continue
+            const d = await r.json()
+            const ip = d?.ip || ''
+            const city = d?.city || ''
+            const region = d?.region || d?.region_name || ''
+            const country = d?.country_name || d?.country || ''
+            const lat = d?.latitude ?? d?.lat ?? ''
+            const lon = d?.longitude ?? d?.lon ?? ''
+            const location = [city, region, country].filter(Boolean).join(', ')
+            const coords = lat !== '' && lon !== '' ? `${lat}, ${lon}` : ''
+            if (ip || location || coords) return { ip, location, coords }
+          } catch (_) {}
+        }
+        return { ip: '', location: '', coords: '' }
+      }
+
+      document.querySelectorAll('.sc-price-card').forEach((card) => {
+        const defaultPanel = card.querySelector('.sc-price-card__default')
+        const formPanel = card.querySelector('.sc-tour-form')
+        const successPanel = card.querySelector('.sc-tour-form__success')
+        const triggerBtn = card.querySelector('[data-tour-trigger]')
+        const backBtn = card.querySelector('.sc-tour-form__back')
+        const dateInput = card.querySelector('.sc-tour-form__date-input')
+        const dateToggle = card.querySelector('.sc-tour-form__date-toggle')
+        const calEl = card.querySelector('.sc-calendar')
+        const submitBtn = card.querySelector('.sc-tour-form__submit')
+        const statusEl = card.querySelector('.sc-tour-form__status')
+        const tourName = card.dataset.tourName
+        const tourPrice = card.dataset.tourPrice
+
+        if (!formPanel || !defaultPanel) return
+
+        initCalendar(calEl, dateInput)
+
+        triggerBtn?.addEventListener('click', () => {
+          card.classList.add('is-form-active')
+          defaultPanel.setAttribute('aria-hidden', 'true')
+          formPanel.setAttribute('aria-hidden', 'false')
+          formPanel.querySelector('input[name="contact"]')?.focus()
+        })
+
+        backBtn?.addEventListener('click', () => {
+          card.classList.remove('is-form-active')
+          defaultPanel.setAttribute('aria-hidden', 'false')
+          formPanel.setAttribute('aria-hidden', 'true')
+          calEl.classList.remove('is-open')
+          calEl.setAttribute('aria-hidden', 'true')
+        })
+
+        dateToggle?.addEventListener('click', () => {
+          const isOpen = calEl.classList.contains('is-open')
+          calEl.classList.toggle('is-open', !isOpen)
+          calEl.setAttribute('aria-hidden', isOpen ? 'true' : 'false')
+        })
+
+        dateInput?.addEventListener('click', () => {
+          const isOpen = calEl.classList.contains('is-open')
+          calEl.classList.toggle('is-open', !isOpen)
+          calEl.setAttribute('aria-hidden', isOpen ? 'true' : 'false')
+        })
+
+        document.addEventListener('click', (e) => {
+          if (!calEl.contains(e.target) && e.target !== dateToggle && e.target !== dateInput && !dateToggle?.contains(e.target)) {
+            calEl.classList.remove('is-open')
+            calEl.setAttribute('aria-hidden', 'true')
+          }
+        })
+
+        formPanel.addEventListener('submit', async (e) => {
+          e.preventDefault()
+          const contactInput = formPanel.querySelector('input[name="contact"]')
+          const contactVal = contactInput?.value?.trim() || ''
+
+          if (!contactVal) {
+            contactInput?.focus()
+            statusEl.textContent = 'Please enter your contact'
+            statusEl.dataset.state = 'error'
+            return
+          }
+
+          const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          const phoneDigits = contactVal.replace(/\D/g, '')
+          if (!emailRe.test(contactVal) && phoneDigits.length < 7) {
+            contactInput?.focus()
+            statusEl.textContent = 'Enter a valid email or phone'
+            statusEl.dataset.state = 'error'
+            return
+          }
+
+          submitBtn.disabled = true
+          statusEl.textContent = 'Sending...'
+          statusEl.dataset.state = ''
+
+          const ipMeta = await fetchIpMeta()
+          const payload = {
+            name: '—',
+            contact: contactVal,
+            dates: dateInput?.value || '—',
+            service: `Scooter Tour: ${tourName}`,
+            message: `🛵 Tour: ${tourName}\n💰 Price: ${tourPrice}` + (dateInput?.value ? `\n📅 Preferred date: ${dateInput.value}` : ''),
+            ip: ipMeta.ip,
+            location: ipMeta.location,
+            coords: ipMeta.coords,
+            language: navigator.language || '',
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+            userAgent: navigator.userAgent || '',
+            referrer: document.referrer || window.location.href || '',
+            page: window.location.href || '',
+          }
+
+          try {
+            const r = await fetch('/hooks/send-telegram-amalfiday', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            })
+            let result
+            try { result = await r.json() } catch (_) { throw new Error('Server error') }
+            if (!r.ok || result.error) throw new Error(result.error || 'Request failed')
+
+            card.classList.remove('is-form-active')
+            card.classList.add('is-success')
+            formPanel.setAttribute('aria-hidden', 'true')
+            successPanel.setAttribute('aria-hidden', 'false')
+          } catch (err) {
+            statusEl.textContent = 'Something went wrong. Try again.'
+            statusEl.dataset.state = 'error'
+          } finally {
+            submitBtn.disabled = false
+          }
+        })
+      })
     })()
   </script>
 </BaseLayout>
@@ -1570,6 +1840,325 @@ const pricingCards = [
     }
 
     .sc-lightbox__nav { width: 40px; height: 40px; }
+  }
+
+  /* ═══════════════════════════════════════════
+     TOUR REQUEST FORM (inline in pricing cards)
+     ═══════════════════════════════════════════ */
+  .sc-price-card {
+    position: relative;
+  }
+
+  .sc-price-card__default {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .sc-price-card.is-form-active .sc-price-card__default,
+  .sc-price-card.is-success .sc-price-card__default {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .sc-tour-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
+  }
+
+  .sc-price-card.is-form-active .sc-tour-form {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+    inset: auto;
+  }
+
+  .sc-tour-form__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .sc-tour-form__tour-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .sc-tour-form__back {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.6);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .sc-tour-form__back:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+  }
+
+  .sc-tour-form__label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.02em;
+  }
+
+  .sc-tour-form__req { color: #ff5900; }
+
+  .sc-tour-form__opt {
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .sc-tour-form__input {
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .sc-tour-form__input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .sc-tour-form__input:focus {
+    outline: none;
+    border-color: rgba(255, 89, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(255, 89, 0, 0.12);
+  }
+
+  .sc-tour-form__date-wrap {
+    position: relative;
+  }
+
+  .sc-tour-form__date-input {
+    padding-right: 2.8rem;
+    cursor: pointer;
+  }
+
+  .sc-tour-form__date-toggle {
+    position: absolute;
+    right: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.25rem;
+    transition: color 0.2s;
+  }
+
+  .sc-tour-form__date-toggle:hover {
+    color: #ffffff;
+  }
+
+  /* Calendar popup */
+  .sc-calendar {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: #1a1d24;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 0.8rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .sc-calendar.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .sc-calendar__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+
+  .sc-calendar__arrow {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 0.7rem;
+    transition: background 0.2s;
+  }
+
+  .sc-calendar__arrow:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .sc-calendar__month-year {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .sc-calendar__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
+
+  .sc-calendar__weekdays span {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.35);
+    padding: 0.3rem 0;
+  }
+
+  .sc-calendar__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .sc-calendar__day {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-align: center;
+  }
+
+  .sc-calendar__day:hover:not(:disabled) {
+    background: rgba(255, 89, 0, 0.2);
+    color: #ffffff;
+  }
+
+  .sc-calendar__day--empty {
+    pointer-events: none;
+  }
+
+  .sc-calendar__day--past {
+    color: rgba(255, 255, 255, 0.2);
+    cursor: default;
+  }
+
+  .sc-tour-form__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  .sc-tour-form__submit {
+    flex-shrink: 0;
+  }
+
+  .sc-tour-form__submit:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .sc-tour-form__status {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.3;
+  }
+
+  .sc-tour-form__status[data-state='error'] {
+    color: #ff6b6b;
+  }
+
+  /* Success state */
+  .sc-tour-form__success {
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem;
+    gap: 0.6rem;
+    transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+  }
+
+  .sc-price-card.is-success .sc-tour-form__success {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .sc-tour-form__success-icon {
+    font-size: 2.8rem;
+    color: #4cd964;
+    filter: drop-shadow(0 6px 18px rgba(76, 217, 100, 0.3));
+  }
+
+  .sc-tour-form__success-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .sc-tour-form__success-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    line-height: 1.45;
+    margin: 0;
+    max-width: 22ch;
   }
 
   @media (prefers-reduced-motion: reduce) {
