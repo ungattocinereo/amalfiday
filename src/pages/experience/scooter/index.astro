@@ -382,25 +382,6 @@ const pricingCards = [
       </div>
     </section>
 
-    <!-- ═══ CTA ═══ -->
-    <section class="section sc-cta-section">
-      <div class="container">
-        <div class="sc-cta" style={`--cta-bg: url(${heroSlides[0].image})`}>
-          <div class="sc-cta__inner">
-            <div class="sc-cta__tag">Ready to ride?</div>
-            <h2>Book your Amalfi Coast scooter adventure and ride home with photos worth a thousand words.</h2>
-            <p>
-              Tell us your dates and preferred route — we'll handle the rest. Scooter, helmet, guide, photographer, edited photos: it's all included.
-            </p>
-            <a class="sc-cta__button" href="/contact">
-              <i class="bi bi-send" aria-hidden="true"></i>
-              Request your ride
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </div>
 
   <!-- ═══ LIGHTBOX ═══ -->
@@ -523,7 +504,7 @@ const pricingCards = [
         (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target) } }),
         { threshold: 0.15 }
       )
-      document.querySelectorAll('.sc-audience__card, .sc-mosaic__item, .sc-price-card, .sc-route-card, .sc-cta').forEach((el) => obs.observe(el))
+      document.querySelectorAll('.sc-audience__card, .sc-mosaic__item, .sc-price-card, .sc-route-card').forEach((el) => obs.observe(el))
 
       /* ═══ Tour Request Forms ═══ */
       const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -1455,6 +1436,7 @@ const pricingCards = [
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(12px);
+    overflow: visible;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
@@ -1464,6 +1446,7 @@ const pricingCards = [
   }
 
   .sc-price-card.is-visible { opacity: 1; transform: translateY(0); }
+  .sc-price-card.is-form-active { z-index: 10; }
 
   .sc-price-card:hover {
     border-color: rgba(255, 89, 0, 0.3);
@@ -1553,99 +1536,6 @@ const pricingCards = [
 
   .sc-price-card__btn { margin-top: 0.8rem; text-align: center; justify-content: center; }
 
-  /* ═══════════════════════════════════════════
-     CTA
-     ═══════════════════════════════════════════ */
-  .sc-cta-section {
-    padding-top: 2rem;
-  }
-
-  .sc-cta {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background-color: #080a10;
-    background-image:
-      linear-gradient(135deg, rgba(12, 20, 40, 0.92), rgba(6, 10, 22, 0.96)),
-      var(--cta-bg);
-    background-size: cover;
-    background-position: center;
-    color: #f2ede6;
-    padding: clamp(2.5rem, 5vw, 4.5rem);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .sc-cta.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .sc-cta__inner {
-    max-width: 38rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .sc-cta__tag {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.55);
-    margin-bottom: 1rem;
-  }
-
-  .sc-cta__inner h2 {
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    margin-bottom: 0.8rem;
-    color: #f2ede6;
-  }
-
-  .sc-cta__inner p {
-    color: rgba(242, 237, 230, 0.75);
-    margin-bottom: 1.8rem;
-  }
-
-  .sc-cta__button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.95rem 2.2rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    color: #fff;
-    background: var(--color-accent);
-    box-shadow: 0 10px 30px rgba(255, 89, 0, 0.3);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    isolation: isolate;
-    position: relative;
-  }
-
-  .sc-cta__button::after {
-    content: '';
-    position: absolute;
-    inset: -30%;
-    z-index: -1;
-    filter: blur(20px);
-    background: radial-gradient(circle, rgba(255, 195, 0, 0.6) 0%, rgba(255, 89, 0, 0.45) 40%, transparent 70%);
-    animation: sc-cta-pulse 3s ease-in-out infinite;
-    opacity: 0.7;
-  }
-
-  .sc-cta__button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 40px rgba(255, 89, 0, 0.4);
-    text-decoration: none;
-    color: #fff;
-  }
-
-  @keyframes sc-cta-pulse {
-    0%, 100% { transform: scale(0.85); opacity: 0.6; }
-    50% { transform: scale(1.05); opacity: 0.9; }
-  }
 
   /* ═══════════════════════════════════════════
      LIGHTBOX
@@ -1794,6 +1684,79 @@ const pricingCards = [
     .sc-pricing__grid {
       grid-template-columns: 1fr;
       gap: 1rem;
+    }
+
+    .sc-calendar {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transform: none;
+      box-shadow: none;
+      max-width: none;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .sc-calendar:not(.is-open) {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sc-calendar.is-open {
+      opacity: 1;
+      transform: none;
+    }
+
+    .sc-calendar__nav,
+    .sc-calendar__weekdays,
+    .sc-calendar__days {
+      background: #1a1d24;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+    }
+
+    .sc-calendar__nav {
+      border-radius: 20px 20px 0 0;
+      padding-top: 1.4rem;
+      padding-bottom: 0.6rem;
+      margin-bottom: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sc-calendar__weekdays {
+      padding-top: 0.2rem;
+      padding-bottom: 0.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .sc-calendar__days {
+      padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
+    }
+
+    .sc-calendar__day {
+      padding: 0.6rem 0;
+      font-size: 0.95rem;
+    }
+
+    .sc-calendar__weekdays span {
+      font-size: 0.7rem;
+      padding: 0.35rem 0;
+    }
+
+    .sc-calendar__month-year {
+      font-size: 1.05rem;
+    }
+
+    .sc-calendar__arrow {
+      width: 36px;
+      height: 36px;
     }
 
     .sc-lightbox__nav--prev { left: 0.5rem; }
@@ -2138,6 +2101,9 @@ const pricingCards = [
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    position: relative;
+    inset: auto;
+    min-height: 12rem;
   }
 
   .sc-tour-form__success-icon {
@@ -2168,8 +2134,7 @@ const pricingCards = [
     .sc-audience__card,
     .sc-mosaic__item,
     .sc-price-card,
-    .sc-route-card,
-    .sc-cta {
+    .sc-route-card {
       opacity: 1;
       transform: none;
       transition: none;
@@ -2187,9 +2152,6 @@ const pricingCards = [
     .sc-hero__dot.is-active .sc-hero__dot-fill {
       animation: none;
       transform: scaleX(1);
-    }
-    .sc-cta__button::after {
-      animation: none;
     }
   }
 </style>
