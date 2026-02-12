@@ -184,6 +184,95 @@ const fallbackQuatrain =
     </div>
   </section>
 
+  <section class="section section--experience">
+    <div class="container">
+      <div class="section__header xp__header">
+        <h2>
+          Amalfi <span class="accent-italic">with us</span>
+        </h2>
+        <a class="section__subtitle-link" href="/experience">
+          We offer the most creative ways to experience the Amalfi Coast.
+        </a>
+      </div>
+      <div class="xp-grid">
+        <a class="xp-card" href="/experience/car-tours">
+          <div class="xp-card__media">
+            <img
+              src="/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp"
+              alt="Scenic Coast — private car tour along the Amalfi Coast"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="xp-card__body">
+            <div class="xp-card__top">
+              <span class="xp-card__eyebrow">Private car tour</span>
+              <h3 class="xp-card__title">Scenic Coast</h3>
+            </div>
+            <p class="xp-card__text">
+              Cliff-top viewpoints, charming villages, limoncello tasting, and a local lunch by the sea.
+            </p>
+            <div class="xp-card__tags">
+              <span class="xp-card__tag">8 hours</span>
+              <span class="xp-card__tag">Up to 6 ppl</span>
+            </div>
+          </div>
+          <span class="xp-card__arrow"><i class="bi bi-arrow-up-right"></i></span>
+        </a>
+
+        <a class="xp-card" href="/experience/car-tours">
+          <div class="xp-card__media">
+            <img
+              src="/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp"
+              alt="Peak Flavors — food and wine tour in Tramonti Valley"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="xp-card__body">
+            <div class="xp-card__top">
+              <span class="xp-card__eyebrow">Wine &amp; food tour</span>
+              <h3 class="xp-card__title">Peak Flavors</h3>
+            </div>
+            <p class="xp-card__text">
+              Buffalo mozzarella, hillside vineyards, and panoramic mountain views you won't find in any guidebook.
+            </p>
+            <div class="xp-card__tags">
+              <span class="xp-card__tag">8 hours</span>
+              <span class="xp-card__tag">Wine tasting</span>
+            </div>
+          </div>
+          <span class="xp-card__arrow"><i class="bi bi-arrow-up-right"></i></span>
+        </a>
+
+        <a class="xp-card" href="/experience/scooter">
+          <div class="xp-card__media">
+            <img
+              src="/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp"
+              alt="Scooter Photo Tour along the Amalfi Coast"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="xp-card__body">
+            <div class="xp-card__top">
+              <span class="xp-card__eyebrow">Motorbike adventure</span>
+              <h3 class="xp-card__title">Scooter Photo Tour</h3>
+            </div>
+            <p class="xp-card__text">
+              Cliffside roads, cinematic overlooks, and 50+ professional photos to take home.
+            </p>
+            <div class="xp-card__tags">
+              <span class="xp-card__tag">4 hours</span>
+              <span class="xp-card__tag">Photo included</span>
+            </div>
+          </div>
+          <span class="xp-card__arrow"><i class="bi bi-arrow-up-right"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--photos">
     <div class="container">
       <div class="section__header">
@@ -999,6 +1088,144 @@ const fallbackQuatrain =
 
 
 
+  /* ── Experience cards ── */
+  .section--experience {
+    background: var(--color-bg);
+  }
+
+  .xp__header {
+    align-items: baseline;
+  }
+
+  .xp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .xp-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .xp-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+    text-decoration: none;
+  }
+
+  .xp-card__media {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+  }
+
+  .xp-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .xp-card:hover .xp-card__media img {
+    transform: scale(1.06);
+  }
+
+  .xp-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.4rem 1.5rem 1.5rem;
+    flex: 1;
+  }
+
+  .xp-card__top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .xp-card__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .xp-card__title {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  .xp-card__text {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    flex: 1;
+  }
+
+  .xp-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+
+  .xp-card__tag {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+  }
+
+  .xp-card__arrow {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #1a1a1a;
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+    z-index: 1;
+  }
+
+  .xp-card:hover .xp-card__arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+    background: var(--color-accent);
+    color: #ffffff;
+  }
+
   @media (max-width: 1000px) {
     .hero__mosaic {
       grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1066,6 +1293,30 @@ const fallbackQuatrain =
 
     .etsy__gallery {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .xp-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .xp-card {
+      flex-direction: row;
+      height: auto;
+    }
+
+    .xp-card__media {
+      width: 200px;
+      min-width: 200px;
+      height: auto;
+      min-height: 200px;
+    }
+
+    .xp-card__arrow {
+      opacity: 1;
+      transform: translate(0, 0);
+      top: auto;
+      bottom: 1rem;
+      right: 1rem;
     }
   }
 
@@ -1152,6 +1403,17 @@ const fallbackQuatrain =
 
     .etsy__gallery {
       grid-template-columns: 1fr;
+    }
+
+    .xp-card {
+      flex-direction: column;
+    }
+
+    .xp-card__media {
+      width: 100%;
+      min-width: 0;
+      height: 220px;
+      min-height: 0;
     }
   }
 </style>
