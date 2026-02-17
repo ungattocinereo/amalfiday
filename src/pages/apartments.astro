@@ -247,13 +247,13 @@ const testimonials = [
           <article
             class={`stay-card${stay.galleryStyle === 'scroll' ? ' stay-card--scroll stay-card--villa' : ''}`}
           >
-            <div
-              class={`stay-card__media${stay.galleryStyle === 'scroll' ? ' stay-card__media--scroll' : ''}`}
-              data-gallery
-              data-gallery-mode={stay.galleryStyle ?? 'cycle'}
-            >
-              {stay.galleryStyle === 'scroll' ? (
-                <>
+            {stay.galleryStyle === 'scroll' ? (
+              <>
+                <div
+                  class="stay-card__media stay-card__media--scroll"
+                  data-gallery
+                  data-gallery-mode="scroll"
+                >
                   <div class="stay-card__track">
                   {stay.gallery.map((src) => (
                     <div class="stay-card__slide">
@@ -287,73 +287,77 @@ const testimonials = [
                       </button>
                     </>
                   )}
-                </>
-              ) : (
-                <>
-                  {stay.gallery.map((src, index) => (
-                    <img
-                      class={`stay-card__image${index === 0 ? ' is-active' : ''}`}
-                      src={src}
-                      data-gallery-image
-                      alt={`${stay.name} photo`}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  ))}
-                  {stay.gallery.length > 1 && (
-                    <>
-                      <button
-                        class="gallery-control"
-                        type="button"
-                        data-gallery-prev
-                        aria-label="Previous photo"
-                      >
-                        <i class="bi bi-chevron-left"></i>
-                      </button>
-                      <button
-                        class="gallery-control"
-                        type="button"
-                        data-gallery-next
-                        aria-label="Next photo"
-                      >
-                        <i class="bi bi-chevron-right"></i>
-                      </button>
-                    </>
+                </div>
+                <div class="stay-card__details">
+                  <div class="stay-card__content">
+                    <h3>{stay.name}</h3>
+                    <p>{stay.description}</p>
+                  </div>
+                  {stay.calendar && (
+                    <div
+                      class="stay-calendar"
+                      data-calendar
+                      data-calendar-name={stay.calendar}
+                    >
+                      <span class="calendar__loading">Loading availability...</span>
+                    </div>
                   )}
-                </>
-              )}
-            </div>
-
-            {stay.galleryStyle === 'scroll' ? (
-              <div class="stay-card__details">
+                </div>
+              </>
+            ) : (
+              <>
+                <div class="stay-card__top">
+                  <div
+                    class="stay-card__media"
+                    data-gallery
+                    data-gallery-mode="cycle"
+                  >
+                    {stay.gallery.map((src, index) => (
+                      <img
+                        class={`stay-card__image${index === 0 ? ' is-active' : ''}`}
+                        src={src}
+                        data-gallery-image
+                        alt={`${stay.name} photo`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ))}
+                    {stay.gallery.length > 1 && (
+                      <>
+                        <button
+                          class="gallery-control"
+                          type="button"
+                          data-gallery-prev
+                          aria-label="Previous photo"
+                        >
+                          <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button
+                          class="gallery-control"
+                          type="button"
+                          data-gallery-next
+                          aria-label="Next photo"
+                        >
+                          <i class="bi bi-chevron-right"></i>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                  {stay.calendar && (
+                    <div
+                      class="stay-calendar"
+                      data-calendar
+                      data-calendar-name={stay.calendar}
+                    >
+                      <span class="calendar__loading">Loading availability...</span>
+                    </div>
+                  )}
+                </div>
                 <div class="stay-card__content">
                   <h3>{stay.name}</h3>
                   <p>{stay.description}</p>
                 </div>
-                {stay.calendar && (
-                  <div
-                    class="stay-calendar"
-                    data-calendar
-                    data-calendar-name={stay.calendar}
-                  >
-                    <span class="calendar__loading">Loading availability...</span>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div class="stay-card__content">
-                <h3>{stay.name}</h3>
-                <p>{stay.description}</p>
-                {stay.calendar && (
-                  <div
-                    class="stay-calendar"
-                    data-calendar
-                    data-calendar-name={stay.calendar}
-                  >
-                    <span class="calendar__loading">Loading availability...</span>
-                  </div>
-                )}
-              </div>
+              </>
             )}
           </article>
         ))}
@@ -625,8 +629,12 @@ const testimonials = [
       const months = []
       const chips = []
 
-      for (let i = 0; i < 12; i++) {
+      const endYear = 2026
+      const endMonth = 10 // November (0-indexed)
+
+      for (let i = 0; ; i++) {
         const d = new Date(today.getFullYear(), today.getMonth() + i, 1)
+        if (d.getFullYear() > endYear || (d.getFullYear() === endYear && d.getMonth() > endMonth)) break
         const year = d.getFullYear()
         const month = d.getMonth()
         const ratio = computeMonthStats(year, month, busy, today)
@@ -1101,6 +1109,23 @@ const testimonials = [
     box-shadow: none;
   }
 
+  .stay-card__top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    min-width: 0;
+  }
+
+  .stay-card__top > * {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .stay-card__top .stay-calendar {
+    margin-top: 0;
+  }
+
   .stay-card__media {
     position: relative;
     border-radius: 22px;
@@ -1232,6 +1257,7 @@ const testimonials = [
   }
 
   .stay-card__content h3 {
+    font-size: 1.5rem;
     margin-bottom: 0.6rem;
   }
 
@@ -1621,6 +1647,10 @@ const testimonials = [
 
   @media (max-width: 900px) {
     .stay-section--two .stay-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stay-card__top {
       grid-template-columns: 1fr;
     }
 
