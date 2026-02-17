@@ -578,7 +578,7 @@ const testimonials = [
     }
 
     const chipColor = (ratio) => {
-      if (ratio < 0.3) return 'rgba(0, 156, 255, 0.1)'
+      if (ratio < 0.3) return 'rgba(0, 0, 0, 0.04)'
       if (ratio < 0.7) return 'rgba(255, 89, 0, 0.08)'
       return 'rgba(255, 89, 0, 0.18)'
     }
@@ -1292,7 +1292,7 @@ const testimonials = [
   /* Calendar */
   .stay-calendar {
     margin-top: 1.5rem;
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: var(--radius-md);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -1315,8 +1315,8 @@ const testimonials = [
 
   /* Year-at-a-glance bar */
   :global(.cal__yearbar) {
-    padding-bottom: 0.75rem;
-    margin-bottom: 0.75rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
     border-bottom: 1px solid var(--color-border);
     overflow: hidden;
   }
@@ -1376,13 +1376,13 @@ const testimonials = [
 
   :global(.cal__strip) {
     display: flex;
-    gap: 1.25rem;
+    gap: 1.5rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    padding: 0.25rem 0;
+    padding: 0.5rem 0;
   }
 
   :global(.cal__strip::-webkit-scrollbar) {
@@ -1437,7 +1437,7 @@ const testimonials = [
     display: flex;
     align-items: baseline;
     gap: 0.35rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
   }
 
   :global(.cal__month-name) {
@@ -1459,7 +1459,7 @@ const testimonials = [
   :global(.cal__grid) {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    gap: 3px;
   }
 
   :global(.cal__dow) {
@@ -1475,7 +1475,7 @@ const testimonials = [
 
   /* Day cells */
   :global(.cal__cell) {
-    height: 26px;
+    height: 28px;
     display: grid;
     place-items: center;
     border-radius: 5px;
@@ -1491,11 +1491,11 @@ const testimonials = [
   }
 
   :global(.cal__cell--free) {
-    background: rgba(0, 156, 255, 0.08);
+    background: rgba(0, 0, 0, 0.04);
   }
 
   :global(.cal__cell--free:not(.cal__cell--past):hover) {
-    background: rgba(0, 156, 255, 0.18);
+    background: rgba(0, 0, 0, 0.08);
     transform: scale(1.06);
   }
 
@@ -1529,7 +1529,7 @@ const testimonials = [
   :global(.cal__legend) {
     display: flex;
     gap: 1rem;
-    margin-top: 0.6rem;
+    margin-top: 0.75rem;
     padding-top: 0.5rem;
   }
 
@@ -1551,7 +1551,7 @@ const testimonials = [
   }
 
   :global(.cal__swatch--free) {
-    background: rgba(0, 156, 255, 0.15);
+    background: rgba(0, 0, 0, 0.08);
   }
 
   :global(.cal__swatch--busy) {
@@ -1581,11 +1581,11 @@ const testimonials = [
 
   /* Night theme fine-tuning */
   :global([data-theme='night'] .cal__cell--free) {
-    background: rgba(0, 156, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
   }
 
   :global([data-theme='night'] .cal__cell--free:not(.cal__cell--past):hover) {
-    background: rgba(0, 156, 255, 0.22);
+    background: rgba(255, 255, 255, 0.12);
   }
 
   :global([data-theme='night'] .cal__cell--busy) {

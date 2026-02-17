@@ -16,10 +16,10 @@ const CAL_URLS = {
     'https://ical.booking.com/v1/export?t=b7023f35-c3ae-44bb-b122-ddc15f4d7e26',
   ],
   'Vintage Room': [
-    'https://ical.booking.com/v1/export?t=e7b18790-16b3-4000-b2e0-c4b5076f20d5',
+    'https://ical.booking.com/v1/export/t/ea3e0ad0-f516-43af-a678-dd860ca9e8df.ics',
   ],
   'Orange Room': [
-    'https://ical.booking.com/v1/export?t=ac4e5066-83f2-4720-8d10-dd865612e91d',
+    'https://ical.booking.com/v1/export/t/acb8b56c-0940-4aeb-ab6d-3de433afab7f.ics',
   ],
   'Casa Carina': [
     'https://www.airbnb.com/calendar/ical/20551225.ics?s=dbbc3c718fa519684c8b4bc62d4e0708',
