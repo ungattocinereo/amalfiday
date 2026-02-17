@@ -1,0 +1,262 @@
+{
+  "desktop_1920x1080": {
+    "viewport": "1920x1080",
+    "elements": {
+      "h1": null
+    },
+    "seo": {
+      "title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+      "title_length": 36,
+      "meta_description": "Amalfi.Day is a local guide for Amalfi Coast photoshoots, apartments in Atrani, beach reviews, and curated experiences in Amalfi, Ravello, and Positano.",
+      "og_title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+      "og_image": "https://amalfi.day/staticpages/video/atrani-sorrento-video.webp",
+      "canonical": "https://amalfi.day/"
+    },
+    "ctas_above_fold": [
+      {
+        "text": "Contact",
+        "href": "/contact",
+        "y_position": 40.8125
+      },
+      {
+        "text": "guide.amalfi.day",
+        "href": "https://guide.amalfi.day",
+        "y_position": 396.609375
+      },
+      {
+        "text": "Bus timetables",
+        "href": "https://cnr.pw/bus",
+        "y_position": 396.609375
+      },
+      {
+        "text": "Ferry timetables",
+        "href": "https://cnr.pw/ferry",
+        "y_position": 396.609375
+      },
+      {
+        "text": "Photoshoots\nGet the best professional photos of yourself.",
+        "href": "/photoshootings",
+        "y_position": 616.3125
+      },
+      {
+        "text": "Amalfi news",
+        "href": "/blog",
+        "y_position": 779.6875
+      },
+      {
+        "text": "Public transport",
+        "href": "/timetables",
+        "y_position": 779.6875
+      },
+      {
+        "text": "Apartment rentals",
+        "href": "/apartments",
+        "y_position": 779.6875
+      },
+      {
+        "text": "Parking tips",
+        "href": "/parking",
+        "y_position": 779.6875
+      },
+      {
+        "text": "Beach reviews",
+        "href": "/beaches",
+        "y_position": 779.6875
+      },
+      {
+        "text": "Moto roads",
+        "href": "/moto",
+        "y_position": 779.6875
+      }
+    ],
+    "navigation_present": true,
+    "image_issues": [
+      {
+        "src": "/brand/logo-light.svg",
+        "issue": "missing alt text"
+      },
+      {
+        "src": "/staticpages/index/bus-timetables.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/index/ferry-timetables.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/index/blog-of-amalfi-coast.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/mainpage/allublictransport.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/mainpage/rental-houses.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/mainpage/parking.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/mainpage/beach-reviews.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/index/moto-roads-in-amalfi.webp",
+        "issue": "above-fold image with lazy loading"
+      }
+    ]
+  },
+  "laptop_1366x768": {
+    "viewport": "1366x768",
+    "elements": {
+      "h1": null
+    },
+    "seo": {
+      "title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+      "title_length": 36,
+      "meta_description": "Amalfi.Day is a local guide for Amalfi Coast photoshoots, apartments in Atrani, beach reviews, and curated experiences in Amalfi, Ravello, and Positano.",
+      "og_title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+      "og_image": "https://amalfi.day/staticpages/video/atrani-sorrento-video.webp",
+      "canonical": "https://amalfi.day/"
+    },
+    "ctas_above_fold": [
+      {
+        "text": "Contact",
+        "href": "/contact",
+        "y_position": 40.8125
+      },
+      {
+        "text": "guide.amalfi.day",
+        "href": "https://guide.amalfi.day",
+        "y_position": 396.609375
+      },
+      {
+        "text": "Bus timetables",
+        "href": "https://cnr.pw/bus",
+        "y_position": 396.609375
+      },
+      {
+        "text": "Ferry timetables",
+        "href": "https://cnr.pw/ferry",
+        "y_position": 396.609375
+      },
+      {
+        "text": "Photoshoots\nGet the best professional photos of yourself.",
+        "href": "/photoshootings",
+        "y_position": 616.3125
+      }
+    ],
+    "navigation_present": true,
+    "image_issues": [
+      {
+        "src": "/brand/logo-light.svg",
+        "issue": "missing alt text"
+      },
+      {
+        "src": "/staticpages/index/bus-timetables.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/index/ferry-timetables.webp",
+        "issue": "above-fold image with lazy loading"
+      }
+    ]
+  },
+  "tablet_768x1024": {
+    "viewport": "768x1024",
+    "elements": {
+      "h1": null
+    },
+    "seo": {
+      "title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+      "title_length": 36,
+      "meta_description": "Amalfi.Day is a local guide for Amalfi Coast photoshoots, apartments in Atrani, beach reviews, and curated experiences in Amalfi, Ravello, and Positano.",
+      "og_title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+      "og_image": "https://amalfi.day/staticpages/video/atrani-sorrento-video.webp",
+      "canonical": "https://amalfi.day/"
+    },
+    "ctas_above_fold": [
+      {
+        "text": "guide.amalfi.day",
+        "href": "https://guide.amalfi.day",
+        "y_position": 371.546875
+      }
+    ],
+    "navigation_present": true,
+    "image_issues": [
+      {
+        "src": "/brand/logo-light.svg",
+        "issue": "missing alt text"
+      },
+      {
+        "src": "/brand/logo-light.svg",
+        "issue": "missing alt text"
+      },
+      {
+        "src": "/staticpages/index/bus-timetables.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/index/ferry-timetables.webp",
+        "issue": "above-fold image with lazy loading"
+      }
+    ],
+    "horizontal_overflow": false,
+    "base_font_size": "16px"
+  },
+  "mobile_375x812": {
+    "viewport": "375x812",
+    "elements": {
+      "h1": null
+    },
+    "seo": {
+      "title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+      "title_length": 36,
+      "meta_description": "Amalfi.Day is a local guide for Amalfi Coast photoshoots, apartments in Atrani, beach reviews, and curated experiences in Amalfi, Ravello, and Positano.",
+      "og_title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+      "og_image": "https://amalfi.day/staticpages/video/atrani-sorrento-video.webp",
+      "canonical": "https://amalfi.day/"
+    },
+    "ctas_above_fold": [
+      {
+        "text": "guide.amalfi.day",
+        "href": "https://guide.amalfi.day",
+        "y_position": 348.9375
+      },
+      {
+        "text": "Bus timetables",
+        "href": "https://cnr.pw/bus",
+        "y_position": 628.125
+      },
+      {
+        "text": "Ferry timetables",
+        "href": "https://cnr.pw/ferry",
+        "y_position": 628.125
+      }
+    ],
+    "navigation_present": true,
+    "image_issues": [
+      {
+        "src": "/brand/logo-light.svg",
+        "issue": "missing alt text"
+      },
+      {
+        "src": "/brand/logo-light.svg",
+        "issue": "missing alt text"
+      },
+      {
+        "src": "/staticpages/index/bus-timetables.webp",
+        "issue": "above-fold image with lazy loading"
+      },
+      {
+        "src": "/staticpages/index/ferry-timetables.webp",
+        "issue": "above-fold image with lazy loading"
+      }
+    ],
+    "horizontal_overflow": false,
+    "base_font_size": "16px"
+  }
+}

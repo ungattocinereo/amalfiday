@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /design-guidelines/
+Disallow: /photoshootings/template/
+Disallow: /blog/*/edit/
+
+Sitemap: https://amalfi.day/sitemap-index.xml

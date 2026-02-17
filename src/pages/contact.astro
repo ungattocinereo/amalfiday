@@ -186,7 +186,13 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         </div>
       </div>
 
-      <form class="contact-form" action="/hooks/send-telegram-amalfiday" method="post">
+      <form
+        class="contact-form"
+        action="/api/contact"
+        method="post"
+        data-primary-endpoint="/api/contact"
+        data-fallback-endpoint="/hooks/send-telegram-amalfiday"
+      >
         <div class="contact-form__body">
           <div class="contact-form__header">
             <span class="badge"><i class="bi bi-stars"></i> Telegram-ready request</span>
@@ -292,6 +298,11 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
             Your message
             <textarea name="message" rows="5" placeholder="Tell us about your plans"></textarea>
           </label>
+          <label class="contact-form__trap" aria-hidden="true">
+            Leave this field empty
+            <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+          </label>
+          <input type="hidden" name="_form_started_at" value="" />
           <div class="contact-form__submit-row">
             <button class="button contact-form__submit-button" type="submit">
               <i class="bi bi-send"></i> Send request
@@ -336,6 +347,13 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     const serviceIcon = serviceSelect?.querySelector('.service-select__icon i')
     const serviceOptions = serviceSelect?.querySelectorAll('.service-select__option')
     const contactInput = form?.querySelector('input[name="contact"]')
+    const honeypotInput = form?.querySelector('input[name="company_website"]')
+    const formStartedAtInput = form?.querySelector('input[name="_form_started_at"]')
+    const primaryEndpoint = form?.dataset.primaryEndpoint || '/api/contact'
+    const fallbackEndpoint = form?.dataset.fallbackEndpoint || '/hooks/send-telegram-amalfiday'
+    const minFillMs = 3500
+    const submitCooldownMs = 60_000
+    const submitCooldownKey = 'amalfi-contact-last-submit-at'
 
     const setStatus = (text, state) => {
       if (!status) return
@@ -415,6 +433,67 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       contactInput.setCustomValidity('')
       return true
     }
+
+    const resetAntiSpamFields = () => {
+      if (honeypotInput) honeypotInput.value = ''
+      if (formStartedAtInput) formStartedAtInput.value = String(Date.now())
+    }
+
+    const getLastSubmitAt = () => {
+      try {
+        const value = localStorage.getItem(submitCooldownKey)
+        return value ? Number(value) : 0
+      } catch (_error) {
+        return 0
+      }
+    }
+
+    const rememberSubmitAt = () => {
+      try {
+        localStorage.setItem(submitCooldownKey, String(Date.now()))
+      } catch (_error) {
+        // storage is optional
+      }
+    }
+
+    const postJson = async (endpoint, requestBody) => {
+      let response
+      try {
+        response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody),
+        })
+      } catch (_error) {
+        const error = new Error('Network error')
+        error.code = 'network'
+        throw error
+      }
+
+      let raw = ''
+      try {
+        raw = await response.text()
+      } catch (_error) {
+        raw = ''
+      }
+
+      let result = {}
+      if (raw) {
+        try {
+          result = JSON.parse(raw)
+        } catch (_error) {
+          result = {}
+        }
+      }
+
+      if (!response.ok || result.error) {
+        const error = new Error(result.error || raw || `Request failed (${response.status})`)
+        error.code = response.status >= 500 || response.status === 404 ? 'server' : 'request'
+        throw error
+      }
+    }
+
+    resetAntiSpamFields()
 
     const openServiceSelect = () => {
       if (!serviceSelect) return
@@ -517,17 +596,37 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       form.classList.add('is-resetting')
       window.setTimeout(() => {
         clearSuccessState()
+        resetAntiSpamFields()
         setStatus('We will send your request directly to Telegram.')
       }, 450)
     })
 
     form?.addEventListener('submit', async (event) => {
       event.preventDefault()
-      
-      // Валидация контакта
+
+      if (honeypotInput?.value.trim()) {
+        form.reset()
+        resetServiceSelect()
+        resetAntiSpamFields()
+        setStatus('Thank you! We will get back to you shortly.', 'success')
+        showSuccessState()
+        return
+      }
+
+      const startedAt = Number(formStartedAtInput?.value || 0)
+      if (Number.isFinite(startedAt) && startedAt > 0 && Date.now() - startedAt < minFillMs) {
+        setStatus('Please wait a few seconds before sending.', 'error')
+        return
+      }
+
+      const lastSubmitAt = getLastSubmitAt()
+      if (lastSubmitAt > 0 && Date.now() - lastSubmitAt < submitCooldownMs) {
+        setStatus('Please wait one minute before sending another request.', 'error')
+        return
+      }
+
       const isContactValid = validateContact()
-      
-      // Строгая проверка service - блокируем отправку если не выбран
+
       if (!serviceInput?.value) {
         serviceInput?.setCustomValidity('Please select a service.')
         serviceSelect?.classList.add('is-invalid')
@@ -539,7 +638,6 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         serviceSelect?.classList.remove('is-invalid')
       }
 
-      // Проверка остальных полей
       if (!form.reportValidity() || !isContactValid) {
         return
       }
@@ -560,37 +658,31 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         referrer: document.referrer || window.location.href || '',
         page: window.location.href || '',
       }
+      const requestBody = { ...payload, ...clientMeta }
 
       try {
-        const response = await fetch('/hooks/send-telegram-amalfiday', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...payload, ...clientMeta }),
-        })
-
-        // Всегда пытаемся распарсить JSON первым делом
-        let result
         try {
-          result = await response.json()
-        } catch (parseError) {
-          // Если не удалось распарсить JSON (например, HTML-ошибка 500), читаем как текст
-          const text = await response.text()
-          throw new Error(text || `Server error: ${response.status}`)
+          await postJson(primaryEndpoint, requestBody)
+        } catch (primaryError) {
+          const canFallback =
+            fallbackEndpoint &&
+            fallbackEndpoint !== primaryEndpoint &&
+            (primaryError?.code === 'network' || primaryError?.code === 'server')
+          if (!canFallback) {
+            throw primaryError
+          }
+          await postJson(fallbackEndpoint, requestBody)
         }
 
-        // Теперь проверяем статус и содержимое ответа
-        if (!response.ok || result.error) {
-          throw new Error(result.error || 'Request failed')
-        }
-
+        rememberSubmitAt()
         form.reset()
         resetServiceSelect()
+        resetAntiSpamFields()
         setStatus('Thank you! We will get back to you shortly.', 'success')
         showSuccessState()
       } catch (error) {
         clearSuccessState()
-        console.error('Webhook error:', error)
-        // Показываем пользователю понятное сообщение
+        console.error('Contact form request failed:', error)
         setStatus('Sorry, something went wrong. Please email hello@amalfi.day.', 'error')
       } finally {
         if (submitButton) submitButton.disabled = false
@@ -920,6 +1012,16 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     text-align: left;
     overflow: hidden;
     transition: background 0.6s ease, box-shadow 0.6s ease;
+  }
+
+  .contact-form__trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .contact-form.is-success {

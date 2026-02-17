@@ -1,3 +1,54 @@
+const RATE_WINDOW_MS = 10 * 60 * 1000
+const RATE_LIMIT_MAX = 6
+const MIN_FORM_FILL_MS = 3500
+const SPAM_WORDS_REGEX = /\b(casino|porn|viagra|forex|escort|betting)\b/i
+const FIELD_LIMITS = {
+  name: 80,
+  contact: 120,
+  dates: 160,
+  service: 80,
+  message: 2000,
+}
+
+const requestBuckets = new Map()
+
+const escapeHtml = (value) =>
+  String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+
+const countLinks = (value) => (String(value || '').match(/https?:\/\/|www\./gi) || []).length
+
+const isSpamText = (value) => {
+  const text = String(value || '').trim()
+  if (!text) return false
+  if (SPAM_WORDS_REGEX.test(text)) return true
+  if (countLinks(text) > 1) return true
+  return /<a\s|<script|href=/i.test(text)
+}
+
+const withinLimit = (value, maxLength) => String(value || '').length <= maxLength
+
+const takeRateLimitSlot = (ip) => {
+  const now = Date.now()
+  const bucket = requestBuckets.get(ip) || []
+  const fresh = bucket.filter((entry) => now - entry < RATE_WINDOW_MS)
+
+  if (fresh.length >= RATE_LIMIT_MAX) {
+    const retryAfterMs = RATE_WINDOW_MS - (now - fresh[0])
+    return {
+      allowed: false,
+      retryAfterSec: Math.max(1, Math.ceil(retryAfterMs / 1000)),
+    }
+  }
+
+  fresh.push(now)
+  requestBuckets.set(ip, fresh)
+  return { allowed: true, retryAfterSec: 0 }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -13,36 +64,13 @@ export default async function handler(req, res) {
     return
   }
 
-  const token = process.env.TELEGRAM_BOT_TOKEN
-  const chatId = process.env.TELEGRAM_CHAT_ID
-
-  if (!token || !chatId) {
-    res.status(500).json({ error: 'Missing Telegram credentials' })
-    return
-  }
-
   let payload = {}
-
   try {
     payload = typeof req.body === 'string' ? JSON.parse(req.body) : req.body || {}
-  } catch (error) {
+  } catch (_error) {
     res.status(400).json({ error: 'Invalid JSON payload' })
     return
   }
-
-  const { name, contact, dates, message, service } = payload
-
-  if (!contact || !dates || !service) {
-    res.status(400).json({ error: 'Missing required fields' })
-    return
-  }
-
-  const escapeHtml = (value) =>
-    String(value ?? '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
 
   const headerValue = (key) => {
     const value = req.headers[key]
@@ -71,6 +99,75 @@ export default async function handler(req, res) {
     payloadValue('ip') ||
     req.socket?.remoteAddress ||
     'unknown'
+
+  const honeypotValue = pickValue(
+    payloadValue('company_website'),
+    payloadValue('company'),
+    payloadValue('website'),
+  )
+  if (honeypotValue) {
+    res.status(200).json({ ok: true })
+    return
+  }
+
+  const startedAtValue = Number(payload?._form_started_at ?? payload?.form_started_at)
+  if (
+    Number.isFinite(startedAtValue) &&
+    startedAtValue > 0 &&
+    Date.now() - startedAtValue < MIN_FORM_FILL_MS
+  ) {
+    res.status(200).json({ ok: true })
+    return
+  }
+
+  const rate = takeRateLimitSlot(ip)
+  if (!rate.allowed) {
+    res.setHeader('Retry-After', String(rate.retryAfterSec))
+    res.status(429).json({ error: 'Too many requests. Please try again later.' })
+    return
+  }
+
+  const token = process.env.TELEGRAM_BOT_TOKEN
+  const chatId = process.env.TELEGRAM_CHAT_ID
+  if (!token || !chatId) {
+    res.status(500).json({ error: 'Missing Telegram credentials' })
+    return
+  }
+
+  const name = payloadValue('name')
+  const contact = payloadValue('contact')
+  const dates = payloadValue('dates')
+  const message = payloadValue('message')
+  const service = payloadValue('service')
+
+  if (!contact || !dates || !service) {
+    res.status(400).json({ error: 'Missing required fields' })
+    return
+  }
+
+  if (
+    !withinLimit(name, FIELD_LIMITS.name) ||
+    !withinLimit(contact, FIELD_LIMITS.contact) ||
+    !withinLimit(dates, FIELD_LIMITS.dates) ||
+    !withinLimit(service, FIELD_LIMITS.service) ||
+    !withinLimit(message, FIELD_LIMITS.message)
+  ) {
+    res.status(400).json({ error: 'Invalid field length' })
+    return
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const phoneDigits = contact.replace(/\D/g, '')
+  if (!emailRegex.test(contact) && phoneDigits.length < 7) {
+    res.status(400).json({ error: 'Invalid contact field' })
+    return
+  }
+
+  if (countLinks(contact) > 0 || isSpamText(name) || isSpamText(dates) || isSpamText(message)) {
+    res.status(400).json({ error: 'Rejected as spam' })
+    return
+  }
+
   const city = headerValue('x-vercel-ip-city') || headerValue('cf-ipcity')
   const region = headerValue('x-vercel-ip-country-region') || headerValue('x-vercel-ip-region')
   const country = headerValue('x-vercel-ip-country') || headerValue('cf-ipcountry')
@@ -79,10 +176,8 @@ export default async function handler(req, res) {
   const payloadLocation = payloadValue('location')
   const payloadCoords = payloadValue('coords')
   const location = pickValue([city, region, country].filter(Boolean).join(', '), payloadLocation) || 'unknown'
-  const coords = pickValue(
-    latitude && longitude ? `${latitude}, ${longitude}` : '',
-    payloadCoords,
-  ) || 'unknown'
+  const coords =
+    pickValue(latitude && longitude ? `${latitude}, ${longitude}` : '', payloadCoords) || 'unknown'
   const userAgent =
     pickValue(headerValue('user-agent'), payloadValue('userAgent'), payloadValue('user_agent')) ||
     'unknown'
@@ -144,7 +239,7 @@ export default async function handler(req, res) {
     }
 
     res.status(200).json({ ok: true })
-  } catch (error) {
+  } catch (_error) {
     res.status(500).json({ error: 'Telegram request failed' })
   }
 }

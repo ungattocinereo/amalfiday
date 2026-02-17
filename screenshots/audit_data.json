@@ -1,0 +1,939 @@
+{
+  "desktop": {
+    "h1_text": null,
+    "h1_font_size": null,
+    "ctas_above_fold": [
+      {
+        "tag": "A",
+        "text": "",
+        "href": "https://amalfi.day/",
+        "top": 35,
+        "width": 186,
+        "height": 44
+      },
+      {
+        "tag": "A",
+        "text": "News",
+        "href": "https://amalfi.day/blog",
+        "top": 48,
+        "width": 61,
+        "height": 19
+      },
+      {
+        "tag": "A",
+        "text": "Experience",
+        "href": "https://amalfi.day/experience",
+        "top": 48,
+        "width": 98,
+        "height": 19
+      },
+      {
+        "tag": "A",
+        "text": "Apartments",
+        "href": "https://amalfi.day/apartments",
+        "top": 48,
+        "width": 103,
+        "height": 19
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "href": "https://instagram.com/amalfi.day",
+        "top": 41,
+        "width": 32,
+        "height": 32
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "href": "https://facebook.com/amalfi.day",
+        "top": 41,
+        "width": 32,
+        "height": 32
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "href": "https://amalfi.day/contact",
+        "top": 41,
+        "width": 85,
+        "height": 32
+      },
+      {
+        "tag": "A",
+        "text": "guide.amalfi.day",
+        "href": "https://guide.amalfi.day/",
+        "top": 397,
+        "width": 647,
+        "height": 364
+      },
+      {
+        "tag": "A",
+        "text": "Bus timetables",
+        "href": "https://cnr.pw/bus",
+        "top": 397,
+        "width": 147,
+        "height": 201
+      },
+      {
+        "tag": "A",
+        "text": "Ferry timetables",
+        "href": "https://cnr.pw/ferry",
+        "top": 397,
+        "width": 147,
+        "height": 201
+      },
+      {
+        "tag": "A",
+        "text": "Photoshoots\nGet the best professional photos of yourself.",
+        "href": "https://amalfi.day/photoshootings",
+        "top": 616,
+        "width": 314,
+        "height": 144
+      },
+      {
+        "tag": "A",
+        "text": "Amalfi news",
+        "href": "https://amalfi.day/blog",
+        "top": 780,
+        "width": 147,
+        "height": 147
+      },
+      {
+        "tag": "A",
+        "text": "Public transport",
+        "href": "https://amalfi.day/timetables",
+        "top": 780,
+        "width": 147,
+        "height": 147
+      },
+      {
+        "tag": "A",
+        "text": "Apartment rentals",
+        "href": "https://amalfi.day/apartments",
+        "top": 780,
+        "width": 147,
+        "height": 147
+      },
+      {
+        "tag": "A",
+        "text": "Parking tips",
+        "href": "https://amalfi.day/parking",
+        "top": 780,
+        "width": 147,
+        "height": 147
+      },
+      {
+        "tag": "A",
+        "text": "Beach reviews",
+        "href": "https://amalfi.day/beaches",
+        "top": 780,
+        "width": 147,
+        "height": 147
+      },
+      {
+        "tag": "A",
+        "text": "Moto roads",
+        "href": "https://amalfi.day/moto",
+        "top": 780,
+        "width": 147,
+        "height": 147
+      }
+    ],
+    "images": [
+      {
+        "src": "https://amalfi.day/brand/logo-dark.svg",
+        "alt": "Amalfi.Day",
+        "loading": "auto",
+        "width": 300,
+        "height": 71,
+        "display_width": 0,
+        "display_height": 0,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-light.svg",
+        "alt": "",
+        "loading": "auto",
+        "width": 300,
+        "height": 71,
+        "display_width": 0,
+        "display_height": 0,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-dark.svg",
+        "alt": "Amalfi.Day",
+        "loading": "auto",
+        "width": 300,
+        "height": 71,
+        "display_width": 0,
+        "display_height": 0,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-light.svg",
+        "alt": "",
+        "loading": "auto",
+        "width": 300,
+        "height": 71,
+        "display_width": 186,
+        "display_height": 44,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-dark.svg",
+        "alt": "Amalfi.Day",
+        "loading": "auto",
+        "width": 300,
+        "height": 71,
+        "display_width": 0,
+        "display_height": 0,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-light.svg",
+        "alt": "",
+        "loading": "auto",
+        "width": 300,
+        "height": 71,
+        "display_width": 0,
+        "display_height": 0,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/brand/amalficarion_logo.svg",
+        "alt": "The Amalfication",
+        "loading": "auto",
+        "width": 300,
+        "height": 60,
+        "display_width": 560,
+        "display_height": 112,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/video/atrani-sorrento-video.webp",
+        "alt": "Atrani to Sorrento coast",
+        "loading": "eager",
+        "width": 1928,
+        "height": 1072,
+        "display_width": 647,
+        "display_height": 364,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/index/bus-timetables.webp",
+        "alt": "Bus timetables",
+        "loading": "lazy",
+        "width": 1000,
+        "height": 1000,
+        "display_width": 147,
+        "display_height": 201,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/index/ferry-timetables.webp",
+        "alt": "Ferry timetables",
+        "loading": "lazy",
+        "width": 1000,
+        "height": 1000,
+        "display_width": 147,
+        "display_height": 201,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/index/blog-of-amalfi-coast.webp",
+        "alt": "Amalfi Coast blog and news",
+        "loading": "lazy",
+        "width": 1000,
+        "height": 1000,
+        "display_width": 147,
+        "display_height": 147,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/mainpage/allublictransport.webp",
+        "alt": "Public transport connections along the Amalfi Coast",
+        "loading": "lazy",
+        "width": 1200,
+        "height": 1200,
+        "display_width": 147,
+        "display_height": 147,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/mainpage/rental-houses.webp",
+        "alt": "Amalfi Coast apartments with sea view",
+        "loading": "lazy",
+        "width": 1200,
+        "height": 1200,
+        "display_width": 147,
+        "display_height": 147,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/mainpage/parking.webp",
+        "alt": "Parking area on the Amalfi Coast",
+        "loading": "lazy",
+        "width": 1200,
+        "height": 1200,
+        "display_width": 147,
+        "display_height": 147,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/mainpage/beach-reviews.webp",
+        "alt": "Amalfi Coast beach overview",
+        "loading": "lazy",
+        "width": 1200,
+        "height": 1200,
+        "display_width": 147,
+        "display_height": 147,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/index/moto-roads-in-amalfi.webp",
+        "alt": "Motorcycle roads on the Amalfi Coast",
+        "loading": "lazy",
+        "width": 1000,
+        "height": 1000,
+        "display_width": 147,
+        "display_height": 147,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp",
+        "alt": "Scenic Coast \u2014 private car tour along the Amalfi Coast",
+        "loading": "lazy",
+        "width": 2499,
+        "height": 1874,
+        "display_width": 366,
+        "display_height": 260,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp",
+        "alt": "Peak Flavors \u2014 food and wine tour in Tramonti Valley",
+        "loading": "lazy",
+        "width": 2500,
+        "height": 1875,
+        "display_width": 366,
+        "display_height": 260,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp",
+        "alt": "Scooter Photo Tour along the Amalfi Coast",
+        "loading": "lazy",
+        "width": 2500,
+        "height": 1395,
+        "display_width": 366,
+        "display_height": 260,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/photoshootings/individual/Shifa/Hero.webp",
+        "alt": "Amalfi Influencer Photoshoot",
+        "loading": "lazy",
+        "width": 2499,
+        "height": 1666,
+        "display_width": 270,
+        "display_height": 360,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp",
+        "alt": "The Perfect Gift to Yourself",
+        "loading": "lazy",
+        "width": 2499,
+        "height": 1666,
+        "display_width": 270,
+        "display_height": 360,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp",
+        "alt": "Morning Glow. True Atrani.",
+        "loading": "lazy",
+        "width": 2499,
+        "height": 1666,
+        "display_width": 270,
+        "display_height": 360,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp",
+        "alt": "Ravello Light Elegance",
+        "loading": "lazy",
+        "width": 2500,
+        "height": 1667,
+        "display_width": 270,
+        "display_height": 360,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp",
+        "alt": "Ravello Romance (Taylor & Regan)",
+        "loading": "lazy",
+        "width": 2500,
+        "height": 1667,
+        "display_width": 270,
+        "display_height": 360,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp",
+        "alt": "Symphony of Love",
+        "loading": "lazy",
+        "width": 2000,
+        "height": 1130,
+        "display_width": 270,
+        "display_height": 360,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp",
+        "alt": "Ayuna's Photographic Memoir",
+        "loading": "lazy",
+        "width": 2500,
+        "height": 1667,
+        "display_width": 270,
+        "display_height": 360,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/photoshootings/camelia/4-camelia-photoshooting-moto.webp",
+        "alt": "Camelia: Beautiful Experience",
+        "loading": "lazy",
+        "width": 2500,
+        "height": 1674,
+        "display_width": 270,
+        "display_height": 360,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/hf_20260211_153716_2c5e7e4e-bb49-4838-b6b5-c367498cce11.jpeg",
+        "alt": "New Year, New AmalfiDay: Here's What We've Been Up To",
+        "loading": "lazy",
+        "width": 2000,
+        "height": 1493,
+        "display_width": 236,
+        "display_height": 180,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/vietri-in-love.webp",
+        "alt": "Vietri in Love: Romantic Light Installations Return for Valentine's Week",
+        "loading": "lazy",
+        "width": 1616,
+        "height": 1080,
+        "display_width": 236,
+        "display_height": 180,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/tourism-trends.webp",
+        "alt": "So, Amalfi Coast Tourism in 2025: High Satisfaction, Rising Prices, and huge Parking Problem",
+        "loading": "lazy",
+        "width": 1199,
+        "height": 903,
+        "display_width": 236,
+        "display_height": 180,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/fuenti-landslide.webp",
+        "alt": "Fuenti Landslide update: Amalfi Drive Reopens a Day Early",
+        "loading": "lazy",
+        "width": 1600,
+        "height": 1200,
+        "display_width": 236,
+        "display_height": 180,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/main-2.jpg",
+        "alt": "Amalfi Carnival 2026: Three Days of Masks, Parades",
+        "loading": "lazy",
+        "width": 1199,
+        "height": 800,
+        "display_width": 236,
+        "display_height": 180,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/main-1.jpg",
+        "alt": "Sita Sud Emergency Bus Schedules: Amalfi\u2013Salerno via Tramonti After Fuenti Landslide",
+        "loading": "lazy",
+        "width": 790,
+        "height": 592,
+        "display_width": 236,
+        "display_height": 180,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/main.jpg",
+        "alt": "The 52nd Gran Carnevale di Maiori 2026: Dreams, Floats & Fireworks on the Amalfi Coast",
+        "loading": "lazy",
+        "width": 1200,
+        "height": 817,
+        "display_width": 236,
+        "display_height": 180,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/merch/t-shirt-0130.webp",
+        "alt": "Amalfi t-shirt design preview",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 274,
+        "display_height": 260,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/merch/t-shirt-che-cosa-new-3.webp",
+        "alt": "Amalfi t-shirt graphic in blue",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 274,
+        "display_height": 260,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/merch/t-shirt-hastalavista-new.webp",
+        "alt": "Amalfi t-shirt print design",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 274,
+        "display_height": 260,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/merch/t-shirt-pastaparty-00-new.webp",
+        "alt": "Amalfi pasta party t-shirt design",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 274,
+        "display_height": 260,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/pre-footer/boat-tours-in-amalfi.webp",
+        "alt": "Boat tours in Amalfi Coast",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 139,
+        "display_height": 120,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/pre-footer/girl-on-moto-in-amalfi-small.webp",
+        "alt": "Amalfi scooter ride",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 139,
+        "display_height": 120,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/pre-footer/2-food-in-amalfi-good.webp",
+        "alt": "Amalfi food experience",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 139,
+        "display_height": 120,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-color-black.svg",
+        "alt": "",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 0,
+        "display_height": 56,
+        "in_viewport": false
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-color-white.svg",
+        "alt": "",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 0,
+        "display_height": 0,
+        "in_viewport": true
+      },
+      {
+        "src": "https://amalfi.day/brand/booking.svg",
+        "alt": "",
+        "loading": "lazy",
+        "width": 0,
+        "height": 0,
+        "display_width": 15,
+        "display_height": 15,
+        "in_viewport": false
+      }
+    ],
+    "title": "Amalfi.Day \u2014 CristallPont Amalfi Day",
+    "meta_description": "Amalfi.Day is a local guide for Amalfi Coast photoshoots, apartments in Atrani, beach reviews, and curated experiences in Amalfi, Ravello, and Positano.",
+    "meta_viewport": "width=device-width, initial-scale=1",
+    "og_image": "https://amalfi.day/staticpages/video/atrani-sorrento-video.webp",
+    "canonical": "https://amalfi.day/",
+    "body_font_size": "16px"
+  },
+  "mobile": {
+    "page_width": 375,
+    "viewport_width": 375,
+    "has_horizontal_scroll": false,
+    "nav_visible": false,
+    "hamburger_found": true,
+    "h1_font_size_mobile": null,
+    "body_font_size_mobile": "16px",
+    "paragraph_font_sizes": [
+      {
+        "text": "Throw your watch into the sea, forget your destina",
+        "fontSize": "12.96px"
+      },
+      {
+        "text": "Every road just leads to views that defy imaginati",
+        "fontSize": "12.96px"
+      },
+      {
+        "text": "Eat the fish, sip the wine, feel the warm vibratio",
+        "fontSize": "12.96px"
+      },
+      {
+        "text": "Nothing left to do but smile \u2014 welcome to",
+        "fontSize": "12.96px"
+      },
+      {
+        "text": "Cliff-top viewpoints, charming villages, limoncell",
+        "fontSize": "14.72px"
+      },
+      {
+        "text": "Buffalo mozzarella, hillside vineyards, and panora",
+        "fontSize": "14.72px"
+      },
+      {
+        "text": "Cliffside roads, cinematic overlooks, and 50+ prof",
+        "fontSize": "14.72px"
+      },
+      {
+        "text": "Scroll through the latest stories and shooting con",
+        "fontSize": "16px"
+      },
+      {
+        "text": "Subscribe and stay up to date with Amalfi Coast ne",
+        "fontSize": "15.2px"
+      }
+    ],
+    "small_touch_targets": [
+      {
+        "tag": "A",
+        "text": "",
+        "width": 152,
+        "height": 36
+      },
+      {
+        "tag": "BUTTON",
+        "text": "",
+        "width": 46,
+        "height": 46
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "tag": "A",
+        "text": "We offer the most creative ways to experience the ",
+        "width": 327,
+        "height": 39
+      },
+      {
+        "tag": "A",
+        "text": "Photo sessions",
+        "width": 211,
+        "height": 40
+      },
+      {
+        "tag": "A",
+        "text": "Fresh stories and local insights are always waitin",
+        "width": 327,
+        "height": 39
+      },
+      {
+        "tag": "A",
+        "text": "Send a request",
+        "width": 176,
+        "height": 48
+      },
+      {
+        "tag": "A",
+        "text": "Browse all experiences",
+        "width": 186,
+        "height": 19
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Subscribe",
+        "width": 282,
+        "height": 38
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "tag": "A",
+        "text": "",
+        "width": 44,
+        "height": 44
+      },
+      {
+        "tag": "A",
+        "text": "Ferry timetables",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Bus timetables",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Airport shuttle",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "All public transport",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Greg's guide",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Apartment overview",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Booking.com",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "AirBnb.com",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "What to do",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Parking tips",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Beach reviews",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Moto roads",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Amalfi News",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Contact us",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Add to bookmarks",
+        "width": 327,
+        "height": 34
+      },
+      {
+        "tag": "A",
+        "text": "Privacy Policy",
+        "width": 81,
+        "height": 15
+      },
+      {
+        "tag": "A",
+        "text": "Cinereo",
+        "width": 57,
+        "height": 17
+      }
+    ],
+    "mobile_ctas_above_fold": [
+      {
+        "text": "guide.amalfi.day",
+        "top": 371,
+        "width": 327,
+        "height": 260
+      },
+      {
+        "text": "Bus timetables",
+        "top": 650,
+        "width": 154,
+        "height": 154
+      },
+      {
+        "text": "Ferry timetables",
+        "top": 650,
+        "width": 154,
+        "height": 154
+      }
+    ],
+    "mobile_images_above_fold": [
+      {
+        "src": "https://amalfi.day/brand/logo-dark.svg",
+        "loading": "auto",
+        "naturalWidth": 300,
+        "displayWidth": 0
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-light.svg",
+        "loading": "auto",
+        "naturalWidth": 300,
+        "displayWidth": 152
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-dark.svg",
+        "loading": "auto",
+        "naturalWidth": 300,
+        "displayWidth": 0
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-light.svg",
+        "loading": "auto",
+        "naturalWidth": 300,
+        "displayWidth": 0
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-dark.svg",
+        "loading": "auto",
+        "naturalWidth": 300,
+        "displayWidth": 0
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-light.svg",
+        "loading": "auto",
+        "naturalWidth": 300,
+        "displayWidth": 203
+      },
+      {
+        "src": "https://amalfi.day/brand/amalficarion_logo.svg",
+        "loading": "auto",
+        "naturalWidth": 300,
+        "displayWidth": 308
+      },
+      {
+        "src": "https://amalfi.day/staticpages/video/atrani-sorrento-video.webp",
+        "loading": "eager",
+        "naturalWidth": 1928,
+        "displayWidth": 327
+      },
+      {
+        "src": "https://amalfi.day/staticpages/index/bus-timetables.webp",
+        "loading": "lazy",
+        "naturalWidth": 1000,
+        "displayWidth": 154
+      },
+      {
+        "src": "https://amalfi.day/staticpages/index/ferry-timetables.webp",
+        "loading": "lazy",
+        "naturalWidth": 1000,
+        "displayWidth": 154
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/fuenti-landslide.webp",
+        "loading": "lazy",
+        "naturalWidth": 0,
+        "displayWidth": 0
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/main-2.jpg",
+        "loading": "lazy",
+        "naturalWidth": 0,
+        "displayWidth": 0
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/main-1.jpg",
+        "loading": "lazy",
+        "naturalWidth": 0,
+        "displayWidth": 0
+      },
+      {
+        "src": "https://amalfi.day/blog/content/images/2026/02/main.jpg",
+        "loading": "lazy",
+        "naturalWidth": 0,
+        "displayWidth": 0
+      },
+      {
+        "src": "https://amalfi.day/brand/logo-color-white.svg",
+        "loading": "lazy",
+        "naturalWidth": 0,
+        "displayWidth": 0
+      }
+    ]
+  }
+}
