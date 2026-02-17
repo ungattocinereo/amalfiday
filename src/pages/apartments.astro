@@ -546,20 +546,18 @@ const testimonials = [
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    const calendars = Array.from(document.querySelectorAll('[data-calendar]'))
-    if (!calendars.length) return
+    const calendarEls = Array.from(document.querySelectorAll('[data-calendar]'))
+    if (!calendarEls.length) return
 
-    const monthNames = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-    ]
-    const dayLabels = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
+    const monthShort = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    const monthFull = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    const dayLabels = ['Mo','Tu','We','Th','Fr','Sa','Su']
 
-    const formatDate = (date) => {
-      const year = date.getFullYear()
-      const month = `${date.getMonth() + 1}`.padStart(2, '0')
-      const day = `${date.getDate()}`.padStart(2, '0')
-      return `${year}-${month}-${day}`
+    const formatDate = (d) => {
+      const y = d.getFullYear()
+      const m = `${d.getMonth() + 1}`.padStart(2, '0')
+      const day = `${d.getDate()}`.padStart(2, '0')
+      return `${y}-${m}-${day}`
     }
 
     const isToday = (date, today) =>
@@ -567,85 +565,151 @@ const testimonials = [
       date.getMonth() === today.getMonth() &&
       date.getDate() === today.getDate()
 
-    const renderMonth = (year, month, busy, today) => {
+    const computeMonthStats = (year, month, busy, today) => {
+      const daysInMonth = new Date(year, month + 1, 0).getDate()
+      let totalFuture = 0, totalBusy = 0
+      for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month, day)
+        if (date < today && !isToday(date, today)) continue
+        totalFuture++
+        if (busy.has(formatDate(date))) totalBusy++
+      }
+      return totalFuture === 0 ? 0 : totalBusy / totalFuture
+    }
+
+    const chipColor = (ratio) => {
+      if (ratio < 0.3) return 'rgba(0, 156, 255, 0.1)'
+      if (ratio < 0.7) return 'rgba(255, 89, 0, 0.08)'
+      return 'rgba(255, 89, 0, 0.18)'
+    }
+
+    const renderMonth = (year, month, busy, today, index) => {
       const firstDay = new Date(year, month, 1)
       const offset = (firstDay.getDay() + 6) % 7
       const daysInMonth = new Date(year, month + 1, 0).getDate()
       const cells = []
 
-      for (let i = 0; i < offset; i += 1) {
+      for (let i = 0; i < offset; i++) {
         cells.push('<span class="cal__cell cal__cell--empty"></span>')
       }
 
-      for (let day = 1; day <= daysInMonth; day += 1) {
+      for (let day = 1; day <= daysInMonth; day++) {
         const date = new Date(year, month, day)
         const key = formatDate(date)
         const isBusy = busy.has(key)
         const isPast = date < today && !isToday(date, today)
         const isTodayDate = isToday(date, today)
-        const classes = [
-          'cal__cell',
+        const cls = ['cal__cell',
           isBusy ? 'cal__cell--busy' : 'cal__cell--free',
           isPast ? 'cal__cell--past' : '',
           isTodayDate ? 'cal__cell--today' : '',
-        ]
-          .filter(Boolean)
-          .join(' ')
-        cells.push(`<span class="${classes}">${day}</span>`)
+        ].filter(Boolean).join(' ')
+        cells.push(`<span class="${cls}">${day}</span>`)
       }
 
       return `
-        <div class="cal__month">
-          <div class="cal__month-title">${monthNames[month]} ${year}</div>
+        <div class="cal__month" data-cal-month-index="${index}">
+          <div class="cal__month-header">
+            <span class="cal__month-name">${monthFull[month]}</span>
+            <span class="cal__month-year">${year}</span>
+          </div>
           <div class="cal__grid">
-            ${dayLabels.map((label) => `<span class="cal__dow">${label}</span>`).join('')}
+            ${dayLabels.map(l => `<span class="cal__dow">${l}</span>`).join('')}
             ${cells.join('')}
           </div>
-        </div>
-      `
+        </div>`
     }
 
     const renderCalendar = (el, busy) => {
       const today = new Date()
-      const current = new Date(today.getFullYear(), today.getMonth(), 1)
-      const next = new Date(today.getFullYear(), today.getMonth() + 1, 1)
+      const months = []
+      const chips = []
+
+      for (let i = 0; i < 12; i++) {
+        const d = new Date(today.getFullYear(), today.getMonth() + i, 1)
+        const year = d.getFullYear()
+        const month = d.getMonth()
+        const ratio = computeMonthStats(year, month, busy, today)
+
+        chips.push(`<button class="cal__chip${i === 0 ? ' cal__chip--active' : ''}" data-cal-chip="${i}" style="--chip-fill:${chipColor(ratio)}"><span class="cal__chip-label">${monthShort[month]}</span></button>`)
+        months.push(renderMonth(year, month, busy, today, i))
+      }
 
       el.innerHTML = `
         <div class="cal">
-          ${renderMonth(current.getFullYear(), current.getMonth(), busy, today)}
-          ${renderMonth(next.getFullYear(), next.getMonth(), busy, today)}
-        </div>
-        <div class="cal__legend">
-          <span class="cal__legend-item"><span class="cal__dot cal__dot--free"></span>Available</span>
-          <span class="cal__legend-item"><span class="cal__dot cal__dot--busy"></span>Booked</span>
-        </div>
-      `
+          <div class="cal__yearbar">
+            <div class="cal__yearbar-track">${chips.join('')}</div>
+          </div>
+          <div class="cal__strip-wrapper">
+            <button class="cal__nav cal__nav--prev cal__nav--hidden" aria-label="Previous months"><i class="bi bi-chevron-left"></i></button>
+            <div class="cal__strip">${months.join('')}</div>
+            <button class="cal__nav cal__nav--next" aria-label="Next months"><i class="bi bi-chevron-right"></i></button>
+          </div>
+          <div class="cal__legend">
+            <span class="cal__legend-item"><span class="cal__swatch cal__swatch--free"></span>Available</span>
+            <span class="cal__legend-item"><span class="cal__swatch cal__swatch--busy"></span>Booked</span>
+          </div>
+        </div>`
+
+      const strip = el.querySelector('.cal__strip')
+      const prevBtn = el.querySelector('.cal__nav--prev')
+      const nextBtn = el.querySelector('.cal__nav--next')
+      const chipBtns = el.querySelectorAll('.cal__chip')
+      const monthEls = el.querySelectorAll('.cal__month')
+
+      const scrollToMonth = (index) => {
+        const target = monthEls[index]
+        if (!target) return
+        strip.scrollTo({ left: target.offsetLeft - strip.offsetLeft, behavior: 'smooth' })
+      }
+
+      const updateState = () => {
+        const atStart = strip.scrollLeft < 10
+        const atEnd = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 10
+        prevBtn.classList.toggle('cal__nav--hidden', atStart)
+        nextBtn.classList.toggle('cal__nav--hidden', atEnd)
+
+        let closestIdx = 0, closestDist = Infinity
+        monthEls.forEach((m, i) => {
+          const dist = Math.abs(m.offsetLeft - strip.scrollLeft - strip.offsetLeft)
+          if (dist < closestDist) { closestDist = dist; closestIdx = i }
+        })
+        chipBtns.forEach((c, i) => c.classList.toggle('cal__chip--active', i === closestIdx))
+      }
+
+      strip.addEventListener('scroll', updateState, { passive: true })
+      updateState()
+
+      chipBtns.forEach(chip => {
+        chip.addEventListener('click', () => scrollToMonth(Number(chip.dataset.calChip)))
+      })
+
+      const getMonthWidth = () => (monthEls[0]?.offsetWidth || 220) + 20
+      prevBtn.addEventListener('click', () => strip.scrollBy({ left: -getMonthWidth(), behavior: 'smooth' }))
+      nextBtn.addEventListener('click', () => strip.scrollBy({ left: getMonthWidth(), behavior: 'smooth' }))
     }
 
     const availabilityPromise = fetch('/calendars/availability.json', { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : null))
       .catch(() => null)
 
-    calendars.forEach(async (calendarEl) => {
+    calendarEls.forEach(async (calendarEl) => {
       const calendarName = calendarEl.dataset.calendarName
-      if (!calendarName) {
-        calendarEl.remove()
-        return
-      }
+      if (!calendarName) { calendarEl.remove(); return }
+
+      calendarEl.innerHTML = '<div class="cal"><div class="cal__yearbar"><div class="cal__shimmer"></div></div><div class="cal__shimmer cal__shimmer--strip"></div></div>'
 
       const availability = await availabilityPromise
       if (!availability?.calendars) {
         calendarEl.innerHTML = '<span class="cal__status">Calendar updating...</span>'
         return
       }
-
       if (!(calendarName in availability.calendars)) {
         calendarEl.innerHTML = '<span class="cal__status">Calendar coming soon.</span>'
         return
       }
 
-      const busyList = availability.calendars[calendarName] || []
-      const busy = new Set(busyList)
+      const busy = new Set(availability.calendars[calendarName] || [])
       renderCalendar(calendarEl, busy)
     })
   })
@@ -1162,6 +1226,11 @@ const testimonials = [
     right: 16px;
   }
 
+  .stay-card__content {
+    min-width: 0;
+    overflow: hidden;
+  }
+
   .stay-card__content h3 {
     margin-bottom: 0.6rem;
   }
@@ -1227,6 +1296,8 @@ const testimonials = [
     border-radius: var(--radius-md);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
+    overflow: hidden;
+    min-width: 0;
   }
 
   :global(.cal__status),
@@ -1236,44 +1307,183 @@ const testimonials = [
   }
 
   :global(.cal) {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
   }
 
-  :global(.cal__month-title) {
-    font-family: var(--font-body);
+  /* Year-at-a-glance bar */
+  :global(.cal__yearbar) {
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  :global(.cal__yearbar-track) {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
+  }
+
+  :global(.cal__yearbar-track::-webkit-scrollbar) {
+    display: none;
+  }
+
+  :global(.cal__chip) {
+    flex: 1 0 36px;
+    max-width: 60px;
+    height: 26px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--chip-fill, var(--color-surface));
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: border-color 0.2s, transform 0.15s;
+    padding: 0;
+  }
+
+  :global(.cal__chip:hover) {
+    border-color: var(--color-accent);
+    transform: translateY(-1px);
+  }
+
+  :global(.cal__chip--active) {
+    border-bottom: 2px solid var(--color-accent);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  :global(.cal__chip-label) {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    pointer-events: none;
+  }
+
+  /* Month strip */
+  :global(.cal__strip-wrapper) {
+    position: relative;
+  }
+
+  :global(.cal__strip) {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.25rem 0;
+  }
+
+  :global(.cal__strip::-webkit-scrollbar) {
+    display: none;
+  }
+
+  :global(.cal__nav) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    color: var(--color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.65rem;
+    box-shadow: var(--shadow-soft);
+    transition: opacity 0.2s, background 0.15s;
+  }
+
+  :global(.cal__nav:hover) {
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  :global(.cal__nav--prev) {
+    left: -14px;
+  }
+
+  :global(.cal__nav--next) {
+    right: -14px;
+  }
+
+  :global(.cal__nav--hidden) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Month tiles */
+  :global(.cal__month) {
+    flex: 0 0 160px;
+    scroll-snap-align: start;
+  }
+
+  :global(.cal__month-header) {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  :global(.cal__month-name) {
+    font-family: var(--font-mono);
     font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text);
-    margin-bottom: 0.5rem;
+  }
+
+  :global(.cal__month-year) {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
   }
 
   :global(.cal__grid) {
     display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-columns: repeat(7, 1fr);
     gap: 2px;
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
   }
 
   :global(.cal__dow) {
-    font-size: 0.6rem;
-    letter-spacing: 0.06em;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: var(--color-text-muted);
+    opacity: 0.6;
     text-align: center;
-    padding-bottom: 4px;
+    padding-bottom: 3px;
   }
 
+  /* Day cells */
   :global(.cal__cell) {
     height: 26px;
     display: grid;
     place-items: center;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
     color: var(--color-text);
-    transition: background 0.15s;
+    transition: background 0.15s, transform 0.15s;
+    position: relative;
   }
 
   :global(.cal__cell--empty) {
@@ -1281,12 +1491,28 @@ const testimonials = [
   }
 
   :global(.cal__cell--free) {
-    background: rgba(0, 156, 255, 0.1);
+    background: rgba(0, 156, 255, 0.08);
+  }
+
+  :global(.cal__cell--free:not(.cal__cell--past):hover) {
+    background: rgba(0, 156, 255, 0.18);
+    transform: scale(1.06);
   }
 
   :global(.cal__cell--busy) {
+    background: rgba(255, 89, 0, 0.1);
+    color: var(--color-text-muted);
+  }
+
+  :global(.cal__cell--busy::before) {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    border-radius: 1px;
     background: var(--color-accent);
-    color: #fff;
     opacity: 0.7;
   }
 
@@ -1295,43 +1521,101 @@ const testimonials = [
   }
 
   :global(.cal__cell--today) {
-    outline: 2px solid var(--color-text);
-    outline-offset: -2px;
+    outline: 1.5px solid var(--color-text);
+    outline-offset: -1.5px;
   }
 
+  /* Legend */
   :global(.cal__legend) {
     display: flex;
     gap: 1rem;
-    font-size: 0.7rem;
-    color: var(--color-text-muted);
     margin-top: 0.6rem;
+    padding-top: 0.5rem;
   }
 
   :global(.cal__legend-item) {
     display: inline-flex;
     align-items: center;
     gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
   }
 
-  :global(.cal__dot) {
-    width: 8px;
-    height: 8px;
-    border-radius: 2px;
+  :global(.cal__swatch) {
+    width: 14px;
+    height: 10px;
+    border-radius: 3px;
     display: inline-block;
   }
 
-  :global(.cal__dot--free) {
-    background: rgba(0, 156, 255, 0.35);
+  :global(.cal__swatch--free) {
+    background: rgba(0, 156, 255, 0.15);
   }
 
-  :global(.cal__dot--busy) {
-    background: var(--color-accent);
-    opacity: 0.7;
+  :global(.cal__swatch--busy) {
+    background: rgba(255, 89, 0, 0.1);
+    border-left: 2px solid var(--color-accent);
   }
 
-  @media (max-width: 1100px) {
-    :global(.cal) {
-      grid-template-columns: 1fr;
+  /* Shimmer loading */
+  :global(.cal__shimmer) {
+    height: 26px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-border) 50%, var(--color-surface) 75%);
+    background-size: 200% 100%;
+    animation: cal-shimmer 1.5s ease infinite;
+  }
+
+  :global(.cal__shimmer--strip) {
+    height: 120px;
+    margin-top: 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+
+  @keyframes cal-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Night theme fine-tuning */
+  :global([data-theme='night'] .cal__cell--free) {
+    background: rgba(0, 156, 255, 0.12);
+  }
+
+  :global([data-theme='night'] .cal__cell--free:not(.cal__cell--past):hover) {
+    background: rgba(0, 156, 255, 0.22);
+  }
+
+  :global([data-theme='night'] .cal__cell--busy) {
+    background: rgba(255, 89, 0, 0.14);
+  }
+
+  @media (max-width: 640px) {
+    :global(.cal__month) {
+      flex: 0 0 145px;
+    }
+
+    :global(.cal__nav--prev) {
+      left: 0;
+      background: var(--color-card);
+      opacity: 0.9;
+    }
+
+    :global(.cal__nav--next) {
+      right: 0;
+      background: var(--color-card);
+      opacity: 0.9;
+    }
+
+    :global(.cal__chip) {
+      flex: 0 0 32px;
+    }
+
+    :global(.cal__cell) {
+      height: 22px;
+      font-size: 0.58rem;
     }
   }
 
