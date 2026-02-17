@@ -72,7 +72,7 @@ const fallbackQuatrain =
   <section class="hero hero--orange">
     <div class="container hero__inner">
       <div class="hero__intro">
-        <h1 class="hero__h1">Amalfi Coast Photoshoots, Tours & Local Guide</h1>
+        <h1 class="hero__h1 sr-only">Amalfi Coast Photoshoots, Tours & Local Guide</h1>
         <div class="hero__quatrain" data-quatrains={JSON.stringify(quatrains)}>
           <p class="hero__line" data-quatrain-line>{fallbackQuatrain[0]}</p>
           <p class="hero__line" data-quatrain-line>{fallbackQuatrain[1]}</p>
@@ -437,6 +437,8 @@ const fallbackQuatrain =
     text-align: center;
     max-width: 980px;
     margin: 0 auto;
+    position: relative;
+    isolation: isolate;
     display: flex;
     flex-direction: column;
     gap: 1.1rem;
@@ -478,14 +480,20 @@ const fallbackQuatrain =
     width: min(560px, 82vw);
     height: auto;
     display: block;
-    transform: scale(1.2);
-    transform-origin: center;
+    transform: scale(1.2) translateY(-20%);
+    transform-origin: center top;
     pointer-events: none;
   }
 
   .hero__logo {
+    position: relative;
+    z-index: -1;
+    isolation: isolate;
     display: flex;
     justify-content: center;
+    transform: scale(var(--hero-logo-scroll-scale, 1));
+    transform-origin: center center;
+    will-change: transform;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
@@ -507,7 +515,8 @@ const fallbackQuatrain =
 
   @media (min-width: 1001px) {
     .hero__logo img {
-      transform: scale(1.5) rotate(-3deg);
+      transform: scale(2.25) rotate(-3deg) translateY(-25%);
+      transform-origin: center top;
     }
   }
 
@@ -1214,6 +1223,10 @@ const fallbackQuatrain =
   }
 
   @media (max-width: 1000px) {
+    .hero__logo img {
+      transform: scale(1.2) translateY(-5%);
+    }
+
     .hero__mosaic {
       grid-template-columns: repeat(6, minmax(0, 1fr));
       grid-template-rows: auto auto auto;
@@ -1407,6 +1420,8 @@ const fallbackQuatrain =
 
 <script is:inline>
   const quatrainRoot = document.querySelector('[data-quatrains]')
+  const heroSection = document.querySelector('.hero')
+  const heroLogo = document.querySelector('.hero__logo')
   const heroVideo = document.querySelector('.guide-card__video')
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
@@ -1461,6 +1476,43 @@ const fallbackQuatrain =
     } catch (error) {
       // no-op: keep fallback quatrain
     }
+  }
+
+  if (heroSection && heroLogo) {
+    let heroStartBottom = 1
+    let ticking = false
+
+    const recalcHeroProgressRange = () => {
+      heroStartBottom = Math.max(heroSection.getBoundingClientRect().bottom, 1)
+    }
+
+    const applyHeroLogoScale = () => {
+      const currentBottom = heroSection.getBoundingClientRect().bottom
+      const progressRaw = (heroStartBottom - currentBottom) / heroStartBottom
+      const progress = Math.min(1, Math.max(0, progressRaw))
+      const scale = 1 + progress * 4
+      heroLogo.style.setProperty('--hero-logo-scroll-scale', scale.toFixed(4))
+      ticking = false
+    }
+
+    const queueHeroLogoScaleUpdate = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(applyHeroLogoScale)
+    }
+
+    recalcHeroProgressRange()
+    applyHeroLogoScale()
+
+    window.addEventListener('scroll', queueHeroLogoScaleUpdate, { passive: true })
+    window.addEventListener('resize', () => {
+      recalcHeroProgressRange()
+      queueHeroLogoScaleUpdate()
+    }, { passive: true })
+    window.addEventListener('load', () => {
+      recalcHeroProgressRange()
+      queueHeroLogoScaleUpdate()
+    }, { once: true })
   }
 
   if (heroVideo) {
