@@ -423,6 +423,7 @@ const tramontiStops = [
             All tours are private, last 8 hours, and include a local guide with a car.
             Pick-up and drop-off anywhere on the Amalfi Coast or in Sorrento.
           </p>
+          <p class="ct-pricing__iva">Tutti i prezzi sono IVA inclusa.</p>
         </div>
         <div class="ct-pricing__grid">
           {pricingCards.map((card) => (
@@ -1540,6 +1541,15 @@ const tramontiStops = [
   .ct-pricing__header p {
     color: rgba(255, 255, 255, 0.7);
     font-size: 1.05rem;
+  }
+
+  .ct-pricing__iva {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.5rem;
   }
 
   .ct-pricing__grid {

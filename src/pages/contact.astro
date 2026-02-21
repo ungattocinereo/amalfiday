@@ -303,6 +303,25 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
             <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
           </label>
           <input type="hidden" name="_form_started_at" value="" />
+          <div class="contact-form__gdpr">
+            <label class="contact-form__gdpr-label">
+              <input
+                type="checkbox"
+                name="gdpr"
+                id="gdpr-consent"
+                required
+                class="contact-form__gdpr-check"
+              />
+              <span>
+                Acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679
+                (GDPR). <a href="/privacy" target="_blank" rel="noreferrer">Leggi la Privacy Policy</a>.
+              </span>
+            </label>
+            <p class="contact-form__gdpr-note">
+              I dati saranno trasmessi tramite servizio di messaggistica Telegram per garantire una
+              risposta rapida.
+            </p>
+          </div>
           <div class="contact-form__submit-row">
             <button class="button contact-form__submit-button" type="submit">
               <i class="bi bi-send"></i> Send request
@@ -636,6 +655,16 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       } else {
         serviceInput?.setCustomValidity('')
         serviceSelect?.classList.remove('is-invalid')
+      }
+
+      const gdprCheckbox = form?.querySelector('#gdpr-consent')
+      if (gdprCheckbox && !gdprCheckbox.checked) {
+        gdprCheckbox.setCustomValidity('Devi accettare il trattamento dei dati per continuare.')
+        gdprCheckbox.reportValidity()
+        setStatus('Please accept the data processing consent to continue.', 'error')
+        return
+      } else if (gdprCheckbox) {
+        gdprCheckbox.setCustomValidity('')
       }
 
       if (!form.reportValidity() || !isContactValid) {
@@ -1022,6 +1051,50 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     overflow: hidden;
     opacity: 0;
     pointer-events: none;
+  }
+
+  .contact-form__gdpr {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .contact-form__gdpr-label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-weight: 400;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .contact-form__gdpr-check {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-accent);
+  }
+
+  .contact-form__gdpr-label a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .contact-form__gdpr-note {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    padding-left: calc(18px + 0.65rem);
   }
 
   .contact-form.is-success {

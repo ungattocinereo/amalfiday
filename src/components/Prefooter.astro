@@ -81,6 +81,10 @@
             <input type="text" name="website" class="newsletter__hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <button class="button secondary newsletter__btn" type="submit">Subscribe</button>
           </div>
+          <p class="newsletter__consent">
+            Iscrivendoti, acconsenti al trattamento dei dati.
+            <a href="/privacy">Privacy Policy</a>
+          </p>
           <span class="newsletter__error" id="newsletter-error" role="alert"></span>
         </form>
         <div class="newsletter__success" id="newsletter-success" aria-live="polite">
@@ -322,6 +326,24 @@
     opacity: 0.7;
     cursor: not-allowed;
     transform: none;
+  }
+
+  .newsletter__consent {
+    margin: 0.25rem 0 0;
+    font-size: 0.73rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    padding: 0 0.2rem;
+  }
+
+  .newsletter__consent a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .newsletter__consent a:hover {
+    color: var(--color-accent);
   }
 
   .newsletter__error {

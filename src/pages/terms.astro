@@ -1,0 +1,543 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const pageTitle = 'Termini e Condizioni — CristallPont Amalfi Day'
+const pageDescription =
+  'Termini e condizioni per prenotazioni di appartamenti, tour ed esperienze sulla Costiera Amalfitana con CristallPont S.R.L.'
+const shareImage = '/pre-footer/2-food-in-amalfi-good.webp'
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
+  <section class="section policy">
+    <div class="container policy__inner">
+      <div class="policy__intro">
+        <h1>
+          Termini e <span class="accent-italic">Condizioni</span>
+        </h1>
+        <p>
+          Condizioni generali di prenotazione per gli alloggi, i tour e le esperienze offerti
+          tramite il sito amalfi.day da CristallPont S.R.L.
+        </p>
+        <div class="policy__meta">
+          <span class="badge"><i class="bi bi-file-earmark-text"></i> Condizioni generali</span>
+          <span class="badge"
+            ><i class="bi bi-calendar3"></i> Ultimo aggiornamento: 21 febbraio 2026</span
+          >
+        </div>
+        <div class="policy__lang" role="tablist" aria-label="Language">
+          <button class="policy__lang-tab policy__lang-tab--active" role="tab" aria-selected="true" aria-controls="policy-it" data-lang="it" type="button">
+            Italiano
+          </button>
+          <button class="policy__lang-tab" role="tab" aria-selected="false" aria-controls="policy-en" data-lang="en" type="button">
+            English
+          </button>
+        </div>
+      </div>
+
+      <!-- ITALIANO -->
+      <div id="policy-it" class="policy__content" role="tabpanel" data-lang="it">
+        <div class="policy__grid">
+          <div class="card policy__card">
+            <h3>Prenotazioni</h3>
+            <ul>
+              <li>Conferma tramite email o messaggio diretto.</li>
+              <li>Caparra richiesta per confermare la prenotazione.</li>
+              <li>Saldo al check-in o prima del tour.</li>
+            </ul>
+          </div>
+          <div class="card policy__card">
+            <h3>Cancellazioni</h3>
+            <ul>
+              <li>Gratuita oltre 30 giorni prima dell'arrivo.</li>
+              <li>50% della caparra tra 15 e 30 giorni.</li>
+              <li>Nessun rimborso sotto i 15 giorni.</li>
+            </ul>
+          </div>
+          <div class="card policy__card">
+            <h3>Tour ed esperienze</h3>
+            <ul>
+              <li>Conferma dopo il pagamento della caparra.</li>
+              <li>Cambio date soggetto a disponibilit&agrave;.</li>
+              <li>Annullamento gratuito oltre 48 ore prima.</li>
+            </ul>
+          </div>
+          <div class="card policy__card">
+            <h3>Legge applicabile</h3>
+            <ul>
+              <li>Diritto italiano.</li>
+              <li>Foro competente: Tribunale di Salerno.</li>
+              <li>Piattaforma ODR UE per controversie online.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="policy__sections">
+          <article class="policy__section">
+            <h2>Soggetto fornitore</h2>
+            <p>
+              I servizi pubblicizzati su amalfi.day sono forniti da:<br />
+              <strong>CristallPont S.R.L.</strong><br />
+              P.IVA / C.F.: 05863730650<br />
+              Sede legale: Traversa Dragone, 2<br />
+              Capitale Sociale: &euro;10.000,00<br />
+              Email: <a href="mailto:hello@amalfi.day">hello@amalfi.day</a>
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Prenotazione e conferma</h2>
+            <p>
+              Le richieste di prenotazione vengono effettuate tramite il modulo di contatto sul sito o
+              tramite comunicazione diretta (email, WhatsApp). La prenotazione si considera confermata
+              solo dopo la ricezione della caparra e l'invio della conferma scritta da parte nostra.
+            </p>
+            <p>
+              Il semplice invio di una richiesta tramite il modulo di contatto non costituisce
+              prenotazione confermata.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Prezzi e pagamenti</h2>
+            <p>
+              Tutti i prezzi pubblicati sul sito sono comprensivi di IVA ove applicabile.
+              Il pagamento della caparra &egrave; richiesto per confermare la prenotazione.
+              Il saldo deve essere corrisposto al check-in (per gli alloggi) o prima dell'inizio
+              del tour (per le esperienze).
+            </p>
+            <p>
+              I metodi di pagamento accettati vengono comunicati al momento della conferma della
+              prenotazione.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Cancellazione e rimborsi &mdash; Alloggi</h2>
+            <p>
+              Le seguenti condizioni di cancellazione si applicano alle prenotazioni dirette tramite
+              il sito amalfi.day. Per prenotazioni effettuate tramite piattaforme terze
+              (Booking.com, Airbnb) si applicano le condizioni della rispettiva piattaforma.
+            </p>
+            <ul>
+              <li>
+                <strong>Oltre 30 giorni prima del check-in:</strong> cancellazione gratuita, rimborso
+                integrale della caparra.
+              </li>
+              <li>
+                <strong>Tra 15 e 30 giorni prima del check-in:</strong> rimborso del 50% della caparra.
+              </li>
+              <li>
+                <strong>Meno di 15 giorni prima del check-in:</strong> nessun rimborso della caparra.
+              </li>
+            </ul>
+            <p>
+              In caso di forza maggiore (calamit&agrave; naturale, restrizioni governative), verranno
+              offerte date alternative o un rimborso secondo le circostanze.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Cancellazione e rimborsi &mdash; Tour ed esperienze</h2>
+            <ul>
+              <li>
+                <strong>Oltre 48 ore prima:</strong> cancellazione gratuita, rimborso integrale.
+              </li>
+              <li>
+                <strong>Tra 24 e 48 ore prima:</strong> rimborso del 50%.
+              </li>
+              <li>
+                <strong>Meno di 24 ore prima o mancata presentazione:</strong> nessun rimborso.
+              </li>
+            </ul>
+            <p>
+              In caso di maltempo che impedisca lo svolgimento del tour, verranno offerte date
+              alternative o un rimborso integrale.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Check-in e check-out</h2>
+            <p>
+              Gli orari standard sono: check-in dalle 14:00, check-out entro le 10:00. Check-in
+              anticipato o check-out posticipato possono essere richiesti e sono soggetti a
+              disponibilit&agrave;.
+            </p>
+            <p>
+              Le istruzioni di accesso vengono comunicate dopo la conferma della prenotazione.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Responsabilit&agrave;</h2>
+            <p>
+              L'ospite &egrave; responsabile per eventuali danni causati alla struttura durante il
+              soggiorno. Il fornitore non &egrave; responsabile per oggetti di valore lasciati
+              incustoditi negli alloggi. La responsabilit&agrave; del fornitore &egrave; limitata al
+              valore del servizio prenotato.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Tassa di soggiorno</h2>
+            <p>
+              Il Comune di Atrani applica una tassa di soggiorno per persona per notte, secondo la
+              normativa comunale vigente. L'importo esatto viene comunicato al momento della
+              prenotazione e deve essere corrisposto separatamente al check-in.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Risoluzione alternativa delle controversie (ODR)</h2>
+            <p>
+              In caso di controversia relativa a un acquisto effettuato online, puoi utilizzare la
+              piattaforma per la Risoluzione Online delle Controversie (ODR) messa a disposizione
+              dalla Commissione Europea all'indirizzo:
+              <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noreferrer"
+                >https://ec.europa.eu/consumers/odr</a
+              >.
+            </p>
+            <p>
+              Il nostro indirizzo email per la risoluzione stragiudiziale delle controversie &egrave;:
+              <a href="mailto:hello@amalfi.day">hello@amalfi.day</a>.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Legge applicabile e foro competente</h2>
+            <p>
+              I presenti termini e condizioni sono regolati dalla legge italiana. Per qualsiasi
+              controversia derivante dall'interpretazione o dall'esecuzione dei presenti termini,
+              &egrave; competente in via esclusiva il Tribunale di Salerno, salvo il foro inderogabile
+              del consumatore ai sensi del D.Lgs. 206/2005 (Codice del Consumo).
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Modifiche ai termini</h2>
+            <p>
+              I presenti termini possono essere aggiornati periodicamente. Le modifiche saranno
+              pubblicate su questa pagina con la data di aggiornamento. Per informazioni sulla
+              gestione dei tuoi dati personali consulta la nostra
+              <a href="/privacy">Privacy Policy</a>.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <!-- ENGLISH -->
+      <div id="policy-en" class="policy__content policy__content--hidden" role="tabpanel" data-lang="en" hidden>
+        <div class="policy__grid">
+          <div class="card policy__card">
+            <h3>Bookings</h3>
+            <ul>
+              <li>Confirmation via email or direct message.</li>
+              <li>Deposit required to confirm booking.</li>
+              <li>Balance due at check-in or before the tour.</li>
+            </ul>
+          </div>
+          <div class="card policy__card">
+            <h3>Cancellations</h3>
+            <ul>
+              <li>Free cancellation more than 30 days before arrival.</li>
+              <li>50% of deposit between 15 and 30 days.</li>
+              <li>No refund under 15 days.</li>
+            </ul>
+          </div>
+          <div class="card policy__card">
+            <h3>Tours & Experiences</h3>
+            <ul>
+              <li>Confirmed after deposit payment.</li>
+              <li>Date changes subject to availability.</li>
+              <li>Free cancellation more than 48 hours before.</li>
+            </ul>
+          </div>
+          <div class="card policy__card">
+            <h3>Applicable Law</h3>
+            <ul>
+              <li>Italian law.</li>
+              <li>Jurisdiction: Court of Salerno.</li>
+              <li>EU ODR platform for online disputes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="policy__sections">
+          <article class="policy__section">
+            <h2>Service Provider</h2>
+            <p>
+              The services advertised on amalfi.day are provided by:<br />
+              <strong>CristallPont S.R.L.</strong><br />
+              VAT / Tax ID: 05863730650<br />
+              Registered office: Traversa Dragone, 2<br />
+              Share capital: &euro;10,000.00<br />
+              Email: <a href="mailto:hello@amalfi.day">hello@amalfi.day</a>
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Booking and Confirmation</h2>
+            <p>
+              Booking requests are made via the contact form on the website or through direct
+              communication (email, WhatsApp). A booking is considered confirmed only after receipt
+              of the deposit and our written confirmation.
+            </p>
+            <p>
+              Simply submitting a request through the contact form does not constitute a confirmed
+              booking.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Prices and Payments</h2>
+            <p>
+              All prices published on the website include VAT where applicable. A deposit payment is
+              required to confirm the booking. The balance is due at check-in (for accommodation) or
+              before the start of the tour (for experiences).
+            </p>
+            <p>
+              Accepted payment methods are communicated at the time of booking confirmation.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Cancellation and Refunds &mdash; Accommodation</h2>
+            <p>
+              The following cancellation terms apply to direct bookings through amalfi.day.
+              For bookings made through third-party platforms (Booking.com, Airbnb), the respective
+              platform's terms apply.
+            </p>
+            <ul>
+              <li>
+                <strong>More than 30 days before check-in:</strong> free cancellation, full deposit
+                refund.
+              </li>
+              <li>
+                <strong>Between 15 and 30 days before check-in:</strong> 50% deposit refund.
+              </li>
+              <li>
+                <strong>Less than 15 days before check-in:</strong> no deposit refund.
+              </li>
+            </ul>
+            <p>
+              In case of force majeure (natural disaster, government restrictions), alternative dates
+              or a refund will be offered depending on the circumstances.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Cancellation and Refunds &mdash; Tours & Experiences</h2>
+            <ul>
+              <li>
+                <strong>More than 48 hours before:</strong> free cancellation, full refund.
+              </li>
+              <li>
+                <strong>Between 24 and 48 hours before:</strong> 50% refund.
+              </li>
+              <li>
+                <strong>Less than 24 hours before or no-show:</strong> no refund.
+              </li>
+            </ul>
+            <p>
+              In case of bad weather preventing the tour, alternative dates or a full refund will be
+              offered.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Check-in and Check-out</h2>
+            <p>
+              Standard times are: check-in from 14:00, check-out by 10:00. Early check-in or late
+              check-out may be requested and are subject to availability.
+            </p>
+            <p>
+              Access instructions are provided after booking confirmation.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Liability</h2>
+            <p>
+              The guest is responsible for any damage caused to the property during their stay.
+              The provider is not responsible for valuables left unattended in the accommodation.
+              The provider's liability is limited to the value of the booked service.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Tourist Tax</h2>
+            <p>
+              The Municipality of Atrani levies a tourist tax per person per night, in accordance
+              with current municipal regulations. The exact amount is communicated at the time of
+              booking and must be paid separately at check-in.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Online Dispute Resolution (ODR)</h2>
+            <p>
+              In case of a dispute relating to an online purchase, you may use the Online Dispute
+              Resolution (ODR) platform provided by the European Commission at:
+              <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noreferrer"
+                >https://ec.europa.eu/consumers/odr</a
+              >.
+            </p>
+            <p>
+              Our email address for out-of-court dispute resolution is:
+              <a href="mailto:hello@amalfi.day">hello@amalfi.day</a>.
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Applicable Law and Jurisdiction</h2>
+            <p>
+              These terms and conditions are governed by Italian law. For any dispute arising from the
+              interpretation or performance of these terms, the Court of Salerno has exclusive
+              jurisdiction, without prejudice to the mandatory consumer forum under Legislative Decree
+              206/2005 (Consumer Code).
+            </p>
+          </article>
+
+          <article class="policy__section">
+            <h2>Changes to Terms</h2>
+            <p>
+              These terms may be updated periodically. Changes will be published on this page with
+              the revision date. For information about how we handle your personal data, please see
+              our <a href="/privacy">Privacy Policy</a>.
+            </p>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  document.querySelectorAll('.policy__lang-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var lang = tab.dataset.lang
+      document.querySelectorAll('.policy__lang-tab').forEach(function (t) {
+        t.classList.remove('policy__lang-tab--active')
+        t.setAttribute('aria-selected', 'false')
+      })
+      tab.classList.add('policy__lang-tab--active')
+      tab.setAttribute('aria-selected', 'true')
+      document.querySelectorAll('.policy__content').forEach(function (panel) {
+        var isActive = panel.dataset.lang === lang
+        panel.classList.toggle('policy__content--hidden', !isActive)
+        panel.hidden = !isActive
+      })
+    })
+  })
+</script>
+
+<style>
+  .section.policy {
+    padding-top: clamp(7rem, 12vw, 10rem);
+  }
+
+  .policy__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .policy__intro h1 {
+    font-size: clamp(2.6rem, 4vw, 3.8rem);
+  }
+
+  .policy__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .policy__lang {
+    display: flex;
+    margin-top: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    width: fit-content;
+  }
+
+  .policy__lang-tab {
+    padding: 0.55rem 1.3rem;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .policy__lang-tab--active {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .policy__lang-tab:not(.policy__lang-tab--active):hover {
+    background: var(--color-surface);
+  }
+
+  .policy__content--hidden {
+    display: none;
+  }
+
+  .policy__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .policy__card {
+    padding: 1.5rem;
+  }
+
+  .policy__card h3 {
+    margin-bottom: 0.8rem;
+  }
+
+  .policy__card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--color-text-muted);
+  }
+
+  .policy__card li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .policy__sections {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .policy__section h2 {
+    font-size: 1.4rem;
+  }
+
+  .policy__section a {
+    color: var(--color-accent);
+  }
+
+  .policy__section ul {
+    padding-left: 1.2rem;
+    color: var(--color-text-muted);
+  }
+
+  .policy__section li {
+    margin-bottom: 0.4rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 700px) {
+    .policy__inner {
+      gap: 2.2rem;
+    }
+  }
+</style>

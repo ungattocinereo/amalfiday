@@ -283,6 +283,7 @@ const pricingCards = [
           <p>
             Both tours are individual (one rider) and include a personal guide, scooter, helmet, insurance, and professional photography with full editing and delivery within 5 days.
           </p>
+          <p class="sc-pricing__iva">Tutti i prezzi sono IVA inclusa.</p>
         </div>
         <div class="sc-pricing__grid">
           {pricingCards.map((card) => (
@@ -1422,6 +1423,15 @@ const pricingCards = [
   .sc-pricing__header p {
     color: rgba(255, 255, 255, 0.7);
     font-size: 1.05rem;
+  }
+
+  .sc-pricing__iva {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.5rem;
   }
 
   .sc-pricing__grid {

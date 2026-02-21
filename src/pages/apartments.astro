@@ -47,6 +47,7 @@ const staySections = [
     stays: [
       {
         name: 'Villa Susy',
+        cin: 'IT065104C2Q9GJBER7',
         description:
           "This villa, located just a mile from Amalfi, offers a unique blend of authenticity and comfort. As you step inside, you'll be transported to a world where the past comes alive, and the present moment is savored.",
         gallery: [
@@ -65,6 +66,7 @@ const staySections = [
     stays: [
       {
         name: 'Awesome apartments',
+        cin: 'IT065011B442X3QQQL',
         description:
           'Our location is just above the city center, a 5-7 minute walk uphill via 350 steps. The apartment features a separate kitchen, shower room, and a spacious room.',
         gallery: ['/apartments/awesomeapts.jpg.avif'],
@@ -79,6 +81,7 @@ const staySections = [
       },
       {
         name: 'Suite Carina',
+        cin: 'IT065011B4MVEU3B33',
         description:
           'This is a double-level apartment located in the heart of the city. There are no steps to access the apartment. The windows offer views of the main street in Atrani.',
         gallery: ['/apartments/casa-carina.jpeg.avif'],
@@ -86,6 +89,7 @@ const staySections = [
       },
       {
         name: 'Suite Harmony',
+        cin: 'IT065011B4JERC6CIZ',
         description:
           'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
         gallery: ['/apartments/harmony.jpg.avif'],
@@ -100,6 +104,7 @@ const staySections = [
     stays: [
       {
         name: 'Vintage interior',
+        cin: 'IT065011B442X3QQQL',
         description:
           'The room is designed with a vintage aesthetic in mind, featuring decor and furnishings that evoke a sense of nostalgia and timeless elegance. The room also comes equipped with a large closet, complete with a mirror, providing ample storage and a convenient space for getting ready. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
         gallery: ['/apartments/room-in-atrani-vintage.webp'],
@@ -107,6 +112,7 @@ const staySections = [
       },
       {
         name: 'Orange room',
+        cin: 'IT065011B442X3QQQL',
         description:
           'This room evokes the nostalgia of the 1960s with its decor and furnishings. The room features a large multi-panel closet, providing ample storage space for guests. The room also comes with with couple of garden chairs and a table. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
         gallery: ['/apartments/orange-room.jpg'],
@@ -114,6 +120,7 @@ const staySections = [
       },
       {
         name: 'Room in center',
+        cin: 'IT065011B442X3QQQL',
         description:
           'This is the largest room in the house, providing plenty of space for guests to spread out and relax. The room features a large table, perfect for meals or working, and two chairs for comfortable seating. Additionally, the room has a small balcony that offers a view of the main street, perfect for enjoying the sights and sounds of the city. The closet is an original piece from the 1970s that is spacious and adds a vintage touch to the room.',
         gallery: ['/apartments/2room-in-atrani-in-center.webp'],
@@ -128,6 +135,7 @@ const staySections = [
     stays: [
       {
         name: 'Room for solo traveller',
+        cin: 'IT065011B442X3QQQL',
         description:
           'This room is designed to be cozy and comfortable, with a small bed that is perfect for one person. The room features a spacious balcony that offers a great place to sit and relax, with a chair that provides a comfortable seating option. The balcony also offers a beautiful view of the mountains, providing a serene and peaceful atmosphere. Additionally, the room is facing the main street of the town, which means that guests can enjoy the hustle and bustle of the city right from the comfort of their own room. The balcony can be accessed via the room and it is perfect for a morning coffee or a nightcap.',
         gallery: ['/apartments/romfor-1-person.jpg.webp'],
@@ -135,6 +143,7 @@ const staySections = [
       },
       {
         name: 'Room for youngsters',
+        cin: 'IT065011B442X3QQQL',
         description:
           'This room is designed to be functional and budget-friendly, perfect for travelers who are looking for a comfortable and affordable place to stay. The room features a bunk bed. The bunk bed is comfortable and convenient, providing a great place to rest after a long day of exploring. The room also features a big mural on the wall, which adds a unique and artistic touch to the space, making it more interesting and personalized. The room also comes with a large window that overlooks an inner street, providing natural light. The window can be opened to let fresh air in and to listen to the street sounds.',
         gallery: ['/apartments/casa-bunkbed-room.jpg'],
@@ -291,6 +300,7 @@ const testimonials = [
                 <div class="stay-card__details">
                   <div class="stay-card__content">
                     <h3>{stay.name}</h3>
+                    {stay.cin && <span class="stay-card__cin">CIN: {stay.cin}</span>}
                     <p>{stay.description}</p>
                   </div>
                   {stay.calendar && (
@@ -355,6 +365,7 @@ const testimonials = [
                 </div>
                 <div class="stay-card__content">
                   <h3>{stay.name}</h3>
+                  {stay.cin && <span class="stay-card__cin">CIN: {stay.cin}</span>}
                   <p>{stay.description}</p>
                 </div>
               </>
@@ -1259,6 +1270,17 @@ const testimonials = [
   .stay-card__content h3 {
     font-size: 1.5rem;
     margin-bottom: 0.6rem;
+  }
+
+  .stay-card__cin {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin-top: -0.3rem;
+    margin-bottom: 0.4rem;
+    opacity: 0.75;
   }
 
   .section--adventure {
