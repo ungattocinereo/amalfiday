@@ -242,6 +242,48 @@ const testimonials = [
     })()
   </script>
 
+  <!-- ═══════ PLATFORM PRESENCE ═══════ -->
+  <section class="platforms">
+    <div class="container">
+      <div class="platforms__grid">
+
+        <a class="platform-card" href="https://www.localgrapher.com/profile/gregory/" target="_blank" rel="noopener noreferrer">
+          <div class="platform-card__logo">
+            <img src="/brand/localgrapher.svg" alt="Localgrapher" loading="lazy" />
+          </div>
+          <div class="platform-card__body">
+            <span class="platform-card__badge">Special Arrangement Hero</span>
+            <span class="platform-card__name">Localgrapher</span>
+          </div>
+          <i class="bi bi-arrow-up-right platform-card__arrow"></i>
+        </a>
+
+        <a class="platform-card" href="https://www.getyourguide.com/atrani-l128528/amalfi-sunrise-photoshoot-t1013879/" target="_blank" rel="noopener noreferrer">
+          <div class="platform-card__logo">
+            <img src="/brand/getyourguide.png" alt="GetYourGuide" loading="lazy" />
+          </div>
+          <div class="platform-card__body">
+            <span class="platform-card__badge">Featured Experience</span>
+            <span class="platform-card__name">GetYourGuide</span>
+          </div>
+          <i class="bi bi-arrow-up-right platform-card__arrow"></i>
+        </a>
+
+        <a class="platform-card platform-card--airbnb" href="https://airbnb.com/sv/amalfiday" target="_blank" rel="noopener noreferrer">
+          <div class="platform-card__logo">
+            <img src="/brand/airbnb.avif" alt="Airbnb" loading="lazy" />
+          </div>
+          <div class="platform-card__body">
+            <span class="platform-card__badge">Quality Photographer</span>
+            <span class="platform-card__name">Airbnb</span>
+          </div>
+          <i class="bi bi-arrow-up-right platform-card__arrow"></i>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════ 1. INDIVIDUAL GALLERY ═══════ -->
   <section class="section section--individual">
     <div class="container">
@@ -732,6 +774,131 @@ const testimonials = [
 </BaseLayout>
 
 <style>
+  /* ===== PLATFORM PRESENCE ===== */
+
+  .platforms {
+    padding: 4rem 0 0;
+  }
+
+  .platforms + .section.section--individual {
+    padding-top: 4rem;
+  }
+
+  .platforms__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .platform-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.8rem 1.5rem 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+  }
+
+  .platform-card:hover {
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-3px);
+    border-color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .platform-card__logo {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .platform-card__logo img {
+    max-height: 64px;
+    max-width: 240px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .platform-card--airbnb .platform-card__logo img {
+    max-height: 74px;
+  }
+
+  .platform-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .platform-card__badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .platform-card__name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .platform-card__arrow {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .platform-card:hover .platform-card__arrow {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+
+  @media (max-width: 768px) {
+    .platforms__grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .platform-card {
+      flex-direction: row;
+      text-align: left;
+      padding: 1.2rem 1.25rem;
+      gap: 1rem;
+    }
+
+    .platform-card__logo {
+      height: 48px;
+      flex-shrink: 0;
+    }
+
+    .platform-card__logo img {
+      max-height: 48px;
+    }
+
+    .platform-card__arrow {
+      opacity: 0.4;
+      position: static;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+  }
+
   /* ===== HERO — Full-viewport cinematic ===== */
 
   .xp-hero {
