@@ -22,10 +22,49 @@ const headerSocials = socialLinks.filter((item) =>
 
       <nav class="nav">
         {navigation.map((item) => (
-          <a class="nav__link" href={item.href}>
-            <i class={`bi ${item.icon}`}></i>
-            {item.label}
-          </a>
+          item.label === 'Experience' ? (
+            <div class="nav__dropdown">
+              <a class="nav__link" href={item.href}>
+                <i class={`bi ${item.icon}`}></i>
+                {item.label}
+                <i class="bi bi-chevron-down nav__chevron"></i>
+              </a>
+              <div class="dropdown">
+                <div class="dropdown__section">
+                  <span class="dropdown__heading">Capture Your Story</span>
+                  <a class="dropdown__item" href="/photoshootings">
+                    <i class="bi bi-person"></i>
+                    <span>Individual Photo Shooting</span>
+                  </a>
+                  <a class="dropdown__item" href="/photoshootings#couples">
+                    <i class="bi bi-people"></i>
+                    <span>Couple Photo Shooting</span>
+                  </a>
+                </div>
+                <div class="dropdown__divider"></div>
+                <div class="dropdown__section">
+                  <span class="dropdown__heading">Tours</span>
+                  <a class="dropdown__item" href="/experience/car-tours">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>Scenic Coast</span>
+                  </a>
+                  <a class="dropdown__item" href="/experience/car-tours">
+                    <i class="bi bi-tree"></i>
+                    <span>Peak Flavors</span>
+                  </a>
+                  <a class="dropdown__item" href="/experience/scooter">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Scooter Photo Tour</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a class="nav__link" href={item.href}>
+              <i class={`bi ${item.icon}`}></i>
+              {item.label}
+            </a>
+          )
         ))}
       </nav>
 
@@ -63,6 +102,9 @@ const headerSocials = socialLinks.filter((item) =>
 
   <!-- Full-screen mobile menu -->
   <div class="mobile-panel" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="mobile-panel__close" type="button" aria-label="Close menu">
+      <i class="bi bi-x-lg"></i>
+    </button>
     <div class="mobile-panel__logo">
       <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} />
       <img class="logo__mark logo__mark--night" src="/brand/logo-light.svg" alt="" aria-hidden="true" />
@@ -73,9 +115,34 @@ const headerSocials = socialLinks.filter((item) =>
         <i class="bi bi-house-door-fill"></i> Home
       </a>
       {navigation.map((item) => (
-        <a class="mobile-panel__link" href={item.href}>
-          <i class={`bi ${item.icon}`}></i> {item.label}
-        </a>
+        item.label === 'Experience' ? (
+          <Fragment>
+            <a class="mobile-panel__link" href={item.href}>
+              <i class={`bi ${item.icon}`}></i> {item.label}
+            </a>
+            <div class="mobile-panel__sublinks">
+              <a class="mobile-panel__sublink" href="/photoshootings">
+                <i class="bi bi-person"></i> Individual Photo Shooting
+              </a>
+              <a class="mobile-panel__sublink" href="/photoshootings#couples">
+                <i class="bi bi-people"></i> Couple Photo Shooting
+              </a>
+              <a class="mobile-panel__sublink" href="/experience/car-tours">
+                <i class="bi bi-geo-alt"></i> Scenic Coast
+              </a>
+              <a class="mobile-panel__sublink" href="/experience/car-tours">
+                <i class="bi bi-tree"></i> Peak Flavors
+              </a>
+              <a class="mobile-panel__sublink" href="/experience/scooter">
+                <i class="bi bi-speedometer2"></i> Scooter Photo Tour
+              </a>
+            </div>
+          </Fragment>
+        ) : (
+          <a class="mobile-panel__link" href={item.href}>
+            <i class={`bi ${item.icon}`}></i> {item.label}
+          </a>
+        )
       ))}
     </div>
 
@@ -181,13 +248,17 @@ const headerSocials = socialLinks.filter((item) =>
       document.body.style.overflow = isOpen ? 'hidden' : ''
     })
 
-    document.querySelectorAll('.mobile-panel__link').forEach((link) => {
-      link.addEventListener('click', () => {
-        header?.classList.remove('menu-open')
-        menuToggle?.setAttribute('aria-expanded', 'false')
-        mobilePanel?.setAttribute('aria-hidden', 'true')
-        document.body.style.overflow = ''
-      })
+    const closeMenu = () => {
+      header?.classList.remove('menu-open')
+      menuToggle?.setAttribute('aria-expanded', 'false')
+      mobilePanel?.setAttribute('aria-hidden', 'true')
+      document.body.style.overflow = ''
+    }
+
+    document.querySelector('.mobile-panel__close')?.addEventListener('click', closeMenu)
+
+    document.querySelectorAll('.mobile-panel__link, .mobile-panel__sublink').forEach((link) => {
+      link.addEventListener('click', closeMenu)
     })
 
     /* ── Scroll + on-hero + scrim ── */
@@ -689,6 +760,30 @@ const headerSocials = socialLinks.filter((item) =>
     transform: translateY(0);
   }
 
+  .mobile-panel__close {
+    position: absolute;
+    top: calc(env(safe-area-inset-top, 0px) + 16px);
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    color: var(--color-text);
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    z-index: 1;
+  }
+
+  .mobile-panel__close:active {
+    transform: scale(0.92);
+    background: var(--color-surface);
+  }
+
   .mobile-panel__logo {
     display: flex;
     justify-content: center;
@@ -844,6 +939,167 @@ const headerSocials = socialLinks.filter((item) =>
     font-size: 1.4rem;
   }
 
+  /* ─── Desktop dropdown ─── */
+  .nav__dropdown {
+    position: relative;
+  }
+
+  .nav__chevron {
+    font-size: 0.6rem;
+    opacity: 0.5;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .nav__dropdown:hover .nav__chevron {
+    transform: rotate(180deg);
+    opacity: 0.8;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    min-width: 240px;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 0.6rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .nav__dropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Bridge element to prevent gap between trigger and dropdown */
+  .dropdown::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 0;
+    right: 0;
+    height: 16px;
+  }
+
+  .dropdown__heading {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    padding: 0.35rem 0.75rem 0.25rem;
+  }
+
+  .dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .dropdown__item:hover {
+    background: var(--color-surface);
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .dropdown__item i {
+    font-size: 1rem;
+    width: 1.4rem;
+    text-align: center;
+    opacity: 0.65;
+    transition: opacity 0.15s;
+  }
+
+  .dropdown__item:hover i {
+    opacity: 1;
+  }
+
+  .dropdown__divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 0.35rem 0.75rem;
+  }
+
+  /* Night theme dropdown */
+  :global([data-theme='night']) .dropdown {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* On-hero dropdown should still have readable bg */
+  .header.on-hero:not(.is-scrolled) .dropdown {
+    background: var(--color-card);
+    color: var(--color-text);
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .dropdown {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .dropdown__item {
+    color: var(--color-text);
+  }
+
+  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .dropdown__heading {
+    color: var(--color-text-muted);
+  }
+
+  /* ─── Mobile sublinks ─── */
+  .mobile-panel__sublinks {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 1rem;
+  }
+
+  .mobile-panel__sublink {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0 1.2rem;
+    height: 52px;
+    border-radius: 12px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s;
+  }
+
+  .mobile-panel__sublink:active {
+    transform: scale(0.97);
+    background: var(--color-card);
+  }
+
+  .mobile-panel__sublink i {
+    font-size: 1.15rem;
+    width: 1.6rem;
+    text-align: center;
+    opacity: 0.6;
+  }
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -890,7 +1146,8 @@ const headerSocials = socialLinks.filter((item) =>
     .cta-btn,
     .header__actions .theme-switch,
     .header__social,
-    .header__divider {
+    .header__divider,
+    .dropdown {
       display: none;
     }
 
