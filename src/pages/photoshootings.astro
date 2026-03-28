@@ -242,12 +242,11 @@ const testimonials = [
     })()
   </script>
 
+  <!-- ═══════ 1. INDIVIDUAL GALLERY ═══════ -->
   <section class="section section--individual">
     <div class="container">
       <div class="cat-header">
-        <h1>
-          Individual <span class="accent-italic">Sessions</span>
-        </h1>
+        <h1>Individual <span class="accent-italic">Sessions</span></h1>
         <p class="cat-header__desc">
           Every solo session is a private journey through the Amalfi Coast's most cinematic corners.
           No rush, no groups — just you, golden light, and a story waiting to be told.
@@ -262,14 +261,10 @@ const testimonials = [
             </div>
             <span class="shoot-card__tag">{item.tag}</span>
             <div class="shoot-card__overlay">
-              <div class="shoot-card__location">
-                <i class="bi bi-geo-alt"></i> {item.location}
-              </div>
+              <div class="shoot-card__location"><i class="bi bi-geo-alt"></i> {item.location}</div>
               <h3 class="shoot-card__title">{item.title}</h3>
               <p class="shoot-card__desc">{item.desc}</p>
-              <span class="shoot-card__cta">
-                View story <i class="bi bi-arrow-right"></i>
-              </span>
+              <span class="shoot-card__cta">View story <i class="bi bi-arrow-right"></i></span>
             </div>
           </a>
         ))}
@@ -277,43 +272,70 @@ const testimonials = [
     </div>
   </section>
 
-  <section class="section testimonials">
+  <!-- ═══════ 2. SOLO PRICING ═══════ -->
+  <section class="section pricing" id="pricing">
     <div class="container">
       <div class="cat-header cat-header--center">
-        <h1>
-          What Guests <span class="accent-italic">Say</span>
-        </h1>
+        <span class="pricing__eyebrow">Transparent Pricing</span>
+        <h1>Solo &amp; Individual <span class="accent-italic">Packages</span></h1>
         <p class="cat-header__desc">
-          Real stories from real people who trusted us with their most precious moments on the coast.
+          No hidden fees, no platform commissions. Direct booking with a local photographer who lives on the coast.
         </p>
       </div>
-      <div class="testimonials__grid">
-        {testimonials.map((item) => (
-          <article class="card testimonial">
-            <div class="testimonial__stars" aria-label="5 stars">
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-            </div>
-            <blockquote class="testimonial__quote">{item.quote}</blockquote>
-            <footer class="testimonial__footer">
-              <strong>{item.author}</strong>
-              <span>{item.meta}</span>
-            </footer>
-          </article>
-        ))}
+      <div class="pricing__cards">
+        <div class="pricing-card">
+          <div class="pricing-card__head">
+            <span class="pricing-card__tag">Personal</span>
+            <h3 class="pricing-card__name">Traveler's Portrait</h3>
+            <p class="pricing-card__tagline">Quick &amp; cinematic — your Amalfi moment</p>
+            <div class="pricing-card__price">&euro;200</div>
+          </div>
+          <ul class="pricing-card__list">
+            <li><i class="bi bi-clock"></i> ~45 minutes</li>
+            <li><i class="bi bi-geo-alt"></i> 2 locations in Atrani</li>
+            <li><i class="bi bi-image"></i> 25+ retouched photos</li>
+            <li><i class="bi bi-sun"></i> Morning or golden hour</li>
+            <li><i class="bi bi-phone"></i> Social-ready formats (IG, LinkedIn)</li>
+            <li><i class="bi bi-cloud-arrow-down"></i> Online gallery, 7 business days</li>
+          </ul>
+          <div class="pricing-card__ideal">
+            <strong>Ideal for:</strong> Solo travelers, content creators, professional portraits abroad
+          </div>
+          <a class="pricing-card__btn" href="/contact">Book this session</a>
+        </div>
+
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-card__ribbon">Popular</div>
+          <div class="pricing-card__head">
+            <span class="pricing-card__tag">Influencer</span>
+            <h3 class="pricing-card__name">Coastal Stories</h3>
+            <p class="pricing-card__tagline">Extended storytelling with hidden-gem locations</p>
+            <div class="pricing-card__price">&euro;320</div>
+          </div>
+          <ul class="pricing-card__list">
+            <li><i class="bi bi-clock"></i> ~1.5 hours</li>
+            <li><i class="bi bi-geo-alt"></i> 3–4 locations in Atrani &amp; beyond</li>
+            <li><i class="bi bi-image"></i> 50+ retouched photos</li>
+            <li><i class="bi bi-calendar-check"></i> Flexible timing</li>
+            <li><i class="bi bi-circle-half"></i> 3 black &amp; white edits included</li>
+            <li><i class="bi bi-lightning"></i> 3 express previews within 24h</li>
+            <li><i class="bi bi-map"></i> Off-the-beaten-path locations</li>
+            <li><i class="bi bi-cloud-arrow-down"></i> Online gallery, 7 business days</li>
+          </ul>
+          <div class="pricing-card__ideal">
+            <strong>Ideal for:</strong> Influencers, travel bloggers, birthday gift to yourself, portfolio content
+          </div>
+          <a class="pricing-card__btn" href="/contact">Book this session</a>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ═══════ 3. COUPLES GALLERY ═══════ -->
   <section class="section section--couples">
     <div class="container">
       <div class="cat-header">
-        <h1>
-          Couple <span class="accent-italic">Sessions</span>
-        </h1>
+        <h1>Couple <span class="accent-italic">Sessions</span></h1>
         <p class="cat-header__desc">
           Two people, one coast, and light that makes everything feel timeless.
           Whether it's an engagement, anniversary, or simply being in love — the Amalfi Coast
@@ -329,14 +351,10 @@ const testimonials = [
             </div>
             <span class="shoot-card__tag">{item.tag}</span>
             <div class="shoot-card__overlay">
-              <div class="shoot-card__location">
-                <i class="bi bi-geo-alt"></i> {item.location}
-              </div>
+              <div class="shoot-card__location"><i class="bi bi-geo-alt"></i> {item.location}</div>
               <h3 class="shoot-card__title">{item.title}</h3>
               <p class="shoot-card__desc">{item.desc}</p>
-              <span class="shoot-card__cta">
-                View story <i class="bi bi-arrow-right"></i>
-              </span>
+              <span class="shoot-card__cta">View story <i class="bi bi-arrow-right"></i></span>
             </div>
           </a>
         ))}
@@ -344,156 +362,104 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- ═══════ PRICING ═══════ -->
-  <section class="section pricing" id="pricing">
+  <!-- ═══════ 4. COUPLES PRICING ═══════ -->
+  <section class="section pricing pricing--alt">
     <div class="container">
       <div class="cat-header cat-header--center">
-        <span class="pricing__eyebrow">Transparent Pricing</span>
-        <h1>
-          Choose Your <span class="accent-italic">Session</span>
-        </h1>
-        <p class="cat-header__desc">
-          No hidden fees, no platform commissions. Direct booking with a local photographer
-          who lives on the Amalfi Coast and knows every secret corner.
-        </p>
+        <span class="pricing__eyebrow">Couples Pricing</span>
+        <h1>Two of You, <span class="accent-italic">One Coast</span></h1>
       </div>
-
-      <!-- ── Solo packages ── -->
-      <div class="pricing__category">
-        <h2 class="pricing__cat-label">Solo &amp; Individual</h2>
-        <div class="pricing__cards">
-          <div class="pricing-card">
-            <div class="pricing-card__head">
-              <span class="pricing-card__tag">Personal</span>
-              <h3 class="pricing-card__name">Traveler's Portrait</h3>
-              <p class="pricing-card__tagline">Quick &amp; cinematic — your Amalfi moment</p>
-              <div class="pricing-card__price">&euro;200</div>
-            </div>
-            <ul class="pricing-card__list">
-              <li><i class="bi bi-clock"></i> ~45 minutes</li>
-              <li><i class="bi bi-geo-alt"></i> 2 locations in Atrani</li>
-              <li><i class="bi bi-image"></i> 25+ retouched photos</li>
-              <li><i class="bi bi-sun"></i> Morning or golden hour</li>
-              <li><i class="bi bi-phone"></i> Social-ready formats (IG, LinkedIn)</li>
-              <li><i class="bi bi-cloud-arrow-down"></i> Online gallery, 7 business days</li>
-            </ul>
-            <div class="pricing-card__ideal">
-              <strong>Ideal for:</strong> Solo travelers, content creators, professional portraits abroad
-            </div>
-            <a class="pricing-card__btn" href="/contact">Book this session</a>
+      <div class="pricing__cards">
+        <div class="pricing-card">
+          <div class="pricing-card__head">
+            <span class="pricing-card__tag">Couple</span>
+            <h3 class="pricing-card__name">Golden Hour Atrani</h3>
+            <p class="pricing-card__tagline">One hour of pure magic in the most photogenic village</p>
+            <div class="pricing-card__price">&euro;280</div>
           </div>
-
-          <div class="pricing-card pricing-card--featured">
-            <div class="pricing-card__ribbon">Popular</div>
-            <div class="pricing-card__head">
-              <span class="pricing-card__tag">Influencer</span>
-              <h3 class="pricing-card__name">Coastal Stories</h3>
-              <p class="pricing-card__tagline">Extended storytelling with hidden-gem locations</p>
-              <div class="pricing-card__price">&euro;320</div>
-            </div>
-            <ul class="pricing-card__list">
-              <li><i class="bi bi-clock"></i> ~1.5 hours</li>
-              <li><i class="bi bi-geo-alt"></i> 3–4 locations in Atrani &amp; beyond</li>
-              <li><i class="bi bi-image"></i> 50+ retouched photos</li>
-              <li><i class="bi bi-calendar-check"></i> Flexible timing</li>
-              <li><i class="bi bi-circle-half"></i> 3 black &amp; white edits included</li>
-              <li><i class="bi bi-lightning"></i> 3 express previews within 24h</li>
-              <li><i class="bi bi-map"></i> Off-the-beaten-path locations</li>
-              <li><i class="bi bi-cloud-arrow-down"></i> Online gallery, 7 business days</li>
-            </ul>
-            <div class="pricing-card__ideal">
-              <strong>Ideal for:</strong> Influencers, travel bloggers, birthday gift to yourself, portfolio content
-            </div>
-            <a class="pricing-card__btn" href="/contact">Book this session</a>
+          <ul class="pricing-card__list">
+            <li><i class="bi bi-clock"></i> ~1 hour</li>
+            <li><i class="bi bi-geo-alt"></i> 2–3 locations in Atrani</li>
+            <li><i class="bi bi-image"></i> 40+ retouched photos</li>
+            <li><i class="bi bi-sun"></i> Golden hour (sunrise or sunset)</li>
+            <li><i class="bi bi-chat-dots"></i> Style &amp; outfit consultation</li>
+            <li><i class="bi bi-cloud-arrow-down"></i> Online gallery, 7 business days</li>
+          </ul>
+          <div class="pricing-card__ideal">
+            <strong>Ideal for:</strong> Honeymoon, anniversary, romantic getaway, save-the-date
           </div>
+          <a class="pricing-card__btn" href="/contact">Book this session</a>
         </div>
-      </div>
 
-      <!-- ── Couples packages ── -->
-      <div class="pricing__category">
-        <h2 class="pricing__cat-label">Couples</h2>
-        <div class="pricing__cards">
-          <div class="pricing-card">
-            <div class="pricing-card__head">
-              <span class="pricing-card__tag">Couple</span>
-              <h3 class="pricing-card__name">Golden Hour Atrani</h3>
-              <p class="pricing-card__tagline">One hour of pure magic in the most photogenic village</p>
-              <div class="pricing-card__price">&euro;280</div>
-            </div>
-            <ul class="pricing-card__list">
-              <li><i class="bi bi-clock"></i> ~1 hour</li>
-              <li><i class="bi bi-geo-alt"></i> 2–3 locations in Atrani</li>
-              <li><i class="bi bi-image"></i> 40+ retouched photos</li>
-              <li><i class="bi bi-sun"></i> Golden hour (sunrise or sunset)</li>
-              <li><i class="bi bi-chat-dots"></i> Style &amp; outfit consultation</li>
-              <li><i class="bi bi-cloud-arrow-down"></i> Online gallery, 7 business days</li>
-            </ul>
-            <div class="pricing-card__ideal">
-              <strong>Ideal for:</strong> Honeymoon, anniversary, romantic getaway, save-the-date
-            </div>
-            <a class="pricing-card__btn" href="/contact">Book this session</a>
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-card__ribbon">Best Value</div>
+          <div class="pricing-card__head">
+            <span class="pricing-card__tag">Couple</span>
+            <h3 class="pricing-card__name">Two Towns Panorama</h3>
+            <p class="pricing-card__tagline">Atrani + Amalfi — the full cinematic experience</p>
+            <div class="pricing-card__price">&euro;400</div>
           </div>
-
-          <div class="pricing-card pricing-card--featured">
-            <div class="pricing-card__ribbon">Best Value</div>
-            <div class="pricing-card__head">
-              <span class="pricing-card__tag">Couple</span>
-              <h3 class="pricing-card__name">Two Towns Panorama</h3>
-              <p class="pricing-card__tagline">Atrani + Amalfi — the full cinematic experience</p>
-              <div class="pricing-card__price">&euro;400</div>
-            </div>
-            <ul class="pricing-card__list">
-              <li><i class="bi bi-clock"></i> ~2 hours</li>
-              <li><i class="bi bi-geo-alt"></i> 4–6 locations across Atrani &amp; Amalfi</li>
-              <li><i class="bi bi-image"></i> 80+ retouched photos</li>
-              <li><i class="bi bi-calendar-check"></i> Flexible timing</li>
-              <li><i class="bi bi-circle-half"></i> 5 black &amp; white edits included</li>
-              <li><i class="bi bi-lightning"></i> 3–5 express previews within 24h</li>
-              <li><i class="bi bi-camera-reels"></i> Walking + posed styles</li>
-              <li><i class="bi bi-cloud-arrow-down"></i> Online gallery, 7 business days</li>
-            </ul>
-            <div class="pricing-card__ideal">
-              <strong>Ideal for:</strong> Engagement, proposal, elopement, anniversary, social media content
-            </div>
-            <a class="pricing-card__btn" href="/contact">Book this session</a>
+          <ul class="pricing-card__list">
+            <li><i class="bi bi-clock"></i> ~2 hours</li>
+            <li><i class="bi bi-geo-alt"></i> 4–6 locations across Atrani &amp; Amalfi</li>
+            <li><i class="bi bi-image"></i> 80+ retouched photos</li>
+            <li><i class="bi bi-calendar-check"></i> Flexible timing</li>
+            <li><i class="bi bi-circle-half"></i> 5 black &amp; white edits included</li>
+            <li><i class="bi bi-lightning"></i> 3–5 express previews within 24h</li>
+            <li><i class="bi bi-camera-reels"></i> Walking + posed styles</li>
+            <li><i class="bi bi-cloud-arrow-down"></i> Online gallery, 7 business days</li>
+          </ul>
+          <div class="pricing-card__ideal">
+            <strong>Ideal for:</strong> Engagement, proposal, elopement, anniversary, social media content
           </div>
-        </div>
-      </div>
-
-      <!-- ── What's always included ── -->
-      <div class="pricing__included">
-        <h3 class="pricing__included-title">Every session includes</h3>
-        <div class="pricing__included-grid">
-          <div class="pricing__included-item">
-            <i class="bi bi-chat-left-text"></i>
-            <span>Pre-session consultation via WhatsApp or email</span>
-          </div>
-          <div class="pricing__included-item">
-            <i class="bi bi-palette"></i>
-            <span>Professional color grading &amp; retouching</span>
-          </div>
-          <div class="pricing__included-item">
-            <i class="bi bi-hdd"></i>
-            <span>High-resolution JPEG — print &amp; web ready</span>
-          </div>
-          <div class="pricing__included-item">
-            <i class="bi bi-compass"></i>
-            <span>Location scouting &amp; insider guidance</span>
-          </div>
-          <div class="pricing__included-item">
-            <i class="bi bi-people"></i>
-            <span>Posing direction &amp; style advice</span>
-          </div>
-          <div class="pricing__included-item">
-            <i class="bi bi-cloud-arrow-down"></i>
-            <span>Online gallery with 90-day access</span>
-          </div>
+          <a class="pricing-card__btn" href="/contact">Book this session</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════ TRAVEL FEE ═══════ -->
+  <!-- ═══════ 5. EVERY SESSION INCLUDES ═══════ -->
+  <section class="section included-section">
+    <div class="container">
+      <div class="cat-header cat-header--center">
+        <h2>Every Session <span class="accent-italic">Includes</span></h2>
+      </div>
+      <div class="included-cards">
+        <div class="included-card">
+          <div class="included-card__icon"><i class="bi bi-chat-left-text"></i></div>
+          <h4 class="included-card__name">Pre-Session Consultation</h4>
+          <p class="included-card__desc">Via WhatsApp or email — we'll discuss your style, mood, and vision before the shoot</p>
+        </div>
+        <div class="included-card">
+          <div class="included-card__icon"><i class="bi bi-palette"></i></div>
+          <h4 class="included-card__name">Professional Retouching</h4>
+          <p class="included-card__desc">Color grading, skin retouching, and cinematic post-processing for every image</p>
+        </div>
+        <div class="included-card">
+          <div class="included-card__icon"><i class="bi bi-hdd"></i></div>
+          <h4 class="included-card__name">High-Res Delivery</h4>
+          <p class="included-card__desc">JPEG files in full resolution — ready for prints, social media, and web use</p>
+        </div>
+        <div class="included-card">
+          <div class="included-card__icon"><i class="bi bi-compass"></i></div>
+          <h4 class="included-card__name">Location Scouting</h4>
+          <p class="included-card__desc">Insider guidance to secret spots, best angles, and optimal lighting times</p>
+        </div>
+        <div class="included-card">
+          <div class="included-card__icon"><i class="bi bi-people"></i></div>
+          <h4 class="included-card__name">Posing Direction</h4>
+          <p class="included-card__desc">Gentle guidance so you look natural and confident — no awkward standing around</p>
+        </div>
+        <div class="included-card">
+          <div class="included-card__icon"><i class="bi bi-cloud-arrow-down"></i></div>
+          <h4 class="included-card__name">Online Gallery</h4>
+          <p class="included-card__desc">Private gallery with 90-day download access — share with family and friends</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ 6. TRAVEL ZONES ═══════ -->
   <section class="section pricing-travel">
     <div class="container">
       <div class="cat-header">
@@ -551,7 +517,7 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- ═══════ ADD-ONS ═══════ -->
+  <!-- ═══════ 7. ADD-ONS ═══════ -->
   <section class="section pricing-addons">
     <div class="container">
       <div class="cat-header cat-header--center">
@@ -563,64 +529,82 @@ const testimonials = [
       <div class="addons-grid">
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-lightning-charge"></i></div>
-          <h4 class="addon-card__name">Rush Delivery</h4>
-          <p class="addon-card__desc">All retouched photos within 48 hours</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">Rush Delivery</h4>
+            <p class="addon-card__desc">All retouched photos within 48 hours</p>
+          </div>
           <span class="addon-card__price">+&euro;60</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-send"></i></div>
-          <h4 class="addon-card__name">Express Preview</h4>
-          <p class="addon-card__desc">5 lightly edited photos within 12 hours</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">Express Preview</h4>
+            <p class="addon-card__desc">5 lightly edited photos within 12 hours</p>
+          </div>
           <span class="addon-card__price">+&euro;25</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-circle-half"></i></div>
-          <h4 class="addon-card__name">Full B&amp;W Set</h4>
-          <p class="addon-card__desc">Complete set additionally in black &amp; white</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">Full B&amp;W Set</h4>
+            <p class="addon-card__desc">Complete set additionally in black &amp; white</p>
+          </div>
           <span class="addon-card__price">+&euro;40</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-hourglass-split"></i></div>
-          <h4 class="addon-card__name">Extra Time</h4>
-          <p class="addon-card__desc">Extend any session by one hour</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">Extra Time</h4>
+            <p class="addon-card__desc">Extend any session by one hour</p>
+          </div>
           <span class="addon-card__price">+&euro;120/hr</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-filetype-raw"></i></div>
-          <h4 class="addon-card__name">RAW Files</h4>
-          <p class="addon-card__desc">All original unedited files delivered</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">RAW Files</h4>
+            <p class="addon-card__desc">All original unedited files delivered</p>
+          </div>
           <span class="addon-card__price">+&euro;80</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-shield-lock"></i></div>
-          <h4 class="addon-card__name">Exclusive Rights</h4>
-          <p class="addon-card__desc">Photos won't be used in my portfolio</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">Exclusive Rights</h4>
+            <p class="addon-card__desc">Photos won't be used in my portfolio</p>
+          </div>
           <span class="addon-card__price">+&euro;120</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-printer"></i></div>
-          <h4 class="addon-card__name">Print Set</h4>
-          <p class="addon-card__desc">10 archival prints, 13&times;18 cm</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">Print Set</h4>
+            <p class="addon-card__desc">10 archival prints, 13&times;18 cm</p>
+          </div>
           <span class="addon-card__price">+&euro;50</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-play-circle"></i></div>
-          <h4 class="addon-card__name">Slideshow Video</h4>
-          <p class="addon-card__desc">60-second highlight reel with music</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">Slideshow Video</h4>
+            <p class="addon-card__desc">60-second highlight reel with music</p>
+          </div>
           <span class="addon-card__price">+&euro;70</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="bi bi-person-plus"></i></div>
-          <h4 class="addon-card__name">Extra Person</h4>
-          <p class="addon-card__desc">Additional person in the session</p>
+          <div class="addon-card__body">
+            <h4 class="addon-card__name">Extra Person</h4>
+            <p class="addon-card__desc">Additional person in the session</p>
+          </div>
           <span class="addon-card__price">+&euro;30/person</span>
         </div>
       </div>
-      <p class="addons-note">Holiday surcharge (Christmas, New Year, Easter, Aug 15): +20%. Early sunrise / night sessions (before 7 AM or after 9 PM): +20%.</p>
+      <p class="addons-note">Holiday surcharge (Christmas, New Year, Easter, Aug 15): +20%.</p>
     </div>
   </section>
 
-  <!-- ═══════ SEASONAL OFFERS ═══════ -->
+  <!-- ═══════ 8. SEASONAL OFFERS ═══════ -->
   <section class="section pricing-seasons">
     <div class="container">
       <div class="seasons-grid">
@@ -634,7 +618,7 @@ const testimonials = [
           <div class="season-card__icon"><i class="bi bi-flower2"></i></div>
           <h3 class="season-card__name">Mid Season</h3>
           <span class="season-card__months">April — May, October</span>
-          <div class="season-card__badge">10% off all packages</div>
+          <div class="season-card__badge">Special Offer 2026 — 20% off</div>
           <p class="season-card__desc">Best light, fewer tourists — the perfect balance. Ideal conditions for unhurried, cinematic sessions.</p>
         </div>
         <div class="season-card season-card--low">
@@ -649,7 +633,7 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- ═══════ POLICIES ═══════ -->
+  <!-- ═══════ 9. POLICIES ═══════ -->
   <section class="section pricing-policies">
     <div class="container">
       <div class="cat-header cat-header--center">
@@ -696,7 +680,37 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- ═══════ FINAL CTA ═══════ -->
+  <!-- ═══════ 10. TESTIMONIALS ═══════ -->
+  <section class="section testimonials">
+    <div class="container">
+      <div class="cat-header cat-header--center">
+        <h1>What Guests <span class="accent-italic">Say</span></h1>
+        <p class="cat-header__desc">
+          Real stories from real people who trusted us with their most precious moments on the coast.
+        </p>
+      </div>
+      <div class="testimonials__grid">
+        {testimonials.map((item) => (
+          <article class="card testimonial">
+            <div class="testimonial__stars" aria-label="5 stars">
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <blockquote class="testimonial__quote">{item.quote}</blockquote>
+            <footer class="testimonial__footer">
+              <strong>{item.author}</strong>
+              <span>{item.meta}</span>
+            </footer>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ 11. FINAL CTA ═══════ -->
   <section class="section pricing-cta">
     <div class="container">
       <div class="pricing-cta__inner">
@@ -1345,19 +1359,8 @@ const testimonials = [
     margin-bottom: 0.6rem;
   }
 
-  .pricing__category {
-    margin-top: 3.5rem;
-  }
-
-  .pricing__cat-label {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.7rem;
-    color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--color-border);
+  .pricing--alt {
+    background: var(--color-surface);
   }
 
   .pricing__cards {
@@ -1512,52 +1515,66 @@ const testimonials = [
     }
   }
 
-  /* ── What's included strip ── */
-  .pricing__included {
-    margin-top: 3.5rem;
-    padding: 2rem 2.2rem;
-    background: var(--color-surface);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border);
+  /* ── Every session includes — mini cards ── */
+  .included-section {
+    background: var(--color-bg);
   }
 
-  .pricing__included-title {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    margin-bottom: 1.4rem;
-    color: var(--color-text);
-  }
-
-  .pricing__included-grid {
+  .included-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
-  .pricing__included-item {
+  .included-card {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .included-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .included-card__icon {
     display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: var(--color-text-muted);
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.08);
+    color: var(--color-accent);
+    font-size: 1.3rem;
   }
 
-  .pricing__included-item i {
-    color: var(--color-accent);
+  .included-card__name {
+    font-family: var(--font-display);
     font-size: 1rem;
-    flex-shrink: 0;
-    margin-top: 0.1rem;
+    color: var(--color-text);
+    margin: 0 0 0.4rem;
+  }
+
+  .included-card__desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.6;
   }
 
   @media (max-width: 768px) {
-    .pricing__included-grid {
+    .included-cards {
       grid-template-columns: 1fr 1fr;
     }
   }
 
   @media (max-width: 480px) {
-    .pricing__included-grid {
+    .included-cards {
       grid-template-columns: 1fr;
     }
   }
@@ -1650,52 +1667,66 @@ const testimonials = [
   .addons-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
+    gap: 1rem;
   }
 
   .addon-card {
     background: var(--color-card);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 1.4rem 1.3rem;
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.2rem;
     display: flex;
-    flex-direction: column;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    align-items: center;
+    gap: 0.9rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   }
 
   .addon-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-soft);
+    border-color: var(--color-accent);
   }
 
   .addon-card__icon {
-    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.08);
     color: var(--color-accent);
-    margin-bottom: 0.7rem;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .addon-card__body {
+    flex: 1;
+    min-width: 0;
   }
 
   .addon-card__name {
     font-family: var(--font-display);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     color: var(--color-text);
-    margin: 0 0 0.3rem;
+    margin: 0;
+    line-height: 1.3;
   }
 
   .addon-card__desc {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--color-text-muted);
-    margin: 0;
-    line-height: 1.5;
-    flex: 1;
+    margin: 0.15rem 0 0;
+    line-height: 1.4;
   }
 
   .addon-card__price {
-    display: inline-block;
-    margin-top: 0.8rem;
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 600;
     color: var(--color-accent);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .addons-note {
@@ -1744,8 +1775,23 @@ const testimonials = [
   }
 
   .season-card--high .season-card__icon { color: var(--color-accent); }
-  .season-card--mid .season-card__icon { color: var(--color-accent-2); }
+  .season-card--mid .season-card__icon { color: #ffffff; }
   .season-card--low .season-card__icon { color: var(--color-aux-2); }
+
+  .season-card--mid {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  .season-card--mid .season-card__name { color: #ffffff; }
+  .season-card--mid .season-card__months { color: rgba(255, 255, 255, 0.7); }
+  .season-card--mid .season-card__desc { color: rgba(255, 255, 255, 0.85); }
+
+  .season-card--mid .season-card__badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
 
   .season-card__name {
     font-family: var(--font-display);
