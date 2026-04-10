@@ -13,6 +13,16 @@ services:
       database__connection__password: EuXORAZQaK-JBQ2VNH5Y1otG
       database__connection__database: ghost
       security__staffDeviceVerification: false
+      mail__transport: SMTP
+      mail__options__host: smtp.eu.mailgun.org
+      mail__options__port: 587
+      mail__options__secure: "false"
+      mail__options__auth__user: postmaster@amalfi.day
+      mail__options__auth__pass: ${MAIL_SMTP_PASS}
+      mail__from: Amalfi.Day <noreply@amalfi.day>
+      mailgun__apiKey: ${MAILGUN_API_KEY}
+      mailgun__domain: amalfi.day
+      mailgun__baseUrl: https://api.eu.mailgun.net/v3
     ports:
       - "127.0.0.1:40001:40001"
     extra_hosts:
