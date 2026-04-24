@@ -1,0 +1,238 @@
+---
+import AvailabilityCalendar from './AvailabilityCalendar.astro'
+import type { Apartment } from '../data/apartments'
+
+export interface Props {
+  apartment: Apartment
+  variant: 'featured' | 'grid'
+}
+
+const { apartment, variant } = Astro.props
+const isFeatured = variant === 'featured'
+const scrollGallery = apartment.galleryStyle === 'scroll' && apartment.gallery.length > 1
+---
+
+<article class:list={['stay', isFeatured && 'stay--featured']}>
+  {scrollGallery ? (
+    <div class="stay__media stay__media--scroll" data-gallery data-gallery-mode="scroll">
+      <div class="stay__track">
+        {apartment.gallery.map((src) => (
+          <div class="stay__slide">
+            <img
+              class="stay__slide-image"
+              src={src}
+              alt={`${apartment.name} photo`}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        ))}
+      </div>
+      <button
+        class="stay__ctrl stay__ctrl--prev"
+        type="button"
+        data-gallery-prev
+        aria-label="Previous photo"
+      >
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button
+        class="stay__ctrl stay__ctrl--next"
+        type="button"
+        data-gallery-next
+        aria-label="Next photo"
+      >
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  ) : (
+    <div class="stay__media" data-gallery data-gallery-mode="cycle">
+      {apartment.gallery.map((src, idx) => (
+        <img
+          class:list={['stay__image', idx === 0 && 'is-active']}
+          src={src}
+          data-gallery-image
+          alt={`${apartment.name} photo`}
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
+      {apartment.gallery.length > 1 && (
+        <>
+          <button
+            class="stay__ctrl stay__ctrl--prev"
+            type="button"
+            data-gallery-prev
+            aria-label="Previous photo"
+          >
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button
+            class="stay__ctrl stay__ctrl--next"
+            type="button"
+            data-gallery-next
+            aria-label="Next photo"
+          >
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </>
+      )}
+    </div>
+  )}
+
+  <div class="stay__body">
+    <div class="stay__content">
+      <h3 class="stay__title">{apartment.name}</h3>
+      {apartment.cin && <span class="stay__cin">CIN: {apartment.cin}</span>}
+      <p class="stay__desc">{apartment.description}</p>
+    </div>
+    <div class="stay__calendar">
+      <AvailabilityCalendar
+        calendarName={apartment.calendar}
+        airbnb={apartment.bookingLinks.airbnb}
+        booking={apartment.bookingLinks.booking}
+      />
+    </div>
+  </div>
+</article>
+
+<style>
+  .stay {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+
+  .stay__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--color-surface);
+    cursor: pointer;
+  }
+
+  .stay__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .stay__image.is-active {
+    opacity: 1;
+  }
+
+  .stay__media--scroll {
+    aspect-ratio: auto;
+    cursor: grab;
+    background: transparent;
+    border-radius: 0;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  }
+
+  .stay__track {
+    display: flex;
+    gap: 1rem;
+    padding: 0 0.5rem 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .stay__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .stay__slide {
+    flex: 0 0 72%;
+    scroll-snap-align: center;
+  }
+
+  .stay__slide-image {
+    width: 100%;
+    height: clamp(220px, 26vw, 320px);
+    border-radius: 18px;
+    object-fit: cover;
+  }
+
+  .stay__ctrl {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    z-index: 2;
+  }
+
+  .stay__ctrl--prev {
+    left: 12px;
+  }
+
+  .stay__ctrl--next {
+    right: 12px;
+  }
+
+  .stay__body {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+
+  .stay__content {
+    min-width: 0;
+  }
+
+  .stay__title {
+    font-size: clamp(1.4rem, 2vw, 1.7rem);
+    margin: 0 0 0.4rem;
+  }
+
+  .stay__cin {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.6rem;
+    opacity: 0.8;
+  }
+
+  .stay__desc {
+    color: var(--color-text);
+    opacity: 0.88;
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  /* Featured variant (Villa Susy): gallery on top, body in side-by-side layout below */
+  .stay--featured .stay__body {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+    gap: 2rem;
+  }
+
+  @media (max-width: 960px) {
+    .stay--featured .stay__body {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

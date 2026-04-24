@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import StayCard from '../components/StayCard.astro'
+import { APARTMENT_SECTIONS } from '../data/apartments'
 
 const pageTitle = 'Apartments — CristallPont Amalfi Day'
 const pageDescription =
-  'Apartments, suites, and rooms in Atrani near Amalfi beach. Browse stays, galleries, and availability for Amalfi Coast trips.'
+  'Apartments, suites, and rooms in Atrani near Amalfi beach. Browse stays, galleries, and live availability for Amalfi Coast trips.'
 const shareImage = '/apartments/3-view-from-cristall-Pont.jpg'
 
 const stats = [
@@ -12,22 +14,10 @@ const stats = [
 ]
 
 const heroSlides = [
-  {
-    image: '/apartments/3-view-from-cristall-Pont.jpg',
-    label: 'Atrani',
-  },
-  {
-    image: '/apartments/villa-ravello-amalfiday-rent-1500x770.webp',
-    label: 'Ravello',
-  },
-  {
-    image: '/apartments/dragone-2.webp',
-    label: 'Rooms',
-  },
-  {
-    image: '/apartments/aria-di-mare-for-amalfi-day-2.webp',
-    label: 'Suites',
-  },
+  { image: '/apartments/3-view-from-cristall-Pont.jpg', label: 'Atrani' },
+  { image: '/apartments/villa-ravello-amalfiday-rent-1500x770.webp', label: 'Ravello' },
+  { image: '/apartments/dragone-2.webp', label: 'Rooms' },
+  { image: '/apartments/harmony.jpg.avif', label: 'Suites' },
 ]
 
 const heroTags = [
@@ -37,120 +27,6 @@ const heroTags = [
   'Private balconies',
   'Full kitchens',
   'Free Wi-Fi',
-]
-
-const staySections = [
-  {
-    title: 'Timeless Retreat in Ravello',
-    subtitle: 'Historical 2-bedroom apartment',
-    columns: 1,
-    stays: [
-      {
-        name: 'Villa Susy',
-        cin: 'IT065104C2Q9GJBER7',
-        description:
-          "This villa, located just a mile from Amalfi, offers a unique blend of authenticity and comfort. As you step inside, you'll be transported to a world where the past comes alive, and the present moment is savored.",
-        gallery: [
-          '/apartments/villa-ravello-amalfiday-rent-1500x770.webp',
-          '/apartments/villa-ravello-amalfiday-rent-2-1500x770.webp',
-        ],
-        calendar: 'Villa Susy',
-        galleryStyle: 'scroll',
-      },
-    ],
-  },
-  {
-    title: 'Suites by the sea',
-    subtitle: 'Apartment options that keep you close to the beach and the Atrani rhythm.',
-    columns: 2,
-    stays: [
-      {
-        name: 'Awesome apartments',
-        cin: 'IT065011B442X3QQQL',
-        description:
-          'Our location is just above the city center, a 5-7 minute walk uphill via 350 steps. The apartment features a separate kitchen, shower room, and a spacious room.',
-        gallery: ['/apartments/awesomeapts.jpg.avif'],
-        calendar: 'Awesome Apts',
-      },
-      {
-        name: 'Aria di Mare',
-        description:
-          'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
-        gallery: ['/apartments/aria-di-mare-for-amalfi-day-2.webp'],
-        calendar: 'Aria di Mare',
-      },
-      {
-        name: 'Suite Carina',
-        cin: 'IT065011B4MVEU3B33',
-        description:
-          'This is a double-level apartment located in the heart of the city. There are no steps to access the apartment. The windows offer views of the main street in Atrani.',
-        gallery: ['/apartments/casa-carina.jpeg.avif'],
-        calendar: 'Casa Carina',
-      },
-      {
-        name: 'Suite Harmony',
-        cin: 'IT065011B4JERC6CIZ',
-        description:
-          'This newly decorated apartment is located in the very center of Atrani, close to the main street. It features a small balcony with a beautiful mountain-views.',
-        gallery: ['/apartments/harmony.jpg.avif'],
-        calendar: 'Harmony Suite',
-      },
-    ],
-  },
-  {
-    title: 'Rooms in our townhouse',
-    subtitle: 'Design-led rooms with balconies and vintage details in the heart of Atrani.',
-    columns: 2,
-    stays: [
-      {
-        name: 'Vintage interior',
-        cin: 'IT065011B442X3QQQL',
-        description:
-          'The room is designed with a vintage aesthetic in mind, featuring decor and furnishings that evoke a sense of nostalgia and timeless elegance. The room also comes equipped with a large closet, complete with a mirror, providing ample storage and a convenient space for getting ready. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
-        gallery: ['/apartments/room-in-atrani-vintage.webp'],
-        calendar: 'Vintage Room',
-      },
-      {
-        name: 'Orange room',
-        cin: 'IT065011B442X3QQQL',
-        description:
-          'This room evokes the nostalgia of the 1960s with its decor and furnishings. The room features a large multi-panel closet, providing ample storage space for guests. The room also comes with with couple of garden chairs and a table. Additionally, the room has a balcony, which allows guests to enjoy fresh air and a view while relaxing in the comfort of their own space.',
-        gallery: ['/apartments/orange-room.jpg'],
-        calendar: 'Orange Room',
-      },
-      {
-        name: 'Room in center',
-        cin: 'IT065011B442X3QQQL',
-        description:
-          'This is the largest room in the house, providing plenty of space for guests to spread out and relax. The room features a large table, perfect for meals or working, and two chairs for comfortable seating. Additionally, the room has a small balcony that offers a view of the main street, perfect for enjoying the sights and sounds of the city. The closet is an original piece from the 1970s that is spacious and adds a vintage touch to the room.',
-        gallery: ['/apartments/2room-in-atrani-in-center.webp'],
-        calendar: 'Central Room',
-      },
-    ],
-  },
-  {
-    title: 'Cost-effective stays',
-    subtitle: 'Smart, comfortable rooms for short stays and solo adventures.',
-    columns: 2,
-    stays: [
-      {
-        name: 'Room for solo traveller',
-        cin: 'IT065011B442X3QQQL',
-        description:
-          'This room is designed to be cozy and comfortable, with a small bed that is perfect for one person. The room features a spacious balcony that offers a great place to sit and relax, with a chair that provides a comfortable seating option. The balcony also offers a beautiful view of the mountains, providing a serene and peaceful atmosphere. Additionally, the room is facing the main street of the town, which means that guests can enjoy the hustle and bustle of the city right from the comfort of their own room. The balcony can be accessed via the room and it is perfect for a morning coffee or a nightcap.',
-        gallery: ['/apartments/romfor-1-person.jpg.webp'],
-        calendar: 'Solo Room',
-      },
-      {
-        name: 'Room for youngsters',
-        cin: 'IT065011B442X3QQQL',
-        description:
-          'This room is designed to be functional and budget-friendly, perfect for travelers who are looking for a comfortable and affordable place to stay. The room features a bunk bed. The bunk bed is comfortable and convenient, providing a great place to rest after a long day of exploring. The room also features a big mural on the wall, which adds a unique and artistic touch to the space, making it more interesting and personalized. The room also comes with a large window that overlooks an inner street, providing natural light. The window can be opened to let fresh air in and to listen to the street sounds.',
-        gallery: ['/apartments/casa-bunkbed-room.jpg'],
-        calendar: 'Bunkbed Room',
-      },
-    ],
-  },
 ]
 
 const testimonials = [
@@ -242,135 +118,26 @@ const testimonials = [
     </div>
   </section>
 
-  {staySections.map((section, sIdx) => (
+  {APARTMENT_SECTIONS.map((section, sIdx) => (
     <section
-      id={sIdx === 0 ? 'stays' : undefined}
-      class={`section stay-section${section.columns === 2 ? ' stay-section--two' : ''}`}
+      id={sIdx === 0 ? 'stays' : section.id}
+      class:list={[
+        'section',
+        'stay-section',
+        section.layout === 'grid-2' && 'stay-section--two',
+        section.layout === 'featured' && 'stay-section--featured',
+      ]}
     >
       <div class="container section__header">
         <h2>{section.title}</h2>
         {section.subtitle && <p>{section.subtitle}</p>}
       </div>
       <div class="container stay-grid">
-        {section.stays.map((stay) => (
-          <article
-            class={`stay-card${stay.galleryStyle === 'scroll' ? ' stay-card--scroll stay-card--villa' : ''}`}
-          >
-            {stay.galleryStyle === 'scroll' ? (
-              <>
-                <div
-                  class="stay-card__media stay-card__media--scroll"
-                  data-gallery
-                  data-gallery-mode="scroll"
-                >
-                  <div class="stay-card__track">
-                  {stay.gallery.map((src) => (
-                    <div class="stay-card__slide">
-                      <img
-                        class="stay-card__slide-image"
-                        src={src}
-                        alt={`${stay.name} photo`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                  ))}
-                  </div>
-                  {stay.gallery.length > 1 && (
-                    <>
-                      <button
-                        class="gallery-control gallery-control--scroll"
-                        type="button"
-                        data-gallery-prev
-                        aria-label="Previous photo"
-                      >
-                        <i class="bi bi-chevron-left"></i>
-                      </button>
-                      <button
-                        class="gallery-control gallery-control--scroll"
-                        type="button"
-                        data-gallery-next
-                        aria-label="Next photo"
-                      >
-                        <i class="bi bi-chevron-right"></i>
-                      </button>
-                    </>
-                  )}
-                </div>
-                <div class="stay-card__details">
-                  <div class="stay-card__content">
-                    <h3>{stay.name}</h3>
-                    {stay.cin && <span class="stay-card__cin">CIN: {stay.cin}</span>}
-                    <p>{stay.description}</p>
-                  </div>
-                  {stay.calendar && (
-                    <div
-                      class="stay-calendar"
-                      data-calendar
-                      data-calendar-name={stay.calendar}
-                    >
-                      <span class="calendar__loading">Loading availability...</span>
-                    </div>
-                  )}
-                </div>
-              </>
-            ) : (
-              <>
-                <div class="stay-card__top">
-                  <div
-                    class="stay-card__media"
-                    data-gallery
-                    data-gallery-mode="cycle"
-                  >
-                    {stay.gallery.map((src, index) => (
-                      <img
-                        class={`stay-card__image${index === 0 ? ' is-active' : ''}`}
-                        src={src}
-                        data-gallery-image
-                        alt={`${stay.name} photo`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    ))}
-                    {stay.gallery.length > 1 && (
-                      <>
-                        <button
-                          class="gallery-control"
-                          type="button"
-                          data-gallery-prev
-                          aria-label="Previous photo"
-                        >
-                          <i class="bi bi-chevron-left"></i>
-                        </button>
-                        <button
-                          class="gallery-control"
-                          type="button"
-                          data-gallery-next
-                          aria-label="Next photo"
-                        >
-                          <i class="bi bi-chevron-right"></i>
-                        </button>
-                      </>
-                    )}
-                  </div>
-                  {stay.calendar && (
-                    <div
-                      class="stay-calendar"
-                      data-calendar
-                      data-calendar-name={stay.calendar}
-                    >
-                      <span class="calendar__loading">Loading availability...</span>
-                    </div>
-                  )}
-                </div>
-                <div class="stay-card__content">
-                  <h3>{stay.name}</h3>
-                  {stay.cin && <span class="stay-card__cin">CIN: {stay.cin}</span>}
-                  <p>{stay.description}</p>
-                </div>
-              </>
-            )}
-          </article>
+        {section.items.map((apartment) => (
+          <StayCard
+            apartment={apartment}
+            variant={section.layout === 'featured' ? 'featured' : 'grid'}
+          />
         ))}
       </div>
     </section>
@@ -471,8 +238,8 @@ const testimonials = [
     galleries.forEach((gallery) => {
       const mode = gallery.dataset.galleryMode || 'cycle'
       if (mode === 'scroll') {
-        const track = gallery.querySelector('.stay-card__track')
-        const slides = track ? Array.from(track.querySelectorAll('.stay-card__slide')) : []
+        const track = gallery.querySelector('.stay__track')
+        const slides = track ? Array.from(track.querySelectorAll('.stay__slide')) : []
         const prevBtn = gallery.querySelector('[data-gallery-prev]')
         const nextBtn = gallery.querySelector('[data-gallery-next]')
 
@@ -500,29 +267,19 @@ const testimonials = [
           track.scrollTo({ left, behavior: 'smooth' })
         }
 
-        nextBtn?.addEventListener('click', () => {
-          const current = getClosestIndex()
-          scrollToIndex(current + 1)
-        })
-
-        prevBtn?.addEventListener('click', () => {
-          const current = getClosestIndex()
-          scrollToIndex(current - 1)
-        })
-
+        nextBtn?.addEventListener('click', () => scrollToIndex(getClosestIndex() + 1))
+        prevBtn?.addEventListener('click', () => scrollToIndex(getClosestIndex() - 1))
         return
       }
+
       const images = Array.from(gallery.querySelectorAll('[data-gallery-image]'))
       if (images.length <= 1) return
 
       let index = 0
       const show = (nextIndex) => {
         index = (nextIndex + images.length) % images.length
-        images.forEach((img, i) => {
-          img.classList.toggle('is-active', i === index)
-        })
+        images.forEach((img, i) => img.classList.toggle('is-active', i === index))
       }
-
       const next = () => show(index + 1)
       const prev = () => show(index - 1)
 
@@ -549,187 +306,9 @@ const testimonials = [
         const endX = event.changedTouches[0]?.clientX ?? 0
         const diff = endX - startX
         if (Math.abs(diff) < 35) return
-        if (diff < 0) {
-          next()
-        } else {
-          prev()
-        }
+        if (diff < 0) next()
+        else prev()
       })
-    })
-  })
-</script>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const calendarEls = Array.from(document.querySelectorAll('[data-calendar]'))
-    if (!calendarEls.length) return
-
-    const monthShort = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-    const monthFull = ['January','February','March','April','May','June','July','August','September','October','November','December']
-    const dayLabels = ['Mo','Tu','We','Th','Fr','Sa','Su']
-
-    const formatDate = (d) => {
-      const y = d.getFullYear()
-      const m = `${d.getMonth() + 1}`.padStart(2, '0')
-      const day = `${d.getDate()}`.padStart(2, '0')
-      return `${y}-${m}-${day}`
-    }
-
-    const isToday = (date, today) =>
-      date.getFullYear() === today.getFullYear() &&
-      date.getMonth() === today.getMonth() &&
-      date.getDate() === today.getDate()
-
-    const computeMonthStats = (year, month, busy, today) => {
-      const daysInMonth = new Date(year, month + 1, 0).getDate()
-      let totalFuture = 0, totalBusy = 0
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day)
-        if (date < today && !isToday(date, today)) continue
-        totalFuture++
-        if (busy.has(formatDate(date))) totalBusy++
-      }
-      return totalFuture === 0 ? 0 : totalBusy / totalFuture
-    }
-
-    const chipColor = (ratio) => {
-      if (ratio < 0.3) return 'rgba(0, 0, 0, 0.04)'
-      if (ratio < 0.7) return 'rgba(255, 89, 0, 0.08)'
-      return 'rgba(255, 89, 0, 0.18)'
-    }
-
-    const renderMonth = (year, month, busy, today, index) => {
-      const firstDay = new Date(year, month, 1)
-      const offset = (firstDay.getDay() + 6) % 7
-      const daysInMonth = new Date(year, month + 1, 0).getDate()
-      const cells = []
-
-      for (let i = 0; i < offset; i++) {
-        cells.push('<span class="cal__cell cal__cell--empty"></span>')
-      }
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day)
-        const key = formatDate(date)
-        const isBusy = busy.has(key)
-        const isPast = date < today && !isToday(date, today)
-        const isTodayDate = isToday(date, today)
-        const cls = ['cal__cell',
-          isBusy ? 'cal__cell--busy' : 'cal__cell--free',
-          isPast ? 'cal__cell--past' : '',
-          isTodayDate ? 'cal__cell--today' : '',
-        ].filter(Boolean).join(' ')
-        cells.push(`<span class="${cls}">${day}</span>`)
-      }
-
-      return `
-        <div class="cal__month" data-cal-month-index="${index}">
-          <div class="cal__month-header">
-            <span class="cal__month-name">${monthFull[month]}</span>
-            <span class="cal__month-year">${year}</span>
-          </div>
-          <div class="cal__grid">
-            ${dayLabels.map(l => `<span class="cal__dow">${l}</span>`).join('')}
-            ${cells.join('')}
-          </div>
-        </div>`
-    }
-
-    const renderCalendar = (el, busy) => {
-      const today = new Date()
-      const months = []
-      const chips = []
-
-      const endYear = 2026
-      const endMonth = 10 // November (0-indexed)
-
-      for (let i = 0; ; i++) {
-        const d = new Date(today.getFullYear(), today.getMonth() + i, 1)
-        if (d.getFullYear() > endYear || (d.getFullYear() === endYear && d.getMonth() > endMonth)) break
-        const year = d.getFullYear()
-        const month = d.getMonth()
-        const ratio = computeMonthStats(year, month, busy, today)
-
-        chips.push(`<button class="cal__chip${i === 0 ? ' cal__chip--active' : ''}" data-cal-chip="${i}" style="--chip-fill:${chipColor(ratio)}"><span class="cal__chip-label">${monthShort[month]}</span></button>`)
-        months.push(renderMonth(year, month, busy, today, i))
-      }
-
-      el.innerHTML = `
-        <div class="cal">
-          <div class="cal__yearbar">
-            <div class="cal__yearbar-track">${chips.join('')}</div>
-          </div>
-          <div class="cal__strip-wrapper">
-            <button class="cal__nav cal__nav--prev cal__nav--hidden" aria-label="Previous months"><i class="bi bi-chevron-left"></i></button>
-            <div class="cal__strip">${months.join('')}</div>
-            <button class="cal__nav cal__nav--next" aria-label="Next months"><i class="bi bi-chevron-right"></i></button>
-          </div>
-          <div class="cal__legend">
-            <span class="cal__legend-item"><span class="cal__swatch cal__swatch--free"></span>Available</span>
-            <span class="cal__legend-item"><span class="cal__swatch cal__swatch--busy"></span>Booked</span>
-          </div>
-        </div>`
-
-      const strip = el.querySelector('.cal__strip')
-      const prevBtn = el.querySelector('.cal__nav--prev')
-      const nextBtn = el.querySelector('.cal__nav--next')
-      const chipBtns = el.querySelectorAll('.cal__chip')
-      const monthEls = el.querySelectorAll('.cal__month')
-
-      const scrollToMonth = (index) => {
-        const target = monthEls[index]
-        if (!target) return
-        strip.scrollTo({ left: target.offsetLeft - strip.offsetLeft, behavior: 'smooth' })
-      }
-
-      const updateState = () => {
-        const atStart = strip.scrollLeft < 10
-        const atEnd = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 10
-        prevBtn.classList.toggle('cal__nav--hidden', atStart)
-        nextBtn.classList.toggle('cal__nav--hidden', atEnd)
-
-        let closestIdx = 0, closestDist = Infinity
-        monthEls.forEach((m, i) => {
-          const dist = Math.abs(m.offsetLeft - strip.scrollLeft - strip.offsetLeft)
-          if (dist < closestDist) { closestDist = dist; closestIdx = i }
-        })
-        chipBtns.forEach((c, i) => c.classList.toggle('cal__chip--active', i === closestIdx))
-      }
-
-      strip.addEventListener('scroll', updateState, { passive: true })
-      updateState()
-
-      chipBtns.forEach(chip => {
-        chip.addEventListener('click', () => scrollToMonth(Number(chip.dataset.calChip)))
-      })
-
-      const getMonthWidth = () => (monthEls[0]?.offsetWidth || 220) + 20
-      prevBtn.addEventListener('click', () => strip.scrollBy({ left: -getMonthWidth(), behavior: 'smooth' }))
-      nextBtn.addEventListener('click', () => strip.scrollBy({ left: getMonthWidth(), behavior: 'smooth' }))
-    }
-
-    const availabilityPromise = fetch('/calendars/availability.json', { cache: 'no-store' })
-      .then((res) => (res.ok ? res.json() : null))
-      .catch(() => null)
-
-    calendarEls.forEach(async (calendarEl) => {
-      const calendarName = calendarEl.dataset.calendarName
-      if (!calendarName) { calendarEl.remove(); return }
-
-      calendarEl.innerHTML = '<div class="cal"><div class="cal__yearbar"><div class="cal__shimmer"></div></div><div class="cal__shimmer cal__shimmer--strip"></div></div>'
-
-      const availability = await availabilityPromise
-      if (!availability?.calendars) {
-        calendarEl.innerHTML = '<span class="cal__status">Calendar updating...</span>'
-        return
-      }
-      if (!(calendarName in availability.calendars)) {
-        calendarEl.innerHTML = '<span class="cal__status">Calendar coming soon.</span>'
-        return
-      }
-
-      const busy = new Set(availability.calendars[calendarName] || [])
-      renderCalendar(calendarEl, busy)
     })
   })
 </script>
@@ -748,7 +327,6 @@ const testimonials = [
     color: #ffffff;
   }
 
-  /* --- Slide images --- */
   .apt-hero__slides {
     position: absolute;
     inset: -2px;
@@ -788,7 +366,6 @@ const testimonials = [
     to { transform: scale(1.06); }
   }
 
-  /* --- Vignette overlay --- */
   .apt-hero__vignette {
     position: absolute;
     inset: 0;
@@ -800,7 +377,6 @@ const testimonials = [
     pointer-events: none;
   }
 
-  /* --- Content layer --- */
   .apt-hero__content {
     position: relative;
     z-index: 2;
@@ -815,7 +391,6 @@ const testimonials = [
     align-items: end;
   }
 
-  /* --- Copy block --- */
   .apt-hero__eyebrow {
     display: inline-block;
     font-family: var(--font-mono);
@@ -892,7 +467,6 @@ const testimonials = [
     animation: apt-fade-up 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* --- Buttons --- */
   .apt-hero__btn {
     display: inline-flex;
     align-items: center;
@@ -933,7 +507,6 @@ const testimonials = [
     color: #ffffff;
   }
 
-  /* --- Aside: tags + progress --- */
   .apt-hero__aside {
     display: flex;
     flex-direction: column;
@@ -966,7 +539,6 @@ const testimonials = [
     animation: apt-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* --- Slide progress dots --- */
   .apt-hero__progress {
     display: flex;
     gap: 0.6rem;
@@ -1024,7 +596,6 @@ const testimonials = [
     to { transform: scaleX(1); }
   }
 
-  /* --- Scroll hint --- */
   .apt-hero__scroll-hint {
     position: absolute;
     bottom: clamp(1rem, 2.5vh, 2rem);
@@ -1048,19 +619,11 @@ const testimonials = [
     50% { opacity: 1; transform: scaleY(1.3); }
   }
 
-  /* --- Entrance animations --- */
   @keyframes apt-fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(18px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* --- Responsive --- */
   @media (max-width: 768px) {
     .apt-hero__grid {
       grid-template-columns: 1fr;
@@ -1085,6 +648,7 @@ const testimonials = [
     }
   }
 
+  /* ===== Stay sections ===== */
   .stay-section {
     padding-top: 3rem;
   }
@@ -1102,187 +666,22 @@ const testimonials = [
 
   .stay-grid {
     display: grid;
-    gap: 2.5rem;
+    gap: 3rem;
   }
 
   .stay-section--two .stay-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
+    gap: 3rem 2rem;
   }
 
-  .stay-card {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: 1fr;
-    padding: 0;
-    border: none;
-    background: transparent;
-    box-shadow: none;
+  @media (max-width: 960px) {
+    .stay-section--two .stay-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .stay-card__top {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
-    min-width: 0;
-  }
-
-  .stay-card__top > * {
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .stay-card__top .stay-calendar {
-    margin-top: 0;
-  }
-
-  .stay-card__media {
-    position: relative;
-    border-radius: 22px;
-    overflow: hidden;
-    background: var(--color-surface);
-    aspect-ratio: 4 / 3;
-    cursor: pointer;
-  }
-
-  .stay-card__media--scroll {
-    aspect-ratio: auto;
-    cursor: grab;
-    mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(
-      90deg,
-      transparent 0%,
-      #000 8%,
-      #000 92%,
-      transparent 100%
-    );
-    width: 100%;
-    margin: 0;
-  }
-
-  .stay-card__image {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    inset: 0;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .stay-card__image.is-active {
-    opacity: 1;
-  }
-
-  .stay-card__track {
-    display: flex;
-    gap: 1rem;
-    padding: 0 0.5rem 0.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
-  .stay-card__track::-webkit-scrollbar {
-    display: none;
-  }
-
-  .stay-card__slide {
-    flex: 0 0 72%;
-    scroll-snap-align: center;
-  }
-
-  .stay-card__slide-image {
-    width: 100%;
-    height: clamp(200px, 24vw, 280px);
-    border-radius: 18px;
-    object-fit: cover;
-  }
-
-  .stay-card--scroll .stay-card__media {
-    background: transparent;
-  }
-
-  .gallery-control--scroll {
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-  }
-
-  .stay-card__media--scroll .gallery-control--scroll {
-    position: absolute;
-  }
-
-  .stay-card__media--scroll .gallery-control--scroll[data-gallery-prev] {
-    left: 8px;
-  }
-
-  .stay-card__media--scroll .gallery-control--scroll[data-gallery-next] {
-    right: 8px;
-  }
-
-  .stay-card--villa .stay-card__details {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-    align-items: start;
-  }
-
-  .stay-card--villa .stay-card__content {
-    max-width: 520px;
-  }
-
-  .stay-card--villa .stay-calendar {
-    margin-top: 0;
-  }
-
-  .gallery-control {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.85);
-    color: var(--color-text);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .gallery-control[data-gallery-prev] {
-    left: 16px;
-  }
-
-  .gallery-control[data-gallery-next] {
-    right: 16px;
-  }
-
-  .stay-card__content {
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .stay-card__content h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .stay-card__cin {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.04em;
-    color: var(--color-text-muted);
-    margin-top: -0.3rem;
-    margin-bottom: 0.4rem;
-    opacity: 0.75;
-  }
-
+  /* ===== Adventure ===== */
   .section--adventure {
     background: var(--color-surface);
   }
@@ -1313,6 +712,7 @@ const testimonials = [
     border-bottom: 1px solid var(--color-border);
   }
 
+  /* ===== Testimonials ===== */
   .testimonials__grid {
     display: grid;
     gap: 1.8rem;
@@ -1337,349 +737,7 @@ const testimonials = [
     color: var(--color-text-muted);
   }
 
-  /* Calendar */
-  .stay-calendar {
-    margin-top: 1.5rem;
-    padding: 1.25rem;
-    border-radius: var(--radius-md);
-    background: transparent;
-    border: none;
-    overflow: hidden;
-    min-width: 0;
-  }
-
-  :global(.cal__status),
-  .calendar__loading {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
-
-  :global(.cal) {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  /* Year-at-a-glance bar */
-  :global(.cal__yearbar) {
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--color-border);
-    overflow: hidden;
-  }
-
-  :global(.cal__yearbar-track) {
-    display: flex;
-    gap: 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    mask-image: linear-gradient(90deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
-  }
-
-  :global(.cal__yearbar-track::-webkit-scrollbar) {
-    display: none;
-  }
-
-  :global(.cal__chip) {
-    flex: 1 0 36px;
-    max-width: 60px;
-    height: 26px;
-    border-radius: 6px;
-    border: 1px solid var(--color-border);
-    background: var(--chip-fill, var(--color-surface));
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    transition: border-color 0.2s, transform 0.15s;
-    padding: 0;
-  }
-
-  :global(.cal__chip:hover) {
-    border-color: var(--color-accent);
-    transform: translateY(-1px);
-  }
-
-  :global(.cal__chip--active) {
-    border-bottom: 2px solid var(--color-accent);
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  :global(.cal__chip-label) {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-text-muted);
-    pointer-events: none;
-  }
-
-  /* Month strip */
-  :global(.cal__strip-wrapper) {
-    position: relative;
-  }
-
-  :global(.cal__strip) {
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding: 0.5rem 0;
-  }
-
-  :global(.cal__strip::-webkit-scrollbar) {
-    display: none;
-  }
-
-  :global(.cal__nav) {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid var(--color-border);
-    background: var(--color-card);
-    color: var(--color-text-muted);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 0.65rem;
-    box-shadow: var(--shadow-soft);
-    transition: opacity 0.2s, background 0.15s;
-  }
-
-  :global(.cal__nav:hover) {
-    background: var(--color-surface);
-    color: var(--color-text);
-  }
-
-  :global(.cal__nav--prev) {
-    left: -14px;
-  }
-
-  :global(.cal__nav--next) {
-    right: -14px;
-  }
-
-  :global(.cal__nav--hidden) {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  /* Month tiles */
-  :global(.cal__month) {
-    flex: 0 0 160px;
-    scroll-snap-align: start;
-  }
-
-  :global(.cal__month-header) {
-    display: flex;
-    align-items: baseline;
-    gap: 0.35rem;
-    margin-bottom: 0.6rem;
-  }
-
-  :global(.cal__month-name) {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text);
-  }
-
-  :global(.cal__month-year) {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.04em;
-    color: var(--color-text-muted);
-  }
-
-  :global(.cal__grid) {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
-  }
-
-  :global(.cal__dow) {
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    opacity: 0.6;
-    text-align: center;
-    padding-bottom: 3px;
-  }
-
-  /* Day cells */
-  :global(.cal__cell) {
-    height: 28px;
-    display: grid;
-    place-items: center;
-    border-radius: 5px;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--color-text);
-    transition: background 0.15s, transform 0.15s;
-    position: relative;
-  }
-
-  :global(.cal__cell--empty) {
-    background: transparent;
-  }
-
-  :global(.cal__cell--free) {
-    background: rgba(0, 0, 0, 0.04);
-  }
-
-  :global(.cal__cell--free:not(.cal__cell--past):hover) {
-    background: rgba(0, 0, 0, 0.08);
-    transform: scale(1.06);
-  }
-
-  :global(.cal__cell--busy) {
-    background: rgba(255, 89, 0, 0.1);
-    color: var(--color-text-muted);
-  }
-
-  :global(.cal__cell--busy::before) {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 4px;
-    bottom: 4px;
-    width: 2px;
-    border-radius: 1px;
-    background: var(--color-accent);
-    opacity: 0.7;
-  }
-
-  :global(.cal__cell--past) {
-    opacity: 0.3;
-  }
-
-  :global(.cal__cell--today) {
-    outline: 1.5px solid var(--color-text);
-    outline-offset: -1.5px;
-  }
-
-  /* Legend */
-  :global(.cal__legend) {
-    display: flex;
-    gap: 1rem;
-    margin-top: 0.75rem;
-    padding-top: 0.5rem;
-  }
-
-  :global(.cal__legend-item) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--color-text-muted);
-    letter-spacing: 0.02em;
-  }
-
-  :global(.cal__swatch) {
-    width: 14px;
-    height: 10px;
-    border-radius: 3px;
-    display: inline-block;
-  }
-
-  :global(.cal__swatch--free) {
-    background: rgba(0, 0, 0, 0.08);
-  }
-
-  :global(.cal__swatch--busy) {
-    background: rgba(255, 89, 0, 0.1);
-    border-left: 2px solid var(--color-accent);
-  }
-
-  /* Shimmer loading */
-  :global(.cal__shimmer) {
-    height: 26px;
-    border-radius: 6px;
-    background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-border) 50%, var(--color-surface) 75%);
-    background-size: 200% 100%;
-    animation: cal-shimmer 1.5s ease infinite;
-  }
-
-  :global(.cal__shimmer--strip) {
-    height: 120px;
-    margin-top: 0.75rem;
-    border-radius: var(--radius-sm);
-  }
-
-  @keyframes cal-shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-
-  /* Night theme fine-tuning */
-  :global([data-theme='night'] .cal__cell--free) {
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  :global([data-theme='night'] .cal__cell--free:not(.cal__cell--past):hover) {
-    background: rgba(255, 255, 255, 0.12);
-  }
-
-  :global([data-theme='night'] .cal__cell--busy) {
-    background: rgba(255, 89, 0, 0.14);
-  }
-
-  @media (max-width: 640px) {
-    :global(.cal__month) {
-      flex: 0 0 145px;
-    }
-
-    :global(.cal__nav--prev) {
-      left: 0;
-      background: var(--color-card);
-      opacity: 0.9;
-    }
-
-    :global(.cal__nav--next) {
-      right: 0;
-      background: var(--color-card);
-      opacity: 0.9;
-    }
-
-    :global(.cal__chip) {
-      flex: 0 0 32px;
-    }
-
-    :global(.cal__cell) {
-      height: 22px;
-      font-size: 0.58rem;
-    }
-  }
-
   @media (max-width: 900px) {
-    .stay-section--two .stay-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .stay-card__top {
-      grid-template-columns: 1fr;
-    }
-
-    .stay-card--villa .stay-card__details {
-      grid-template-columns: 1fr;
-    }
-
     .adventure-grid {
       grid-template-columns: 1fr;
     }
@@ -1690,17 +748,6 @@ const testimonials = [
 
     .testimonials__grid {
       grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .gallery-control {
-      width: 34px;
-      height: 34px;
-    }
-
-    .stay-card__slide {
-      flex: 0 0 82%;
     }
   }
 </style>

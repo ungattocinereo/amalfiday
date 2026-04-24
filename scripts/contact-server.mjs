@@ -1,12 +1,14 @@
 import http from 'node:http'
 import contactHandler from '../api/contact.js'
 import subscribeHandler from '../api/subscribe.js'
+import availabilityHandler from '../api/availability.js'
 
 const port = Number(process.env.CONTACT_API_PORT || process.env.PORT || 8787)
 
 const routes = {
   '/api/contact': contactHandler,
   '/api/subscribe': subscribeHandler,
+  '/api/availability': availabilityHandler,
 }
 
 const server = http.createServer((req, res) => {
