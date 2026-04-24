@@ -504,7 +504,9 @@ const { calendarName, airbnb, booking } = Astro.props
   .avail__legend {
     display: flex;
     gap: 1rem;
-    padding-top: 0.25rem;
+    padding: 0.65rem 0.9rem;
+    background: rgba(0, 0, 0, 0.035);
+    border-radius: var(--radius-sm);
   }
 
   .avail__legend-item {
@@ -550,9 +552,6 @@ const { calendarName, airbnb, booking } = Astro.props
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--color-border);
-    margin-top: 0.25rem;
   }
 
   .avail__btn {
@@ -638,6 +637,10 @@ const { calendarName, airbnb, booking } = Astro.props
 
   [data-theme='night'] .avail__sw--free {
     background: rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme='night'] .avail__legend {
+    background: rgba(255, 255, 255, 0.04);
   }
 
   [data-theme='night'] .avail__nav {
