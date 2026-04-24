@@ -11,13 +11,30 @@ const { calendarName, airbnb, booking } = Astro.props
 <div class="avail" data-calendar data-calendar-name={calendarName}>
   <div class="avail__heading">
     <span class="avail__eyebrow">Availability</span>
-    <span class="avail__range">through 31 October 2026</span>
+    <span class="avail__range">through 30 November 2026</span>
   </div>
   <div class="avail__chips" data-avail-chips aria-label="Jump to month"></div>
-  <div class="avail__grid" data-avail-grid>
-    <div class="avail__skeleton"></div>
-    <div class="avail__skeleton"></div>
-    <div class="avail__skeleton"></div>
+  <div class="avail__viewport">
+    <button
+      class="avail__nav avail__nav--prev"
+      type="button"
+      data-avail-prev
+      aria-label="Previous month"
+    >
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <div class="avail__track" data-avail-track>
+      <div class="avail__skeleton"></div>
+      <div class="avail__skeleton"></div>
+    </div>
+    <button
+      class="avail__nav avail__nav--next"
+      type="button"
+      data-avail-next
+      aria-label="Next month"
+    >
+      <i class="bi bi-chevron-right"></i>
+    </button>
   </div>
   <div class="avail__legend">
     <span class="avail__legend-item"><span class="avail__sw avail__sw--free"></span>Available</span>
@@ -45,7 +62,7 @@ const { calendarName, airbnb, booking } = Astro.props
     window.__availabilityBooted = true
 
     const END_YEAR = 2026
-    const END_MONTH = 9 // October (0-indexed)
+    const END_MONTH = 10 // November (0-indexed)
 
     const monthShort = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     const monthFull = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -75,25 +92,6 @@ const { calendarName, airbnb, booking } = Astro.props
       return months
     }
 
-    const monthRatio = (year, month, busy, today) => {
-      const daysInMonth = new Date(year, month + 1, 0).getDate()
-      let totalFuture = 0
-      let totalBusy = 0
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day)
-        if (date < today && !isToday(date, today)) continue
-        totalFuture++
-        if (busy.has(formatDate(date))) totalBusy++
-      }
-      return totalFuture === 0 ? 0 : totalBusy / totalFuture
-    }
-
-    const chipFill = (ratio) => {
-      if (ratio < 0.25) return 'var(--avail-chip-low)'
-      if (ratio < 0.6) return 'var(--avail-chip-mid)'
-      return 'var(--avail-chip-high)'
-    }
-
     const renderMonth = (year, month, busy, today, index) => {
       const firstDay = new Date(year, month, 1)
       const offset = (firstDay.getDay() + 6) % 7
@@ -111,8 +109,7 @@ const { calendarName, airbnb, booking } = Astro.props
         const isPast = date < today && !isToday(date, today)
         const isTodayDate = isToday(date, today)
         const classes = ['avail__cell']
-        if (isBusy) classes.push('avail__cell--busy')
-        else classes.push('avail__cell--free')
+        classes.push(isBusy ? 'avail__cell--busy' : 'avail__cell--free')
         if (isPast) classes.push('avail__cell--past')
         if (isTodayDate) classes.push('avail__cell--today')
         const label = `${day} ${monthFull[month]} ${year} — ${isBusy ? 'booked' : 'available'}`
@@ -120,7 +117,7 @@ const { calendarName, airbnb, booking } = Astro.props
       }
 
       return `
-        <div class="avail__month" data-month-index="${index}" id="avail-${year}-${month}">
+        <div class="avail__month" data-month-index="${index}" data-month-key="${year}-${month}">
           <div class="avail__month-head">
             <span class="avail__month-name">${monthFull[month]}</span>
             <span class="avail__month-year">${year}</span>
@@ -132,48 +129,90 @@ const { calendarName, airbnb, booking } = Astro.props
         </div>`
     }
 
-    const renderChips = (el, months, busy, today) => {
+    const renderChips = (el, months) => {
       el.innerHTML = months
         .map((m, i) => {
-          const ratio = monthRatio(m.year, m.month, busy, today)
-          const fill = chipFill(ratio)
-          return `<button type="button" class="avail__chip" data-chip-index="${i}" style="--chip-fill:${fill}">
+          return `<button type="button" class="avail__chip${i === 0 ? ' avail__chip--active' : ''}" data-chip-index="${i}">
             <span class="avail__chip-mon">${monthShort[m.month]}</span>
-            <span class="avail__chip-yr">'${String(m.year).slice(2)}</span>
+            <span class="avail__chip-yr">${String(m.year).slice(2)}</span>
           </button>`
         })
         .join('')
+    }
 
-      el.querySelectorAll('.avail__chip').forEach((chip) => {
+    const setupInteractions = (root, months) => {
+      const track = root.querySelector('[data-avail-track]')
+      const prevBtn = root.querySelector('[data-avail-prev]')
+      const nextBtn = root.querySelector('[data-avail-next]')
+      const chipEls = Array.from(root.querySelectorAll('.avail__chip'))
+      const monthEls = Array.from(track.querySelectorAll('.avail__month'))
+
+      const getMonthStep = () => {
+        if (monthEls.length < 2) return monthEls[0]?.offsetWidth || 0
+        return monthEls[1].offsetLeft - monthEls[0].offsetLeft
+      }
+
+      const scrollToIndex = (index) => {
+        const clamped = Math.max(0, Math.min(index, monthEls.length - 1))
+        const target = monthEls[clamped]
+        if (!target) return
+        track.scrollTo({ left: target.offsetLeft, behavior: 'smooth' })
+      }
+
+      const getActiveIndex = () => {
+        const step = getMonthStep()
+        if (step <= 0) return 0
+        return Math.max(0, Math.min(monthEls.length - 1, Math.round(track.scrollLeft / step)))
+      }
+
+      const updateState = () => {
+        const active = getActiveIndex()
+        chipEls.forEach((c, i) => c.classList.toggle('avail__chip--active', i === active))
+
+        const atStart = track.scrollLeft < 4
+        const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4
+        prevBtn.disabled = atStart
+        nextBtn.disabled = atEnd
+      }
+
+      track.addEventListener('scroll', updateState, { passive: true })
+      window.addEventListener('resize', updateState)
+      updateState()
+
+      prevBtn.addEventListener('click', () => scrollToIndex(getActiveIndex() - 1))
+      nextBtn.addEventListener('click', () => scrollToIndex(getActiveIndex() + 1))
+
+      chipEls.forEach((chip) => {
         chip.addEventListener('click', () => {
           const idx = Number(chip.dataset.chipIndex)
-          const m = months[idx]
-          const target = el.parentElement.querySelector(`#avail-${m.year}-${m.month}`)
-          if (!target) return
-          target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-          target.classList.add('avail__month--flash')
-          setTimeout(() => target.classList.remove('avail__month--flash'), 1200)
+          scrollToIndex(idx)
         })
       })
     }
 
     const renderCalendar = (root, busy) => {
       const chipsEl = root.querySelector('[data-avail-chips]')
-      const gridEl = root.querySelector('[data-avail-grid]')
+      const trackEl = root.querySelector('[data-avail-track]')
       const today = new Date()
       const months = monthsInRange()
 
-      renderChips(chipsEl, months, busy, today)
-      gridEl.innerHTML = months
+      renderChips(chipsEl, months)
+      trackEl.innerHTML = months
         .map((m, i) => renderMonth(m.year, m.month, busy, today, i))
         .join('')
+
+      setupInteractions(root, months)
     }
 
     const renderStatus = (root, message) => {
-      const gridEl = root.querySelector('[data-avail-grid]')
+      const trackEl = root.querySelector('[data-avail-track]')
       const chipsEl = root.querySelector('[data-avail-chips]')
+      const prevBtn = root.querySelector('[data-avail-prev]')
+      const nextBtn = root.querySelector('[data-avail-next]')
       if (chipsEl) chipsEl.innerHTML = ''
-      if (gridEl) gridEl.innerHTML = `<p class="avail__status">${message}</p>`
+      if (prevBtn) prevBtn.style.display = 'none'
+      if (nextBtn) nextBtn.style.display = 'none'
+      if (trackEl) trackEl.innerHTML = `<p class="avail__status">${message}</p>`
     }
 
     const bootCalendar = (root, availability) => {
@@ -216,18 +255,14 @@ const { calendarName, airbnb, booking } = Astro.props
 
 <style is:global>
   .avail {
-    --avail-chip-low: rgba(0, 0, 0, 0.04);
-    --avail-chip-mid: rgba(255, 89, 0, 0.14);
-    --avail-chip-high: rgba(255, 89, 0, 0.32);
     container-type: inline-size;
     container-name: avail;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1.25rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-card);
+    gap: 0.85rem;
+    padding: 0.75rem 0 0;
+    border: none;
+    background: transparent;
   }
 
   .avail__heading {
@@ -248,7 +283,7 @@ const { calendarName, airbnb, booking } = Astro.props
 
   .avail__range {
     font-family: var(--font-mono);
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 0.08em;
     color: var(--color-text-muted);
     text-transform: uppercase;
@@ -256,171 +291,220 @@ const { calendarName, airbnb, booking } = Astro.props
 
   .avail__chips {
     display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--color-border);
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .avail__chips::-webkit-scrollbar {
+    display: none;
   }
 
   .avail__chip {
-    flex: 1 1 auto;
-    min-width: 46px;
-    padding: 6px 8px;
+    flex: 0 0 auto;
+    padding: 4px 10px;
     border: 1px solid var(--color-border);
-    border-radius: 8px;
-    background: var(--chip-fill, var(--color-surface));
+    border-radius: 999px;
+    background: transparent;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1px;
-    transition: border-color 0.2s ease, transform 0.15s ease;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
   }
 
   .avail__chip:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-1px);
+    border-color: var(--color-text);
+  }
+
+  .avail__chip--active {
+    background: var(--color-text);
+    color: var(--color-card);
+    border-color: var(--color-text);
   }
 
   .avail__chip-mon {
     font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-text);
   }
 
   .avail__chip-yr {
     font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.04em;
-    color: var(--color-text-muted);
+    font-size: 0.52rem;
+    opacity: 0.65;
   }
 
-  .avail__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem 1rem;
+  .avail__chip--active .avail__chip-yr {
+    opacity: 0.8;
   }
 
-  @container avail (min-width: 620px) {
-    .avail__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+  /* Viewport with arrow buttons */
+  .avail__viewport {
+    position: relative;
+  }
+
+  .avail__track {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+  }
+
+  .avail__track::-webkit-scrollbar {
+    display: none;
   }
 
   .avail__month {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    padding: 0.35rem;
-    border-radius: 10px;
-    transition: background 0.4s ease;
-    scroll-margin-top: 80px;
+    flex: 0 0 calc(50% - 0.625rem);
+    scroll-snap-align: start;
+    min-width: 0;
   }
 
-  .avail__month--flash {
-    background: rgba(255, 89, 0, 0.08);
+  .avail__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.7rem;
+    box-shadow: var(--shadow-soft);
+    transition: opacity 0.2s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .avail__nav:hover:not(:disabled) {
+    background: var(--color-surface);
+    border-color: var(--color-text);
+  }
+
+  .avail__nav:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .avail__nav--prev {
+    left: -14px;
+  }
+
+  .avail__nav--next {
+    right: -14px;
   }
 
   .avail__month-head {
     display: flex;
     align-items: baseline;
-    gap: 0.35rem;
-    padding-bottom: 0.2rem;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
     border-bottom: 1px solid var(--color-border);
   }
 
   .avail__month-name {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.98rem;
     color: var(--color-text);
+    line-height: 1;
   }
 
   .avail__month-year {
     font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.04em;
+    font-size: 0.6rem;
     color: var(--color-text-muted);
+    letter-spacing: 0.04em;
   }
 
   .avail__dow,
   .avail__days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
+    gap: 2px;
+  }
+
+  .avail__dow {
+    margin-bottom: 2px;
   }
 
   .avail__dow span {
     font-family: var(--font-mono);
-    font-size: 0.52rem;
-    letter-spacing: 0.06em;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-muted);
     text-align: center;
     padding-bottom: 2px;
-    opacity: 0.7;
+    opacity: 0.55;
   }
 
+  /* ===== Airbnb-style cells ===== */
   .avail__cell {
-    height: 28px;
+    aspect-ratio: 1 / 1;
     display: grid;
     place-items: center;
-    border-radius: 5px;
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: 0.74rem;
     color: var(--color-text);
-    transition: background 0.15s ease, transform 0.15s ease;
+    background: transparent;
+    border-radius: 4px;
     position: relative;
+    transition: background 0.14s ease;
   }
 
   .avail__cell--empty {
     background: transparent;
   }
 
+  /* Available: white / card background + dark number */
   .avail__cell--free {
-    background: rgba(0, 0, 0, 0.045);
+    background: var(--color-card);
+    color: var(--color-text);
+    font-weight: 500;
   }
 
   .avail__cell--free:not(.avail__cell--past):hover {
-    background: rgba(0, 0, 0, 0.09);
-    transform: scale(1.06);
+    background: var(--color-surface);
   }
 
+  /* Booked: no background, grey number, strikethrough */
   .avail__cell--busy {
-    background: rgba(255, 89, 0, 0.12);
+    background: transparent;
     color: var(--color-text-muted);
-  }
-
-  .avail__cell--busy::before {
-    content: '';
-    position: absolute;
-    left: 2px;
-    top: 5px;
-    bottom: 5px;
-    width: 2px;
-    border-radius: 1px;
-    background: var(--color-accent);
-    opacity: 0.8;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    text-decoration-color: currentColor;
+    opacity: 0.7;
   }
 
   .avail__cell--past {
-    opacity: 0.32;
+    opacity: 0.28;
   }
 
   .avail__cell--today {
     outline: 1.5px solid var(--color-text);
     outline-offset: -1.5px;
+    font-weight: 700;
   }
 
   .avail__legend {
     display: flex;
-    gap: 1.25rem;
-    padding-top: 0.35rem;
+    gap: 1rem;
+    padding-top: 0.25rem;
   }
 
   .avail__legend-item {
@@ -428,41 +512,53 @@ const { calendarName, airbnb, booking } = Astro.props
     align-items: center;
     gap: 0.35rem;
     font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-size: 0.58rem;
     letter-spacing: 0.04em;
     color: var(--color-text-muted);
     text-transform: uppercase;
   }
 
   .avail__sw {
-    width: 14px;
-    height: 10px;
+    width: 16px;
+    height: 16px;
     border-radius: 3px;
-    display: inline-block;
+    display: inline-grid;
+    place-items: center;
   }
 
   .avail__sw--free {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
   }
 
   .avail__sw--busy {
-    background: rgba(255, 89, 0, 0.18);
-    border-left: 2px solid var(--color-accent);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+
+  .avail__sw--busy::before {
+    content: '12';
+    opacity: 0.7;
   }
 
   .avail__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
-    padding-top: 0.35rem;
+    padding-top: 0.5rem;
     border-top: 1px solid var(--color-border);
-    margin-top: 0.35rem;
+    margin-top: 0.25rem;
   }
 
   .avail__btn {
     flex: 1 1 auto;
     text-align: center;
-    padding: 0.65rem 1rem;
+    padding: 0.6rem 1rem;
     border-radius: 999px;
     font-size: 0.8rem;
     font-weight: 600;
@@ -508,7 +604,8 @@ const { calendarName, airbnb, booking } = Astro.props
   }
 
   .avail__skeleton {
-    height: 180px;
+    flex: 0 0 calc(50% - 0.625rem);
+    height: 200px;
     border-radius: 10px;
     background: linear-gradient(
       90deg,
@@ -527,6 +624,7 @@ const { calendarName, airbnb, booking } = Astro.props
 
   [data-theme='night'] .avail__cell--free {
     background: rgba(255, 255, 255, 0.06);
+    color: var(--color-text);
   }
 
   [data-theme='night'] .avail__cell--free:not(.avail__cell--past):hover {
@@ -534,50 +632,49 @@ const { calendarName, airbnb, booking } = Astro.props
   }
 
   [data-theme='night'] .avail__cell--busy {
-    background: rgba(255, 89, 0, 0.16);
-  }
-
-  [data-theme='night'] .avail__chip {
-    background: var(--chip-fill, rgba(255, 255, 255, 0.04));
+    color: var(--color-text-muted);
+    opacity: 0.5;
   }
 
   [data-theme='night'] .avail__sw--free {
     background: rgba(255, 255, 255, 0.1);
   }
 
-  @media (max-width: 640px) {
-    .avail {
-      padding: 1rem;
-    }
+  [data-theme='night'] .avail__nav {
+    background: var(--color-card);
+  }
 
-    .avail__grid {
-      display: flex;
-      grid-template-columns: none;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 1rem;
-      margin: 0 -1rem;
-      padding: 0 1rem 0.5rem;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
+  [data-theme='night'] .avail__chip--active {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
 
-    .avail__grid::-webkit-scrollbar {
-      display: none;
-    }
-
+  /* Wide containers (e.g., Villa Susy featured card) — show 3 months */
+  @container avail (min-width: 760px) {
     .avail__month {
-      flex: 0 0 86%;
-      scroll-snap-align: center;
+      flex: 0 0 calc(33.333% - 0.833rem);
     }
+    .avail__skeleton {
+      flex: 0 0 calc(33.333% - 0.833rem);
+    }
+  }
 
+  /* Narrow mobile: show 1 month at a time */
+  @media (max-width: 640px) {
+    .avail__month {
+      flex: 0 0 100%;
+    }
+    .avail__skeleton {
+      flex: 0 0 100%;
+    }
+    .avail__nav--prev {
+      left: -4px;
+    }
+    .avail__nav--next {
+      right: -4px;
+    }
     .avail__cell {
-      height: 34px;
-      font-size: 0.75rem;
-    }
-
-    .avail__chip {
-      min-width: 44px;
+      font-size: 0.82rem;
     }
   }
 </style>

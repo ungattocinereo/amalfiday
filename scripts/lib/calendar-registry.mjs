@@ -34,4 +34,4 @@ export const ICAL_REGISTRY = {
   ],
 }
 
-export const AVAILABILITY_END = { year: 2026, month: 9, day: 31 } // October 31, 2026
+export const AVAILABILITY_END = { year: 2026, month: 10, day: 30 } // November 30, 2026
