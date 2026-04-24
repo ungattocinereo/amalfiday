@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:static": "astro build && node scripts/precompress.mjs",
+    "build:static": "node scripts/update-calendars.mjs && astro build && node scripts/precompress.mjs",
     "contact:api": "node scripts/contact-server.mjs",
     "update-calendars": "node scripts/update-calendars.mjs",
     "preview": "astro preview",
