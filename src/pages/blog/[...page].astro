@@ -23,6 +23,39 @@ const featured = isFirstPage ? (posts[0] ?? null) : null
 const sidebar = isFirstPage ? posts.slice(1, 4) : []
 const grid = isFirstPage ? posts.slice(4) : posts
 
+const promoTiles = [
+  {
+    title: 'Apartments',
+    href: '/apartments',
+    image: '/staticpages/mainpage/rental-houses.webp',
+    imageAlt: 'Amalfi Coast apartments with sea view',
+  },
+  {
+    title: 'Photoshoots',
+    href: '/photoshootings',
+    image: '/photoshootings/individual/Shifa/Hero.webp',
+    imageAlt: 'Amalfi Coast photoshoot session',
+  },
+  {
+    title: 'Experiences',
+    href: '/experience',
+    image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp',
+    imageAlt: 'Curated Amalfi Coast experiences',
+  },
+  {
+    title: 'Public transport',
+    href: '/timetables',
+    image: '/staticpages/mainpage/allublictransport.webp',
+    imageAlt: 'Public transport on the Amalfi Coast',
+  },
+  {
+    title: 'Beaches',
+    href: '/beaches',
+    image: '/staticpages/mainpage/beach-reviews.webp',
+    imageAlt: 'Amalfi Coast beach reviews',
+  },
+]
+
 const pageLabel = currentPage > 1 ? ` — Page ${currentPage}` : ''
 const pageTitle = `Amalfi Notes — Blog${pageLabel}`
 const pageDescription =
@@ -88,6 +121,28 @@ const currentSeason = (() => {
             ))}
           </div>
         )}
+      </div>
+    </section>
+  )}
+
+  <!-- INTERNAL PROMO (first page only) -->
+  {isFirstPage && (
+    <section class="container blog-promo">
+      <div class="blog-promo__label">Plan your stay</div>
+      <div class="blog-promo__grid">
+        {promoTiles.map((tile) => (
+          <a class="blog-promo__tile" href={tile.href}>
+            <img
+              src={tile.image}
+              alt={tile.imageAlt}
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="1200"
+            />
+            <span class="blog-promo__badge">{tile.title}</span>
+          </a>
+        ))}
       </div>
     </section>
   )}
@@ -553,6 +608,84 @@ const currentSeason = (() => {
     .editorial-card__thumb {
       width: 80px;
       height: 80px;
+    }
+  }
+
+  /* === BLOG PROMO === */
+  .blog-promo {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .blog-promo__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .blog-promo__grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+
+  .blog-promo__tile {
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    aspect-ratio: 1 / 1;
+  }
+
+  .blog-promo__tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .blog-promo__tile:hover img {
+    transform: scale(1.05);
+  }
+
+  .blog-promo__badge {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.6rem;
+    border-radius: 999px;
+    background: #ffffff;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    color: #111111;
+    white-space: nowrap;
+  }
+
+  .blog-promo__tile:hover .blog-promo__badge {
+    background: var(--color-accent);
+    color: #ffffff;
+  }
+
+  @media (max-width: 900px) {
+    .blog-promo__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .blog-promo__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
     }
   }
 </style>
