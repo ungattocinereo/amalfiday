@@ -9,7 +9,7 @@ const shareImage = '/pre-footer/boat-tours-in-amalfi.webp'
 const transportSteps = [
   {
     step: '01',
-    icon: 'bi-train-front',
+    icon: 'fa-train',
     title: 'Naples',
     accent: 'to Salerno',
     mapSrc:
@@ -17,13 +17,13 @@ const transportSteps = [
     description:
       'Start at Napoli Centrale and take a train to Salerno. Multiple trains run daily and the ride takes roughly the same time on all of them. Check schedules and buy tickets at trenitalia.com. Coming from other Italian cities? italotreno.it offers faster, more comfortable options.',
     links: [
-      { text: 'trenitalia.com', url: 'https://www.trenitalia.com', icon: 'bi-arrow-up-right' },
-      { text: 'italotreno.it', url: 'https://www.italotreno.it/en', icon: 'bi-arrow-up-right' },
+      { text: 'trenitalia.com', url: 'https://www.trenitalia.com', icon: 'fa-up-right-from-square' },
+      { text: 'italotreno.it', url: 'https://www.italotreno.it/en', icon: 'fa-up-right-from-square' },
     ],
   },
   {
     step: '02',
-    icon: 'bi-water',
+    icon: 'fa-water',
     title: 'Salerno',
     accent: 'to Amalfi',
     mapSrc: null,
@@ -34,7 +34,7 @@ const transportSteps = [
 
 const ferryBus = [
   {
-    icon: 'bi-tsunami',
+    icon: 'fa-water',
     mode: 'Ferry',
     accent: 'scenic route',
     time: '~35 min',
@@ -46,7 +46,7 @@ const ferryBus = [
     link: { text: 'Ferry timetables (PDF)', url: '/files/FERRY-timetables.pdf' },
   },
   {
-    icon: 'bi-bus-front',
+    icon: 'fa-bus',
     mode: 'Bus',
     accent: 'budget route',
     time: '~75 min',
@@ -64,7 +64,7 @@ const walkingMapSrc =
 
 const drivingRoutes = [
   {
-    icon: 'bi-signpost-split',
+    icon: 'fa-signs-post',
     name: 'Via Vietri Sul Mare',
     tag: 'Recommended',
     tagColor: 'green',
@@ -73,7 +73,7 @@ const drivingRoutes = [
       'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d193406.8796035415!2d14.368275172026657!3d40.7624097678548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x133ba81e8986d9e3%3A0xbf48c58ba6c9356d!2sNaples+International+Airport%2C+Viale+F.+Ruffo+di+Calabria%2C+80144+Napoli+NA!3m2!1d40.884749299999996!2d14.289242999999999!4m5!1s0x133bc1c1b213bded%3A0x1c97dd0bbf1cf787!2sVietri+Sul+Mare%2C+Province+of+Salerno!3m2!1d40.667944899999995!2d14.7278743!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C+Province+of+Salerno!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1549449540895',
   },
   {
-    icon: 'bi-flower2',
+    icon: 'fa-leaf',
     name: 'Via Sorrento',
     tag: 'Scenic',
     tagColor: 'blue',
@@ -82,7 +82,7 @@ const drivingRoutes = [
       'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d193444.73588044615!2d14.306266970445343!3d40.749398424498246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x133ba81e8986d9e3%3A0xbf48c58ba6c9356d!2sNaples+International+Airport%2C+Viale+F.+Ruffo+di+Calabria%2C+80144+Napoli+NA!3m2!1d40.884749299999996!2d14.289242999999999!4m5!1s0x133b9908fa0c0919%3A0xb396785a92762205!2sMeta%2C+Metropolitan+City+of+Naples!3m2!1d40.6428867!2d14.417339799999999!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C+Province+of+Salerno!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1549451299042',
   },
   {
-    icon: 'bi-exclamation-triangle',
+    icon: 'fa-triangle-exclamation',
     name: 'Via Chiunzi & Ravello',
     tag: 'Challenging',
     tagColor: 'orange',
@@ -94,7 +94,7 @@ const drivingRoutes = [
 
 const parkingOptions = [
   {
-    icon: 'bi-p-circle',
+    icon: 'fa-square-parking',
     title: 'Street parking outside Atrani',
     accent: 'cheapest',
     price: '24€/24h',
@@ -106,7 +106,7 @@ const parkingOptions = [
     },
   },
   {
-    icon: 'bi-geo-alt',
+    icon: 'fa-location-dot',
     title: 'Parcheggio Luna Rossa',
     accent: 'closest',
     price: 'from 40€/day',
@@ -118,7 +118,7 @@ const parkingOptions = [
     },
   },
   {
-    icon: 'bi-clock-history',
+    icon: 'fa-clock-rotate-left',
     title: 'Atrani town parking',
     accent: 'limited',
     price: '3€/hr',
@@ -145,7 +145,7 @@ const parkingOptions = [
     <div class="dir-hero__veil" aria-hidden="true"></div>
     <div class="container dir-hero__inner">
       <div class="dir-hero__content">
-        <span class="dir-eyebrow dir-eyebrow--hero"><i class="bi bi-compass"></i> Three-step guide</span>
+        <span class="dir-eyebrow dir-eyebrow--hero"><i class="fa-solid fa-compass"></i> Three-step guide</span>
         <h1>
           Find Gregory's B&B in <span class="accent-italic">Atrani</span>
         </h1>
@@ -156,14 +156,14 @@ const parkingOptions = [
           <strong>TL;DR</strong> — Go to <strong>Salerno</strong> by train, then take a bus or ferry to <strong>Amalfi</strong>. Atrani is right next to Amalfi. Skip Sorrento or Vietri Sul Mare station — they take longer.
         </div>
         <nav class="dir-hero__nav">
-          <a href="#public-transport"><i class="bi bi-train-front"></i> Public transport</a>
-          <a href="#walking"><i class="bi bi-signpost"></i> Walking route</a>
-          <a href="#driving"><i class="bi bi-car-front"></i> Driving</a>
-          <a href="#parking"><i class="bi bi-p-circle"></i> Parking</a>
+          <a href="#public-transport"><i class="fa-solid fa-train"></i> Public transport</a>
+          <a href="#walking"><i class="fa-solid fa-signs-post"></i> Walking route</a>
+          <a href="#driving"><i class="fa-solid fa-car"></i> Driving</a>
+          <a href="#parking"><i class="fa-solid fa-square-parking"></i> Parking</a>
         </nav>
       </div>
       <aside class="dir-hero__aside">
-        <div class="dir-hero__aside-badge"><i class="bi bi-lightbulb"></i></div>
+        <div class="dir-hero__aside-badge"><i class="fa-solid fa-lightbulb"></i></div>
         <p>
           Watch out for Google Maps errors — it sometimes routes you through Sorrento, which adds hours. Always route via <strong>Salerno</strong>.
         </p>
@@ -183,14 +183,14 @@ const parkingOptions = [
         <div class="dir-step__number">{transportSteps[0].step}</div>
         <div class="dir-step__body">
           <div class="dir-step__header">
-            <i class={`bi ${transportSteps[0].icon}`}></i>
+            <i class={`fa-solid ${transportSteps[0].icon}`}></i>
             <h3>{transportSteps[0].title} <span class="accent-italic">{transportSteps[0].accent}</span></h3>
           </div>
           <p>{transportSteps[0].description}</p>
           <div class="dir-step__links">
             {transportSteps[0].links.map((l) => (
               <a href={l.url} target="_blank" rel="noopener">
-                {l.text} <i class={`bi ${l.icon}`}></i>
+                {l.text} <i class={`fa-solid ${l.icon}`}></i>
               </a>
             ))}
           </div>
@@ -214,7 +214,7 @@ const parkingOptions = [
         <div class="dir-step__number">{transportSteps[1].step}</div>
         <div class="dir-step__body">
           <div class="dir-step__header">
-            <i class={`bi ${transportSteps[1].icon}`}></i>
+            <i class={`fa-solid ${transportSteps[1].icon}`}></i>
             <h3>{transportSteps[1].title} <span class="accent-italic">{transportSteps[1].accent}</span></h3>
           </div>
           <p>{transportSteps[1].description}</p>
@@ -229,11 +229,11 @@ const parkingOptions = [
                 )}
                 <div class="dir-option__head">
                   <div class="dir-option__icon">
-                    <i class={`bi ${opt.icon}`}></i>
+                    <i class={`fa-solid ${opt.icon}`}></i>
                   </div>
                   <div>
                     <h4>{opt.mode} <span class="accent-italic">{opt.accent}</span></h4>
-                    <span class="dir-option__time"><i class="bi bi-clock"></i> {opt.time}</span>
+                    <span class="dir-option__time"><i class="fa-solid fa-clock"></i> {opt.time}</span>
                   </div>
                 </div>
                 <p>{opt.description}</p>
@@ -246,12 +246,12 @@ const parkingOptions = [
                 <div class="dir-option__links">
                   {opt.link && (
                     <a class="dir-option__dl" href={opt.link.url} target="_blank" rel="noopener">
-                      <i class="bi bi-file-earmark-pdf"></i> {opt.link.text}
+                      <i class="fa-solid fa-file-pdf"></i> {opt.link.text}
                     </a>
                   )}
                   {opt.bookLink && (
                     <a class="dir-option__book" href={opt.bookLink.url} target="_blank" rel="noopener">
-                      <i class="bi bi-ticket-perforated"></i> {opt.bookLink.text}
+                      <i class="fa-solid fa-ticket"></i> {opt.bookLink.text}
                     </a>
                   )}
                 </div>
@@ -263,28 +263,28 @@ const parkingOptions = [
             <h4>Useful links</h4>
             <div class="dir-useful-links__grid">
               <a href="https://www.travelmar.it/en/index" target="_blank" rel="noopener" class="dir-useful-link">
-                <span class="dir-useful-link__icon"><i class="bi bi-water"></i></span>
+                <span class="dir-useful-link__icon"><i class="fa-solid fa-water"></i></span>
                 <span class="dir-useful-link__body">
                   <span class="dir-useful-link__name">Travelmar</span>
                   <span class="dir-useful-link__desc">Ferry tickets & schedules</span>
                 </span>
-                <i class="bi bi-arrow-up-right dir-useful-link__arrow"></i>
+                <i class="fa-solid fa-up-right-from-square dir-useful-link__arrow"></i>
               </a>
               <a href="https://www.unicocampania.it" target="_blank" rel="noopener" class="dir-useful-link">
-                <span class="dir-useful-link__icon"><i class="bi bi-credit-card-2-front"></i></span>
+                <span class="dir-useful-link__icon"><i class="fa-solid fa-credit-card"></i></span>
                 <span class="dir-useful-link__body">
                   <span class="dir-useful-link__name">Unico Campania</span>
                   <span class="dir-useful-link__desc">Regional transport passes</span>
                 </span>
-                <i class="bi bi-arrow-up-right dir-useful-link__arrow"></i>
+                <i class="fa-solid fa-up-right-from-square dir-useful-link__arrow"></i>
               </a>
               <a href="https://moovitapp.com/" target="_blank" rel="noopener" class="dir-useful-link">
-                <span class="dir-useful-link__icon"><i class="bi bi-phone"></i></span>
+                <span class="dir-useful-link__icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
                 <span class="dir-useful-link__body">
                   <span class="dir-useful-link__name">Moovit</span>
                   <span class="dir-useful-link__desc">Live bus & ferry tracker</span>
                 </span>
-                <i class="bi bi-arrow-up-right dir-useful-link__arrow"></i>
+                <i class="fa-solid fa-up-right-from-square dir-useful-link__arrow"></i>
               </a>
             </div>
           </div>
@@ -296,7 +296,7 @@ const parkingOptions = [
         <div class="dir-step__number">03</div>
         <div class="dir-step__body">
           <div class="dir-step__header">
-            <i class="bi bi-signpost-split"></i>
+            <i class="fa-solid fa-signs-post"></i>
             <h3>Amalfi <span class="accent-italic">to Atrani</span></h3>
           </div>
           <div class="dir-eyebrow" style="margin-top: -0.5rem;">On foot · ~10 min</div>
@@ -340,14 +340,14 @@ const parkingOptions = [
             </p>
             <div class="dir-porters__meta">
               <div class="dir-porters__price"><strong>From 20€</strong> per person</div>
-              <div class="dir-porters__hours"><i class="bi bi-clock"></i> Every day 7:00–20:00</div>
+              <div class="dir-porters__hours"><i class="fa-solid fa-clock"></i> Every day 7:00–20:00</div>
             </div>
             <div class="dir-porters__links">
               <a href="https://amalfiporters.it" target="_blank" rel="noopener">
-                <i class="bi bi-globe"></i> amalfiporters.it
+                <i class="fa-solid fa-globe"></i> amalfiporters.it
               </a>
               <a href="https://wa.me/393392768989" target="_blank" rel="noopener">
-                <i class="bi bi-whatsapp"></i> +39 339 2768989
+                <i class="fa-brands fa-whatsapp"></i> +39 339 2768989
               </a>
             </div>
           </div>
@@ -375,7 +375,7 @@ const parkingOptions = [
             We've prepared a detailed PDF with step-by-step photo instructions to help you locate the house once you're in Atrani. It includes landmarks, turns, and what to look for at each point.
           </p>
           <a class="dir-house__btn" href="/files/directions/directions-gregs-house.pdf" target="_blank" rel="noopener">
-            <i class="bi bi-file-earmark-pdf"></i> Download PDF with instructions
+            <i class="fa-solid fa-file-pdf"></i> Download PDF with instructions
           </a>
         </div>
       </div>
@@ -393,7 +393,7 @@ const parkingOptions = [
         {drivingRoutes.map((route) => (
           <article class="dir-route card">
             <div class="dir-route__head">
-              <div class="dir-route__icon"><i class={`bi ${route.icon}`}></i></div>
+              <div class="dir-route__icon"><i class={`fa-solid ${route.icon}`}></i></div>
               <div>
                 <h3>{route.name}</h3>
                 <span class={`dir-route__tag dir-route__tag--${route.tagColor}`}>{route.tag}</span>
@@ -430,7 +430,7 @@ const parkingOptions = [
       <div class="dir-parking__grid">
         {parkingOptions.map((opt) => (
           <article class="dir-parking__card card">
-            <div class="dir-parking__icon"><i class={`bi ${opt.icon}`}></i></div>
+            <div class="dir-parking__icon"><i class={`fa-solid ${opt.icon}`}></i></div>
             <h3>{opt.title} <span class="accent-italic">{opt.accent}</span></h3>
             <div class="dir-parking__detail">
               <span class="dir-parking__price">{opt.price}</span>
@@ -439,7 +439,7 @@ const parkingOptions = [
             <p>{opt.description}</p>
             {opt.link && (
               <a class="dir-parking__link" href={opt.link.url} target="_blank" rel="noopener">
-                <i class="bi bi-geo-alt"></i> {opt.link.text}
+                <i class="fa-solid fa-location-dot"></i> {opt.link.text}
               </a>
             )}
           </article>

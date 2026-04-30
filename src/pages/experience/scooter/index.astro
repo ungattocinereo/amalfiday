@@ -67,7 +67,7 @@ const pricingCards = [
     subtitle: 'Amalfi → Furore → Positano & back',
     description: 'The iconic coastal road. We ride the SS163 through the most famous villages, stopping at hidden viewpoints, scenic tunnels, and cliffside cafes. Includes 40–60 professionally edited photos and short video clips for social media.',
     price: '€280',
-    icon: 'bi-tsunami',
+    icon: 'fa-water',
     features: ['4-hour guided ride', '40–60 edited photos', 'Video clips for reels', 'Cafe stop included', 'Helmet & insurance'],
   },
   {
@@ -75,7 +75,7 @@ const pricingCards = [
     subtitle: 'Coast → Tramonti → Valico di Chiunzi',
     description: 'The road less traveled. We climb through the Tramonti Valley to 880 meters, passing lemon groves, chestnut forests, and a sacred mountain cemetery. Stop at a mozzarella farm and local winery along the way.',
     price: '€350',
-    icon: 'bi-signpost-split',
+    icon: 'fa-signs-post',
     features: ['4-hour guided ride', '50–70 edited photos', 'Video clips for reels', 'Farm & winery visits', 'Helmet & insurance'],
   },
 ]
@@ -114,7 +114,7 @@ const pricingCards = [
               </p>
               <div class="sc-hero__actions">
                 <a class="sc-btn sc-btn--primary" href="/contact">
-                  <i class="bi bi-send" aria-hidden="true"></i> Book your ride
+                  <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Book your ride
                 </a>
                 <a class="sc-btn sc-btn--ghost" href="#pricing">
                   See pricing
@@ -222,7 +222,7 @@ const pricingCards = [
           <article class="sc-route-card">
             <div class="sc-route-card__header">
               <div class="sc-route-card__icon">
-                <i class="bi bi-tsunami" aria-hidden="true"></i>
+                <i class="fa-solid fa-water" aria-hidden="true"></i>
               </div>
               <span class="sc-route-card__label">Route 01</span>
               <h3>Coastal Cruise</h3>
@@ -236,9 +236,9 @@ const pricingCards = [
                 This route is perfect for those who love the sea, sunshine, and the classic dolce vita atmosphere. Every tunnel exit opens a new panorama, every village has a story, and every curve deserves its own frame.
               </p>
               <ul class="sc-route-card__highlights">
-                <li><i class="bi bi-clock" aria-hidden="true"></i> 4 hours</li>
-                <li><i class="bi bi-camera" aria-hidden="true"></i> 40–60 photos</li>
-                <li><i class="bi bi-cup-hot" aria-hidden="true"></i> Cafe break included</li>
+                <li><i class="fa-solid fa-clock" aria-hidden="true"></i> 4 hours</li>
+                <li><i class="fa-solid fa-camera" aria-hidden="true"></i> 40–60 photos</li>
+                <li><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Cafe break included</li>
               </ul>
             </div>
           </article>
@@ -247,7 +247,7 @@ const pricingCards = [
           <article class="sc-route-card">
             <div class="sc-route-card__header">
               <div class="sc-route-card__icon">
-                <i class="bi bi-signpost-split" aria-hidden="true"></i>
+                <i class="fa-solid fa-signs-post" aria-hidden="true"></i>
               </div>
               <span class="sc-route-card__label">Route 02</span>
               <h3>Valley Explorer</h3>
@@ -261,9 +261,9 @@ const pricingCards = [
                 On our way back, we visit a mozzarella factory where the cheese is still warm, a family winery with wines you won't find outside this valley, and a local liquor distillery. This tour is perfect for those who love nature, history, culture, and the Italy that most tourists never see.
               </p>
               <ul class="sc-route-card__highlights">
-                <li><i class="bi bi-clock" aria-hidden="true"></i> 4 hours</li>
-                <li><i class="bi bi-camera" aria-hidden="true"></i> 50–70 photos</li>
-                <li><i class="bi bi-flower1" aria-hidden="true"></i> Farm & winery visits</li>
+                <li><i class="fa-solid fa-clock" aria-hidden="true"></i> 4 hours</li>
+                <li><i class="fa-solid fa-camera" aria-hidden="true"></i> 50–70 photos</li>
+                <li><i class="fa-solid fa-leaf" aria-hidden="true"></i> Farm & winery visits</li>
               </ul>
             </div>
           </article>
@@ -291,14 +291,14 @@ const pricingCards = [
               <!-- Default card content -->
               <div class="sc-price-card__default">
                 <div class="sc-price-card__icon">
-                  <i class={`bi ${card.icon}`} aria-hidden="true"></i>
+                  <i class={`fa-solid ${card.icon}`} aria-hidden="true"></i>
                 </div>
                 <h3 class="sc-price-card__title">{card.title}</h3>
                 <p class="sc-price-card__subtitle">{card.subtitle}</p>
                 <p class="sc-price-card__desc">{card.description}</p>
                 <ul class="sc-price-card__features">
                   {card.features.map((f) => (
-                    <li><i class="bi bi-check2" aria-hidden="true"></i> {f}</li>
+                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> {f}</li>
                   ))}
                 </ul>
                 <div class="sc-price-card__prices">
@@ -317,7 +317,7 @@ const pricingCards = [
                 <div class="sc-tour-form__header">
                   <span class="sc-tour-form__tour-name">{card.title}</span>
                   <button class="sc-tour-form__back" type="button" aria-label="Back to tour info">
-                    <i class="bi bi-x-lg" aria-hidden="true"></i>
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                   </button>
                 </div>
                 <label class="sc-tour-form__label">
@@ -342,16 +342,16 @@ const pricingCards = [
                       readonly
                     />
                     <button class="sc-tour-form__date-toggle" type="button" aria-label="Open calendar">
-                      <i class="bi bi-calendar3" aria-hidden="true"></i>
+                      <i class="fa-solid fa-calendar" aria-hidden="true"></i>
                     </button>
                     <div class="sc-calendar" aria-hidden="true">
                       <div class="sc-calendar__nav">
                         <button class="sc-calendar__arrow" type="button" data-cal-prev aria-label="Previous month">
-                          <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                         </button>
                         <span class="sc-calendar__month-year"></span>
                         <button class="sc-calendar__arrow" type="button" data-cal-next aria-label="Next month">
-                          <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                         </button>
                       </div>
                       <div class="sc-calendar__weekdays">
@@ -363,7 +363,7 @@ const pricingCards = [
                 </label>
                 <div class="sc-tour-form__actions">
                   <button class="sc-btn sc-btn--primary sc-tour-form__submit" type="submit">
-                    <i class="bi bi-send" aria-hidden="true"></i> Request
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request
                   </button>
                   <span class="sc-tour-form__status"></span>
                 </div>
@@ -372,7 +372,7 @@ const pricingCards = [
               <!-- Success state -->
               <div class="sc-tour-form__success" aria-hidden="true">
                 <div class="sc-tour-form__success-icon">
-                  <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
                 </div>
                 <h4 class="sc-tour-form__success-title">Thank you!</h4>
                 <p class="sc-tour-form__success-text">Your request has been sent. We'll get back to you shortly.</p>

@@ -10,14 +10,14 @@ const shareImageAlt = 'Cars parked along the Amalfi Coast road'
 const towns = [
   {
     name: 'Amalfi',
-    icon: 'bi-building',
+    icon: 'fa-building',
     badge: 'Best for overnight',
     options: [
       {
         name: 'Luna Rossa (multi-level garage)',
         hourly: '2-4',
         daily: '25-45',
-        notes: 'Official: 170 car spots + 30 moto. Long-stay (lunga sosta): 40/day Apr-Nov, 45/day Aug, 25/day winter. Check-in/out tied to 12:00.',
+        notes: 'Official: 170 car spots + 30 moto. Lunga sosta: 40/day Holy Thursday → 3 Nov + 27 Dec → 6 Jan; 25/day 4 Nov → 26 Dec and 7 Jan → 27 Mar. Jan 8 – Mar 31 2026: +1/hour surcharge on the first 2 daytime hours for non-residents. Check-in/out tied to 12:00.',
         restrictions: 'No gas/methane vehicles. Max height 2m. Tunnel connects to Atrani.',
         source: 'official',
       },
@@ -34,9 +34,17 @@ const towns = [
   },
   {
     name: 'Positano',
-    icon: 'bi-geo-alt',
+    icon: 'fa-location-dot',
     badge: 'Most difficult',
     options: [
+      {
+        name: 'Municipal blue zones (strisce blu)',
+        hourly: '3',
+        daily: '8',
+        notes: 'Cheapest paid option in town if you can find a spot. Per Azienda Turismo Positano.',
+        restrictions: 'Spots are scarce and turn over fast in peak season.',
+        source: 'official',
+      },
       {
         name: 'Central private garages',
         hourly: '8-12',
@@ -58,7 +66,7 @@ const towns = [
   },
   {
     name: 'Ravello',
-    icon: 'bi-music-note-beamed',
+    icon: 'fa-music',
     badge: 'Mountain town',
     options: [
       {
@@ -82,7 +90,7 @@ const towns = [
   },
   {
     name: 'Atrani',
-    icon: 'bi-water',
+    icon: 'fa-water',
     badge: 'Strict limits',
     options: [
       {
@@ -98,7 +106,7 @@ const towns = [
   },
   {
     name: 'Praiano',
-    icon: 'bi-sunset',
+    icon: 'fa-sun',
     badge: 'Clear pricing',
     options: [
       {
@@ -114,7 +122,7 @@ const towns = [
   },
   {
     name: 'Maiori',
-    icon: 'bi-shop',
+    icon: 'fa-shop',
     badge: 'More accessible',
     options: [
       {
@@ -138,7 +146,7 @@ const towns = [
   },
   {
     name: 'Minori',
-    icon: 'bi-cup-hot',
+    icon: 'fa-mug-hot',
     badge: 'Small town',
     options: [
       {
@@ -154,7 +162,7 @@ const towns = [
   },
   {
     name: 'Cetara',
-    icon: 'bi-fish',
+    icon: 'fa-fish',
     badge: 'Fishing village',
     options: [
       {
@@ -170,7 +178,7 @@ const towns = [
   },
   {
     name: 'Vietri sul Mare',
-    icon: 'bi-palette',
+    icon: 'fa-palette',
     badge: 'Budget pick',
     options: [
       {
@@ -186,7 +194,7 @@ const towns = [
   },
   {
     name: 'Conca dei Marini',
-    icon: 'bi-signpost-split',
+    icon: 'fa-signs-post',
     badge: 'Limited',
     options: [
       {
@@ -202,7 +210,7 @@ const towns = [
   },
   {
     name: 'Furore',
-    icon: 'bi-arrow-down-circle',
+    icon: 'fa-circle-down',
     badge: 'Remote',
     options: [
       {
@@ -220,28 +228,28 @@ const towns = [
 
 const strategies = [
   {
-    icon: 'bi-geo-alt-fill',
+    icon: 'fa-location-dot',
     title: 'Park & Ride',
     accent: 'Strategy',
     description:
       'Leave your car in a cheaper, high-capacity location (Salerno, Vietri sul Mare, or Sorrento) and travel along the coast by ferry or SITA bus. In peak season, the problem is often not price but availability.',
   },
   {
-    icon: 'bi-clock-history',
+    icon: 'fa-clock-rotate-left',
     title: 'Arrive Early',
     accent: 'Before 9 AM',
     description:
       'After 10:00 in summer, even paid garages in Positano and Amalfi are full. Early arrival is the single most effective trick for securing a spot.',
   },
   {
-    icon: 'bi-phone',
+    icon: 'fa-mobile-screen-button',
     title: 'Use EasyPark App',
     accent: 'Remotely',
     description:
       'Pay and extend parking time remotely in blue zones across Italy. No need to run back to the meter. Works in most Amalfi Coast towns.',
   },
   {
-    icon: 'bi-house-check',
+    icon: 'fa-house-circle-check',
     title: 'Book Hotels with Parking',
     accent: 'Included',
     description:
@@ -251,19 +259,19 @@ const strategies = [
 
 const warnings = [
   {
-    icon: 'bi-exclamation-triangle',
+    icon: 'fa-triangle-exclamation',
     text: 'Never park on the shoulder of SS163 (the coastal highway). Mass towing operations happen regularly. Fine + towing = 150-250+.',
   },
   {
-    icon: 'bi-square',
+    icon: 'fa-square',
     text: 'White lines = residents only. Yellow lines = local services only. Parking there guarantees a fine. Always look for "Solo Residenti" signs.',
   },
   {
-    icon: 'bi-fuel-pump',
+    icon: 'fa-gas-pump',
     text: 'Almost no gas stations on the coast. Fill up in Salerno or before entering the coastal road.',
   },
   {
-    icon: 'bi-cash-stack',
+    icon: 'fa-money-bill-wave',
     text: 'Many parking meters and small lots are cash-only. Keep small bills and coins handy.',
   },
 ]
@@ -288,7 +296,7 @@ const warnings = [
     <div class="container parking-hero__content">
       <div class="parking-hero__copy">
         <span class="badge parking-hero__badge">
-          <i class="bi bi-car-front"></i>
+          <i class="fa-solid fa-car"></i>
           Updated 2026
         </span>
         <h1>
@@ -299,11 +307,11 @@ const warnings = [
         </p>
         <div class="parking-hero__actions">
           <a class="parking-hero__cta" href="#prices">
-            <i class="bi bi-arrow-down-circle"></i>
+            <i class="fa-solid fa-circle-down"></i>
             See prices by town
           </a>
           <a class="parking-hero__cta parking-hero__cta--ghost" href="#ztl">
-            <i class="bi bi-camera-video"></i>
+            <i class="fa-solid fa-video"></i>
             ZTL zones
           </a>
         </div>
@@ -311,7 +319,7 @@ const warnings = [
       <div class="parking-hero__stats">
         <div class="parking-hero__stat">
           <div class="parking-hero__stat-icon">
-            <i class="bi bi-geo-alt"></i>
+            <i class="fa-solid fa-location-dot"></i>
           </div>
           <div class="parking-hero__stat-text">
             <span class="parking-hero__stat-num">11</span>
@@ -320,7 +328,7 @@ const warnings = [
         </div>
         <div class="parking-hero__stat">
           <div class="parking-hero__stat-icon">
-            <i class="bi bi-currency-euro"></i>
+            <i class="fa-solid fa-euro-sign"></i>
           </div>
           <div class="parking-hero__stat-text">
             <span class="parking-hero__stat-num">1.50–12</span>
@@ -329,7 +337,7 @@ const warnings = [
         </div>
         <div class="parking-hero__stat">
           <div class="parking-hero__stat-icon">
-            <i class="bi bi-calendar-check"></i>
+            <i class="fa-solid fa-calendar-check"></i>
           </div>
           <div class="parking-hero__stat-text">
             <span class="parking-hero__stat-num">2026</span>
@@ -400,7 +408,7 @@ const warnings = [
           <article class="town-card" id={town.name.toLowerCase().replace(/\s+/g, '-')}>
             <div class="town-card__header">
               <div class="town-card__icon">
-                <i class={`bi ${town.icon}`}></i>
+                <i class={`fa-solid ${town.icon}`}></i>
               </div>
               <div>
                 <h3>{town.name}</h3>
@@ -434,7 +442,7 @@ const warnings = [
                   <p class="parking-option__notes">{opt.notes}</p>
                   {opt.restrictions && (
                     <p class="parking-option__restrictions">
-                      <i class="bi bi-exclamation-circle"></i>
+                      <i class="fa-solid fa-circle-exclamation"></i>
                       {opt.restrictions}
                     </p>
                   )}
@@ -442,7 +450,7 @@ const warnings = [
               ))}
             </div>
             <div class="town-card__tip">
-              <i class="bi bi-lightbulb"></i>
+              <i class="fa-solid fa-lightbulb"></i>
               <span>{town.tip}</span>
             </div>
           </article>
@@ -457,7 +465,7 @@ const warnings = [
       <div class="ztl-grid">
         <div class="ztl-content">
           <span class="parking-eyebrow">
-            <i class="bi bi-camera-video"></i>
+            <i class="fa-solid fa-video"></i>
             Critical to know
           </span>
           <h2>
@@ -468,29 +476,29 @@ const warnings = [
           </p>
           <div class="ztl-checks">
             <div class="ztl-check">
-              <i class="bi bi-clock"></i>
+              <i class="fa-solid fa-clock"></i>
               <span><strong>Restriction times</strong> are posted on signs at each zone entrance. Read them carefully.</span>
             </div>
             <div class="ztl-check">
-              <i class="bi bi-car-front"></i>
+              <i class="fa-solid fa-car"></i>
               <span><strong>Vehicle class</strong> restrictions apply. Euro 0-3 vehicles are typically prohibited.</span>
             </div>
             <div class="ztl-check">
-              <i class="bi bi-house-door"></i>
+              <i class="fa-solid fa-house"></i>
               <span><strong>Hotel guests</strong> with pre-registration can be exempted. Contact your hotel or ask at reception.</span>
             </div>
           </div>
         </div>
         <div class="ztl-alert-card">
           <div class="ztl-alert-icon">
-            <i class="bi bi-shield-exclamation"></i>
+            <i class="fa-solid fa-shield-halved"></i>
           </div>
           <h3>Fine: from 150 and up</h3>
           <p>
             Violations are punished with a fine starting from 150 euros plus towing expenses if necessary.
           </p>
           <div class="ztl-tip">
-            <i class="bi bi-info-circle"></i>
+            <i class="fa-solid fa-circle-info"></i>
             <p>
               <strong>Good to know:</strong> Even if you've already left the hotel, your accommodation can usually register your plate retroactively. Guest registration documents are typically collected by the commune within 1-2 months.
             </p>
@@ -512,7 +520,7 @@ const warnings = [
         {strategies.map((s) => (
           <div class="strategy-card">
             <div class="strategy-icon">
-              <i class={`bi ${s.icon}`}></i>
+              <i class={`fa-solid ${s.icon}`}></i>
             </div>
             <h3>
               {s.title} <span class="accent-italic">{s.accent}</span>
@@ -535,7 +543,7 @@ const warnings = [
       <div class="routes-grid">
         <article class="route-card route-card--recommended">
           <div class="route-card__label">Recommended</div>
-          <div class="route-card__icon"><i class="bi bi-star-fill"></i></div>
+          <div class="route-card__icon"><i class="fa-solid fa-star"></i></div>
           <h3>Budget + Comfort</h3>
           <p class="route-card__base">Base: <strong>Maiori or Minori</strong></p>
           <ul>
@@ -546,7 +554,7 @@ const warnings = [
           </ul>
         </article>
         <article class="route-card">
-          <div class="route-card__icon"><i class="bi bi-ship"></i></div>
+          <div class="route-card__icon"><i class="fa-solid fa-ship"></i></div>
           <h3>No Car Needed</h3>
           <p class="route-card__base">Base: <strong>Salerno or Vietri sul Mare</strong></p>
           <ul>
@@ -557,7 +565,7 @@ const warnings = [
           </ul>
         </article>
         <article class="route-card">
-          <div class="route-card__icon"><i class="bi bi-car-front-fill"></i></div>
+          <div class="route-card__icon"><i class="fa-solid fa-car"></i></div>
           <h3>Full Mobility</h3>
           <p class="route-card__base">Base: <strong>Hotel with parking in Ravello</strong></p>
           <ul>
@@ -583,7 +591,7 @@ const warnings = [
         {warnings.map((w) => (
           <div class="warning-item">
             <div class="warning-icon">
-              <i class={`bi ${w.icon}`}></i>
+              <i class={`fa-solid ${w.icon}`}></i>
             </div>
             <p>{w.text}</p>
           </div>
@@ -613,10 +621,10 @@ const warnings = [
             />
           </div>
           <div class="alt-card__content">
-            <h3><i class="bi bi-water"></i> TravelMar Ferries</h3>
+            <h3><i class="fa-solid fa-water"></i> TravelMar Ferries</h3>
             <p>Connect Salerno, Cetara, Maiori, Minori, Amalfi, and Positano. Running April through October. From 5 per ride.</p>
             <a class="alt-card__link" href="/timetables">
-              <i class="bi bi-arrow-right"></i>
+              <i class="fa-solid fa-arrow-right"></i>
               See ferry timetables
             </a>
           </div>
@@ -630,10 +638,10 @@ const warnings = [
             />
           </div>
           <div class="alt-card__content">
-            <h3><i class="bi bi-bus-front"></i> SITA Buses</h3>
+            <h3><i class="fa-solid fa-bus"></i> SITA Buses</h3>
             <p>Cover the entire coast for 1.50-2.40 per ride. Frequent service. Can be very crowded in summer, but reliable year-round.</p>
             <a class="alt-card__link" href="/timetables">
-              <i class="bi bi-arrow-right"></i>
+              <i class="fa-solid fa-arrow-right"></i>
               See bus timetables
             </a>
           </div>
@@ -653,33 +661,33 @@ const warnings = [
           </h2>
           <div class="apps-list">
             <a class="app-item" href="https://www.easypark.com/" target="_blank" rel="noreferrer">
-              <div class="app-icon"><i class="bi bi-phone"></i></div>
+              <div class="app-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
               <div>
                 <strong>EasyPark App</strong>
                 <span>Pay & extend parking remotely across Italy</span>
               </div>
-              <i class="bi bi-box-arrow-up-right app-item__arrow"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square app-item__arrow"></i>
             </a>
             <a class="app-item" href="https://www.travelmar.it/en/index" target="_blank" rel="noreferrer">
-              <div class="app-icon"><i class="bi bi-ship"></i></div>
+              <div class="app-icon"><i class="fa-solid fa-ship"></i></div>
               <div>
                 <strong>TravelMar Website</strong>
                 <span>Ferry schedules and ticket booking</span>
               </div>
-              <i class="bi bi-box-arrow-up-right app-item__arrow"></i>
+              <i class="fa-solid fa-arrow-up-right-from-square app-item__arrow"></i>
             </a>
             <a class="app-item" href="/timetables">
-              <div class="app-icon"><i class="bi bi-clock"></i></div>
+              <div class="app-icon"><i class="fa-solid fa-clock"></i></div>
               <div>
                 <strong>All timetables</strong>
                 <span>Our dedicated page for public transport timetables</span>
               </div>
-              <i class="bi bi-arrow-right app-item__arrow"></i>
+              <i class="fa-solid fa-arrow-right app-item__arrow"></i>
             </a>
           </div>
         </div>
         <div class="contacts-card">
-          <h3><i class="bi bi-telephone"></i> Useful contacts</h3>
+          <h3><i class="fa-solid fa-phone"></i> Useful contacts</h3>
           <div class="contact-row">
             <span class="contact-label">Luna Rossa (Amalfi)</span>
             <a href="tel:+39089871082" class="contact-phone">+39 089 871 082</a>
@@ -687,7 +695,7 @@ const warnings = [
           <div class="contact-row">
             <span class="contact-label">Parcheggio MA.CRI (Positano)</span>
             <a href="https://wa.me/393338146221" class="contact-phone" target="_blank" rel="noreferrer">
-              <i class="bi bi-whatsapp"></i> +39 333 814 6221
+              <i class="fa-brands fa-whatsapp"></i> +39 333 814 6221
             </a>
           </div>
         </div>

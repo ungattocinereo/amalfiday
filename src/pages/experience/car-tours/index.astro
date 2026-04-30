@@ -59,7 +59,7 @@ const pricingCards = [
     priceLarge: '€600',
     labelSmall: '1–3 ppl',
     labelLarge: '4–6 ppl',
-    icon: 'bi-geo-alt',
+    icon: 'fa-location-dot',
   },
   {
     title: 'Peak Flavors',
@@ -69,7 +69,7 @@ const pricingCards = [
     priceLarge: '€650',
     labelSmall: '1–3 ppl',
     labelLarge: '4–6 ppl',
-    icon: 'bi-cup-hot',
+    icon: 'fa-mug-hot',
   },
   {
     title: 'Amalfi Your Way',
@@ -79,25 +79,25 @@ const pricingCards = [
     priceLarge: '',
     labelSmall: 'depends on itinerary',
     labelLarge: '',
-    icon: 'bi-compass',
+    icon: 'fa-compass',
     isCustom: true,
   },
 ]
 
 const stops = [
-  { name: 'Positano', icon: 'bi-house', desc: 'Cliffside village' },
-  { name: 'Amalfi', icon: 'bi-building', desc: 'Historic harbor' },
-  { name: 'Atrani', icon: 'bi-camera-reels', desc: 'Hidden gem' },
-  { name: 'Ravello', icon: 'bi-music-note-beamed', desc: 'Mountain terrace' },
-  { name: 'Tramonti', icon: 'bi-cup-hot', desc: 'Wine experience' },
-  { name: 'Chiunzi', icon: 'bi-binoculars', desc: 'Mountain panorama' },
+  { name: 'Positano', icon: 'fa-house', desc: 'Cliffside village' },
+  { name: 'Amalfi', icon: 'fa-building', desc: 'Historic harbor' },
+  { name: 'Atrani', icon: 'fa-video', desc: 'Hidden gem' },
+  { name: 'Ravello', icon: 'fa-music', desc: 'Mountain terrace' },
+  { name: 'Tramonti', icon: 'fa-mug-hot', desc: 'Wine experience' },
+  { name: 'Chiunzi', icon: 'fa-binoculars', desc: 'Mountain panorama' },
 ]
 
 const tramontiStops = [
-  { name: 'Tramonti', icon: 'bi-tree', desc: 'Mountain valley' },
-  { name: 'Winery', icon: 'bi-cup-hot', desc: 'Hillside vineyard' },
-  { name: 'Farm', icon: 'bi-flower1', desc: 'Buffalo mozzarella' },
-  { name: 'Restaurant', icon: 'bi-star', desc: 'Michelin desserts' },
+  { name: 'Tramonti', icon: 'fa-tree', desc: 'Mountain valley' },
+  { name: 'Winery', icon: 'fa-mug-hot', desc: 'Hillside vineyard' },
+  { name: 'Farm', icon: 'fa-leaf', desc: 'Buffalo mozzarella' },
+  { name: 'Restaurant', icon: 'fa-star', desc: 'Michelin desserts' },
 ]
 ---
 
@@ -133,7 +133,7 @@ const tramontiStops = [
               </p>
               <div class="ct-hero__actions">
                 <a class="ct-btn ct-btn--primary" href="/contact">
-                  <i class="bi bi-send" aria-hidden="true"></i> Request a tour
+                  <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request a tour
                 </a>
                 <a class="ct-btn ct-btn--ghost" href="#pricing">
                   See pricing
@@ -195,7 +195,7 @@ const tramontiStops = [
                   <div class="ct-route__card">
                     <span class="ct-route__num">{String(i + 1).padStart(2, '0')}</span>
                     <div class="ct-route__icon">
-                      <i class={`bi ${stop.icon}`} aria-hidden="true"></i>
+                      <i class={`fa-solid ${stop.icon}`} aria-hidden="true"></i>
                     </div>
                     <div class="ct-route__text">
                       <span class="ct-route__name">{stop.name}</span>
@@ -317,7 +317,7 @@ const tramontiStops = [
     <!-- ═══ DIVIDER ═══ -->
     <div class="ct-divider" aria-hidden="true">
       <div class="ct-divider__line"></div>
-      <div class="ct-divider__icon"><i class="bi bi-arrow-down-short"></i></div>
+      <div class="ct-divider__icon"><i class="fa-solid fa-arrow-down"></i></div>
       <div class="ct-divider__line"></div>
     </div>
 
@@ -431,7 +431,7 @@ const tramontiStops = [
               <!-- Default card content -->
               <div class="ct-price-card__default">
                 <div class="ct-price-card__icon">
-                  <i class={`bi ${card.icon}`} aria-hidden="true"></i>
+                  <i class={`fa-solid ${card.icon}`} aria-hidden="true"></i>
                 </div>
                 <h3 class="ct-price-card__title">{card.title}</h3>
                 <p class="ct-price-card__subtitle">{card.subtitle}</p>
@@ -466,7 +466,7 @@ const tramontiStops = [
                 <div class="ct-tour-form__header">
                   <span class="ct-tour-form__tour-name">{card.title}</span>
                   <button class="ct-tour-form__back" type="button" aria-label="Back to tour info">
-                    <i class="bi bi-x-lg" aria-hidden="true"></i>
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                   </button>
                 </div>
                 <label class="ct-tour-form__label">
@@ -491,16 +491,16 @@ const tramontiStops = [
                       readonly
                     />
                     <button class="ct-tour-form__date-toggle" type="button" aria-label="Open calendar">
-                      <i class="bi bi-calendar3" aria-hidden="true"></i>
+                      <i class="fa-solid fa-calendar" aria-hidden="true"></i>
                     </button>
                     <div class="ct-calendar" aria-hidden="true">
                       <div class="ct-calendar__nav">
                         <button class="ct-calendar__arrow" type="button" data-cal-prev aria-label="Previous month">
-                          <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                         </button>
                         <span class="ct-calendar__month-year"></span>
                         <button class="ct-calendar__arrow" type="button" data-cal-next aria-label="Next month">
-                          <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                         </button>
                       </div>
                       <div class="ct-calendar__weekdays">
@@ -512,7 +512,7 @@ const tramontiStops = [
                 </label>
                 <div class="ct-tour-form__actions">
                   <button class="ct-btn ct-btn--primary ct-tour-form__submit" type="submit">
-                    <i class="bi bi-send" aria-hidden="true"></i> Request
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request
                   </button>
                   <span class="ct-tour-form__status"></span>
                 </div>
@@ -521,7 +521,7 @@ const tramontiStops = [
               <!-- Success state -->
               <div class="ct-tour-form__success" aria-hidden="true">
                 <div class="ct-tour-form__success-icon">
-                  <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
                 </div>
                 <h4 class="ct-tour-form__success-title">Thank you!</h4>
                 <p class="ct-tour-form__success-text">Your request has been sent. We'll get back to you shortly.</p>

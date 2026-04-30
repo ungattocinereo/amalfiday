@@ -36,9 +36,9 @@ import { footerLinks, socialLinks } from '../data/site'
               target="_blank"
               rel="noreferrer"
             >
-              {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
-              {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
-              {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
+              {item.label === 'Instagram' && <i class="fa-brands fa-instagram"></i>}
+              {item.label === 'Facebook' && <i class="fa-brands fa-facebook"></i>}
+              {item.label === 'Twitter' && <i class="fa-brands fa-x-twitter"></i>}
             </a>
           ))}
       </div>
@@ -53,13 +53,13 @@ import { footerLinks, socialLinks } from '../data/site'
           rel={item.external ? 'noreferrer' : undefined}
         >
           {(item.label === 'Ferry timetables' || item.label === 'Bus timetables') && (
-            <i class="bi bi-download footer__icon"></i>
+            <i class="fa-solid fa-download footer__icon"></i>
           )}
           {item.label === 'Airport shuttle' && (
-            <i class="bi bi-airplane footer__icon"></i>
+            <i class="fa-solid fa-plane footer__icon"></i>
           )}
           {item.label === 'All public transport' && (
-            <i class="bi bi-map footer__icon"></i>
+            <i class="fa-solid fa-map footer__icon"></i>
           )}
           {item.label}
         </a>
@@ -84,13 +84,13 @@ import { footerLinks, socialLinks } from '../data/site'
             />
           )}
           {item.label === 'AirBnb.com' && (
-            <i class="bi bi-house-door footer__icon" aria-hidden="true"></i>
+            <i class="fa-solid fa-house footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Apartment overview' && (
-            <i class="bi bi-house-heart footer__icon"></i>
+            <i class="fa-solid fa-house footer__icon"></i>
           )}
           {item.label === "Greg's guide" && (
-            <i class="bi bi-signpost-split footer__icon"></i>
+            <i class="fa-solid fa-signs-post footer__icon"></i>
           )}
           {item.label}
         </a>
@@ -101,16 +101,16 @@ import { footerLinks, socialLinks } from '../data/site'
       {footerLinks.info.map((item) => (
         <a class="footer__link" href={item.href}>
           {item.label === 'What to do' && (
-            <i class="bi bi-stars footer__icon"></i>
+            <i class="fa-solid fa-star footer__icon"></i>
           )}
           {item.label === 'Parking tips' && (
-            <i class="bi bi-p-circle footer__icon"></i>
+            <i class="fa-solid fa-square-parking footer__icon"></i>
           )}
           {item.label === 'Beach reviews' && (
-            <i class="bi bi-umbrella footer__icon"></i>
+            <i class="fa-solid fa-umbrella footer__icon"></i>
           )}
           {item.label === 'Moto roads' && (
-            <i class="bi bi-map footer__icon"></i>
+            <i class="fa-solid fa-map footer__icon"></i>
           )}
           {item.label}
         </a>
@@ -119,26 +119,15 @@ import { footerLinks, socialLinks } from '../data/site'
 
     <div class="footer__column">
       {footerLinks.blog.map((item) => (
-        item.spacer ? (
-          <span class="footer__spacer" aria-hidden="true"></span>
-        ) : (
-          <a
-            class="footer__link"
-            href={item.href}
-            data-bookmark={item.action === 'bookmark' ? 'true' : undefined}
-          >
-            {item.label === 'Amalfi News' && (
-              <i class="bi bi-newspaper footer__icon"></i>
-            )}
-            {item.label === 'Contact us' && (
-              <i class="bi bi-envelope footer__icon"></i>
-            )}
-            {item.label === 'Add to bookmarks' && (
-              <i class="bi bi-bookmark-plus footer__icon"></i>
-            )}
-            {item.label}
-          </a>
-        )
+        <a class="footer__link" href={item.href}>
+          {item.label === 'Amalfi News' && (
+            <i class="fa-solid fa-newspaper footer__icon"></i>
+          )}
+          {item.label === 'Contact us' && (
+            <i class="fa-solid fa-envelope footer__icon"></i>
+          )}
+          {item.label}
+        </a>
       ))}
     </div>
   </div>
@@ -175,25 +164,6 @@ import { footerLinks, socialLinks } from '../data/site'
 </footer>
 
 <script is:inline>
-  const bookmarkLink = document.querySelector('[data-bookmark="true"]')
-  bookmarkLink?.addEventListener('click', (event) => {
-    event.preventDefault()
-    const url = window.location.origin
-    const title = document.title
-
-    if (window.sidebar && window.sidebar.addPanel) {
-      window.sidebar.addPanel(title, url, '')
-      return
-    }
-
-    if (window.external && 'AddFavorite' in window.external) {
-      window.external.AddFavorite(url, title)
-      return
-    }
-
-    alert('Press Ctrl+D (Windows) or ⌘+D (Mac) to bookmark this page.')
-  })
-
   document.getElementById('open-cookie-banner')?.addEventListener('click', function () {
     var banner = document.getElementById('cookie-banner')
     if (banner) banner.classList.add('is-visible')
@@ -300,10 +270,6 @@ import { footerLinks, socialLinks } from '../data/site'
     font-weight: 500;
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 0.4rem;
-  }
-
-  .footer__spacer {
-    height: 0.6rem;
   }
 
   .footer__icon {

@@ -8,9 +8,9 @@ export const site = {
 }
 
 export const navigation = [
-  { label: 'News', href: '/blog', icon: 'bi-newspaper' },
-  { label: 'Experience', href: '/experience', icon: 'bi-stars' },
-  { label: 'Apartments', href: '/apartments', icon: 'bi-house-door' },
+  { label: 'News', href: '/blog', icon: 'fa-newspaper' },
+  { label: 'Experience', href: '/experience', icon: 'fa-star' },
+  { label: 'Apartments', href: '/apartments', icon: 'fa-house' },
 ]
 
 export const socialLinks = [
@@ -110,8 +110,6 @@ export const footerLinks = {
   blog: [
     { label: 'Amalfi News', href: '/blog' },
     { label: 'Contact us', href: '/contact' },
-    { label: '', href: '#', spacer: true },
-    { label: 'Add to bookmarks', href: '#bookmark', action: 'bookmark' },
   ],
 }
 

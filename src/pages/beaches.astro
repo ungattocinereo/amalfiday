@@ -16,96 +16,96 @@ const quickFacts = [
   {
     title: 'Water',
     accent: 'warmth',
-    icon: 'bi-thermometer-sun',
+    icon: 'fa-temperature-arrow-up',
     text: 'The most comfortable swim comes from June to September, when the sea hovers around 26–28°C (79–82°F).',
   },
   {
     title: 'Beach',
     accent: 'texture',
-    icon: 'bi-gem',
+    icon: 'fa-gem',
     text: 'Most Amalfi beaches are pebbly. Big towns counter it with full service, smooth walkways, and shaded terraces.',
   },
   {
     title: 'Sunbed',
     accent: 'ritual',
-    icon: 'bi-umbrella',
+    icon: 'fa-umbrella',
     text: 'A standard setup is two loungers plus one umbrella for the day. In July–August, reserve ahead in Amalfi and Positano.',
   },
 ]
 
 const beaches = [
   {
-    icon: 'bi-geo-alt-fill',
+    icon: 'fa-location-dot',
     name: 'Vietri Sul Mare',
     accent: 'wide',
     description:
       'The widest and most accessible beach on the coast, with easy parking, democratic prices, and steady cleaning. A great base if you prefer to stay closer to the edge of the coast.',
   },
   {
-    icon: 'bi-compass',
+    icon: 'fa-compass',
     name: 'Erchie',
     accent: 'hidden',
     description:
       'A tiny fishing village tucked into a quiet bay. Boat-only coves hide along the cliffs, perfect for privacy and slow, quiet swims.',
   },
   {
-    icon: 'bi-people',
+    icon: 'fa-users',
     name: 'Maiori',
     accent: 'long',
     description:
       'The longest beach on the Amalfi Coast, popular with families. You can find budget stays, but premium zones can charge higher to keep crowds down.',
   },
   {
-    icon: 'bi-heart',
+    icon: 'fa-heart',
     name: 'Minori',
     accent: 'cozy',
     description:
       'A smaller, softer cousin to Maiori. It feels intimate and sweet, but it fills up fast in peak season.',
   },
   {
-    icon: 'bi-signpost-split',
+    icon: 'fa-signs-post',
     name: 'Castiglione',
     accent: 'cliffside',
     description:
       'Ravello’s official beach, wedged between cliffs. Reach it via a 120-step staircase from the road. Motorcycle parking only, yet Atrani is an easy swim away.',
   },
   {
-    icon: 'bi-water',
+    icon: 'fa-water',
     name: 'Atrani',
     accent: 'quiet',
     description:
       'Split by a small river, with clean water and a handful of bars. It stays calm most of the year but fills up in July and August.',
   },
   {
-    icon: 'bi-buildings',
+    icon: 'fa-city',
     name: 'Amalfi',
     accent: 'central',
     description:
       'The main beach and the most crowded, especially near the cruise pier. Prices range from budget to premium, with private hotel clubs nearby and wilder cliffs beyond the port.',
   },
   {
-    icon: 'bi-stars',
+    icon: 'fa-star',
     name: 'Conca dei Marini',
     accent: 'emerald',
     description:
       'Home to Grotta dello Smeraldo, the emerald-lit sea cave. The beach itself is small, cozy, and wrapped in rock and greenery.',
   },
   {
-    icon: 'bi-camera',
+    icon: 'fa-camera',
     name: 'Furore (Fiordo di Furore)',
     accent: 'dramatic',
     description:
       'One of the coast’s most photogenic spots. There’s no parking, so cars line the road with the risk of a fine. The view is the reward.',
   },
   {
-    icon: 'bi-sunset',
+    icon: 'fa-sun',
     name: 'Praiano',
     accent: 'sunset',
     description:
       'Praiano nails the golden hour. Marina di Praia is framed by cliffs and feels secluded. It also hosts one of the rare seaside discos with music right by the water.',
   },
   {
-    icon: 'bi-music-note-beamed',
+    icon: 'fa-music',
     name: 'Positano',
     accent: 'iconic',
     description:
@@ -117,19 +117,19 @@ const practicalNotes = [
   {
     title: 'Free water',
     accent: 'access',
-    icon: 'bi-water',
+    icon: 'fa-water',
     text: 'Every beach keeps a public strip where you can lay a towel and swim. For comfort, rent a set — especially if you plan to stay all day.',
   },
   {
     title: 'Boat',
     accent: 'rentals',
-    icon: 'bi-life-preserver',
+    icon: 'fa-life-ring',
     text: 'Amalfi rentals often offer license-free boats within local limits. They are perfect for the Galli Islands, sea caves, and hidden coves. Keep distance from the shore and ask the operator about allowed zones.',
   },
   {
     title: 'Beach',
     accent: 'restaurants',
-    icon: 'bi-cup-hot',
+    icon: 'fa-mug-hot',
     text: 'Some trattorias are accessible only from the water. Arrive by boat, anchor, swim in, and enjoy a long, slow lunch between swims.',
   },
 ]
@@ -152,7 +152,7 @@ const practicalNotes = [
     <div class="beach-hero__veil" aria-hidden="true"></div>
     <div class="container beach-hero__content">
       <div class="beach-hero__copy">
-        <span class="badge beach-hero__badge"><i class="bi bi-water"></i> Personal guide</span>
+        <span class="badge beach-hero__badge"><i class="fa-solid fa-water"></i> Personal guide</span>
         <h1>
           Amalfi Beach <span class="accent-italic">review</span>
         </h1>
@@ -215,7 +215,7 @@ const practicalNotes = [
         {quickFacts.map((item) => (
           <article class="card fact-card">
             <div class="fact-card__icon">
-              <i class={`bi ${item.icon}`}></i>
+              <i class={`fa-solid ${item.icon}`}></i>
             </div>
             <h3>
               {item.title} <span class="accent-italic">{item.accent}</span>
@@ -240,7 +240,7 @@ const practicalNotes = [
           {beaches.map((beach) => (
             <article class="beach-row">
               <div class="beach-row__icon" aria-hidden="true">
-                <i class={`bi ${beach.icon}`}></i>
+                <i class={`fa-solid ${beach.icon}`}></i>
               </div>
               <div class="beach-row__content">
                 <h3>
@@ -267,7 +267,7 @@ const practicalNotes = [
         {practicalNotes.map((item) => (
           <article class="card note-card">
             <div class="note-card__icon">
-              <i class={`bi ${item.icon}`}></i>
+              <i class={`fa-solid ${item.icon}`}></i>
             </div>
             <h3>
               {item.title} <span class="accent-italic">{item.accent}</span>

@@ -34,8 +34,8 @@ const related = allPosts
     <hr class="post-header__rule" />
     <div class="post-header__meta">
       <span>{post.author.name}</span>
-      <span><i class="bi bi-calendar3"></i> {post.date}</span>
-      {post.readingTime > 0 && <span><i class="bi bi-clock"></i> {post.readingTime} min read</span>}
+      <span><i class="fa-solid fa-calendar"></i> {post.date}</span>
+      {post.readingTime > 0 && <span><i class="fa-solid fa-clock"></i> {post.readingTime} min read</span>}
     </div>
   </div>
 
@@ -81,7 +81,7 @@ const related = allPosts
 
     <!-- BACK LINK -->
     <div class="back-link">
-      <a href="/blog"><i class="bi bi-arrow-left"></i> Back to all posts</a>
+      <a href="/blog"><i class="fa-solid fa-arrow-left"></i> Back to all posts</a>
     </div>
   </article>
 

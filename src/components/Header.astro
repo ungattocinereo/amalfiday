@@ -25,19 +25,19 @@ const headerSocials = socialLinks.filter((item) =>
           item.label === 'Experience' ? (
             <div class="nav__dropdown">
               <a class="nav__link" href={item.href}>
-                <i class={`bi ${item.icon}`}></i>
+                <i class={`fa-solid ${item.icon}`}></i>
                 {item.label}
-                <i class="bi bi-chevron-down nav__chevron"></i>
+                <i class="fa-solid fa-chevron-down nav__chevron"></i>
               </a>
               <div class="dropdown">
                 <div class="dropdown__section">
                   <span class="dropdown__heading">Capture Your Story</span>
                   <a class="dropdown__item" href="/photoshootings">
-                    <i class="bi bi-person"></i>
+                    <i class="fa-solid fa-person"></i>
                     <span>Individual Photo Shooting</span>
                   </a>
                   <a class="dropdown__item" href="/photoshootings#couples">
-                    <i class="bi bi-people"></i>
+                    <i class="fa-solid fa-users"></i>
                     <span>Couple Photo Shooting</span>
                   </a>
                 </div>
@@ -45,15 +45,15 @@ const headerSocials = socialLinks.filter((item) =>
                 <div class="dropdown__section">
                   <span class="dropdown__heading">Tours</span>
                   <a class="dropdown__item" href="/experience/car-tours">
-                    <i class="bi bi-geo-alt"></i>
+                    <i class="fa-solid fa-location-dot"></i>
                     <span>Scenic Coast</span>
                   </a>
                   <a class="dropdown__item" href="/experience/car-tours">
-                    <i class="bi bi-tree"></i>
+                    <i class="fa-solid fa-tree"></i>
                     <span>Peak Flavors</span>
                   </a>
                   <a class="dropdown__item" href="/experience/scooter">
-                    <i class="bi bi-speedometer2"></i>
+                    <i class="fa-solid fa-gauge-high"></i>
                     <span>Scooter Photo Tour</span>
                   </a>
                 </div>
@@ -61,7 +61,7 @@ const headerSocials = socialLinks.filter((item) =>
             </div>
           ) : (
             <a class="nav__link" href={item.href}>
-              <i class={`bi ${item.icon}`}></i>
+              <i class={`fa-solid ${item.icon}`}></i>
               {item.label}
             </a>
           )
@@ -72,8 +72,8 @@ const headerSocials = socialLinks.filter((item) =>
         <div class="header__social">
           {headerSocials.map((item) => (
             <a class="header__social-link" href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
-              {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
-              {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
+              {item.label === 'Instagram' && <i class="fa-brands fa-instagram"></i>}
+              {item.label === 'Facebook' && <i class="fa-brands fa-facebook"></i>}
             </a>
           ))}
         </div>
@@ -86,8 +86,8 @@ const headerSocials = socialLinks.filter((item) =>
             <span class="theme-switch__thumb"></span>
           </span>
           <span class="theme-switch__icon" aria-hidden="true">
-            <i class="bi bi-sun"></i>
-            <i class="bi bi-moon-stars"></i>
+            <i class="fa-solid fa-sun"></i>
+            <i class="fa-solid fa-moon"></i>
           </span>
         </label>
       </div>
@@ -96,14 +96,14 @@ const headerSocials = socialLinks.filter((item) =>
 
   <!-- Mobile: hamburger -->
   <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-    <i class="bi bi-list"></i>
-    <i class="bi bi-x-lg"></i>
+    <i class="fa-solid fa-list"></i>
+    <i class="fa-solid fa-xmark"></i>
   </button>
 
   <!-- Full-screen mobile menu -->
   <div class="mobile-panel" role="dialog" aria-modal="true" aria-hidden="true">
     <button class="mobile-panel__close" type="button" aria-label="Close menu">
-      <i class="bi bi-x-lg"></i>
+      <i class="fa-solid fa-xmark"></i>
     </button>
     <div class="mobile-panel__logo">
       <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} />
@@ -112,35 +112,35 @@ const headerSocials = socialLinks.filter((item) =>
 
     <div class="mobile-panel__links">
       <a class="mobile-panel__link" href="/">
-        <i class="bi bi-house-door-fill"></i> Home
+        <i class="fa-solid fa-house"></i> Home
       </a>
       {navigation.map((item) => (
         item.label === 'Experience' ? (
           <Fragment>
             <a class="mobile-panel__link" href={item.href}>
-              <i class={`bi ${item.icon}`}></i> {item.label}
+              <i class={`fa-solid ${item.icon}`}></i> {item.label}
             </a>
             <div class="mobile-panel__sublinks">
               <a class="mobile-panel__sublink" href="/photoshootings">
-                <i class="bi bi-person"></i> Individual Photo Shooting
+                <i class="fa-solid fa-person"></i> Individual Photo Shooting
               </a>
               <a class="mobile-panel__sublink" href="/photoshootings#couples">
-                <i class="bi bi-people"></i> Couple Photo Shooting
+                <i class="fa-solid fa-users"></i> Couple Photo Shooting
               </a>
               <a class="mobile-panel__sublink" href="/experience/car-tours">
-                <i class="bi bi-geo-alt"></i> Scenic Coast
+                <i class="fa-solid fa-location-dot"></i> Scenic Coast
               </a>
               <a class="mobile-panel__sublink" href="/experience/car-tours">
-                <i class="bi bi-tree"></i> Peak Flavors
+                <i class="fa-solid fa-tree"></i> Peak Flavors
               </a>
               <a class="mobile-panel__sublink" href="/experience/scooter">
-                <i class="bi bi-speedometer2"></i> Scooter Photo Tour
+                <i class="fa-solid fa-gauge-high"></i> Scooter Photo Tour
               </a>
             </div>
           </Fragment>
         ) : (
           <a class="mobile-panel__link" href={item.href}>
-            <i class={`bi ${item.icon}`}></i> {item.label}
+            <i class={`fa-solid ${item.icon}`}></i> {item.label}
           </a>
         )
       ))}
@@ -155,8 +155,8 @@ const headerSocials = socialLinks.filter((item) =>
           <span class="theme-switch__thumb"></span>
         </span>
         <span class="theme-switch__icon" aria-hidden="true">
-          <i class="bi bi-sun"></i>
-          <i class="bi bi-moon-stars"></i>
+          <i class="fa-solid fa-sun"></i>
+          <i class="fa-solid fa-moon"></i>
         </span>
       </label>
       <span class="mobile-panel__theme-label">Day / Night</span>
@@ -166,14 +166,14 @@ const headerSocials = socialLinks.filter((item) =>
       <div class="mobile-panel__social">
         {socialLinks.filter(s => s.label !== 'Email').map((item) => (
           <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
-            {item.label === 'Instagram' && <i class="bi bi-instagram"></i>}
-            {item.label === 'Facebook' && <i class="bi bi-facebook"></i>}
-            {item.label === 'Twitter' && <i class="bi bi-twitter-x"></i>}
+            {item.label === 'Instagram' && <i class="fa-brands fa-instagram"></i>}
+            {item.label === 'Facebook' && <i class="fa-brands fa-facebook"></i>}
+            {item.label === 'Twitter' && <i class="fa-brands fa-x-twitter"></i>}
           </a>
         ))}
       </div>
       <a class="mobile-panel__whatsapp" href="/contact">
-        <i class="bi bi-whatsapp"></i> WhatsApp
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
       </a>
     </div>
   </div>
@@ -588,25 +588,25 @@ const headerSocials = socialLinks.filter((item) =>
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   }
 
-  .theme-switch__icon .bi-sun {
+  .theme-switch__icon .fa-sun {
     right: 6px;
     top: 50%;
     transform: translateY(-50%);
   }
 
-  .theme-switch__icon .bi-moon-stars {
+  .theme-switch__icon .fa-moon {
     left: 6px;
     top: 50%;
     transform: translateY(-50%) scale(0.8);
     opacity: 0;
   }
 
-  :global([data-theme='night']) .theme-switch__icon .bi-sun {
+  :global([data-theme='night']) .theme-switch__icon .fa-sun {
     opacity: 0;
     transform: translateY(-50%) scale(0.8);
   }
 
-  :global([data-theme='night']) .theme-switch__icon .bi-moon-stars {
+  :global([data-theme='night']) .theme-switch__icon .fa-moon {
     opacity: 1;
     transform: translateY(-50%) scale(1);
   }
@@ -633,15 +633,15 @@ const headerSocials = socialLinks.filter((item) =>
     transform: scale(0.94);
   }
 
-  .menu-toggle .bi-x-lg {
+  .menu-toggle .fa-xmark {
     display: none;
   }
 
-  .header.menu-open .menu-toggle .bi-list {
+  .header.menu-open .menu-toggle .fa-list {
     display: none;
   }
 
-  .header.menu-open .menu-toggle .bi-x-lg {
+  .header.menu-open .menu-toggle .fa-xmark {
     display: inline;
   }
 
@@ -875,11 +875,11 @@ const headerSocials = socialLinks.filter((item) =>
     font-size: 0.82rem;
   }
 
-  .mobile-panel .theme-switch__icon .bi-sun {
+  .mobile-panel .theme-switch__icon .fa-sun {
     right: 8px;
   }
 
-  .mobile-panel .theme-switch__icon .bi-moon-stars {
+  .mobile-panel .theme-switch__icon .fa-moon {
     left: 8px;
   }
 
