@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp'
 const shareImageAlt = 'Lashanda — birthday sunrise photoshoot in Atrani, Amalfi Coast, August 2025'
@@ -55,10 +56,21 @@ const allImages = [
 ---
 
 <BaseLayout
-  title="Lashanda — Morning Glow in Atrani — Amalfi Day"
+  title="Atrani Sunrise Photoshoot — Lashanda | Amalfi.Day"
   description="A birthday sunrise photoshoot in Atrani during the Blue Fish Festival. Early morning light, golden styling, and the most beautiful bus stop in the world."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'lashada',
+    name: 'Atrani Sunrise Photoshoot — Lashanda',
+    description:
+      'A birthday sunrise photoshoot in Atrani during the Blue Fish Festival. Early morning light, golden styling, and the most beautiful bus stop in the world.',
+    hero: heroImage,
+    location: 'Atrani',
+    datePublished: '2025-08-18',
+    keywords: ['atrani photoshoot', 'amalfi coast photographer', 'sunrise portrait', 'birthday photoshoot italy'],
+    galleryImages: allImages,
+  })}
 >
   <div class="ed">
 

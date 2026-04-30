@@ -14,7 +14,10 @@ export default defineConfig({
         !page.includes('/photoshootings/template') &&
         !page.includes('/parking-in-amalfi-coast-2025') &&
         !page.includes('/beaches-in-amalfi') &&
-        !page.includes('/amalfi-coast-on-the-moto'),
+        !page.includes('/amalfi-coast-on-the-moto') &&
+        !page.endsWith('/photo/') &&
+        !page.endsWith('/experience/photo-shoot/') &&
+        !page.endsWith('/guide/'),
     }),
   ],
   vite: {

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp'
 const shareImageAlt = 'Loreana photoshoot in Ravello, Amalfi Coast, September 2025'
@@ -59,10 +60,21 @@ const allImages = [
 ---
 
 <BaseLayout
-  title="Loreana — The Perfect Gift to Yourself — Amalfi Day"
+  title="Ravello Solo Photoshoot — Loreana | Amalfi.Day"
   description="A spontaneous photoshoot in Ravello on the Amalfi Coast: Loreana's solo trip from Peru became an unforgettable birthday gift to herself, captured during golden hour."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'loreana',
+    name: 'Ravello Solo Photoshoot — Loreana',
+    description:
+      "A spontaneous photoshoot in Ravello: Loreana's solo trip from Peru became an unforgettable birthday gift to herself, captured during golden hour.",
+    hero: heroImage,
+    location: 'Ravello',
+    datePublished: '2025-09-07',
+    keywords: ['ravello photoshoot', 'amalfi coast photographer', 'solo travel photoshoot', 'birthday gift photoshoot'],
+    galleryImages: allImages,
+  })}
 >
   <div class="ed">
 

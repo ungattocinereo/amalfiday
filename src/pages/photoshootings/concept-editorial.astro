@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp'
 const shareImageAlt = 'Editorial photoshoot in Ravello, Amalfi Coast'
@@ -58,10 +59,21 @@ const allImages = [
 ---
 
 <BaseLayout
-  title="Colours of Atrani — CristallPont Amalfi Day"
-  description="An editorial photoshoot series in Atrani, Amalfi Coast — three cinematic galleries and a visual story."
+  title="Atrani Editorial Photoshoot — Colours of Atrani | Amalfi.Day"
+  description="An editorial photoshoot series in Atrani, Amalfi Coast — three cinematic galleries and a visual story of light, colour, and the village."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'concept-editorial',
+    name: 'Atrani Editorial Photoshoot — Colours of Atrani',
+    description:
+      'An editorial photoshoot series in Atrani, Amalfi Coast — three cinematic galleries and a visual story of light, colour, and the village.',
+    hero: heroImage,
+    location: 'Atrani',
+    datePublished: '2023-10-14',
+    keywords: ['atrani editorial photoshoot', 'amalfi coast editorial photography', 'concept photography italy'],
+    galleryImages: allImages,
+  })}
 >
   <div class="ed">
 

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp'
 const shareImageAlt = 'Taylor and Regan engagement photoshoot in Ravello'
@@ -87,10 +88,21 @@ const galleryTwoImages = [
 ---
 
 <BaseLayout
-  title="Ravello Romance Photoshoot — CristallPont Amalfi Day"
-  description="Capturing Love: Taylor and Regan's engagement photoshoot in Ravello on the Amalfi Coast."
+  title="Ravello Engagement Photoshoot — Regan & Taylor | Amalfi.Day"
+  description="Capturing love in Ravello: Taylor and Regan's engagement photoshoot on the Amalfi Coast — gardens, piazzas, and the soft Italian light."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'regan-tay-ravello',
+    name: 'Ravello Engagement Photoshoot — Regan & Taylor',
+    description:
+      "Taylor and Regan's engagement photoshoot in Ravello on the Amalfi Coast — gardens, piazzas, and the soft Italian light.",
+    hero: heroImage,
+    location: 'Ravello',
+    datePublished: '2023-10-05',
+    keywords: ['ravello engagement photoshoot', 'amalfi coast engagement photographer', 'destination engagement photos italy', 'ravello couple photographer'],
+    galleryImages: [...galleryOneImages, ...galleryTwoImages],
+  })}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

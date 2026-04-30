@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp'
 const shareImageAlt = 'Julietta — sunset photoshoot in Maiori, Amalfi Coast, July 2024'
@@ -47,10 +48,21 @@ const allImages = [
 ---
 
 <BaseLayout
-  title="Julietta — Gifted Sunset Memories in Maiori — Amalfi Day"
+  title="Maiori Sunset Photoshoot — Julietta | Amalfi.Day"
   description="A sunset photoshoot in Maiori — a gift between friends on the Amalfi Coast. Natural light, real emotions, and memories that last for years."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'julietta',
+    name: 'Maiori Sunset Photoshoot — Julietta',
+    description:
+      'A sunset photoshoot in Maiori — a gift between friends on the Amalfi Coast. Natural light, real emotions, and memories that last.',
+    hero: heroImage,
+    location: 'Maiori',
+    datePublished: '2024-07-20',
+    keywords: ['maiori photoshoot', 'amalfi coast sunset photoshoot', 'gift photoshoot italy', 'friendship photoshoot amalfi'],
+    galleryImages: allImages,
+  })}
 >
   <div class="ed">
 

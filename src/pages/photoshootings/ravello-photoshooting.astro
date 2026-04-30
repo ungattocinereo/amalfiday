@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage =
   '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp'
@@ -73,10 +74,21 @@ const seoSection = {
 ---
 
 <BaseLayout
-  title="Ravello Photoshoot — CristallPont Amalfi Day"
-  description="Stunning Ravello photoshoots: a fashion story of romance, light, and timeless Amalfi elegance."
+  title="Ravello Fashion Photoshoot — Light & Elegance | Amalfi.Day"
+  description="Stunning Ravello fashion photoshoots: romance, light, and timeless Amalfi elegance — captured in the gardens and piazzas of Ravello."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'ravello-photoshooting',
+    name: 'Ravello Fashion Photoshoot — Light & Elegance',
+    description:
+      'Ravello fashion photoshoots: a story of romance, light, and timeless Amalfi elegance, captured in the gardens and piazzas of Ravello.',
+    hero: heroImage,
+    location: 'Ravello',
+    datePublished: '2024-06-09',
+    keywords: ['ravello fashion photoshoot', 'amalfi coast photographer', 'ravello photographer', 'editorial photoshoot italy'],
+    galleryImages: galleryOneImages,
+  })}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

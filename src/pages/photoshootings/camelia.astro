@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/camelia/4-camelia-photoshooting-moto.webp'
 const shareImageAlt = 'Camelia photoshoot on a motorbike in Tramonti'
@@ -80,10 +81,21 @@ const galleryTwoImages = [
 ---
 
 <BaseLayout
-  title="Camelia Photoshoot — CristallPont Amalfi Day"
-  description="A photo journey through Tramonti and sunset — Camelia's beautiful experience on the Amalfi Coast."
+  title="Tramonti Motorbike Photoshoot — Camelia | Amalfi.Day"
+  description="A motorbike photo journey through Tramonti at sunset — Camelia's beautiful experience high above the Amalfi Coast."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'camelia',
+    name: 'Tramonti Motorbike Photoshoot — Camelia',
+    description:
+      "A motorbike photo journey through Tramonti at sunset — Camelia's beautiful experience high above the Amalfi Coast.",
+    hero: heroImage,
+    location: 'Tramonti',
+    datePublished: '2017-09-05',
+    keywords: ['tramonti photoshoot', 'amalfi coast motorbike photography', 'sunset photoshoot italy'],
+    galleryImages: galleryTwoImages,
+  })}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

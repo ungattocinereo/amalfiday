@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp'
 const shareImageAlt = 'Olga and Marat in Atrani on the Amalfi Coast'
@@ -57,10 +58,21 @@ const galleryOneImages = [
 ---
 
 <BaseLayout
-  title="Olga & Marat Photoshoot — CristallPont Amalfi Day"
-  description="A Symphony of Love: Olga and Marat's idyllic Amalfi photoshoot in Atrani."
+  title="Atrani Couple Photoshoot — Olga & Marat | Amalfi.Day"
+  description="A Symphony of Love: Olga and Marat's couple photoshoot in Atrani — golden Amalfi Coast light, intimate moments, and the village as backdrop."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'olga-marat',
+    name: 'Atrani Couple Photoshoot — Olga & Marat',
+    description:
+      "A Symphony of Love: Olga and Marat's couple photoshoot in Atrani — golden Amalfi Coast light, intimate moments, and the village as backdrop.",
+    hero: heroImage,
+    location: 'Atrani',
+    datePublished: '2023-09-08',
+    keywords: ['atrani couple photoshoot', 'amalfi coast couple photography', 'romantic photoshoot italy', 'destination photoshoot amalfi'],
+    galleryImages: galleryOneImages,
+  })}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

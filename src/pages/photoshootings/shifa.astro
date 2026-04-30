@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/individual/Shifa/Hero.webp'
 const shareImageAlt = 'Shifa — private sunrise photoshoot in Amalfi harbor, September 2025'
@@ -55,13 +56,31 @@ const allImages = [
   ...mosaicImages,
   ...dissolveImages,
 ]
+
+const photoshootJsonLd = buildPhotoshootSchema({
+  slug: 'shifa',
+  name: 'Amalfi Influencer Photoshoot — Shifa',
+  description:
+    'Private sunrise photoshoot in Amalfi harbor — empty streets, soft sea light, and the cathedral steps as the meeting point.',
+  hero: heroImage,
+  location: 'Amalfi',
+  datePublished: '2025-09-20',
+  keywords: [
+    'amalfi photoshoot',
+    'amalfi photographer',
+    'influencer photoshoot amalfi',
+    'sunrise portrait amalfi coast',
+  ],
+  galleryImages: allImages,
+})
 ---
 
 <BaseLayout
-  title="Shifa — Amalfi Influencer Photoshoot — Amalfi Day"
-  description="Private sunrise photoshoot in Amalfi harbor. A premium experience and a meaningful gift for partners, friends, or special occasions."
+  title="Amalfi Influencer Photoshoot at Sunrise — Shifa | Amalfi.Day"
+  description="Private sunrise photoshoot in Amalfi harbor. Empty streets, golden light, the cathedral steps as the meeting point — a premium influencer session and a meaningful gift."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={photoshootJsonLd}
 >
   <div class="ed">
 

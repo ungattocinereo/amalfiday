@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { featuredPhotoshoots } from '../data/site'
+import { featuredPhotoshoots, site } from '../data/site'
 
 const heroSlides = [
   {
@@ -21,9 +21,9 @@ const heroSlides = [
   },
 ]
 
-const pageTitle = 'Experiences — CristallPont Amalfi Day'
+const pageTitle = 'Amalfi Coast Experiences — Tours, Photo Shoots & Tastings | Amalfi.Day'
 const pageDescription =
-  'Bespoke Amalfi Coast experiences: photo shoots, scenic rides, and curated local tastings hosted by a true local.'
+  'Bespoke Amalfi Coast experiences: photo shoots, scenic rides, scooter tours, and curated local tastings hosted by a true local.'
 const shareImageAlt = 'Amalfi Coast experience hero'
 const shareImage = heroSlides[0].image
 
@@ -62,9 +62,44 @@ const experienceTags = [
   'Village routes',
   'Hidden beaches',
 ]
+
+const experienceJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/experience`,
+    isPartOf: { '@id': `${site.url}/#business` },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: experienceCards.map((card, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Service',
+          name: card.title,
+          description: card.text,
+          url: new URL(card.href, site.url).toString(),
+          provider: { '@id': `${site.url}/#business` },
+          areaServed: { '@type': 'Place', name: 'Amalfi Coast' },
+          image: new URL(card.image, site.url).toString(),
+        },
+      })),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Experiences', item: `${site.url}/experience` },
+    ],
+  },
+]
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} imageAlt={shareImageAlt}>
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} imageAlt={shareImageAlt} jsonLd={experienceJsonLd}>
   <section class="xp-hero hero--dark">
     <div class="xp-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (

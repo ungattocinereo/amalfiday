@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-const pageTitle = 'Amalfi Beach Review — CristallPont Amalfi Day'
+import { site } from '../data/site'
+const pageTitle = 'Amalfi Coast Beach Guide — 11 Beaches Reviewed | Amalfi.Day'
 const pageDescription =
-  'A personal beach guide to the Amalfi Coast: when to go, what to expect, and which beaches match your mood.'
+  'A personal beach guide to the Amalfi Coast: when to go, what to expect, and which beaches match your mood. Atrani, Amalfi, Positano, Maiori, and more.'
 const heroImage = '/staticpages/beach/amalfi-beach-review.jpg'
 const shareImageAlt = 'Amalfi Coast shoreline and beach'
 
@@ -133,6 +134,29 @@ const practicalNotes = [
     text: 'Some trattorias are accessible only from the water. Arrive by boat, anchor, swim in, and enjoy a long, slow lunch between swims.',
   },
 ]
+
+const beachesJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/beaches`,
+    image: new URL(heroImage, site.url).toString(),
+    author: { '@id': `${site.url}/#business` },
+    publisher: { '@id': `${site.url}/#business` },
+    inLanguage: 'en',
+    about: { '@type': 'Place', name: 'Amalfi Coast' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Beaches', item: `${site.url}/beaches` },
+    ],
+  },
+]
 ---
 
 <BaseLayout
@@ -140,6 +164,7 @@ const practicalNotes = [
   description={pageDescription}
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={beachesJsonLd}
 >
   <section class="beach-hero hero--dark">
     <img

@@ -7,6 +7,26 @@ export const site = {
   twitterHandle: '@amalfiday',
 }
 
+export const business = {
+  legalName: 'CristallPont S.R.L.',
+  brandName: 'Amalfi.Day',
+  vatId: '05863730650',
+  street: 'Traversa Dragone, 2',
+  locality: 'Atrani',
+  region: 'SA',
+  postalCode: '84010',
+  country: 'IT',
+  countryName: 'Italy',
+  phone: '+39 339 2768989',
+  email: 'hello@amalfi.day',
+  geo: { lat: 40.6394, lon: 14.6064 },
+  bookingUrl: 'https://www.booking.com/hotel/it/cristallpont-amalfi-day.html',
+  airbnbUrl: 'https://www.airbnb.com/p/atrani',
+  instagramUrl: 'https://instagram.com/amalfi.day',
+  facebookUrl: 'https://facebook.com/amalfi.day',
+  twitterUrl: 'https://twitter.com/amalfiday',
+}
+
 export const navigation = [
   { label: 'News', href: '/blog', icon: 'fa-newspaper' },
   { label: 'Experience', href: '/experience', icon: 'fa-star' },

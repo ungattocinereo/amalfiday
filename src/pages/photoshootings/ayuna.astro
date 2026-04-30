@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp'
 const shareImageAlt = 'Ayuna photoshoot in Atrani on the Amalfi Coast'
@@ -40,10 +41,21 @@ const galleryOneImages = [
 ---
 
 <BaseLayout
-  title="Ayuna Photoshoot — CristallPont Amalfi Day"
-  description="Bella Vita in Atrani: Ayuna's photographic memoir on the Amalfi Coast."
+  title="Atrani Solo Photoshoot — Ayuna's Memoir | Amalfi.Day"
+  description="Bella Vita in Atrani: Ayuna's photographic memoir on the Amalfi Coast — solo travel, morning light, and the quiet streets of the village."
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={buildPhotoshootSchema({
+    slug: 'ayuna',
+    name: "Atrani Solo Photoshoot — Ayuna's Memoir",
+    description:
+      "Ayuna's photographic memoir in Atrani — solo travel on the Amalfi Coast, morning light, and the quiet streets of the village.",
+    hero: heroImage,
+    location: 'Atrani',
+    datePublished: '2023-08-01',
+    keywords: ['atrani photoshoot', 'amalfi coast solo photographer', 'travel photoshoot italy', 'memoir photography amalfi'],
+    galleryImages: galleryOneImages,
+  })}
 >
   <div class="shoot-template">
     <section class="shoot-hero hero--dark">

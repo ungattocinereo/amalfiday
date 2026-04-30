@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import { site } from '../data/site'
 
 const whatsappHref = 'https://wa.me/393270972329'
 
@@ -22,9 +23,9 @@ const heroSlides = [
   },
 ]
 
-const pageTitle = 'Photoshootings — CristallPont Amalfi Day'
+const pageTitle = 'Amalfi Coast Photoshoots — Couples, Solo & Influencers | Amalfi.Day'
 const pageDescription =
-  'Photoshootings on the Amalfi Coast for couples, influencers, and solo travelers. Cinematic sessions in Amalfi, Atrani, Ravello, and Positano.'
+  'Amalfi Coast photoshoots for couples, influencers, and solo travelers. Cinematic sessions in Amalfi, Atrani, Ravello, Positano, Maiori, and Tramonti.'
 const shareImageAlt = 'Amalfi Coast photoshoot hero scene'
 const shareImage = heroSlides[0].image
 
@@ -158,9 +159,39 @@ const testimonials = [
     meta: 'Guest, 2019',
   },
 ]
+
+const allShoots = [...individualShoots, ...coupleShoots]
+const hubJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${site.url}/photoshootings#hub`,
+    name: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/photoshootings`,
+    isPartOf: { '@id': `${site.url}/#business` },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: allShoots.map((s, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: new URL(s.href, site.url).toString(),
+        name: s.title,
+      })),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Photoshoots', item: `${site.url}/photoshootings` },
+    ],
+  },
+]
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} imageAlt={shareImageAlt}>
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} imageAlt={shareImageAlt} jsonLd={hubJsonLd}>
   <section class="xp-hero hero--dark">
     <div class="xp-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
