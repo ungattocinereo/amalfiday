@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import CldImage from '../../components/CldImage.astro'
 import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/individual/Shifa/Hero.webp'
@@ -86,12 +87,14 @@ const photoshootJsonLd = buildPhotoshootSchema({
 
     <!-- ═══════ HERO ═══════ -->
     <section class="ed-hero hero--dark">
-      <img
+      <CldImage
         class="ed-hero__img"
         src={heroImage}
         alt="Shifa — sunrise photoshoot in Amalfi harbor"
-        loading="eager"
-        fetchpriority="high"
+        width={2499}
+        height={1666}
+        priority
+        sizes="100vw"
       />
       <div class="ed-hero__veil" aria-hidden="true"></div>
       <div class="ed-hero__grain" aria-hidden="true"></div>

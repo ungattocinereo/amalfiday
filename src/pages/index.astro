@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import CldImage from '../components/CldImage.astro'
 import { featuredPhotoshoots, heroLinks } from '../data/site'
 import { getGhostPosts } from '../data/ghost'
 import heroQuatrains from '../../hero-quatrains.json'
@@ -88,15 +89,14 @@ const fallbackQuatrain =
         <div class="hero__tile hero__tile--primary">
           <a class="guide-card" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
             <div class="guide-card__media">
-              <img
+              <CldImage
                 class="guide-card__poster"
                 src="/staticpages/video/atrani-sorrento-video.webp"
                 alt="Atrani to Sorrento coast"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-                width="1500"
-                height="1072"
+                width={1500}
+                height={1072}
+                priority
+                sizes="(max-width: 900px) 100vw, 60vw"
               />
               <video
                 class="guide-card__video"

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import CldImage from '../components/CldImage.astro'
 import { site } from '../data/site'
 const heroImage = '/staticpages/timetables/bus-timetables-amalfi-coast.jpg'
 
@@ -159,12 +160,14 @@ const timetablesJsonLd = [
   jsonLd={timetablesJsonLd}
 >
   <section class="timetables-hero hero--dark">
-    <img
+    <CldImage
       class="timetables-hero__image"
       src={heroImage}
       alt="Amalfi Coast bus route with a SITA bus"
-      loading="eager"
-      fetchpriority="high"
+      width={2000}
+      height={1063}
+      priority
+      sizes="100vw"
     />
     <div class="timetables-hero__veil" aria-hidden="true"></div>
     <div class="container timetables-hero__content">

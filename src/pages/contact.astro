@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import CldImage from '../components/CldImage.astro'
 
 const pageTitle = 'Contact — CristallPont Amalfi Day'
 const pageDescription =
@@ -13,12 +14,14 @@ const whatsappHref = 'https://wa.me/393270972329'
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
   <section class="contact-hero hero--dark">
     <div class="contact-hero__media">
-      <img
+      <CldImage
         class="contact-hero__image"
         src={heroImage}
         alt="Amalfi coast cliffside and sea"
-        loading="eager"
-        fetchpriority="high"
+        width={2464}
+        height={1728}
+        priority
+        sizes="100vw"
       />
     </div>
     <div class="contact-hero__veil" aria-hidden="true"></div>

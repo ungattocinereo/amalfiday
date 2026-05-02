@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import CldImage from '../components/CldImage.astro'
 import { site } from '../data/site'
 const heroImage = '/staticpages/parking/parking.webp'
 
@@ -346,12 +347,14 @@ const parkingJsonLd = [
 >
   <!-- Hero -->
   <section class="parking-hero hero--dark">
-    <img
+    <CldImage
       class="parking-hero__image"
       src={heroImage}
       alt="Driving along the Amalfi Coast"
-      loading="eager"
-      fetchpriority="high"
+      width={2000}
+      height={1116}
+      priority
+      sizes="100vw"
     />
     <div class="parking-hero__veil" aria-hidden="true"></div>
     <div class="container parking-hero__content">

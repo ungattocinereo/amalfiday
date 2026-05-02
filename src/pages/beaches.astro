@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import CldImage from '../components/CldImage.astro'
 import { site } from '../data/site'
 const pageTitle = 'Amalfi Coast Beach Guide — 11 Beaches Reviewed | Amalfi.Day'
 const pageDescription =
@@ -184,12 +185,14 @@ const beachesJsonLd = [
   jsonLd={beachesJsonLd}
 >
   <section class="beach-hero hero--dark">
-    <img
+    <CldImage
       class="beach-hero__image"
       src={heroImage}
       alt="Amalfi Coast shoreline and beach"
-      loading="eager"
-      fetchpriority="high"
+      width={2000}
+      height={1500}
+      priority
+      sizes="100vw"
     />
     <div class="beach-hero__veil" aria-hidden="true"></div>
     <div class="container beach-hero__content">
