@@ -43,11 +43,18 @@ const {
 
 const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME
 
+// Routing policy: photoshoot and apartment images are served direct from
+// amalfi.day (not Cloudinary). Everything else goes through Cloudinary
+// fetch when the cloud name is configured.
+const SKIP_CLOUDINARY = ['/photoshootings/', '/apartments/']
+const useCloud =
+  Boolean(cloud) && !SKIP_CLOUDINARY.some((p) => src.includes(p))
+
 // Resolve to an absolute URL Cloudinary can fetch.
 const sourceUrl = /^https?:\/\//.test(src) ? src : `${site.url}${src.startsWith('/') ? '' : '/'}${src}`
 
 const cldUrl = (w: number) =>
-  cloud
+  useCloud
     ? `https://res.cloudinary.com/${cloud}/image/fetch/f_auto,q_auto,w_${w}/${sourceUrl}`
     : src
 
@@ -67,7 +74,7 @@ const fallbackSrc = cldUrl(Math.min(width, 1600))
 
 <img
   src={fallbackSrc}
-  srcset={cloud ? srcset : undefined}
+  srcset={useCloud ? srcset : undefined}
   sizes={sizes ?? `${width}px`}
   width={width}
   height={height}

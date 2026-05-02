@@ -169,11 +169,32 @@ const result = await cloudinary.uploader.upload('public/photoshootings/individua
 
 ---
 
+## Routing policy (since 2026-05-02)
+
+**Photoshoot images (`/photoshootings/...`) and apartment images (`/apartments/...`) are served direct from amalfi.day, never via Cloudinary.** Everything else routes through Cloudinary fetch when `PUBLIC_CLOUDINARY_CLOUD_NAME` is set.
+
+The policy is baked into `src/components/CldImage.astro`:
+
+```ts
+const SKIP_CLOUDINARY = ['/photoshootings/', '/apartments/']
+const useCloud =
+  Boolean(cloud) && !SKIP_CLOUDINARY.some((p) => src.includes(p))
+```
+
+When `useCloud` is false, the helper emits a plain `<img>` with the local `src`, no `srcset`. `width`, `height`, `alt`, `loading`, and `fetchpriority` are still preserved so layout reservation, LCP hints, and accessibility keep working.
+
+This means callers can safely use `<CldImage>` everywhere — for photoshoot/apartment paths it transparently degrades to a plain `<img>`, so future migrations of gallery thumbs and apartment cards "just work" without per-call branching.
+
+To extend the skip-list (e.g. also keep `/brand/` direct), edit the `SKIP_CLOUDINARY` array.
+
+---
+
 ## What to do next
 
-1. Drop the keys into the three places listed in **"Where to put the keys"**.
-2. Confirm `https://res.cloudinary.com/di63rbpo7/image/fetch/f_auto,q_auto,w_1200/https://amalfi.day/staticpages/video/atrani-sorrento-video.webp` returns an image when opened in a browser. If yes, the cloud is wired up.
-3. Tell me when ready and I'll add the `CldImage.astro` helper and migrate the heroes.
+1. ~~Drop the keys into the three places listed in **"Where to put the keys"**.~~ ✓ (done 2026-05-02)
+2. ~~Confirm Cloudinary fetch returns 200 for a sample URL.~~ ✓
+3. ~~Add `CldImage.astro` helper and migrate the heroes.~~ ✓ (commit `5497ba6`)
+4. Migrate further non-photoshoot/non-apartment images as needed (e.g., `/staticpages/...` cards, blog index thumbs).
 
 ---
 
