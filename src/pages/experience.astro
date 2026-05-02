@@ -21,7 +21,7 @@ const heroSlides = [
   },
 ]
 
-const pageTitle = 'Amalfi Coast Experiences — Tours, Photo Shoots & Tastings | Amalfi.Day'
+const pageTitle = 'Amalfi Coast Experiences — Tours, Photo Shoots, Tastings'
 const pageDescription =
   'Bespoke Amalfi Coast experiences: photo shoots, scenic rides, scooter tours, and curated local tastings hosted by a true local.'
 const shareImageAlt = 'Amalfi Coast experience hero'
@@ -104,7 +104,7 @@ const experienceJsonLd = [
     <div class="xp-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`xp-hero__slide ${i === 0 ? 'is-active' : ''}`}>
-          <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+          <img src={slide.image} alt={`${slide.label} — Amalfi Coast experience`} loading={i === 0 ? 'eager' : 'lazy'} />
         </div>
       ))}
     </div>
@@ -156,7 +156,7 @@ const experienceJsonLd = [
     <div class="container">
       <div class="section__header experience-list__header">
         <span class="guide-eyebrow">Experiences</span>
-        <h1 class="experience-list__title">Let's explore<br /><span class="accent-italic">Amalfi Coast</span></h1>
+        <h2 class="experience-list__title">Let's explore<br /><span class="accent-italic">Amalfi Coast</span></h2>
         <p class="experience-list__lead">
           Skip the tourist traps and see the coast through the eyes of a local. Every route is hand-picked, every stop is personal — this is how the Amalfi Coast was meant to be discovered.
         </p>
@@ -278,7 +278,7 @@ const experienceJsonLd = [
         <div class="guide-section__grid">
           <div class="guide-section__content">
             <span class="guide-eyebrow guide-eyebrow--light">Only here you can find</span>
-            <h1>Greg's personal <span class="accent-italic">guide</span> for guests</h1>
+            <h2>Greg's personal <span class="accent-italic">guide</span> for guests</h2>
             <p>
               Inside my private guide I recommend every place I’ve tested myself: panoramic viewpoints,
               hidden beaches, authentic kitchens, and the exact timing that makes each spot magical.

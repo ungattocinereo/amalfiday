@@ -1,0 +1,55 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/guide",
+      "destination": "https://guide.amalfi.day",
+      "permanent": true
+    },
+    {
+      "source": "/guide/",
+      "destination": "https://guide.amalfi.day",
+      "permanent": true
+    },
+    {
+      "source": "/beaches-in-amalfi",
+      "destination": "/beaches",
+      "permanent": true
+    },
+    {
+      "source": "/beaches-in-amalfi/",
+      "destination": "/beaches",
+      "permanent": true
+    },
+    {
+      "source": "/parking-in-amalfi-coast-2025",
+      "destination": "/parking",
+      "permanent": true
+    },
+    {
+      "source": "/amalfi-coast-on-the-moto",
+      "destination": "/moto",
+      "permanent": true
+    },
+    {
+      "source": "/photo",
+      "destination": "/photoshootings",
+      "permanent": true
+    },
+    {
+      "source": "/photo/",
+      "destination": "/photoshootings",
+      "permanent": true
+    },
+    {
+      "source": "/experience/photo-shoot",
+      "destination": "/photoshootings",
+      "permanent": true
+    },
+    {
+      "source": "/experience/photo-shoot/",
+      "destination": "/photoshootings",
+      "permanent": true
+    }
+  ]
+}

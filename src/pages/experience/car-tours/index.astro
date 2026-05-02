@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro'
 
-const pageTitle = 'Private Car Tours on the Amalfi Coast — Full-Day Trips with a Local Guide'
+const pageTitle = 'Private Amalfi Coast Car Tours — Full-Day with a Local Guide'
 const pageDescription =
   'Book a private 8-hour car tour on the Amalfi Coast. Visit Positano, Amalfi, Ravello, and Tramonti with a local guide. Wine tastings, hidden beaches, and flexible itineraries for groups up to 6.'
 const shareImageAlt = 'Private car tour on the Amalfi Coast — red vintage car on a mountain road'
@@ -114,7 +114,7 @@ const tramontiStops = [
       <div class="ct-hero__slides" aria-hidden="true">
         {heroSlides.map((slide, i) => (
           <div class={`ct-hero__slide ${i === 0 ? 'is-active' : ''}`}>
-            <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+            <img src={slide.image} alt={`${slide.label} — Amalfi Coast private car tour`} loading={i === 0 ? 'eager' : 'lazy'} />
           </div>
         ))}
       </div>

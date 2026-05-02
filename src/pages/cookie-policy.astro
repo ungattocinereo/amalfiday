@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 
-const pageTitle = 'Cookie Policy — CristallPont Amalfi Day'
+const pageTitle = 'Cookie Policy — Amalfi.Day'
 const pageDescription =
-  'Cookie policy per amalfi.day: quali cookie utilizziamo, perché e come gestirli.'
+  'Cookie policy for amalfi.day: which cookies we use, why, and how to manage them.'
 const shareImage = '/pre-footer/2-food-in-amalfi-good.webp'
 ---
 
@@ -15,210 +15,18 @@ const shareImage = '/pre-footer/2-food-in-amalfi-good.webp'
           Cookie <span class="accent-italic">Policy</span>
         </h1>
         <p>
-          Questa pagina spiega quali cookie e tecnologie di tracciamento utilizziamo sul sito
-          amalfi.day, perch&eacute; li usiamo e come puoi gestirli.
+          This page explains which cookies and tracking technologies we use on amalfi.day,
+          why we use them, and how you can manage them.
         </p>
         <div class="policy__meta">
-          <span class="badge"><i class="fa-solid fa-cookie"></i> Cookie e localStorage</span>
+          <span class="badge"><i class="fa-solid fa-cookie"></i> Cookies and localStorage</span>
           <span class="badge"
-            ><i class="fa-solid fa-calendar"></i> Ultimo aggiornamento: 21 febbraio 2026</span
+            ><i class="fa-solid fa-calendar"></i> Last updated: 21 February 2026</span
           >
         </div>
-        <div class="policy__lang" role="tablist" aria-label="Language">
-          <button class="policy__lang-tab policy__lang-tab--active" role="tab" aria-selected="true" aria-controls="policy-it" data-lang="it" type="button">
-            Italiano
-          </button>
-          <button class="policy__lang-tab" role="tab" aria-selected="false" aria-controls="policy-en" data-lang="en" type="button">
-            English
-          </button>
-        </div>
       </div>
 
-      <!-- ITALIANO -->
-      <div id="policy-it" class="policy__content" role="tabpanel" data-lang="it">
-        <div class="policy__grid">
-          <div class="card policy__card">
-            <h3>Cookie tecnici</h3>
-            <ul>
-              <li>Preferenza tema (chiaro/scuro) — localStorage.</li>
-              <li>Scelta consenso cookie — localStorage.</li>
-              <li>Protezione anti-spam modulo contatti — localStorage.</li>
-            </ul>
-          </div>
-          <div class="card policy__card">
-            <h3>Cookie analitici</h3>
-            <ul>
-              <li>Google Analytics: <code>_ga</code>, <code>_ga_*</code> (durata: 2 anni).</li>
-              <li>Raccolgono dati anonimi sulla navigazione.</li>
-              <li>Attivati solo previo consenso esplicito.</li>
-            </ul>
-          </div>
-          <div class="card policy__card">
-            <h3>Cookie di terze parti</h3>
-            <ul>
-              <li>Google Fonts pu&ograve; impostare cookie di sessione.</li>
-              <li>Nessun cookie di marketing o profilazione.</li>
-              <li>Nessun pixel di tracciamento (Facebook, ecc.).</li>
-            </ul>
-          </div>
-          <div class="card policy__card">
-            <h3>Gestire i cookie</h3>
-            <ul>
-              <li>Usa il banner "Cookie settings" nel footer del sito.</li>
-              <li>Disattiva i cookie nelle impostazioni del browser.</li>
-              <li>Installa il componente aggiuntivo di opt-out di Google Analytics.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="policy__sections">
-          <article class="policy__section">
-            <h2>Cosa sono i cookie</h2>
-            <p>
-              I cookie sono piccoli file di testo memorizzati dal browser quando visiti un sito web.
-              Permettono al sito di ricordare le tue preferenze e raccogliere informazioni anonime
-              sull'utilizzo. Il termine "cookie" in questa policy include anche le tecnologie
-              equivalenti come localStorage.
-            </p>
-          </article>
-
-          <article class="policy__section">
-            <h2>Cookie tecnici essenziali</h2>
-            <p>
-              Questi cookie sono necessari per il funzionamento del sito e non raccolgono dati
-              personali. Non richiedono consenso.
-            </p>
-            <div class="policy__table-wrap">
-              <table class="policy__table">
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Finalit&agrave;</th>
-                    <th>Durata</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><code>theme</code></td>
-                    <td>localStorage</td>
-                    <td>Salva la preferenza tema chiaro/scuro</td>
-                    <td>Persistente</td>
-                  </tr>
-                  <tr>
-                    <td><code>cookie-consent</code></td>
-                    <td>localStorage</td>
-                    <td>Registra la scelta relativa ai cookie analitici</td>
-                    <td>Persistente</td>
-                  </tr>
-                  <tr>
-                    <td><code>amalfi-contact-last-submit-at</code></td>
-                    <td>localStorage</td>
-                    <td>Protezione anti-spam del modulo contatti (cooldown 60 sec.)</td>
-                    <td>Sessione</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </article>
-
-          <article class="policy__section">
-            <h2>Cookie analitici — Google Analytics</h2>
-            <p>
-              Utilizziamo Google Analytics 4 (ID: G-C2E8E3XBBJ) per comprendere come i visitatori
-              utilizzano il sito. Questi cookie vengono attivati <strong>solo dopo il tuo consenso
-              esplicito</strong> tramite il banner cookie.
-            </p>
-            <div class="policy__table-wrap">
-              <table class="policy__table">
-                <thead>
-                  <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Finalit&agrave;</th>
-                    <th>Durata</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><code>_ga</code></td>
-                    <td>Cookie HTTP</td>
-                    <td>Distingue gli utenti in modo anonimo</td>
-                    <td>2 anni</td>
-                  </tr>
-                  <tr>
-                    <td><code>_ga_C2E8E3XBBJ</code></td>
-                    <td>Cookie HTTP</td>
-                    <td>Mantiene lo stato della sessione</td>
-                    <td>2 anni</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p>
-              I dati raccolti sono aggregati e anonimi. Google agisce come responsabile del trattamento
-              in conformit&agrave; al
-              <a href="https://business.safety.google/processorterms/" target="_blank" rel="noreferrer"
-                >Data Processing Agreement</a
-              > di Google.
-            </p>
-          </article>
-
-          <article class="policy__section">
-            <h2>Cookie di terze parti</h2>
-            <p>
-              Il sito carica font da Google Fonts (fonts.googleapis.com). Questa richiesta pu&ograve;
-              comportare la trasmissione del tuo indirizzo IP a Google e l'impostazione di cookie di
-              sessione. Per maggiori informazioni consulta la
-              <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer"
-                >Privacy Policy di Google</a
-              >.
-            </p>
-            <p>
-              Non utilizziamo cookie di marketing, profilazione, n&eacute; pixel di tracciamento
-              (Facebook Pixel, ecc.).
-            </p>
-          </article>
-
-          <article class="policy__section">
-            <h2>Come gestire o disabilitare i cookie</h2>
-            <p>Puoi gestire i cookie in diversi modi:</p>
-            <ul>
-              <li>
-                <strong>Banner del sito:</strong> clicca su "Cookie settings" nel footer per modificare
-                la tua scelta in qualsiasi momento.
-              </li>
-              <li>
-                <strong>Impostazioni del browser:</strong> ogni browser consente di bloccare o eliminare
-                i cookie. Consulta la guida del tuo browser (Chrome, Firefox, Safari, Edge).
-              </li>
-              <li>
-                <strong>Opt-out Google Analytics:</strong> installa il
-                <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noreferrer"
-                  >componente aggiuntivo di opt-out</a
-                > disponibile per tutti i principali browser.
-              </li>
-            </ul>
-            <p>
-              La disattivazione dei cookie tecnici potrebbe compromettere alcune funzionalit&agrave;
-              del sito (ad esempio, il tema potrebbe non essere memorizzato).
-            </p>
-          </article>
-
-          <article class="policy__section">
-            <h2>Modifiche alla cookie policy</h2>
-            <p>
-              Questa cookie policy pu&ograve; essere aggiornata periodicamente. Le modifiche saranno
-              pubblicate su questa pagina con la data di aggiornamento. Per informazioni complete sulla
-              gestione dei tuoi dati personali consulta la nostra
-              <a href="/privacy">Privacy Policy</a>.
-            </p>
-          </article>
-        </div>
-      </div>
-
-      <!-- ENGLISH -->
-      <div id="policy-en" class="policy__content policy__content--hidden" role="tabpanel" data-lang="en" hidden>
+      <div class="policy__content">
         <div class="policy__grid">
           <div class="card policy__card">
             <h3>Technical Cookies</h3>
@@ -402,25 +210,6 @@ const shareImage = '/pre-footer/2-food-in-amalfi-good.webp'
   </section>
 </BaseLayout>
 
-<script is:inline>
-  document.querySelectorAll('.policy__lang-tab').forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      var lang = tab.dataset.lang
-      document.querySelectorAll('.policy__lang-tab').forEach(function (t) {
-        t.classList.remove('policy__lang-tab--active')
-        t.setAttribute('aria-selected', 'false')
-      })
-      tab.classList.add('policy__lang-tab--active')
-      tab.setAttribute('aria-selected', 'true')
-      document.querySelectorAll('.policy__content').forEach(function (panel) {
-        var isActive = panel.dataset.lang === lang
-        panel.classList.toggle('policy__content--hidden', !isActive)
-        panel.hidden = !isActive
-      })
-    })
-  })
-</script>
-
 <style>
   .section.policy {
     padding-top: clamp(7rem, 12vw, 10rem);
@@ -441,40 +230,6 @@ const shareImage = '/pre-footer/2-food-in-amalfi-good.webp'
     flex-wrap: wrap;
     gap: 0.6rem;
     margin-top: 1.5rem;
-  }
-
-  .policy__lang {
-    display: flex;
-    margin-top: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    overflow: hidden;
-    width: fit-content;
-  }
-
-  .policy__lang-tab {
-    padding: 0.55rem 1.3rem;
-    background: transparent;
-    border: none;
-    font-family: inherit;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--color-text-muted);
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-  }
-
-  .policy__lang-tab--active {
-    background: var(--color-accent);
-    color: #fff;
-  }
-
-  .policy__lang-tab:not(.policy__lang-tab--active):hover {
-    background: var(--color-surface);
-  }
-
-  .policy__content--hidden {
-    display: none;
   }
 
   .policy__grid {

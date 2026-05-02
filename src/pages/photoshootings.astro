@@ -23,7 +23,7 @@ const heroSlides = [
   },
 ]
 
-const pageTitle = 'Amalfi Coast Photoshoots — Couples, Solo & Influencers | Amalfi.Day'
+const pageTitle = 'Amalfi Coast Photoshoots — Couples, Solo & Influencers'
 const pageDescription =
   'Amalfi Coast photoshoots for couples, influencers, and solo travelers. Cinematic sessions in Amalfi, Atrani, Ravello, Positano, Maiori, and Tramonti.'
 const shareImageAlt = 'Amalfi Coast photoshoot hero scene'
@@ -196,7 +196,7 @@ const hubJsonLd = [
     <div class="xp-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`xp-hero__slide ${i === 0 ? 'is-active' : ''}`}>
-          <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+          <img src={slide.image} alt={`Amalfi Coast photoshoot in ${slide.label}`} loading={i === 0 ? 'eager' : 'lazy'} />
         </div>
       ))}
     </div>

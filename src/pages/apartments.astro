@@ -122,7 +122,7 @@ const testimonials = [
     <div class="apt-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`apt-hero__slide ${i === 0 ? 'is-active' : ''}`}>
-          <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+          <img src={slide.image} alt={`${slide.label} — Atrani apartment on the Amalfi Coast`} loading={i === 0 ? 'eager' : 'lazy'} />
         </div>
       ))}
     </div>

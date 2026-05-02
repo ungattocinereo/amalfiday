@@ -17,7 +17,9 @@ export default defineConfig({
         !page.includes('/amalfi-coast-on-the-moto') &&
         !page.endsWith('/photo/') &&
         !page.endsWith('/experience/photo-shoot/') &&
-        !page.endsWith('/guide/'),
+        !page.endsWith('/guide/') &&
+        !page.endsWith('/how-to-get/') &&
+        !page.endsWith('/what-to-do/'),
     }),
   ],
   vite: {

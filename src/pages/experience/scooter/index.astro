@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro'
 
-const pageTitle = 'Scooter Photo Tour on the Amalfi Coast — Ride, Explore, and Get Stunning Photos'
+const pageTitle = 'Amalfi Coast Scooter Photo Tour — Ride & Get Stunning Photos'
 const pageDescription =
   'Book an individual scooter photo tour on the Amalfi Coast. Ride through legendary coastal roads or mountain valleys with a local guide and professional photographer. One rider, two routes to choose from.'
 const shareImageAlt = 'Scooter photo tour on the Amalfi Coast — riding along the coastal road with stunning sea views'
@@ -94,7 +94,7 @@ const pricingCards = [
       <div class="sc-hero__slides" aria-hidden="true">
         {heroSlides.map((slide, i) => (
           <div class={`sc-hero__slide ${i === 0 ? 'is-active' : ''}`}>
-            <img src={slide.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+            <img src={slide.image} alt={`${slide.label} — Amalfi Coast scooter photo tour`} loading={i === 0 ? 'eager' : 'lazy'} />
           </div>
         ))}
       </div>
