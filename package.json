@@ -17,6 +17,9 @@
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",
     "@astrojs/sitemap": "^3.7.0",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/libre-baskerville": "^5.2.10",
+    "@fontsource/roboto": "^5.2.10",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "astro": "^5.0.0"
   },
