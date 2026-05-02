@@ -14,6 +14,12 @@ export async function getStaticPaths() {
 type Props = { post: GhostPostFull; allPosts: GhostPostFull[] }
 const { post, allPosts } = Astro.props
 
+// Detect posts that mention public transport — show a contextual link to /timetables.
+const transportRe =
+  /\b(ferry|ferries|bus|buses|sita\b|travelmar|alicost|timetable|sitabus|shuttle|public transport)\b/i
+const transportHaystack = `${post.title} ${post.excerpt} ${post.tags.join(' ')}`
+const isTransportPost = transportRe.test(transportHaystack)
+
 // Related posts: same tag first, then recent, exclude self, max 3
 const related = allPosts
   .filter((p) => p.slug !== post.slug)
@@ -87,6 +93,16 @@ const postJsonLd = [
     <div class="article__content">
       <Fragment set:html={post.html} />
     </div>
+
+    {isTransportPost && (
+      <aside class="post-callout">
+        <div class="post-callout__icon"><i class="fa-solid fa-bus"></i></div>
+        <div class="post-callout__content">
+          <strong class="post-callout__title">Plan your route</strong>
+          <p>Need ferry or bus times for the Amalfi Coast? Our <a href="/timetables">public transport timetables</a> page has the latest SITA, TravelMar, and shuttle schedules.</p>
+        </div>
+      </aside>
+    )}
 
     <!-- AUTHOR BIO -->
     <div class="author-bio">
@@ -176,6 +192,50 @@ const postJsonLd = [
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
+  }
+
+  /* === POST CALLOUT (transport) === */
+  .post-callout {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin: 2.5rem 0;
+    padding: 1.2rem 1.4rem;
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .post-callout__icon {
+    color: var(--color-accent);
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+  }
+
+  .post-callout__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .post-callout__title {
+    display: block;
+    font-family: var(--font-display);
+    margin-bottom: 0.3rem;
+    color: var(--color-text);
+  }
+
+  .post-callout p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    font-size: 0.95rem;
+  }
+
+  .post-callout a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   /* === HERO IMAGE === */
