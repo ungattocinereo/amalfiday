@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import { site } from '../data/site'
 const heroImage = '/staticpages/timetables/bus-timetables-amalfi-coast.jpg'
 
 const pageTitle = 'SitaBus Timetables — Amalfi Coast Buses & Ferries'
@@ -93,6 +94,61 @@ const timetables = [
     link: 'https://amalfi.day/files/BUS-5070-AMALFI-POSITANO-SORRENTO.pdf',
   },
 ]
+
+const timetablesFaqs = [
+  {
+    q: 'How do I buy SITA bus tickets on the Amalfi Coast?',
+    a: 'Buy tickets at any Tabacchi shop displaying the "T" sign before you board — drivers do not sell tickets on the bus. Tickets cost from 1.50 to 2.40 EUR depending on the route. Validate the ticket in the small machine when you board.',
+  },
+  {
+    q: 'Which bus line runs from Amalfi to Salerno?',
+    a: 'Line 5120 connects Amalfi → Atrani → Minori → Maiori → Cetara → Vietri sul Mare → Salerno. It is the main coastal line and runs frequently throughout the day.',
+  },
+  {
+    q: 'How do I get from Amalfi to Positano by bus?',
+    a: 'Take SITA line 5070, which runs Amalfi → Positano → Sorrento, stopping in Praiano along the way. The route follows the SS163 with dramatic coastal views — sit on the seaward side if you can.',
+  },
+  {
+    q: 'Are there ferries from Amalfi to Capri or Positano?',
+    a: 'Yes — TravelMar, Alicost, and other operators run seasonal ferries from Amalfi to Positano, Capri, Salerno, and Sorrento. Routes operate roughly April through October. Download the latest ferry timetables PDF for current schedules.',
+  },
+  {
+    q: 'How do I get from Naples airport to Amalfi or Atrani?',
+    a: 'Take a train from Napoli Centrale to Salerno (about an hour), then either ferry or SITA bus 5120 to Amalfi. From Amalfi it is a 10-minute walk along the waterfront to Atrani.',
+  },
+]
+
+const timetablesJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/timetables`,
+    image: new URL(heroImage, site.url).toString(),
+    author: { '@id': `${site.url}/#business` },
+    publisher: { '@id': `${site.url}/#business` },
+    inLanguage: 'en',
+    about: { '@type': 'Place', name: 'Amalfi Coast' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: timetablesFaqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Timetables', item: `${site.url}/timetables` },
+    ],
+  },
+]
 ---
 
 <BaseLayout
@@ -100,6 +156,7 @@ const timetables = [
   description={pageDescription}
   image={heroImage}
   imageAlt={shareImageAlt}
+  jsonLd={timetablesJsonLd}
 >
   <section class="timetables-hero hero--dark">
     <img
@@ -233,7 +290,7 @@ const timetables = [
             <img
               src="/staticpages/timetables/TABACCI.webp"
               alt="Travelers buying bus tickets at a Tabacchi shop on the Amalfi Coast"
-              loading="lazy"
+              loading="lazy" width="1200" height="1200"
             />
         </figure>
         <div class="tickets-app">
@@ -284,7 +341,7 @@ const timetables = [
             <img
               src="/staticpages/timetables/TraVelMar.webp"
               alt="TravelMar ferry on the Amalfi Coast"
-              loading="lazy"
+              loading="lazy" width="1200" height="1200"
             />
           </div>
           <div class="ferry-content">
@@ -319,7 +376,7 @@ const timetables = [
             <img
               src="/staticpages/timetables/PositanoJet.webp"
               alt="PositanoJet ferry on the Amalfi Coast"
-              loading="lazy"
+              loading="lazy" width="1200" height="1200"
             />
           </div>
           <div class="ferry-content">
@@ -368,7 +425,7 @@ const timetables = [
             <img
               src="/staticpages/timetables/NLG.webp"
               alt="Alicost ferry on the Amalfi Coast"
-              loading="lazy"
+              loading="lazy" width="1200" height="1200"
             />
           </div>
           <div class="ferry-content">
@@ -435,7 +492,7 @@ const timetables = [
             <img
               src="/staticpages/timetables/shuttle.webp"
               alt="Airport shuttle from Naples to Amalfi"
-              loading="lazy"
+              loading="lazy" width="1200" height="1200"
             />
           </div>
           <div class="travel-card__content">
@@ -462,7 +519,7 @@ const timetables = [
             <img
               src="/staticpages/timetables/Taxi.webp"
               alt="Taxi on the Amalfi Coast"
-              loading="lazy"
+              loading="lazy" width="1200" height="1200"
             />
           </div>
           <div class="travel-card__content">
@@ -484,6 +541,21 @@ const timetables = [
             </a>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section tt-faq">
+    <div class="container">
+      <h2>Public transport <span class="accent-italic">FAQ</span></h2>
+      <div class="tt-faq__list">
+        {timetablesFaqs.map((f) => (
+          <details class="tt-faq__item">
+            <summary class="tt-faq__q">{f.q}</summary>
+            <p class="tt-faq__a">{f.a}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -1159,5 +1231,70 @@ const timetables = [
     .timetable-card {
       padding: 1.4rem;
     }
+  }
+
+  /* ── FAQ ──────────────────────── */
+  .tt-faq {
+    background: var(--color-surface);
+    padding: 4rem 0;
+  }
+
+  .tt-faq h2 {
+    margin-bottom: 2rem;
+  }
+
+  .tt-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 820px;
+  }
+
+  .tt-faq__item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .tt-faq__item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .tt-faq__q {
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-text);
+  }
+
+  .tt-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .tt-faq__q::after {
+    content: '+';
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .tt-faq__item[open] .tt-faq__q::after {
+    transform: rotate(45deg);
+  }
+
+  .tt-faq__a {
+    margin: 0;
+    padding: 0 1.2rem 1.1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
   }
 </style>

@@ -150,6 +150,23 @@ const beachesJsonLd = [
   },
   {
     '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Amalfi Coast beaches',
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: beaches.length,
+    itemListElement: beaches.map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': ['TouristAttraction', 'Beach'],
+        name: b.name,
+        description: b.description,
+        containedInPlace: { '@type': 'Place', name: 'Amalfi Coast' },
+      },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },

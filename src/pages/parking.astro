@@ -277,6 +277,29 @@ const warnings = [
   },
 ]
 
+const parkingFaqs = [
+  {
+    q: 'Where can I park in Amalfi town?',
+    a: 'Luna Rossa is the most predictable option for multi-day stays — an official multi-level garage with 170 car spots and 30 moto spots. Hourly rate is 2-4, daily rate is 25-45, and a long-stay (lunga sosta) tariff applies seasonally. A tunnel connects Luna Rossa to Atrani.',
+  },
+  {
+    q: 'What is the cheapest way to park in Positano?',
+    a: 'Park free in the hills above Positano at Nocelle or Montepertuso, then take the Flavio Gioia bus down for 1.60 EUR, or walk about 35 minutes downhill via the steps. Spaces are limited even there during peak season.',
+  },
+  {
+    q: 'Can I park in Atrani as my base?',
+    a: 'No — Atrani has strict municipal limits. From June through September, non-residents pay 3 EUR per hour with a maximum stay of four hours (08:00-20:00), and overnight parking is banned 20:00-08:00. Plan to park in Amalfi (Luna Rossa) and walk through the tunnel to Atrani instead.',
+  },
+  {
+    q: 'What is a ZTL zone on the Amalfi Coast?',
+    a: 'ZTL stands for Zona a Traffico Limitato, a restricted traffic zone where only authorised vehicles (residents, hotel guests with permits) may enter during posted hours. Cameras enforce the boundary; an unauthorised entry triggers a fine of 150 EUR or more, often charged automatically to your rental car.',
+  },
+  {
+    q: 'Are there gas stations along the Amalfi Coast road?',
+    a: 'Almost none. Fill up in Salerno or before entering the coastal road — the SS163 between Vietri sul Mare and Positano has only a couple of stations and they are easy to miss.',
+  },
+]
+
 const parkingJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -293,6 +316,15 @@ const parkingJsonLd = [
       '@type': 'Place',
       name: 'Amalfi Coast',
     },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: parkingFaqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
   },
   {
     '@context': 'https://schema.org',
@@ -646,7 +678,7 @@ const parkingJsonLd = [
             <img
               src="/staticpages/directions/get-here-by-ferry.webp"
               alt="Ferry on the Amalfi Coast"
-              loading="lazy"
+              loading="lazy" width="1500" height="636"
             />
           </div>
           <div class="alt-card__content">
@@ -663,7 +695,7 @@ const parkingJsonLd = [
             <img
               src="/staticpages/directions/get-here-by-bus.webp"
               alt="SITA bus on the Amalfi Coast"
-              loading="lazy"
+              loading="lazy" width="1200" height="554"
             />
           </div>
           <div class="alt-card__content">
@@ -728,6 +760,24 @@ const parkingJsonLd = [
             </a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section parking-faq">
+    <div class="container">
+      <span class="parking-eyebrow">Frequently asked</span>
+      <h2>
+        Parking <span class="accent-italic">questions</span>
+      </h2>
+      <div class="faq-list">
+        {parkingFaqs.map((f) => (
+          <details class="faq-item">
+            <summary class="faq-q">{f.q}</summary>
+            <p class="faq-a">{f.a}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
@@ -1868,5 +1918,70 @@ const parkingJsonLd = [
     .alt-card:hover {
       transform: none;
     }
+  }
+
+  /* ====== FAQ ====== */
+  .parking-faq {
+    background: var(--color-surface);
+    padding: 4rem 0;
+  }
+
+  .parking-faq h2 {
+    margin-bottom: 2rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 820px;
+  }
+
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .faq-q {
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-text);
+  }
+
+  .faq-q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-q::after {
+    content: '+';
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item[open] .faq-q::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-a {
+    margin: 0;
+    padding: 0 1.2rem 1.1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
   }
 </style>
