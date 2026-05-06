@@ -1,0 +1,1374 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { site } from '../data/site'
+
+const downloadUrl = 'https://cnr.pw/ferry'
+const pageTitle = 'Amalfi Coast Ferry Timetables 2026'
+const pageDescription =
+  'Updated Amalfi Coast ferry schedules for Travelmar, Grassi Junior Ferries, and NLG, with departures, fares, routes, notes, and PDF download.'
+const shareImage = '/staticpages/timetables/ferry-hero-01.webp'
+
+const heroSlides = [
+  {
+    image: '/staticpages/timetables/ferry-hero-01.webp',
+    label: 'Coast ferry',
+    alt: 'Ferry crossing the Amalfi Coast',
+  },
+  {
+    image: '/staticpages/timetables/ferry-hero-02.webp',
+    label: 'Amalfi port',
+    alt: 'Ferries near Amalfi port',
+  },
+  {
+    image: '/staticpages/timetables/ferry-hero-03.webp',
+    label: 'Sea route',
+    alt: 'Amalfi Coast ferry route at sea',
+  },
+]
+
+const heroTags = [
+  'Salerno',
+  'Amalfi',
+  'Positano',
+  'Capri',
+  'Sorrento',
+  'Maiori',
+]
+
+const stats = [
+  { value: '3', label: 'ferry operators' },
+  { value: '2026', label: 'season schedules' },
+]
+
+const ferryJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/ferry-timetables`,
+    dateModified: '2026-05-06',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Ferry timetables', item: `${site.url}/ferry-timetables` },
+    ],
+  },
+]
+
+const operators = [
+  {
+    name: 'Travelmar',
+    id: 'travelmar',
+    summary: 'Frequent coastal ferries between Salerno, Cetara, Maiori, Amalfi, and Positano.',
+    highlights: [
+      { icon: 'fa-route', title: 'Best for coast hopping', text: 'Useful for Salerno, Amalfi, Positano, Maiori, and Cetara.' },
+      { icon: 'fa-clock', title: 'Fast Amalfi link', text: 'Salerno to Amalfi is usually 35 minutes; starred trips take about 60 minutes.' },
+      { icon: 'fa-cloud-sun-rain', title: 'Weather dependent', text: 'Always recheck the live schedule before boarding.' },
+    ],
+    tables: [
+      {
+        title: 'Departures From Salerno',
+        group: 'Travelmar Timetable',
+        headers: ['Destination', 'Departures', 'Duration', 'Fare', 'Notes'],
+        rows: [
+          ['Amalfi', '08:40, 09:40, 10:40, 11:10, 11:40, 13:10, 14:10, 15:30, 17:10, 18:00*', '35 min / 60 min*', '12.00', '* via Cetara-Maiori'],
+          ['Positano', '08:40, 09:40, 10:40, 11:10, 11:40, 13:10, 14:10, 15:30, 17:10', '70 min', '17.00', ''],
+          ['Cetara', '09:00, 10:10, 13:00, 15:00, 16:40, 18:00', '10 min', '7.50', ''],
+          ['Maiori', '09:00, 10:10, 13:00, 15:00, 16:40, 18:00', '30 min', '10.00', ''],
+        ],
+      },
+      {
+        title: 'Departures From Amalfi',
+        group: 'Travelmar Timetable',
+        headers: ['Destination', 'Departures', 'Duration', 'Fare', 'Notes'],
+        rows: [
+          ['Salerno', '09:00*, 10:35, 11:20*, 12:10, 12:45, 14:10, 16:15, 17:45, 19:10', '35 min / 60 min*', '12.00', '* via Cetara-Maiori'],
+          ['Positano', '09:20, 10:30, 11:30, 12:00, 12:30, 14:00, 15:00, 16:20, 18:00', '25 min', '10.00', ''],
+          ['Maiori', '09:00, 11:20, 13:00, 14:15, 16:30, 18:00, 19:10', '15 min', '5.00', ''],
+          ['Cetara', '09:00, 11:20, 13:00, 14:15, 16:30, 18:00, 19:10', '40 min', '9.00', ''],
+        ],
+      },
+      {
+        title: 'Departures From Positano',
+        group: 'Travelmar Timetable',
+        headers: ['Destination', 'Departures', 'Duration', 'Fare', 'Notes'],
+        rows: [
+          ['Salerno', '10:00, 11:30, 12:00, 13:30, 15:30, 17:00, 18:30', '70 min', '17.00', ''],
+          ['Amalfi', '10:00, 11:30, 12:00, 13:30, 15:30, 17:00, 18:30', '25 min', '10.00', ''],
+          ['Maiori', '10:00*, 12:00*, 13:30*, 15:30*, 17:00*, 18:30*', '25+15 min', '15.00', '* change boat in Amalfi'],
+          ['Cetara', '10:00*, 12:00*, 13:30*, 15:30*, 17:00*, 18:30*', '25+40 min', '17.00', '* change boat in Amalfi'],
+        ],
+      },
+      {
+        title: 'Departures From Maiori',
+        group: 'Travelmar Timetable',
+        headers: ['Destination', 'Departures', 'Duration', 'Fare', 'Notes'],
+        rows: [
+          ['Salerno', '09:25, 11:50, 13:25, 14:40, 16:55, 18:25, 19:35', '30 min', '10.00', ''],
+          ['Amalfi', '08:25, 09:45, 10:50, 11:45, 13:40, 15:45, 17:20, 18:40', '15 min', '5.00', ''],
+          ['Positano', '08:25*, 09:45*, 10:50*, 11:45*, 13:40*, 15:45*, 17:20*', '15+25 min', '15.00', '* change boat in Amalfi'],
+          ['Cetara', '09:25, 11:50, 13:25, 14:40, 16:55, 18:25, 19:35', '20 min', '8.00', ''],
+        ],
+      },
+      {
+        title: 'Departures From Cetara',
+        group: 'Travelmar Timetable',
+        headers: ['Destination', 'Departures', 'Duration', 'Fare', 'Notes'],
+        rows: [
+          ['Salerno', '09:45, 12:05, 13:45, 15:05, 17:15, 18:45, 19:50', '10 min', '7.50', ''],
+          ['Positano', '09:20*, 10:30*, 13:20*, 15:20*, 17:00*', '40+25 min', '17.00', '* change boat in Amalfi'],
+          ['Amalfi', '09:20, 10:30, 13:20, 15:20, 17:00, 18:20', '40 min', '9.00', ''],
+          ['Maiori', '09:20, 10:30, 13:20, 15:20, 17:00, 18:20', '20 min', '8.00', ''],
+        ],
+      },
+      {
+        title: 'Travelmar Printed Tours',
+        group: '',
+        headers: ['Tour', 'Itinerary', 'Price', 'Notes'],
+        rows: [
+          ['Amalfi Coast tour', 'Salerno > Positano at 11:10; Positano > Amalfi at 15:30; Amalfi > Salerno at 19:10', '39.00', 'Available every day'],
+          ['Dreamy Town tour', 'Salerno > Amalfi at 11:10; Amalfi > Maiori at 14:15; Maiori > Cetara at 16:55; Cetara > Salerno at 18:45', '32.50', 'Available every day'],
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Grassi Junior Ferries',
+    id: 'grassi-junior-ferries',
+    summary: 'Coastal ferries with routes between Salerno, Amalfi, Positano, Cetara, Maiori, Minori, and Capri.',
+    highlights: [
+      { icon: 'fa-suitcase-rolling', title: 'Luggage extra', text: 'Luggage is printed as EUR 3; bike or pet ticket is EUR 5.' },
+      { icon: 'fa-umbrella-beach', title: 'Good for Capri days', text: 'Includes same-day Positano and Capri itinerary combinations.' },
+      { icon: 'fa-circle-info', title: 'Some prices differ', text: 'Promotional cards and main timetable show a few different prices.' },
+    ],
+    tables: [
+      {
+        title: 'Departures From Salerno Masuccio Pier - Concordia',
+        group: 'Grassi Junior Main Timetable',
+        headers: ['Destination', 'Departures', 'Fare', 'Notes'],
+        rows: [
+          ['Positano', '09:50, 10:58 via Capri, 14:35, 18:25, 20:25', '16.50', ''],
+          ['Amalfi', '09:50, 14:35', '11.50', ''],
+          ['Capri', '10:58 direct', '25.50', ''],
+          ['Cetara', '09:50', '7.50', ''],
+          ['Maiori', '09:50', '10.50', ''],
+          ['Minori', '09:50', '10.50', ''],
+        ],
+      },
+      {
+        title: 'Departures From Positano',
+        group: 'Grassi Junior Main Timetable',
+        headers: ['Destination', 'Departures', 'Fare', 'Notes'],
+        rows: [
+          ['Salerno', '08:40, 10:00 direct, 12:50, 16:45, 19:05', '15.00', ''],
+          ['Amalfi', '08:40, 12:50, 16:45, 19:05', '10.00', ''],
+          ['Capri', '10:00 via Salerno, 14:35', '28.00', ''],
+          ['Cetara', '08:40*, 12:50', '15.00', '* via Salerno'],
+          ['Maiori', '08:40*, 12:50', '13.00', '* via Salerno'],
+          ['Minori', '08:40*, 12:50', '13.00', '* via Salerno'],
+        ],
+      },
+      {
+        title: 'Departures From Amalfi',
+        group: 'Grassi Junior Main Timetable',
+        headers: ['Destination', 'Departures', 'Fare', 'Notes'],
+        rows: [
+          ['Salerno', '09:10, 13:15, 17:25, 19:30', '10.00', ''],
+          ['Positano', '11:00, 15:10, 17:25*, 19:30*', '10.00', '* via Salerno'],
+          ['Cetara', '09:10*, 13:15', '8.00', '* via Salerno'],
+          ['Maiori', '09:10*, 13:15', '4.00', '* via Salerno'],
+          ['Minori', '09:10*, 13:15', '4.00', '* via Salerno'],
+        ],
+      },
+      {
+        title: 'Departures From Cetara',
+        group: 'Grassi Junior Main Timetable',
+        headers: ['Destination', 'Departures', 'Fare', 'Notes'],
+        rows: [
+          ['Positano', '10:15, 14:15*', '15.00', '* via Salerno'],
+          ['Amalfi', '10:15, 14:15', '8.00', ''],
+          ['Salerno', '14:15', '6.00', ''],
+          ['Maiori', '10:15', '7.00', ''],
+          ['Minori', '10:15', '7.00', ''],
+        ],
+      },
+      {
+        title: 'Departures From Maiori',
+        group: 'Grassi Junior Main Timetable',
+        headers: ['Destination', 'Departures', 'Fare', 'Notes'],
+        rows: [
+          ['Positano', '10:35, 13:50*', '13.00', '* via Salerno'],
+          ['Amalfi', '10:35, 13:50', '4.00', ''],
+          ['Salerno', '13:50', '9.00', ''],
+          ['Minori', '10:35', '4.00', ''],
+          ['Cetara', '13:50', '7.00', ''],
+        ],
+      },
+      {
+        title: 'Departures From Minori',
+        group: 'Grassi Junior Main Timetable',
+        headers: ['Destination', 'Departures', 'Fare', 'Notes'],
+        rows: [
+          ['Positano', '10:50, 13:35*', '13.00', '* via Salerno'],
+          ['Amalfi', '10:50', '4.00', ''],
+          ['Salerno', '13:35', '9.00', ''],
+          ['Maiori', '13:35', '4.00', ''],
+          ['Cetara', '13:35', '7.00', ''],
+        ],
+      },
+      {
+        title: 'Departures From Capri',
+        group: 'Grassi Junior Main Timetable',
+        headers: ['Destination', 'Departures', 'Fare', 'Notes'],
+        rows: [
+          ['Positano', '13:10, 18:20', '23.00', ''],
+          ['Amalfi', '18:20', '24.00', ''],
+          ['Salerno', '18:20 direct', '26.50', ''],
+        ],
+      },
+      {
+        title: 'Positano And Capri In The Same Day',
+        group: '',
+        headers: ['Starting Point', 'Itinerary', 'Price'],
+        rows: [
+          ['Salerno', '09:50 Salerno > Positano; 14:35 Positano > Capri; 18:20 Capri > Salerno', '60.00'],
+          ['Amalfi', '11:00 Amalfi > Positano; 14:35 Positano > Capri; 18:20 Capri > Amalfi', '56.00'],
+          ['Cetara', '10:15 Cetara > Positano; 14:35 Positano > Capri; 18:20 Capri > Amalfi', '56.00'],
+          ['Maiori', '10:35 Maiori > Positano; 14:35 Positano > Capri; 18:20 Capri > Amalfi', '55.00'],
+          ['Minori', '10:50 Minori > Positano; 14:35 Positano > Capri; 18:20 Capri > Amalfi', '55.00'],
+        ],
+      },
+      {
+        title: 'Amalfi And Positano In The Same Day',
+        group: '',
+        headers: ['Starting Point', 'Itinerary', 'Price'],
+        rows: [
+          ['Salerno', '09:50 Salerno > Positano; 12:50 or 16:45 Positano > Amalfi; 17:25 or 19:30 Amalfi > Salerno', '32.50'],
+          ['Salerno', '09:50 Salerno > Amalfi; 15:10 Amalfi > Positano; 16:45 or 19:05 Positano > Salerno', '32.50'],
+          ['Salerno', '14:35 Salerno > Positano; 16:45 Positano > Amalfi; 19:30 Amalfi > Salerno', '32.50'],
+          ['Cetara', '10:15 Cetara > Positano; 12:50 or 16:45 or 19:05 Positano > Amalfi', '25.00'],
+          ['Cetara', '10:15 Cetara > Amalfi; 15:10 Amalfi > Positano; 16:45 or 19:05 Positano > Amalfi', '28.00'],
+          ['Cetara', '14:15 Cetara > Positano; 16:45 or 19:05 Positano > Amalfi', '25.00'],
+          ['Maiori', '10:35 Maiori > Positano; 12:50 or 16:45 or 19:05 Positano > Amalfi', '23.00'],
+          ['Maiori', '10:35 Maiori > Amalfi; 15:10 Amalfi > Positano; 16:45 or 19:05 Positano > Amalfi', '24.00'],
+          ['Maiori', '13:50 Maiori > Positano; 16:45 or 19:05 Positano > Amalfi', '23.00'],
+          ['Minori', '10:50 Minori > Positano; 12:50 or 16:45 or 19:05 Positano > Amalfi', '23.00'],
+          ['Minori', '10:50 Minori > Amalfi; 15:10 Amalfi > Positano; 16:45 or 19:05 Positano > Amalfi', '24.00'],
+          ['Minori', '13:35 Minori > Positano; 16:45 or 19:05 Positano > Amalfi', '23.00'],
+        ],
+      },
+    ],
+  },
+  {
+    name: 'NLG',
+    id: 'nlg',
+    summary: 'Longer seasonal links from Amalfi to Capri, Sorrento, Naples, Salerno, Castellammare, and Positano.',
+    highlights: [
+      { icon: 'fa-calendar-days', title: 'Main season', text: 'Most 2026 routes run from 01 April to 03 November.' },
+      { icon: 'fa-right-left', title: 'Check changes', text: 'Some Naples to Amalfi trips require a change at Capri.' },
+      { icon: 'fa-ticket', title: 'Amalfi office', text: 'Ticket office phone: 0815520763 / 3483441759.' },
+    ],
+    tables: [
+      {
+        title: 'Amalfi <-> Capri',
+        group: 'NLG Timetable',
+        headers: ['Departure Port', 'Departures', 'Service'],
+        rows: [
+          ['Amalfi', '08:54, 10:30, 17:00', 'Everyday'],
+          ['Capri', '09:45, 15:45, 17:15', 'Everyday'],
+        ],
+      },
+      {
+        title: 'Sorrento <-> Amalfi',
+        group: 'NLG Timetable',
+        headers: ['Period', 'Departure Port', 'Departures', 'Service'],
+        rows: [
+          ['17 Nov 2025 - 31 Mar 2026', 'Sorrento', '11:00', 'Sat-Sun; everyday from 24/03'],
+          ['17 Nov 2025 - 31 Mar 2026', 'Amalfi', '15:45', 'Sat-Sun; everyday from 24/03'],
+          ['01 April - 03 November 2026', 'Sorrento', '09:00, 09:30, 11:00, 12:25, 15:15, 16:10', 'Everyday'],
+          ['01 April - 03 November 2026', 'Amalfi', '08:54, 10:53, 13:40, 15:45, 17:02', 'Everyday'],
+        ],
+      },
+      {
+        title: 'Napoli Beverello <-> Amalfi',
+        group: 'NLG Timetable',
+        headers: ['Departure Port', 'Departures', 'Service'],
+        rows: [
+          ['Napoli Beverello', '08:35 from 01/05, 10:00, 14:40 from 01/05, 15:35', 'Everyday'],
+          ['Amalfi', '08:54, 10:30 from 01/05, 15:45, 17:00 from 01/05', 'Everyday'],
+        ],
+      },
+      {
+        title: 'Salerno Molo Manfredi <-> Amalfi',
+        group: 'NLG Timetable',
+        headers: ['Departure Port', 'Departures', 'Service'],
+        rows: [
+          ['Salerno Molo Manfredi', '08:25', 'Everyday'],
+          ['Amalfi', '18:30', 'Everyday'],
+        ],
+      },
+      {
+        title: 'Castellammare Di Stabia <-> Amalfi',
+        group: 'NLG Timetable',
+        headers: ['Departure Port', 'Departures', 'Service'],
+        rows: [
+          ['Castellammare di Stabia', '08:20', 'Everyday'],
+          ['Amalfi', '17:02', 'Everyday'],
+        ],
+      },
+      {
+        title: 'Positano <-> Amalfi',
+        group: 'NLG Timetable',
+        headers: ['Departure Port', 'Departures', 'Service'],
+        rows: [
+          ['Positano', '10:33, 11:31, 13:10, 16:35 from 01/05, 18:04', 'Everyday'],
+          ['Amalfi', '08:54, 10:30, 13:40, 15:45, 17:02', 'Everyday'],
+        ],
+      },
+    ],
+  },
+]
+
+const tableCount = operators.reduce((sum, operator) => sum + operator.tables.length, 0)
+const isDeparturesHeader = (header) => /departures/i.test(header)
+const isMoneyHeader = (header) => /fare|price/i.test(header)
+const isItineraryHeader = (header) => /itinerary/i.test(header)
+const formatMoney = (value) => (/^\d+(?:\.\d+)?$/.test(value) ? `EUR ${value}` : value)
+const splitDepartures = (value) => value.split(/\s*,\s*/).filter(Boolean)
+const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={shareImage}
+  imageAlt="Ferry on the Amalfi Coast"
+  jsonLd={ferryJsonLd}
+>
+  <section class="apt-hero hero--dark">
+    <div class="apt-hero__slides" aria-hidden="true">
+      {heroSlides.map((slide, i) => (
+        <div class={`apt-hero__slide ${i === 0 ? 'is-active' : ''}`}>
+          <img
+            src={slide.image}
+            alt={slide.alt}
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        </div>
+      ))}
+    </div>
+    <div class="apt-hero__vignette"></div>
+    <div class="apt-hero__content">
+      <div class="container">
+        <div class="apt-hero__grid">
+          <div class="apt-hero__copy">
+            <span class="apt-hero__eyebrow">Amalfi Coast ferries 2026</span>
+            <h1 class="apt-hero__title">
+              Ferry timetables<br /><span class="apt-hero__title-accent">made readable</span>
+            </h1>
+            <p class="apt-hero__lead">
+              Travelmar, Grassi Junior Ferries, and NLG schedules for the main coastal routes.
+              Use this page to scan departures quickly, then verify live availability before travel.
+            </p>
+            <div class="apt-hero__stats">
+              {stats.map((item) => (
+                <div class="apt-hero__stat">
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+              <div class="apt-hero__stat">
+                <strong>{tableCount}</strong>
+                <span>route tables</span>
+              </div>
+            </div>
+            <div class="apt-hero__actions">
+              <a class="apt-hero__btn apt-hero__btn--primary" href="#download">Download PDF bundle</a>
+              <a class="apt-hero__btn apt-hero__btn--ghost" href="#travelmar">Browse schedules</a>
+            </div>
+          </div>
+          <div class="apt-hero__aside">
+            <ul class="apt-hero__tags">
+              {heroTags.map((tag, i) => (
+                <li class="apt-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+              ))}
+            </ul>
+            <div class="apt-hero__progress">
+              {heroSlides.map((slide, i) => (
+                <button
+                  class={`apt-hero__dot ${i === 0 ? 'is-active' : ''}`}
+                  data-slide={i}
+                  aria-label={`Show ${slide.label}`}
+                >
+                  <span class="apt-hero__dot-label">{slide.label}</span>
+                  <span class="apt-hero__dot-bar"><span class="apt-hero__dot-fill"></span></span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="apt-hero__scroll-hint" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+
+  <section class="ferry-download-band" id="download" aria-label="Download ferry timetables">
+    <div class="container ferry-download-band__inner">
+      <div>
+        <span class="ferry-eyebrow">All operators</span>
+        <h2>Download the complete PDF bundle</h2>
+        <p>
+          One file bundle for all ferry companies. Keep it offline and use the tables below for quick route scanning.
+        </p>
+      </div>
+      <a class="ferry-download-button" href={downloadUrl} target="_blank" rel="noreferrer">
+        <i class="fa-solid fa-cloud-arrow-down"></i>
+        Download all ferry timetables
+      </a>
+    </div>
+  </section>
+
+  <section class="ferry-notes section">
+    <div class="container ferry-notes__grid">
+      <div>
+        <span class="ferry-eyebrow">Before boarding</span>
+        <h2>Ferry times can change fast.</h2>
+      </div>
+      <div class="tourist-note-grid">
+        <article class="tourist-note">
+          <i class="fa-solid fa-clock"></i>
+          <div>
+            <h3>Local time</h3>
+            <p>All departures are shown in local Italian time.</p>
+          </div>
+        </article>
+        <article class="tourist-note">
+          <i class="fa-solid fa-euro-sign"></i>
+          <div>
+            <h3>EUR fares</h3>
+            <p>Prices are in euros and may not include luggage or port extras.</p>
+          </div>
+        </article>
+        <article class="tourist-note">
+          <i class="fa-solid fa-cloud-sun-rain"></i>
+          <div>
+            <h3>Sea conditions</h3>
+            <p>Weather, technical issues, and operator updates can change service.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {operators.map((operator) => (
+    <section class="operator-section" id={operator.id}>
+      <div class="container">
+        <header class="operator-header">
+          <span class="ferry-eyebrow">Operator</span>
+          <h2>{operator.name}</h2>
+          <p>{operator.summary}</p>
+        </header>
+
+        <div class="operator-sticky-label" aria-label={`Current ferry operator: ${operator.name}`}>
+          <div class="operator-sticky-label__operator">
+            <span>Current operator</span>
+            <strong>{operator.name}</strong>
+          </div>
+          <small>
+            <i class="fa-solid fa-location-dot"></i>
+            <span data-current-route>{operator.tables[0]?.title}</span>
+          </small>
+        </div>
+
+        <div class="operator-highlights">
+          {operator.highlights.map((item) => (
+            <article class="operator-highlight">
+              <i class={`fa-solid ${item.icon}`}></i>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="schedule-stack">
+          {operator.tables.map((table, tableIndex) => (
+            <article
+              class="schedule-card"
+              id={`${operator.id}-${tableIndex + 1}`}
+              data-route-title={table.title}
+            >
+              <div class="schedule-card__header">
+                <div>
+                  {table.group && <span>{table.group}</span>}
+                  <h3>{table.title}</h3>
+                </div>
+              </div>
+
+              <div class="table-scroll" tabindex="0">
+                <table>
+                  <thead>
+                    <tr>
+                      {table.headers.map((header) => (
+                        <th>{header}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {table.rows.map((row) => (
+                      <tr>
+                        {table.headers.map((header, cellIndex) => {
+                          const cell = row[cellIndex] ?? ''
+                          return (
+                            <td data-label={header}>
+                              {isDeparturesHeader(header) && cell ? (
+                                <div class="time-list">
+                                  {splitDepartures(cell).map((time) => (
+                                    <span>{time}</span>
+                                  ))}
+                                </div>
+                              ) : isItineraryHeader(header) && cell ? (
+                                <div class="itinerary-list">
+                                  {splitItinerary(cell).map((leg) => (
+                                    <span>{leg}</span>
+                                  ))}
+                                </div>
+                              ) : isMoneyHeader(header) && cell ? (
+                                <strong class="fare-value">{formatMoney(cell)}</strong>
+                              ) : cell ? (
+                                <span>{cell}</span>
+                              ) : (
+                                <span class="empty-cell">-</span>
+                              )}
+                            </td>
+                          )
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+</BaseLayout>
+
+<script is:inline>
+  ;(function () {
+    const slides = document.querySelectorAll('.apt-hero__slide')
+    const dots = document.querySelectorAll('.apt-hero__dot')
+    if (!slides.length) return
+
+    let current = 0
+    const DURATION = 6000
+
+    function go(next) {
+      slides[current].classList.remove('is-active')
+      dots[current].classList.remove('is-active')
+      current = next
+      slides[current].classList.add('is-active')
+      dots[current].classList.add('is-active')
+    }
+
+    let timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        clearInterval(timer)
+        go(Number(dot.dataset.slide))
+        timer = setInterval(() => go((current + 1) % slides.length), DURATION)
+      })
+    })
+  })()
+
+  ;(function () {
+    const sections = Array.from(document.querySelectorAll('.operator-section'))
+    if (!sections.length) return
+
+    const contexts = sections.map((section) => ({
+      label: section.querySelector('[data-current-route]'),
+      cards: Array.from(section.querySelectorAll('[data-route-title]')),
+    })).filter((context) => context.label && context.cards.length)
+
+    function updateCurrentRoutes() {
+      contexts.forEach(({ label, cards }) => {
+        const referenceY = window.innerHeight * 0.34
+        let active = cards[0]
+
+        cards.forEach((card) => {
+          const rect = card.getBoundingClientRect()
+          if (rect.top <= referenceY && rect.bottom > 96) {
+            active = card
+          }
+        })
+
+        const nextTitle = active?.dataset.routeTitle || ''
+        if (nextTitle && label.textContent !== nextTitle) {
+          label.textContent = nextTitle
+        }
+      })
+    }
+
+    let ticking = false
+    function requestUpdate() {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        updateCurrentRoutes()
+        ticking = false
+      })
+    }
+
+    updateCurrentRoutes()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+  })()
+</script>
+
+<style>
+  .apt-hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #0a0a0a;
+    color: #ffffff;
+  }
+
+  .apt-hero__slides {
+    position: absolute;
+    inset: -2px;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .apt-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+  }
+
+  .apt-hero__slide.is-active {
+    opacity: 1;
+  }
+
+  .apt-hero__slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.86) saturate(1.02);
+    transform: scale(1.01);
+    backface-visibility: hidden;
+  }
+
+  .apt-hero__slide.is-active img {
+    animation: apt-ken-burns 6.5s cubic-bezier(0.25, 0, 0.4, 1) forwards;
+  }
+
+  @keyframes apt-ken-burns {
+    from { transform: scale(1.01); }
+    to { transform: scale(1.06); }
+  }
+
+  .apt-hero__vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.24) 45%, rgba(0, 0, 0, 0.08) 65%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.44) 0%, transparent 52%),
+      radial-gradient(ellipse at 50% 0%, transparent 48%, rgba(0, 0, 0, 0.24) 100%);
+    pointer-events: none;
+  }
+
+  .apt-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  }
+
+  .apt-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
+  }
+
+  .apt-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: apt-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__title {
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__title-accent {
+    font-style: italic;
+    color: #ff5900;
+    display: inline-block;
+  }
+
+  .apt-hero__lead {
+    max-width: 34rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__stat {
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .apt-hero__stat strong {
+    font-size: 1.1rem;
+    color: #ff5900;
+  }
+
+  .apt-hero__stat span {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .apt-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .apt-hero__btn--primary {
+    background: #ff5900;
+    color: #ffffff;
+  }
+
+  .apt-hero__btn--primary:hover {
+    background: #ff7a33;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .apt-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .apt-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .apt-hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+    opacity: 0;
+    animation: apt-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 260px;
+  }
+
+  .apt-hero__tag {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    opacity: 0;
+    animation: apt-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__progress {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .apt-hero__dot {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .apt-hero__dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  .apt-hero__dot.is-active .apt-hero__dot-label {
+    opacity: 1;
+  }
+
+  .apt-hero__dot-bar {
+    width: 36px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .apt-hero__dot-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ff5900;
+    border-radius: 2px;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .apt-hero__dot.is-active .apt-hero__dot-fill {
+    animation: apt-fill-bar 6s linear forwards;
+  }
+
+  @keyframes apt-fill-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .apt-hero__scroll-hint {
+    position: absolute;
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    animation: apt-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .apt-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: apt-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes apt-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  @keyframes apt-fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .ferry-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .ferry-download-band {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ferry-download-band__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem 0;
+  }
+
+  .ferry-download-band h2 {
+    margin: 0.35rem 0 0.35rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.1;
+  }
+
+  .ferry-download-band p {
+    max-width: 690px;
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .ferry-download-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    min-height: 48px;
+    padding: 0.9rem 1.15rem;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    color: #ffffff;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 14px 34px rgba(255, 89, 0, 0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ferry-download-button:hover,
+  .ferry-download-button:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 40px rgba(255, 89, 0, 0.3);
+  }
+
+  .ferry-notes {
+    background: var(--color-surface);
+  }
+
+  .ferry-notes__grid {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .ferry-notes h2 {
+    margin: 0.45rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    line-height: 1.05;
+  }
+
+  .tourist-note-grid,
+  .operator-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .tourist-note,
+  .operator-highlight {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.85rem;
+    align-items: start;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+  }
+
+  .tourist-note i,
+  .operator-highlight i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-accent) 12%, var(--color-card));
+    color: var(--color-accent);
+  }
+
+  .tourist-note h3,
+  .operator-highlight h3 {
+    margin: 0 0 0.25rem;
+    font-size: 0.98rem;
+    line-height: 1.2;
+  }
+
+  .tourist-note p,
+  .operator-highlight p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .operator-section {
+    padding: 5rem 0;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    scroll-margin-top: calc(var(--header-space) + 90px);
+  }
+
+  .operator-section:nth-of-type(odd) {
+    background: var(--color-surface);
+  }
+
+  .operator-header {
+    margin-bottom: 1.4rem;
+  }
+
+  .operator-header h2 {
+    margin: 0.4rem 0 0.65rem;
+    font-family: var(--font-display);
+    font-size: clamp(2.3rem, 5vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  .operator-header p {
+    max-width: 720px;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+
+  .operator-sticky-label {
+    position: sticky;
+    top: calc(var(--header-space) + 0.75rem);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 0 1rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-card) 92%, transparent);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(16px);
+  }
+
+  .operator-sticky-label__operator {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    min-width: 0;
+  }
+
+  .operator-sticky-label span {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .operator-sticky-label strong {
+    min-width: 0;
+    color: var(--color-text);
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    line-height: 1.1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .operator-sticky-label small {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    min-width: 0;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .operator-sticky-label small span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .operator-highlights {
+    margin: 1.5rem 0 2rem;
+  }
+
+  .schedule-stack {
+    display: grid;
+    gap: 1.3rem;
+  }
+
+  .schedule-card {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+    scroll-margin-top: calc(var(--header-space) + 90px);
+  }
+
+  .schedule-card__header {
+    padding: 1.1rem;
+    border-bottom: 1px solid var(--color-border);
+    background:
+      linear-gradient(135deg, rgba(0, 156, 255, 0.08), transparent 48%),
+      color-mix(in srgb, var(--color-card) 90%, var(--color-surface));
+  }
+
+  .schedule-card__header span {
+    display: block;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .schedule-card h3 {
+    margin: 0.3rem 0 0;
+    font-size: clamp(1.2rem, 2vw, 1.65rem);
+    line-height: 1.15;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 0.95rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  tbody tr:hover {
+    background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+  }
+
+  td:first-child {
+    font-weight: 800;
+  }
+
+  .time-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    min-width: 240px;
+  }
+
+  .time-list span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0.32rem 0.52rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-accent) 12%, var(--color-card));
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .itinerary-list {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 320px;
+  }
+
+  .itinerary-list span {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--color-text);
+    line-height: 1.45;
+  }
+
+  .itinerary-list span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--color-aux-2);
+  }
+
+  .fare-value {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0.3rem 0.55rem;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-aux) 10%, var(--color-card));
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    white-space: nowrap;
+  }
+
+  .empty-cell {
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .apt-hero__grid,
+    .ferry-download-band__inner,
+    .ferry-notes__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .apt-hero__aside {
+      align-items: flex-start;
+    }
+
+    .apt-hero__tags {
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    .apt-hero__progress {
+      align-self: flex-start;
+    }
+
+    .ferry-download-button {
+      width: 100%;
+    }
+
+    .operator-sticky-label {
+      top: 76px;
+    }
+
+    .tourist-note-grid,
+    .operator-highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .apt-hero__title {
+      font-size: clamp(2.4rem, 10vw, 3.8rem);
+    }
+
+    .ferry-download-band__inner {
+      padding: 1.5rem 0;
+    }
+
+    .operator-section {
+      padding: 3.5rem 0;
+    }
+
+    .operator-sticky-label {
+      align-items: flex-start;
+      gap: 0.55rem;
+      padding: 0.65rem 0.75rem;
+    }
+
+    table {
+      min-width: 680px;
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+    }
+  }
+</style>

@@ -106,7 +106,7 @@ export const blogTags = [
 
 export const footerLinks = {
   transport: [
-    { label: 'Ferry timetables', href: 'https://cnr.pw/ferry', external: true },
+    { label: 'Ferry timetables', href: '/ferry-timetables' },
     { label: 'Bus timetables', href: 'https://cnr.pw/bus', external: true },
     { label: 'Airport shuttle', href: '/how-to-get' },
     { label: 'All public transport', href: '/timetables' },

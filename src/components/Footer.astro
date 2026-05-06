@@ -52,7 +52,10 @@ import { footerLinks, socialLinks } from '../data/site'
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noreferrer' : undefined}
         >
-          {(item.label === 'Ferry timetables' || item.label === 'Bus timetables') && (
+          {item.label === 'Ferry timetables' && (
+            <i class="fa-solid fa-water footer__icon"></i>
+          )}
+          {item.label === 'Bus timetables' && (
             <i class="fa-solid fa-download footer__icon"></i>
           )}
           {item.label === 'Airport shuttle' && (
