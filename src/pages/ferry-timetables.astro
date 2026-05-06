@@ -40,6 +40,16 @@ const stats = [
   { value: '2026', label: 'season schedules' },
 ]
 
+const getStickyRouteLabel = (title: string) => {
+  const compactTitle = title
+    .replace(/^Departures From Salerno Masuccio Pier - Concordia$/, 'From Salerno piers')
+    .replace(/^Departures From /, 'From ')
+    .replace(/ And /g, ' & ')
+    .replace(/ In The Same Day$/, ' same day')
+
+  return compactTitle
+}
+
 const ferryJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -62,6 +72,7 @@ const ferryJsonLd = [
 const operators = [
   {
     name: 'Travelmar',
+    shortName: 'Travelmar',
     id: 'travelmar',
     summary: 'Frequent coastal ferries between Salerno, Cetara, Maiori, Amalfi, and Positano.',
     highlights: [
@@ -138,6 +149,7 @@ const operators = [
   },
   {
     name: 'Grassi Junior Ferries',
+    shortName: 'Grassi',
     id: 'grassi-junior-ferries',
     summary: 'Coastal ferries with routes between Salerno, Amalfi, Positano, Cetara, Maiori, Minori, and Capri.',
     highlights: [
@@ -265,6 +277,7 @@ const operators = [
   },
   {
     name: 'NLG',
+    shortName: 'NLG',
     id: 'nlg',
     summary: 'Longer seasonal links from Amalfi to Capri, Sorrento, Naples, Salerno, Castellammare, and Positano.',
     highlights: [
@@ -476,14 +489,14 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
         </header>
 
         <div class="operator-sticky-label" aria-label={`Current ferry operator: ${operator.name}`}>
-          <div class="operator-sticky-label__operator">
-            <span>Current operator</span>
-            <strong>{operator.name}</strong>
+          <div class="operator-pill">
+            <i class="fa-solid fa-ship"></i>
+            <strong>{operator.shortName}</strong>
           </div>
-          <small>
+          <div class="operator-route-note" aria-live="polite">
             <i class="fa-solid fa-location-dot"></i>
-            <span data-current-route>{operator.tables[0]?.title}</span>
-          </small>
+            <span data-current-route>{getStickyRouteLabel(operator.tables[0]?.title ?? '')}</span>
+          </div>
         </div>
 
         <div class="operator-highlights">
@@ -503,7 +516,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
             <article
               class="schedule-card"
               id={`${operator.id}-${tableIndex + 1}`}
-              data-route-title={table.title}
+              data-route-label={getStickyRouteLabel(table.title)}
             >
               <div class="schedule-card__header">
                 <div>
@@ -597,7 +610,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
 
     const contexts = sections.map((section) => ({
       label: section.querySelector('[data-current-route]'),
-      cards: Array.from(section.querySelectorAll('[data-route-title]')),
+      cards: Array.from(section.querySelectorAll('[data-route-label]')),
     })).filter((context) => context.label && context.cards.length)
 
     function updateCurrentRoutes() {
@@ -612,7 +625,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
           }
         })
 
-        const nextTitle = active?.dataset.routeTitle || ''
+        const nextTitle = active?.dataset.routeLabel || ''
         if (nextTitle && label.textContent !== nextTitle) {
           label.textContent = nextTitle
         }
@@ -1105,64 +1118,76 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     position: sticky;
     top: calc(var(--header-space) + 0.75rem);
     z-index: 3;
-    display: flex;
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    gap: 0.45rem;
     margin: 0 0 1rem;
-    padding: 0.7rem 0.85rem;
-    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
-    border-radius: var(--radius-sm);
-    background: color-mix(in srgb, var(--color-card) 92%, transparent);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    backdrop-filter: blur(16px);
+    padding: 0;
+    pointer-events: none;
   }
 
-  .operator-sticky-label__operator {
-    display: flex;
-    align-items: baseline;
-    gap: 0.55rem;
+  .operator-pill,
+  .operator-route-note {
+    min-height: 2.65rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    pointer-events: auto;
+  }
+
+  .operator-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    padding: 0.58rem 0.76rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .operator-pill i {
+    font-size: 0.82rem;
+  }
+
+  .operator-pill strong {
     min-width: 0;
-  }
-
-  .operator-sticky-label span {
-    color: var(--color-text-muted);
+    color: inherit;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
+    font-size: clamp(0.76rem, 2.2vw, 0.88rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
     text-transform: uppercase;
     white-space: nowrap;
   }
 
-  .operator-sticky-label strong {
-    min-width: 0;
-    color: var(--color-text);
-    font-size: clamp(1rem, 2vw, 1.35rem);
-    line-height: 1.1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .operator-sticky-label small {
-    display: inline-flex;
+  .operator-route-note {
+    display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 0.45rem;
-    flex: 1 1 auto;
-    justify-content: flex-end;
     min-width: 0;
-    color: var(--color-accent);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 800;
-    white-space: nowrap;
+    padding: 0.5rem 0.78rem;
+    border: 1px solid rgba(26, 26, 26, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #1a1a1a;
   }
 
-  .operator-sticky-label small span {
+  .operator-route-note i {
+    flex: 0 0 auto;
+    color: var(--color-accent);
+    font-size: 0.82rem;
+  }
+
+  .operator-route-note span {
     min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    color: inherit;
+    font-family: var(--font-mono);
+    font-size: clamp(0.78rem, 2.6vw, 0.94rem);
+    font-weight: 800;
+    line-height: 1.12;
+    overflow-wrap: anywhere;
   }
 
   .operator-highlights {
@@ -1357,9 +1382,21 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     }
 
     .operator-sticky-label {
-      align-items: flex-start;
+      align-items: center;
       gap: 0.55rem;
-      padding: 0.65rem 0.75rem;
+    }
+
+    .operator-pill,
+    .operator-route-note {
+      min-height: 2.5rem;
+    }
+
+    .operator-pill {
+      padding: 0.54rem 0.64rem;
+    }
+
+    .operator-route-note {
+      padding: 0.48rem 0.62rem;
     }
 
     table {
