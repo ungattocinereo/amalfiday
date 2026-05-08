@@ -3,6 +3,10 @@ import { navigation, socialLinks, site } from '../data/site'
 const headerSocials = socialLinks.filter((item) =>
   ['Instagram', 'Facebook'].includes(item.label)
 )
+const hasDropdown = (item: (typeof navigation)[number]) =>
+  Array.isArray(item.dropdownSections) && item.dropdownSections.length > 0
+const getMobilePanelId = (label: string) =>
+  `mobile-section-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`
 ---
 
 <header class="header" id="header">
@@ -22,45 +26,40 @@ const headerSocials = socialLinks.filter((item) =>
 
       <nav class="nav">
         {navigation.map((item) => (
-          item.label === 'Experience' ? (
+          hasDropdown(item) ? (
             <div class="nav__dropdown">
-              <a class="nav__link" href={item.href}>
-                <i class={`fa-solid ${item.icon}`}></i>
-                {item.label}
-                <i class="fa-solid fa-chevron-down nav__chevron"></i>
-              </a>
+              {item.href ? (
+                <a class="nav__link" href={item.href} aria-haspopup="true">
+                  <i class={`fa-solid ${item.icon}`}></i>
+                  {item.label}
+                  <i class="fa-solid fa-chevron-down nav__chevron"></i>
+                </a>
+              ) : (
+                <button class="nav__link nav__link--button" type="button" aria-haspopup="true">
+                  <i class={`fa-solid ${item.icon}`}></i>
+                  {item.label}
+                  <i class="fa-solid fa-chevron-down nav__chevron"></i>
+                </button>
+              )}
               <div class="dropdown">
-                <div class="dropdown__section">
-                  <span class="dropdown__heading">Capture Your Story</span>
-                  <a class="dropdown__item" href="/photoshootings">
-                    <i class="fa-solid fa-person"></i>
-                    <span>Individual Photo Shooting</span>
-                  </a>
-                  <a class="dropdown__item" href="/photoshootings#couples">
-                    <i class="fa-solid fa-users"></i>
-                    <span>Couple Photo Shooting</span>
-                  </a>
-                </div>
-                <div class="dropdown__divider"></div>
-                <div class="dropdown__section">
-                  <span class="dropdown__heading">Tours</span>
-                  <a class="dropdown__item" href="/experience/car-tours#tour-scenic">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>Scenic Coast</span>
-                  </a>
-                  <a class="dropdown__item" href="/experience/car-tours#tour-tramonti">
-                    <i class="fa-solid fa-tree"></i>
-                    <span>Peak Flavors</span>
-                  </a>
-                  <a class="dropdown__item" href="/experience/scooter">
-                    <i class="fa-solid fa-gauge-high"></i>
-                    <span>Scooter Photo Tour</span>
-                  </a>
-                </div>
+                {item.dropdownSections?.map((section, sectionIndex) => (
+                  <Fragment>
+                    {sectionIndex > 0 && <div class="dropdown__divider"></div>}
+                    <div class="dropdown__section">
+                      <span class="dropdown__heading">{section.heading}</span>
+                      {section.items.map((link) => (
+                        <a class="dropdown__item" href={link.href}>
+                          <i class={`fa-solid ${link.icon}`}></i>
+                          <span>{link.label}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </Fragment>
+                ))}
               </div>
             </div>
           ) : (
-            <a class="nav__link" href={item.href}>
+            <a class="nav__link" href={item.href || '#'}>
               <i class={`fa-solid ${item.icon}`}></i>
               {item.label}
             </a>
@@ -105,41 +104,52 @@ const headerSocials = socialLinks.filter((item) =>
     <button class="mobile-panel__close" type="button" aria-label="Close menu">
       <i class="fa-solid fa-xmark"></i>
     </button>
-    <div class="mobile-panel__logo">
-      <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
-      <img class="logo__mark logo__mark--night" src="/brand/logo-light.svg" alt="" aria-hidden="true" width="267" height="63" />
-    </div>
+    <a class="mobile-panel__brand" href="/" aria-label={`${site.name} home`}>
+      <span class="mobile-panel__brand-mark" aria-hidden="true"></span>
+    </a>
 
     <div class="mobile-panel__links">
       <a class="mobile-panel__link" href="/">
         <i class="fa-solid fa-house"></i> Home
       </a>
       {navigation.map((item) => (
-        item.label === 'Experience' ? (
-          <Fragment>
-            <a class="mobile-panel__link" href={item.href}>
-              <i class={`fa-solid ${item.icon}`}></i> {item.label}
-            </a>
-            <div class="mobile-panel__sublinks">
-              <a class="mobile-panel__sublink" href="/photoshootings">
-                <i class="fa-solid fa-person"></i> Individual Photo Shooting
-              </a>
-              <a class="mobile-panel__sublink" href="/photoshootings#couples">
-                <i class="fa-solid fa-users"></i> Couple Photo Shooting
-              </a>
-              <a class="mobile-panel__sublink" href="/experience/car-tours#tour-scenic">
-                <i class="fa-solid fa-location-dot"></i> Scenic Coast
-              </a>
-              <a class="mobile-panel__sublink" href="/experience/car-tours#tour-tramonti">
-                <i class="fa-solid fa-tree"></i> Peak Flavors
-              </a>
-              <a class="mobile-panel__sublink" href="/experience/scooter">
-                <i class="fa-solid fa-gauge-high"></i> Scooter Photo Tour
-              </a>
+        hasDropdown(item) ? (
+          <div class="mobile-panel__accordion" data-mobile-accordion>
+            <button
+              class="mobile-panel__accordion-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls={getMobilePanelId(item.label)}
+              data-mobile-accordion-toggle
+            >
+              <span class="mobile-panel__accordion-label">
+                <i class={`fa-solid ${item.icon}`}></i>
+                <span>{item.label}</span>
+              </span>
+              <i class="fa-solid fa-chevron-down mobile-panel__accordion-chevron" aria-hidden="true"></i>
+            </button>
+            <div class="mobile-panel__accordion-body" id={getMobilePanelId(item.label)} hidden>
+              <div class="mobile-panel__sublinks">
+                {item.href && (
+                  <a class="mobile-panel__sublink mobile-panel__sublink--overview" href={item.href}>
+                    <i class="fa-solid fa-arrow-right"></i> {item.label} overview
+                  </a>
+                )}
+              {item.dropdownSections?.map((section) => (
+                <Fragment>
+                  <span class="mobile-panel__subheading">{section.heading}</span>
+                  {section.items.map((link) => (
+                    <a class="mobile-panel__sublink" href={link.href}>
+                      <i class={`fa-solid ${link.icon}`}></i> {link.label}
+                    </a>
+                  ))}
+                </Fragment>
+              ))}
+              </div>
             </div>
-          </Fragment>
+          </div>
         ) : (
-          <a class="mobile-panel__link" href={item.href}>
+          <a class="mobile-panel__link" href={item.href || '#'}>
             <i class={`fa-solid ${item.icon}`}></i> {item.label}
           </a>
         )
@@ -159,7 +169,6 @@ const headerSocials = socialLinks.filter((item) =>
           <i class="fa-solid fa-moon"></i>
         </span>
       </label>
-      <span class="mobile-panel__theme-label">Day / Night</span>
     </div>
 
     <div class="mobile-panel__bottom">
@@ -253,9 +262,26 @@ const headerSocials = socialLinks.filter((item) =>
       menuToggle?.setAttribute('aria-expanded', 'false')
       mobilePanel?.setAttribute('aria-hidden', 'true')
       document.body.style.overflow = ''
+      document.querySelectorAll('[data-mobile-accordion-toggle]').forEach((toggle) => {
+        toggle.setAttribute('aria-expanded', 'false')
+      })
+      document.querySelectorAll('.mobile-panel__accordion-body').forEach((panel) => {
+        panel.hidden = true
+      })
     }
 
     document.querySelector('.mobile-panel__close')?.addEventListener('click', closeMenu)
+
+    document.querySelectorAll('[data-mobile-accordion-toggle]').forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        const panelId = toggle.getAttribute('aria-controls')
+        const panel = panelId ? document.getElementById(panelId) : null
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true'
+
+        toggle.setAttribute('aria-expanded', String(!isExpanded))
+        if (panel) panel.hidden = isExpanded
+      })
+    })
 
     document.querySelectorAll('.mobile-panel__link, .mobile-panel__sublink').forEach((link) => {
       link.addEventListener('click', closeMenu)
@@ -431,6 +457,14 @@ const headerSocials = socialLinks.filter((item) =>
 
   .nav__link:hover {
     text-decoration: none;
+  }
+
+  .nav__link--button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
   }
 
   /* ─── Actions (right side) ─── */
@@ -614,35 +648,61 @@ const headerSocials = socialLinks.filter((item) =>
   /* ─── Hamburger ─── */
   .menu-toggle {
     display: none;
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    border: none;
-    background: var(--color-card);
-    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(15, 17, 21, 0.12);
+    background: #fff;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--color-text);
-    font-size: 1.35rem;
-    transition: transform 0.15s, background 0.2s, color 0.2s;
+    color: #15171d;
+    font-size: 1.32rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s, border-color 0.2s, color 0.2s;
     pointer-events: auto;
+    box-shadow: none;
+  }
+
+  :global([data-theme='night']) .menu-toggle {
+    background: #05070a;
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+
+  .header.menu-open > .menu-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.86) rotate(-12deg);
   }
 
   .menu-toggle:active {
     transform: scale(0.94);
   }
 
+  .menu-toggle i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    line-height: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
   .menu-toggle .fa-xmark {
-    display: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.58);
   }
 
   .header.menu-open .menu-toggle .fa-list {
-    display: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0.58);
   }
 
   .header.menu-open .menu-toggle .fa-xmark {
-    display: inline;
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
   }
 
   /* ═══════════════════════════════════════════
@@ -699,11 +759,10 @@ const headerSocials = socialLinks.filter((item) =>
   }
 
   :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .menu-toggle {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    border-color: rgba(15, 17, 21, 0.12);
+    color: #15171d;
+    box-shadow: none;
   }
 
   /* Night theme on-hero: logo shadow + white CTA */
@@ -749,14 +808,22 @@ const headerSocials = socialLinks.filter((item) =>
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateY(-12px);
-    transition: opacity 0.25s ease-out, transform 0.25s ease-out, visibility 0.25s;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateY(-10px) scale(0.985);
+    clip-path: circle(0 at calc(100% - 36px) calc(env(safe-area-inset-top, 0px) + 32px));
+    transition:
+      clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.28s ease-out,
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.28s;
   }
 
   .header.menu-open .mobile-panel {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    clip-path: circle(150% at calc(100% - 36px) calc(env(safe-area-inset-top, 0px) + 32px));
     transform: translateY(0);
   }
 
@@ -764,45 +831,110 @@ const headerSocials = socialLinks.filter((item) =>
     position: absolute;
     top: calc(env(safe-area-inset-top, 0px) + 16px);
     right: 16px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid var(--color-border);
-    background: var(--color-card);
-    color: var(--color-text);
-    font-size: 1.2rem;
+    z-index: 2;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(15, 17, 21, 0.12);
+    background: #fff;
+    color: #15171d;
+    font-size: 1.32rem;
     cursor: pointer;
-    transition: background 0.15s, transform 0.15s;
-    z-index: 1;
+    box-shadow: none;
+    opacity: 0;
+    transform: rotate(90deg) scale(0.78);
+    transition:
+      opacity 0.22s ease 0.18s,
+      transform 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.18s,
+      background 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  :global([data-theme='night']) .mobile-panel__close {
+    background: #05070a;
+    border-color: rgba(255, 255, 255, 0.14);
+    color: #fff;
+  }
+
+  .header.menu-open .mobile-panel__close {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
 
   .mobile-panel__close:active {
-    transform: scale(0.92);
-    background: var(--color-surface);
+    transform: rotate(0deg) scale(0.94);
   }
 
-  .mobile-panel__logo {
+  .mobile-panel__brand,
+  .mobile-panel__links > *,
+  .mobile-panel__theme-row,
+  .mobile-panel__bottom {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.32s ease, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .header.menu-open .mobile-panel__brand,
+  .header.menu-open .mobile-panel__links > *,
+  .header.menu-open .mobile-panel__theme-row,
+  .header.menu-open .mobile-panel__bottom {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .header.menu-open .mobile-panel__brand { transition-delay: 0.08s; }
+  .header.menu-open .mobile-panel__links > :nth-child(1) { transition-delay: 0.12s; }
+  .header.menu-open .mobile-panel__links > :nth-child(2) { transition-delay: 0.16s; }
+  .header.menu-open .mobile-panel__links > :nth-child(3) { transition-delay: 0.2s; }
+  .header.menu-open .mobile-panel__links > :nth-child(4) { transition-delay: 0.24s; }
+  .header.menu-open .mobile-panel__theme-row { transition-delay: 0.28s; }
+  .header.menu-open .mobile-panel__bottom { transition-delay: 0.32s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle,
+    .menu-toggle i,
+    .mobile-panel,
+    .mobile-panel__close,
+    .mobile-panel__brand,
+    .mobile-panel__links > *,
+    .mobile-panel__theme-row,
+    .mobile-panel__bottom {
+      transition: none;
+    }
+
+    .mobile-panel {
+      clip-path: none;
+    }
+  }
+
+  .mobile-panel__brand {
     display: flex;
     justify-content: center;
     margin-bottom: 1.5rem;
+    text-decoration: none;
   }
 
-  .mobile-panel__logo .logo__mark {
-    height: 48px;
-    width: auto;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+  .mobile-panel__brand-mark {
+    display: block;
+    width: min(220px, 62vw);
+    height: 52px;
+    background: linear-gradient(100deg, #ff5e00 0%, #ff8b24 58%, #ffc04d 100%);
+    -webkit-mask: url('/brand/logo.svg') center / contain no-repeat;
+    mask: url('/brand/logo.svg') center / contain no-repeat;
   }
 
   .mobile-panel__links {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 9px;
   }
 
-  .mobile-panel__link {
+  .mobile-panel__link,
+  .mobile-panel__accordion-toggle {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -815,72 +947,82 @@ const headerSocials = socialLinks.filter((item) =>
     font-weight: 600;
     color: var(--color-text);
     text-decoration: none;
-    transition: background 0.15s, transform 0.15s;
   }
 
-  .mobile-panel__link:active {
+  .mobile-panel__link,
+  .mobile-panel__accordion-toggle {
+    transition:
+      background 0.15s,
+      opacity 0.32s ease,
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mobile-panel__link {
+    justify-content: flex-start;
+  }
+
+  .mobile-panel__link:active,
+  .mobile-panel__accordion-toggle:active {
     transform: scale(0.97);
     background: var(--color-surface);
   }
 
-  .mobile-panel__link i {
+  .mobile-panel__accordion-toggle {
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid var(--color-border);
+    font-family: var(--font-body);
+    cursor: pointer;
+  }
+
+  .mobile-panel__accordion-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .mobile-panel__link i,
+  .mobile-panel__accordion-label i {
     font-size: 1.5rem;
     width: 2rem;
     text-align: center;
   }
 
+  .mobile-panel__accordion-chevron {
+    flex: 0 0 auto;
+    font-size: 0.9rem;
+    opacity: 0.55;
+    transition: transform 0.18s, opacity 0.18s;
+  }
+
+  .mobile-panel__accordion-toggle[aria-expanded='true'] .mobile-panel__accordion-chevron {
+    transform: rotate(180deg);
+    opacity: 0.9;
+  }
+
+  .mobile-panel__accordion-body {
+    padding: 0.55rem 0 0.15rem;
+  }
+
+  .mobile-panel__accordion-body[hidden] {
+    display: none;
+  }
+
   .mobile-panel__divider {
     height: 1px;
     background: var(--color-border);
-    margin: 1.2rem 0;
+    margin: 1.15rem 0 1rem;
   }
 
   .mobile-panel__theme-row {
+    position: absolute;
+    top: calc(env(safe-area-inset-top, 0px) + 29px);
+    right: 82px;
+    z-index: 2;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-  }
-
-  .mobile-panel__theme-label {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    font-weight: 500;
-  }
-
-  /* Larger toggle for mobile */
-  .mobile-panel .theme-switch__track {
-    width: 56px;
-    height: 28px;
-  }
-
-  .mobile-panel .theme-switch__thumb {
-    width: 24px;
-    height: 24px;
-  }
-
-  .mobile-panel .theme-switch__input:checked + .theme-switch__track .theme-switch__thumb {
-    transform: translateX(28px);
-  }
-
-  :global([data-theme='night']) .mobile-panel .theme-switch__thumb {
-    transform: translateX(28px);
-  }
-
-  .mobile-panel .theme-switch__icon {
-    width: 56px;
-    height: 28px;
-  }
-
-  .mobile-panel .theme-switch__icon i {
-    font-size: 0.82rem;
-  }
-
-  .mobile-panel .theme-switch__icon .fa-sun {
-    right: 8px;
-  }
-
-  .mobile-panel .theme-switch__icon .fa-moon {
-    left: 8px;
+    justify-content: center;
   }
 
   .mobile-panel__bottom {
@@ -950,7 +1092,8 @@ const headerSocials = socialLinks.filter((item) =>
     transition: transform 0.2s, opacity 0.2s;
   }
 
-  .nav__dropdown:hover .nav__chevron {
+  .nav__dropdown:hover .nav__chevron,
+  .nav__dropdown:focus-within .nav__chevron {
     transform: rotate(180deg);
     opacity: 0.8;
   }
@@ -960,7 +1103,7 @@ const headerSocials = socialLinks.filter((item) =>
     top: calc(100% + 14px);
     left: 50%;
     transform: translateX(-50%) translateY(4px);
-    min-width: 240px;
+    min-width: 260px;
     background: var(--color-card);
     border: 1px solid var(--color-border);
     border-radius: 16px;
@@ -974,7 +1117,8 @@ const headerSocials = socialLinks.filter((item) =>
     -webkit-backdrop-filter: blur(20px);
   }
 
-  .nav__dropdown:hover .dropdown {
+  .nav__dropdown:hover .dropdown,
+  .nav__dropdown:focus-within .dropdown {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -1069,7 +1213,17 @@ const headerSocials = socialLinks.filter((item) =>
     display: flex;
     flex-direction: column;
     gap: 6px;
-    padding-left: 1rem;
+    padding-left: 0.85rem;
+  }
+
+  .mobile-panel__subheading {
+    display: block;
+    padding: 0.55rem 1.2rem 0.1rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
   }
 
   .mobile-panel__sublink {
@@ -1086,6 +1240,12 @@ const headerSocials = socialLinks.filter((item) =>
     color: var(--color-text);
     text-decoration: none;
     transition: background 0.15s, transform 0.15s;
+  }
+
+  .mobile-panel__sublink--overview {
+    background: var(--color-card);
+    color: var(--color-accent);
+    font-weight: 650;
   }
 
   .mobile-panel__sublink:active {
