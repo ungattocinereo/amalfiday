@@ -532,6 +532,16 @@ const fallbackQuatrain =
     opacity: 0;
   }
 
+  @media (max-width: 700px) {
+    .hero__logo-canvas {
+      display: none;
+    }
+
+    .hero__logo.is-ready .hero__logo-fallback {
+      opacity: 1;
+    }
+  }
+
   .hero__quatrain,
   .hero__logo {
     cursor: pointer;
@@ -1501,15 +1511,18 @@ const fallbackQuatrain =
 
   const particleLogo = document.querySelector('[data-particle-logo]')
   const particleCanvas = particleLogo?.querySelector('[data-particle-canvas]')
+  const phoneLogoOnly = window.matchMedia('(max-width: 700px)')
 
-  if (particleLogo && particleCanvas) {
+  if (particleLogo && particleCanvas && phoneLogoOnly.matches) {
+    particleLogo.dataset.particleMode = 'svg'
+  } else if (particleLogo && particleCanvas) {
     const ctx = particleCanvas.getContext('2d')
     const logoSource = particleLogo.dataset.particleLogo
     const logoImage = new Image()
     const cursor = { x: 0, y: 0, active: false }
     const sourceCanvas = document.createElement('canvas')
     const sourceCtx = sourceCanvas.getContext('2d', { willReadFrequently: true })
-    const mobileParticles = window.matchMedia('(max-width: 700px)')
+    const compactParticles = window.matchMedia('(max-width: 900px)')
 
     let particles = []
     let canvasCssWidth = 0
@@ -1527,6 +1540,8 @@ const fallbackQuatrain =
     let introPending = !prefersReducedMotion.matches
     let introStartedAt = 0
     let introSettleTimer = 0
+
+    particleLogo.dataset.particleMode = 'canvas'
 
     const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
 
@@ -1599,7 +1614,7 @@ const fallbackQuatrain =
 
       const sampleWidth = 642
       const sampleHeight = 129
-      const isMobile = mobileParticles.matches
+      const isMobile = compactParticles.matches
       const minParticles = isMobile ? 1050 : 1500
       const maxParticles = isMobile ? 1176 : 3000
       const targetParticles = isMobile ? 1176 : 2300
@@ -1706,15 +1721,15 @@ const fallbackQuatrain =
       particles = textParticles.concat(dustParticles)
 
       if (introPending) {
-        const dropHeight = canvasCssHeight * (mobileParticles.matches ? 1.25 : 1.5)
+        const dropHeight = canvasCssHeight * (compactParticles.matches ? 1.25 : 1.5)
         particles.forEach((particle, i) => {
           const fallSeed = hash(particle.homeX + i * 5, particle.homeY + i * 11)
           const driftSeed = hash(particle.homeY + i * 17, particle.homeX + i * 23)
 
           particle.x = particle.homeX + (driftSeed - 0.5) * canvasCssWidth * 0.18
           particle.y = particle.homeY - dropHeight * (0.55 + fallSeed * 0.7)
-          particle.vx = (driftSeed - 0.5) * (mobileParticles.matches ? 1.2 : 1.8)
-          particle.vy = 2.8 + fallSeed * (mobileParticles.matches ? 2.8 : 3.8)
+          particle.vx = (driftSeed - 0.5) * (compactParticles.matches ? 1.2 : 1.8)
+          particle.vy = 2.8 + fallSeed * (compactParticles.matches ? 2.8 : 3.8)
           particle.friction = Math.max(0.78, particle.friction - 0.04)
         })
         particleLogo.dataset.intro = 'falling'
@@ -1735,9 +1750,9 @@ const fallbackQuatrain =
       lastFrameTime = time
       scrollEnergy *= Math.pow(0.9, delta)
 
-      const hoverRadius = mobileParticles.matches ? 64 : 108
-      const hoverStrength = mobileParticles.matches ? 1.25 : 1.75
-      const pointerActiveMs = mobileParticles.matches ? 260 : 320
+      const hoverRadius = compactParticles.matches ? 64 : 108
+      const hoverStrength = compactParticles.matches ? 1.25 : 1.75
+      const pointerActiveMs = compactParticles.matches ? 260 : 320
       let maxMotion = scrollEnergy
 
       if (cursor.active && time - lastPointerMoveAt > pointerActiveMs) {
@@ -1834,7 +1849,7 @@ const fallbackQuatrain =
 
     const updateCursor = (event) => {
       const rect = particleCanvas.getBoundingClientRect()
-      const hoverPadding = mobileParticles.matches ? 32 : 72
+      const hoverPadding = compactParticles.matches ? 32 : 72
       const inside =
         event.clientX >= rect.left - hoverPadding &&
         event.clientX <= rect.right + hoverPadding &&
