@@ -221,6 +221,7 @@ const getMobilePanelId = (label: string) =>
 
     const setTheme = (value, { persist = false } = {}) => {
       root.dataset.theme = value
+      window.__setBrowserThemeColor?.(value)
       if (persist) try { localStorage.setItem('theme', value) } catch {}
       syncSwitch(value)
     }

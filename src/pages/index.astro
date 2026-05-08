@@ -69,7 +69,10 @@ const fallbackQuatrain =
   description={pageDescription}
   image={shareImage}
   imageAlt={shareImageAlt}
-  themeColor="#e35428"
+  themeColor="#FF5900"
+  themeColorDark="#FF5900"
+  bodyClass="home-page"
+  browserChromeColor="#FF5900"
 >
   <section class="hero hero--orange">
     <div class="container hero__inner">
@@ -387,6 +390,19 @@ const fallbackQuatrain =
 </BaseLayout>
 
 <style>
+  :global(html) {
+    background-color: #FF5900;
+  }
+
+  :global(html[data-theme='night']),
+  :global(body.home-page) {
+    background-color: #FF5900;
+  }
+
+  :global(body.home-page main) {
+    background: var(--color-bg);
+  }
+
   .hero {
     padding: 6rem 0 3rem;
     position: relative;
