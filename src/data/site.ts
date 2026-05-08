@@ -27,10 +27,76 @@ export const business = {
   twitterUrl: 'https://twitter.com/amalfiday',
 }
 
-export const navigation = [
+type NavigationDropdownItem = {
+  label: string
+  href: string
+  icon: string
+}
+
+type NavigationDropdownSection = {
+  heading: string
+  items: NavigationDropdownItem[]
+}
+
+type NavigationItem = {
+  label: string
+  href?: string
+  icon: string
+  dropdownSections?: NavigationDropdownSection[]
+}
+
+export const navigation: NavigationItem[] = [
   { label: 'News', href: '/blog', icon: 'fa-newspaper' },
-  { label: 'Experience', href: '/experience', icon: 'fa-star' },
-  { label: 'Apartments', href: '/apartments', icon: 'fa-house' },
+  {
+    label: 'Experience',
+    href: '/experience',
+    icon: 'fa-star',
+    dropdownSections: [
+      {
+        heading: 'Capture Your Story',
+        items: [
+          { label: 'Individual Photo Shooting', href: '/photoshootings', icon: 'fa-person' },
+          { label: 'Couple Photo Shooting', href: '/photoshootings#couples', icon: 'fa-users' },
+        ],
+      },
+      {
+        heading: 'Tours',
+        items: [
+          { label: 'Scenic Coast', href: '/experience/car-tours#tour-scenic', icon: 'fa-location-dot' },
+          { label: 'Peak Flavors', href: '/experience/car-tours#tour-tramonti', icon: 'fa-tree' },
+          { label: 'Scooter Photo Tour', href: '/experience/scooter', icon: 'fa-gauge-high' },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Coast Intel',
+    icon: 'fa-compass',
+    dropdownSections: [
+      {
+        heading: 'Stay',
+        items: [
+          { label: 'Apartments', href: '/apartments', icon: 'fa-house' },
+        ],
+      },
+      {
+        heading: 'Transport',
+        items: [
+          { label: 'How to get here', href: '/how-to-get', icon: 'fa-route' },
+          { label: 'Ferry timetables', href: '/ferry-timetables', icon: 'fa-ship' },
+          { label: 'Bus & public transport', href: '/timetables', icon: 'fa-bus' },
+          { label: 'Parking tips', href: '/parking', icon: 'fa-square-parking' },
+        ],
+      },
+      {
+        heading: 'Field Notes',
+        items: [
+          { label: 'Beach reviews', href: '/beaches', icon: 'fa-umbrella-beach' },
+          { label: 'Moto roads', href: '/moto', icon: 'fa-motorcycle' },
+        ],
+      },
+    ],
+  },
 ]
 
 export const socialLinks = [
