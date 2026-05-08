@@ -136,15 +136,6 @@ const operators = [
           ['Maiori', '09:20, 10:30, 13:20, 15:20, 17:00, 18:20', '20 min', '8.00', ''],
         ],
       },
-      {
-        title: 'Travelmar Printed Tours',
-        group: '',
-        headers: ['Tour', 'Itinerary', 'Price', 'Notes'],
-        rows: [
-          ['Amalfi Coast tour', 'Salerno > Positano at 11:10; Positano > Amalfi at 15:30; Amalfi > Salerno at 19:10', '39.00', 'Available every day'],
-          ['Dreamy Town tour', 'Salerno > Amalfi at 11:10; Amalfi > Maiori at 14:15; Maiori > Cetara at 16:55; Cetara > Salerno at 18:45', '32.50', 'Available every day'],
-        ],
-      },
     ],
   },
   {
@@ -154,7 +145,7 @@ const operators = [
     summary: 'Coastal ferries with routes between Salerno, Amalfi, Positano, Cetara, Maiori, Minori, and Capri.',
     highlights: [
       { icon: 'fa-suitcase-rolling', title: 'Luggage extra', text: 'Luggage is printed as EUR 3; bike or pet ticket is EUR 5.' },
-      { icon: 'fa-umbrella-beach', title: 'Good for Capri days', text: 'Includes same-day Positano and Capri itinerary combinations.' },
+      { icon: 'fa-umbrella-beach', title: 'Capri links', text: 'Includes Positano, Capri, Amalfi, and Salerno route tables.' },
       { icon: 'fa-circle-info', title: 'Some prices differ', text: 'Promotional cards and main timetable show a few different prices.' },
     ],
     tables: [
@@ -242,37 +233,6 @@ const operators = [
           ['Salerno', '18:20 direct', '26.50', ''],
         ],
       },
-      {
-        title: 'Positano And Capri In The Same Day',
-        group: '',
-        headers: ['Starting Point', 'Itinerary', 'Price'],
-        rows: [
-          ['Salerno', '09:50 Salerno > Positano; 14:35 Positano > Capri; 18:20 Capri > Salerno', '60.00'],
-          ['Amalfi', '11:00 Amalfi > Positano; 14:35 Positano > Capri; 18:20 Capri > Amalfi', '56.00'],
-          ['Cetara', '10:15 Cetara > Positano; 14:35 Positano > Capri; 18:20 Capri > Amalfi', '56.00'],
-          ['Maiori', '10:35 Maiori > Positano; 14:35 Positano > Capri; 18:20 Capri > Amalfi', '55.00'],
-          ['Minori', '10:50 Minori > Positano; 14:35 Positano > Capri; 18:20 Capri > Amalfi', '55.00'],
-        ],
-      },
-      {
-        title: 'Amalfi And Positano In The Same Day',
-        group: '',
-        headers: ['Starting Point', 'Itinerary', 'Price'],
-        rows: [
-          ['Salerno', '09:50 Salerno > Positano; 12:50 or 16:45 Positano > Amalfi; 17:25 or 19:30 Amalfi > Salerno', '32.50'],
-          ['Salerno', '09:50 Salerno > Amalfi; 15:10 Amalfi > Positano; 16:45 or 19:05 Positano > Salerno', '32.50'],
-          ['Salerno', '14:35 Salerno > Positano; 16:45 Positano > Amalfi; 19:30 Amalfi > Salerno', '32.50'],
-          ['Cetara', '10:15 Cetara > Positano; 12:50 or 16:45 or 19:05 Positano > Amalfi', '25.00'],
-          ['Cetara', '10:15 Cetara > Amalfi; 15:10 Amalfi > Positano; 16:45 or 19:05 Positano > Amalfi', '28.00'],
-          ['Cetara', '14:15 Cetara > Positano; 16:45 or 19:05 Positano > Amalfi', '25.00'],
-          ['Maiori', '10:35 Maiori > Positano; 12:50 or 16:45 or 19:05 Positano > Amalfi', '23.00'],
-          ['Maiori', '10:35 Maiori > Amalfi; 15:10 Amalfi > Positano; 16:45 or 19:05 Positano > Amalfi', '24.00'],
-          ['Maiori', '13:50 Maiori > Positano; 16:45 or 19:05 Positano > Amalfi', '23.00'],
-          ['Minori', '10:50 Minori > Positano; 12:50 or 16:45 or 19:05 Positano > Amalfi', '23.00'],
-          ['Minori', '10:50 Minori > Amalfi; 15:10 Amalfi > Positano; 16:45 or 19:05 Positano > Amalfi', '24.00'],
-          ['Minori', '13:35 Minori > Positano; 16:45 or 19:05 Positano > Amalfi', '23.00'],
-        ],
-      },
     ],
   },
   {
@@ -287,7 +247,7 @@ const operators = [
     ],
     tables: [
       {
-        title: 'Amalfi <-> Capri',
+        title: 'Amalfi and Capri ferry times',
         group: 'NLG Timetable',
         headers: ['Departure Port', 'Departures', 'Service'],
         rows: [
@@ -296,7 +256,7 @@ const operators = [
         ],
       },
       {
-        title: 'Sorrento <-> Amalfi',
+        title: 'Sorrento and Amalfi ferry times',
         group: 'NLG Timetable',
         headers: ['Period', 'Departure Port', 'Departures', 'Service'],
         rows: [
@@ -307,7 +267,7 @@ const operators = [
         ],
       },
       {
-        title: 'Napoli Beverello <-> Amalfi',
+        title: 'Napoli Beverello and Amalfi ferry times',
         group: 'NLG Timetable',
         headers: ['Departure Port', 'Departures', 'Service'],
         rows: [
@@ -316,7 +276,7 @@ const operators = [
         ],
       },
       {
-        title: 'Salerno Molo Manfredi <-> Amalfi',
+        title: 'Salerno Molo Manfredi and Amalfi ferry times',
         group: 'NLG Timetable',
         headers: ['Departure Port', 'Departures', 'Service'],
         rows: [
@@ -325,7 +285,7 @@ const operators = [
         ],
       },
       {
-        title: 'Castellammare Di Stabia <-> Amalfi',
+        title: 'Castellammare di Stabia and Amalfi ferry times',
         group: 'NLG Timetable',
         headers: ['Departure Port', 'Departures', 'Service'],
         rows: [
@@ -334,7 +294,7 @@ const operators = [
         ],
       },
       {
-        title: 'Positano <-> Amalfi',
+        title: 'Positano and Amalfi ferry times',
         group: 'NLG Timetable',
         headers: ['Departure Port', 'Departures', 'Service'],
         rows: [
@@ -965,7 +925,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     color: var(--color-accent);
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.1;
     letter-spacing: 0;
     text-transform: uppercase;
@@ -1221,7 +1181,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     color: var(--color-accent);
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 400;
     text-transform: uppercase;
   }
 

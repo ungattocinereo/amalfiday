@@ -46,7 +46,7 @@ const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME
 // Routing policy: photoshoot and apartment images are served direct from
 // amalfi.day (not Cloudinary). Everything else goes through Cloudinary
 // fetch when the cloud name is configured.
-const SKIP_CLOUDINARY = ['/photoshootings/', '/apartments/']
+const SKIP_CLOUDINARY = ['/photoshootings/', '/apartments/', '/staticpages/how-to-get/']
 const useCloud =
   Boolean(cloud) && !SKIP_CLOUDINARY.some((p) => src.includes(p))
 
