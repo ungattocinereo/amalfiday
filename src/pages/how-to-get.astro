@@ -1,19 +1,2621 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import CldImage from '../components/CldImage.astro'
+import { site } from '../data/site'
 
-const pageTitle = 'How to Get to the Amalfi Coast — Trains, Ferries, Buses, Driving'
+const pageTitle = 'Naples Airport to Amalfi Coast 2026: Best Routes'
 const pageDescription =
-  'How to get to Amalfi and Atrani: airports, trains, ferries, buses, private transfers, and driving tips from Naples, Rome, Salerno, and Sorrento.'
-const shareImage = '/pre-footer/boat-tours-in-amalfi.webp'
+  'Naples Airport to Amalfi Coast guide for 2026: compare bus, train, ferry, taxi and private transfer routes to Amalfi, Positano, Ravello and Atrani.'
+const shareImage = '/staticpages/how-to-get/naples-airport-amalfi-hero-01.webp'
+const updatedDate = '2026-05-08'
+
+const heroSlides = [
+  {
+    image: '/staticpages/how-to-get/naples-airport-amalfi-hero-01.webp',
+    label: 'Arrivals',
+    alt: 'Travelers arriving for the Naples Airport to Amalfi Coast route',
+    width: 2000,
+    height: 1600,
+  },
+  {
+    image: '/staticpages/how-to-get/naples-airport-amalfi-hero-02.webp',
+    label: 'Ferry',
+    alt: 'Ferry route toward the Amalfi Coast',
+    width: 2000,
+    height: 1500,
+  },
+  {
+    image: '/staticpages/how-to-get/naples-airport-amalfi-hero-03.webp',
+    label: 'Coast',
+    alt: 'Amalfi Coast route view after arriving from Naples',
+    width: 2000,
+    height: 1500,
+  },
+  {
+    image: '/staticpages/how-to-get/naples-airport-amalfi-hero-04.webp',
+    label: 'Transfer',
+    alt: 'Road transfer route toward the Amalfi Coast',
+    width: 2000,
+    height: 1594,
+  },
+]
+
+const heroStats = [
+  { value: 'EUR 20', label: 'direct shuttle from airport' },
+  { value: '19:30', label: 'late-arrival decision point' },
+  { value: '4 towns', label: 'Amalfi, Atrani, Positano, Ravello' },
+]
+
+const heroTags = [
+  'Airport shuttle',
+  'Train + ferry',
+  'Late arrival',
+  'Luggage',
+  'Positano',
+  'Winter backup',
+]
+
+const routeChoices = [
+  {
+    icon: 'fa-bus',
+    label: 'Best Value',
+    title: 'Direct Shuttle',
+    route: 'Pintour from Naples Airport',
+    bestFor: 'Amalfi, Atrani, Maiori, Minori',
+    time: '2h 15m+',
+    cost: 'EUR 20',
+    href: '#tickets',
+  },
+  {
+    icon: 'fa-ship',
+    label: 'Best Scenery',
+    title: 'Train + Ferry',
+    route: 'Alibus, train to Salerno, ferry',
+    bestFor: 'Daylight arrivals with light luggage',
+    time: '2h 20m+',
+    cost: 'EUR 22-35',
+    href: '#routes',
+  },
+  {
+    icon: 'fa-location-dot',
+    label: 'Positano',
+    title: 'Ferry or Transfer',
+    route: 'Beverello, Salerno, or private car',
+    bestFor: 'Positano and Praiano',
+    time: '2h 30m+',
+    cost: 'EUR 36-160',
+    href: '#destinations',
+  },
+  {
+    icon: 'fa-car-side',
+    label: 'No Stress',
+    title: 'Private Transfer',
+    route: 'Door to door from arrivals',
+    bestFor: 'Late flights, families, Ravello',
+    time: '1h 20m+',
+    cost: 'EUR 145+',
+    href: '#late-arrival',
+  },
+]
+
+const quickRoutes = [
+  {
+    route: 'Pintour Airport Shuttle',
+    towns: 'Amalfi, Atrani, Ravello, Maiori, Minori',
+    image: '/staticpages/how-to-get/route-pintour-shuttle.webp',
+    alt: 'Pintour airport shuttle booking for the Amalfi Coast',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    timeMain: '2h 15m-2h 40m to Amalfi',
+    timeNote: 'Direct airport shuttle in normal traffic; summer queues can add time.',
+    cost: '€20 adult €10 child',
+    season: 'Check live booking before travel.',
+  },
+  {
+    route: 'Alibus + Train + Salerno Ferry',
+    towns: 'Amalfi, Atrani, Maiori, Minori',
+    image: '/staticpages/how-to-get/route-salerno-train-travelmar.webp',
+    alt: 'Salerno train and Travelmar ferry route to the Amalfi Coast',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    timeMain: '2h 20m-3h 30m to Amalfi',
+    timeNote: 'Includes Alibus, train, port walk and ferry boarding.',
+    cost: '€22-35 solo',
+    season: 'Best in ferry season; bus backup year-round.',
+  },
+  {
+    route: 'Alibus to Beverello + Naples Ferry',
+    towns: 'Positano, Amalfi',
+    image: '/staticpages/how-to-get/route-nlg-naples-ferry.webp',
+    alt: 'NLG ferry from Naples Beverello toward Positano',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    timeMain: '2h 30m-3h 15m to Positano',
+    timeNote: 'Works when Beverello ferry times line up with your flight.',
+    cost: '€36-45 solo',
+    season: 'Mostly April-November, with reduced winter service.',
+  },
+  {
+    route: 'Taxi or Private Transfer',
+    towns: 'Amalfi, Atrani, Positano, Ravello',
+    image: '/staticpages/how-to-get/route-taxi-transfer.webp',
+    alt: 'Taxi and private transfer option from Naples Airport to the Amalfi Coast',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    timeMain: '1h 20m-2h 30m to your town',
+    timeNote: 'Depends on traffic, destination and summer road conditions.',
+    cost: '€145-160 per car',
+    season: 'Year-round, and strongest for late arrivals.',
+  },
+]
+
+const ticketApps = [
+  {
+    name: 'MooneyGo',
+    kind: 'Transport app / web planner',
+    logo: '/staticpages/how-to-get/logos/mooneygo-logo.svg',
+    logoAlt: 'MooneyGo logo',
+    buy: 'Bus, metro, train, taxi and mobility tickets',
+    bestFor: 'All-in-one public transport checks before moving around Naples and Campania',
+    note: 'Good backup app when coverage fits your route; verify the operator before buying.',
+    href: 'https://www.mooneygo.it/trasporti/',
+    action: 'Open MooneyGo',
+  },
+  {
+    name: 'Unico Campania',
+    kind: 'Campania ticket system',
+    logo: '/staticpages/how-to-get/logos/unico-campania-logo.svg',
+    logoAlt: 'Unico Campania logo',
+    buy: 'Unico tickets, fare checks, App Unico and points of sale',
+    bestFor: 'Naples and Campania urban fares, Tap&Go, and official tariff checks',
+    note: 'Use it to confirm the official Campania fare system before choosing a ticket.',
+    href: 'https://www.unicocampania.it',
+    action: 'Open Unico',
+  },
+  {
+    name: 'Trenitalia App',
+    kind: 'Train app',
+    logo: '/staticpages/how-to-get/logos/trenitalia-logo.svg',
+    logoAlt: 'Trenitalia logo',
+    buy: 'Napoli Centrale to Salerno regional train tickets',
+    bestFor: 'The train leg toward Salerno ferries or buses',
+    note: 'Digital regional tickets are bought in the app or on the website.',
+    href: 'https://www.trenitalia.com/en/information/trenitalia-app.html',
+    action: 'Open Trenitalia',
+  },
+  {
+    name: 'Travelmar',
+    kind: 'Ferry booking',
+    logo: '/staticpages/how-to-get/logos/travelmar-logo.svg',
+    logoAlt: 'Travelmar logo',
+    logoTheme: 'sea',
+    buy: 'Salerno, Amalfi, Positano, Maiori, Minori ferry tickets',
+    bestFor: 'Salerno-side coastal ferries',
+    note: 'Tickets can be booked online or bought at the pier before departure.',
+    href: 'https://www.travelmar.it/en/',
+    action: 'Open Travelmar',
+  },
+  {
+    name: 'NLG',
+    kind: 'Ferry booking',
+    logo: '/staticpages/how-to-get/logos/nlg-logo.svg',
+    logoAlt: 'NLG logo',
+    buy: 'Naples Beverello to Positano and seasonal ferry routes',
+    bestFor: 'Direct Naples port to Positano checks',
+    note: 'Good to check when landing early enough to reach Beverello.',
+    href: 'https://www.nlg.it/en/routes/napolibeverello-positano/',
+    action: 'Open NLG',
+  },
+  {
+    name: 'Pintour',
+    kind: 'Airport shuttle booking',
+    logo: '/staticpages/how-to-get/logos/pintour-logo.png',
+    logoAlt: 'Pintourbus logo',
+    buy: 'Naples Airport to Amalfi-side shuttle tickets',
+    bestFor: 'Direct airport route to Amalfi, Atrani, Maiori, Minori',
+    note: 'This is the simplest public route when the timetable fits your landing.',
+    href: 'https://www.pintourbus.com/en/napoli-amalfi-transfer/',
+    action: 'Open Pintour',
+  },
+]
+
+const destinations = [
+  {
+    name: 'Amalfi / Atrani',
+    tag: 'Amalfi, Atrani',
+    image: '/staticpages/how-to-get/destination-amalfi-atrani.webp',
+    alt: 'Route card illustration for Amalfi and Atrani arrivals',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    answer: 'Pintour direct if timing fits. Otherwise Alibus to Naples, train to Salerno, then ferry or SITA bus.',
+    steps: [
+      'Check Pintour first because it leaves from Naples Capodichino and stops at Atrani and Amalfi.',
+      'If you miss the shuttle, use Napoli Centrale to Salerno as the cleanest public interchange.',
+      'For Atrani, Amalfi port is usually close enough to walk through the tunnel if bags are manageable.',
+    ],
+    warning: 'Ask your host about the final 300 meters. Atrani has stairs and narrow lanes.',
+  },
+  {
+    name: 'Positano',
+    tag: 'Positano, Praiano',
+    image: '/staticpages/how-to-get/destination-positano.webp',
+    alt: 'Route card illustration for Positano arrivals from Naples Airport',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    answer: 'Ferry from Naples Beverello or Salerno in season. If the boat times do not fit, taxi or private transfer is the realistic luggage-friendly fallback.',
+    steps: [
+      'Use Alibus to Beverello only if a ferry departs after your realistic arrival at the port.',
+      'Use Salerno when the train and ferry times line up better than Naples port.',
+      'If landing late afternoon, private transfer often beats stressful public connections to Positano.',
+    ],
+    warning: 'A Positano arrival can still mean many stairs from the pier or Sponda stop.',
+  },
+  {
+    name: 'Ravello',
+    tag: 'Ravello, Scala',
+    image: '/staticpages/how-to-get/destination-ravello.webp',
+    alt: 'Route card illustration for Ravello arrivals from the Amalfi Coast',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    answer: 'Pintour to Ravello/Castiglione junction or ferry to Amalfi, then local taxi or bus uphill.',
+    steps: [
+      'Ravello has no ferry pier and no train station.',
+      'Confirm whether your accommodation is walkable from the Pintour Ravello/Castiglione stop.',
+      'With suitcases, use a local taxi from Amalfi instead of the uphill bus.',
+    ],
+    warning: 'Do not assume a Ravello stop means Ravello main square.',
+  },
+  {
+    name: 'Maiori / Minori',
+    tag: 'Maiori, Minori',
+    image: '/staticpages/how-to-get/destination-maiori-minori.webp',
+    alt: 'Route card illustration for Maiori and Minori arrivals',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    answer: 'Pintour direct is easiest. Salerno plus ferry or bus is the best backup.',
+    steps: [
+      'These towns are easier than Positano for luggage and public transport.',
+      'Pintour stops in both Maiori and Minori.',
+      'From Salerno, ferries are pleasant in season and buses work as a year-round fallback.',
+    ],
+    warning: 'In winter, build the plan around bus service first, ferry second.',
+  },
+]
+
+const partyCosts = [
+  {
+    route: 'Pintour Direct Shuttle',
+    tag: 'Direct airport shuttle',
+    icon: 'fa-bus',
+    solo: 'EUR 20',
+    couple: 'EUR 40',
+    four: 'EUR 80',
+    note: 'Best value if your town is on the stop list.',
+  },
+  {
+    route: 'Train + Salerno Ferry',
+    tag: 'Alibus, train, ferry',
+    icon: 'fa-train',
+    solo: 'EUR 22-35',
+    couple: 'EUR 44-70',
+    four: 'EUR 88-140',
+    note: 'Good in daylight; add buffer for station and pier changes.',
+  },
+  {
+    route: 'Naples Ferry Route',
+    tag: 'Alibus, Beverello, ferry',
+    icon: 'fa-ship',
+    solo: 'EUR 36-45',
+    couple: 'EUR 72-90',
+    four: 'EUR 144-180',
+    note: 'Useful for Positano when the boat time fits.',
+  },
+  {
+    route: 'Taxi Fixed Fare',
+    tag: 'Door-to-door private car',
+    icon: 'fa-taxi',
+    solo: 'EUR 145-160',
+    couple: 'EUR 145-160',
+    four: 'EUR 145-160',
+    note: 'Per car: Positano EUR 145, Amalfi EUR 155, Ravello EUR 160.',
+  },
+]
+
+const finalMeterCards = [
+  {
+    title: 'The pier is not your door',
+    tag: 'Ferries, cobbles, stairs',
+    image: '/staticpages/contact/porters.webp',
+    imageAlt: 'Porter and luggage on Amalfi Coast steps',
+    imageWidth: 1200,
+    imageHeight: 896,
+    icon: 'fa-ship',
+    text: 'Ferries are easier than buses, but the port can still mean stairs, cobblestones, and a walk uphill.',
+    note: 'Ask your host whether to walk, take a taxi, or book porter help.',
+  },
+  {
+    title: 'A car may stop at the edge',
+    tag: 'Drop-off roads, pedestrian lanes',
+    image: '/staticpages/contact/transfers.webp',
+    imageAlt: 'Private transfer car on the Amalfi Coast road',
+    imageWidth: 1200,
+    imageHeight: 896,
+    icon: 'fa-car-side',
+    text: 'In Positano, Atrani, and Ravello, a transfer can get close, but not always to the front door.',
+    note: 'Confirm the closest legal drop-off before choosing a route.',
+  },
+  {
+    title: 'The map hides the climb',
+    tag: 'SITA stops, hill towns, buffers',
+    image: '/staticpages/how-to-get/maps-guide.webp',
+    imageAlt: 'Map guide illustration for Amalfi Coast arrival paths',
+    imageWidth: 1024,
+    imageHeight: 1024,
+    icon: 'fa-route',
+    text: 'A bus stop below your town can be correct on Google Maps and still be painful with suitcases.',
+    note: 'Keep at least 45 minutes of buffer after landing.',
+  },
+]
+
+const warnings = [
+  {
+    icon: 'fa-map-location-dot',
+    title: 'Google Maps can be technically right',
+    text: 'It may suggest tight transfers, hidden station walks, or bus stops below your hotel. Check the luggage reality, not just the route line.',
+  },
+  {
+    icon: 'fa-people-arrows',
+    title: 'July and August buses fill fast',
+    text: 'SITA buses are useful and cheap, but standing-room boarding with suitcases is not a relaxing start to the trip.',
+  },
+  {
+    icon: 'fa-cloud-showers-heavy',
+    title: 'Ferries are weather dependent',
+    text: 'Always recheck ferry operators the day before and again in the morning, especially around rough sea or wind.',
+  },
+  {
+    icon: 'fa-person-walking-luggage',
+    title: 'The last 500 meters matter',
+    text: 'Ports, bus stops, steps, and pedestrian lanes can be the hardest part. Ask your accommodation for the exact bag-friendly arrival point.',
+  },
+]
+
+const ctas = [
+  {
+    title: 'Transfer request',
+    description: 'Door-to-door help when your arrival time or luggage makes public transport awkward.',
+    href: '/contact',
+    image: '/staticpages/contact/masterclasses.webp',
+    imageAlt: 'Private Amalfi Coast planning help',
+  },
+  {
+    title: 'Atrani apartments',
+    description: 'Small coastal stays close to Amalfi, with the final arrival point worth checking early.',
+    href: '/apartments',
+    image: '/staticpages/mainpage/rental-houses.webp',
+    imageAlt: 'Amalfi Coast apartments with sea view',
+  },
+  {
+    title: 'Ferry timetables',
+    description: 'Seasonal boat routes from Salerno and Naples toward Amalfi and Positano.',
+    href: '/ferry-timetables',
+    image: '/staticpages/index/ferry-timetables.webp',
+    imageAlt: 'Ferry timetable card on the Amalfi Coast',
+  },
+  {
+    title: 'Parking guide',
+    description: 'Where to leave the car, what it usually costs, and how to avoid the painful spots.',
+    href: '/parking',
+    image: '/staticpages/mainpage/parking.webp',
+    imageAlt: 'Parking area on the Amalfi Coast',
+  },
+]
+
+const sourceLinks = [
+  {
+    label: 'Naples Airport - by bus',
+    href: 'https://www.aeroportodinapoli.it/en/by-bus?tab=3',
+    note: 'Alibus stops, airport bus area, and high-season timing warnings.',
+  },
+  {
+    label: 'ANM Alibus',
+    href: 'https://www2.anm.it/index.php?Itemid=373&id=1314&option=com_content&task=view',
+    note: 'Alibus first/last departures, frequency, and EUR 5 fare.',
+  },
+  {
+    label: 'Trenitalia App',
+    href: 'https://www.trenitalia.com/en/information/trenitalia-app.html',
+    note: 'Regional train ticket purchase and live train information.',
+  },
+  {
+    label: 'MooneyGo transport tickets',
+    href: 'https://www.mooneygo.it/trasporti/',
+    note: 'Transport app and web planner for public transport, trains, buses, taxis, and mobility tickets.',
+  },
+  {
+    label: 'Unico Campania',
+    href: 'https://www.unicocampania.it',
+    note: 'Official Campania fare system, App Unico, Tap&Go, and fare search.',
+  },
+  {
+    label: 'Pintour Naples Airport - Amalfi',
+    href: 'https://www.pintourbus.com/en/napoli-amalfi-transfer/',
+    note: 'Direct airport shuttle stops, departures, and EUR 20 fare.',
+  },
+  {
+    label: 'Comune di Napoli taxi fares',
+    href: 'https://www.comune.napoli.it/flex/cm/pages/ServeBLOB.php/L/IT/IDPagina/1193/UT/systemPrint',
+    note: 'Official fixed fares and rules for requesting them before departure.',
+  },
+  {
+    label: 'Travelmar FAQ',
+    href: 'https://www.travelmar.it/en/faq',
+    note: 'Online ferry booking, pier ticket purchase, and daily schedule notes.',
+  },
+  {
+    label: 'NLG Naples - Positano',
+    href: 'https://www.nlg.it/en/routes/napolibeverello-positano/',
+    note: 'Seasonal Naples Beverello to Positano ferry times and fares.',
+  },
+]
+
+const faqs = [
+  {
+    q: 'Is there a direct bus from Naples Airport to Amalfi?',
+    a: 'Yes. Pintour lists a direct Naples Capodichino Airport to Amalfi shuttle with intermediate stops including Vietri, Cetara, Maiori, Minori, Ravello/Castiglione, Atrani, and Amalfi. Check live booking because seasonal timetables can change.',
+  },
+  {
+    q: 'What is the best way from Naples Airport to Positano?',
+    a: 'In ferry season, the smoothest public route is often Alibus to Naples Beverello or train to Salerno, then ferry to Positano. Outside ferry season or after a late landing, book a taxi or private transfer if you have luggage.',
+  },
+  {
+    q: 'How much is a taxi from Naples Airport to the Amalfi Coast?',
+    a: 'The official Naples fixed taxi tariff lists Positano at EUR 145, Amalfi at EUR 155, and Ravello at EUR 160 per cab. Motorway tolls and the EUR 5 minivan supplement are excluded.',
+  },
+  {
+    q: 'Can I reach the Amalfi Coast if my flight lands late?',
+    a: 'Sometimes, but it is risky after evening arrivals. After about 19:30, ferries and bus connections become limited. For flights landing after 21:00, book a transfer or sleep in Naples or Salerno and continue in daylight.',
+  },
+  {
+    q: 'Is Salerno the better interchange?',
+    a: 'Use Salerno for Amalfi, Atrani, Ravello, Maiori, and Minori. For Positano, compare live ferry departures from Naples Beverello and Salerno, then choose the port that has the best realistic departure after your flight.',
+  },
+  {
+    q: 'Do ferries run in winter?',
+    a: 'Some routes run with reduced schedules, while many tourist routes are seasonal or weather dependent. In winter, plan around trains and buses first, then use ferries only after checking live operator schedules.',
+  },
+]
+
+const airportJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: pageTitle,
+    description: pageDescription,
+    image: `${site.url}${shareImage}`,
+    url: `${site.url}/how-to-get`,
+    dateModified: updatedDate,
+    author: { '@id': `${site.url}/#business` },
+    publisher: { '@id': `${site.url}/#business` },
+    mainEntityOfPage: `${site.url}/how-to-get`,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Naples Airport to Amalfi Coast',
+        item: `${site.url}/how-to-get`,
+      },
+    ],
+  },
+]
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} noindex={true}>
-  <section class="section">
-    <div class="container">
-      <h1>
-        How to <span class="accent-italic">get here</span>
-      </h1>
-      <p>Details coming soon.</p>
-    </div>
-  </section>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={shareImage}
+  imageAlt="Travel route to the Amalfi Coast"
+  type="article"
+  jsonLd={airportJsonLd}
+>
+  <article class="airport-page">
+    <section class="airport-hero hero--dark">
+      <div class="airport-hero__slides" aria-hidden="true">
+        {heroSlides.map((slide, i) => (
+          <div class={`airport-hero__slide ${i === 0 ? 'is-active' : ''}`}>
+            <CldImage
+              class="airport-hero__image"
+              src={slide.image}
+              alt={slide.alt}
+              width={slide.width}
+              height={slide.height}
+              priority={i === 0}
+              eager={i === 0}
+              sizes="100vw"
+            />
+          </div>
+        ))}
+      </div>
+      <div class="airport-hero__vignette"></div>
+      <div class="airport-hero__content">
+        <div class="container">
+          <div class="airport-hero__grid">
+            <div class="airport-hero__copy">
+              <span class="airport-eyebrow">Airport transfer planner 2026</span>
+              <h1 class="airport-hero__title">
+                Naples Airport<br /><span class="airport-hero__title-accent accent-italic">to Amalfi Coast</span>
+              </h1>
+              <p class="airport-hero__lead">
+                Choose by destination, bags, and arrival time. Before afternoon, public
+                transport can be excellent. After evening, transfer or an overnight stop is
+                often the smarter move.
+              </p>
+              <div class="airport-hero__stats">
+                {heroStats.map((item) => (
+                  <div class="airport-hero__stat">
+                    <strong>{item.value}</strong>
+                    <span>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div class="airport-hero__actions">
+                <a class="airport-button airport-button--primary" href="#routes">
+                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  Compare Routes
+                </a>
+                <a class="airport-button airport-button--ghost" href="#tickets">
+                  <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                  Ticket Apps
+                </a>
+              </div>
+            </div>
+
+            <div class="airport-hero__aside">
+              <ul class="airport-hero__tags">
+                {heroTags.map((tag, i) => (
+                  <li class="airport-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+                ))}
+              </ul>
+              <div class="airport-hero__progress" aria-label="Hero image routes">
+                {heroSlides.map((slide, i) => (
+                  <button
+                    class={`airport-hero__dot ${i === 0 ? 'is-active' : ''}`}
+                    type="button"
+                    data-slide={i}
+                    aria-label={`Show ${slide.label}`}
+                  >
+                    <span class="airport-hero__dot-label">{slide.label}</span>
+                    <span class="airport-hero__dot-bar"><span class="airport-hero__dot-fill"></span></span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="airport-hero__scroll-hint" aria-hidden="true">
+        <span></span>
+      </div>
+    </section>
+
+    <section class="airport-choice-band" aria-label="Route shortcuts">
+      <div class="container">
+        <div class="airport-choice-grid">
+          {routeChoices.map((choice) => (
+            <a class="choice-card" href={choice.href}>
+              <span class="choice-card__icon">
+                <i class={`fa-solid ${choice.icon}`} aria-hidden="true"></i>
+              </span>
+              <span class="choice-card__label">{choice.label}</span>
+              <strong>{choice.title}</strong>
+              <small>{choice.route}</small>
+              <dl>
+                <div>
+                  <dt>For</dt>
+                  <dd>{choice.bestFor}</dd>
+                </div>
+                <div>
+                  <dt>Time</dt>
+                  <dd>{choice.time}</dd>
+                </div>
+                <div>
+                  <dt>Cost</dt>
+                  <dd>{choice.cost}</dd>
+                </div>
+              </dl>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-section" id="routes">
+      <div class="container">
+        <div class="airport-section__head">
+          <span class="airport-kicker">Route Planner</span>
+          <h2>Pick the <span class="accent-italic">Least Painful</span> Route</h2>
+          <p>
+            These are planning ranges. In July and August, traffic, queues, and ferry
+            boarding can add real time. For public transport, leave buffer.
+          </p>
+        </div>
+
+        <div class="route-grid">
+          {quickRoutes.map((route) => (
+            <article class="route-card">
+              <figure class="route-card__media">
+                <CldImage
+                  src={route.image}
+                  alt={route.alt}
+                  width={route.imageWidth}
+                  height={route.imageHeight}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1180px) 50vw, 25vw"
+                />
+              </figure>
+              <div class="route-card__body">
+                <h3>{route.route}</h3>
+                <p class="route-card__towns">{route.towns}</p>
+
+                <div class="route-card__divider"></div>
+
+                <div class="route-card__meta route-card__meta--time">
+                  <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                  <div>
+                    <strong>{route.timeMain}</strong>
+                    <span>{route.timeNote}</span>
+                  </div>
+                </div>
+
+                <div class="route-card__divider"></div>
+
+                <div class="route-card__meta route-card__meta--cost">
+                  <i class="fa-solid fa-euro-sign" aria-hidden="true"></i>
+                  <span>{route.cost}</span>
+                </div>
+              </div>
+
+              <div class="route-card__footer">
+                <p class="route-card__note">{route.season}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-tickets" id="tickets">
+      <div class="container">
+        <div class="airport-section__head airport-section__head--wide">
+          <span class="airport-kicker">Ticket Apps & Booking Tools</span>
+          <h2>Where to <span class="accent-italic">Buy Tickets</span></h2>
+          <p>
+            Install or bookmark these before landing. Airport Wi-Fi, queues, and small screens
+            become annoying exactly when you need to move quickly.
+          </p>
+        </div>
+
+        <div class="ticket-grid">
+          {ticketApps.map((app) => (
+            <a class="ticket-card" href={app.href} target="_blank" rel="noreferrer">
+              <figure class={`ticket-card__media ${app.logoTheme ? `ticket-card__media--${app.logoTheme}` : ''}`}>
+                <img
+                  src={app.logo}
+                  alt={app.logoAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+
+              <div class="ticket-card__body">
+                <h3>{app.name}</h3>
+                <p class="ticket-card__kind">{app.kind}</p>
+
+                <div class="ticket-card__divider"></div>
+
+                <div class="ticket-card__meta ticket-card__meta--buy">
+                  <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                  <strong>{app.buy}</strong>
+                </div>
+
+                <div class="ticket-card__divider"></div>
+
+                <div class="ticket-card__meta">
+                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  <span>{app.bestFor}</span>
+                </div>
+              </div>
+
+              <div class="ticket-card__footer">
+                <p class="ticket-card__note">{app.note}</p>
+                <span class="ticket-card__action" aria-label={app.action}>
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-destinations" id="destinations">
+      <div class="container">
+        <div class="airport-section__head">
+          <span class="airport-kicker">By Destination</span>
+          <h2>Best Route by <span class="accent-italic">Town</span></h2>
+          <p>
+            The coast is not one destination. Amalfi and Maiori are Salerno-side.
+            Positano is easiest when ferry times line up. Ravello always needs a final climb.
+          </p>
+        </div>
+
+        <div class="destination-grid">
+          {destinations.map((destination) => (
+            <article class="destination-card">
+              <figure class="destination-card__media">
+                <CldImage
+                  src={destination.image}
+                  alt={destination.alt}
+                  width={destination.imageWidth}
+                  height={destination.imageHeight}
+                  sizes="(max-width: 900px) 100vw, 34vw"
+                />
+              </figure>
+
+              <div class="destination-card__body">
+                <h3>{destination.name}</h3>
+                <p class="destination-card__tag">{destination.tag}</p>
+
+                <div class="destination-card__divider"></div>
+
+                <div class="destination-card__meta destination-card__meta--answer">
+                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  <strong>{destination.answer}</strong>
+                </div>
+
+                <div class="destination-card__divider"></div>
+
+                <div class="destination-card__steps">
+                  {destination.steps.map((step) => (
+                    <div class="destination-card__step">
+                      <i class="fa-solid fa-check" aria-hidden="true"></i>
+                      <span>{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div class="destination-card__footer">
+                <p class="destination-card__note">{destination.warning}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-costs">
+      <div class="container">
+        <div class="airport-section__head">
+          <span class="airport-kicker">Budget Reality</span>
+          <h2>Compare <span class="accent-italic">Group Costs</span></h2>
+          <p>
+            Public transport wins for one person. For four people, transfer pricing starts
+            making more sense, especially with suitcases.
+          </p>
+        </div>
+
+        <div class="cost-grid">
+          {partyCosts.map((item) => (
+            <article class="cost-card">
+              <div class="cost-card__body">
+                <div class="cost-card__header">
+                  <i class={`fa-solid ${item.icon}`} aria-hidden="true"></i>
+                  <div>
+                    <h3>{item.route}</h3>
+                    <p class="cost-card__tag">{item.tag}</p>
+                  </div>
+                </div>
+
+                <div class="cost-card__divider"></div>
+
+                <div class="cost-card__prices">
+                  <div class="cost-card__price">
+                    <span>Solo</span>
+                    <strong>{item.solo}</strong>
+                  </div>
+                  <div class="cost-card__price">
+                    <span>Couple</span>
+                    <strong>{item.couple}</strong>
+                  </div>
+                  <div class="cost-card__price">
+                    <span>4 People</span>
+                    <strong>{item.four}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cost-card__footer">
+                <p class="cost-card__note">{item.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-late" id="late-arrival">
+      <div class="container">
+        <div class="airport-late__grid">
+          <div class="airport-late__copy">
+            <span class="airport-kicker">Late Arrival</span>
+            <h2>After Evening, <span class="accent-italic">Stop Optimizing</span></h2>
+            <p>
+              If your flight lands after 21:00, public transport is no longer a clever puzzle.
+              It is a risk chain. The safest answer is transfer, taxi, or a night in Naples or
+              Salerno.
+            </p>
+          </div>
+
+          <aside class="late-card">
+            <span class="late-card__eyebrow">Decision rule</span>
+            <div class="late-card__time">
+              <span>after</span>
+              <strong>19:30</strong>
+            </div>
+            <p>Pre-book a transfer unless your exact ferry or shuttle is confirmed and has enough buffer.</p>
+            <a class="late-card__button" href="/contact">
+              <span>Ask for Transfer Help</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </aside>
+        </div>
+
+        <div class="late-signals" aria-label="Late arrival warning signals">
+          <article class="late-signal">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+            <div>
+              <h3>Ferries and SITA thin out</h3>
+              <p>After evening, one missed step can remove the whole public route.</p>
+            </div>
+          </article>
+          <article class="late-signal">
+            <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>
+            <div>
+              <h3>Luggage turns changes into work</h3>
+              <p>Late station walks, bus queues, and stairs feel very different with suitcases.</p>
+            </div>
+          </article>
+          <article class="late-signal">
+            <i class="fa-solid fa-bed" aria-hidden="true"></i>
+            <div>
+              <h3>A night nearby can be smarter</h3>
+              <p>Naples or Salerno may cost less than forcing a risky coastal connection.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-media-section">
+      <div class="container">
+        <div class="airport-section__head airport-section__head--wide">
+          <span class="airport-kicker">Luggage Notes</span>
+          <h2>The Last <span class="accent-italic">500 Meters</span> Matter</h2>
+          <p>
+            On the Amalfi Coast, "arrival" may mean the pier, the bus stop, or a junction below
+            your town. The final walk can decide whether a cheap route feels smart or miserable.
+          </p>
+        </div>
+
+        <div class="final-meter-grid">
+          {finalMeterCards.map((card) => (
+            <article class="final-meter-card">
+              <figure class="final-meter-card__media">
+                <CldImage
+                  src={card.image}
+                  alt={card.imageAlt}
+                  width={card.imageWidth}
+                  height={card.imageHeight}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1180px) 50vw, 33vw"
+                />
+              </figure>
+
+              <div class="final-meter-card__body">
+                <h3>{card.title}</h3>
+                <p class="final-meter-card__tag">{card.tag}</p>
+
+                <div class="final-meter-card__divider"></div>
+
+                <div class="final-meter-card__meta">
+                  <i class={`fa-solid ${card.icon}`} aria-hidden="true"></i>
+                  <span>{card.text}</span>
+                </div>
+              </div>
+
+              <div class="final-meter-card__footer">
+                <p class="final-meter-card__note">{card.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-warnings">
+      <div class="container">
+        <div class="airport-section__head">
+          <span class="airport-kicker">Local Warnings</span>
+          <h2>Do Not Learn This <span class="accent-italic">at Arrivals</span></h2>
+        </div>
+
+        <div class="warning-grid">
+          {warnings.map((warning) => (
+            <article class="warning-card">
+              <i class={`fa-solid ${warning.icon}`} aria-hidden="true"></i>
+              <h3>{warning.title}</h3>
+              <p>{warning.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-cta-section">
+      <div class="container">
+        <div class="airport-section__head">
+          <span class="airport-kicker">Next Step</span>
+          <h2>Useful Links <span class="accent-italic">Before Booking</span></h2>
+        </div>
+
+        <div class="cta-grid">
+          {ctas.map((cta) => (
+            <a class="cta-card" href={cta.href} aria-label={cta.title}>
+              <div class="cta-card__media">
+                <img src={cta.image} alt={cta.imageAlt} loading="lazy" decoding="async" />
+              </div>
+              <div class="cta-card__body">
+                <h3>{cta.title}</h3>
+                <p>{cta.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-faq">
+      <div class="container airport-faq__grid">
+        <div>
+          <span class="airport-kicker">FAQ</span>
+          <h2>Naples Airport <span class="accent-italic">Questions</span></h2>
+        </div>
+        <div class="faq-list">
+          {faqs.map((faq) => (
+            <details class="faq-item">
+              <summary>{faq.q}</summary>
+              <p>{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section airport-sources">
+      <div class="container">
+        <div class="sources-panel">
+          <div class="airport-section__head">
+            <span class="airport-kicker">Checked Sources</span>
+            <h2>Recheck <span class="accent-italic">Before Travel</span></h2>
+            <p>
+              Schedules can change with season, weather, strikes, and traffic. Use this page
+              to choose a strategy, then confirm the exact departure close to your date.
+            </p>
+          </div>
+          <div class="source-grid">
+            {sourceLinks.map((source) => (
+              <a class="source-link" href={source.href} target="_blank" rel="noreferrer">
+                <strong>{source.label}</strong>
+                <span>{source.note}</span>
+                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
 </BaseLayout>
+
+<script>
+  const airportSlides = document.querySelectorAll('.airport-hero__slide')
+  const airportDots = document.querySelectorAll('.airport-hero__dot')
+  const reduceAirportMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  let airportIndex = 0
+  let airportTimer
+
+  function showAirportSlide(index) {
+    airportSlides[airportIndex]?.classList.remove('is-active')
+    airportDots[airportIndex]?.classList.remove('is-active')
+    airportIndex = index
+    airportSlides[airportIndex]?.classList.add('is-active')
+    airportDots[airportIndex]?.classList.add('is-active')
+  }
+
+  function nextAirportSlide() {
+    showAirportSlide((airportIndex + 1) % airportSlides.length)
+  }
+
+  if (airportSlides.length > 1) {
+    if (!reduceAirportMotion) {
+      airportTimer = window.setInterval(nextAirportSlide, 6500)
+    }
+
+    airportDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        if (airportTimer) window.clearInterval(airportTimer)
+        showAirportSlide(index)
+        if (!reduceAirportMotion) {
+          airportTimer = window.setInterval(nextAirportSlide, 6500)
+        }
+      })
+    })
+  }
+</script>
+
+<style>
+  .airport-page {
+    --airport-ink: var(--color-text);
+    --airport-muted: var(--color-text-muted);
+    --airport-line: var(--color-border);
+    --airport-surface: var(--color-card);
+    --airport-soft: var(--color-surface);
+    --airport-orange: var(--color-accent);
+    --airport-sea: #007c89;
+    --airport-blue: var(--color-aux);
+    --airport-green: #2d7f59;
+    --airport-gold: var(--color-accent-2);
+    --airport-eyebrow: #6f7783;
+    background: var(--color-bg);
+    color: var(--airport-ink);
+  }
+
+  :global([data-theme='night']) .airport-page {
+    --airport-sea: #23c7d5;
+    --airport-green: #64c996;
+    --airport-eyebrow: #a7afb9;
+  }
+
+  .airport-page [id] {
+    scroll-margin-top: calc(var(--header-space) + 1rem);
+  }
+
+  .airport-page h1,
+  .airport-page h2,
+  .airport-page h3 {
+    color: var(--airport-ink);
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+
+  .airport-page p,
+  .airport-page li,
+  .airport-page dd {
+    color: var(--airport-muted);
+  }
+
+  .airport-hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: #0a0f12;
+    color: #ffffff;
+  }
+
+  .airport-hero__slides {
+    position: absolute;
+    inset: -2px;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .airport-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    backface-visibility: hidden;
+  }
+
+  .airport-hero__slide.is-active {
+    opacity: 1;
+  }
+
+  .airport-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.01);
+    backface-visibility: hidden;
+  }
+
+  .airport-hero__slide.is-active .airport-hero__image {
+    animation: airport-ken-burns 6.8s cubic-bezier(0.25, 0, 0.4, 1) forwards;
+  }
+
+  @keyframes airport-ken-burns {
+    from { transform: scale(1.01); }
+    to { transform: scale(1.055); }
+  }
+
+  .airport-hero__vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(5, 10, 14, 0.9) 0%, rgba(5, 10, 14, 0.42) 48%, transparent 70%),
+      linear-gradient(90deg, rgba(5, 10, 14, 0.62) 0%, rgba(5, 10, 14, 0.18) 56%, transparent 80%),
+      radial-gradient(ellipse at 50% 0%, transparent 48%, rgba(5, 10, 14, 0.28) 100%);
+    pointer-events: none;
+  }
+
+  .airport-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-bottom: clamp(2.8rem, 5.5vh, 5rem);
+  }
+
+  .airport-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3rem;
+    align-items: flex-end;
+  }
+
+  .airport-hero__copy {
+    max-width: 840px;
+  }
+
+  .airport-eyebrow,
+  .airport-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .airport-eyebrow {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--airport-eyebrow);
+    font-size: 0.65rem;
+    letter-spacing: 0.24em;
+    opacity: 0;
+    animation: airport-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .airport-hero .airport-eyebrow {
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .airport-kicker {
+    margin-bottom: 0.8rem;
+    color: var(--airport-eyebrow);
+    font-size: 0.74rem;
+  }
+
+  .airport-hero .airport-hero__title {
+    max-width: 920px;
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2.8rem, 6.5vw, 5.9rem);
+    line-height: 1;
+    opacity: 0;
+    animation: airport-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .airport-hero__title-accent {
+    display: inline-block;
+    color: var(--airport-orange);
+  }
+
+  .airport-hero .airport-hero__lead {
+    max-width: 38rem;
+    margin-top: 1.2rem;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: clamp(1rem, 1.5vw, 1.12rem);
+    line-height: 1.55;
+    opacity: 0;
+    animation: airport-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .airport-hero__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: airport-fade-up 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .airport-hero__stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.62rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+  }
+
+  .airport-hero__stat strong {
+    color: var(--airport-orange);
+    font-size: 1.05rem;
+  }
+
+  .airport-hero .airport-hero__stat span {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.8rem;
+  }
+
+  .airport-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: airport-fade-up 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .airport-button,
+  .late-card a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 42px;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    touch-action: manipulation;
+  }
+
+  .airport-button {
+    padding: 0.72rem 1.45rem;
+    border: 1px solid transparent;
+  }
+
+  .airport-button--primary {
+    color: #ffffff;
+    background: var(--airport-orange);
+  }
+
+  .airport-button:hover,
+  .airport-button:focus-visible,
+  .late-card a:hover,
+  .late-card a:focus-visible {
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .airport-button--primary:hover,
+  .airport-button--primary:focus-visible {
+    color: #ffffff;
+    background: #ff7a33;
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+  }
+
+  .airport-button:focus-visible,
+  .airport-hero__dot:focus-visible,
+  .choice-card:focus-visible,
+  .ticket-card:focus-visible,
+  .cta-card:focus-visible,
+  .source-link:focus-visible,
+  .late-card a:focus-visible {
+    outline: 3px solid var(--airport-gold);
+    outline-offset: 3px;
+  }
+
+  .airport-button--ghost {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .airport-button--ghost:hover,
+  .airport-button--ghost:focus-visible {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .airport-hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+    opacity: 0;
+    animation: airport-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .airport-hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 300px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .airport-hero__tag {
+    padding: 0.38rem 0.78rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0;
+    animation: airport-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .airport-hero__progress {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .airport-hero__dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .airport-hero__dot-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.42;
+  }
+
+  .airport-hero__dot.is-active .airport-hero__dot-label {
+    opacity: 1;
+  }
+
+  .airport-hero__dot-bar {
+    width: 36px;
+    height: 2px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .airport-hero__dot-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    background: var(--airport-orange);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  .airport-hero__dot.is-active .airport-hero__dot-fill {
+    animation: airport-fill-bar 6.4s linear forwards;
+  }
+
+  @keyframes airport-fill-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .airport-hero__scroll-hint {
+    position: absolute;
+    z-index: 3;
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation: airport-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .airport-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: airport-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes airport-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  @keyframes airport-fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .late-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.94);
+    color: #17212b;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.24);
+  }
+
+  .late-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 5px;
+    background: var(--airport-orange);
+  }
+
+  .late-card__eyebrow {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: var(--airport-orange);
+    font: 800 0.74rem/1 var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .late-card__time {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.7rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid rgba(23, 33, 43, 0.12);
+  }
+
+  .late-card__time span {
+    padding-bottom: 0.34rem;
+    color: #6a727b;
+    font: 800 0.74rem/1 var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .late-card__time strong {
+    display: block;
+    color: #17212b;
+    font-size: clamp(3rem, 7vw, 4.65rem);
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+  }
+
+  .late-card p {
+    margin-bottom: 1rem;
+    color: #4d5864;
+  }
+
+  .late-card__button {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    color: #ffffff;
+    background: var(--airport-orange);
+  }
+
+  .late-card__button span {
+    color: inherit;
+  }
+
+  .airport-choice-band {
+    position: relative;
+    z-index: 3;
+    padding: 3.5rem 0 4rem;
+  }
+
+  .airport-choice-grid,
+  .route-grid,
+  .ticket-grid,
+  .destination-grid,
+  .cost-grid,
+  .warning-grid,
+  .cta-grid,
+  .source-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .airport-choice-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .choice-card,
+  .route-card,
+  .ticket-card,
+  .destination-card,
+  .cost-card,
+  .warning-card,
+  .cta-card,
+  .faq-item,
+  .source-link,
+  .sources-panel {
+    border: 1px solid var(--airport-line);
+    border-radius: var(--radius-md);
+    background: var(--airport-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .choice-card {
+    display: grid;
+    gap: 0.65rem;
+    min-height: 265px;
+    padding: 1rem;
+    color: var(--airport-ink);
+  }
+
+  .choice-card:hover,
+  .choice-card:focus-visible,
+  .ticket-card:hover,
+  .ticket-card:focus-visible,
+  .cta-card:hover,
+  .cta-card:focus-visible,
+  .source-link:hover,
+  .source-link:focus-visible {
+    color: var(--airport-ink);
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .choice-card__icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--airport-orange);
+  }
+
+  .choice-card__label {
+    color: var(--airport-sea);
+    font: 800 0.74rem/1 var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .choice-card strong {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+
+  .choice-card small {
+    color: var(--airport-muted);
+    line-height: 1.45;
+  }
+
+  .choice-card dl {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+  }
+
+  .choice-card dl div {
+    display: grid;
+    gap: 0.18rem;
+  }
+
+  .choice-card dt {
+    color: var(--airport-sea);
+    font: 800 0.68rem/1 var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .choice-card dd {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .airport-section {
+    background: var(--airport-soft);
+  }
+
+  .airport-tickets,
+  .airport-costs,
+  .airport-warnings,
+  .airport-faq {
+    background: var(--color-bg);
+  }
+
+  .airport-destinations,
+  .airport-media-section,
+  .airport-cta-section,
+  .airport-sources {
+    background: var(--airport-soft);
+  }
+
+  .airport-section__head {
+    max-width: 760px;
+    margin-bottom: 1.8rem;
+  }
+
+  .airport-section__head--wide {
+    max-width: 900px;
+  }
+
+  .airport-section__head h2,
+  .airport-late h2,
+  .airport-media-copy h2,
+  .airport-faq h2 {
+    font-size: clamp(2rem, 4vw, 3.65rem);
+    line-height: 1;
+  }
+
+  .route-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .warning-card {
+    padding: 1rem;
+  }
+
+  .cost-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .route-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .route-card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    margin: 0;
+    overflow: hidden;
+    background: var(--airport-soft);
+  }
+
+  .route-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+
+  .cost-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 0;
+  }
+
+  .cost-card__header {
+    display: grid;
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .cost-card__header i {
+    display: grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--airport-orange);
+    font-size: 0.82rem;
+  }
+
+  .route-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 0;
+  }
+
+  .route-card h3,
+  .ticket-card h3,
+  .destination-card h3,
+  .cost-card h3,
+  .warning-card h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1.15rem;
+    line-height: 1.2;
+  }
+
+  .route-card__towns {
+    margin: 0;
+    color: var(--airport-orange);
+    font: 400 0.72rem/1.4 var(--font-mono);
+  }
+
+  .route-card p,
+  .warning-card p {
+    margin-bottom: 0;
+  }
+
+  .route-card__divider {
+    height: 1px;
+    margin: 0.9rem 0;
+    background: var(--airport-line);
+  }
+
+  .route-card__meta {
+    display: grid;
+    grid-template-columns: 1.65rem minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: start;
+  }
+
+  .route-card__meta i {
+    display: grid;
+    place-items: center;
+    width: 1.65rem;
+    height: 1.65rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--airport-orange);
+    font-size: 0.72rem;
+  }
+
+  .route-card__meta strong {
+    display: block;
+    color: var(--airport-ink);
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .route-card__meta span {
+    display: block;
+    margin-top: 0.18rem;
+    color: var(--airport-muted);
+    font-size: 0.92rem;
+    line-height: 1.42;
+  }
+
+  .route-card__meta--cost {
+    align-items: center;
+  }
+
+  .route-card__meta--cost span {
+    margin-top: 0;
+    color: var(--airport-ink);
+    font-size: 0.98rem;
+    line-height: 1.35;
+  }
+
+  .route-card__footer {
+    margin-top: auto;
+    padding-top: 0.9rem;
+  }
+
+  .cost-card__tag {
+    margin: 0;
+    color: var(--airport-orange);
+    font: 400 0.72rem/1.4 var(--font-mono);
+  }
+
+  .cost-card__divider {
+    height: 1px;
+    margin: 0.9rem 0;
+    background: var(--airport-line);
+  }
+
+  .cost-card__prices {
+    display: grid;
+    gap: 0;
+  }
+
+  .cost-card__price {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.68rem 0;
+    border-top: 1px solid var(--airport-line);
+  }
+
+  .cost-card__price:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .cost-card__price:last-child {
+    padding-bottom: 0;
+  }
+
+  .cost-card__price span {
+    color: var(--airport-orange);
+    font: 800 0.68rem/1.25 var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  .cost-card__price strong {
+    color: var(--airport-ink);
+    font-size: 0.98rem;
+    line-height: 1.25;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .cost-card__footer {
+    margin-top: auto;
+    padding-top: 0.9rem;
+  }
+
+  .airport-page .cost-card__note {
+    margin: 0;
+    padding: 0.82rem 1rem 0.95rem;
+    background: var(--airport-orange);
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .airport-page .route-card__note {
+    margin: 0;
+    padding: 0.82rem 1rem 0.95rem;
+    border-radius: 0;
+    background: var(--airport-orange);
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .ticket-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .ticket-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 430px;
+    overflow: hidden;
+    padding: 0;
+    color: var(--airport-ink);
+  }
+
+  .ticket-card__media {
+    display: grid;
+    place-items: center;
+    min-height: 150px;
+    margin: 0;
+    padding: 1.35rem;
+    border-bottom: 1px solid var(--airport-line);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(250, 244, 236, 0.9)),
+      var(--airport-soft);
+  }
+
+  .ticket-card__media img {
+    display: block;
+    width: auto;
+    max-width: min(82%, 220px);
+    height: auto;
+    max-height: 76px;
+    object-fit: contain;
+  }
+
+  .ticket-card__media--sea {
+    background:
+      radial-gradient(circle at 76% 18%, rgba(255, 255, 255, 0.18), transparent 32%),
+      linear-gradient(135deg, #173557, #007c89);
+  }
+
+  .ticket-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 0.9rem;
+  }
+
+  .ticket-card__kind {
+    display: block;
+    margin: 0;
+    color: var(--airport-orange);
+    font: 400 0.72rem/1.4 var(--font-mono);
+  }
+
+  .ticket-card__divider {
+    height: 1px;
+    margin: 0.9rem 0;
+    background: var(--airport-line);
+  }
+
+  .ticket-card__meta {
+    display: grid;
+    grid-template-columns: 1.65rem minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: start;
+  }
+
+  .ticket-card__meta i {
+    display: grid;
+    place-items: center;
+    width: 1.65rem;
+    height: 1.65rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--airport-orange);
+    font-size: 0.72rem;
+  }
+
+  .ticket-card__meta strong {
+    display: block;
+    color: var(--airport-ink);
+    font-size: 0.98rem;
+    line-height: 1.3;
+  }
+
+  .ticket-card__meta span {
+    display: block;
+    color: var(--airport-muted);
+    font-size: 0.92rem;
+    line-height: 1.42;
+  }
+
+  .ticket-card__footer {
+    position: relative;
+    margin-top: auto;
+    min-height: 116px;
+    padding: 0.82rem 3.1rem 1rem 1rem;
+    background: var(--airport-orange);
+  }
+
+  .airport-page .ticket-card__note {
+    margin: 0;
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .ticket-card__action {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    place-items: center;
+    width: 2.65rem;
+    height: 2.65rem;
+    border-radius: var(--radius-sm) 0 0 0;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+  .destination-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .destination-card {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.44fr) minmax(0, 1fr);
+    grid-template-areas:
+      "media body"
+      "media footer";
+    overflow: hidden;
+  }
+
+  .destination-card__media {
+    grid-area: media;
+    margin: 0;
+    overflow: hidden;
+    background: var(--airport-soft);
+  }
+
+  .destination-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+
+  .destination-card__body {
+    grid-area: body;
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem 1.15rem 0.95rem;
+  }
+
+  .destination-card__tag {
+    margin: 0;
+    color: var(--airport-orange);
+    font: 400 0.72rem/1.4 var(--font-mono);
+  }
+
+  .destination-card__divider {
+    height: 1px;
+    margin: 0.9rem 0;
+    background: var(--airport-line);
+  }
+
+  .destination-card__meta,
+  .destination-card__step {
+    display: grid;
+    grid-template-columns: 1.65rem minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: start;
+  }
+
+  .destination-card__meta i,
+  .destination-card__step i {
+    display: grid;
+    place-items: center;
+    width: 1.65rem;
+    height: 1.65rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--airport-orange);
+    font-size: 0.72rem;
+  }
+
+  .destination-card__meta strong {
+    display: block;
+    color: var(--airport-ink);
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .destination-card__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .destination-card__step span {
+    color: var(--airport-muted);
+    font-size: 0.94rem;
+    line-height: 1.45;
+  }
+
+  .destination-card__footer {
+    grid-area: footer;
+    margin-top: auto;
+    align-self: end;
+  }
+
+  .airport-page .destination-card__note {
+    margin: 0;
+    padding: 0.82rem 1rem 0.95rem;
+    background: var(--airport-orange);
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .cost-grid,
+  .warning-grid,
+  .cta-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .warning-card > i {
+    color: var(--airport-orange);
+    font-size: 1.25rem;
+  }
+
+  .airport-late {
+    position: relative;
+    overflow: hidden;
+    background: #101820;
+    color: #ffffff;
+  }
+
+  .airport-late::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.72), transparent 78%);
+  }
+
+  .airport-late > .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .airport-late .accent-italic {
+    color: var(--airport-gold);
+  }
+
+  .airport-late .airport-kicker {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .airport-late h2 {
+    color: #ffffff;
+  }
+
+  .airport-late p,
+  .airport-late li {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .airport-late .late-card p {
+    color: #4d5864;
+  }
+
+  .airport-late__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+    gap: clamp(1.4rem, 4vw, 3rem);
+    align-items: end;
+  }
+
+  .airport-late__copy {
+    max-width: 760px;
+  }
+
+  .airport-late__copy p {
+    max-width: 620px;
+  }
+
+  .late-signals {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.3rem;
+  }
+
+  .late-signal {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 0.85rem;
+    min-height: 146px;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.075);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+
+  .late-signal h3 {
+    margin-bottom: 0.35rem;
+    color: #ffffff;
+    font-size: 1.05rem;
+    line-height: 1.18;
+  }
+
+  .late-signal p {
+    padding: 0;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .late-signal i {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 195, 0, 0.14);
+    color: var(--airport-gold);
+    font-size: 1rem;
+  }
+
+  .late-card {
+    padding: 1.35rem;
+  }
+
+  .final-meter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .final-meter-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--airport-line);
+    border-radius: var(--radius-md);
+    background: var(--airport-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .final-meter-card__media {
+    aspect-ratio: 4 / 3;
+    margin: 0;
+    overflow: hidden;
+    background: var(--airport-soft);
+  }
+
+  .final-meter-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .final-meter-card:hover .final-meter-card__media img {
+    transform: scale(1.04);
+  }
+
+  .final-meter-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 0;
+  }
+
+  .final-meter-card h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1.15rem;
+    line-height: 1.2;
+  }
+
+  .final-meter-card__tag {
+    margin: 0;
+    color: var(--airport-orange);
+    font: 400 0.72rem/1.4 var(--font-mono);
+  }
+
+  .final-meter-card__divider {
+    height: 1px;
+    margin: 0.9rem 0;
+    background: var(--airport-line);
+  }
+
+  .final-meter-card__meta {
+    display: grid;
+    grid-template-columns: 1.65rem minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: start;
+  }
+
+  .final-meter-card__meta i {
+    display: grid;
+    place-items: center;
+    width: 1.65rem;
+    height: 1.65rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--airport-orange);
+    font-size: 0.72rem;
+  }
+
+  .final-meter-card__meta span {
+    color: var(--airport-muted);
+    font-size: 0.94rem;
+    line-height: 1.45;
+  }
+
+  .final-meter-card__footer {
+    margin-top: auto;
+    padding-top: 0.9rem;
+  }
+
+  .airport-page .final-meter-card__note {
+    margin: 0;
+    padding: 0.82rem 1rem 0.95rem;
+    background: var(--airport-orange);
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .warning-card > i {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 0.9rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.12);
+  }
+
+  .cta-card {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+    border-radius: 18px;
+    color: var(--airport-ink);
+    background: #ffffff;
+  }
+
+  .cta-card__media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--airport-soft);
+  }
+
+  .cta-card__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .cta-card:hover .cta-card__media img,
+  .cta-card:focus-visible .cta-card__media img {
+    transform: scale(1.05);
+  }
+
+  .cta-card__body {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+    padding: 1rem 1rem 1.1rem;
+  }
+
+  .cta-card__body h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--airport-ink);
+  }
+
+  .cta-card__body p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #5f6871;
+  }
+
+  .cta-card:hover .cta-card__body h3,
+  .cta-card:focus-visible .cta-card__body h3 {
+    color: var(--airport-orange);
+  }
+
+  .airport-faq__grid {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    padding: 1rem 1.1rem;
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    color: var(--airport-ink);
+    font-weight: 800;
+  }
+
+  .faq-item summary:focus-visible {
+    outline: 3px solid var(--airport-gold);
+    outline-offset: 4px;
+  }
+
+  .faq-item p {
+    margin: 0.8rem 0 0;
+  }
+
+  .sources-panel {
+    padding: 1.4rem;
+  }
+
+  .source-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .source-link {
+    position: relative;
+    display: grid;
+    gap: 0.35rem;
+    padding: 1rem 2.7rem 1rem 1rem;
+    color: var(--airport-ink);
+  }
+
+  .source-link span {
+    color: var(--airport-muted);
+    line-height: 1.45;
+  }
+
+  .source-link i {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--airport-orange);
+  }
+
+  @media (max-width: 1180px) {
+    .airport-choice-grid,
+    .route-grid,
+    .ticket-grid,
+    .cost-grid,
+    .final-meter-grid,
+    .warning-grid,
+    .cta-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ticket-card {
+      min-height: 320px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .airport-hero__grid,
+    .airport-late__grid,
+    .airport-faq__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .airport-hero__grid {
+      gap: 2rem;
+    }
+
+    .airport-hero__aside {
+      align-items: flex-start;
+    }
+
+    .airport-hero__tags {
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    .airport-hero__progress {
+      align-self: flex-start;
+    }
+
+    .late-card {
+      max-width: 560px;
+    }
+
+    .late-signals {
+      grid-template-columns: 1fr;
+    }
+
+    .destination-grid,
+    .source-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .destination-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .destination-card__media {
+      aspect-ratio: 4 / 3;
+    }
+
+    .destination-card__steps {
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+  @media (max-width: 640px) {
+    .airport-hero__content {
+      padding-bottom: clamp(3rem, 7vh, 5rem);
+    }
+
+    .airport-hero__title {
+      font-size: clamp(2.4rem, 10vw, 3.8rem);
+    }
+
+    .airport-hero__lead {
+      max-width: 26rem;
+    }
+
+    .airport-hero__actions,
+    .airport-button {
+      width: 100%;
+    }
+
+    .airport-choice-grid,
+    .route-grid,
+    .ticket-grid,
+    .cost-grid,
+    .final-meter-grid,
+    .warning-grid,
+    .cta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .choice-card,
+    .ticket-card,
+    .cta-card {
+      min-height: auto;
+    }
+
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .airport-hero__slide {
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .airport-hero__dot-label {
+      transition: opacity 0.4s ease;
+    }
+
+    .airport-button,
+    .choice-card,
+    .ticket-card,
+    .cta-card,
+    .late-signal,
+    .source-link,
+    .late-card a {
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+    }
+
+    .cta-card__media img,
+    .final-meter-card__media img,
+    .cta-card__body h3 {
+      transition:
+        transform 0.3s ease,
+        color 0.2s ease;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .airport-hero__slide.is-active .airport-hero__image,
+    .airport-hero__dot.is-active .airport-hero__dot-fill,
+    .airport-hero__scroll-hint span,
+    .airport-eyebrow,
+    .airport-hero__title,
+    .airport-hero__lead,
+    .airport-hero__stats,
+    .airport-hero__actions,
+    .airport-hero__aside,
+    .airport-hero__tag {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
