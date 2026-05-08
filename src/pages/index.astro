@@ -80,8 +80,11 @@ const fallbackQuatrain =
           <p class="hero__line" data-quatrain-line>{fallbackQuatrain[2]}</p>
           <p class="hero__line" data-quatrain-line>{fallbackQuatrain[3]}</p>
         </div>
-        <div class="hero__logo">
-          <img src="/brand/amalficarion_logo.svg" alt="The Amalfication" width="642" height="129" />
+        <div class="hero__logo" data-particle-logo="/brand/amalficarion_logo.svg" role="img" aria-label="The Amalfication">
+          <div class="hero__logo-stage">
+            <canvas class="hero__logo-canvas" data-particle-canvas aria-hidden="true"></canvas>
+            <img class="hero__logo-fallback" src="/brand/amalficarion_logo.svg" alt="" width="642" height="129" loading="eager" />
+          </div>
         </div>
       </div>
 
@@ -137,10 +140,8 @@ const fallbackQuatrain =
         <div class="hero__tile hero__tile--small hero__tile--small-b">
           <a
             class="hero__mini hero__mini--photo"
-            href={heroLinks.ferryPdf}
+            href="/ferry-timetables"
             id="ferry"
-            target="_blank"
-            rel="noreferrer"
           >
             <img
               src="/staticpages/index/ferry-timetables.webp"
@@ -457,6 +458,8 @@ const fallbackQuatrain =
   }
 
   .hero__quatrain {
+    position: relative;
+    z-index: 2;
     font-family: var(--font-display);
     font-size: clamp(0.81rem, 1.27vw, 1.04rem);
     line-height: 1.44;
@@ -476,26 +479,57 @@ const fallbackQuatrain =
     opacity: 0.2;
   }
 
-  .hero__logo img {
-    width: min(560px, 82vw);
-    height: auto;
-    display: block;
-    transform: scale(1.2) translateY(-20%);
-    transform-origin: center top;
-    pointer-events: none;
-  }
-
   .hero__logo {
     position: relative;
-    z-index: -1;
+    z-index: 0;
     isolation: isolate;
     display: flex;
     justify-content: center;
+    width: min(560px, 82vw);
+    aspect-ratio: 641.6 / 128.69;
     transform: scale(var(--hero-logo-scroll-scale, 1));
     transform-origin: center center;
     will-change: transform;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  .hero__logo-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.2) translateY(-20%);
+    transform-origin: center top;
+    will-change: transform;
+  }
+
+  .hero__logo-canvas,
+  .hero__logo-fallback {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+  }
+
+  .hero__logo-canvas {
+    opacity: 0;
+    transition: opacity 0.28s ease;
+  }
+
+  .hero__logo-fallback {
+    object-fit: contain;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .hero__logo.is-ready .hero__logo-canvas {
+    opacity: 1;
+  }
+
+  .hero__logo.is-ready .hero__logo-fallback {
+    opacity: 0;
   }
 
   .hero__quatrain,
@@ -513,7 +547,7 @@ const fallbackQuatrain =
   }
 
   @media (min-width: 1001px) {
-    .hero__logo img {
+    .hero__logo-stage {
       transform: scale(2.25) rotate(-3deg) translateY(-25%);
       transform-origin: center top;
     }
@@ -1220,7 +1254,7 @@ const fallbackQuatrain =
   }
 
   @media (max-width: 1000px) {
-    .hero__logo img {
+    .hero__logo-stage {
       transform: scale(1.28) translateY(1%);
     }
 
@@ -1463,6 +1497,429 @@ const fallbackQuatrain =
     } catch (error) {
       // no-op: keep fallback quatrain
     }
+  }
+
+  const particleLogo = document.querySelector('[data-particle-logo]')
+  const particleCanvas = particleLogo?.querySelector('[data-particle-canvas]')
+
+  if (particleLogo && particleCanvas) {
+    const ctx = particleCanvas.getContext('2d')
+    const logoSource = particleLogo.dataset.particleLogo
+    const logoImage = new Image()
+    const cursor = { x: 0, y: 0, active: false }
+    const sourceCanvas = document.createElement('canvas')
+    const sourceCtx = sourceCanvas.getContext('2d', { willReadFrequently: true })
+    const mobileParticles = window.matchMedia('(max-width: 700px)')
+
+    let particles = []
+    let canvasCssWidth = 0
+    let canvasCssHeight = 0
+    let animationFrame = 0
+    let rebuildFrame = 0
+    let lastFrameTime = performance.now()
+    let lastScrollY = window.scrollY
+    let scrollEnergy = 0
+    let scrollDirection = 1
+    let sourceReady = false
+    let isVisible = true
+    let isAnimating = false
+    let lastPointerMoveAt = 0
+    let introPending = !prefersReducedMotion.matches
+    let introStartedAt = 0
+    let introSettleTimer = 0
+
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
+
+    const hash = (x, y) => {
+      const value = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453
+      return value - Math.floor(value)
+    }
+
+    const resizeCanvas = () => {
+      const nextWidth = Math.max(1, Math.round(particleCanvas.clientWidth || particleLogo.clientWidth || 560))
+      const nextHeight = Math.max(1, Math.round(particleCanvas.clientHeight || particleLogo.clientHeight || 112))
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+
+      canvasCssWidth = nextWidth
+      canvasCssHeight = nextHeight
+
+      const pixelWidth = Math.round(nextWidth * dpr)
+      const pixelHeight = Math.round(nextHeight * dpr)
+
+      if (particleCanvas.width !== pixelWidth || particleCanvas.height !== pixelHeight) {
+        particleCanvas.width = pixelWidth
+        particleCanvas.height = pixelHeight
+      }
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+
+    const drawParticles = () => {
+      ctx.clearRect(0, 0, canvasCssWidth, canvasCssHeight)
+      ctx.fillStyle = 'rgba(255, 225, 83, 0.94)'
+      ctx.beginPath()
+      particles.forEach((particle) => {
+        ctx.moveTo(particle.x + particle.radius, particle.y)
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
+      })
+      ctx.fill()
+    }
+
+    const collectCandidates = (imageData, sampleWidth, sampleHeight, step) => {
+      const data = imageData.data
+      const alphaAt = (x, y) => {
+        if (x < 0 || x >= sampleWidth || y < 0 || y >= sampleHeight) return 0
+        return data[(y * sampleWidth + x) * 4 + 3]
+      }
+      const candidates = []
+
+      for (let y = 0; y < sampleHeight; y += step) {
+        for (let x = 0; x < sampleWidth; x += step) {
+          if (alphaAt(x, y) < 80) continue
+
+          const nearEdge =
+            alphaAt(x - step, y) < 60 ||
+            alphaAt(x + step, y) < 60 ||
+            alphaAt(x, y - step) < 60 ||
+            alphaAt(x, y + step) < 60
+
+          if (nearEdge && hash(x, y) < 0.45) continue
+
+          candidates.push({ x, y, edge: nearEdge, rank: hash(x + 31, y + 17) })
+        }
+      }
+
+      return candidates
+    }
+
+    const rebuildParticles = () => {
+      if (!sourceReady || !sourceCtx) return
+
+      resizeCanvas()
+
+      const sampleWidth = 642
+      const sampleHeight = 129
+      const isMobile = mobileParticles.matches
+      const minParticles = isMobile ? 1050 : 1500
+      const maxParticles = isMobile ? 1176 : 3000
+      const targetParticles = isMobile ? 1176 : 2300
+
+      sourceCanvas.width = sampleWidth
+      sourceCanvas.height = sampleHeight
+      sourceCtx.clearRect(0, 0, sampleWidth, sampleHeight)
+      sourceCtx.drawImage(logoImage, 0, 0, sampleWidth, sampleHeight)
+
+      const imageData = sourceCtx.getImageData(0, 0, sampleWidth, sampleHeight)
+      let step = isMobile ? 5 : 3
+      let candidates = collectCandidates(imageData, sampleWidth, sampleHeight, step)
+
+      while (candidates.length > maxParticles && step < 9) {
+        step += 1
+        candidates = collectCandidates(imageData, sampleWidth, sampleHeight, step)
+      }
+
+      while (candidates.length < minParticles && step > 2) {
+        step -= 1
+        candidates = collectCandidates(imageData, sampleWidth, sampleHeight, step)
+      }
+
+      if (candidates.length > targetParticles) {
+        candidates = candidates.sort((a, b) => a.rank - b.rank).slice(0, targetParticles)
+      }
+
+      const imageDataAlphaAt = (x, y) => {
+        const sourceX = clamp(Math.round(x), 0, sampleWidth - 1)
+        const sourceY = clamp(Math.round(y), 0, sampleHeight - 1)
+        return imageData.data[(sourceY * sampleWidth + sourceX) * 4 + 3]
+      }
+
+      const textParticles = candidates.map((point) => {
+        const jitter = step * (point.edge ? 0.08 : 0.18)
+        const jitterX = (hash(point.x + 101, point.y) - 0.5) * jitter
+        const jitterY = (hash(point.x, point.y + 101) - 0.5) * jitter
+        const homeX = ((point.x + step * 0.5 + jitterX) / sampleWidth) * canvasCssWidth
+        const homeY = ((point.y + step * 0.5 + jitterY) / sampleHeight) * canvasCssHeight
+        const radiusBase = isMobile ? 0.62 : 0.52
+        const radius = radiusBase + hash(point.x + 7, point.y + 13) * (point.edge ? 0.2 : 0.32)
+
+        return {
+          homeX,
+          homeY,
+          x: homeX,
+          y: homeY,
+          vx: 0,
+          vy: 0,
+          radius,
+          mass: 0.8 + hash(point.x + 3, point.y + 5) * 0.7,
+          spring: point.edge ? 0.036 : 0.042,
+          friction: point.edge ? 0.86 : 0.84,
+        }
+      })
+
+      const dustCount = isMobile ? 24 : 360
+      const dustParticles = Array.from({ length: dustCount }, (_, i) => {
+        let sourceX = 0
+        let sourceY = 0
+
+        for (let attempt = 0; attempt < 8; attempt += 1) {
+          const seed = i + attempt * dustCount
+          const band = hash(seed + 17, seed + 29)
+          const a = hash(seed + 43, seed + 61)
+          const b = hash(seed + 73, seed + 89)
+
+          if (band < 0.38) {
+            sourceX = a * sampleWidth
+            sourceY = (0.02 + b * 0.3) * sampleHeight
+          } else if (band < 0.78) {
+            sourceX = a * sampleWidth
+            sourceY = (0.66 + b * 0.3) * sampleHeight
+          } else if (band < 0.89) {
+            sourceX = (0.01 + a * 0.14) * sampleWidth
+            sourceY = (0.18 + b * 0.62) * sampleHeight
+          } else {
+            sourceX = (0.85 + a * 0.14) * sampleWidth
+            sourceY = (0.18 + b * 0.62) * sampleHeight
+          }
+
+          if (imageDataAlphaAt(sourceX, sourceY) < 24) break
+        }
+
+        const homeX = (sourceX / sampleWidth) * canvasCssWidth
+        const homeY = (sourceY / sampleHeight) * canvasCssHeight
+        const radiusBase = isMobile ? 0.32 : 0.36
+        const radius = radiusBase + hash(i + 97, i + 131) * (isMobile ? 0.18 : 0.24)
+
+        return {
+          homeX,
+          homeY,
+          x: homeX,
+          y: homeY,
+          vx: 0,
+          vy: 0,
+          radius,
+          mass: 0.45 + hash(i + 151, i + 181) * 0.45,
+          spring: 0.026,
+          friction: 0.88,
+        }
+      })
+
+      particles = textParticles.concat(dustParticles)
+
+      if (introPending) {
+        const dropHeight = canvasCssHeight * (mobileParticles.matches ? 1.25 : 1.5)
+        particles.forEach((particle, i) => {
+          const fallSeed = hash(particle.homeX + i * 5, particle.homeY + i * 11)
+          const driftSeed = hash(particle.homeY + i * 17, particle.homeX + i * 23)
+
+          particle.x = particle.homeX + (driftSeed - 0.5) * canvasCssWidth * 0.18
+          particle.y = particle.homeY - dropHeight * (0.55 + fallSeed * 0.7)
+          particle.vx = (driftSeed - 0.5) * (mobileParticles.matches ? 1.2 : 1.8)
+          particle.vy = 2.8 + fallSeed * (mobileParticles.matches ? 2.8 : 3.8)
+          particle.friction = Math.max(0.78, particle.friction - 0.04)
+        })
+        particleLogo.dataset.intro = 'falling'
+        introStartedAt = performance.now()
+      } else {
+        particleLogo.dataset.intro = 'settled'
+      }
+
+      particleLogo.dataset.particles = String(particles.length)
+      particleLogo.dataset.textParticles = String(textParticles.length)
+      particleLogo.dataset.dustParticles = String(dustParticles.length)
+      drawParticles()
+      particleLogo.classList.add('is-ready')
+    }
+
+    const animateParticles = (time) => {
+      const delta = clamp((time - lastFrameTime) / 16.67, 0.65, 1.8)
+      lastFrameTime = time
+      scrollEnergy *= Math.pow(0.9, delta)
+
+      const hoverRadius = mobileParticles.matches ? 64 : 108
+      const hoverStrength = mobileParticles.matches ? 1.25 : 1.75
+      const pointerActiveMs = mobileParticles.matches ? 260 : 320
+      let maxMotion = scrollEnergy
+
+      if (cursor.active && time - lastPointerMoveAt > pointerActiveMs) {
+        cursor.active = false
+      }
+
+      particles.forEach((particle) => {
+        const homeDx = particle.homeX - particle.x
+        const homeDy = particle.homeY - particle.y
+
+        particle.vx += homeDx * particle.spring * delta
+        particle.vy += homeDy * particle.spring * delta
+
+        if (cursor.active) {
+          const dx = particle.x - cursor.x
+          const dy = particle.y - cursor.y
+          const distanceSquared = dx * dx + dy * dy
+
+          if (distanceSquared < hoverRadius * hoverRadius) {
+            const distance = Math.max(Math.sqrt(distanceSquared), 0.001)
+            const force = (1 - distance / hoverRadius) ** 2 * hoverStrength
+            particle.vx += (dx / distance) * force * delta
+            particle.vy += (dy / distance) * force * delta
+          }
+        }
+
+        if (scrollEnergy > 0.004) {
+          const drift = Math.sin(particle.homeX * 0.027 + time * 0.006) * scrollEnergy * 0.18
+          particle.vx += drift * delta
+          particle.vy += scrollDirection * scrollEnergy * (0.28 + particle.mass * 0.12) * delta
+        }
+
+        particle.vx *= Math.pow(particle.friction, delta)
+        particle.vy *= Math.pow(particle.friction, delta)
+        particle.x += particle.vx * delta
+        particle.y += particle.vy * delta
+        maxMotion = Math.max(
+          maxMotion,
+          Math.abs(particle.vx),
+          Math.abs(particle.vy),
+          Math.abs(homeDx) * 0.03,
+          Math.abs(homeDy) * 0.03
+        )
+      })
+
+      drawParticles()
+
+      if (introStartedAt && time - introStartedAt > 3300 && !cursor.active && scrollEnergy < 0.02) {
+        particles.forEach((particle) => {
+          particle.x = particle.homeX
+          particle.y = particle.homeY
+          particle.vx = 0
+          particle.vy = 0
+        })
+        scrollEnergy = 0
+        introStartedAt = 0
+        drawParticles()
+        stopParticles()
+        return
+      }
+
+      if (!cursor.active && maxMotion < 0.025) {
+        introStartedAt = 0
+        stopParticles()
+        return
+      }
+
+      if (isAnimating && isVisible) {
+        animationFrame = window.requestAnimationFrame(animateParticles)
+      }
+    }
+
+    const startParticles = () => {
+      if (isAnimating || prefersReducedMotion.matches || !particles.length) return
+      isAnimating = true
+      lastFrameTime = performance.now()
+      animationFrame = window.requestAnimationFrame(animateParticles)
+    }
+
+    const stopParticles = () => {
+      isAnimating = false
+      if (animationFrame) window.cancelAnimationFrame(animationFrame)
+      particleLogo.dataset.intro = 'settled'
+    }
+
+    const queueRebuildParticles = () => {
+      if (!sourceReady) return
+      if (rebuildFrame) window.cancelAnimationFrame(rebuildFrame)
+      rebuildFrame = window.requestAnimationFrame(() => {
+        rebuildParticles()
+        if (isVisible && (cursor.active || scrollEnergy > 0.004)) startParticles()
+      })
+    }
+
+    const updateCursor = (event) => {
+      const rect = particleCanvas.getBoundingClientRect()
+      const hoverPadding = mobileParticles.matches ? 32 : 72
+      const inside =
+        event.clientX >= rect.left - hoverPadding &&
+        event.clientX <= rect.right + hoverPadding &&
+        event.clientY >= rect.top - hoverPadding &&
+        event.clientY <= rect.bottom + hoverPadding
+
+      cursor.active = inside
+      if (!inside) return
+
+      lastPointerMoveAt = performance.now()
+      cursor.x = ((event.clientX - rect.left) / Math.max(rect.width, 1)) * canvasCssWidth
+      cursor.y = ((event.clientY - rect.top) / Math.max(rect.height, 1)) * canvasCssHeight
+      startParticles()
+    }
+
+    const pushScrollImpulse = () => {
+      const nextScrollY = window.scrollY
+      const delta = nextScrollY - lastScrollY
+      lastScrollY = nextScrollY
+
+      if (!isVisible || Math.abs(delta) < 0.5) return
+
+      scrollDirection = delta > 0 ? 1 : -1
+      scrollEnergy = clamp(scrollEnergy + Math.min(Math.abs(delta), 80) * 0.012, 0, 1.5)
+      startParticles()
+    }
+
+    if ('ResizeObserver' in window) {
+      const logoResizeObserver = new ResizeObserver(queueRebuildParticles)
+      logoResizeObserver.observe(particleLogo)
+    }
+
+    if ('IntersectionObserver' in window) {
+      const logoObserver = new IntersectionObserver((entries) => {
+        isVisible = entries[0]?.isIntersecting ?? true
+        if (isVisible) {
+          if (cursor.active || scrollEnergy > 0.004) startParticles()
+        } else {
+          stopParticles()
+          cursor.active = false
+        }
+      }, { threshold: 0.02 })
+      logoObserver.observe(particleLogo)
+    }
+
+    window.addEventListener('pointermove', updateCursor, { passive: true })
+    window.addEventListener('scroll', pushScrollImpulse, { passive: true })
+    window.addEventListener('resize', queueRebuildParticles, { passive: true })
+    window.addEventListener('blur', () => {
+      cursor.active = false
+      lastPointerMoveAt = 0
+    })
+
+    logoImage.onload = () => {
+      try {
+        sourceReady = true
+        rebuildParticles()
+        if (introPending) {
+          introPending = false
+          startParticles()
+          if (introSettleTimer) window.clearTimeout(introSettleTimer)
+          introSettleTimer = window.setTimeout(() => {
+            if (particleLogo.dataset.intro !== 'falling') return
+            particles.forEach((particle) => {
+              particle.x = particle.homeX
+              particle.y = particle.homeY
+              particle.vx = 0
+              particle.vy = 0
+            })
+            scrollEnergy = 0
+            introStartedAt = 0
+            drawParticles()
+            stopParticles()
+          }, 3600)
+        }
+      } catch (error) {
+        particleLogo.classList.remove('is-ready')
+      }
+    }
+
+    logoImage.onerror = () => {
+      particleLogo.classList.remove('is-ready')
+    }
+
+    logoImage.src = logoSource
   }
 
   if (heroSection && heroLogo) {
