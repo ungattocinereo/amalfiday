@@ -15,6 +15,7 @@ const {
   twitterCard = 'summary_large_image',
   jsonLd,
   noindex = false,
+  themeColor = '#FF5900',
 } = Astro.props
 
 const resolveImage = (value) => {
@@ -119,10 +120,8 @@ const allJsonLd = [businessSchema, ...pageJsonLd]
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#FF5900" />
-    <meta name="theme-color" content="#FF5900" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#FF5900" media="(prefers-color-scheme: light)" />
-    <meta name="msapplication-TileColor" content="#FF5900" />
+    <meta name="theme-color" content={themeColor} />
+    <meta name="msapplication-TileColor" content={themeColor} />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     {allJsonLd.map((data) => (
       <script type="application/ld+json" set:html={JSON.stringify(data)} />
