@@ -191,62 +191,79 @@ const motoJsonLd = [
       <div class="mh__grain"></div>
     </div>
     <div class="container mh__content">
-      <div class="mh__top">
-        <span class="mh__eyebrow">
-          <span class="mh__eyebrow-dot"></span>
-          Tramonti Valley Route
-        </span>
-      </div>
-      <h1 class="mh__title">
-        <span class="mh__title-line">The winding</span>
-        <span class="mh__title-line"><em>road</em> above</span>
-        <span class="mh__title-line">the clouds</span>
-      </h1>
-      <p class="mh__lead">
-        A secret motorcycle route through the untouched heart of the Amalfi Coast.
-        From sea level to 880m — where tourists never go.
-      </p>
-      <div class="mh__actions">
-        <a class="button" href="#route">
-          <i class="fa-solid fa-circle-down"></i>
-          Explore the route
-        </a>
-        <a class="mh__ghost-btn" href={mapShare} target="_blank" rel="noreferrer">
-          <i class="fa-solid fa-map"></i>
-          Open in Google Maps
-        </a>
-      </div>
-      <div class="mh__stats" data-stats>
-        <div class="mh__stat">
-          <div class="mh__stat-num">
-            <span class="mh__counter" data-target="42.4" data-decimals="1">0</span>
+      <div class="mh__grid">
+        <div class="mh__copy">
+          <div class="mh__top">
+            <span class="mh__eyebrow">
+              <span class="mh__eyebrow-dot"></span>
+              Tramonti Valley Route
+            </span>
           </div>
-          <div class="mh__stat-unit">km</div>
-          <div class="mh__stat-label">Route length</div>
+          <h1 class="mh__title">
+            <span class="mh__title-line"><em>road</em> above</span>
+            <span class="mh__title-line">the clouds</span>
+          </h1>
+          <p class="mh__lead">
+            A secret motorcycle route through the untouched heart of the Amalfi Coast.
+            From sea level to 880m — where tourists never go.
+          </p>
+          <div class="mh__actions">
+            <a class="button" href="#route">
+              <i class="fa-solid fa-circle-down"></i>
+              Explore the route
+            </a>
+            <a class="mh__ghost-btn" href={mapShare} target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-map"></i>
+              Open in Google Maps
+            </a>
+          </div>
         </div>
-        <div class="mh__stat-divider"></div>
-        <div class="mh__stat">
-          <div class="mh__stat-num">
-            <span class="mh__counter" data-target="694" data-decimals="0">0</span>
+        <div class="mh__aside">
+          <div class="mh__stats" data-stats>
+            <div class="mh__stat">
+              <div class="mh__stat-num">
+                <span class="mh__counter-frame mh__counter-frame--decimal">
+                  <span class="mh__counter-ghost" aria-hidden="true">00.0</span>
+                  <span class="mh__counter" data-target="42.4" data-decimals="1">0</span>
+                </span>
+              </div>
+              <div class="mh__stat-unit">km</div>
+              <div class="mh__stat-label">Route length</div>
+            </div>
+            <div class="mh__stat-divider"></div>
+            <div class="mh__stat">
+              <div class="mh__stat-num">
+                <span class="mh__counter-frame mh__counter-frame--three">
+                  <span class="mh__counter-ghost" aria-hidden="true">000</span>
+                  <span class="mh__counter" data-target="694" data-decimals="0">0</span>
+                </span>
+              </div>
+              <div class="mh__stat-unit">m</div>
+              <div class="mh__stat-label">Peak elevation</div>
+            </div>
+            <div class="mh__stat-divider"></div>
+            <div class="mh__stat">
+              <div class="mh__stat-num">
+                <span class="mh__counter-frame mh__counter-frame--two">
+                  <span class="mh__counter-ghost" aria-hidden="true">00</span>
+                  <span class="mh__counter" data-target="96" data-decimals="0">0</span>
+                </span><span class="mh__stat-suffix">%</span>
+              </div>
+              <div class="mh__stat-unit">&nbsp;</div>
+              <div class="mh__stat-label">Unknown to tourists</div>
+            </div>
+            <div class="mh__stat-divider"></div>
+            <div class="mh__stat">
+              <div class="mh__stat-num">
+                <span class="mh__counter-frame mh__counter-frame--one">
+                  <span class="mh__counter-ghost" aria-hidden="true">0</span>
+                  <span class="mh__counter" data-target="8" data-decimals="0">0</span>
+                </span>
+              </div>
+              <div class="mh__stat-unit">stops</div>
+              <div class="mh__stat-label">Points of interest</div>
+            </div>
           </div>
-          <div class="mh__stat-unit">m</div>
-          <div class="mh__stat-label">Peak elevation</div>
-        </div>
-        <div class="mh__stat-divider"></div>
-        <div class="mh__stat">
-          <div class="mh__stat-num">
-            <span class="mh__counter" data-target="96" data-decimals="0">0</span><span class="mh__stat-suffix">%</span>
-          </div>
-          <div class="mh__stat-unit">&nbsp;</div>
-          <div class="mh__stat-label">Unknown to tourists</div>
-        </div>
-        <div class="mh__stat-divider"></div>
-        <div class="mh__stat">
-          <div class="mh__stat-num">
-            <span class="mh__counter" data-target="8" data-decimals="0">0</span>
-          </div>
-          <div class="mh__stat-unit">stops</div>
-          <div class="mh__stat-label">Points of interest</div>
         </div>
       </div>
     </div>
@@ -387,55 +404,68 @@ const motoJsonLd = [
       <div class="mh__grain"></div>
     </div>
     <div class="container mh__content">
-      <div class="mh__top mh2__fade" style="--fade-delay: 0.1s">
-        <span class="mh__eyebrow">
-          <span class="mh__eyebrow-dot mh2__dot"></span>
-          Amalfi — Agerola Route
-        </span>
-      </div>
-      <h2 class="mh__title">
-        <span class="mh2__title-line">The windiest</span>
-        <span class="mh2__title-line"><em>road</em> from Amalfi</span>
-        <span class="mh2__title-line">to Agerola</span>
-      </h2>
-      <p class="mh__lead mh2__fade" style="--fade-delay: 0.2s">
-        Get ready to uncover the raw, untamed beauty of the Amalfi Coast as you navigate the
-        twists and turns of Tramonti Valley. This off-the-beaten-path route is a dream come true
-        for those seeking an authentic Italian experience away from the crowds.
-      </p>
-      <div class="mh__actions mh2__fade" style="--fade-delay: 0.3s">
-        <a class="button" href="#route2-map">
-          <i class="fa-solid fa-circle-down"></i>
-          Explore the route
-        </a>
-        <a class="mh__ghost-btn" href={mapShare2} target="_blank" rel="noreferrer">
-          <i class="fa-solid fa-map"></i>
-          Open in Google Maps
-        </a>
-      </div>
-      <div class="mh__stats mh2__fade" style="--fade-delay: 0.4s" data-stats>
-        <div class="mh__stat">
-          <div class="mh__stat-num">
-            <span class="mh__counter" data-target="25.7" data-decimals="1">0</span>
+      <div class="mh__grid">
+        <div class="mh__copy">
+          <div class="mh__top mh2__fade" style="--fade-delay: 0.1s">
+            <span class="mh__eyebrow">
+              <span class="mh__eyebrow-dot mh2__dot"></span>
+              Amalfi — Agerola Route
+            </span>
           </div>
-          <div class="mh__stat-unit">km</div>
-          <div class="mh__stat-label">Length of the road</div>
+          <h2 class="mh__title">
+            <span class="mh2__title-line"><em>road</em> from Amalfi</span>
+            <span class="mh2__title-line">to Agerola</span>
+          </h2>
+          <p class="mh__lead mh2__fade" style="--fade-delay: 0.2s">
+            Get ready to uncover the raw, untamed beauty of the Amalfi Coast as you navigate the
+            twists and turns above Conca dei Marini and Agerola.
+          </p>
+          <div class="mh__actions mh2__fade" style="--fade-delay: 0.3s">
+            <a class="button" href="#route2-map">
+              <i class="fa-solid fa-circle-down"></i>
+              Explore the route
+            </a>
+            <a class="mh__ghost-btn" href={mapShare2} target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-map"></i>
+              Open in Google Maps
+            </a>
+          </div>
         </div>
-        <div class="mh__stat-divider"></div>
-        <div class="mh__stat">
-          <div class="mh__stat-num">
-            <span class="mh__counter" data-target="661" data-decimals="0">0</span>
+        <div class="mh__aside">
+          <div class="mh__stats mh2__fade" style="--fade-delay: 0.4s" data-stats>
+            <div class="mh__stat">
+              <div class="mh__stat-num">
+                <span class="mh__counter-frame mh__counter-frame--decimal">
+                  <span class="mh__counter-ghost" aria-hidden="true">00.0</span>
+                  <span class="mh__counter" data-target="25.7" data-decimals="1">0</span>
+                </span>
+              </div>
+              <div class="mh__stat-unit">km</div>
+              <div class="mh__stat-label">Length of the road</div>
+            </div>
+            <div class="mh__stat-divider"></div>
+            <div class="mh__stat">
+              <div class="mh__stat-num">
+                <span class="mh__counter-frame mh__counter-frame--three">
+                  <span class="mh__counter-ghost" aria-hidden="true">000</span>
+                  <span class="mh__counter" data-target="661" data-decimals="0">0</span>
+                </span>
+              </div>
+              <div class="mh__stat-unit">m</div>
+              <div class="mh__stat-label">Maximum elevation</div>
+            </div>
+            <div class="mh__stat-divider"></div>
+            <div class="mh__stat mh__stat--wide">
+              <div class="mh__stat-num">
+                <span class="mh__counter-frame mh__counter-frame--one">
+                  <span class="mh__counter-ghost" aria-hidden="true">0</span>
+                  <span class="mh__counter" data-target="5" data-decimals="0">0</span>
+                </span>
+              </div>
+              <div class="mh__stat-unit">stops</div>
+              <div class="mh__stat-label">Points of interest</div>
+            </div>
           </div>
-          <div class="mh__stat-unit">m</div>
-          <div class="mh__stat-label">Maximum elevation</div>
-        </div>
-        <div class="mh__stat-divider"></div>
-        <div class="mh__stat">
-          <div class="mh__stat-num">
-            <span class="mh__counter" data-target="5" data-decimals="0">0</span>
-          </div>
-          <div class="mh__stat-unit">stops</div>
-          <div class="mh__stat-label">Points of interest</div>
         </div>
       </div>
     </div>
@@ -560,10 +590,11 @@ const motoJsonLd = [
   /* ===== HERO ===== */
   .mh {
     position: relative;
-    min-height: 100svh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: flex-end;
-    padding: calc(var(--header-space) + 2rem) 0 clamp(3rem, 6vw, 5rem);
+    padding: calc(var(--header-space) + 1.5rem) 0 clamp(2.5rem, 5vh, 4.5rem);
     background: #0a0c10;
     color: #f5f5f5;
     overflow: hidden;
@@ -580,9 +611,9 @@ const motoJsonLd = [
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 70% 30%, rgba(255, 89, 0, 0.18), transparent),
-      radial-gradient(ellipse 60% 50% at 20% 70%, rgba(1, 98, 255, 0.1), transparent),
-      radial-gradient(ellipse 40% 40% at 90% 80%, rgba(255, 195, 0, 0.08), transparent);
+      radial-gradient(ellipse 80% 60% at 70% 30%, rgba(255, 89, 0, 0.16), transparent),
+      radial-gradient(ellipse 60% 50% at 20% 70%, rgba(1, 98, 255, 0.08), transparent),
+      radial-gradient(ellipse 40% 40% at 90% 80%, rgba(255, 195, 0, 0.06), transparent);
     z-index: 1;
   }
 
@@ -592,8 +623,11 @@ const motoJsonLd = [
     bottom: 0;
     left: 0;
     right: 0;
-    height: 50%;
-    background: linear-gradient(to top, #0a0c10, transparent);
+    height: 100%;
+    background:
+      linear-gradient(0deg, rgba(10, 12, 16, 0.82) 0%, rgba(10, 12, 16, 0.18) 48%, transparent 70%),
+      linear-gradient(90deg, rgba(5, 8, 13, 0.38) 0%, transparent 52%),
+      radial-gradient(ellipse at 50% 0%, transparent 48%, rgba(0, 0, 0, 0.2) 100%);
     z-index: 2;
   }
 
@@ -602,12 +636,12 @@ const motoJsonLd = [
     inset: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.6;
+    opacity: 0.52;
   }
 
   .mh__road-base {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.06);
+    stroke: rgba(255, 255, 255, 0.05);
     stroke-width: 48;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -624,7 +658,7 @@ const motoJsonLd = [
 
   .mh__road-glow {
     fill: none;
-    stroke: rgba(255, 89, 0, 0.15);
+    stroke: rgba(255, 89, 0, 0.12);
     stroke-width: 80;
     stroke-linecap: round;
     filter: blur(40px);
@@ -644,10 +678,29 @@ const motoJsonLd = [
   .mh__content {
     position: relative;
     z-index: 4;
+    width: 100%;
+  }
+
+  .mh__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 28rem);
+    align-items: end;
+    gap: clamp(2rem, 6vw, 5rem);
+  }
+
+  .mh__copy {
+    max-width: 40rem;
+  }
+
+  .mh__aside {
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .mh__top {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     opacity: 0;
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
   }
@@ -658,25 +711,28 @@ const motoJsonLd = [
     gap: 0.6rem;
     font-family: var(--font-mono);
     text-transform: uppercase;
-    letter-spacing: 0.22em;
-    font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
   }
 
   .mh__eyebrow-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     background: var(--color-accent);
-    animation: pulse 2s ease-in-out infinite;
   }
 
   .mh__title {
-    font-size: clamp(2.8rem, 7.5vw, 6.4rem);
-    line-height: 0.95;
-    margin: 0 0 1.5rem;
-    letter-spacing: -0.03em;
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    line-height: 1;
+    margin: 0;
+    letter-spacing: 0;
     font-weight: 700;
+  }
+
+  .mh .mh__title {
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
   }
 
   .mh__title-line {
@@ -696,50 +752,67 @@ const motoJsonLd = [
   }
 
   .mh__lead {
-    max-width: 38rem;
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 2rem;
+    max-width: 30rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 1.2rem 0 0;
     opacity: 0;
     animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+  }
+
+  .mh .mh__lead {
+    margin-bottom: 0;
   }
 
   .mh__actions {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 0.8rem;
     flex-wrap: wrap;
-    margin-bottom: clamp(3rem, 6vw, 5rem);
+    margin-top: 1.8rem;
+    margin-bottom: 0;
     opacity: 0;
     animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
   }
 
+  .mh .mh__actions {
+    margin-bottom: 0;
+  }
+
   .mh .button {
-    box-shadow: 0 8px 32px rgba(255, 89, 0, 0.3);
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    box-shadow: none;
+  }
+
+  .mh .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
   }
 
   .mh__ghost-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.9rem 1.4rem;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.06);
-    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-size: 0.9rem;
     font-weight: 600;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     transition: all 0.25s ease;
   }
 
   .mh__ghost-btn:hover {
     background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.45);
     color: #fff;
     text-decoration: none;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 
   /* Stats row */
@@ -758,11 +831,40 @@ const motoJsonLd = [
     animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
   }
 
+  .mh .mh__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    width: min(100%, 28rem);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   .mh__stat {
     min-width: 0;
   }
 
+  .mh .mh__stat {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-content: center;
+    column-gap: 0.55rem;
+    row-gap: 0.35rem;
+    min-height: 6.4rem;
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
   .mh__stat-num {
+    display: inline-flex;
+    align-items: baseline;
     font-family: var(--font-display);
     font-size: clamp(2rem, 4.5vw, 3.4rem);
     color: #fff;
@@ -770,6 +872,30 @@ const motoJsonLd = [
     margin-bottom: 0.15rem;
     font-variant-numeric: tabular-nums;
     min-width: 3ch;
+  }
+
+  .mh .mh__stat-num {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: end;
+    font-size: clamp(2rem, 3.2vw, 2.8rem);
+    margin-bottom: 0;
+    min-width: 0;
+  }
+
+  .mh__counter-frame {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
+  }
+
+  .mh__counter-ghost {
+    display: inline-block;
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .mh__stat-suffix {
@@ -786,9 +912,24 @@ const motoJsonLd = [
     margin-bottom: 0.4rem;
   }
 
+  .mh .mh__stat-unit {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    font-size: 0.62rem;
+    margin-bottom: 0.45rem;
+  }
+
   .mh__stat-label {
     font-size: 0.82rem;
     color: rgba(255, 255, 255, 0.4);
+  }
+
+  .mh .mh__stat-label {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 0.76rem;
+    color: rgba(255, 255, 255, 0.72);
   }
 
   .mh__stat-divider {
@@ -798,26 +939,26 @@ const motoJsonLd = [
     align-self: center;
   }
 
+  .mh .mh__stat-divider {
+    display: none;
+  }
+
   /* Scroll hint */
   .mh__scroll-hint {
     position: absolute;
-    bottom: 1.5rem;
+    bottom: clamp(1rem, 2.5vh, 2rem);
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
-    width: 24px;
-    height: 40px;
-    border-radius: 12px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    animation: fadeUp 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .mh__scroll-hint span {
     display: block;
-    width: 4px;
-    height: 8px;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.5);
-    margin: 6px auto 0;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
     animation: scrollBounce 2s ease-in-out infinite;
   }
 
@@ -1148,10 +1289,11 @@ const motoJsonLd = [
   /* ===== ROUTE 2 HERO ===== */
   .mh2 {
     position: relative;
-    min-height: 100svh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: flex-end;
-    padding: clamp(3rem, 6vw, 5rem) 0;
+    padding: calc(var(--header-space) + 1.5rem) 0 clamp(2.5rem, 5vh, 4.5rem);
     background: #0c0a10;
     color: #f5f5f5;
     overflow: hidden;
@@ -1168,9 +1310,9 @@ const motoJsonLd = [
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(1, 98, 255, 0.16), transparent),
-      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(255, 89, 0, 0.12), transparent),
-      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(120, 60, 200, 0.08), transparent);
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(1, 98, 255, 0.12), transparent),
+      radial-gradient(ellipse 60% 50% at 80% 60%, rgba(255, 89, 0, 0.1), transparent),
+      radial-gradient(ellipse 40% 40% at 10% 80%, rgba(120, 60, 200, 0.06), transparent);
     z-index: 1;
   }
 
@@ -1180,8 +1322,11 @@ const motoJsonLd = [
     bottom: 0;
     left: 0;
     right: 0;
-    height: 50%;
-    background: linear-gradient(to top, #0c0a10, transparent);
+    height: 100%;
+    background:
+      linear-gradient(0deg, rgba(12, 10, 16, 0.84) 0%, rgba(12, 10, 16, 0.18) 48%, transparent 70%),
+      linear-gradient(90deg, rgba(4, 8, 20, 0.4) 0%, transparent 52%),
+      radial-gradient(ellipse at 50% 0%, transparent 48%, rgba(0, 0, 0, 0.22) 100%);
     z-index: 2;
   }
 
@@ -1204,7 +1349,22 @@ const motoJsonLd = [
 
   .mh2__dot {
     background: #4a90ff;
-    animation: pulse2 2s ease-in-out infinite;
+  }
+
+  .mh2 .mh__grid {
+    grid-template-columns: minmax(0, 1.18fr) minmax(18rem, 24rem);
+  }
+
+  .mh2 .mh__copy {
+    max-width: 48rem;
+  }
+
+  .mh2 .mh__title {
+    font-size: clamp(2.8rem, 5vw, 4.9rem);
+  }
+
+  .mh2 .mh__lead {
+    max-width: 33rem;
   }
 
   .mh2__title-line {
@@ -1237,9 +1397,64 @@ const motoJsonLd = [
     transform: translateY(0);
   }
 
-  /* Route 2 stats: 3-column layout */
   .mh2 .mh__stats {
-    grid-template-columns: 1fr auto 1fr auto 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    width: min(100%, 24rem);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .mh2 .mh__stat {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-content: center;
+    column-gap: 0.55rem;
+    row-gap: 0.35rem;
+    min-height: 6rem;
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .mh2 .mh__stat-num {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: end;
+    font-size: clamp(2rem, 3vw, 2.7rem);
+    margin-bottom: 0;
+    min-width: 0;
+  }
+
+  .mh2 .mh__stat-unit {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    font-size: 0.62rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .mh2 .mh__stat-label {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 0.76rem;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .mh2 .mh__stat-divider {
+    display: none;
+  }
+
+  .mh2 .mh__stat--wide {
+    grid-column: 1 / -1;
   }
 
   @keyframes pulse2 {
@@ -1249,13 +1464,34 @@ const motoJsonLd = [
 
   @media (max-width: 768px) {
     .mh2 .mh__stats {
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    .mh2 .mh__stat--wide {
+      grid-column: 1 / -1;
+    }
+
+    .mh2 .mh__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mh2 .mh__title {
+      font-size: clamp(2.4rem, 10vw, 3.8rem);
+    }
+
+    .mh2 .mh__lead {
+      max-width: 30rem;
     }
   }
 
   @media (max-width: 480px) {
     .mh2 .mh__stats {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mh2 .mh__title {
+      font-size: clamp(2.4rem, 12vw, 3.3rem);
     }
   }
 
@@ -1322,14 +1558,18 @@ const motoJsonLd = [
   }
 
   @keyframes scrollBounce {
-    0%, 100% { transform: translateY(0); opacity: 0.5; }
-    50% { transform: translateY(10px); opacity: 1; }
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
   }
 
   /* Counter animation class */
   .mh__counter {
-    display: inline-block;
+    position: absolute;
+    inset: 0;
+    display: block;
+    text-align: right;
     font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
   }
 
   .mh__counter.is-counting {
@@ -1339,8 +1579,25 @@ const motoJsonLd = [
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
     .mh {
+      min-height: 100vh;
+      min-height: 100dvh;
       align-items: flex-end;
-      padding-bottom: 5rem;
+      padding-bottom: 2rem;
+    }
+
+    .mh__grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .mh__aside {
+      justify-content: stretch;
+    }
+
+    .mh .mh__stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%;
+      gap: 0.65rem;
     }
 
     .mh__stats {
@@ -1355,9 +1612,20 @@ const motoJsonLd = [
       flex-wrap: wrap;
     }
 
+    .mh .mh__stat {
+      display: grid;
+      min-height: 5.9rem;
+      padding: 0.75rem;
+    }
+
     .mh__stat-num {
       font-size: 2rem;
       min-width: 2ch;
+    }
+
+    .mh .mh__stat-num {
+      font-size: clamp(1.85rem, 8vw, 2.35rem);
+      min-width: 0;
     }
 
     .mh__stat-unit {
@@ -1370,6 +1638,10 @@ const motoJsonLd = [
 
     /* Hide vertical dividers, show none in 2-col grid */
     .mh__stat-divider {
+      display: none;
+    }
+
+    .mh__scroll-hint {
       display: none;
     }
 
@@ -1409,6 +1681,10 @@ const motoJsonLd = [
       font-size: clamp(2.2rem, 10vw, 3.2rem);
     }
 
+    .mh .mh__title {
+      font-size: clamp(2.4rem, 13vw, 3.4rem);
+    }
+
     .mh__actions {
       flex-direction: column;
       align-items: stretch;
@@ -1421,6 +1697,11 @@ const motoJsonLd = [
     .mh__stats {
       grid-template-columns: 1fr;
       gap: 1rem;
+    }
+
+    .mh .mh__stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
     }
   }
 
