@@ -13,6 +13,7 @@ The redesign should make articles feel intentional and editorial when Ghost cont
 
 - Article pages use a small centered header plus a separate hero image, so the first screen feels weaker than the rest of the site.
 - Ghost `kg-header-card kg-width-full` is not styled, so header cards collapse into the narrow article column and can render as awkward empty strips.
+- The article body was originally designed around simple paragraphs, headings, and images. It does not yet fully account for the richer HTML that Ghost emits from the Koenig editor, so using a Header card or full-width media inside a post can break spacing, image height, text contrast, and the overall reading rhythm.
 - Ghost `srcset` URLs such as `/blog/content/images/size/w600/...` return 404 on production because Caddy serves `/blog/content/images/*` directly from the Ghost content volume before Ghost can generate resized files.
 - The blog index currently has its own masthead and editorial listing. It should not change in this pass.
 
@@ -38,6 +39,22 @@ After the hero:
 - Keep the author bio, transport callout, related posts, and back link behavior.
 - Preserve existing Ghost card support where it already works: images, galleries, videos, bookmarks, callouts, toggles, tables, and embeds.
 - Keep the first-paragraph drop cap, but constrain it to the first real top-level paragraph so it does not attach to Ghost cards or media.
+
+## Post Content Layout Fixes
+
+Treat the post body as a Ghost-rendered editorial document, not just a stream of basic HTML:
+
+- Normalize vertical rhythm between paragraphs, headings, figures, lists, dividers, and Ghost cards so inserted media does not create huge accidental gaps or cramped transitions.
+- Define clear width rules for content types:
+  - text, lists, tables, and quotes stay in the readable article column;
+  - `kg-width-wide` breaks out to a controlled wide measure;
+  - `kg-width-full` breaks out to the viewport without causing horizontal scroll.
+- Style Ghost image cards explicitly through `.kg-image-card`, `.kg-image`, and captions, rather than relying only on generic `figure img` rules.
+- Ensure images, captions, and cards have stable dimensions or responsive constraints so lazy-loaded media and broken `srcset` choices do not collapse layout while loading.
+- Make Ghost headings inside the body (`h2`, `h3`, and card headings) feel like article section markers, with spacing that works after text, images, and header cards.
+- Keep blockquotes, callouts, bookmarks, videos, embeds, and toggles visually compatible with the new hero so the article does not feel like two different templates stitched together.
+- Add mobile rules for every breakout pattern so full-width content remains edge-to-edge and readable on phones without clipping text or creating side-scroll.
+- Use the production article example with Ghost Header cards as the main regression case, because it exposes the original missing layout support.
 
 ## Ghost Header Cards
 
