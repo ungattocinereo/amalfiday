@@ -1049,11 +1049,43 @@ const airportJsonLd = [
   const reduceAirportMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   let airportIndex = 0
   let airportTimer
+  const airportFadeDuration = 1300
+  const airportFreezeTimers = new WeakMap()
+
+  function clearAirportSlideFreeze(slide) {
+    const image = slide?.querySelector('.airport-hero__image')
+    if (!image) return
+    image.style.animation = ''
+    image.style.transform = ''
+  }
+
+  function freezeAirportSlideTransform(slide) {
+    const image = slide?.querySelector('.airport-hero__image')
+    if (!image) return
+
+    const transform = window.getComputedStyle(image).transform
+    image.style.animation = 'none'
+    image.style.transform = transform === 'none' ? '' : transform
+
+    window.clearTimeout(airportFreezeTimers.get(slide))
+    airportFreezeTimers.set(
+      slide,
+      window.setTimeout(() => {
+        if (!slide.classList.contains('is-active')) {
+          clearAirportSlideFreeze(slide)
+        }
+        airportFreezeTimers.delete(slide)
+      }, airportFadeDuration)
+    )
+  }
 
   function showAirportSlide(index) {
+    if (index === airportIndex) return
+    freezeAirportSlideTransform(airportSlides[airportIndex])
     airportSlides[airportIndex]?.classList.remove('is-active')
     airportDots[airportIndex]?.classList.remove('is-active')
     airportIndex = index
+    clearAirportSlideFreeze(airportSlides[airportIndex])
     airportSlides[airportIndex]?.classList.add('is-active')
     airportDots[airportIndex]?.classList.add('is-active')
   }

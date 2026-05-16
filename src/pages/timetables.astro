@@ -1,13 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import CldImage from '../components/CldImage.astro'
 import { site } from '../data/site'
 const heroImage = '/staticpages/timetables/bus-timetables-amalfi-coast.jpg'
 
-const pageTitle = 'SitaBus Timetables — Amalfi Coast Buses & Ferries'
+const pageTitle = 'Local Transport Timetables — Amalfi Coast Buses & Shuttles'
 const pageDescription =
-  'Download the latest SitaBus (SITA) timetables for the Amalfi Coast and plan your route between Salerno, Amalfi, Positano, and Sorrento.'
+  'Download the latest SitaBus (SITA) timetables for the Amalfi Coast and plan bus, shuttle, train, and taxi connections between Salerno, Amalfi, Positano, and Sorrento.'
 const shareImageAlt = 'SITA bus traveling along the Amalfi Coast'
+
+const heroSlides = [
+  {
+    image: heroImage,
+    label: 'SITA bus',
+    alt: 'SITA bus traveling along the Amalfi Coast road',
+    position: 'center',
+  },
+  {
+    image: '/staticpages/timetables/hero-bus-amalfi-harbor.jpg',
+    label: 'Amalfi stop',
+    alt: 'SITA buses waiting near Amalfi harbor',
+    position: 'center',
+  },
+  {
+    image: '/staticpages/timetables/hero-bus-amalfi-road.jpg',
+    label: 'Coastal road',
+    alt: 'SITA bus driving through Amalfi on the coastal road',
+    position: 'center',
+  },
+]
+
+const heroTags = [
+  'Salerno',
+  'Amalfi',
+  'Atrani',
+  'Maiori',
+  'Positano',
+  'Sorrento',
+]
+
+const heroStats = [
+  { value: '6', label: 'bus lines' },
+  { value: '2026', label: 'updated files' },
+  { value: '4', label: 'ticket apps' },
+]
 
 const introParagraphs = [
   'Planning your dream vacation along the breathtaking Amalfi Coast? Perfect timing! The official 2025 SITA bus schedules are now available for download, offering seamless connectivity between all the iconic coastal gems - Salerno, Maiori, Minori, Amalfi, Positano, and Sorrento.',
@@ -19,13 +54,13 @@ const introParagraphs = [
 const timetables = [
   {
     number: '5120',
-    updated: 'Updated: Feb 4, 2026',
+    updated: 'Updated: Apr 1, 2026',
     route: ['Amalfi', 'Atrani', 'Minori', 'Maiori', 'Cetara', 'Vietri sul Mare', 'Salerno'],
     link: 'https://amalfi.day/files/BUS-timetables.pdf',
   },
   {
     number: '5110',
-    updated: 'Updated: Feb 4, 2026',
+    updated: 'Updated: Apr 1, 2026',
     route: [
       'Scala',
       'Minuta',
@@ -40,13 +75,13 @@ const timetables = [
   },
   {
     number: '5080',
-    updated: 'Updated: Feb 4, 2026',
+    updated: 'Updated: Apr 1, 2026',
     route: ['Amalfi', 'Conca', 'Furore', 'Agerola', 'Pimonte', 'Gragnano', 'Castellammare', 'Napoli'],
     link: 'https://amalfi.day/files/BUS-5080-AMALFI-AGEROLA-GRAGNANO-CASTELLAMMARE-NAPOLI.pdf',
   },
   {
     number: '5020',
-    updated: 'Updated: Feb 4, 2026',
+    updated: 'Updated: Apr 1, 2026',
     route: [
       'Amalfi',
       'Atrani',
@@ -62,7 +97,7 @@ const timetables = [
   },
   {
     number: '5010',
-    updated: 'Updated: Feb 4, 2026',
+    updated: 'Updated: Apr 1, 2026',
     route: [
       'Maiori',
       'Tramonti',
@@ -77,7 +112,7 @@ const timetables = [
   },
   {
     number: '5070',
-    updated: 'Updated: Feb 4, 2026',
+    updated: 'Updated: Apr 1, 2026',
     route: [
       'Amalfi',
       'Conca',
@@ -93,6 +128,54 @@ const timetables = [
       'Piano di Sorrento',
     ],
     link: 'https://amalfi.day/files/BUS-5070-AMALFI-POSITANO-SORRENTO.pdf',
+  },
+]
+
+const ticketApps = [
+  {
+    name: 'MooneyGo',
+    kind: 'Transport app / web planner',
+    logo: '/staticpages/how-to-get/logos/mooneygo-logo.svg',
+    logoAlt: 'MooneyGo logo',
+    buy: 'Bus, metro, train, taxi and mobility tickets',
+    bestFor: 'All-in-one public transport checks before moving around Naples and Campania',
+    note: 'Good backup app when coverage fits your route; verify the operator before buying.',
+    href: 'https://www.mooneygo.it/trasporti/',
+    action: 'Open MooneyGo',
+  },
+  {
+    name: 'Unico Campania',
+    kind: 'Campania ticket system',
+    logo: '/staticpages/how-to-get/logos/unico-campania-logo.svg',
+    logoAlt: 'Unico Campania logo',
+    buy: 'Unico tickets, fare checks, App Unico and points of sale',
+    bestFor: 'Naples and Campania urban fares, Tap&Go, and official tariff checks',
+    note: 'Use it to confirm the official Campania fare system before choosing a ticket.',
+    href: 'https://www.unicocampania.it',
+    action: 'Open Unico',
+  },
+  {
+    name: 'Trenitalia App',
+    kind: 'Train app',
+    logo: '/staticpages/how-to-get/logos/trenitalia-logo.svg',
+    logoAlt: 'Trenitalia logo',
+    buy: 'Napoli Centrale to Salerno regional train tickets',
+    bestFor: 'The train leg toward Salerno ferries or buses',
+    note: 'Digital regional tickets are bought in the app or on the website.',
+    href: 'https://www.trenitalia.com/en/information/trenitalia-app.html',
+    action: 'Open Trenitalia',
+  },
+  {
+    name: '.italo',
+    kind: 'High-speed train app',
+    logo: '/staticpages/how-to-get/logos/italo-logo.jpg',
+    logoAlt: '.italo logo',
+    logoTheme: 'italo',
+    buy: 'Italo high-speed train tickets across Italy',
+    bestFor: 'Rome, Naples, Florence, Milan and other fast train legs before reaching the coast',
+    note: 'Compare Italo with Trenitalia for long-distance trains into Napoli Centrale or Salerno.',
+    href: 'https://www.italotreno.com/en/app',
+    action: 'Open Italo',
   },
 ]
 
@@ -160,45 +243,86 @@ const timetablesJsonLd = [
   jsonLd={timetablesJsonLd}
 >
   <section class="timetables-hero hero--dark">
-    <CldImage
-      class="timetables-hero__image"
-      src={heroImage}
-      alt="Amalfi Coast bus route with a SITA bus"
-      width={2000}
-      height={1063}
-      priority
-      sizes="100vw"
-    />
-    <div class="timetables-hero__veil" aria-hidden="true"></div>
-    <div class="container timetables-hero__content">
-      <div class="timetables-hero__copy">
-        <span class="badge timetables-hero__badge">
-          SITA / TravelMar / AmicoShuttle
-        </span>
-        <h1>
-          Ferries and buses and other local <span class="accent-italic">public transport</span>.
-        </h1>
-        <div class="timetables-hero__links">
-          <a class="timetables-hero__link-card" href="https://cnr.pw/bus" target="_blank" rel="noreferrer">
-            <i class="fa-solid fa-cloud-arrow-down"></i>
-            Bus timetables
-          </a>
-          <a class="timetables-hero__link-card" href="https://cnr.pw/ferry" target="_blank" rel="noreferrer">
-            <i class="fa-solid fa-cloud-arrow-down"></i>
-            Ferry timetables
-          </a>
+    <div class="timetables-hero__slides" aria-hidden="true">
+      {heroSlides.map((slide, i) => (
+        <div class={`timetables-hero__slide ${i === 0 ? 'is-active' : ''}`}>
+          <img
+            src={slide.image}
+            alt={slide.alt}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            style={`object-position: ${slide.position};`}
+          />
+        </div>
+      ))}
+    </div>
+    <div class="timetables-hero__vignette"></div>
+    <div class="timetables-hero__content">
+      <div class="container">
+        <div class="timetables-hero__grid">
+          <div class="timetables-hero__copy">
+            <span class="timetables-hero__eyebrow">Amalfi Coast public transport 2026</span>
+            <h1 class="timetables-hero__title">
+              Local<br />transport<br />timetables
+            </h1>
+            <p class="timetables-hero__lead">
+              SITA bus lines, local shuttles, taxis, trains, and ticket apps for moving between
+              Salerno, Amalfi, Positano, Sorrento, and the coastal villages.
+            </p>
+            <div class="timetables-hero__stats">
+              {heroStats.map((item) => (
+                <div class="timetables-hero__stat">
+                  <strong>{item.value}</strong>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
+            <div class="timetables-hero__actions">
+              <a class="timetables-hero__btn timetables-hero__btn--primary" href="https://cnr.pw/bus" target="_blank" rel="noreferrer">Download bus PDFs</a>
+              <a class="timetables-hero__btn timetables-hero__btn--ghost" href="#tickets">Ticket apps</a>
+            </div>
+          </div>
+          <div class="timetables-hero__aside">
+            <ul class="timetables-hero__tags">
+              {heroTags.map((tag, i) => (
+                <li class="timetables-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+              ))}
+            </ul>
+            <div class="timetables-hero__progress">
+              {heroSlides.map((slide, i) => (
+                <button
+                  class={`timetables-hero__dot ${i === 0 ? 'is-active' : ''}`}
+                  type="button"
+                  data-slide={i}
+                  aria-label={`Show ${slide.label}`}
+                >
+                  <span class="timetables-hero__dot-label">{slide.label}</span>
+                  <span class="timetables-hero__dot-bar"><span class="timetables-hero__dot-fill"></span></span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="timetables-hero__scroll-hint" aria-hidden="true">
+      <span></span>
     </div>
   </section>
 
   <section class="section timetables-section">
-    <div class="container timetables-grid">
-      <div class="timetables-intro">
-        <div class="timetables-eyebrow">New 2026 timetables</div>
+    <div class="container timetables-intro">
+      <div class="section-heading">
+        <span class="section-kicker">SITA bus files</span>
         <h2>
           New 2026 <span class="accent-italic">Timetables</span>
         </h2>
+        <p>
+          Download the latest SITA bus schedules for the main Amalfi Coast routes and keep
+          them offline for quick route checks.
+        </p>
+      </div>
+
+      <div class="timetables-intro__details">
         <div class="timetables-copy">
           <p>{introParagraphs[0]}</p>
           <p>{introParagraphs[1]}</p>
@@ -208,11 +332,13 @@ const timetablesJsonLd = [
         <div class="timetables-update">
           <span class="badge">
             <i class="fa-solid fa-clock"></i>
-            Updated: Feb 4, 2026
+            Updated: Apr 1, 2026
           </span>
         </div>
       </div>
+    </div>
 
+    <div class="container timetables-grid">
       <div class="timetables-list">
         {timetables.map((line) => (
           <article class="timetable-card">
@@ -253,9 +379,16 @@ const timetablesJsonLd = [
     </div>
 
     <div class="container amico-block">
-      <h2>
-        Amico Shuttle <span class="accent-italic">From Amalfi-Ravello</span>
-      </h2>
+      <div class="section-heading">
+        <span class="section-kicker">Local shuttle</span>
+        <h2>
+          Amico Shuttle <span class="accent-italic">From Amalfi-Ravello</span>
+        </h2>
+        <p>
+          Book the Amalfi-Ravello shuttle online before you travel and check the luggage rules
+          before boarding.
+        </p>
+      </div>
       <p>
         You can buy Online Ticket here (
         <a href="https://www.amicoshuttle.com/en/" target="_blank" rel="noreferrer">
@@ -273,222 +406,140 @@ const timetablesJsonLd = [
       </a>
     </div>
 
-    <div class="container tickets-block">
-      <h2>
-        How to buy <span class="accent-italic">bus tickets</span> in Amalfi Coast
-      </h2>
+    <div class="container tickets-block" id="tickets">
+      <div class="section-heading tickets-header">
+        <span class="section-kicker">Before you board</span>
+        <h2>
+          How to buy <span class="accent-italic">bus tickets</span> in Amalfi Coast
+        </h2>
+        <p>
+          Paper tickets are still the simplest option for SITA buses. Buy them before boarding,
+          validate once you step on the bus, and keep the ticket until the end of the ride.
+        </p>
+      </div>
+
       <div class="tickets-grid">
         <div class="tickets-info">
           <div class="tickets-icon">
             <i class="fa-solid fa-ticket"></i>
           </div>
-          <p>
-            Bus tickets can be purchased in advance at either the newsstand in the train station
-            or at any Tabacchi (shops with a letter "T" sign). It is important to validate your
-            ticket upon boarding the bus. For those who have an electronic ticket, activation is
-            required through the associated app prior to the trip.
-          </p>
+
+          <ol class="ticket-steps">
+            <li class="ticket-step">
+              <span class="ticket-step__number">01</span>
+              <div>
+                <h3>Buy before boarding</h3>
+                <p>
+                  Use the newsstand in the train station or any Tabacchi shop with the letter
+                  "T" sign.
+                </p>
+              </div>
+            </li>
+            <li class="ticket-step">
+              <span class="ticket-step__number">02</span>
+              <div>
+                <h3>Validate on the bus</h3>
+                <p>
+                  Stamp the paper ticket in the small machine after you board, then keep it with
+                  you for checks.
+                </p>
+              </div>
+            </li>
+            <li class="ticket-step">
+              <span class="ticket-step__number">03</span>
+              <div>
+                <h3>Activate app tickets first</h3>
+                <p>
+                  If you use a digital ticket, activate it in the app before the trip starts.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="tickets-note">
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <p>
+              Drivers usually expect passengers to board with a paper ticket or an already
+              activated digital ticket.
+            </p>
+          </div>
         </div>
         <figure class="tickets-image">
-            <img
-              src="/staticpages/timetables/TABACCI.webp"
-              alt="Travelers buying bus tickets at a Tabacchi shop on the Amalfi Coast"
-              loading="lazy" width="1200" height="1200"
-            />
+          <img
+            src="/staticpages/timetables/TABACCI.webp"
+            alt="Travelers buying bus tickets at a Tabacchi shop on the Amalfi Coast"
+            loading="lazy" width="1200" height="1200"
+          />
         </figure>
-        <div class="tickets-app">
-          <p>
-            Recently we have the app to buy tickets. Keep in mind that you need to activate your
-            ticket before you get on board of the bus
-          </p>
-          <div class="tickets-app__links">
-            <a
-              class="button secondary tickets-app__link"
-              href="https://apps.apple.com/it/app/unico-campania-app/id1504055273"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i class="fa-brands fa-apple"></i>
-              Download for iPhone
-            </a>
-            <a
-              class="button secondary tickets-app__link"
-              href="https://play.google.com/store/apps/details?id=net.pluservice.unicoc&gl=IT"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i class="fa-brands fa-google-play"></i>
-              Download for Android
-            </a>
-          </div>
-        </div>
       </div>
-    </div>
 
-    <div class="container ferry-section">
-      <div class="ferry-header">
-        <h2>
-          Sea Ferries <span class="accent-italic">Timetables</span>
-        </h2>
-        <span class="ferry-update">Files were updated 26 March 2026</span>
-      </div>
-      <p class="ferry-lead">
-        Several ferry companies operate services along the Amalfi Coast, connecting major towns
-        such as Cetara, Maiori, Amalfi, Positano, and Salerno. Travelmar - is one of the most
-        popular ferry companies in Amalfi Coast. NLG - operating between Amalfi and Naples and
-        in Sorrento Coast.
-      </p>
-      <div class="ferry-grid">
-        <article class="ferry-column">
-          <div class="ferry-media">
-            <img
-              src="/staticpages/timetables/TraVelMar.webp"
-              alt="TravelMar ferry on the Amalfi Coast"
-              loading="lazy" width="1200" height="1200"
-            />
-          </div>
-          <div class="ferry-content">
-            <h3>
-              <i class="fa-solid fa-water"></i>
-              TravelMar
-            </h3>
-            <p>
-              The most convenient mode of transportation for traveling between towns along the
-              Amalfi Coast is by ferry. The ferry routes operate from April to October and connect
-              all the coastal towns. In addition to linking Amalfi and Positano, there are also
-              ferry services to Capri and Sorrento. However, it is important to note that ferry
-              operations may be temporarily suspended during rough sea conditions.
-            </p>
-            <p class="ferry-route">
-              <i class="fa-solid fa-circle-info"></i>
-              <span>Salerno → Cetara → Maiori → Minori → Vietri sul Mare → Amalfi</span>
-            </p>
-            <a
-              class="timetable-download ferry-download"
-              href="https://amalfi.day/files/FERRY-timetables.pdf"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i class="fa-solid fa-cloud-arrow-down"></i>
-              TravelMar timetables
-            </a>
-          </div>
-        </article>
-        <article class="ferry-column">
-          <div class="ferry-media">
-            <img
-              src="/staticpages/timetables/PositanoJet.webp"
-              alt="PositanoJet ferry on the Amalfi Coast"
-              loading="lazy" width="1200" height="1200"
-            />
-          </div>
-          <div class="ferry-content">
-            <h3>
-              <i class="fa-solid fa-compass"></i>
-              PositanoJet
-            </h3>
-            <p>
-              Positano Jet is a new company operating in 2025 along the Amalfi Coast. They offer
-              tours not only to Positano but also to Capri and Sorrento. We've gathered all their
-              schedules here for your convenience.
-              <a
-                class="ferry-inline-link"
-                href="https://positanojet.nefesy.com/b2c/b2c.php?LANG=en"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Book your ticket by clicking here.
-              </a>
-            </p>
-            <p class="ferry-fees">
-              <i class="fa-solid fa-circle-info"></i>
-              <span>
-                Additional Fees:
-                <br />
-                Baggage: 3,00€
-                <br />
-                Baggage XL 5,00€
-                <br />
-                Pet Ticket: 5,00€
-              </span>
-            </p>
-            <a
-              class="timetable-download ferry-download"
-              href="https://amalfi.day/files/FERRY-timetables-positanojet.pdf"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i class="fa-solid fa-cloud-arrow-down"></i>
-              Positanojet timetables
-            </a>
-          </div>
-        </article>
-        <article class="ferry-column">
-          <div class="ferry-media">
-            <img
-              src="/staticpages/timetables/NLG.webp"
-              alt="Alicost ferry on the Amalfi Coast"
-              loading="lazy" width="1200" height="1200"
-            />
-          </div>
-          <div class="ferry-content">
-            <h3>
-              <i class="fa-solid fa-sun"></i>
-              Alicost
-            </h3>
-            <p>
-              Positano Jet is a new company operating in 2025 along the Amalfi Coast. They offer
-              tours not only to Positano but also to Capri and Sorrento. We've gathered all their
-              schedules here for your convenience. You can book your ticket by clicking here
-            </p>
-            <p class="ferry-fees">
-              <i class="fa-solid fa-circle-info"></i>
-              <span>
-                Additional Taxes Per Person
-                <br />
-                Capri Tax: + 5,00 €
-                <span class="tax-direction">
-                  <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                  Capri
+      <div class="tickets-apps">
+        <div class="section-heading tickets-apps__intro">
+          <span class="section-kicker">Digital backup</span>
+          <h3>Apps for tickets and train legs</h3>
+          <p>
+            You can also use apps for some bus, Campania public transport, and train tickets.
+            Activate electronic bus tickets in the app before boarding, and recheck the operator
+            shown for your route before buying.
+          </p>
+        </div>
+
+        <div class="ticket-grid">
+          {ticketApps.map((app) => (
+            <a class="ticket-card" href={app.href} target="_blank" rel="noreferrer">
+              <figure class={`ticket-card__media ${app.logoTheme ? `ticket-card__media--${app.logoTheme}` : ''}`}>
+                <img
+                  src={app.logo}
+                  alt={app.logoAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+
+              <div class="ticket-card__body">
+                <h3>{app.name}</h3>
+                <p class="ticket-card__kind">{app.kind}</p>
+
+                <div class="ticket-card__divider"></div>
+
+                <div class="ticket-card__meta ticket-card__meta--buy">
+                  <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                  <strong>{app.buy}</strong>
+                </div>
+
+                <div class="ticket-card__divider"></div>
+
+                <div class="ticket-card__meta">
+                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  <span>{app.bestFor}</span>
+                </div>
+              </div>
+
+              <div class="ticket-card__footer">
+                <p class="ticket-card__note">{app.note}</p>
+                <span class="ticket-card__action" aria-label={app.action}>
+                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                 </span>
-                <br />
-                Procida Tax: + 3,50 €
-                <span class="tax-direction">
-                  <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                  Procida
-                </span>
-                <br />
-                Salerno Tax: + 1,50 €
-                <span class="tax-direction">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                  Salerno
-                </span>
-              </span>
-            </p>
-            <a
-              class="timetable-download ferry-download"
-              href="https://amalfi.day/files/FERRY-timetables-alicost.pdf"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i class="fa-solid fa-cloud-arrow-down"></i>
-              Alicost Timetables
+              </div>
             </a>
-          </div>
-        </article>
+          ))}
+        </div>
       </div>
     </div>
 
     <div class="container travel-section">
-      <h2>
-        Getting to Amalfi <span class="accent-italic">from other parts of Italy</span>
-      </h2>
-      <p class="travel-lead">
-        If you're traveling to the Amalfi Coast from another part of Italy, the easiest way to
-        get there is by taking a train to Salerno and then either taking a bus or ferry to
-        Amalfi. There are direct trains from Rome to Salerno, which take around 2 hours, and
-        from there, you can easily reach Amalfi by bus or ferry.
-      </p>
+      <div class="section-heading">
+        <span class="section-kicker">Connections</span>
+        <h2>
+          Fastest ways to Amalfi: <span class="accent-italic">shuttle or taxi</span>
+        </h2>
+        <p class="travel-lead">
+          If you're arriving from another part of Italy, the quickest door-to-door options are a
+          pre-booked shuttle or a private taxi from Naples, Salerno, or the nearest station.
+          Trains are useful for the long leg, but the final coastal transfer is usually fastest
+          by road.
+        </p>
+      </div>
       <div class="travel-grid">
         <article class="travel-card travel-card--split">
           <div class="travel-card__media">
@@ -551,7 +602,14 @@ const timetablesJsonLd = [
   <!-- FAQ -->
   <section class="section tt-faq">
     <div class="container">
-      <h2>Public transport <span class="accent-italic">FAQ</span></h2>
+      <div class="section-heading tt-faq__heading">
+        <span class="section-kicker">Quick answers</span>
+        <h2>Public transport <span class="accent-italic">FAQ</span></h2>
+        <p>
+          Short answers for the most common ticket, route, and connection questions on the Amalfi
+          Coast.
+        </p>
+      </div>
       <div class="tt-faq__list">
         {timetablesFaqs.map((f) => (
           <details class="tt-faq__item">
@@ -564,95 +622,374 @@ const timetablesJsonLd = [
   </section>
 </BaseLayout>
 
+<script is:inline>
+  ;(function () {
+    const slides = document.querySelectorAll('.timetables-hero__slide')
+    const dots = document.querySelectorAll('.timetables-hero__dot')
+    if (!slides.length) return
+
+    let current = 0
+    const duration = 6000
+    const FADE_DURATION = 1300
+    const freezeTimers = new WeakMap()
+
+    function clearSlideFreeze(slide) {
+      const image = slide?.querySelector('img')
+      if (!image) return
+      image.style.animation = ''
+      image.style.transform = ''
+    }
+
+    function freezeSlideTransform(slide) {
+      const image = slide?.querySelector('img')
+      if (!image) return
+
+      const transform = window.getComputedStyle(image).transform
+      image.style.animation = 'none'
+      image.style.transform = transform === 'none' ? '' : transform
+
+      window.clearTimeout(freezeTimers.get(slide))
+      freezeTimers.set(
+        slide,
+        window.setTimeout(() => {
+          if (!slide.classList.contains('is-active')) {
+            clearSlideFreeze(slide)
+          }
+          freezeTimers.delete(slide)
+        }, FADE_DURATION)
+      )
+    }
+
+    function go(next) {
+      if (next === current) return
+      freezeSlideTransform(slides[current])
+      slides[current].classList.remove('is-active')
+      dots[current]?.classList.remove('is-active')
+      current = next
+      clearSlideFreeze(slides[current])
+      slides[current].classList.add('is-active')
+      dots[current]?.classList.add('is-active')
+    }
+
+    let timer = window.setInterval(() => go((current + 1) % slides.length), duration)
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        window.clearInterval(timer)
+        go(Number(dot.dataset.slide))
+        timer = window.setInterval(() => go((current + 1) % slides.length), duration)
+      })
+    })
+  })()
+</script>
+
 <style>
   .timetables-hero {
     position: relative;
     min-height: 100vh;
-    min-height: 100svh;
+    min-height: 100dvh;
     display: flex;
     align-items: flex-end;
-    padding: calc(var(--header-space) + 3.5rem) 0 4rem;
+    overflow: hidden;
+    background: #0a0a0a;
     color: #ffffff;
+  }
+
+  .timetables-hero__slides {
+    position: absolute;
+    inset: -2px;
+    z-index: 0;
     overflow: hidden;
   }
 
-  .timetables-hero__image {
+  .timetables-hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backface-visibility: hidden;
+  }
+
+  .timetables-hero__slide.is-active {
+    opacity: 1;
+  }
+
+  .timetables-hero__slide img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(1.05) contrast(1.05);
-    z-index: -2;
+    display: block;
+    filter: brightness(0.86) saturate(1.02);
+    transform: scale(1.01);
+    backface-visibility: hidden;
   }
 
-  .timetables-hero__veil {
+  .timetables-hero__slide.is-active img {
+    animation: timetables-ken-burns 6.5s cubic-bezier(0.25, 0, 0.4, 1) forwards;
+  }
+
+  @keyframes timetables-ken-burns {
+    from { transform: scale(1.01); }
+    to { transform: scale(1.06); }
+  }
+
+  .timetables-hero__vignette {
     position: absolute;
     inset: 0;
-    background: rgba(10, 14, 18, 0.62);
-    z-index: -1;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.24) 45%, rgba(0, 0, 0, 0.08) 65%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.44) 0%, transparent 52%),
+      radial-gradient(ellipse at 50% 0%, transparent 48%, rgba(0, 0, 0, 0.24) 100%);
+    pointer-events: none;
   }
 
   .timetables-hero__content {
-    display: grid;
-    gap: 2rem;
-    align-items: start;
-    justify-items: start;
+    position: relative;
+    z-index: 2;
     width: 100%;
+    padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
+  }
+
+  .timetables-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: end;
   }
 
   .timetables-hero__copy {
-    display: grid;
-    gap: 1.6rem;
-    align-items: flex-start;
-    text-align: left;
-    justify-self: start;
-    width: 100%;
-    max-width: 46rem;
+    max-width: 780px;
   }
 
-  .timetables-hero__badge {
-    width: max-content;
-    background: rgba(255, 255, 255, 0.16);
+  .timetables-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: timetables-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .timetables-hero__title {
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: 0;
+    margin: 0;
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: timetables-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .timetables-hero__content h1 {
-    font-size: clamp(2.8rem, 5vw, 4.8rem);
+  .timetables-hero__lead {
     max-width: 38rem;
-    color: #ffffff;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: timetables-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .timetables-hero__links {
+  .timetables-hero__stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.2rem;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: timetables-fade-up 0.8s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .timetables-hero__link-card {
+  .timetables-hero__stat {
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .timetables-hero__stat strong {
+    font-size: 1.1rem;
+    color: #ff5900;
+  }
+
+  .timetables-hero__stat span {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .timetables-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+    opacity: 0;
+    animation: timetables-fade-up 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .timetables-hero__btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
-    padding: 0.85rem 1.4rem;
-    border-radius: var(--radius-md);
-    background: rgba(12, 16, 20, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(14px);
-    color: #ffffff;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+    border: none;
   }
 
-  .timetables-hero__link-card:hover {
+  .timetables-hero__btn--primary {
+    background: #ff5900;
     color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 22px 46px rgba(0, 0, 0, 0.35);
+  }
+
+  .timetables-hero__btn--primary:hover {
+    background: #ff7a33;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .timetables-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .timetables-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .timetables-hero__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+    opacity: 0;
+    animation: timetables-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .timetables-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    max-width: 260px;
+  }
+
+  .timetables-hero__tag {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    opacity: 0;
+    animation: timetables-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .timetables-hero__progress {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .timetables-hero__dot {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .timetables-hero__dot-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  .timetables-hero__dot.is-active .timetables-hero__dot-label {
+    opacity: 1;
+  }
+
+  .timetables-hero__dot-bar {
+    width: 36px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .timetables-hero__dot-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ff5900;
+    border-radius: 2px;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .timetables-hero__dot.is-active .timetables-hero__dot-fill {
+    animation: timetables-fill-bar 6s linear forwards;
+  }
+
+  @keyframes timetables-fill-bar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .timetables-hero__scroll-hint {
+    position: absolute;
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    animation: timetables-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .timetables-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: timetables-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes timetables-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  @keyframes timetables-fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .timetables-section {
@@ -674,34 +1011,62 @@ const timetablesJsonLd = [
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
     align-items: start;
   }
 
   .timetables-intro {
-    padding: 2.4rem 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+    padding-bottom: clamp(2rem, 5vw, 3.25rem);
     border-radius: 0;
     background: transparent;
     border: 0;
     box-shadow: none;
   }
 
-  .timetables-eyebrow {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-weight: 600;
-    color: var(--color-accent);
-    margin-bottom: 1rem;
+  .timetables-intro__details {
+    max-width: 48rem;
   }
 
-  .timetables-intro h2 {
-    font-size: clamp(2rem, 3vw, 2.8rem);
+  .section-heading {
+    display: grid;
+    gap: 0.55rem;
+    max-width: 58rem;
+  }
+
+  .section-heading h2,
+  .section-heading h3 {
+    margin: 0;
+    font-size: clamp(2.45rem, 4.8vw, 4.35rem);
+    line-height: 1.04;
+  }
+
+  .section-heading p {
+    max-width: 44rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 1.5vw, 1.14rem);
+    line-height: 1.6;
+  }
+
+  .section-kicker {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
   }
 
   .timetables-copy {
-    margin-top: 1.5rem;
+    margin-top: 0;
   }
 
   .timetables-copy p {
@@ -724,7 +1089,7 @@ const timetablesJsonLd = [
   }
 
   .timetables-list {
-    grid-column: span 2;
+    grid-column: auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.5rem;
@@ -869,215 +1234,300 @@ const timetablesJsonLd = [
   }
 
   .tickets-block {
-    margin-top: 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    --ticket-ink: var(--color-text);
+    --ticket-muted: var(--color-text-muted);
+    --ticket-line: var(--color-border);
+    --ticket-surface: var(--color-card);
+    --ticket-soft: var(--color-surface);
+    --ticket-orange: var(--color-accent);
+    scroll-margin-top: calc(var(--header-space) + 1.5rem);
+    margin-top: clamp(4.5rem, 7vw, 6.25rem);
+    display: grid;
+    gap: clamp(1.6rem, 3vw, 2.4rem);
+  }
+
+  .tickets-header {
+    max-width: 62rem;
   }
 
   .tickets-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 0.9fr);
-    gap: 2rem;
+    grid-template-columns: minmax(0, 0.98fr) minmax(20rem, 0.72fr);
+    gap: clamp(1rem, 3vw, 2rem);
     align-items: start;
   }
 
   .tickets-info {
     display: grid;
-    gap: 1.2rem;
+    align-content: start;
+    gap: 1.35rem;
+    padding-top: 0.35rem;
+    color: var(--ticket-ink);
   }
 
   .tickets-icon {
     width: 56px;
     height: 56px;
-    border-radius: 16px;
+    border-radius: 50%;
     display: grid;
     place-items: center;
-    background: rgba(255, 89, 0, 0.12);
-    color: var(--color-accent);
-    font-size: 1.4rem;
+    background: rgba(255, 89, 0, 0.1);
+    border: 1px solid rgba(255, 89, 0, 0.22);
+    color: var(--ticket-orange);
+    font-size: 1.35rem;
   }
 
-  .tickets-info p {
-    margin: 0;
-  }
-
-  .tickets-image {
-    margin: 0;
-    overflow: hidden;
-    border-radius: 0;
-    box-shadow: var(--shadow-lift);
-  }
-
-  .tickets-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .tickets-app {
+  .ticket-steps {
     display: grid;
-    gap: 1.2rem;
-  }
-
-  .tickets-app p {
+    gap: 1.05rem;
     margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .tickets-app__links {
+  .ticket-step {
+    position: relative;
     display: grid;
-    gap: 0.9rem;
+    grid-template-columns: 3.2rem minmax(0, 1fr);
+    gap: 1rem;
     align-items: start;
   }
 
-  .tickets-app__link {
-    justify-content: center;
-    text-decoration: none;
-    color: #ffffff;
+  .ticket-step + .ticket-step::before {
+    content: '';
+    position: absolute;
+    top: -1.05rem;
+    left: 1.58rem;
+    width: 1px;
+    height: 1.05rem;
+    background: rgba(255, 89, 0, 0.22);
   }
 
-  .tickets-app__link:hover {
-    color: #ffffff;
-    text-decoration: none;
-  }
-
-  .ferry-section {
-    margin-top: 4.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-  }
-
-  .ferry-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .ferry-header h1 {
-    font-size: clamp(3rem, 6vw, 5.2rem);
-  }
-
-  .ferry-update {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-  }
-
-  .ferry-lead {
-    max-width: 70rem;
-  }
-
-  .ferry-grid {
+  .ticket-step__number {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
+    place-items: center;
+    width: 3.05rem;
+    height: 3.05rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.08);
+    border: 1px solid rgba(255, 89, 0, 0.22);
+    color: var(--ticket-orange);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
   }
 
-  .ferry-column {
-    display: flex;
-    flex-direction: column;
-    gap: 1.1rem;
-    padding: 0;
-    border-radius: var(--radius-lg);
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-soft);
-    overflow: hidden;
+  .ticket-step h3 {
+    margin: 0 0 0.35rem;
+    color: var(--ticket-ink);
+    font-size: clamp(1.1rem, 1.7vw, 1.32rem);
+    line-height: 1.18;
   }
 
-  .ferry-media {
+  .ticket-step p {
+    margin: 0;
+    color: var(--ticket-muted);
+    line-height: 1.55;
+  }
+
+  .tickets-note {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    margin-top: 0.3rem;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 89, 0, 0.2);
+    background: rgba(255, 89, 0, 0.07);
+  }
+
+  .tickets-note i {
+    margin-top: 0.18rem;
+    color: var(--ticket-orange);
+  }
+
+  .tickets-note p {
+    margin: 0;
+    color: var(--ticket-ink);
+    line-height: 1.45;
+  }
+
+  .tickets-image {
     position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 3;
+    margin: 0;
     overflow: hidden;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lift);
+    background: var(--ticket-soft);
   }
 
-  .ferry-media img {
+  .tickets-image img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    object-position: center;
   }
 
-  .ferry-content {
+  .tickets-apps {
+    display: grid;
+    gap: 1.25rem;
+    padding-top: 0.35rem;
+  }
+
+  .tickets-apps__intro {
+    max-width: 64rem;
+  }
+
+  .ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .ticket-card {
     display: flex;
     flex-direction: column;
-    gap: 1.1rem;
-    padding: 1.6rem;
+    min-height: 392px;
+    overflow: hidden;
+    padding: 0;
+    color: var(--ticket-ink);
+    border: 1px solid var(--ticket-line);
+    border-radius: var(--radius-sm);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.76)),
+      var(--ticket-surface);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
 
-  .ferry-column h3 {
+  .ticket-card:hover,
+  .ticket-card:focus-visible {
+    color: var(--ticket-ink);
+    text-decoration: none;
+    transform: translateY(-4px);
+    border-color: rgba(255, 89, 0, 0.36);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.13);
+  }
+
+  .ticket-card__media {
+    display: grid;
+    place-items: center;
+    min-height: 132px;
     margin: 0;
-    font-size: 1.4rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
+    padding: 1.2rem;
+    border-bottom: 1px solid var(--ticket-line);
+    background:
+      radial-gradient(circle at 84% 18%, rgba(1, 98, 255, 0.1), transparent 34%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(239, 247, 245, 0.88)),
+      var(--ticket-soft);
   }
 
-  .ferry-column h3 i {
-    color: var(--color-accent);
-    font-size: 1.1rem;
+  .ticket-card__media img {
+    display: block;
+    width: auto;
+    max-width: min(82%, 220px);
+    height: auto;
+    max-height: 76px;
+    object-fit: contain;
   }
 
-  .ferry-column p {
+  .ticket-card__media--italo {
+    background: #A51B33;
+  }
+
+  .ticket-card__media--italo img {
+    max-width: min(94%, 253px);
+    max-height: 87px;
+  }
+
+  .ticket-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 0.85rem;
+  }
+
+  .ticket-card h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1.15rem;
+    line-height: 1.2;
+  }
+
+  .ticket-card__kind {
+    display: block;
     margin: 0;
+    color: var(--ticket-orange);
+    font: 400 0.72rem/1.4 var(--font-mono);
   }
 
-  .ferry-inline-link {
-    color: var(--color-accent);
-    font-weight: 600;
+  .ticket-card__divider {
+    height: 1px;
+    margin: 0.9rem 0;
+    background: var(--ticket-line);
   }
 
-  .ferry-inline-link:hover {
-    color: var(--color-accent-2);
+  .ticket-card__meta {
+    display: grid;
+    grid-template-columns: 1.65rem minmax(0, 1fr);
+    gap: 0.65rem;
+    align-items: start;
   }
 
-  .ferry-route {
-    display: flex;
-    gap: 0.6rem;
-    align-items: flex-start;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
+  .ticket-card__meta i {
+    display: grid;
+    place-items: center;
+    width: 1.65rem;
+    height: 1.65rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.12);
+    color: var(--ticket-orange);
+    font-size: 0.72rem;
   }
 
-  .ferry-fees {
-    display: flex;
-    gap: 0.6rem;
-    align-items: flex-start;
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
+  .ticket-card__meta strong {
+    display: block;
+    color: var(--ticket-ink);
+    font-size: 0.98rem;
+    line-height: 1.3;
   }
 
-  .ferry-route i,
-  .ferry-fees i {
-    color: var(--color-accent);
-    font-size: 1rem;
-    margin-top: 0.1rem;
+  .ticket-card__meta span {
+    display: block;
+    color: var(--ticket-muted);
+    font-size: 0.92rem;
+    line-height: 1.42;
   }
 
-  .ferry-route span,
-  .ferry-fees span {
-    display: inline-block;
+  .ticket-card__footer {
+    position: relative;
+    margin-top: auto;
+    min-height: 108px;
+    padding: 0.82rem 3.1rem 1rem 1rem;
+    background: linear-gradient(135deg, var(--ticket-orange), #d94700);
   }
 
-  .tax-direction {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-weight: 600;
+  .ticket-card__note {
+    margin: 0;
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 800;
+    line-height: 1.35;
   }
 
-  .tax-direction i {
-    color: var(--color-accent);
-    font-size: 0.95rem;
-  }
-
-  .ferry-download {
-    align-self: flex-start;
+  .ticket-card__action {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    place-items: center;
+    width: 2.65rem;
+    height: 2.65rem;
+    border-radius: var(--radius-sm) 0 0 0;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 0.9rem;
   }
 
   .travel-section {
@@ -1173,20 +1623,27 @@ const timetablesJsonLd = [
   }
 
   @media (max-width: 1100px) {
-    .timetables-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .timetables-list {
-      grid-column: span 2;
+    .timetables-intro {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
   @media (max-width: 900px) {
-    .timetables-hero {
-      min-height: 100vh;
-      min-height: 100svh;
-      padding-top: calc(var(--header-space) + 2.5rem);
+    .timetables-hero__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .timetables-hero__aside {
+      align-items: flex-start;
+    }
+
+    .timetables-hero__tags {
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    .timetables-hero__progress {
+      align-self: flex-start;
     }
 
     .timetables-grid {
@@ -1198,16 +1655,26 @@ const timetablesJsonLd = [
       grid-template-columns: minmax(0, 1fr);
     }
 
+    .tickets-header,
+    .tickets-apps__intro {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+    }
+
     .tickets-grid {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .ferry-grid {
-      grid-template-columns: minmax(0, 1fr);
+    .ticket-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .travel-grid {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ticket-card {
+      min-height: 320px;
     }
 
     .travel-card--split {
@@ -1227,12 +1694,51 @@ const timetablesJsonLd = [
   }
 
   @media (max-width: 600px) {
+    .timetables-hero__title {
+      font-size: clamp(2.4rem, 10vw, 3.8rem);
+    }
+
+    .timetables-hero__btn {
+      width: 100%;
+      justify-content: center;
+    }
+
     .timetables-intro {
-      padding: 2rem 1.6rem;
+      padding-bottom: 2rem;
     }
 
     .timetable-card {
       padding: 1.4rem;
+    }
+
+    .tickets-info {
+      padding-top: 0.2rem;
+    }
+
+    .tickets-image {
+      aspect-ratio: 1 / 1;
+    }
+
+    .ticket-step {
+      grid-template-columns: 2.65rem minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+
+    .ticket-step + .ticket-step::before {
+      left: 1.28rem;
+    }
+
+    .ticket-step__number {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .ticket-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ticket-card {
+      min-height: auto;
     }
   }
 
@@ -1242,7 +1748,7 @@ const timetablesJsonLd = [
     padding: 4rem 0;
   }
 
-  .tt-faq h2 {
+  .tt-faq__heading {
     margin-bottom: 2rem;
   }
 

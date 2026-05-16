@@ -1,8 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { site } from '../data/site'
-
-const downloadUrl = 'https://cnr.pw/ferry'
 const pageTitle = 'Amalfi Coast Ferry Timetables 2026'
 const pageDescription =
   'Updated Amalfi Coast ferry schedules for Travelmar, Grassi Junior Ferries, and NLG, with departures, fares, routes, notes, and PDF download.'
@@ -341,7 +339,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
           <div class="apt-hero__copy">
             <span class="apt-hero__eyebrow">Amalfi Coast ferries 2026</span>
             <h1 class="apt-hero__title">
-              Ferry timetables<br /><span class="apt-hero__title-accent">made readable</span>
+              Ferry<br />timetables
             </h1>
             <p class="apt-hero__lead">
               Travelmar, Grassi Junior Ferries, and NLG schedules for the main coastal routes.
@@ -360,7 +358,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
               </div>
             </div>
             <div class="apt-hero__actions">
-              <a class="apt-hero__btn apt-hero__btn--primary" href="#download">Download PDF bundle</a>
+              <a class="apt-hero__btn apt-hero__btn--primary" href="#download">Ferry company PDFs</a>
               <a class="apt-hero__btn apt-hero__btn--ghost" href="#travelmar">Browse schedules</a>
             </div>
           </div>
@@ -391,19 +389,159 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     </div>
   </section>
 
-  <section class="ferry-download-band" id="download" aria-label="Download ferry timetables">
-    <div class="container ferry-download-band__inner">
-      <div>
-        <span class="ferry-eyebrow">All operators</span>
-        <h2>Download the complete PDF bundle</h2>
-        <p>
-          One file bundle for all ferry companies. Keep it offline and use the tables below for quick route scanning.
-        </p>
+  <section class="section ferry-section" id="download" aria-label="Sea ferry timetable downloads">
+    <div class="container">
+      <div class="ferry-header">
+        <h2>
+          Sea Ferries <span class="accent-italic">Timetables</span>
+        </h2>
+        <span class="ferry-update">Files were updated 26 March 2026</span>
       </div>
-      <a class="ferry-download-button" href={downloadUrl} target="_blank" rel="noreferrer">
-        <i class="fa-solid fa-cloud-arrow-down"></i>
-        Download all ferry timetables
-      </a>
+      <p class="ferry-lead">
+        Several ferry companies operate services along the Amalfi Coast, connecting major towns
+        such as Cetara, Maiori, Amalfi, Positano, and Salerno. Travelmar - is one of the most
+        popular ferry companies in Amalfi Coast. NLG - operating between Amalfi and Naples and
+        in Sorrento Coast.
+      </p>
+      <div class="ferry-grid">
+        <article class="ferry-column">
+          <div class="ferry-media">
+            <img
+              src="/staticpages/timetables/TraVelMar.webp"
+              alt="TravelMar ferry on the Amalfi Coast"
+              loading="lazy" width="1200" height="1200"
+            />
+          </div>
+          <div class="ferry-content">
+            <h3>
+              <i class="fa-solid fa-water"></i>
+              TravelMar
+            </h3>
+            <p>
+              The most convenient mode of transportation for traveling between towns along the
+              Amalfi Coast is by ferry. The ferry routes operate from April to October and connect
+              all the coastal towns. In addition to linking Amalfi and Positano, there are also
+              ferry services to Capri and Sorrento. However, it is important to note that ferry
+              operations may be temporarily suspended during rough sea conditions.
+            </p>
+            <p class="ferry-route">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>Salerno → Cetara → Maiori → Minori → Vietri sul Mare → Amalfi</span>
+            </p>
+            <a
+              class="timetable-download ferry-download"
+              href="https://amalfi.day/files/FERRY-timetables.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              TravelMar timetables
+            </a>
+          </div>
+        </article>
+        <article class="ferry-column">
+          <div class="ferry-media">
+            <img
+              src="/staticpages/timetables/PositanoJet.webp"
+              alt="PositanoJet ferry on the Amalfi Coast"
+              loading="lazy" width="1200" height="1200"
+            />
+          </div>
+          <div class="ferry-content">
+            <h3>
+              <i class="fa-solid fa-compass"></i>
+              PositanoJet
+            </h3>
+            <p>
+              Positano Jet is a new company operating in 2025 along the Amalfi Coast. They offer
+              tours not only to Positano but also to Capri and Sorrento. We've gathered all their
+              schedules here for your convenience.
+              <a
+                class="ferry-inline-link"
+                href="https://positanojet.nefesy.com/b2c/b2c.php?LANG=en"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Book your ticket by clicking here.
+              </a>
+            </p>
+            <p class="ferry-fees">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>
+                Additional Fees:
+                <br />
+                Baggage: 3,00€
+                <br />
+                Baggage XL 5,00€
+                <br />
+                Pet Ticket: 5,00€
+              </span>
+            </p>
+            <a
+              class="timetable-download ferry-download"
+              href="https://amalfi.day/files/FERRY-timetables-positanojet.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              Positanojet timetables
+            </a>
+          </div>
+        </article>
+        <article class="ferry-column">
+          <div class="ferry-media">
+            <img
+              src="/staticpages/timetables/NLG.webp"
+              alt="Alicost ferry on the Amalfi Coast"
+              loading="lazy" width="1200" height="1200"
+            />
+          </div>
+          <div class="ferry-content">
+            <h3>
+              <i class="fa-solid fa-sun"></i>
+              Alicost
+            </h3>
+            <p>
+              Positano Jet is a new company operating in 2025 along the Amalfi Coast. They offer
+              tours not only to Positano but also to Capri and Sorrento. We've gathered all their
+              schedules here for your convenience. You can book your ticket by clicking here
+            </p>
+            <p class="ferry-fees">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>
+                Additional Taxes Per Person
+                <br />
+                Capri Tax: + 5,00 €
+                <span class="tax-direction">
+                  <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                  Capri
+                </span>
+                <br />
+                Procida Tax: + 3,50 €
+                <span class="tax-direction">
+                  <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                  Procida
+                </span>
+                <br />
+                Salerno Tax: + 1,50 €
+                <span class="tax-direction">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  Salerno
+                </span>
+              </span>
+            </p>
+            <a
+              class="timetable-download ferry-download"
+              href="https://amalfi.day/files/FERRY-timetables-alicost.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i class="fa-solid fa-cloud-arrow-down"></i>
+              Alicost Timetables
+            </a>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -544,11 +682,43 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
 
     let current = 0
     const DURATION = 6000
+    const FADE_DURATION = 1300
+    const freezeTimers = new WeakMap()
+
+    function clearSlideFreeze(slide) {
+      const image = slide?.querySelector('img')
+      if (!image) return
+      image.style.animation = ''
+      image.style.transform = ''
+    }
+
+    function freezeSlideTransform(slide) {
+      const image = slide?.querySelector('img')
+      if (!image) return
+
+      const transform = window.getComputedStyle(image).transform
+      image.style.animation = 'none'
+      image.style.transform = transform === 'none' ? '' : transform
+
+      window.clearTimeout(freezeTimers.get(slide))
+      freezeTimers.set(
+        slide,
+        window.setTimeout(() => {
+          if (!slide.classList.contains('is-active')) {
+            clearSlideFreeze(slide)
+          }
+          freezeTimers.delete(slide)
+        }, FADE_DURATION)
+      )
+    }
 
     function go(next) {
+      if (next === current) return
+      freezeSlideTransform(slides[current])
       slides[current].classList.remove('is-active')
       dots[current].classList.remove('is-active')
       current = next
+      clearSlideFreeze(slides[current])
       slides[current].classList.add('is-active')
       dots[current].classList.add('is-active')
     }
@@ -704,12 +874,6 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     margin: 0;
     opacity: 0;
     animation: apt-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .apt-hero__title-accent {
-    font-style: italic;
-    color: #ff5900;
-    display: inline-block;
   }
 
   .apt-hero__lead {
@@ -931,52 +1095,163 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     text-transform: uppercase;
   }
 
-  .ferry-download-band {
+  .ferry-section {
     background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    scroll-margin-top: calc(var(--header-space) + 1rem);
   }
 
-  .ferry-download-band__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 2rem;
-    align-items: center;
-    padding: 2rem 0;
+  .ferry-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.2rem;
   }
 
-  .ferry-download-band h2 {
-    margin: 0.35rem 0 0.35rem;
-    font-family: var(--font-display);
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    line-height: 1.1;
-  }
-
-  .ferry-download-band p {
-    max-width: 690px;
+  .ferry-header h2 {
     margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.3rem, 5vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  .ferry-update {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
     color: var(--color-text-muted);
   }
 
-  .ferry-download-button {
+  .ferry-lead {
+    max-width: 70rem;
+    margin-bottom: 1.6rem;
+    color: var(--color-text-muted);
+  }
+
+  .ferry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .ferry-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 0;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+  }
+
+  .ferry-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .ferry-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    object-position: center;
+  }
+
+  .ferry-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 1.6rem;
+  }
+
+  .ferry-column h3 {
+    margin: 0;
+    font-size: 1.4rem;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.65rem;
-    min-height: 48px;
-    padding: 0.9rem 1.15rem;
-    border-radius: var(--radius-sm);
-    background: var(--color-accent);
+    gap: 0.6rem;
+  }
+
+  .ferry-column h3 i {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+  }
+
+  .ferry-column p {
+    margin: 0;
+  }
+
+  .ferry-inline-link {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .ferry-inline-link:hover {
+    color: var(--color-accent-2);
+  }
+
+  .ferry-route,
+  .ferry-fees {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .ferry-route i,
+  .ferry-fees i {
+    color: var(--color-accent);
+    font-size: 1rem;
+    margin-top: 0.1rem;
+  }
+
+  .ferry-route span,
+  .ferry-fees span {
+    display: inline-block;
+  }
+
+  .tax-direction {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+  }
+
+  .tax-direction i {
+    color: var(--color-accent);
+    font-size: 0.95rem;
+  }
+
+  .timetable-download {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    background: var(--gradient-sunset);
     color: #ffffff;
-    font-weight: 800;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 12px 30px rgba(255, 89, 0, 0.3);
     text-decoration: none;
-    box-shadow: 0 14px 34px rgba(255, 89, 0, 0.22);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .ferry-download-button:hover,
-  .ferry-download-button:focus-visible {
-    transform: translateY(-1px);
-    box-shadow: 0 18px 40px rgba(255, 89, 0, 0.3);
+  .timetable-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(255, 89, 0, 0.4);
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .ferry-download {
+    align-self: flex-start;
   }
 
   .ferry-notes {
@@ -1296,7 +1571,6 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
 
   @media (max-width: 900px) {
     .apt-hero__grid,
-    .ferry-download-band__inner,
     .ferry-notes__grid {
       grid-template-columns: 1fr;
     }
@@ -1314,14 +1588,11 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
       align-self: flex-start;
     }
 
-    .ferry-download-button {
-      width: 100%;
-    }
-
     .operator-sticky-label {
       top: 76px;
     }
 
+    .ferry-grid,
     .tourist-note-grid,
     .operator-highlights {
       grid-template-columns: 1fr;
@@ -1331,10 +1602,6 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
   @media (max-width: 640px) {
     .apt-hero__title {
       font-size: clamp(2.4rem, 10vw, 3.8rem);
-    }
-
-    .ferry-download-band__inner {
-      padding: 1.5rem 0;
     }
 
     .operator-section {
