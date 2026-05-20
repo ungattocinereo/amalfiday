@@ -21,7 +21,8 @@
     "@fontsource/libre-baskerville": "^5.2.10",
     "@fontsource/roboto": "^5.2.10",
     "@fortawesome/fontawesome-free": "^7.1.0",
-    "astro": "^5.0.0"
+    "astro": "^5.0.0",
+    "mapbox-gl": "^3.23.1"
   },
   "overrides": {
     "path-to-regexp": "6.3.0"

@@ -1,0 +1,2297 @@
+---
+import 'mapbox-gl/dist/mapbox-gl.css'
+import CldImage from './CldImage.astro'
+import {
+  photoSpotDifficulties,
+  photoSpotMapTypes,
+  photoSpotTimeTags,
+  type PhotoSpot,
+} from '../data/photo-locations'
+
+interface Props {
+  spots: PhotoSpot[]
+}
+
+const { spots } = Astro.props as Props
+const cities = Array.from(new Set(spots.map((spot) => spot.city))).sort((a, b) =>
+  a.localeCompare(b),
+)
+const firstSpot = spots[0]
+const spotPayload = spots.map((spot) => ({
+  slug: spot.slug,
+  title: spot.title,
+  city: spot.city,
+  mapType: spot.mapType,
+  types: spot.types,
+  timeTags: spot.timeTags,
+  difficulty: spot.difficulty,
+  cost: spot.cost,
+  coordinates: spot.coordinates,
+  isApproximate: Boolean(spot.isApproximate),
+  mapsUrl: spot.mapsUrl,
+  locationNote: spot.locationNote || '',
+  description: spot.description,
+  quotes: spot.quotes,
+  bestTime: spot.bestTime,
+  tips: spot.tips,
+  image: spot.image,
+}))
+const spotJson = JSON.stringify(spotPayload).replace(/</g, '\\u003c')
+
+const mapTypeIcons: Record<string, string> = {
+  Beach: 'fa-umbrella-beach',
+  Viewpoint: 'fa-camera-retro',
+  Architecture: 'fa-landmark',
+  'Hidden Gem': 'fa-key',
+  Hike: 'fa-person-hiking',
+  Sea: 'fa-sailboat',
+}
+const filterGroups = [
+  { key: 'city', label: 'Town', values: cities },
+  { key: 'type', label: 'Scene', values: photoSpotMapTypes },
+  { key: 'time', label: 'Light', values: photoSpotTimeTags },
+  { key: 'difficulty', label: 'Access', values: photoSpotDifficulties },
+]
+const getTypeIcon = (value: string) => mapTypeIcons[value] || ''
+---
+
+<section class="photo-map" id="photo-spots-map" data-photo-map>
+  <script id="photo-spots-data" type="application/json" set:html={spotJson}></script>
+
+  <div class="container photo-map__intro">
+    <div>
+      <p class="photo-map__eyebrow">Pinned field notes</p>
+      <h2>Pick a place by light, mood, and walking effort.</h2>
+    </div>
+    <p>
+      Browse the map, narrow the coast by town or scene, then open one concise field note
+      instead of scrolling through every location at once.
+    </p>
+  </div>
+
+  <div class="photo-map__workspace">
+    <aside class="finder-panel" aria-label="Photo spot results">
+      <button class="finder-panel__handle" type="button" data-toggle-results aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <strong><span data-visible-count>{spots.length}</span> spots</strong>
+      </button>
+
+      <div class="finder-panel__top">
+        <label class="finder-search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <span class="sr-only">Search photo spots</span>
+          <input
+            type="search"
+            data-search-spots
+            autocomplete="off"
+            placeholder="Search spots or towns"
+          />
+        </label>
+        <button class="mobile-filter-button" type="button" data-open-filters>
+          <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+          Filters
+        </button>
+      </div>
+
+      <div class="active-filters" data-active-filters hidden></div>
+
+      <div class="filter-panel" data-desktop-filter-panel>
+        {filterGroups.map((group) => (
+          <div class={`filter-group filter-group--${group.key}`}>
+            <div class="filter-group__label">{group.label}</div>
+            <div class="filter-group__chips">
+              {group.values.map((value) => (
+                <button
+                  class={`filter-chip ${group.key === 'type' ? 'filter-chip--icon' : ''}`}
+                  type="button"
+                  data-filter-group={group.key}
+                  data-filter-value={value}
+                  aria-pressed="false"
+                >
+                  {group.key === 'type' && <i class={`fa-solid ${getTypeIcon(value)}`} aria-hidden="true"></i>}
+                  {value}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="result-summary">
+        <span><strong data-visible-count>{spots.length}</strong> matching spots</span>
+        <button type="button" data-clear-filters>Clear</button>
+      </div>
+
+      <div class="photo-map__list" data-spot-list aria-live="polite">
+        <p class="photo-map__empty" data-empty-state hidden>
+          No spots match these filters. Clear one filter or search another town.
+        </p>
+        {spots.map((spot, index) => (
+          <article
+            class={`spot-card ${index === 0 ? 'is-selected' : ''}`}
+            id={`spot-card-${spot.slug}`}
+            data-spot-card
+            data-spot-slug={spot.slug}
+            data-search-text={`${spot.title} ${spot.city} ${spot.mapType} ${spot.types.join(' ')} ${spot.timeTags.join(' ')} ${spot.difficulty}`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            <button
+              class="spot-card__main"
+              type="button"
+              data-select-spot={spot.slug}
+              aria-label={`Open details for ${spot.title}`}
+            >
+              <span class="spot-card__media">
+                <CldImage
+                  src={spot.image.src}
+                  alt={spot.image.alt}
+                  width={spot.image.width}
+                  height={spot.image.height}
+                  sizes="(max-width: 760px) 96px, 132px"
+                />
+              </span>
+              <span class="spot-card__body">
+                <span class="spot-card__topline">
+                  <span class={`spot-type spot-type--${spot.mapType.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <i class={`fa-solid ${mapTypeIcons[spot.mapType]}`} aria-hidden="true"></i>
+                    {spot.mapType}
+                  </span>
+                  <span class="spot-card__city">{spot.city}</span>
+                </span>
+                <span class="spot-card__title">{spot.title}</span>
+                <span class="spot-card__meta">
+                  <span><i class="fa-regular fa-clock" aria-hidden="true"></i>{spot.timeTags.join(' / ')}</span>
+                  <span><i class="fa-solid fa-shoe-prints" aria-hidden="true"></i>{spot.difficulty}</span>
+                </span>
+              </span>
+            </button>
+            <div class="spot-card__actions">
+              <button class="spot-save" type="button" data-save-spot={spot.slug} aria-pressed="false" aria-label={`Save ${spot.title}`}>
+                <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                <span>Save</span>
+              </button>
+              <a href={spot.mapsUrl} target="_blank" rel="noreferrer">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Maps
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </aside>
+
+    <div class="map-frame">
+      <div class="photo-map__canvas" data-map-canvas></div>
+      <div class="photo-map__fallback" data-map-fallback>
+        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+        <p>Map preview is unavailable here. The list and Google Maps links still work.</p>
+      </div>
+      <div class="map-toolbar" aria-label="Map tools">
+        <button class="map-action" type="button" data-fit-all>
+          <i class="fa-solid fa-compress" aria-hidden="true"></i>
+          All spots
+        </button>
+        <button class="map-action map-action--mobile" type="button" data-toggle-results aria-expanded="false">
+          <i class="fa-solid fa-list" aria-hidden="true"></i>
+          List
+        </button>
+      </div>
+      <div class="photo-map__legend" aria-label="Map legend">
+        {photoSpotMapTypes.map((type) => (
+          <span class={`legend-chip legend-chip--${type.toLowerCase().replace(/\s+/g, '-')}`}>
+            <i class={`fa-solid ${mapTypeIcons[type]}`} aria-hidden="true"></i>
+            {type}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <aside class="spot-detail" data-detail-panel aria-label="Selected photo spot">
+      <button class="spot-detail__close" type="button" data-close-detail aria-label="Close selected spot">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      {firstSpot && (
+        <div data-detail-content>
+          <div class="spot-detail__media">
+            <CldImage
+              src={firstSpot.image.src}
+              alt={firstSpot.image.alt}
+              width={firstSpot.image.width}
+              height={firstSpot.image.height}
+              sizes="(max-width: 760px) 100vw, 420px"
+            />
+          </div>
+          <div class="spot-detail__body">
+            <div class="spot-detail__kicker">
+              <span>{firstSpot.city}</span>
+              <span>{firstSpot.difficulty}</span>
+            </div>
+            <h3>{firstSpot.title}</h3>
+            <div class="spot-detail__tags">
+              {firstSpot.types.slice(0, 4).map((type) => <span class="spot-tag">{type}</span>)}
+            </div>
+            {firstSpot.description.map((paragraph) => <p>{paragraph}</p>)}
+            <div class="spot-detail__facts">
+              <div><strong>Best time</strong><span>{firstSpot.bestTime}</span></div>
+              <div><strong>Cost</strong><span>{firstSpot.cost}</span></div>
+              <div><strong>Access</strong><span>{firstSpot.difficulty}</span></div>
+            </div>
+            <div class="spot-detail__block">
+              <h4>What people say</h4>
+              {firstSpot.quotes.map((quote) => (
+                <blockquote>
+                  {quote.text}
+                  {quote.source && <cite>{quote.source}</cite>}
+                </blockquote>
+              ))}
+            </div>
+            <div class="spot-detail__block">
+              <h4>Photo tips</h4>
+              <ul>
+                {firstSpot.tips.map((tip) => <li>{tip}</li>)}
+              </ul>
+            </div>
+            <div class="spot-detail__actions">
+              <a class="spot-detail__map" href={firstSpot.mapsUrl} target="_blank" rel="noreferrer">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                Google Maps
+              </a>
+              <button class="spot-detail__save" type="button" data-save-spot={firstSpot.slug} aria-pressed="false">
+                <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+                <span>Save</span>
+              </button>
+              <a class="spot-detail__cta" href={`/contact?service=Photoshooting&spot=${encodeURIComponent(firstSpot.title)}&location=${encodeURIComponent(firstSpot.city)}`}>
+                Book photographer
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </aside>
+  </div>
+
+  <div class="filter-drawer" data-filter-drawer aria-hidden="true">
+    <div class="filter-drawer__scrim" data-close-filters></div>
+    <div class="filter-drawer__sheet" role="dialog" aria-modal="true" aria-label="Photo spot filters">
+      <div class="filter-drawer__header">
+        <div>
+          <span>Filters</span>
+          <strong><span data-visible-count>{spots.length}</span> spots</strong>
+        </div>
+        <button type="button" data-close-filters aria-label="Close filters">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="filter-panel filter-panel--drawer">
+        {filterGroups.map((group) => (
+          <div class={`filter-group filter-group--${group.key}`}>
+            <div class="filter-group__label">{group.label}</div>
+            <div class="filter-group__chips">
+              {group.values.map((value) => (
+                <button
+                  class={`filter-chip ${group.key === 'type' ? 'filter-chip--icon' : ''}`}
+                  type="button"
+                  data-filter-group={group.key}
+                  data-filter-value={value}
+                  aria-pressed="false"
+                >
+                  {group.key === 'type' && <i class={`fa-solid ${getTypeIcon(value)}`} aria-hidden="true"></i>}
+                  {value}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="filter-drawer__footer">
+        <button type="button" data-clear-filters>Clear</button>
+        <button type="button" data-close-filters>
+          Show <span data-visible-count>{spots.length}</span> spots
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector('[data-photo-map]')
+  const dataNode = document.getElementById('photo-spots-data')
+  const spots = dataNode ? JSON.parse(dataNode.textContent || '[]') : []
+  const mapboxToken = import.meta.env.PUBLIC_MAPBOX_TOKEN || ''
+  const filterButtons = Array.from(root?.querySelectorAll('[data-filter-group]') || [])
+  const clearFiltersButtons = Array.from(root?.querySelectorAll('[data-clear-filters]') || [])
+  const searchInput = root?.querySelector('[data-search-spots]')
+  const cards = Array.from(root?.querySelectorAll('[data-spot-card]') || [])
+  const visibleCounts = Array.from(root?.querySelectorAll('[data-visible-count]') || [])
+  const activeFiltersNode = root?.querySelector('[data-active-filters]')
+  const emptyState = root?.querySelector('[data-empty-state]')
+  const mapCanvas = root?.querySelector('[data-map-canvas]')
+  const mapFallback = root?.querySelector('[data-map-fallback]')
+  const detailPanel = root?.querySelector('[data-detail-panel]')
+  const detailContent = root?.querySelector('[data-detail-content]')
+  const closeDetailButton = root?.querySelector('[data-close-detail]')
+  const filterDrawer = root?.querySelector('[data-filter-drawer]')
+  const openFiltersButton = root?.querySelector('[data-open-filters]')
+  const closeFiltersButtons = Array.from(root?.querySelectorAll('[data-close-filters]') || [])
+  const toggleResultsButtons = Array.from(root?.querySelectorAll('[data-toggle-results]') || [])
+  const fitAllButton = root?.querySelector('[data-fit-all]')
+  const saveKey = 'amalfi-photo-spots-saved'
+  const compactQuery = window.matchMedia('(max-width: 760px)')
+  const activeFilters = {
+    city: new Set(),
+    type: new Set(),
+    time: new Set(),
+    difficulty: new Set(),
+  }
+  const filterLabels = {
+    city: 'Town',
+    type: 'Scene',
+    time: 'Light',
+    difficulty: 'Access',
+  }
+  const mapColors = {
+    Beach: '#009cff',
+    Viewpoint: '#ff5900',
+    Architecture: '#7a5cff',
+    'Hidden Gem': '#00a676',
+    Hike: '#855c34',
+    Sea: '#0162ff',
+  }
+  let map
+  let mapboxgl
+  let query = ''
+
+  const readHashSlug = () => {
+    try {
+      return decodeURIComponent(window.location.hash.replace(/^#/, ''))
+    } catch (_error) {
+      return window.location.hash.replace(/^#/, '')
+    }
+  }
+
+  const hashSlug = readHashSlug()
+  const hasSpotHash = spots.some((spot) => spot.slug === hashSlug)
+  let selectedSlug = hasSpotHash ? hashSlug : spots[0]?.slug || ''
+
+  const escapeHtml = (value) =>
+    String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;')
+
+  const normalize = (value) =>
+    String(value || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+
+  const isCompact = () => compactQuery.matches
+
+  const getSavedSpots = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(saveKey) || '[]')
+      return Array.isArray(parsed) ? parsed : []
+    } catch (_error) {
+      return []
+    }
+  }
+
+  const setSavedSpots = (saved) => {
+    try {
+      localStorage.setItem(saveKey, JSON.stringify(saved))
+    } catch (_error) {
+      // Local storage is optional.
+    }
+  }
+
+  const updateSaveButtons = () => {
+    const saved = new Set(getSavedSpots())
+    root?.querySelectorAll('[data-save-spot]').forEach((button) => {
+      const slug = button.dataset.saveSpot
+      const isSaved = saved.has(slug)
+      button.setAttribute('aria-pressed', String(isSaved))
+      button.classList.toggle('is-saved', isSaved)
+      const icon = button.querySelector('i')
+      const label = button.querySelector('span')
+      if (icon) icon.className = isSaved ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'
+      if (label) label.textContent = isSaved ? 'Saved' : 'Save'
+    })
+  }
+
+  const spotMatchesFilters = (spot) => {
+    if (activeFilters.city.size && !activeFilters.city.has(spot.city)) return false
+    if (activeFilters.type.size && !activeFilters.type.has(spot.mapType)) return false
+    if (activeFilters.difficulty.size && !activeFilters.difficulty.has(spot.difficulty)) return false
+    if (activeFilters.time.size && !spot.timeTags.some((time) => activeFilters.time.has(time))) return false
+    if (query) {
+      const haystack = normalize([
+        spot.title,
+        spot.city,
+        spot.mapType,
+        spot.difficulty,
+        spot.bestTime,
+        spot.types.join(' '),
+        spot.timeTags.join(' '),
+      ].join(' '))
+      return haystack.includes(query)
+    }
+    return true
+  }
+
+  const getFilteredSpots = () => spots.filter(spotMatchesFilters)
+
+  const toGeoJson = (items) => ({
+    type: 'FeatureCollection',
+    features: items.map((spot) => ({
+      type: 'Feature',
+      properties: {
+        slug: spot.slug,
+        title: spot.title,
+        shortTitle: spot.title.replace(/^Villa\s+/i, '').slice(0, 22),
+        city: spot.city,
+        mapType: spot.mapType,
+        color: mapColors[spot.mapType] || '#ff5900',
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: [spot.coordinates.lng, spot.coordinates.lat],
+      },
+    })),
+  })
+
+  const colorMatchExpression = [
+    'match',
+    ['get', 'mapType'],
+    'Beach',
+    mapColors.Beach,
+    'Viewpoint',
+    mapColors.Viewpoint,
+    'Architecture',
+    mapColors.Architecture,
+    'Hidden Gem',
+    mapColors['Hidden Gem'],
+    'Hike',
+    mapColors.Hike,
+    'Sea',
+    mapColors.Sea,
+    '#ff5900',
+  ]
+
+  const refreshSelectedLayer = () => {
+    if (!map?.getLayer?.('unclustered-point')) return
+    map.setPaintProperty('unclustered-point', 'circle-radius', [
+      'case',
+      ['==', ['get', 'slug'], selectedSlug],
+      15,
+      10,
+    ])
+    map.setPaintProperty('unclustered-point', 'circle-stroke-width', [
+      'case',
+      ['==', ['get', 'slug'], selectedSlug],
+      5,
+      2,
+    ])
+  }
+
+  const fitMapToSpots = (items, options = {}) => {
+    if (!map || !items.length) return
+    const bounds = new mapboxgl.LngLatBounds()
+    items.forEach((spot) => bounds.extend([spot.coordinates.lng, spot.coordinates.lat]))
+    const padding = isCompact()
+      ? { top: 72, right: 28, bottom: 300, left: 28 }
+      : { top: 72, right: 72, bottom: 72, left: 72 }
+    if (items.length === 1) {
+      map.easeTo({
+        center: [items[0].coordinates.lng, items[0].coordinates.lat],
+        zoom: Math.max(map.getZoom(), 12),
+        duration: options.immediate ? 0 : 650,
+      })
+      return
+    }
+    map.fitBounds(bounds, {
+      padding,
+      maxZoom: 11.5,
+      duration: options.immediate ? 0 : 650,
+    })
+  }
+
+  const renderEmptyDetail = () => {
+    if (!detailContent) return
+    detailContent.innerHTML = `
+      <div class="spot-detail__empty">
+        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+        <h3>No spots in this view</h3>
+        <p>Clear a filter or search another town to bring the field notes back.</p>
+      </div>
+    `
+  }
+
+  const renderDetail = (spot) => {
+    if (!detailContent || !spot) return
+    const tags = spot.types
+      .slice(0, 4)
+      .map((type) => `<span class="spot-tag">${escapeHtml(type)}</span>`)
+      .join('')
+    const description = spot.description.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')
+    const quotes = spot.quotes
+      .map((quote) => `
+        <blockquote>
+          ${escapeHtml(quote.text)}
+          ${quote.source ? `<cite>${escapeHtml(quote.source)}</cite>` : ''}
+        </blockquote>
+      `)
+      .join('')
+    const tips = spot.tips.map((tip) => `<li>${escapeHtml(tip)}</li>`).join('')
+    const ctaHref = `/contact?service=Photoshooting&spot=${encodeURIComponent(spot.title)}&location=${encodeURIComponent(spot.city)}`
+    detailContent.innerHTML = `
+      <div class="spot-detail__media">
+        <img src="${escapeHtml(spot.image.src)}" alt="${escapeHtml(spot.image.alt)}" width="${spot.image.width}" height="${spot.image.height}" loading="lazy" decoding="async" />
+      </div>
+      <div class="spot-detail__body">
+        <div class="spot-detail__kicker">
+          <span>${escapeHtml(spot.city)}</span>
+          <span>${escapeHtml(spot.difficulty)}</span>
+        </div>
+        <h3>${escapeHtml(spot.title)}</h3>
+        <div class="spot-detail__tags">${tags}</div>
+        ${spot.isApproximate ? '<p class="spot-detail__note">Map pin is approximate; use the Google Maps link for navigation.</p>' : ''}
+        ${spot.locationNote ? `<p class="spot-detail__note">${escapeHtml(spot.locationNote)}</p>` : ''}
+        ${description}
+        <div class="spot-detail__facts">
+          <div><strong>Best time</strong><span>${escapeHtml(spot.bestTime)}</span></div>
+          <div><strong>Cost</strong><span>${escapeHtml(spot.cost)}</span></div>
+          <div><strong>Access</strong><span>${escapeHtml(spot.difficulty)}</span></div>
+        </div>
+        <div class="spot-detail__block">
+          <h4>What people say</h4>
+          ${quotes}
+        </div>
+        <div class="spot-detail__block">
+          <h4>Photo tips</h4>
+          <ul>${tips}</ul>
+        </div>
+        <div class="spot-detail__actions">
+          <a class="spot-detail__map" href="${escapeHtml(spot.mapsUrl)}" target="_blank" rel="noreferrer">
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            Google Maps
+          </a>
+          <button class="spot-detail__save" type="button" data-save-spot="${escapeHtml(spot.slug)}" aria-pressed="false">
+            <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+            <span>Save</span>
+          </button>
+          <a class="spot-detail__cta" href="${ctaHref}">
+            Book photographer
+          </a>
+        </div>
+      </div>
+    `
+    updateSaveButtons()
+  }
+
+  const setHash = (slug) => {
+    if (!slug) return
+    const next = `${window.location.pathname}${window.location.search}#${encodeURIComponent(slug)}`
+    if (window.location.hash.replace(/^#/, '') !== encodeURIComponent(slug)) {
+      window.history.replaceState(null, '', next)
+    }
+  }
+
+  const selectSpot = (slug, options = {}) => {
+    const spot = spots.find((item) => item.slug === slug)
+    if (!spot) return
+    selectedSlug = slug
+    cards.forEach((card) => {
+      const isSelected = card.dataset.spotSlug === slug
+      card.classList.toggle('is-selected', isSelected)
+      card.setAttribute('aria-selected', String(isSelected))
+    })
+    renderDetail(spot)
+    refreshSelectedLayer()
+    if (options.openDetail !== false) {
+      detailPanel?.classList.add('is-open')
+    }
+    if (options.hash !== false) setHash(slug)
+    if (options.scrollCard) {
+      document.getElementById(`spot-card-${slug}`)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    }
+    if (map && options.fly !== false) {
+      map.easeTo({
+        center: [spot.coordinates.lng, spot.coordinates.lat],
+        zoom: Math.max(map.getZoom(), 12),
+        duration: options.immediate ? 0 : 650,
+      })
+    }
+  }
+
+  const updateAppliedFilters = () => {
+    if (!activeFiltersNode) return
+    const chips = []
+    if (query) {
+      chips.push(`
+        <button type="button" data-clear-search aria-label="Clear search">
+          Search: ${escapeHtml(searchInput?.value || '')}
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      `)
+    }
+    Object.entries(activeFilters).forEach(([group, values]) => {
+      values.forEach((value) => {
+        chips.push(`
+          <button type="button" data-remove-filter-group="${escapeHtml(group)}" data-remove-filter-value="${escapeHtml(value)}">
+            ${escapeHtml(filterLabels[group])}: ${escapeHtml(value)}
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        `)
+      })
+    })
+    activeFiltersNode.innerHTML = chips.join('')
+    activeFiltersNode.hidden = chips.length === 0
+  }
+
+  const updateFilterButtons = () => {
+    filterButtons.forEach((button) => {
+      const group = button.dataset.filterGroup
+      const value = button.dataset.filterValue
+      const isActive = Boolean(group && value && activeFilters[group]?.has(value))
+      button.setAttribute('aria-pressed', String(isActive))
+    })
+  }
+
+  const updateFilteredView = ({ fit = true } = {}) => {
+    const filtered = getFilteredSpots()
+    const visibleSlugs = new Set(filtered.map((spot) => spot.slug))
+    cards.forEach((card) => {
+      card.hidden = !visibleSlugs.has(card.dataset.spotSlug)
+    })
+    visibleCounts.forEach((node) => {
+      node.textContent = String(filtered.length)
+    })
+    if (emptyState) emptyState.hidden = filtered.length > 0
+    const source = map?.getSource('photo-spots')
+    if (source?.setData) source.setData(toGeoJson(filtered))
+    if (!filtered.length) {
+      selectedSlug = ''
+      renderEmptyDetail()
+      refreshSelectedLayer()
+    } else if (!visibleSlugs.has(selectedSlug)) {
+      selectSpot(filtered[0].slug, { fly: false, openDetail: !isCompact(), hash: false })
+    } else {
+      refreshSelectedLayer()
+    }
+    updateAppliedFilters()
+    updateFilterButtons()
+    if (fit) fitMapToSpots(filtered)
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const group = button.dataset.filterGroup
+      const value = button.dataset.filterValue
+      if (!group || !value || !activeFilters[group]) return
+      if (activeFilters[group].has(value)) {
+        activeFilters[group].delete(value)
+      } else {
+        activeFilters[group].add(value)
+      }
+      updateFilteredView()
+    })
+  })
+
+  searchInput?.addEventListener('input', (event) => {
+    query = normalize(event.target.value)
+    updateFilteredView()
+  })
+
+  clearFiltersButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      Object.values(activeFilters).forEach((set) => set.clear())
+      query = ''
+      if (searchInput) searchInput.value = ''
+      updateFilteredView()
+    })
+  })
+
+  activeFiltersNode?.addEventListener('click', (event) => {
+    const clearSearch = event.target.closest('[data-clear-search]')
+    if (clearSearch) {
+      query = ''
+      if (searchInput) searchInput.value = ''
+      updateFilteredView()
+      return
+    }
+    const chip = event.target.closest('[data-remove-filter-group]')
+    const group = chip?.dataset.removeFilterGroup
+    const value = chip?.dataset.removeFilterValue
+    if (group && value && activeFilters[group]) {
+      activeFilters[group].delete(value)
+      updateFilteredView()
+    }
+  })
+
+  root?.addEventListener('click', (event) => {
+    const saveButton = event.target.closest('[data-save-spot]')
+    if (saveButton) {
+      const slug = saveButton.dataset.saveSpot
+      const saved = new Set(getSavedSpots())
+      if (saved.has(slug)) {
+        saved.delete(slug)
+      } else {
+        saved.add(slug)
+      }
+      setSavedSpots([...saved])
+      updateSaveButtons()
+      return
+    }
+
+    const selectButton = event.target.closest('[data-select-spot]')
+    const slug = selectButton?.dataset.selectSpot
+    if (slug) {
+      selectSpot(slug, { openDetail: true })
+    }
+  })
+
+  openFiltersButton?.addEventListener('click', () => {
+    filterDrawer?.classList.add('is-open')
+    filterDrawer?.setAttribute('aria-hidden', 'false')
+  })
+
+  closeFiltersButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      filterDrawer?.classList.remove('is-open')
+      filterDrawer?.setAttribute('aria-hidden', 'true')
+    })
+  })
+
+  toggleResultsButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const isExpanded = root?.classList.toggle('is-results-expanded')
+      toggleResultsButtons.forEach((toggle) => {
+        toggle.setAttribute('aria-expanded', String(Boolean(isExpanded)))
+      })
+      window.setTimeout(() => map?.resize?.(), 280)
+    })
+  })
+
+  closeDetailButton?.addEventListener('click', () => {
+    detailPanel?.classList.remove('is-open')
+  })
+
+  fitAllButton?.addEventListener('click', () => {
+    fitMapToSpots(getFilteredSpots())
+  })
+
+  window.addEventListener('hashchange', () => {
+    const nextSlug = readHashSlug()
+    if (spots.some((spot) => spot.slug === nextSlug)) {
+      selectSpot(nextSlug, { hash: false, openDetail: true })
+    }
+  })
+
+  compactQuery.addEventListener?.('change', () => {
+    map?.resize?.()
+    fitMapToSpots(getFilteredSpots(), { immediate: true })
+  })
+
+  const initMap = async () => {
+    if (!mapboxToken || !mapCanvas || !spots.length) {
+      mapFallback?.removeAttribute('hidden')
+      return
+    }
+
+    const mapboxModule = await import('mapbox-gl')
+    mapboxgl = mapboxModule.default
+    mapboxgl.accessToken = mapboxToken
+    map = new mapboxgl.Map({
+      container: mapCanvas,
+      style: 'mapbox://styles/mapbox/standard',
+      config: {
+        basemap: {
+          theme: 'monochrome',
+          lightPreset: 'day',
+        },
+      },
+      center: [14.54, 40.62],
+      zoom: 9.15,
+      cooperativeGestures: true,
+      dragRotate: false,
+      pitchWithRotate: false,
+      attributionControl: true,
+    })
+
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right')
+
+    map.on('load', () => {
+      mapFallback?.setAttribute('hidden', 'true')
+      map.addSource('photo-spots', {
+        type: 'geojson',
+        data: toGeoJson(getFilteredSpots()),
+        generateId: true,
+        cluster: true,
+        clusterMaxZoom: 13,
+        clusterRadius: 54,
+      })
+
+      map.addLayer({
+        id: 'clusters',
+        type: 'circle',
+        source: 'photo-spots',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': ['step', ['get', 'point_count'], '#ffca3a', 4, '#ff5900', 9, '#0162ff'],
+          'circle-radius': ['step', ['get', 'point_count'], 20, 4, 27, 9, 34],
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 3,
+          'circle-opacity': 0.95,
+        },
+      })
+
+      map.addLayer({
+        id: 'cluster-count',
+        type: 'symbol',
+        source: 'photo-spots',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': ['get', 'point_count_abbreviated'],
+          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+          'text-size': 13,
+        },
+        paint: {
+          'text-color': '#101419',
+        },
+      })
+
+      map.addLayer({
+        id: 'unclustered-point',
+        type: 'circle',
+        source: 'photo-spots',
+        filter: ['!', ['has', 'point_count']],
+        paint: {
+          'circle-color': colorMatchExpression,
+          'circle-radius': ['case', ['==', ['get', 'slug'], selectedSlug], 15, 10],
+          'circle-stroke-width': ['case', ['==', ['get', 'slug'], selectedSlug], 5, 2],
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 0.96,
+        },
+      })
+
+      map.addLayer({
+        id: 'point-label',
+        type: 'symbol',
+        source: 'photo-spots',
+        filter: ['!', ['has', 'point_count']],
+        minzoom: 10.6,
+        layout: {
+          'text-field': ['get', 'shortTitle'],
+          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
+          'text-size': 11,
+          'text-offset': [0, 1.55],
+          'text-anchor': 'top',
+        },
+        paint: {
+          'text-color': '#14171b',
+          'text-halo-color': '#ffffff',
+          'text-halo-width': 1.6,
+        },
+      })
+
+      map.on('click', 'clusters', (event) => {
+        const features = map.queryRenderedFeatures(event.point, { layers: ['clusters'] })
+        const clusterId = features[0]?.properties?.cluster_id
+        const source = map.getSource('photo-spots')
+        if (!source || clusterId === undefined) return
+        const applyZoom = (zoom) => {
+          map.easeTo({
+            center: features[0].geometry.coordinates,
+            zoom,
+            duration: 650,
+          })
+        }
+        const result = source.getClusterExpansionZoom(clusterId, (error, zoom) => {
+          if (!error) applyZoom(zoom)
+        })
+        if (result?.then) result.then(applyZoom).catch(() => {})
+      })
+
+      map.on('click', 'unclustered-point', (event) => {
+        const slug = event.features?.[0]?.properties?.slug
+        if (slug) {
+          selectSpot(slug, { scrollCard: true, fly: false, openDetail: true })
+          if (isCompact()) root?.classList.add('is-results-expanded')
+        }
+      })
+
+      map.on('mouseenter', 'clusters', () => {
+        map.getCanvas().style.cursor = 'pointer'
+      })
+      map.on('mouseleave', 'clusters', () => {
+        map.getCanvas().style.cursor = ''
+      })
+      map.on('mouseenter', 'unclustered-point', () => {
+        map.getCanvas().style.cursor = 'pointer'
+      })
+      map.on('mouseleave', 'unclustered-point', () => {
+        map.getCanvas().style.cursor = ''
+      })
+
+      fitMapToSpots(getFilteredSpots(), { immediate: true })
+    })
+  }
+
+  updateSaveButtons()
+  updateAppliedFilters()
+  updateFilterButtons()
+  if (selectedSlug) {
+    selectSpot(selectedSlug, { fly: false, hash: hasSpotHash, openDetail: Boolean(hasSpotHash && isCompact()) })
+  }
+  initMap()
+</script>
+
+<style>
+  .photo-map {
+    --map-ink: #101419;
+    --map-paper: #fffdf8;
+    --map-panel: rgba(255, 253, 248, 0.94);
+    --map-line: rgba(16, 20, 25, 0.12);
+    --map-muted: rgba(16, 20, 25, 0.68);
+    --map-shadow: 0 18px 50px rgba(16, 20, 25, 0.14);
+    --map-blue: #0162ff;
+    --map-sea: #009cff;
+    color: var(--map-ink);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(240, 242, 246, 0.78)),
+      repeating-linear-gradient(90deg, rgba(16, 20, 25, 0.035) 0 1px, transparent 1px 84px);
+    padding: 3.2rem 0 4rem;
+    scroll-margin-top: var(--header-space);
+    overflow: clip;
+  }
+
+  :global([data-theme='night']) .photo-map {
+    --map-ink: #f7f2e8;
+    --map-paper: #151820;
+    --map-panel: rgba(21, 24, 32, 0.94);
+    --map-line: rgba(255, 255, 255, 0.12);
+    --map-muted: rgba(247, 242, 232, 0.68);
+    --map-shadow: 0 18px 54px rgba(0, 0, 0, 0.44);
+    background:
+      linear-gradient(180deg, rgba(15, 17, 21, 0.97), rgba(23, 26, 32, 0.94)),
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 84px);
+  }
+
+  .photo-map__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.68fr);
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 1.1rem;
+  }
+
+  .photo-map__eyebrow,
+  .filter-group__label {
+    margin: 0 0 0.5rem;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .photo-map__intro h2 {
+    max-width: 760px;
+    margin: 0;
+    color: var(--map-ink);
+    font-size: 3.6rem;
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  .photo-map__intro p {
+    margin: 0;
+    color: var(--map-muted);
+    font-size: 1rem;
+  }
+
+  .photo-map__workspace {
+    width: min(1680px, calc(100% - 2rem));
+    min-height: 700px;
+    height: min(840px, calc(100svh - 2rem));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(330px, 360px) minmax(520px, 1fr) minmax(330px, 380px);
+    gap: 0.75rem;
+  }
+
+  .finder-panel,
+  .map-frame,
+  .spot-detail {
+    min-width: 0;
+    min-height: 0;
+    border: 1px solid var(--map-line);
+    border-radius: 8px;
+    background: var(--map-panel);
+    box-shadow: var(--map-shadow);
+  }
+
+  .finder-panel {
+    display: grid;
+    grid-template-rows: auto auto auto auto minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  .finder-panel__handle {
+    display: none;
+  }
+
+  .finder-panel__top {
+    display: grid;
+    gap: 0.6rem;
+    padding: 0.9rem;
+    border-bottom: 1px solid var(--map-line);
+  }
+
+  .finder-search {
+    min-width: 0;
+    min-height: 44px;
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    gap: 0.55rem;
+    align-items: center;
+    padding: 0 0.85rem;
+    border: 1px solid var(--map-line);
+    border-radius: 8px;
+    color: var(--map-muted);
+    background: rgba(255, 255, 255, 0.66);
+  }
+
+  :global([data-theme='night']) .finder-search,
+  :global([data-theme='night']) .filter-chip,
+  :global([data-theme='night']) .spot-card,
+  :global([data-theme='night']) .spot-card__actions,
+  :global([data-theme='night']) .spot-tag,
+  :global([data-theme='night']) .spot-detail__facts div,
+  :global([data-theme='night']) .spot-detail__map,
+  :global([data-theme='night']) .spot-detail__save {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .finder-search input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    color: var(--map-ink);
+    background: transparent;
+    font: 700 0.92rem/1 var(--font-body);
+  }
+
+  .finder-search input::placeholder {
+    color: var(--map-muted);
+  }
+
+  .mobile-filter-button {
+    display: none;
+  }
+
+  .filter-panel {
+    max-height: 286px;
+    overflow: auto;
+    padding: 0.9rem;
+    border-bottom: 1px solid var(--map-line);
+  }
+
+  .filter-group + .filter-group {
+    margin-top: 0.85rem;
+  }
+
+  .filter-group__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .filter-chip {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.36rem;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid var(--map-line);
+    border-radius: 999px;
+    color: var(--map-ink);
+    background: rgba(255, 255, 255, 0.68);
+    font: 800 0.74rem/1.1 var(--font-body);
+    cursor: pointer;
+  }
+
+  .filter-chip[aria-pressed='true'] {
+    color: #ffffff;
+    border-color: transparent;
+    background: var(--color-accent);
+  }
+
+  .active-filters {
+    min-height: 42px;
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--map-line);
+  }
+
+  .active-filters[hidden] {
+    display: none;
+  }
+
+  .active-filters button {
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    flex: 0 0 auto;
+    border: 1px solid rgba(255, 89, 0, 0.22);
+    border-radius: 999px;
+    color: var(--color-accent);
+    background: rgba(255, 89, 0, 0.08);
+    font: 800 0.72rem/1 var(--font-body);
+    cursor: pointer;
+  }
+
+  .active-filters :global(button) {
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    flex: 0 0 auto;
+    border: 1px solid rgba(255, 89, 0, 0.22);
+    border-radius: 999px;
+    color: var(--color-accent);
+    background: rgba(255, 89, 0, 0.08);
+    font: 800 0.72rem/1 var(--font-body);
+    cursor: pointer;
+  }
+
+  .result-summary {
+    min-height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 0.9rem;
+    border-bottom: 1px solid var(--map-line);
+    color: var(--map-muted);
+    font-size: 0.86rem;
+  }
+
+  .result-summary button {
+    min-height: 32px;
+    border: 0;
+    color: var(--color-accent);
+    background: transparent;
+    font: 900 0.8rem/1 var(--font-body);
+    cursor: pointer;
+  }
+
+  .photo-map__list {
+    min-height: 0;
+    overflow: auto;
+    display: grid;
+    align-content: start;
+    gap: 0.62rem;
+    padding: 0.7rem;
+  }
+
+  .photo-map__empty {
+    margin: 0;
+    padding: 1rem;
+    border: 1px dashed var(--map-line);
+    border-radius: 8px;
+    color: var(--map-muted);
+    background: rgba(255, 255, 255, 0.36);
+  }
+
+  .spot-card {
+    min-height: 132px;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    overflow: hidden;
+    border: 1px solid var(--map-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.62);
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .spot-card:hover,
+  .spot-card.is-selected {
+    border-color: color-mix(in srgb, var(--color-accent) 58%, var(--map-line));
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(16, 20, 25, 0.1);
+  }
+
+  .spot-card__main {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 0;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .spot-card__media {
+    min-height: 104px;
+    background: #d9d6cc;
+  }
+
+  .spot-card__media img,
+  .spot-detail__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .spot-card__body {
+    min-width: 0;
+    display: grid;
+    gap: 0.42rem;
+    align-content: start;
+    padding: 0.72rem;
+  }
+
+  .spot-card__topline,
+  .spot-card__meta,
+  .spot-card__actions,
+  .spot-detail__actions,
+  .spot-detail__kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.52rem;
+  }
+
+  .spot-card__topline {
+    justify-content: space-between;
+  }
+
+  .spot-type,
+  .spot-tag,
+  .legend-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+    border-radius: 999px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .spot-type {
+    max-width: 100%;
+    padding: 0.34rem 0.48rem;
+    color: #ffffff;
+    background: var(--color-accent);
+    font-size: 0.66rem;
+    white-space: nowrap;
+  }
+
+  .spot-type--beach { background: #009cff; }
+  .spot-type--viewpoint { background: #ff5900; }
+  .spot-type--architecture { background: #7a5cff; }
+  .spot-type--hidden-gem { background: #00a676; }
+  .spot-type--hike { background: #855c34; }
+  .spot-type--sea { background: #0162ff; }
+
+  .spot-card__city {
+    overflow: hidden;
+    color: var(--color-accent);
+    font: 800 0.66rem/1 var(--font-mono);
+    letter-spacing: 0.05em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .spot-card__title {
+    color: var(--map-ink);
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    line-height: 1.08;
+  }
+
+  .spot-card__meta {
+    display: grid;
+    gap: 0.26rem;
+    color: var(--map-muted);
+    font-size: 0.74rem;
+    line-height: 1.28;
+  }
+
+  .spot-card__meta span {
+    min-width: 0;
+    display: flex;
+    gap: 0.36rem;
+  }
+
+  .spot-card__meta i {
+    flex: 0 0 auto;
+    margin-top: 0.08rem;
+    color: var(--color-accent);
+  }
+
+  .spot-card__actions {
+    justify-content: space-between;
+    padding: 0.5rem 0.62rem;
+    border-top: 1px solid var(--map-line);
+    background: rgba(255, 255, 255, 0.44);
+  }
+
+  .spot-save,
+  .spot-card__actions a,
+  .spot-detail__save,
+  .spot-detail__close,
+  .map-action,
+  .mobile-filter-button,
+  .filter-drawer__header button,
+  .filter-drawer__footer button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    border-radius: 999px;
+    font-weight: 900;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .mobile-filter-button,
+  .spot-detail__close {
+    display: none;
+  }
+
+  .spot-save,
+  .spot-card__actions a,
+  .spot-detail__save,
+  .spot-detail__map,
+  .map-action {
+    border: 1px solid var(--map-line);
+    color: var(--map-ink);
+    background: rgba(255, 255, 255, 0.68);
+  }
+
+  .spot-save,
+  .spot-card__actions a {
+    padding: 0 0.7rem;
+    font-size: 0.74rem;
+  }
+
+  .spot-save.is-saved,
+  .spot-detail__save.is-saved {
+    color: var(--color-accent);
+  }
+
+  .spot-detail :global(.spot-detail__save.is-saved) {
+    color: var(--color-accent);
+  }
+
+  .map-frame {
+    position: relative;
+    overflow: hidden;
+    background: #dce9ed;
+  }
+
+  .photo-map__canvas {
+    position: absolute;
+    inset: 0;
+  }
+
+  .photo-map__fallback {
+    position: absolute;
+    inset: 1rem;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 0.8rem;
+    padding: 2rem;
+    border: 1px dashed rgba(16, 20, 25, 0.2);
+    border-radius: 8px;
+    color: #24323a;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.4)),
+      url('/staticpages/how-to-get/maps-guide.webp') center / cover;
+    text-align: center;
+  }
+
+  .photo-map__fallback[hidden] {
+    display: none;
+  }
+
+  .photo-map__fallback i {
+    color: var(--color-accent);
+    font-size: 2rem;
+  }
+
+  .photo-map__fallback p {
+    max-width: 340px;
+    margin: 0;
+    color: #24323a;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+
+  .map-toolbar {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    pointer-events: none;
+  }
+
+  .map-action {
+    min-height: 40px;
+    padding: 0 0.8rem;
+    font-size: 0.78rem;
+    pointer-events: auto;
+    box-shadow: 0 10px 28px rgba(16, 20, 25, 0.14);
+  }
+
+  .map-action--mobile {
+    display: none;
+  }
+
+  .photo-map__legend {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem;
+    pointer-events: none;
+  }
+
+  .legend-chip {
+    padding: 0.45rem 0.58rem;
+    color: #101419;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(16, 20, 25, 0.12);
+    font-size: 0.68rem;
+    box-shadow: 0 8px 22px rgba(16, 20, 25, 0.12);
+  }
+
+  .spot-detail {
+    position: relative;
+    overflow: auto;
+  }
+
+  .spot-detail__close {
+    display: none;
+  }
+
+  .spot-detail__media {
+    height: 238px;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    background: #d9d6cc;
+  }
+
+  .spot-detail__body {
+    padding: 1rem;
+  }
+
+  .spot-detail__kicker {
+    flex-wrap: wrap;
+    color: var(--color-accent);
+    font: 800 0.72rem/1.2 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .spot-detail__kicker span + span::before {
+    content: '/';
+    margin-right: 0.52rem;
+    color: var(--map-line);
+  }
+
+  .spot-detail h3 {
+    margin: 0.65rem 0;
+    color: var(--map-ink);
+    font-size: 2.2rem;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .spot-detail p,
+  .spot-detail li,
+  .spot-detail blockquote {
+    color: var(--map-muted);
+    line-height: 1.62;
+  }
+
+  .spot-detail__note {
+    padding: 0.65rem 0.75rem;
+    border-left: 3px solid var(--color-accent);
+    color: var(--map-ink) !important;
+    background: rgba(255, 89, 0, 0.08);
+    font-weight: 800;
+  }
+
+  .spot-detail__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .spot-tag {
+    padding: 0.32rem 0.48rem;
+    border: 1px solid var(--map-line);
+    color: var(--map-muted);
+    font-size: 0.68rem;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .spot-detail__facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .spot-detail__facts div {
+    min-width: 0;
+    padding: 0.72rem;
+    border: 1px solid var(--map-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.48);
+  }
+
+  .spot-detail__facts strong,
+  .spot-detail__facts span {
+    display: block;
+  }
+
+  .spot-detail__facts strong {
+    margin-bottom: 0.35rem;
+    color: var(--map-ink);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .spot-detail__facts span {
+    color: var(--map-muted);
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .spot-detail__block {
+    margin-top: 1.1rem;
+  }
+
+  .spot-detail__block h4 {
+    margin: 0 0 0.65rem;
+    color: var(--map-ink);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .spot-detail__block ul {
+    margin: 0 0 0.85rem;
+    padding-left: 1.1rem;
+  }
+
+  .spot-detail blockquote {
+    margin: 0 0 0.7rem;
+    padding: 0.7rem 0 0.7rem 0.85rem;
+    border-left: 2px solid var(--color-accent);
+    font-style: italic;
+  }
+
+  .spot-detail cite {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--map-ink);
+    font-style: normal;
+    font-weight: 800;
+  }
+
+  .spot-detail__actions {
+    flex-wrap: wrap;
+    margin-top: 1.2rem;
+  }
+
+  .spot-detail__map,
+  .spot-detail__save,
+  .spot-detail__cta {
+    min-height: 44px;
+    padding: 0 0.9rem;
+    text-decoration: none;
+    font-size: 0.82rem;
+  }
+
+  .spot-detail__cta {
+    flex: 1 1 180px;
+    color: #ffffff;
+    background: var(--color-accent);
+  }
+
+  .spot-detail__empty {
+    min-height: 100%;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 0.8rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .spot-detail__empty i {
+    color: var(--color-accent);
+    font-size: 2rem;
+  }
+
+  .spot-detail__empty h3,
+  .spot-detail__empty p {
+    margin: 0;
+  }
+
+  .spot-detail :global(.spot-detail__media) {
+    height: 238px;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+    background: #d9d6cc;
+  }
+
+  .spot-detail :global(.spot-detail__media img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .spot-detail :global(.spot-detail__body) {
+    padding: 1rem;
+  }
+
+  .spot-detail :global(.spot-detail__kicker) {
+    display: flex;
+    align-items: center;
+    gap: 0.52rem;
+    flex-wrap: wrap;
+    color: var(--color-accent);
+    font: 800 0.72rem/1.2 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .spot-detail :global(.spot-detail__kicker span + span::before) {
+    content: '/';
+    margin-right: 0.52rem;
+    color: var(--map-line);
+  }
+
+  .spot-detail :global(h3) {
+    margin: 0.65rem 0;
+    color: var(--map-ink);
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .spot-detail :global(p),
+  .spot-detail :global(li),
+  .spot-detail :global(blockquote) {
+    color: var(--map-muted);
+    line-height: 1.62;
+  }
+
+  .spot-detail :global(.spot-detail__note) {
+    padding: 0.65rem 0.75rem;
+    border-left: 3px solid var(--color-accent);
+    color: var(--map-ink) !important;
+    background: rgba(255, 89, 0, 0.08);
+    font-weight: 800;
+  }
+
+  .spot-detail :global(.spot-detail__tags) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .spot-detail :global(.spot-tag) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+    padding: 0.32rem 0.48rem;
+    border: 1px solid var(--map-line);
+    border-radius: 999px;
+    color: var(--map-muted);
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 0.68rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .spot-detail :global(.spot-detail__facts) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .spot-detail :global(.spot-detail__facts div) {
+    min-width: 0;
+    padding: 0.72rem;
+    border: 1px solid var(--map-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.48);
+  }
+
+  .spot-detail :global(.spot-detail__facts strong),
+  .spot-detail :global(.spot-detail__facts span) {
+    display: block;
+  }
+
+  .spot-detail :global(.spot-detail__facts strong) {
+    margin-bottom: 0.35rem;
+    color: var(--map-ink);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .spot-detail :global(.spot-detail__facts span) {
+    color: var(--map-muted);
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .spot-detail :global(.spot-detail__block) {
+    margin-top: 1.1rem;
+  }
+
+  .spot-detail :global(.spot-detail__block h4) {
+    margin: 0 0 0.65rem;
+    color: var(--map-ink);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .spot-detail :global(.spot-detail__block ul) {
+    margin: 0 0 0.85rem;
+    padding-left: 1.1rem;
+  }
+
+  .spot-detail :global(blockquote) {
+    margin: 0 0 0.7rem;
+    padding: 0.7rem 0 0.7rem 0.85rem;
+    border-left: 2px solid var(--color-accent);
+    font-style: italic;
+  }
+
+  .spot-detail :global(cite) {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--map-ink);
+    font-style: normal;
+    font-weight: 800;
+  }
+
+  .spot-detail :global(.spot-detail__actions) {
+    display: flex;
+    align-items: center;
+    gap: 0.52rem;
+    flex-wrap: wrap;
+    margin-top: 1.2rem;
+  }
+
+  .spot-detail :global(.spot-detail__map),
+  .spot-detail :global(.spot-detail__save),
+  .spot-detail :global(.spot-detail__cta) {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.42rem;
+    border-radius: 999px;
+    padding: 0 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .spot-detail :global(.spot-detail__map),
+  .spot-detail :global(.spot-detail__save) {
+    border: 1px solid var(--map-line);
+    color: var(--map-ink);
+    background: rgba(255, 255, 255, 0.68);
+  }
+
+  .spot-detail :global(.spot-detail__cta) {
+    flex: 1 1 180px;
+    color: #ffffff;
+    background: var(--color-accent);
+  }
+
+  .spot-detail :global(.spot-detail__empty) {
+    min-height: 100%;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 0.8rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .filter-drawer {
+    display: none;
+  }
+
+  @media (max-width: 1320px) {
+    .photo-map__workspace {
+      grid-template-columns: minmax(310px, 340px) minmax(460px, 1fr) minmax(300px, 340px);
+    }
+
+    .spot-detail h3 {
+      font-size: 1.9rem;
+    }
+  }
+
+  @media (max-width: 1179px) {
+    .photo-map__intro {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .photo-map__intro h2 {
+      font-size: 2.8rem;
+    }
+
+    .photo-map__workspace {
+      width: min(100% - 1rem, 920px);
+      height: auto;
+      min-height: 0;
+      grid-template-columns: 1fr;
+    }
+
+    .map-frame {
+      order: 1;
+      height: 58svh;
+      min-height: 430px;
+    }
+
+    .finder-panel {
+      order: 2;
+      height: min(680px, 82svh);
+    }
+
+    .spot-detail {
+      order: 3;
+      height: min(720px, 82svh);
+      overflow: auto;
+    }
+
+    .spot-detail__media {
+      height: 320px;
+    }
+
+    .spot-detail :global(.spot-detail__media) {
+      height: 320px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .photo-map {
+      padding: 0.5rem 0 1rem;
+    }
+
+    .photo-map__intro {
+      display: none;
+    }
+
+    .photo-map__workspace {
+      position: relative;
+      width: 100%;
+      height: calc(100svh - 0.75rem);
+      min-height: 620px;
+      display: block;
+      margin: 0;
+    }
+
+    .map-frame {
+      position: absolute;
+      inset: 0 0.5rem 0.5rem;
+      height: auto;
+      min-height: 0;
+    }
+
+    .photo-map__legend {
+      display: none;
+    }
+
+    .map-toolbar {
+      top: 0.7rem;
+      left: 0.7rem;
+      right: 0.7rem;
+    }
+
+    .map-action {
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0 0.75rem;
+    }
+
+    .map-action--mobile {
+      display: inline-flex;
+    }
+
+    .photo-map__fallback {
+      inset: 0.75rem 0.75rem calc(min(46svh, 390px) + 1rem);
+      padding: 1.25rem;
+    }
+
+    .finder-panel {
+      position: absolute;
+      left: 0.5rem;
+      right: 0.5rem;
+      bottom: 0.5rem;
+      z-index: 5;
+      height: min(46svh, 390px);
+      display: grid;
+      grid-template-rows: auto auto auto minmax(0, 1fr);
+      transition: height 0.26s ease;
+    }
+
+    .photo-map.is-results-expanded .finder-panel {
+      height: min(76svh, 640px);
+    }
+
+    .finder-panel__handle {
+      min-height: 44px;
+      display: grid;
+      place-items: center;
+      gap: 0.2rem;
+      border: 0;
+      border-bottom: 1px solid var(--map-line);
+      color: var(--map-ink);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .finder-panel__handle span {
+      width: 42px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--map-line);
+    }
+
+    .finder-panel__handle strong {
+      font-size: 0.8rem;
+    }
+
+    .finder-panel__top {
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 0.65rem;
+    }
+
+    .mobile-filter-button {
+      display: inline-flex;
+      padding: 0 0.85rem;
+      border: 1px solid var(--map-line);
+      color: #ffffff;
+      background: var(--color-accent);
+      font-size: 0.82rem;
+    }
+
+    .finder-panel > .filter-panel,
+    .result-summary {
+      display: none;
+    }
+
+    .active-filters {
+      min-height: 0;
+      padding: 0 0.65rem 0.65rem;
+      border-bottom: 1px solid var(--map-line);
+    }
+
+    .active-filters button {
+      min-height: 36px;
+    }
+
+    .active-filters :global(button) {
+      min-height: 36px;
+    }
+
+    .photo-map__list {
+      padding: 0.65rem;
+    }
+
+    .spot-card {
+      min-height: 118px;
+    }
+
+    .spot-card__main {
+      grid-template-columns: 92px minmax(0, 1fr);
+    }
+
+    .spot-card__media {
+      min-height: 92px;
+    }
+
+    .spot-card__body {
+      padding: 0.62rem;
+    }
+
+    .spot-card__title {
+      font-size: 1rem;
+    }
+
+    .spot-card__meta {
+      font-size: 0.7rem;
+    }
+
+    .spot-card__actions {
+      padding: 0.42rem 0.5rem;
+    }
+
+    .spot-save,
+    .spot-card__actions a {
+      min-height: 40px;
+    }
+
+    .filter-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      display: block;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .filter-drawer.is-open {
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .filter-drawer__scrim {
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 20, 25, 0.46);
+      opacity: 0;
+      transition: opacity 0.22s ease;
+    }
+
+    .filter-drawer.is-open .filter-drawer__scrim {
+      opacity: 1;
+    }
+
+    .filter-drawer__sheet {
+      position: absolute;
+      left: 0.5rem;
+      right: 0.5rem;
+      bottom: 0.5rem;
+      max-height: min(84svh, 680px);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      overflow: hidden;
+      border: 1px solid var(--map-line);
+      border-radius: 8px;
+      background: var(--map-panel);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      transform: translateY(calc(100% + 1rem));
+      transition: transform 0.26s ease;
+    }
+
+    .filter-drawer.is-open .filter-drawer__sheet {
+      transform: translateY(0);
+    }
+
+    .filter-drawer__header,
+    .filter-drawer__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.8rem;
+      border-bottom: 1px solid var(--map-line);
+    }
+
+    .filter-drawer__header span,
+    .filter-drawer__header strong {
+      display: block;
+    }
+
+    .filter-drawer__header span {
+      color: var(--color-accent);
+      font: 800 0.72rem/1 var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .filter-drawer__header strong {
+      margin-top: 0.25rem;
+      color: var(--map-ink);
+    }
+
+    .filter-drawer__header button {
+      width: 44px;
+      padding: 0;
+      border: 1px solid var(--map-line);
+      color: var(--map-ink);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .filter-panel--drawer {
+      max-height: none;
+      border-bottom: 0;
+    }
+
+    .filter-panel--drawer .filter-group + .filter-group {
+      margin-top: 1.1rem;
+    }
+
+    .filter-panel--drawer .filter-chip {
+      min-height: 44px;
+      padding: 0.55rem 0.78rem;
+      font-size: 0.82rem;
+    }
+
+    .filter-drawer__footer {
+      border-top: 1px solid var(--map-line);
+      border-bottom: 0;
+    }
+
+    .filter-drawer__footer button {
+      flex: 1 1 0;
+      border: 1px solid var(--map-line);
+      color: var(--map-ink);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .filter-drawer__footer button:last-child {
+      color: #ffffff;
+      border-color: transparent;
+      background: var(--color-accent);
+    }
+
+    .spot-detail {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      height: auto;
+      max-height: none;
+      border: 0;
+      border-radius: 0;
+      transform: translateY(100%);
+      transition: transform 0.28s ease;
+    }
+
+    .spot-detail.is-open {
+      transform: translateY(0);
+    }
+
+    .spot-detail__close {
+      position: sticky;
+      top: 0.75rem;
+      left: calc(100% - 3.4rem);
+      z-index: 2;
+      display: inline-flex;
+      width: 44px;
+      padding: 0;
+      margin: 0.75rem 0.75rem -3.2rem auto;
+      border: 1px solid var(--map-line);
+      color: var(--map-ink);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .spot-detail__media {
+      height: 44svh;
+      min-height: 44svh;
+      max-height: 48svh;
+      border-radius: 0;
+    }
+
+    .spot-detail :global(.spot-detail__media) {
+      height: 44svh;
+      min-height: 44svh;
+      max-height: 48svh;
+      border-radius: 0;
+    }
+
+    .spot-detail__body {
+      padding: 1rem 1rem 1.4rem;
+    }
+
+    .spot-detail h3 {
+      font-size: 2rem;
+    }
+
+    .spot-detail :global(h3) {
+      font-size: 2rem;
+    }
+
+    .spot-detail__facts {
+      grid-template-columns: 1fr;
+    }
+
+    .spot-detail :global(.spot-detail__facts) {
+      grid-template-columns: 1fr;
+    }
+
+    .spot-detail__actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .spot-detail :global(.spot-detail__actions) {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .spot-detail__cta,
+    .spot-detail__map,
+    .spot-detail__save {
+      width: 100%;
+    }
+
+    .spot-detail :global(.spot-detail__cta),
+    .spot-detail :global(.spot-detail__map),
+    .spot-detail :global(.spot-detail__save) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .spot-card__main {
+      grid-template-columns: 84px minmax(0, 1fr);
+    }
+
+    .spot-card__media {
+      min-height: 84px;
+    }
+
+    .spot-type {
+      font-size: 0.62rem;
+    }
+
+    .spot-card__city {
+      font-size: 0.62rem;
+    }
+  }
+</style>

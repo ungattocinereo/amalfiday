@@ -367,6 +367,8 @@ const whatsappHref = 'https://wa.me/393270972329'
     const serviceIcon = serviceSelect?.querySelector('.service-select__icon i')
     const serviceOptions = serviceSelect?.querySelectorAll('.service-select__option')
     const contactInput = form?.querySelector('input[name="contact"]')
+    const datesInput = form?.querySelector('input[name="dates"]')
+    const messageInput = form?.querySelector('textarea[name="message"]')
     const honeypotInput = form?.querySelector('input[name="company_website"]')
     const formStartedAtInput = form?.querySelector('input[name="_form_started_at"]')
     const primaryEndpoint = form?.dataset.primaryEndpoint || '/api/contact'
@@ -556,6 +558,44 @@ const whatsappHref = 'https://wa.me/393270972329'
       })
       closeServiceSelect()
     }
+
+    const applyServiceValue = (value) => {
+      if (!value || !serviceOptions?.length) return
+      const option = Array.from(serviceOptions).find(
+        (item) =>
+          (item.dataset.value || item.textContent || '').trim().toLowerCase() ===
+          value.trim().toLowerCase(),
+      )
+      if (option) applyServiceChoice(option)
+    }
+
+    const prefillFromUrl = () => {
+      if (!form) return
+      const params = new URLSearchParams(window.location.search)
+      const service = params.get('service')
+      const spot = params.get('spot')
+      const location = params.get('location')
+      const dates = params.get('dates')
+
+      if (service) {
+        applyServiceValue(service)
+      } else if (spot) {
+        applyServiceValue('Photoshooting')
+      }
+
+      if (datesInput && dates && !datesInput.value.trim()) {
+        datesInput.value = dates
+      } else if (datesInput && location && !datesInput.value.trim()) {
+        datesInput.placeholder = `Dates, ${location}`
+      }
+
+      if (messageInput && spot && !messageInput.value.trim()) {
+        const place = location ? `${spot}, ${location}` : spot
+        messageInput.value = `I'm interested in a photoshooting at ${place}.`
+      }
+    }
+
+    prefillFromUrl()
 
     serviceToggle?.addEventListener('click', (event) => {
       event.preventDefault()

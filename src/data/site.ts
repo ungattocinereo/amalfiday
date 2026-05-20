@@ -91,6 +91,7 @@ export const navigation: NavigationItem[] = [
       {
         heading: 'Field Notes',
         items: [
+          { label: 'Photo spots', href: '/photolocations', icon: 'fa-map-location-dot' },
           { label: 'Beach reviews', href: '/beaches', icon: 'fa-umbrella-beach' },
           { label: 'Moto roads', href: '/moto', icon: 'fa-motorcycle' },
         ],
@@ -174,7 +175,8 @@ export const footerLinks = {
   transport: [
     { label: 'Ferry timetables', href: '/ferry-timetables' },
     { label: 'Bus timetables', href: 'https://cnr.pw/bus', external: true },
-    { label: 'Naples airport transfer', href: '/how-to-get' },
+    { label: 'Book Airport Shuttle', href: 'https://shuttlebus.pintourbus.com', external: true },
+    { label: 'How to get here from Naples', href: '/how-to-get' },
     { label: 'All public transport', href: '/timetables' },
   ],
   apartments: [
@@ -189,6 +191,7 @@ export const footerLinks = {
   ],
   info: [
     { label: 'What to do', href: '/experience' },
+    { label: 'Photo spots', href: '/photolocations' },
     { label: 'Parking tips', href: '/parking' },
     { label: 'Beach reviews', href: '/beaches' },
     { label: 'Moto roads', href: '/moto' },
