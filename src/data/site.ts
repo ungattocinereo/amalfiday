@@ -176,7 +176,7 @@ export const footerLinks = {
     { label: 'Ferry timetables', href: '/ferry-timetables' },
     { label: 'Bus timetables', href: 'https://cnr.pw/bus', external: true },
     { label: 'Book Airport Shuttle', href: 'https://shuttlebus.pintourbus.com', external: true },
-    { label: 'How to get here from Naples', href: '/how-to-get' },
+    { label: 'Naples to Amalfi', href: '/how-to-get' },
     { label: 'All public transport', href: '/timetables' },
   ],
   apartments: [
