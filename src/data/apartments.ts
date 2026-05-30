@@ -55,7 +55,7 @@ export const APARTMENT_SECTIONS: ApartmentSection[] = [
         },
         ical: {
           booking: [
-            'https://ical.booking.com/v1/export?t=d1d7f32f-23b9-4914-b348-07719a6bd239',
+            'https://ical.booking.com/v1/export?t=d3c249ba-4358-4d99-abfd-7b81980525bf',
           ],
         },
       },

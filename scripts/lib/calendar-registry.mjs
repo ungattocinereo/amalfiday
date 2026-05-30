@@ -2,7 +2,7 @@
 // Consumed by api/availability.js (Vercel serverless) and scripts/update-calendars.mjs (manual fallback).
 export const ICAL_REGISTRY = {
   'Villa Susy': [
-    'https://ical.booking.com/v1/export?t=d1d7f32f-23b9-4914-b348-07719a6bd239',
+    'https://ical.booking.com/v1/export?t=d3c249ba-4358-4d99-abfd-7b81980525bf',
   ],
   'Awesome Apts': [
     'https://www.airbnb.com/calendar/ical/3456236.ics?t=eb37cdcccf9a4865b675311c819e0fd2',
