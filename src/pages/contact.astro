@@ -373,6 +373,9 @@ const whatsappHref = 'https://wa.me/393270972329'
     const formStartedAtInput = form?.querySelector('input[name="_form_started_at"]')
     const primaryEndpoint = form?.dataset.primaryEndpoint || '/api/contact'
     const fallbackEndpoint = form?.dataset.fallbackEndpoint || '/hooks/send-telegram-amalfiday'
+    const fallbackEmail = 'hello@amalfi.day'
+    const sendFailureMessage = `Sorry, something went wrong. Please email ${fallbackEmail}.`
+    const fallbackStatusCodes = new Set([404, 405, 500, 502, 503, 504])
     const minFillMs = 3500
     const submitCooldownMs = 60_000
     const submitCooldownKey = 'amalfi-contact-last-submit-at'
@@ -510,7 +513,9 @@ const whatsappHref = 'https://wa.me/393270972329'
 
       if (!response.ok || result.error) {
         const error = new Error(result.error || raw || `Request failed (${response.status})`)
-        error.code = response.status >= 500 || response.status === 404 ? 'server' : 'request'
+        error.status = response.status
+        error.code =
+          response.status >= 500 || fallbackStatusCodes.has(response.status) ? 'server' : 'request'
         throw error
       }
     }
@@ -753,7 +758,7 @@ const whatsappHref = 'https://wa.me/393270972329'
       } catch (error) {
         clearSuccessState()
         console.error('Contact form request failed:', error)
-        setStatus('Sorry, something went wrong. Please email hello@amalfi.day.', 'error')
+        setStatus(sendFailureMessage, 'error')
       } finally {
         if (submitButton) submitButton.disabled = false
       }
