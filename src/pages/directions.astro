@@ -60,6 +60,14 @@ const ferryBus = [
   },
 ]
 
+const heroTags = [
+  'Train to Salerno',
+  'Ferry or bus',
+  '10-minute walk',
+  'Skip Sorrento',
+  'Parking tips',
+]
+
 const walkingMapSrc =
   'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d3027.783177685797!2d14.602921515089081!3d40.63466340028073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e2!4m5!1s0x133b95adeeb3beb1%3A0xce3612645bf68968!2sFlavio%20Gioia%2C%20Via%20Lungomare%20dei%20Cavalieri%2C%20Amalfi%2C%20SA!3m2!1d40.633595899999996!2d14.6015562!4m5!1s0x133b95764da04449%3A0x4e2b19b97e30cee9!2sdejavu%20Amalfi%2C%20Piazza%20Municipio%2C%20Amalfi%2C%20SA!3m2!1d40.6343113!2d14.6044869!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C%2084010%20SA!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1600799650925!5m2!1sen!2sit'
 
@@ -198,32 +206,40 @@ const directionsJsonLd = [
       loading="eager"
       fetchpriority="high" width="2400" height="1641"
     />
-    <div class="dir-hero__veil" aria-hidden="true"></div>
-    <div class="container dir-hero__inner">
-      <div class="dir-hero__content">
-        <span class="dir-eyebrow dir-eyebrow--hero"><i class="fa-solid fa-compass"></i> Three-step guide</span>
-        <h1>
-          Find Gregory's B&B in <span class="accent-italic">Atrani</span>
-        </h1>
-        <p class="dir-hero__lead">
-          Reach the Amalfi Coast in two simple steps: train to Salerno, then ferry or bus to Amalfi. Atrani is a 10-minute walk from there.
-        </p>
-        <div class="dir-hero__tldr">
-          <strong>TL;DR</strong> — Go to <strong>Salerno</strong> by train, then take a bus or ferry to <strong>Amalfi</strong>. Atrani is right next to Amalfi. Skip Sorrento or Vietri Sul Mare station — they take longer.
+    <div class="dir-hero__vignette" aria-hidden="true"></div>
+    <div class="dir-hero__content">
+      <div class="container">
+        <div class="dir-hero__grid">
+          <div class="dir-hero__copy">
+            <span class="dir-hero__eyebrow">Three-step guide</span>
+            <h1 class="dir-hero__title">
+              Get to Atrani and find <span class="dir-hero__title-accent">our B&B</span>
+            </h1>
+            <p class="dir-hero__lead">
+              Reach the Amalfi Coast in two simple steps: train to Salerno, then ferry or bus to Amalfi. Atrani is a 10-minute walk from there.
+            </p>
+            <nav class="dir-hero__actions" aria-label="Directions sections">
+              <a class="dir-hero__btn dir-hero__btn--primary" href="#public-transport"><i class="fa-solid fa-train"></i> Public transport</a>
+              <a class="dir-hero__btn dir-hero__btn--ghost" href="#walking"><i class="fa-solid fa-signs-post"></i> Walking route</a>
+              <a class="dir-hero__btn dir-hero__btn--ghost" href="#driving"><i class="fa-solid fa-car"></i> Driving</a>
+              <a class="dir-hero__btn dir-hero__btn--ghost" href="#parking"><i class="fa-solid fa-square-parking"></i> Parking</a>
+            </nav>
+          </div>
+          <aside class="dir-hero__aside">
+            <ul class="dir-hero__tags" aria-label="Route highlights">
+              {heroTags.map((tag, i) => (
+                <li class="dir-hero__tag" style={`animation-delay: ${0.6 + i * 0.08}s`}>{tag}</li>
+              ))}
+            </ul>
+            <p class="dir-hero__note">
+              Go to <strong>Salerno</strong> by train, then take a bus or ferry to <strong>Amalfi</strong>. Watch out for Google Maps errors — it sometimes routes you through Sorrento, which adds hours.
+            </p>
+          </aside>
         </div>
-        <nav class="dir-hero__nav">
-          <a href="#public-transport"><i class="fa-solid fa-train"></i> Public transport</a>
-          <a href="#walking"><i class="fa-solid fa-signs-post"></i> Walking route</a>
-          <a href="#driving"><i class="fa-solid fa-car"></i> Driving</a>
-          <a href="#parking"><i class="fa-solid fa-square-parking"></i> Parking</a>
-        </nav>
       </div>
-      <aside class="dir-hero__aside">
-        <div class="dir-hero__aside-badge"><i class="fa-solid fa-lightbulb"></i></div>
-        <p>
-          Watch out for Google Maps errors — it sometimes routes you through Sorrento, which adds hours. Always route via <strong>Salerno</strong>.
-        </p>
-      </aside>
+    </div>
+    <div class="dir-hero__scroll-hint" aria-hidden="true">
+      <span></span>
     </div>
   </section>
 
@@ -419,25 +435,6 @@ const directionsJsonLd = [
     </div>
   </section>
 
-
-  <!-- ─── FINDING THE HOUSE ─── -->
-  <section class="section dir-house" id="house">
-    <div class="container">
-      <div class="dir-house__card">
-        <div class="dir-house__content">
-          <div class="dir-eyebrow" style="color: rgba(255,255,255,0.7);">Final destination</div>
-          <h2>How to find the <span style="color:#ffc300; font-style:italic;">house</span> in Atrani</h2>
-          <p>
-            We've prepared a detailed PDF with step-by-step photo instructions to help you locate the house once you're in Atrani. It includes landmarks, turns, and what to look for at each point.
-          </p>
-          <a class="dir-house__btn" href="/files/directions/directions-gregs-house.pdf" target="_blank" rel="noopener">
-            <i class="fa-solid fa-file-pdf"></i> Download PDF with instructions
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── DRIVING ─── -->
   <section class="section dir-driving" id="driving">
     <div class="container">
@@ -526,174 +523,218 @@ const directionsJsonLd = [
   .dir-hero {
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
+    background: #0a0a0a;
     color: #ffffff;
-    padding: calc(var(--header-space) + 4rem) 0 4rem;
   }
 
   .dir-hero__image {
     position: absolute;
-    inset: 0;
+    inset: -2px;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center 40%;
+    display: block;
     filter: saturate(1.08) contrast(1.05);
-    z-index: -2;
+    transform: scale(1.01);
+    z-index: 0;
   }
 
-  .dir-hero__veil {
+  .dir-hero__vignette {
     position: absolute;
     inset: 0;
-    background: rgba(12, 16, 20, 0.6);
-    z-index: -1;
+    z-index: 1;
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 45%, transparent 65%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.38) 0%, transparent 52%),
+      radial-gradient(ellipse at 50% 0%, transparent 50%, rgba(0, 0, 0, 0.18) 100%);
+    pointer-events: none;
   }
 
-  :global([data-theme='night']) .dir-hero__veil {
-    background: rgba(12, 16, 20, 0.72);
+  .dir-hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: calc(var(--header-space) + 2rem) 0 clamp(2.5rem, 5vh, 4.5rem);
   }
 
-  .dir-hero__inner {
+  .dir-hero__grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 3rem;
     align-items: end;
   }
 
-  .dir-hero__content h1 {
-    font-size: clamp(2.8rem, 5vw, 4.4rem);
-    margin-top: 1rem;
-    color: #ffffff;
+  .dir-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: dir-fade-up 0.7s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .dir-hero__content h1 .accent-italic {
-    color: #FBBF00;
+  .dir-hero__title {
+    max-width: 46rem;
+    font-size: clamp(2.65rem, 5.8vw, 5.2rem);
+    line-height: 1;
+    letter-spacing: 0;
+    margin: 0;
+    color: #ffffff;
+    opacity: 0;
+    animation: dir-fade-up 0.8s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .dir-hero__title-accent {
+    font-style: italic;
+    color: #ffc300;
+    display: inline-block;
   }
 
   .dir-hero__lead {
-    font-size: clamp(1rem, 1.6vw, 1.15rem);
-    color: rgba(255, 255, 255, 0.82);
-    max-width: 38rem;
-    line-height: 1.65;
+    max-width: 30rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 1.2rem;
+    opacity: 0;
+    animation: dir-fade-up 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .dir-hero__tldr {
-    margin-top: 2rem;
-    padding: 1.2rem 1.5rem;
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    font-size: 0.95rem;
-    color: #1a1a1a;
-    line-height: 1.6;
-    backdrop-filter: blur(16px);
-  }
-
-  .dir-hero__tldr strong {
-    color: #c74400;
-  }
-
-  :global([data-theme='night']) .dir-hero__tldr {
-    background: rgba(12, 16, 20, 0.48);
-    border-color: rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.88);
-  }
-
-  :global([data-theme='night']) .dir-hero__tldr strong {
-    color: #ffc300;
-  }
-
-  .dir-hero__nav {
+  .dir-hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 2rem;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+    opacity: 0;
+    animation: dir-fade-up 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .dir-hero__nav a {
+  .dir-hero__btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.6rem 1.2rem;
-    border-radius: 100px;
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: #1a1a1a;
+    gap: 0.4rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
     text-decoration: none;
-    font-size: 0.88rem;
-    font-weight: 500;
-    backdrop-filter: blur(8px);
-    transition: background 0.2s, border-color 0.2s;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
   }
 
-  .dir-hero__nav a:hover {
-    background: rgba(255, 255, 255, 0.64);
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-
-  :global([data-theme='night']) .dir-hero__nav a {
-    background: rgba(12, 16, 20, 0.45);
-    border-color: rgba(255, 255, 255, 0.16);
+  .dir-hero__btn--primary {
+    background: #ff5900;
     color: #ffffff;
   }
 
-  :global([data-theme='night']) .dir-hero__nav a:hover {
-    background: rgba(12, 16, 20, 0.55);
-    border-color: rgba(255, 255, 255, 0.3);
+  .dir-hero__btn--primary:hover {
+    background: #ff7a33;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .dir-hero__btn--ghost {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .dir-hero__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    color: #ffffff;
+    text-decoration: none;
   }
 
   .dir-hero__aside {
-    align-self: start;
-    padding: 1.6rem;
-    border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.59);
-    border: 1px solid rgba(200, 160, 0, 0.3);
-    backdrop-filter: blur(16px);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #000000;
-  }
-
-  .dir-hero__aside-badge {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #ffffff;
+    max-width: 300px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    color: #b38600;
-    font-size: 1rem;
-    margin-bottom: 0.8rem;
+    gap: 1.5rem;
+    opacity: 0;
+    animation: dir-fade-up 0.8s 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .dir-hero__aside p {
-    color: #000000;
+  .dir-hero__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
   }
 
-  .dir-hero__aside strong {
-    color: #c74400;
+  .dir-hero__tag {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    opacity: 0;
+    animation: dir-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  :global([data-theme='night']) .dir-hero__aside {
-    background: rgba(12, 16, 20, 0.55);
-    border-color: rgba(255, 195, 0, 0.25);
-    color: rgba(255, 255, 255, 0.85);
+  .dir-hero__note {
+    margin: 0;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    backdrop-filter: blur(8px);
   }
 
-  :global([data-theme='night']) .dir-hero__aside-badge {
-    background: rgba(255, 195, 0, 0.2);
+  .dir-hero__note strong {
     color: #ffc300;
   }
 
-  :global([data-theme='night']) .dir-hero__aside p {
-    color: rgba(255, 255, 255, 0.85);
+  .dir-hero__scroll-hint {
+    position: absolute;
+    bottom: clamp(1rem, 2.5vh, 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0;
+    animation: dir-fade-up 0.6s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  :global([data-theme='night']) .dir-hero__aside strong {
-    color: #ffc300;
+  .dir-hero__scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: dir-scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes dir-scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  @keyframes dir-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ── Shared ───────────────────────── */
@@ -1100,49 +1141,6 @@ const directionsJsonLd = [
     font-weight: 500;
   }
 
-  /* ── House ────────────────────────── */
-  .dir-house__card {
-    padding: 3.5rem;
-    border-radius: var(--radius-lg);
-    background:
-      radial-gradient(ellipse at 30% 20%, rgba(255, 89, 0, 0.25), transparent 50%),
-      linear-gradient(150deg, #111318 0%, #1a1e26 100%);
-    color: #ffffff;
-    text-align: center;
-  }
-
-  .dir-house__card h2 {
-    color: #ffffff;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-  }
-
-  .dir-house__card p {
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 34rem;
-    margin: 0 auto;
-  }
-
-  .dir-house__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-    padding: 0.9rem 2rem;
-    border-radius: 100px;
-    background: var(--gradient-sunset);
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.35);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .dir-house__btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(255, 89, 0, 0.45);
-  }
-
   /* ── Driving Routes ───────────────── */
   .dir-driving__sub {
     max-width: 32rem;
@@ -1281,8 +1279,18 @@ const directionsJsonLd = [
 
   /* ── Responsive ───────────────────── */
   @media (max-width: 1024px) {
-    .dir-hero__inner {
+    .dir-hero__grid {
       grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .dir-hero__aside {
+      max-width: none;
+      align-items: flex-start;
+    }
+
+    .dir-hero__tags {
+      justify-content: flex-start;
     }
 
     .dir-options {
@@ -1322,10 +1330,17 @@ const directionsJsonLd = [
   }
 
   @media (max-width: 720px) {
-    .dir-hero {
-      padding: calc(var(--header-space) + 3rem) 0 3rem;
-      min-height: 100vh;
-      min-height: 100dvh;
+    .dir-hero__content {
+      padding: calc(var(--header-space) + 2.5rem) 0 3rem;
+    }
+
+    .dir-hero__title {
+      font-size: clamp(2.35rem, 10vw, 3.8rem);
+    }
+
+    .dir-hero__btn {
+      width: 100%;
+      justify-content: center;
     }
 
     .dir-step {
@@ -1343,9 +1358,6 @@ const directionsJsonLd = [
       padding: 2rem;
     }
 
-    .dir-house__card {
-      padding: 2rem;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
