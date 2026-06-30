@@ -86,6 +86,23 @@ export const APARTMENT_SECTIONS: ApartmentSection[] = [
         },
       },
       {
+        id: 'sunrise-balcony',
+        name: 'The Sunrise Balcony',
+        calendar: 'The Sunrise Balcony',
+        cin: 'IT065104C24IZCCRHA',
+        description:
+          'A spacious apartment in Ravello with a kitchen and a balcony facing the sunrise over Amalfi. A bright, comfortable base for slow mornings above the coast.',
+        gallery: ['/apartments/the-sunrise-balcony.webp'],
+        bookingLinks: {
+          airbnb: 'https://www.airbnb.com/rooms/1681964318010929888',
+        },
+        ical: {
+          airbnb: [
+            'https://www.airbnb.com/calendar/ical/1681964318010929888.ics?t=e62e556b493b43a0810805f46513a918',
+          ],
+        },
+      },
+      {
         id: 'carina',
         name: 'Suite Carina',
         calendar: 'Casa Carina',

@@ -7,6 +7,9 @@ export const ICAL_REGISTRY = {
   'Awesome Apts': [
     'https://www.airbnb.com/calendar/ical/3456236.ics?t=eb37cdcccf9a4865b675311c819e0fd2',
   ],
+  'The Sunrise Balcony': [
+    'https://www.airbnb.com/calendar/ical/1681964318010929888.ics?t=e62e556b493b43a0810805f46513a918',
+  ],
   'Casa Carina': [
     'https://www.airbnb.com/calendar/ical/20551225.ics?t=d02159c760e14554aa6b68ff6c99baf6',
   ],
