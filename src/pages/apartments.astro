@@ -770,16 +770,41 @@ const testimonials = [
 
   .adventure-grid {
     display: grid;
-    gap: 2.5rem;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: center;
+    gap: clamp(2rem, 4vw, 4rem);
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.78fr);
+    align-items: start;
+  }
+
+  .adventure-copy {
+    max-width: 680px;
+  }
+
+  .adventure-copy h2 {
+    font-size: clamp(2.3rem, 4vw, 4rem);
+  }
+
+  .adventure-copy .lead {
+    max-width: 62ch;
+  }
+
+  .adventure-media {
+    position: relative;
+    justify-self: end;
+    width: min(100%, 540px);
+    max-height: clamp(320px, 42vw, 520px);
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
   }
 
   .adventure-media img {
     width: 100%;
-    border-radius: var(--radius-lg);
-    aspect-ratio: 3 / 4;
+    height: 100%;
+    aspect-ratio: 16 / 11;
     object-fit: cover;
+    object-position: 50% 42%;
   }
 
   .adventure-pillars {
@@ -822,14 +847,51 @@ const testimonials = [
   @media (max-width: 900px) {
     .adventure-grid {
       grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .adventure-copy {
+      max-width: none;
+    }
+
+    .adventure-media {
+      justify-self: stretch;
+      width: 100%;
+      max-height: 360px;
+      aspect-ratio: 16 / 10;
+    }
+
+    .adventure-media img {
+      aspect-ratio: 16 / 10;
     }
 
     .adventure-pillars {
       grid-template-columns: 1fr;
+      gap: 1rem;
     }
 
     .testimonials__grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .section--adventure {
+      padding-top: 3rem;
+      padding-bottom: 3.25rem;
+    }
+
+    .adventure-copy h2 {
+      font-size: clamp(2rem, 11vw, 2.8rem);
+    }
+
+    .adventure-pillars {
+      margin-top: 1.4rem;
+    }
+
+    .adventure-media {
+      max-height: 300px;
+      border-radius: var(--radius-md);
     }
   }
 </style>
