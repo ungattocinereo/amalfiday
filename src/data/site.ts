@@ -191,7 +191,6 @@ export const footerLinks = {
   ],
   info: [
     { label: 'What to do', href: '/experience' },
-    { label: 'Photo spots', href: '/photolocations' },
     { label: 'Parking tips', href: '/parking' },
     { label: 'Beach reviews', href: '/beaches' },
     { label: 'Moto roads', href: '/moto' },
