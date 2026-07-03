@@ -91,7 +91,6 @@ export const navigation: NavigationItem[] = [
       {
         heading: 'Field Notes',
         items: [
-          { label: 'Photo spots', href: '/photolocations', icon: 'fa-map-location-dot' },
           { label: 'Beach reviews', href: '/beaches', icon: 'fa-umbrella-beach' },
           { label: 'Moto roads', href: '/moto', icon: 'fa-motorcycle' },
         ],
