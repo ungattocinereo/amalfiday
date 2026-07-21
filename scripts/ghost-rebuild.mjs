@@ -22,7 +22,7 @@ import http from 'node:http'
 import crypto from 'node:crypto'
 import { execFile } from 'node:child_process'
 
-const PROJECT_ROOT = '/home/greg/amalfiday'
+const PROJECT_ROOT = '/srv/amalfiday'
 const PORT = Number(process.env.REBUILD_PORT || 4400)
 const SECRET = process.env.GHOST_WEBHOOK_SECRET || ''
 
