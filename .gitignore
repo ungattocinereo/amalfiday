@@ -9,7 +9,6 @@ dist
 .claude
 .codex
 .opencode
-package-lock.json
 .vercel
 files
 
