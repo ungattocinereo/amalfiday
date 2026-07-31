@@ -10,6 +10,7 @@
  * Usage:
  *   <CldImage src="/path/to/image.webp" alt="..." width={1500} height={1072} priority />
  *   <CldImage src="/path/to/image.webp" alt="..." width={800} height={600} sizes="(max-width: 768px) 100vw, 800px" />
+ *   <CldImage src="/photoshootings/example.webp" alt="..." width={800} height={600} delivery="cloudinary" />
  */
 
 import { site } from '../data/site'
@@ -24,6 +25,8 @@ interface Props {
   eager?: boolean
   /** Set fetchpriority="high". Use for the LCP image. Default: false. */
   priority?: boolean
+  /** Override the default delivery policy for a specific image. */
+  delivery?: 'auto' | 'cloudinary' | 'direct'
   /** Pass through `class` and other img attributes. */
   class?: string
   [key: string]: unknown
@@ -37,6 +40,7 @@ const {
   sizes,
   eager = false,
   priority = false,
+  delivery = 'auto',
   class: className,
   ...rest
 } = Astro.props as Props
@@ -48,7 +52,9 @@ const cloud = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME
 // fetch when the cloud name is configured.
 const SKIP_CLOUDINARY = ['/photoshootings/', '/apartments/', '/staticpages/how-to-get/']
 const useCloud =
-  Boolean(cloud) && !SKIP_CLOUDINARY.some((p) => src.includes(p))
+  Boolean(cloud) &&
+  delivery !== 'direct' &&
+  (delivery === 'cloudinary' || !SKIP_CLOUDINARY.some((p) => src.includes(p)))
 
 // Resolve to an absolute URL Cloudinary can fetch.
 const sourceUrl = /^https?:\/\//.test(src) ? src : `${site.url}${src.startsWith('/') ? '' : '/'}${src}`
@@ -61,7 +67,7 @@ const cldUrl = (w: number) =>
 // Generate a srcset at standard breakpoints, capped at 2× the intrinsic
 // width and at 2560 (covers 1080p monitors at 2× DPR). The browser picks
 // the smallest source that meets viewport_width × DPR.
-const STANDARD_WIDTHS = [640, 960, 1280, 1600, 1920, 2560]
+const STANDARD_WIDTHS = [320, 480, 640, 960, 1280, 1600, 1920, 2560]
 const maxWidth = Math.min(width * 2, 2560)
 const widths = STANDARD_WIDTHS.filter((w) => w <= maxWidth)
 if (widths[widths.length - 1] !== maxWidth) widths.push(maxWidth)

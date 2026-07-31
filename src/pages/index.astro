@@ -111,7 +111,6 @@ const fallbackQuatrain =
                 loop
                 playsinline
                 preload="none"
-                poster="/staticpages/video/atrani-sorrento-video.webp"
               >
                 <source data-src="/staticpages/video/atrani-sorrento-video.mp4" type="video/mp4" />
               </video>
@@ -130,13 +129,12 @@ const fallbackQuatrain =
             target="_blank"
             rel="noreferrer"
           >
-            <img
+            <CldImage
               src="/staticpages/index/bus-timetables.webp"
               alt="Bus timetables"
-              loading="lazy"
-              decoding="async"
-              width="1000"
-              height="1000"
+              width={1000}
+              height={1000}
+              sizes="(max-width: 900px) 50vw, 20vw"
             />
             <span class="hero__mini-badge">Bus timetables</span>
           </a>
@@ -147,13 +145,12 @@ const fallbackQuatrain =
             href="/ferry-timetables"
             id="ferry"
           >
-            <img
+            <CldImage
               src="/staticpages/index/ferry-timetables.webp"
               alt="Ferry timetables"
-              loading="lazy"
-              decoding="async"
-              width="1000"
-              height="1000"
+              width={1000}
+              height={1000}
+              sizes="(max-width: 900px) 50vw, 20vw"
             />
             <span class="hero__mini-badge">Ferry timetables</span>
           </a>
@@ -173,13 +170,12 @@ const fallbackQuatrain =
       <div class="hero__essentials">
         {staticPages.map((item) => (
           <a class="hero__essential" href={item.href}>
-            <img
+            <CldImage
               src={item.image}
               alt={item.imageAlt}
-              loading="lazy"
-              decoding="async"
-              width="1200"
-              height="1200"
+              width={1200}
+              height={1200}
+              sizes="(max-width: 900px) 50vw, 16vw"
             />
             <span class="hero__mini-badge">{item.title}</span>
           </a>
@@ -201,11 +197,12 @@ const fallbackQuatrain =
       <div class="xp-grid">
         <a class="xp-card" href="/experience/car-tours">
           <div class="xp-card__media">
-            <img
+            <CldImage
               src="/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp"
               alt="Scenic Coast — private car tour along the Amalfi Coast"
-              loading="lazy"
-              decoding="async" width="2499" height="1874"
+              width={2499}
+              height={1874}
+              sizes="(max-width: 900px) 100vw, 31vw"
             />
           </div>
           <div class="xp-card__body">
@@ -226,11 +223,12 @@ const fallbackQuatrain =
 
         <a class="xp-card" href="/experience/car-tours">
           <div class="xp-card__media">
-            <img
+            <CldImage
               src="/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp"
               alt="Peak Flavors — food and wine tour in Tramonti Valley"
-              loading="lazy"
-              decoding="async" width="2500" height="1875"
+              width={2500}
+              height={1875}
+              sizes="(max-width: 900px) 100vw, 31vw"
             />
           </div>
           <div class="xp-card__body">
@@ -251,11 +249,12 @@ const fallbackQuatrain =
 
         <a class="xp-card" href="/experience/scooter">
           <div class="xp-card__media">
-            <img
+            <CldImage
               src="/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp"
               alt="Scooter Photo Tour along the Amalfi Coast"
-              loading="lazy"
-              decoding="async" width="2500" height="1395"
+              width={2500}
+              height={1395}
+              sizes="(max-width: 900px) 100vw, 31vw"
             />
           </div>
           <div class="xp-card__body">
@@ -295,7 +294,14 @@ const fallbackQuatrain =
         {featuredPhotoshoots.map((item, index) => (
           <a class="scroll__card" href={item.href}>
             <div class="scroll__media" data-index={index}>
-              <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+              <CldImage
+                src={item.image}
+                alt={item.title}
+                width={1200}
+                height={1600}
+                sizes="(max-width: 900px) 88vw, 270px"
+                delivery="cloudinary"
+              />
             </div>
             <div class="scroll__overlay">
               <h3>{item.title}</h3>
@@ -328,7 +334,14 @@ const fallbackQuatrain =
           <a class="news-card" href={post.href}>
             <div class="news-card__media">
               {post.image ? (
-                <img src={post.image} alt={post.title} loading="lazy" decoding="async" />
+                <CldImage
+                  src={post.image}
+                  alt={post.title}
+                  width={800}
+                  height={600}
+                  sizes="(max-width: 900px) 78vw, 240px"
+                  delivery="cloudinary"
+                />
               ) : (
                 <div class="news-card__placeholder" aria-hidden="true"></div>
               )}
@@ -364,14 +377,13 @@ const fallbackQuatrain =
         data-pose-parallax
       >
         <span class="pose-teaser__preview" aria-hidden="true">
-          <img
+          <CldImage
             class="pose-teaser__image"
             src="/pose-guide/photoposes-preview.jpg"
             alt=""
-            loading="lazy"
-            decoding="async"
-            width="1800"
-            height="871"
+            width={1800}
+            height={871}
+            sizes="100vw"
           />
         </span>
       </a>
@@ -654,6 +666,12 @@ const fallbackQuatrain =
     display: block;
     z-index: 2;
     position: relative;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .guide-card.is-video-ready .guide-card__video {
+    opacity: 1;
   }
 
   .guide-card.is-video-ready .guide-card__poster {
