@@ -1,4 +1,5 @@
 import { site } from './site'
+import { photography, photographerSchema } from './photographer'
 
 export type PhotoshootSchemaInput = {
   slug: string
@@ -14,7 +15,7 @@ export type PhotoshootSchemaInput = {
 const toAbs = (path: string) => new URL(path, site.url).toString()
 
 export function buildPhotoshootSchema(input: PhotoshootSchemaInput) {
-  const url = `${site.url}/photoshootings/${input.slug}`
+  const url = `${site.url}/photoshootings/${input.slug}/`
   const images = [
     toAbs(input.hero),
     ...(input.galleryImages?.slice(0, 6).map((g) => toAbs(g.src)) ?? []),
@@ -28,12 +29,8 @@ export function buildPhotoshootSchema(input: PhotoshootSchemaInput) {
     description: input.description,
     url,
     image: images,
-    creator: { '@id': `${site.url}/#business` },
-    author: {
-      '@type': 'Person',
-      name: 'Greg',
-      url: site.url,
-    },
+    creator: { '@id': photography.photographerId },
+    author: { '@id': photography.photographerId },
     ...(input.datePublished ? { datePublished: input.datePublished } : {}),
     contentLocation: {
       '@type': 'Place',
@@ -46,7 +43,7 @@ export function buildPhotoshootSchema(input: PhotoshootSchemaInput) {
       },
     },
     ...(input.keywords?.length ? { keywords: input.keywords.join(', ') } : {}),
-    isPartOf: { '@id': `${site.url}/photoshootings#hub` },
+    isPartOf: { '@id': `${photography.url}#hub` },
   }
 
   const breadcrumbs = {
@@ -58,11 +55,11 @@ export function buildPhotoshootSchema(input: PhotoshootSchemaInput) {
         '@type': 'ListItem',
         position: 2,
         name: 'Photoshoots',
-        item: `${site.url}/photoshootings`,
+        item: photography.url,
       },
       { '@type': 'ListItem', position: 3, name: input.name, item: url },
     ],
   }
 
-  return [work, breadcrumbs]
+  return [photographerSchema, work, breadcrumbs]
 }
