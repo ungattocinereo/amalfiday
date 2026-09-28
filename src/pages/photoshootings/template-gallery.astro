@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PhotoshootHeroSummary from '../../components/PhotoshootHeroSummary.astro'
+import GalleryStudyControls from '../../components/GalleryStudyControls.astro'
+import PhotoRequestDialog from '../../components/PhotoRequestDialog.astro'
+import GalleryFour from '../../components/GalleryFour.astro'
+import { galleryFrames as images, galleryHero, galleryStory } from '../../data/gallery-study'
+import '../../styles/gallery-study.css'
+
+const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) => images.slice(index * 2, index * 2 + 2))
+---
+<BaseLayout title="Loreana — A Photographic Story | Amalfi.Day" description="An afternoon in Ravello. A birthday gift to yourself. Four ways to relive a photographic story on the Amalfi Coast." image={galleryHero} noindex={true}>
+  <div class="gs" data-gallery-study>
+    <section class="gs-hero hero--dark" aria-label="Loreana’s photoshoot in Ravello">
+      <div class="gs-hero__motion"><img class="gs-hero__image" src={galleryHero} alt="Loreana overlooking the Amalfi Coast in Ravello" width="2499" height="1666" fetchpriority="high" loading="eager" /></div>
+      <div class="gs-hero__veil"></div>
+      <div class="gs-hero__content">
+        <div class="gs-eyebrow">Ravello, Italy <span>September · 7 · 2025</span></div>
+        <h1>The Perfect Gift<br /><em>to Yourself</em></h1>
+        <div class="gs-hero__bottom"><PhotoshootHeroSummary description={galleryStory.summary} context={galleryStory.context} images={images} inline /><a href="#gs-story" aria-label="Discover the story"><span>Discover</span><i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a></div>
+      </div>
+      <button class="gs-motion-toggle" type="button" aria-label="Pause cover animation" aria-pressed="false"><i class="fa-solid fa-pause" aria-hidden="true"></i></button>
+    </section>
+
+    <section class="gs-story gs-wrap" id="gs-story">
+      <div class="gs-story__heading" data-reveal>
+        <span class="gs-eyebrow">An unexpected journey</span>
+        <h2>Discovering<br /><em>the Amalfi Coast.</em></h2>
+      </div>
+      <div class="gs-story__copy" data-reveal>
+        <span class="gs-small-index">Ravello / A solo story</span>
+        <p>Loreana was in Rome with her friends, visiting Italy for a short trip from Peru. The Amalfi Coast was something she had never heard much about. Her friends told her about the dramatic cliffs, colourful towns, and hidden streets.</p>
+        <p>She decided to travel alone for a couple of days and contacted me on a Sunday morning — asking if a photoshoot could be arranged within a few hours.</p>
+      </div>
+    </section>
+    <section class="gs-quote gs-wrap" aria-label="Loreana’s words">
+      <blockquote data-reveal><span class="gs-quote__mark" aria-hidden="true">“</span><p>This was the best<br />birthday gift I could<br /><em>give to myself this year.</em></p><footer><span class="gs-quote__rule"></span><cite>Loreana</cite><span>Ravello, September 2025</span></footer></blockquote>
+    </section>
+
+    <section class="gs-chapter gs-rail" id="gs-chapter-1" data-gallery="rail" aria-labelledby="gs-title-1">
+      <header class="gs-chapter__heading gs-wrap" data-reveal><div><span class="gs-eyebrow">01 / The journey</span><h2 id="gs-title-1">A little <em>further.</em></h2></div><p>One afternoon.<br />A whole new perspective.</p></header>
+      <div class="gs-scroll-scene">
+        <div class="gs-stage">
+          <div class="gs-stage__meta gs-wrap"><span class="gs-small-index">Ravello / The sequence</span><span class="gs-gesture"><i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i><span class="gs-desktop-hint">Scroll to wander</span><span class="gs-touch-hint">Swipe to wander</span></span></div>
+          <div class="gs-rail__viewport" tabindex="0" aria-label="Photographs. Use the arrow keys to browse.">
+            <div class="gs-rail__track">
+              {images.map((image, index) => <figure class:list={['gs-rail__frame', { 'is-portrait': image.portrait }]} style={`--photo-ratio:${image.ratio}`}>
+                <a class="gs-photo" href={image.original} data-open-photo={index} aria-label={`Open photograph ${index + 1}: ${image.alt}`}><img src={image.src} srcset={image.srcset} sizes="(max-width: 700px) 85vw, 65vw" width={image.width} height={image.height} alt={image.alt} loading="lazy" decoding="async" draggable="false" /><span class="gs-photo__expand"><i class="fa-solid fa-expand" aria-hidden="true"></i></span></a>
+                <figcaption><span>{String(index + 1).padStart(2, '0')}</span><span>Ravello, Italy</span></figcaption>
+              </figure>)}
+            </div>
+          </div>
+          <GalleryStudyControls label="The journey" />
+        </div>
+      </div>
+    </section>
+
+    <section class="gs-bridge gs-wrap" data-reveal><span class="gs-eyebrow">A change of pace</span><p>When the crowd fades,<br /><em>the real story begins.</em></p><span class="gs-bridge__line"></span></section>
+
+    <section class="gs-chapter gs-spreads" id="gs-chapter-2" data-gallery="spreads" aria-labelledby="gs-title-2">
+      <header class="gs-chapter__heading gs-wrap" data-reveal><div><span class="gs-eyebrow">02 / In good company</span><h2 id="gs-title-2">Better <em>together.</em></h2></div><p>Two frames.<br />A conversation in light.</p></header>
+      <div class="gs-spreads__viewport" tabindex="0" aria-label="Photo spreads. Drag, swipe or use the arrow keys to browse.">
+        {spreads.map((spread, index) => <div class="gs-spread" data-spread={index}>
+          <div class="gs-spread__photos">{spread.map(image => <figure class:list={['gs-spread__frame', { 'is-portrait': image.portrait }]} style={`--photo-ratio:${image.ratio}`}><a class="gs-photo" href={image.original} data-open-photo={image.index} aria-label={`Open photograph ${image.index + 1}: ${image.alt}`}><img src={image.src} srcset={image.srcset} sizes="(max-width: 700px) 44vw, 42vw" width={image.width} height={image.height} alt={image.alt} loading="lazy" decoding="async" draggable="false" /><span class="gs-photo__expand"><i class="fa-solid fa-expand" aria-hidden="true"></i></span></a><figcaption>{String(image.index + 1).padStart(2, '0')} / Loreana in Ravello</figcaption></figure>)}</div>
+          <span class="gs-spread__number">{String(index + 1).padStart(2, '0')} <span>/ 06</span></span>
+        </div>)}
+      </div>
+      <GalleryStudyControls label="In good company" />
+    </section>
+
+    <section class="gs-bridge gs-wrap" data-reveal><span class="gs-eyebrow">Nothing to rush</span><p>Some moments deserve<br /><em>a little longer.</em></p><span class="gs-bridge__line"></span></section>
+
+    <section class="gs-chapter gs-dissolve" id="gs-chapter-3" data-gallery="dissolve" aria-labelledby="gs-title-3">
+      <header class="gs-chapter__heading gs-wrap" data-reveal><div><span class="gs-eyebrow">03 / Stay a moment</span><h2 id="gs-title-3">Just <em>be here.</em></h2></div><p>Let the light linger.<br />Let the rest disappear.</p></header>
+      <div class="gs-scroll-scene"><div class="gs-stage">
+        <div class="gs-dissolve__viewport" tabindex="0" aria-label="Photographs. Use the arrow keys to browse.">
+          {images.map((image, index) => <figure class:list={['gs-dissolve__frame', { 'is-active': index === 0 }]}>
+            <a class="gs-photo" href={image.original} data-open-photo={index} aria-label={`Open photograph ${index + 1}: ${image.alt}`}><img src={image.src} srcset={image.srcset} sizes="(max-width: 700px) 90vw, 85vw" width={image.width} height={image.height} alt={image.alt} loading="lazy" decoding="async" draggable="false" /><span class="gs-photo__expand"><i class="fa-solid fa-expand" aria-hidden="true"></i></span></a>
+          </figure>)}
+        </div>
+        <GalleryStudyControls label="Stay a moment" />
+      </div></div>
+    </section>
+
+    <GalleryFour />
+
+    <section class="gs-cta gs-wrap" data-reveal>
+      <span class="gs-eyebrow"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i> Your turn to remember</span>
+      <h2>A place. A feeling.<br /><em>A story that’s yours.</em></h2>
+      <p>Tell me a little about yourself.<br />I’ll take care of the light, the places, and the quiet moments in between.</p>
+      <a class="gs-button gs-request-trigger" href="/contact?service=Photoshooting" data-request aria-haspopup="dialog" aria-controls="gs-request"><span class="gs-request-trigger__label">Request a photoshoot</span><span class="gs-request-trigger__icon" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i><i class="fa-solid fa-camera"></i></span></a>
+      <span class="gs-cta__note">Made with you, on the Amalfi Coast.</span>
+    </section>
+  </div>
+
+  <dialog class="gs-dialog gs-lightbox" id="gs-lightbox" aria-label="Photograph viewer">
+    <div class="gs-lightbox__top"><span class="gs-eyebrow">Loreana / Ravello</span><button class="gs-icon" type="button" data-close aria-label="Close photograph viewer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+    <div class="gs-lightbox__image"><img alt="" /></div>
+    <GalleryStudyControls label="Full-size photographs" />
+    <p class="sr-only" data-lightbox-status aria-live="polite"></p>
+  </dialog>
+  <PhotoRequestDialog />
+  <script>
+    import '../../scripts/gallery-study'
+  </script>
+</BaseLayout>

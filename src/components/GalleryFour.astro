@@ -1,0 +1,49 @@
+---
+import GalleryStudyControls from './GalleryStudyControls.astro'
+import { galleryFrames as images } from '../data/gallery-study'
+
+// Keep the subject in view when a photograph fills a differently shaped screen.
+const focalPoints: Record<string, string> = {
+  '02': '64% 35%', '05': '52% 15%', '08': '50% 20%',
+  '07': '60% 14%', '20': '62% 24%', '10': '50% 32%',
+  '13': '50% 8%', '12': '50% 15%', '23': '62% 10%',
+  '29': '54% 72%', '33': '49% 8%', '34': '62% 6%',
+}
+---
+
+<!-- Gallery 4: an optional, full-viewport treatment of the same sequence. -->
+<section class="gs-immersive" id="gs-gallery-4" data-gallery="immersive" aria-labelledby="gs-title-4" aria-roledescription="carousel">
+  <div class="gs-immersive__viewport" tabindex="0" aria-label="Photographs. Swipe or use the arrow keys to browse.">
+    {images.map((image, index) => (
+      <figure class="gs-immersive__frame" style={`--focal-point: ${focalPoints[image.id] ?? '50% 25%'}`} role="group" aria-roledescription="slide" aria-label={`Photograph ${index + 1} of ${images.length}`}>
+        <img
+          src={image.src}
+          srcset={`${image.srcset}, ${image.original} ${image.width}w`}
+          sizes={`max(100vw, ${(image.width / image.height * 100).toFixed(1)}svh)`}
+          width={image.width}
+          height={image.height}
+          alt={image.alt}
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+      </figure>
+    ))}
+  </div>
+  <div class="gs-immersive__veil" aria-hidden="true"></div>
+  <div class="gs-immersive__top">
+    <span class="gs-eyebrow">Loreana <span>/ Ravello, Italy</span></span>
+    <a class="gs-icon" data-immersive-open data-open-photo="0" href={images[0].original} aria-label="Open photograph 1 in full">
+      <i class="fa-solid fa-expand" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="gs-immersive__overlay">
+    <div class="gs-immersive__story">
+      <span class="gs-eyebrow">04 / The whole picture</span>
+      <h2 id="gs-title-4">A view<br /> <em>to keep.</em></h2>
+      <p data-immersive-caption>{images[0].alt}</p>
+    </div>
+    <GalleryStudyControls label="The whole picture" />
+  </div>
+  <p class="sr-only" data-immersive-status aria-live="polite" aria-atomic="true"></p>
+</section>

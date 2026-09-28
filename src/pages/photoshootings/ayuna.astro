@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import PhotoshootHeroSummary from '../../components/PhotoshootHeroSummary.astro'
 import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp'
@@ -71,6 +72,7 @@ const galleryOneImages = [
         <div class="shoot-hero__meta">
           <div class="shoot-hero__date">{shootDate}</div>
           <h1 class="shoot-hero__title">{shootTitle}</h1>
+          <PhotoshootHeroSummary description="A photographic story with Ayuna" context={[shootTitle, shareImageAlt, articleDescriptionOne, articleDescriptionTwo]} images={galleryOneImages} />
         </div>
       </div>
       <a class="scroll-indicator" href="#shoot-story" aria-label="Scroll to story">

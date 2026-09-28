@@ -5,9 +5,15 @@ node_modules
 dist
 .env
 .DS_Store
-.agents
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/photoshoot-template/
 .claude
-.codex
+.codex/*
+!.codex/skills/
+.codex/skills/*
+!.codex/skills/photoshoot-template
 .opencode
 .vercel
 files

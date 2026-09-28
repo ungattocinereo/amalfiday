@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import PhotoshootHeroSummary from '../../components/PhotoshootHeroSummary.astro'
 import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp'
@@ -88,6 +89,7 @@ const allImages = [
       <div class="container ed-hero__content">
         <div class="ed-hero__date">{shootDate}</div>
         <h1 class="ed-hero__title">{shootTitle}</h1>
+        <PhotoshootHeroSummary description="A photographic story with Lashanda" context={[shootTitle, shareImageAlt, articleDescription]} images={allImages} />
       </div>
       <a class="ed-scroll-cue" href="#ed-story" aria-label="Scroll to story">
         <svg width="18" height="28" viewBox="0 0 18 28" fill="none">

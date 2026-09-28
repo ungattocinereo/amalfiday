@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import PhotoshootHeroSummary from '../../components/PhotoshootHeroSummary.astro'
 import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage =
@@ -104,6 +105,7 @@ const seoSection = {
         <div class="shoot-hero__meta">
           <div class="shoot-hero__date">{shootDate}</div>
           <h1 class="shoot-hero__title">{shootTitle}</h1>
+          <PhotoshootHeroSummary description="A fashion story in Ravello" context={[shootTitle, shareImageAlt, ...storyIntro.paragraphs]} images={galleryOneImages} />
         </div>
       </div>
       <a class="scroll-indicator" href="#shoot-story" aria-label="Scroll to story">

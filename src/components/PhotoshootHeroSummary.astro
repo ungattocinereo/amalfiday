@@ -1,0 +1,34 @@
+---
+import { selectPhotoshootHeroIcons } from '../data/photoshoot-hero-icons'
+
+interface Props {
+  description: string
+  context?: string[]
+  images?: { alt: string }[]
+  inline?: boolean
+}
+
+const { description, context = [], images = [], inline = false } = Astro.props
+const icons = selectPhotoshootHeroIcons([description, ...context], images)
+const iconDescription = icons.map(icon => icon.label).join(' · ')
+---
+
+<span class:list={['photo-hero-summary', { 'photo-hero-summary--ruled': !inline }]}>
+  <span class="photo-hero-summary__icons" role="img" aria-label={iconDescription} title={iconDescription}>
+    {icons.map(icon => <i class={`fa-solid ${icon.name}`} aria-hidden="true"></i>)}
+  </span>
+  <span class="photo-hero-summary__text">{description}</span>
+</span>
+
+<style>
+  .photo-hero-summary { display: flex; align-items: center; gap: 16px; min-width: 0; color: #fff; }
+  .photo-hero-summary__icons { display: inline-flex; flex: none; align-items: center; gap: 11px; padding-right: 16px; border-right: 1px solid #ffffff40; font-size: 13px; line-height: 1; letter-spacing: 0; opacity: .9; }
+  .photo-hero-summary__icons i { width: 1.15em; text-align: center; }
+  .photo-hero-summary__text { min-width: 0; line-height: 1.7; }
+  .photo-hero-summary--ruled { border-top: 1px solid #ffffff40; padding-top: 20px; margin-block: 28px 20px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; }
+  @media (max-width: 700px) {
+    .photo-hero-summary { gap: 10px; }
+    .photo-hero-summary__icons { gap: 8px; padding-right: 10px; font-size: 11px; }
+    .photo-hero-summary--ruled { margin-top: 22px; padding-top: 16px; font-size: 10px; }
+  }
+</style>

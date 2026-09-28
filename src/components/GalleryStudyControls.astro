@@ -1,0 +1,18 @@
+---
+import { galleryFrames } from '../data/gallery-study'
+const { label } = Astro.props
+---
+<div class="gs-controls">
+  <span class="gs-count"><span data-current>01</span><span class="gs-count__line"></span>12</span>
+  <div class="gs-thumbs" aria-label={`${label}: choose a photograph`}>
+    {galleryFrames.map((image, index) => (
+      <button type="button" class="gs-thumb" data-frame={index} aria-label={`View photograph ${index + 1}`} aria-current={index === 0 ? 'true' : 'false'}>
+        <img src={image.thumb} alt="" width="32" height="38" loading="lazy" />
+      </button>
+    ))}
+  </div>
+  <div class="gs-arrows">
+    <button class="gs-icon" type="button" data-prev aria-label="Previous photograph"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+    <button class="gs-icon" type="button" data-next aria-label="Next photograph"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+  </div>
+</div>

@@ -4,6 +4,10 @@
 
 This is an Astro 5 static site for Amalfi.Day. Application source lives in `src/`: routes in `src/pages`, shared Astro components in `src/components`, common layouts in `src/layouts`, data and integrations in `src/data`, and global CSS in `src/styles`. Public assets are served from `public/` by URL path, while larger legacy media also exists in `staticpages/`. Build and content utilities live in `scripts/`. Generated output such as `dist/`, `.astro/`, and `node_modules/` should not be edited by hand.
 
+## Photoshoot Pages
+
+For new photoshoots and changes to their hero, galleries, images, or request form, read and apply the project [photoshoot-template skill](.agents/skills/photoshoot-template/SKILL.md). The approved default is `src/pages/photoshootings/template-gallery.astro`; older `template.astro` and `concept-editorial.astro` are not the default for new pages. Preserving faces in every crop is mandatory: check each image in the hero, galleries, and thumbnails across desktop and mobile sizes, and use focal points specific to that photoshoot. Preserve the agreed fonts, themes, contextual icons, gallery controls, and compact request flow described in the skill unless the user explicitly changes them.
+
 ## Build, Test, and Development Commands
 
 - `npm install` installs project dependencies.

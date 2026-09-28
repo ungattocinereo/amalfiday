@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import PhotoshootHeroSummary from '../../components/PhotoshootHeroSummary.astro'
 
 const heroImage = '/photoshootings/hero/personal/Masha-Minchuck-Amalfi-day.jpg'
 const shareImageAlt = 'Cinematic photoshoot template hero image'
@@ -130,6 +131,7 @@ const galleryTwoImages = [
         <div class="shoot-hero__meta">
           <div class="shoot-hero__date">{shootDate}</div>
           <h1 class="shoot-hero__title">{shootTitle}</h1>
+          <PhotoshootHeroSummary description="Light, movement and a story to remember." context={[shootTitle, shareImageAlt, articleDescription]} images={[...galleryOneImages, ...galleryTwoImages]} />
         </div>
       </div>
       <a class="scroll-indicator" href="#shoot-story" aria-label="Scroll to story">

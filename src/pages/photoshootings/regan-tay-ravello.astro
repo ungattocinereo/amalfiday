@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import PhotoshootHeroSummary from '../../components/PhotoshootHeroSummary.astro'
 import { buildPhotoshootSchema } from '../../data/photoshoot-schema'
 
 const heroImage = '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp'
@@ -118,6 +119,7 @@ const galleryTwoImages = [
         <div class="shoot-hero__meta">
           <div class="shoot-hero__date">{shootDate}</div>
           <h1 class="shoot-hero__title">{shootTitle}</h1>
+          <PhotoshootHeroSummary description="A photographic story with Taylor & Regan" context={[shootTitle, shareImageAlt, storyIntro.subtitle, storyIntro.paragraph, storyCraft.paragraph]} images={[...galleryOneImages, ...galleryTwoImages]} />
         </div>
       </div>
       <a class="scroll-indicator" href="#shoot-story" aria-label="Scroll to story">

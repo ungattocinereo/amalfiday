@@ -1,0 +1,4 @@
+interface:
+  display_name: "Фотосессия Amalfi.Day"
+  short_description: "Новая фотосессия по шаблону с фокусом на лица"
+  default_prompt: "Используй $photoshoot-template, чтобы создать новую фотосессию по основному шаблону Amalfi.Day, сохранив лица в кадре и все согласованные правила."
