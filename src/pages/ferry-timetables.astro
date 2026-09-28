@@ -488,7 +488,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
             </a>
           </div>
         </article>
-        <article class="ferry-column">
+        <article class="ferry-column" id="alicost" aria-labelledby="alicost-title">
           <div class="ferry-media">
             <img
               src="/staticpages/timetables/NLG.webp"
@@ -497,48 +497,33 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
             />
           </div>
           <div class="ferry-content">
-            <h3>
-              <i class="fa-solid fa-sun"></i>
-              Alicost
-            </h3>
-            <p>
-              Positano Jet is a new company operating in 2025 along the Amalfi Coast. They offer
-              tours not only to Positano but also to Capri and Sorrento. We've gathered all their
-              schedules here for your convenience. You can book your ticket by clicking here
-            </p>
-            <p class="ferry-fees">
-              <i class="fa-solid fa-circle-info"></i>
-              <span>
-                Additional Taxes Per Person
-                <br />
-                Capri Tax: + 5,00 €
-                <span class="tax-direction">
-                  <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                  Capri
-                </span>
-                <br />
-                Procida Tax: + 3,50 €
-                <span class="tax-direction">
-                  <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                  Procida
-                </span>
-                <br />
-                Salerno Tax: + 1,50 €
-                <span class="tax-direction">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                  Salerno
-                </span>
-              </span>
-            </p>
-            <a
-              class="timetable-download ferry-download"
-              href="https://amalfi.day/files/FERRY-timetables-alicost.pdf"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <i class="fa-solid fa-cloud-arrow-down"></i>
-              Alicost Timetables
-            </a>
+            <div class="ferry-title-row">
+            <h3 id="alicost-title"><i class="fa-solid fa-sun" aria-hidden="true"></i> Alicost</h3>
+            <details class="ferry-info" id="alicost-info">
+              <summary aria-label="Alicost service information" title="Service information"><i class="fa-solid fa-circle-info" aria-hidden="true"></i></summary>
+              <div class="ferry-info-panel">
+                <p><strong>Checked <time datetime="2026-09-13">13 September 2026</time>.</strong>{' '}
+                  Recheck your travel date; schedules and sea conditions can affect sailings.</p>
+                <a class="ferry-inline-link" href="https://www.alicost.it/aliscafi-per-ischia/"
+                  target="_blank" rel="noreferrer">Alicost Ischia timetable</a>
+                <p><strong>Metrò del Mare:</strong> Only A1/A2 have ended for 2026
+                  (4/6 September). Alicost announces their return in 2027.</p>
+                <a class="ferry-archive-link" href="https://www.alicost.it/metro-del-mare/"
+                  target="_blank" rel="noreferrer">Official season notice</a>
+              </div>
+            </details>
+            </div>
+            <p class="ferry-service-name">Capri &amp; Ischia · Seasonal ferry services</p>
+            <p>Alicost continues to operate seasonal services between the Amalfi Coast,
+              Salerno and the islands. The end of the Metrò del Mare season does not apply
+              to all Alicost routes.</p>
+            <p><strong>Capri:</strong> Connections from Amalfi, Positano, Salerno and other
+              coastal towns. Check the official timetable for your departure port.</p>
+            <p><strong>Ischia:</strong> Daily services from Amalfi, Positano and Salerno
+              are scheduled through <time datetime="2026-09-30">30 September 2026</time>.</p>
+            <a class="timetable-download ferry-download"
+              href="https://www.alicost.it/aliscafi-per-capri/"
+              target="_blank" rel="noreferrer">Alicost Capri timetable</a>
           </div>
         </article>
       </div>
@@ -673,6 +658,22 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     </section>
   ))}
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const info = document.getElementById('alicost-info')
+    if (!info) return
+    document.addEventListener('click', (event) => {
+      if (event.target instanceof Node && !info.contains(event.target)) info.open = false
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && info.open) {
+        info.open = false
+        info.querySelector('summary')?.focus()
+      }
+    })
+  })()
+</script>
 
 <script is:inline>
   ;(function () {
@@ -1125,6 +1126,105 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     max-width: 70rem;
     margin-bottom: 1.6rem;
     color: var(--color-text-muted);
+  }
+
+  #alicost {
+    scroll-margin-top: 7rem;
+  }
+
+  #alicost {
+    overflow: visible;
+  }
+
+  #alicost .ferry-media {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .ferry-service-name {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .ferry-title-row {
+    position: relative;
+  }
+
+  .ferry-title-row h3 {
+    min-height: 44px;
+    padding-right: 56px;
+  }
+
+  .ferry-info {
+    position: static;
+  }
+
+  .ferry-info summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    background: var(--color-card);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    list-style: none;
+  }
+
+  .ferry-info summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .ferry-info summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .ferry-info summary:hover,
+  .ferry-info[open] summary {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .ferry-info-panel {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 5;
+    width: 100%;
+    padding: 1rem;
+    display: grid;
+    gap: 0.75rem;
+    background: var(--color-card);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: 0.85rem;
+    box-shadow: var(--shadow-soft);
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 767px) {
+    .ferry-info-panel {
+      position: static;
+      width: auto;
+      margin-top: 0.65rem;
+      box-shadow: none;
+    }
+  }
+
+  .ferry-archive-link {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 0.9rem;
   }
 
   .ferry-grid {
