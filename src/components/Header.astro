@@ -45,14 +45,14 @@ const isActive = (item: (typeof navigation)[number]) =>
         ) : (
           <a class:list={['nav-link', { 'is-active': isActive(item) }]} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
         ))}
+        <a class:list={['nav-link', { 'is-active': isCurrent('/contact') }]} href="/contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>Contact</a>
       </nav>
-      <div class="header__connect">
+      <div class="header__connect" aria-label="Social media">
         {headerSocials.map((item) => (
           <a class="icon-link" href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.label} (opens in a new tab)`} title={item.label}>
             <i class={`fa-brands fa-${item.label.toLowerCase()}`} aria-hidden="true"></i>
           </a>
         ))}
-        <a class="contact-link" href="/contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>Contact <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
       </div>
     </div>
 
@@ -186,8 +186,8 @@ const isActive = (item: (typeof navigation)[number]) =>
       if (menu.open) closeMenu()
     })
     // Read the sections behind the fixed bar, ignoring the navigation itself.
-    // Photo heroes already declare their dark treatment; a matching glass tint
-    // keeps white lettering readable even over highlights in the photograph.
+    // Photo heroes declare their dark treatment. All other sections use their
+    // computed background to choose light or dark navigation lettering.
     const bar = header.querySelector('.glass-bar')
     const parseColor = (value) => {
       const channels = value.match(/[\d.]+/g)?.map(Number)
@@ -273,7 +273,6 @@ const isActive = (item: (typeof navigation)[number]) =>
 <style>
   /* Panels follow the chosen theme. The bar independently follows the page below. */
   .header, .nav-sheet, .mobile-menu {
-    --glass: rgba(255, 255, 255, 0.82);
     --glass-solid: #ffffff;
     --glass-line: rgba(20, 20, 20, 0.12);
     --glass-ink: #141414;
@@ -284,7 +283,6 @@ const isActive = (item: (typeof navigation)[number]) =>
     --night-logo: none;
   }
   :global([data-theme='night']) :is(.header, .nav-sheet, .mobile-menu) {
-    --glass: rgba(13, 16, 19, 0.86);
     --glass-solid: #111417;
     --glass-line: rgba(255, 255, 255, 0.15);
     --glass-ink: #ffffff;
@@ -312,22 +310,14 @@ const isActive = (item: (typeof navigation)[number]) =>
     padding-top: max(16px, env(safe-area-inset-top));
     border: 0;
     border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     color: var(--glass-ink);
     transition: min-height 200ms ease, padding-block 200ms ease, color 160ms ease;
   }
-  .glass-bar::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: var(--glass);
-    backdrop-filter: blur(22px) saturate(125%);
-    -webkit-backdrop-filter: blur(22px) saturate(125%);
-    transition: background 180ms ease;
-    pointer-events: none;
-  }
   .glass-bar[data-surface='light'] {
-    --glass: rgba(255, 255, 255, 0.82);
     --glass-solid: #ffffff;
     --glass-line: rgba(20, 20, 20, 0.12);
     --glass-ink: #141414;
@@ -337,7 +327,6 @@ const isActive = (item: (typeof navigation)[number]) =>
     --night-logo: none;
   }
   .glass-bar[data-surface='dark'] {
-    --glass: rgba(9, 12, 15, 0.72);
     --glass-solid: #111417;
     --glass-line: rgba(255, 255, 255, 0.15);
     --glass-ink: #ffffff;
@@ -347,8 +336,6 @@ const isActive = (item: (typeof navigation)[number]) =>
     --night-logo: block;
   }
   .is-scrolled .glass-bar { min-height: 72px; padding-block: max(8px, env(safe-area-inset-top)) 8px; }
-  .is-scrolled .glass-bar[data-surface='light'] { --glass: rgba(255, 255, 255, 0.92); }
-  .is-scrolled .glass-bar[data-surface='dark'] { --glass: rgba(9, 12, 15, 0.9); }
   .header a, .header button, .header summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
   .header a:hover { text-decoration: none; }
   .header :is(a, button, summary):focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 3px; }
@@ -357,21 +344,20 @@ const isActive = (item: (typeof navigation)[number]) =>
   .brand__day { display: var(--day-logo); }
   .brand__night { display: var(--night-logo); }
   .header__center, .desktop-nav, .header__connect { display: flex; align-items: center; }
-  .header__center { justify-self: center; }
-  .desktop-nav { gap: 8px; }
-  .header__connect { gap: 2px; margin-left: 20px; padding-left: 20px; border-left: 1px solid var(--glass-line); }
-  .nav-link { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: 4px; color: var(--glass-ink); font-size: 15px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background 160ms ease; }
+  .header__center { justify-self: center; gap: 24px; height: 44px; }
+  .desktop-nav { gap: 8px; height: 44px; }
+  .nav-disclosure { height: 44px; }
+  .header__connect { gap: 4px; height: 44px; }
+  .nav-link { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; height: 44px; padding: 0 14px; border-radius: 4px; color: var(--glass-ink); font-size: 15px; line-height: 20px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background 160ms ease; }
   .nav-link::after { content: ''; position: absolute; height: 2px; bottom: 3px; left: 14px; right: 14px; background: var(--glass-accent); transform: scaleX(0); transform-origin: left; transition: transform 180ms ease; }
   .nav-link.is-active::after, details[open] > .nav-link::after { transform: scaleX(1); }
-  .nav-link.is-active, details[open] > .nav-link { background: var(--glass-hover); }
+  .nav-link.is-active, details[open] > .nav-link { background: transparent; }
   summary { list-style: none; }
   summary::-webkit-details-marker { display: none; }
-  .chevron { font-size: 9px; transition: transform 180ms ease; }
+  .chevron { display: grid; place-items: center; width: 12px; height: 20px; line-height: 1; font-size: 9px; transition: transform 180ms ease; }
   details[open] > summary .chevron { transform: rotate(180deg); }
-  .icon-link, .theme-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--glass-ink); border-radius: 4px; font-size: 18px; transition: background 160ms ease, color 160ms ease, transform 180ms ease; }
-  .contact-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding-inline: 12px; margin-left: 8px; border-radius: 4px; color: var(--glass-ink); font-size: 15px; font-weight: 500; transition: background 160ms ease; }
-  .contact-link i { font-size: 11px; transition: transform 180ms ease; }
-  .contact-link[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--glass-accent); text-underline-offset: 9px; text-decoration-thickness: 2px; }
+  .icon-link, .theme-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--glass-ink); border-radius: 4px; font-size: 18px; line-height: 1; padding: 0; flex-shrink: 0; transition: background 160ms ease, color 160ms ease, transform 180ms ease; }
+  .icon-link > i, .theme-button > i { width: 20px; line-height: 20px; text-align: center; }
   .theme-button { justify-self: end; border: 0; background: transparent; cursor: pointer; }
   .theme-sun { display: none; }
   :global([data-theme='night']) .theme-moon { display: none; }
@@ -389,13 +375,13 @@ const isActive = (item: (typeof navigation)[number]) =>
   .sub-link i { width: 18px; flex-shrink: 0; color: var(--glass-muted); text-align: center; font-size: 14px; }
   .sub-link:hover, .sub-link[aria-current='page'] { background: var(--glass-hover); color: var(--glass-ink); }
   .sub-link:hover i, .sub-link[aria-current='page'] i { color: var(--glass-accent); }
-  .menu-toggle, .menu-close { display: flex; align-items: center; justify-content: center; justify-self: center; gap: 12px; min-height: 44px; padding: 0 16px; background: var(--glass-hover); color: var(--glass-ink); border: 0; border-radius: 4px; font: 500 14px var(--font-body); cursor: pointer; transition: background 180ms ease, color 180ms ease, transform 180ms ease; }
+  .menu-toggle, .menu-close { display: flex; align-items: center; justify-content: center; justify-self: center; gap: 10px; height: 44px; padding: 0 14px; background: transparent; color: var(--glass-ink); border: 0; border-radius: 4px; font: 500 14px/20px var(--font-body); cursor: pointer; transition: background 180ms ease, color 180ms ease, transform 180ms ease; }
   .menu-toggle { display: none; }
-  .menu-lines { position: relative; width: 20px; height: 14px; }
-  .menu-lines::before, .menu-lines::after { content: ''; position: absolute; left: 0; height: 2px; background: var(--glass-accent); transition: width 180ms ease, background 180ms ease; }
-  .menu-lines::before { width: 20px; top: 3px; }
-  .menu-lines::after { width: 12px; bottom: 3px; }
-  .menu-close i { color: var(--glass-accent); transition: transform 180ms ease; }
+  .menu-lines { position: relative; width: 20px; height: 20px; flex-shrink: 0; }
+  .menu-lines::before, .menu-lines::after { content: ''; position: absolute; left: 0; height: 2px; background: currentColor; transition: width 180ms ease, background 180ms ease; }
+  .menu-lines::before { width: 20px; top: 6px; }
+  .menu-lines::after { width: 12px; bottom: 6px; }
+  .menu-close i { width: 20px; line-height: 20px; text-align: center; color: var(--glass-accent); transition: transform 180ms ease; }
   .menu-toggle:active, .menu-close:active, .theme-button:active { transform: scale(0.96); }
   .mobile-menu { position: fixed; inset: 0; width: 100%; max-width: 640px; height: 100%; height: 100dvh; max-height: none; margin: 0 auto; padding: 0; border: 0; border-radius: 0; color: var(--glass-ink); background: var(--glass-solid); overflow: clip; }
   .mobile-menu[open] { display: flex; flex-direction: column; animation: reveal 200ms ease-out; }
@@ -427,8 +413,6 @@ const isActive = (item: (typeof navigation)[number]) =>
     .nav-link:hover { background: var(--glass-hover); color: var(--glass-ink); }
     .nav-link:hover::after { transform: scaleX(1); }
     .icon-link:hover, .theme-button:hover { background: var(--glass-accent); color: #141414; transform: translateY(-2px); }
-    .contact-link:hover { background: var(--glass-hover); color: var(--glass-ink); }
-    .contact-link:hover i { color: var(--glass-accent); transform: translate(2px, -2px); }
     .menu-toggle:hover, .menu-close:hover { background: var(--glass-accent); color: #141414; }
     .menu-toggle:hover .menu-lines::before, .menu-toggle:hover .menu-lines::after { background: #141414; width: 20px; }
     .menu-close:hover i { color: #141414; transform: rotate(90deg); }
@@ -451,11 +435,5 @@ const isActive = (item: (typeof navigation)[number]) =>
   .header:not([data-surface-ready]) *, .header:not([data-surface-ready]) *::before { transition: none !important; }
   @media (prefers-reduced-motion: reduce) {
     .header *, .header *::before, .header *::after { transition: none !important; animation: none !important; }
-  }
-  @media (prefers-reduced-transparency: reduce) {
-    .glass-bar::before { background: var(--glass-solid); backdrop-filter: none; -webkit-backdrop-filter: none; }
-  }
-  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .glass-bar::before { background: var(--glass-solid); }
   }
 </style>
