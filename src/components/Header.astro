@@ -1,1333 +1,323 @@
 ---
 import { navigation, socialLinks, site } from '../data/site'
-const headerSocials = socialLinks.filter((item) =>
-  ['Instagram', 'Facebook'].includes(item.label)
-)
-const hasDropdown = (item: (typeof navigation)[number]) =>
-  Array.isArray(item.dropdownSections) && item.dropdownSections.length > 0
-const getMobilePanelId = (label: string) =>
-  `mobile-section-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`
+const headerSocials = socialLinks.filter((item) => ['Instagram', 'Facebook'].includes(item.label))
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
+const isCurrent = (href?: string) => href === currentPath
+const isWithin = (href?: string) => href && !href.includes('#') && (isCurrent(href) || currentPath.startsWith(`${href}/`))
+const isActive = (item: (typeof navigation)[number]) =>
+  isWithin(item.href) || item.dropdownSections?.some((section) => section.items.some((link) => isWithin(link.href)))
 ---
 
 <header class="header" id="header">
-  <!-- Mobile: logo outside pill, centered -->
-  <a class="logo mobile-logo" href="/" aria-label={`${site.name} home`}>
-    <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
-    <img class="logo__mark logo__mark--night" src="/brand/logo-light.svg" alt="" aria-hidden="true" width="267" height="63" />
-  </a>
+  <div class="glass-bar">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <img class="brand__day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
+      <img class="brand__night" src="/brand/logo-light.svg" alt="" aria-hidden="true" width="267" height="63" />
+    </a>
 
-  <div class="header__pill">
-    <div class="header__inner">
-      <!-- Desktop: logo inside pill, left -->
-      <a class="logo desktop-logo" href="/" aria-label={`${site.name} home`}>
-        <img class="logo__mark logo__mark--day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
-        <img class="logo__mark logo__mark--night" src="/brand/logo-light.svg" alt="" aria-hidden="true" width="267" height="63" />
-      </a>
-
-      <nav class="nav">
-        {navigation.map((item) => (
-          hasDropdown(item) ? (
-            <div class="nav__dropdown">
-              {item.href ? (
-                <a class="nav__link" href={item.href} aria-haspopup="true">
-                  <i class={`fa-solid ${item.icon}`}></i>
-                  {item.label}
-                  <i class="fa-solid fa-chevron-down nav__chevron"></i>
-                </a>
-              ) : (
-                <button class="nav__link nav__link--button" type="button" aria-haspopup="true">
-                  <i class={`fa-solid ${item.icon}`}></i>
-                  {item.label}
-                  <i class="fa-solid fa-chevron-down nav__chevron"></i>
-                </button>
-              )}
-              <div class="dropdown">
-                {item.dropdownSections?.map((section, sectionIndex) => (
-                  <Fragment>
-                    {sectionIndex > 0 && <div class="dropdown__divider"></div>}
-                    <div class="dropdown__section">
-                      <span class="dropdown__heading">{section.heading}</span>
-                      {section.items.map((link) => (
-                        <a class="dropdown__item" href={link.href}>
-                          <i class={`fa-solid ${link.icon}`}></i>
-                          <span>{link.label}</span>
-                        </a>
-                      ))}
-                    </div>
-                  </Fragment>
+    <div class="header__center">
+      <nav class="desktop-nav" aria-label="Main navigation">
+        {navigation.map((item) => item.dropdownSections?.length ? (
+          <details class="nav-disclosure" data-desktop-disclosure>
+            <summary class:list={['nav-link', { 'is-active': isActive(item) }]}>
+              {item.label}<i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            </summary>
+            <div class="nav-sheet">
+              <div class="nav-sheet__intro">
+                <span class="eyebrow">Explore the coast</span>
+                <span class="nav-sheet__title">{item.label}</span>
+                {item.href && <a class="overview" href={item.href}>Discover all <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>}
+              </div>
+              <div class="nav-sheet__sections">
+                {item.dropdownSections.map((section) => (
+                  <div class="nav-section">
+                    <span class="eyebrow">{section.heading}</span>
+                    {section.items.map((link) => (
+                      <a class="sub-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                        <i class={`fa-solid ${link.icon}`} aria-hidden="true"></i><span>{link.label}</span>
+                      </a>
+                    ))}
+                  </div>
                 ))}
               </div>
             </div>
-          ) : (
-            <a class="nav__link" href={item.href || '#'}>
-              <i class={`fa-solid ${item.icon}`}></i>
-              {item.label}
-            </a>
-          )
+          </details>
+        ) : (
+          <a class:list={['nav-link', { 'is-active': isActive(item) }]} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
         ))}
       </nav>
-
-      <div class="header__actions">
-        <div class="header__social">
-          {headerSocials.map((item) => (
-            <a class="header__social-link" href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
-              {item.label === 'Instagram' && <i class="fa-brands fa-instagram"></i>}
-              {item.label === 'Facebook' && <i class="fa-brands fa-facebook"></i>}
-            </a>
-          ))}
-        </div>
-        <span class="header__divider"></span>
-        <a class="cta-btn" href="/contact">Contact</a>
-        <span class="header__divider"></span>
-        <label class="theme-switch" aria-label="Toggle theme">
-          <input class="theme-switch__input" type="checkbox" />
-          <span class="theme-switch__track">
-            <span class="theme-switch__thumb"></span>
-          </span>
-          <span class="theme-switch__icon" aria-hidden="true">
-            <i class="fa-solid fa-sun"></i>
-            <i class="fa-solid fa-moon"></i>
-          </span>
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile: hamburger -->
-  <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-    <i class="fa-solid fa-list"></i>
-    <i class="fa-solid fa-xmark"></i>
-  </button>
-
-  <!-- Full-screen mobile menu -->
-  <div class="mobile-panel" role="dialog" aria-modal="true" aria-hidden="true">
-    <button class="mobile-panel__close" type="button" aria-label="Close menu">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-    <a class="mobile-panel__brand" href="/" aria-label={`${site.name} home`}>
-      <span class="mobile-panel__brand-mark" aria-hidden="true"></span>
-    </a>
-
-    <div class="mobile-panel__links">
-      <a class="mobile-panel__link" href="/">
-        <i class="fa-solid fa-house"></i> Home
-      </a>
-      {navigation.map((item) => (
-        hasDropdown(item) ? (
-          <div class="mobile-panel__accordion" data-mobile-accordion>
-            <button
-              class="mobile-panel__accordion-toggle"
-              type="button"
-              aria-expanded="false"
-              aria-controls={getMobilePanelId(item.label)}
-              data-mobile-accordion-toggle
-            >
-              <span class="mobile-panel__accordion-label">
-                <i class={`fa-solid ${item.icon}`}></i>
-                <span>{item.label}</span>
-              </span>
-              <i class="fa-solid fa-chevron-down mobile-panel__accordion-chevron" aria-hidden="true"></i>
-            </button>
-            <div class="mobile-panel__accordion-body" id={getMobilePanelId(item.label)} hidden>
-              <div class="mobile-panel__sublinks">
-                {item.href && (
-                  <a class="mobile-panel__sublink mobile-panel__sublink--overview" href={item.href}>
-                    <i class="fa-solid fa-arrow-right"></i> {item.label} overview
-                  </a>
-                )}
-              {item.dropdownSections?.map((section) => (
-                <Fragment>
-                  <span class="mobile-panel__subheading">{section.heading}</span>
-                  {section.items.map((link) => (
-                    <a class="mobile-panel__sublink" href={link.href}>
-                      <i class={`fa-solid ${link.icon}`}></i> {link.label}
-                    </a>
-                  ))}
-                </Fragment>
-              ))}
-              </div>
-            </div>
-          </div>
-        ) : (
-          <a class="mobile-panel__link" href={item.href || '#'}>
-            <i class={`fa-solid ${item.icon}`}></i> {item.label}
-          </a>
-        )
-      ))}
-    </div>
-
-    <div class="mobile-panel__divider"></div>
-
-    <div class="mobile-panel__theme-row">
-      <label class="theme-switch" aria-label="Toggle theme">
-        <input class="theme-switch__input" type="checkbox" />
-        <span class="theme-switch__track">
-          <span class="theme-switch__thumb"></span>
-        </span>
-        <span class="theme-switch__icon" aria-hidden="true">
-          <i class="fa-solid fa-sun"></i>
-          <i class="fa-solid fa-moon"></i>
-        </span>
-      </label>
-    </div>
-
-    <div class="mobile-panel__bottom">
-      <div class="mobile-panel__social">
-        {socialLinks.filter(s => s.label !== 'Email').map((item) => (
-          <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
-            {item.label === 'Instagram' && <i class="fa-brands fa-instagram"></i>}
-            {item.label === 'Facebook' && <i class="fa-brands fa-facebook"></i>}
-            {item.label === 'Twitter' && <i class="fa-brands fa-x-twitter"></i>}
+      <div class="header__connect">
+        {headerSocials.map((item) => (
+          <a class="icon-link" href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.label} (opens in a new tab)`} title={item.label}>
+            <i class={`fa-brands fa-${item.label.toLowerCase()}`} aria-hidden="true"></i>
           </a>
         ))}
+        <a class="contact-link" href="/contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>Contact <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
       </div>
-      <a class="mobile-panel__whatsapp" href="/contact">
-        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-      </a>
     </div>
+
+    <button class="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog">
+      <span class="menu-lines" aria-hidden="true"></span><span>Menu</span>
+    </button>
+    <button class="theme-button" type="button" data-theme-toggle aria-label="Switch to dark theme" title="Switch theme">
+      <i class="fa-regular fa-moon theme-moon" aria-hidden="true"></i><i class="fa-regular fa-sun theme-sun" aria-hidden="true"></i>
+    </button>
   </div>
+
+  <dialog class="mobile-menu" id="mobile-menu" aria-label="Main navigation">
+    <div class="mobile-menu__bar">
+      <a class="brand" href="/" aria-label={`${site.name} home`}>
+        <img class="brand__day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
+        <img class="brand__night" src="/brand/logo-light.svg" alt="" aria-hidden="true" width="267" height="63" />
+      </a>
+      <button class="menu-close" type="button" autofocus><i class="fa-solid fa-xmark" aria-hidden="true"></i> Close</button>
+      <button class="theme-button" type="button" data-theme-toggle aria-label="Switch to dark theme" title="Switch theme">
+        <i class="fa-regular fa-moon theme-moon" aria-hidden="true"></i><i class="fa-regular fa-sun theme-sun" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="mobile-menu__body">
+      <div class="mobile-menu__intro"><span class="eyebrow">Amalfi coast, your way</span><span class="mobile-menu__title">A little closer to paradise.</span></div>
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a class="mobile-nav__link" href="/" aria-current={isCurrent('/') ? 'page' : undefined}><span class="nav-number" aria-hidden="true">01</span><span>Home</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        {navigation.map((item, index) => item.dropdownSections?.length ? (
+          <details class="mobile-disclosure">
+            <summary class:list={['mobile-nav__link', { 'is-active': isActive(item) }]}><span class="nav-number" aria-hidden="true">0{index + 2}</span><span>{item.label}</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+            <div class="mobile-subnav">
+              {item.href && <a class="overview" href={item.href}>Discover all {item.label.toLowerCase()} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>}
+              {item.dropdownSections.map((section) => (
+                <div class="nav-section">
+                  <span class="eyebrow">{section.heading}</span>
+                  {section.items.map((link) => <a class="sub-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}><i class={`fa-solid ${link.icon}`} aria-hidden="true"></i><span>{link.label}</span></a>)}
+                </div>
+              ))}
+            </div>
+          </details>
+        ) : (
+          <a class="mobile-nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}><span class="nav-number" aria-hidden="true">0{index + 2}</span><span>{item.label}</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        ))}
+      </nav>
+      <div class="mobile-connect">
+        <a class="mobile-contact" href="/contact"><span>Let’s plan your day</span><span>Get in touch <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span></a>
+        <div class="mobile-socials">
+          {headerSocials.map((item) => <a href={item.href} target="_blank" rel="noreferrer"><i class={`fa-brands fa-${item.label.toLowerCase()}`} aria-hidden="true"></i>{item.label}<span class="sr-only"> (opens in a new tab)</span></a>)}
+        </div>
+      </div>
+    </div>
+  </dialog>
 </header>
 
 <script is:inline>
   ;(() => {
     const root = document.documentElement
     const header = document.getElementById('header')
-    const themeToggles = Array.from(document.querySelectorAll('.theme-switch__input'))
-    const menuToggle = document.querySelector('.menu-toggle')
-    const mobilePanel = document.querySelector('.mobile-panel')
-    const desktopLogo = document.querySelector('.desktop-logo')
-    const scrim = document.getElementById('topScrim')
-
-    /* ── Responsive logo visibility ── */
-    const mq = window.matchMedia('(min-width:901px)')
-    const syncLogo = () => {
-      if (desktopLogo) desktopLogo.style.display = mq.matches ? 'inline-flex' : 'none'
-      const mobileLogo = header?.querySelector(':scope > .mobile-logo')
-      if (mobileLogo) mobileLogo.style.display = mq.matches ? 'none' : 'inline-flex'
+    const themeButtons = header.querySelectorAll('[data-theme-toggle]')
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+    let storedTheme
+    try { storedTheme = localStorage.getItem('theme') } catch {}
+    let followSystem = storedTheme !== 'day' && storedTheme !== 'night'
+    const setTheme = (theme) => {
+      root.dataset.theme = theme
+      window.__setBrowserThemeColor?.(theme)
+      themeButtons.forEach((button) => {
+        const label = `Switch to ${theme === 'night' ? 'light' : 'dark'} theme`
+        button.setAttribute('aria-label', label)
+        button.title = label
+      })
     }
-    syncLogo()
-    mq.addEventListener('change', syncLogo)
+    setTheme(root.dataset.theme || (systemTheme.matches ? 'night' : 'day'))
+    themeButtons.forEach((button) => button.addEventListener('click', () => {
+      followSystem = false
+      const theme = root.dataset.theme === 'night' ? 'day' : 'night'
+      setTheme(theme)
+      try { localStorage.setItem('theme', theme) } catch {}
+    }))
+    systemTheme.addEventListener('change', (event) => {
+      if (followSystem) setTheme(event.matches ? 'night' : 'day')
+    })
 
-    /* ── Theme ── */
-    const getStoredTheme = () => {
-      try { return localStorage.getItem('theme') } catch { return null }
-    }
-
-    const getSystemTheme = () =>
-      window.matchMedia?.('(prefers-color-scheme:dark)').matches ? 'night' : 'day'
-
-    const syncSwitch = (value) =>
-      themeToggles.forEach((t) => { t.checked = value === 'night' })
-
-    const setTheme = (value, { persist = false } = {}) => {
-      root.dataset.theme = value
-      window.__setBrowserThemeColor?.(value)
-      if (persist) try { localStorage.setItem('theme', value) } catch {}
-      syncSwitch(value)
-    }
-
-    const storedTheme = getStoredTheme()
-    const hasStoredTheme = storedTheme === 'day' || storedTheme === 'night'
-    const initialTheme = hasStoredTheme ? storedTheme : root.dataset.theme || getSystemTheme()
-    let allowSystemSync = !hasStoredTheme
-
-    setTheme(initialTheme, { persist: hasStoredTheme })
-
-    if (window.matchMedia) {
-      const media = window.matchMedia('(prefers-color-scheme: dark)')
-      const onSystemChange = (event) => {
-        if (!allowSystemSync) return
-        setTheme(event.matches ? 'night' : 'day')
+    const disclosures = [...header.querySelectorAll('[data-desktop-disclosure]')]
+    const closeDisclosures = (except) => disclosures.forEach((details) => {
+      if (details !== except) details.open = false
+    })
+    disclosures.forEach((details) => {
+      details.querySelector('summary').addEventListener('click', () => closeDisclosures(details))
+      details.addEventListener('focusout', (event) => {
+        if (!details.contains(event.relatedTarget)) details.open = false
+      })
+    })
+    document.addEventListener('click', (event) => {
+      if (!disclosures.some((details) => details.contains(event.target))) closeDisclosures()
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return
+      const opened = disclosures.find((details) => details.open)
+      if (opened) {
+        opened.querySelector('summary').focus()
+        closeDisclosures()
       }
-      if (media.addEventListener) media.addEventListener('change', onSystemChange)
-      else if (media.addListener) media.addListener(onSystemChange)
-    }
-
-    themeToggles.forEach((toggle) => {
-      toggle.addEventListener('change', () => {
-        allowSystemSync = false
-        setTheme(toggle.checked ? 'night' : 'day', { persist: true })
-      })
     })
 
-    /* ── Mobile menu ── */
-    menuToggle?.addEventListener('click', () => {
-      const isOpen = header?.classList.toggle('menu-open')
-      menuToggle.setAttribute('aria-expanded', String(isOpen))
-      mobilePanel?.setAttribute('aria-hidden', String(!isOpen))
-      document.body.style.overflow = isOpen ? 'hidden' : ''
+    const menu = header.querySelector('#mobile-menu')
+    const menuToggle = header.querySelector('.menu-toggle')
+    const desktop = window.matchMedia('(min-width: 1100px)')
+    let previousOverflow = ''
+    menuToggle.addEventListener('click', () => {
+      closeDisclosures()
+      previousOverflow = document.body.style.overflow
+      menu.showModal()
+      document.body.style.overflow = 'hidden'
+      menuToggle.setAttribute('aria-expanded', 'true')
     })
-
-    const closeMenu = () => {
-      header?.classList.remove('menu-open')
-      menuToggle?.setAttribute('aria-expanded', 'false')
-      mobilePanel?.setAttribute('aria-hidden', 'true')
-      document.body.style.overflow = ''
-      document.querySelectorAll('[data-mobile-accordion-toggle]').forEach((toggle) => {
-        toggle.setAttribute('aria-expanded', 'false')
-      })
-      document.querySelectorAll('.mobile-panel__accordion-body').forEach((panel) => {
-        panel.hidden = true
-      })
-    }
-
-    document.querySelector('.mobile-panel__close')?.addEventListener('click', closeMenu)
-
-    document.querySelectorAll('[data-mobile-accordion-toggle]').forEach((toggle) => {
-      toggle.addEventListener('click', () => {
-        const panelId = toggle.getAttribute('aria-controls')
-        const panel = panelId ? document.getElementById(panelId) : null
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true'
-
-        toggle.setAttribute('aria-expanded', String(!isExpanded))
-        if (panel) panel.hidden = isExpanded
-      })
+    const closeMenu = () => menu.close()
+    menu.querySelector('.menu-close').addEventListener('click', closeMenu)
+    menu.addEventListener('click', (event) => {
+      if (event.target === menu || event.target.closest('a')) closeMenu()
     })
-
-    document.querySelectorAll('.mobile-panel__link, .mobile-panel__sublink').forEach((link) => {
-      link.addEventListener('click', closeMenu)
+    menu.addEventListener('close', () => {
+      document.body.style.overflow = previousOverflow
+      menuToggle.setAttribute('aria-expanded', 'false')
+      menu.querySelectorAll('details').forEach((details) => { details.open = false })
+      if (desktop.matches) header.querySelector('.brand').focus({ preventScroll: true })
+      else menuToggle.focus({ preventScroll: true })
     })
-
-    /* ── Scroll + on-hero + scrim ── */
-    /* Hero element lives inside <main><slot/></main> which is parsed AFTER
-       this inline script.  We must wait for the full DOM before querying it. */
-    const initHero = () => {
-      const heroEl = document.querySelector('.hero--orange, .hero--dark, .hero--azure')
-
-      const onScroll = () => {
-        const scrolled = window.scrollY > 12
-        header?.classList.toggle('is-scrolled', scrolled)
-        if (heroEl) {
-          const heroBottom = heroEl.getBoundingClientRect().bottom
-          const onHero = !scrolled && heroBottom > 80
-          header?.classList.toggle('on-hero', onHero)
-          if (scrim) scrim.classList.toggle('visible', onHero)
-        } else {
-          header?.classList.remove('on-hero')
-          if (scrim) scrim.classList.remove('visible')
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true })
-      onScroll()
-      /* Mark header as JS-initialised so CSS :not(.on-hero) rule only applies
-         after the class has had a chance to be set */
-      header?.setAttribute('data-ready', '')
-    }
-
-    /* If DOM is already complete (e.g. deferred execution), run immediately;
-       otherwise wait for DOMContentLoaded */
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initHero)
-    } else {
-      initHero()
-    }
+    desktop.addEventListener('change', () => {
+      closeDisclosures()
+      if (menu.open) closeMenu()
+    })
+    const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 16)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
   })()
 </script>
 
 <style>
-  /* ═══════════════════════════════════════════
-     HEADER — Logo-First Pill (Concept A)
-     ═══════════════════════════════════════════ */
-
   .header {
+    --glass: rgba(255, 253, 249, 0.82);
+    --glass-solid: #fffdf9;
+    --glass-line: rgba(43, 39, 33, 0.15);
+    --glass-ink: #292822;
+    --glass-muted: #67645c;
+    --glass-hover: rgba(140, 116, 77, 0.09);
+    --glass-accent: #a93c0b;
     position: fixed;
-    top: clamp(10px, 2vw, 18px);
-    left: 0;
-    right: 0;
-    z-index: 20;
-    pointer-events: none;
-    color: var(--color-text);
+    z-index: 30;
+    top: max(16px, env(safe-area-inset-top));
+    inset-inline: 24px;
+    color: var(--glass-ink);
   }
-
-  /* ─── Pill shell ─── */
-  .header__pill {
-    pointer-events: auto;
-    width: min(var(--container-max), calc(100% - 32px));
-    margin: 0 auto;
-    border-radius: 999px;
-    border: 1px solid transparent;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, backdrop-filter 0.25s;
+  :global([data-theme='night']) .header {
+    --glass: rgba(22, 26, 29, 0.84);
+    --glass-solid: #161a1d;
+    --glass-line: rgba(255, 246, 230, 0.18);
+    --glass-ink: #f6f1e8;
+    --glass-muted: #b9b6ae;
+    --glass-hover: rgba(255, 244, 220, 0.08);
+    --glass-accent: #ffac77;
   }
-
-  /* Show pill background only after JS init (data-ready) — prevents flash on hero pages */
-  .header[data-ready].is-scrolled .header__pill,
-  .header[data-ready]:not(.on-hero) .header__pill {
-    background: var(--color-nav-bg);
-    border-color: var(--color-nav-border);
-    box-shadow: var(--shadow-soft);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-  }
-
-  .header__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.6rem;
-    transition: padding 0.25s;
-  }
-
-  .header.is-scrolled .header__inner {
-    padding: 0.55rem 1.4rem;
-  }
-
-  /* ─── Logo ─── */
-  .logo {
-    flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-  }
-
-  .logo__mark {
-    height: 44px;
-    width: auto;
-    display: block;
-    transition: transform 0.2s;
-  }
-
-  .header.is-scrolled .logo__mark {
-    transform: scale(0.9);
-  }
-
-  .logo__mark--night {
-    display: none;
-  }
-
-  :global([data-theme='night']) .logo__mark--day {
-    display: none;
-  }
-
-  :global([data-theme='night']) .logo__mark--night {
-    display: block;
-  }
-
-  /* Mobile logo: hidden by default, shown by JS + media query */
-  .mobile-logo {
-    display: none;
-    pointer-events: auto;
-  }
-
-  /* Desktop logo: shown by JS on >=901 */
-  .desktop-logo {
-    display: none;
-  }
-
-  /* ─── Nav ─── */
-  .nav {
-    display: flex;
-    gap: 1.4rem;
-    align-items: center;
-  }
-
-  .nav__link {
-    font-weight: 500;
-    font-size: 0.95rem;
-    color: currentColor;
-    text-decoration: none;
+  .glass-bar {
     position: relative;
-    display: inline-flex;
+    display: grid;
+    grid-template-columns: minmax(174px, 1fr) auto minmax(174px, 1fr);
     align-items: center;
-    gap: 0.45rem;
-    white-space: nowrap;
-    transition: color 0.2s;
+    gap: 20px;
+    min-height: 76px;
+    padding: 10px 24px;
+    border: 1px solid var(--glass-line);
+    border-radius: 5px;
+    background: var(--glass);
+    backdrop-filter: blur(24px) saturate(135%);
+    -webkit-backdrop-filter: blur(24px) saturate(135%);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.24), 0 8px 32px rgba(22, 25, 27, 0.07);
+    transition: background 180ms, box-shadow 180ms;
   }
-
-  .nav__link i {
-    font-size: 1rem;
+  .is-scrolled .glass-bar { box-shadow: inset 0 1px rgba(255, 255, 255, 0.18), 0 8px 32px rgba(22, 25, 27, 0.14); }
+  .header a, .header button, .header summary { -webkit-tap-highlight-color: transparent; }
+  .header a:hover { text-decoration: none; }
+  .header :is(a, button, summary):focus-visible { outline: 2px solid var(--glass-accent); outline-offset: 4px; border-radius: 3px; }
+  .brand { display: inline-flex; align-items: center; justify-self: start; min-height: 44px; }
+  .brand img { width: 170px; height: auto; }
+  .brand__night { display: none; }
+  :global([data-theme='night']) .brand__day { display: none; }
+  :global([data-theme='night']) .brand__night { display: block; }
+  .header__center, .desktop-nav, .header__connect { display: flex; align-items: center; }
+  .desktop-nav { gap: 4px; }
+  .header__connect { gap: 0; margin-left: 17px; padding-left: 17px; border-left: 1px solid var(--glass-line); }
+  .nav-link { position: relative; display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 12px; color: var(--glass-ink); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer; }
+  .nav-link::after { content: ''; position: absolute; height: 1px; bottom: 3px; left: 12px; right: 12px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 180ms; }
+  .nav-link:hover::after, .nav-link.is-active::after, details[open] > .nav-link::after { transform: scaleX(1); }
+  .nav-link:hover, .nav-link.is-active, .contact-link:hover { color: var(--glass-accent); }
+  summary { list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  .chevron { font-size: 8px; color: var(--glass-muted); transition: transform 180ms; }
+  details[open] > summary .chevron { transform: rotate(180deg); }
+  .icon-link, .theme-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--glass-ink); border-radius: 3px; font-size: 17px; }
+  .icon-link:hover, .theme-button:hover, .menu-toggle:hover, .menu-close:hover { color: var(--glass-ink); background: var(--glass-hover); }
+  .contact-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin-left: 10px; color: var(--glass-ink); font-size: 14px; font-weight: 500; }
+  .contact-link i { font-size: 10px; color: var(--glass-accent); }
+  .theme-button { justify-self: end; border: 1px solid var(--glass-line); background: transparent; cursor: pointer; }
+  .theme-sun { display: none; }
+  :global([data-theme='night']) .theme-moon { display: none; }
+  :global([data-theme='night']) .theme-sun { display: inline-block; }
+  .nav-sheet { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: min(720px, calc(100vw - 64px)); max-height: calc(100dvh - 130px); overflow-y: auto; display: grid; grid-template-columns: 190px 1fr; padding: 26px; gap: 28px; border: 1px solid var(--glass-line); border-radius: 5px; background: var(--glass-solid); color: var(--glass-ink); box-shadow: 0 18px 50px rgba(10, 20, 25, 0.18); animation: reveal 180ms ease-out; }
+  .nav-sheet__intro { display: flex; flex-direction: column; align-items: flex-start; padding-right: 20px; border-right: 1px solid var(--glass-line); }
+  .eyebrow { display: block; font-family: var(--font-mono); font-size: 9px; line-height: 1.6; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--glass-muted); }
+  .nav-sheet__title { margin: 15px 0 24px; font-family: var(--font-display); font-size: 25px; line-height: 1.35; }
+  .overview { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--glass-accent); font-size: 13px; font-weight: 500; }
+  .overview:hover { color: var(--glass-ink); }
+  .overview i { font-size: 10px; }
+  .nav-section + .nav-section { margin-top: 16px; }
+  .nav-section > .eyebrow { padding: 0 10px 5px; }
+  .sub-link { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px; color: var(--glass-ink); font-size: 14px; line-height: 1.4; border-radius: 3px; }
+  .sub-link i { width: 18px; flex-shrink: 0; color: var(--glass-muted); text-align: center; font-size: 14px; }
+  .sub-link:hover, .sub-link[aria-current='page'] { background: var(--glass-hover); color: var(--glass-accent); }
+  .menu-toggle, .menu-close { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 12px; background: none; color: var(--glass-ink); border: 0; font: 500 13px var(--font-body); cursor: pointer; }
+  .menu-toggle { display: none; }
+  .menu-lines { width: 17px; height: 8px; border-block: 1px solid currentColor; }
+  .mobile-menu { position: fixed; inset: 8px; width: calc(100% - 16px); max-width: 640px; height: calc(100% - 16px); height: calc(100dvh - 16px); max-height: none; margin: 0 auto; padding: 0; border: 1px solid var(--glass-line); border-radius: 5px; color: var(--glass-ink); background: var(--glass-solid); overflow: clip; }
+  .mobile-menu[open] { display: flex; flex-direction: column; animation: reveal 200ms ease-out; }
+  .mobile-menu::backdrop { background: rgba(12, 20, 25, 0.46); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .mobile-menu__bar { position: sticky; top: 0; z-index: 1; background: var(--glass-solid); flex-shrink: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 68px; padding: 10px 14px; padding-top: max(10px, env(safe-area-inset-top)); border-bottom: 1px solid var(--glass-line); }
+  .mobile-menu__body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 28px 24px max(24px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; flex: 1; }
+  .mobile-menu__body > * { flex-shrink: 0; }
+  .mobile-menu__intro { margin-bottom: 24px; }
+  .mobile-menu__title { display: block; margin-top: 9px; font-family: var(--font-display); font-style: italic; font-size: 17px; line-height: 1.6; }
+  .mobile-nav { border-top: 1px solid var(--glass-line); }
+  .mobile-nav > * { border-bottom: 1px solid var(--glass-line); }
+  .mobile-nav__link { display: grid; grid-template-columns: 24px 1fr 20px; align-items: center; gap: 12px; min-height: 72px; color: var(--glass-ink); font-family: var(--font-display); font-size: 23px; cursor: pointer; }
+  .mobile-nav__link:hover, .mobile-nav__link.is-active, .mobile-nav__link[aria-current='page'] { color: var(--glass-accent); }
+  .nav-number { font: 10px var(--font-mono); color: var(--glass-muted); }
+  .mobile-nav__link > i { justify-self: end; font-size: 13px; transition: transform 180ms; }
+  .mobile-disclosure[open] > summary > i { transform: rotate(45deg); }
+  .mobile-subnav { padding: 0 0 20px 26px; }
+  .mobile-subnav > .overview { margin: 0 10px 14px; }
+  .mobile-connect { margin-top: auto; padding-top: 30px; }
+  .mobile-contact { display: flex; flex-direction: column; gap: 8px; padding: 20px; border: 1px solid var(--glass-line); border-radius: 3px; background: var(--glass-hover); color: var(--glass-ink); }
+  .mobile-contact > span:first-child { font: 10px var(--font-mono); color: var(--glass-muted); }
+  .mobile-contact > span:last-child { display: flex; justify-content: space-between; align-items: center; font-size: 18px; }
+  .mobile-contact i { color: var(--glass-accent); font-size: 13px; }
+  .mobile-contact:hover { color: var(--glass-accent); }
+  .mobile-socials { display: flex; justify-content: center; gap: 28px; margin-top: 14px; }
+  .mobile-socials a { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; color: var(--glass-ink); font-size: 12px; }
+  .mobile-socials i { font-size: 18px; }
+  @keyframes reveal { from { opacity: 0; margin-top: -5px; } to { opacity: 1; margin-top: 0; } }
+  @media (max-width: 1099px) {
+    .header { inset-inline: 12px; top: max(10px, env(safe-area-inset-top)); }
+    .glass-bar { grid-template-columns: 1fr auto 1fr; min-height: 66px; gap: 12px; padding: 10px 14px; }
+    .brand img { width: 132px; }
+    .header__center { display: none; }
+    .menu-toggle { display: flex; }
   }
-
-  .nav__link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 2px;
-    background: var(--gradient-sunset);
-    transition: width 0.2s;
+  @media (max-width: 380px) {
+    .header { inset-inline: 8px; }
+    .glass-bar, .mobile-menu__bar { padding-inline: 10px; gap: 6px; }
+    .brand img { width: 110px; }
+    .menu-toggle, .menu-close { gap: 7px; padding-inline: 8px; }
+    .mobile-menu__body { padding-inline: 18px; }
   }
-
-  .nav__link:hover::after {
-    width: 100%;
-  }
-
-  .nav__link:hover {
-    text-decoration: none;
-  }
-
-  .nav__link--button {
-    padding: 0;
-    border: 0;
-    background: transparent;
-    font: inherit;
-    cursor: pointer;
-  }
-
-  /* ─── Actions (right side) ─── */
-  .header__actions {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  /* ─── Desktop social icons ─── */
-  .header__social {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-  }
-
-  .header__social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    color: currentColor;
-    opacity: 0.7;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: opacity 0.2s, transform 0.15s;
-    position: relative;
-  }
-
-  .header__social-link:hover {
-    opacity: 1;
-    transform: translateY(-1px);
-  }
-
-  .header__social-link::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: currentColor;
-    opacity: 0;
-    transition: opacity 0.15s;
-  }
-
-  .header__social-link:hover::after {
-    opacity: 0.06;
-  }
-
-  .header__social-link i {
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ─── Dividers ─── */
-  .header__divider {
-    width: 1px;
-    height: 18px;
-    background: var(--color-border);
-    margin: 0 0.4rem;
-  }
-
-  /* ─── CTA button ─── */
-  .cta-btn {
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 0.45rem 1.1rem;
-    border-radius: 999px;
-    cursor: pointer;
-    border: 1.5px solid var(--color-accent);
-    color: var(--color-accent);
-    background: transparent;
-    transition: background 0.2s, color 0.2s, transform 0.15s;
-    white-space: nowrap;
-    text-decoration: none;
-  }
-
-  .cta-btn:hover {
-    background: var(--color-accent);
-    color: #fff;
-    transform: translateY(-1px);
-  }
-
-  /* ─── Theme toggle ─── */
-  .theme-switch {
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .theme-switch__input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .theme-switch__track {
-    width: 42px;
-    height: 21px;
-    border-radius: 999px;
-    background: #1b1f27;
-    display: inline-flex;
-    align-items: center;
-    padding: 2px;
-    position: relative;
-    z-index: 0;
-    transition: background 0.2s;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-  }
-
-  :global([data-theme='night']) .theme-switch__track {
-    background: #171c26;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-  }
-
-  .theme-switch__thumb {
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    background: #fff;
-    display: block;
-    transform: translateX(0);
-    transition: transform 0.18s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    position: relative;
-    z-index: 2;
-  }
-
-  .theme-switch__input:checked + .theme-switch__track .theme-switch__thumb {
-    transform: translateX(21px);
-  }
-
-  :global([data-theme='night']) .theme-switch__thumb {
-    transform: translateX(21px);
-  }
-
-  .theme-switch__icon {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 42px;
-    height: 21px;
-    pointer-events: none;
-    color: #fff;
-    z-index: 1;
-  }
-
-  .theme-switch__icon i {
-    position: absolute;
-    font-size: 0.68rem;
-    transition: opacity 0.2s, transform 0.2s;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-  }
-
-  .theme-switch__icon .fa-sun {
-    right: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .theme-switch__icon .fa-moon {
-    left: 6px;
-    top: 50%;
-    transform: translateY(-50%) scale(0.8);
-    opacity: 0;
-  }
-
-  :global([data-theme='night']) .theme-switch__icon .fa-sun {
-    opacity: 0;
-    transform: translateY(-50%) scale(0.8);
-  }
-
-  :global([data-theme='night']) .theme-switch__icon .fa-moon {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-  }
-
-  /* ─── Hamburger ─── */
-  .menu-toggle {
-    display: none;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid rgba(15, 17, 21, 0.12);
-    background: #fff;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #15171d;
-    font-size: 1.32rem;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s, border-color 0.2s, color 0.2s;
-    pointer-events: auto;
-    box-shadow: none;
-  }
-
-  :global([data-theme='night']) .menu-toggle {
-    background: #05070a;
-    border-color: rgba(255, 255, 255, 0.14);
-    color: #fff;
-  }
-
-  .header.menu-open > .menu-toggle {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.86) rotate(-12deg);
-  }
-
-  .menu-toggle:active {
-    transform: scale(0.94);
-  }
-
-  .menu-toggle i {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    line-height: 1;
-    transform: translate(-50%, -50%) rotate(0deg) scale(1);
-    transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  .menu-toggle .fa-xmark {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(90deg) scale(0.58);
-  }
-
-  .header.menu-open .menu-toggle .fa-list {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(-90deg) scale(0.58);
-  }
-
-  .header.menu-open .menu-toggle .fa-xmark {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(0deg) scale(1);
-  }
-
-  /* ═══════════════════════════════════════════
-     ON-HERO STATE (light theme only)
-     White navbar content over dark/gradient heroes
-     ═══════════════════════════════════════════ */
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) {
-    color: #fff;
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .logo__mark--day {
-    display: none;
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .logo__mark--night {
-    display: block;
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .logo__mark {
-    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .nav__link::after {
-    background: rgba(255, 255, 255, 0.95);
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .cta-btn {
-    border-color: rgba(255, 255, 255, 0.85);
-    color: #fff;
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .cta-btn:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: #fff;
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .theme-switch__track {
-    background: rgba(255, 255, 255, 0.22);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .header__social-link {
-    color: #fff;
-    opacity: 0.85;
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .header__social-link:hover {
-    opacity: 1;
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .header__divider {
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .menu-toggle {
-    background: #fff;
-    border-color: rgba(15, 17, 21, 0.12);
-    color: #15171d;
-    box-shadow: none;
-  }
-
-  /* Night theme on-hero: logo shadow + white CTA */
-  .header.on-hero:not(.is-scrolled) .logo__mark {
-    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
-  }
-
-  .header.on-hero:not(.is-scrolled) .logo__mark--day {
-    display: none;
-  }
-
-  .header.on-hero:not(.is-scrolled) .logo__mark--night {
-    display: block;
-  }
-
-  :global([data-theme='night']) .header.on-hero:not(.is-scrolled) .cta-btn {
-    border-color: rgba(255, 255, 255, 0.85);
-    color: #fff;
-  }
-
-  :global([data-theme='night']) .header.on-hero:not(.is-scrolled) .cta-btn:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: #fff;
-  }
-
-  .header.on-hero .theme-switch__track {
-    background: #1b1f27;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
-  }
-
-  /* ═══════════════════════════════════════════
-     MOBILE PANEL (full-screen overlay)
-     ═══════════════════════════════════════════ */
-
-  .mobile-panel {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 18;
-    background: var(--color-bg);
-    flex-direction: column;
-    padding: calc(env(safe-area-inset-top, 0px) + 80px) 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    transform: translateY(-10px) scale(0.985);
-    clip-path: circle(0 at calc(100% - 36px) calc(env(safe-area-inset-top, 0px) + 32px));
-    transition:
-      clip-path 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.28s ease-out,
-      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      visibility 0.28s;
-  }
-
-  .header.menu-open .mobile-panel {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    clip-path: circle(150% at calc(100% - 36px) calc(env(safe-area-inset-top, 0px) + 32px));
-    transform: translateY(0);
-  }
-
-  .mobile-panel__close {
-    position: absolute;
-    top: calc(env(safe-area-inset-top, 0px) + 16px);
-    right: 16px;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid rgba(15, 17, 21, 0.12);
-    background: #fff;
-    color: #15171d;
-    font-size: 1.32rem;
-    cursor: pointer;
-    box-shadow: none;
-    opacity: 0;
-    transform: rotate(90deg) scale(0.78);
-    transition:
-      opacity 0.22s ease 0.18s,
-      transform 0.34s cubic-bezier(0.22, 1, 0.36, 1) 0.18s,
-      background 0.2s,
-      color 0.2s,
-      border-color 0.2s;
-  }
-
-  :global([data-theme='night']) .mobile-panel__close {
-    background: #05070a;
-    border-color: rgba(255, 255, 255, 0.14);
-    color: #fff;
-  }
-
-  .header.menu-open .mobile-panel__close {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-
-  .mobile-panel__close:active {
-    transform: rotate(0deg) scale(0.94);
-  }
-
-  .mobile-panel__brand,
-  .mobile-panel__links > *,
-  .mobile-panel__theme-row,
-  .mobile-panel__bottom {
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.32s ease, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .header.menu-open .mobile-panel__brand,
-  .header.menu-open .mobile-panel__links > *,
-  .header.menu-open .mobile-panel__theme-row,
-  .header.menu-open .mobile-panel__bottom {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .header.menu-open .mobile-panel__brand { transition-delay: 0.08s; }
-  .header.menu-open .mobile-panel__links > :nth-child(1) { transition-delay: 0.12s; }
-  .header.menu-open .mobile-panel__links > :nth-child(2) { transition-delay: 0.16s; }
-  .header.menu-open .mobile-panel__links > :nth-child(3) { transition-delay: 0.2s; }
-  .header.menu-open .mobile-panel__links > :nth-child(4) { transition-delay: 0.24s; }
-  .header.menu-open .mobile-panel__theme-row { transition-delay: 0.28s; }
-  .header.menu-open .mobile-panel__bottom { transition-delay: 0.32s; }
-
   @media (prefers-reduced-motion: reduce) {
-    .menu-toggle,
-    .menu-toggle i,
-    .mobile-panel,
-    .mobile-panel__close,
-    .mobile-panel__brand,
-    .mobile-panel__links > *,
-    .mobile-panel__theme-row,
-    .mobile-panel__bottom {
-      transition: none;
-    }
-
-    .mobile-panel {
-      clip-path: none;
-    }
+    .header *, .header *::after { transition: none !important; animation: none !important; }
   }
-
-  .mobile-panel__brand {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    text-decoration: none;
-  }
-
-  .mobile-panel__brand-mark {
-    display: block;
-    width: min(220px, 62vw);
-    height: 52px;
-    background: linear-gradient(100deg, #ff5e00 0%, #ff8b24 58%, #ffc04d 100%);
-    -webkit-mask: url('/brand/logo.svg') center / contain no-repeat;
-    mask: url('/brand/logo.svg') center / contain no-repeat;
-  }
-
-  .mobile-panel__links {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-  }
-
-  .mobile-panel__link,
-  .mobile-panel__accordion-toggle {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0 1.2rem;
-    height: 68px;
-    border-radius: 16px;
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--color-text);
-    text-decoration: none;
-  }
-
-  .mobile-panel__link,
-  .mobile-panel__accordion-toggle {
-    transition:
-      background 0.15s,
-      opacity 0.32s ease,
-      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .mobile-panel__link {
-    justify-content: flex-start;
-  }
-
-  .mobile-panel__link:active,
-  .mobile-panel__accordion-toggle:active {
-    transform: scale(0.97);
-    background: var(--color-surface);
-  }
-
-  .mobile-panel__accordion-toggle {
-    justify-content: space-between;
-    width: 100%;
-    border: 1px solid var(--color-border);
-    font-family: var(--font-body);
-    cursor: pointer;
-  }
-
-  .mobile-panel__accordion-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    min-width: 0;
-  }
-
-  .mobile-panel__link i,
-  .mobile-panel__accordion-label i {
-    font-size: 1.5rem;
-    width: 2rem;
-    text-align: center;
-  }
-
-  .mobile-panel__accordion-chevron {
-    flex: 0 0 auto;
-    font-size: 0.9rem;
-    opacity: 0.55;
-    transition: transform 0.18s, opacity 0.18s;
-  }
-
-  .mobile-panel__accordion-toggle[aria-expanded='true'] .mobile-panel__accordion-chevron {
-    transform: rotate(180deg);
-    opacity: 0.9;
-  }
-
-  .mobile-panel__accordion-body {
-    padding: 0.55rem 0 0.15rem;
-  }
-
-  .mobile-panel__accordion-body[hidden] {
-    display: none;
-  }
-
-  .mobile-panel__divider {
-    height: 1px;
-    background: var(--color-border);
-    margin: 1.15rem 0 1rem;
-  }
-
-  .mobile-panel__theme-row {
-    position: absolute;
-    top: calc(env(safe-area-inset-top, 0px) + 29px);
-    right: 82px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .mobile-panel__bottom {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .mobile-panel__social {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  .mobile-panel__social a {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text);
-    font-size: 1.3rem;
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    text-decoration: none;
-    transition: background 0.15s;
-  }
-
-  .mobile-panel__social a:active {
-    background: var(--color-surface);
-  }
-
-  .mobile-panel__whatsapp {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    height: 56px;
-    border-radius: 16px;
-    background: var(--color-accent);
-    color: #fff;
-    font-size: 1.15rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.15s, opacity 0.15s;
-  }
-
-  .mobile-panel__whatsapp:active {
-    transform: scale(0.97);
-    opacity: 0.9;
-  }
-
-  .mobile-panel__whatsapp i {
-    font-size: 1.4rem;
-  }
-
-  /* ─── Desktop dropdown ─── */
-  .nav__dropdown {
-    position: relative;
-  }
-
-  .nav__chevron {
-    font-size: 0.6rem;
-    opacity: 0.5;
-    transition: transform 0.2s, opacity 0.2s;
-  }
-
-  .nav__dropdown:hover .nav__chevron,
-  .nav__dropdown:focus-within .nav__chevron {
-    transform: rotate(180deg);
-    opacity: 0.8;
-  }
-
-  .dropdown {
-    position: absolute;
-    top: calc(100% + 14px);
-    left: 50%;
-    transform: translateX(-50%) translateY(4px);
-    min-width: 260px;
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    padding: 0.6rem;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
-  .nav__dropdown:hover .dropdown,
-  .nav__dropdown:focus-within .dropdown {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  /* Bridge element to prevent gap between trigger and dropdown */
-  .dropdown::before {
-    content: '';
-    position: absolute;
-    top: -16px;
-    left: 0;
-    right: 0;
-    height: 16px;
-  }
-
-  .dropdown__heading {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-muted);
-    padding: 0.35rem 0.75rem 0.25rem;
-  }
-
-  .dropdown__item {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 0.55rem 0.75rem;
-    border-radius: 10px;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: background 0.15s, color 0.15s;
-    white-space: nowrap;
-  }
-
-  .dropdown__item:hover {
-    background: var(--color-surface);
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-
-  .dropdown__item i {
-    font-size: 1rem;
-    width: 1.4rem;
-    text-align: center;
-    opacity: 0.65;
-    transition: opacity 0.15s;
-  }
-
-  .dropdown__item:hover i {
-    opacity: 1;
-  }
-
-  .dropdown__divider {
-    height: 1px;
-    background: var(--color-border);
-    margin: 0.35rem 0.75rem;
-  }
-
-  /* Night theme dropdown */
-  :global([data-theme='night']) .dropdown {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  /* On-hero dropdown should still have readable bg */
-  .header.on-hero:not(.is-scrolled) .dropdown {
-    background: var(--color-card);
-    color: var(--color-text);
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .dropdown {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .dropdown__item {
-    color: var(--color-text);
-  }
-
-  :global(:root:not([data-theme='night'])) .header.on-hero:not(.is-scrolled) .dropdown__heading {
-    color: var(--color-text-muted);
-  }
-
-  /* ─── Mobile sublinks ─── */
-  .mobile-panel__sublinks {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding-left: 0.85rem;
-  }
-
-  .mobile-panel__subheading {
-    display: block;
-    padding: 0.55rem 1.2rem 0.1rem;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-  }
-
-  .mobile-panel__sublink {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    padding: 0 1.2rem;
-    height: 52px;
-    border-radius: 12px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: background 0.15s, transform 0.15s;
-  }
-
-  .mobile-panel__sublink--overview {
-    background: var(--color-card);
-    color: var(--color-accent);
-    font-weight: 650;
-  }
-
-  .mobile-panel__sublink:active {
-    transform: scale(0.97);
-    background: var(--color-card);
-  }
-
-  .mobile-panel__sublink i {
-    font-size: 1.15rem;
-    width: 1.6rem;
-    text-align: center;
-    opacity: 0.6;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  /* ═══════════════════════════════════════════
-     RESPONSIVE
-     ═══════════════════════════════════════════ */
-
-  @media (max-width: 900px) {
-    .header {
-      top: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 12px;
-      pointer-events: auto;
-    }
-
-    .header__pill {
-      width: auto;
-      margin: 0;
-      border-radius: 999px;
-      background: transparent !important;
-      border-color: transparent !important;
-      box-shadow: none !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-    }
-
-    .header__inner {
-      padding: 0.35rem 0.1rem;
-      gap: 0.5rem;
-    }
-
-    .nav,
-    .cta-btn,
-    .header__actions .theme-switch,
-    .header__social,
-    .header__divider,
-    .dropdown {
-      display: none;
-    }
-
-    .logo__mark {
-      height: 36px;
-    }
-
-    .menu-toggle {
-      display: inline-flex;
-    }
-
-    .mobile-panel {
-      display: flex;
-    }
-  }
-
-  @media (min-width: 901px) {
-    .mobile-panel {
-      display: none !important;
-    }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass-bar { background: var(--glass-solid); }
   }
 </style>
