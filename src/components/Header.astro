@@ -1,5 +1,6 @@
 ---
 import { navigation, socialLinks, site } from '../data/site'
+import MorphingLogo from './MorphingLogo.astro'
 const headerSocials = socialLinks.filter((item) => ['Instagram', 'Facebook'].includes(item.label))
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
 const isCurrent = (href?: string) => href === currentPath
@@ -11,11 +12,7 @@ const isActive = (item: (typeof navigation)[number]) =>
 <header class="header" id="header" data-home={currentPath === '/' ? '' : undefined}>
   <div class="glass-bar">
     <a class="brand brand--morph" href="/" aria-label={`${site.name} home`}>
-      <span class="brand__wordmark" aria-hidden="true">
-        <img class="brand__day" src="/brand/logo-dark.svg" alt="" width="267" height="63" />
-        <img class="brand__night" src="/brand/logo-light.svg" alt="" width="267" height="63" />
-      </span>
-      <span class="brand__monogram" aria-hidden="true"></span>
+      <MorphingLogo />
     </a>
 
     <div class="header__center">
@@ -333,8 +330,8 @@ const isActive = (item: (typeof navigation)[number]) =>
     --nav-background: rgba(255, 255, 255, 0.42);
     --nav-sheen: rgba(255, 255, 255, 0.38);
     --nav-edge: rgba(255, 255, 255, 0.6);
-    --morph-duration: 620ms;
-    --morph-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --morph-duration: 440ms;
+    --morph-ease: cubic-bezier(0.33, 1, 0.68, 1);
     --compact-center-width: 451px;
     position: fixed;
     z-index: 30;
@@ -426,11 +423,7 @@ const isActive = (item: (typeof navigation)[number]) =>
   .brand { position: relative; display: inline-flex; align-items: center; justify-self: start; width: 176px; min-width: 0; height: 44px; max-width: 100%; color: var(--glass-ink); }
   .brand img { width: 100%; height: auto; }
   .brand--morph { transition: width var(--morph-duration) var(--morph-ease); }
-  .brand__wordmark { position: absolute; width: 100%; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); transform-origin: center; opacity: 1; filter: blur(0); transition: transform var(--morph-duration) var(--morph-ease), opacity 300ms ease 200ms, filter 400ms ease; }
-  .brand__monogram { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; background: currentColor; mask: url('/brand/logo-monogram.svg') center / contain no-repeat; -webkit-mask: url('/brand/logo-monogram.svg') center / contain no-repeat; opacity: 0; filter: blur(2px); transform: translate(-50%, -50%) scale(0.18) rotate(-18deg); transition: opacity 180ms ease, filter 260ms ease, transform 420ms var(--morph-ease); }
   .is-scrolled .brand--morph { width: 44px; }
-  .is-scrolled .brand__wordmark { opacity: 0; filter: blur(2px); transform: translate(-50%, -50%) scale(0.18); transition: transform 520ms var(--morph-ease), opacity 260ms ease 180ms, filter 440ms ease; }
-  .is-scrolled .brand__monogram { opacity: 1; filter: blur(0); transform: translate(-50%, -50%) scale(1) rotate(0deg); transition: opacity 240ms ease 220ms, filter 380ms ease 180ms, transform 440ms cubic-bezier(0.22, 1.25, 0.36, 1) 180ms; }
   .brand__day { display: var(--day-logo); }
   .brand__night { display: var(--night-logo); }
   .header__center, .desktop-nav, .header__connect { display: flex; align-items: center; }
@@ -537,7 +530,6 @@ const isActive = (item: (typeof navigation)[number]) =>
   @media (max-width: 1099px) {
     .glass-bar { --compact-center-width: 44px; min-height: 72px; gap: 12px; padding: 14px 0; padding-top: max(14px, env(safe-area-inset-top)); }
     .is-scrolled .glass-bar { min-height: 56px; padding: 6px 12px; gap: 8px; }
-    .brand__monogram { width: 28px; height: 28px; }
     .brand { width: 112px; height: 44px; }
     .brand img { width: 100%; }
     .header__center { display: none; }

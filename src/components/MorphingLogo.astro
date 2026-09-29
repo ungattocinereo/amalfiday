@@ -1,0 +1,166 @@
+---
+import wordmark from '../../public/brand/logo-dark.svg?raw'
+import monogram from '../../public/brand/logo-monogram.svg?raw'
+
+// Keep the supplied artwork as the source of truth. Illustrator exports the
+// wordmark as one compound path; the counters belong to their preceding letter.
+const outlines = wordmark.match(/\bd="([^"]+)"/)![1].match(/M[^M]+/g)!
+const marks = [...monogram.matchAll(/\bd="([^"]+)"/g)].map((match) => match[1])
+const letters = [
+  { name: 'A', from: outlines[9] + outlines[10], to: marks[0] },
+  { name: 'D', from: outlines[0] + outlines[1], to: marks[1] },
+  { name: 'Y', from: outlines[8], to: marks[2] },
+]
+const rest = [2, 3, 4, 5, 6, 7, 11, 12, 13].map((index) => outlines[index]).join('')
+---
+
+<svg class="morph-logo" data-morph-logo viewBox="0 0 266.84 266.84" fill="currentColor" aria-hidden="true" focusable="false">
+  <path data-wordmark-rest d={rest} transform="translate(0 101.845)" />
+  {letters.map((letter) => (
+    <path data-morph-letter={letter.name} d={letter.from} data-compact-path={letter.to} transform="translate(0 101.845)" />
+  ))}
+  <g data-monogram-details opacity="0" transform="translate(24.2582 24.2582) scale(0.77021)">
+    {marks.slice(3).map((path) => <path d={path} />)}
+  </g>
+</svg>
+
+<script>
+  type Point = { x: number; y: number }
+  const namespace = 'http://www.w3.org/2000/svg'
+  const canvas = 266.84
+  const wordmarkY = (canvas - 63.15) / 2
+  // A 36px mark centered in the same 44px target on desktop and mobile.
+  const compactSize = canvas * 36 / 44
+  const compactScale = compactSize / 283.46
+  const compactInset = (canvas - compactSize) / 2
+  const compactTransform = `translate(${compactInset} ${compactInset}) scale(${compactScale})`
+  const clamp = (value: number) => Math.max(0, Math.min(1, value))
+
+  // Sample each closed contour separately so the A/D counters stay open.
+  // These points are used only in flight; both resting states use exact artwork.
+  const sample = (path: string, count: number): Point[] => {
+    const probe = document.createElementNS(namespace, 'path')
+    probe.setAttribute('d', path)
+    const length = probe.getTotalLength()
+    return Array.from({ length: count }, (_, index) => {
+      const point = probe.getPointAtLength(length * index / count)
+      return { x: point.x, y: point.y }
+    })
+  }
+  const normalize = (points: Point[]) => {
+    const xs = points.map((point) => point.x)
+    const ys = points.map((point) => point.y)
+    const left = Math.min(...xs)
+    const top = Math.min(...ys)
+    const width = Math.max(...xs) - left || 1
+    const height = Math.max(...ys) - top || 1
+    return points.map(({ x, y }) => ({ x: (x - left) / width, y: (y - top) / height }))
+  }
+  const winding = (points: Point[]) => points.reduce((area, point, index) => {
+    const next = points[(index + 1) % points.length]
+    return area + point.x * next.y - next.x * point.y
+  }, 0)
+  const align = (from: Point[], to: Point[]) => {
+    // SVGs can start the same letter at different points and wind oppositely.
+    // Match their contours before interpolating to avoid twisting the strokes.
+    const ordered = winding(from) * winding(to) < 0 ? [...to].reverse() : to
+    const source = normalize(from)
+    const target = normalize(ordered)
+    let bestOffset = 0
+    let bestScore = Infinity
+    for (let offset = 0; offset < target.length; offset++) {
+      const score = source.reduce((sum, point, index) => {
+        const other = target[(index + offset) % target.length]
+        return sum + (point.x - other.x) ** 2 + (point.y - other.y) ** 2
+      }, 0)
+      if (score < bestScore) { bestScore = score; bestOffset = offset }
+    }
+    return ordered.map((_, index) => ordered[(index + bestOffset) % ordered.length])
+  }
+
+  document.querySelectorAll<SVGSVGElement>('[data-morph-logo]').forEach((logo) => {
+    const header = logo.closest('header')!
+    const rest = logo.querySelector<SVGPathElement>('[data-wordmark-rest]')!
+    const details = logo.querySelector<SVGGElement>('[data-monogram-details]')!
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const letters = [...logo.querySelectorAll<SVGPathElement>('[data-morph-letter]')].map((path) => {
+      const from = path.getAttribute('d')!
+      const to = path.dataset.compactPath!
+      const targets = to.match(/M[^M]+/g)!
+      const contours = from.match(/M[^M]+/g)!.map((contour, index) => {
+        const count = index === 0 ? 160 : 48
+        const source = sample(contour, count)
+        const target = align(source, sample(targets[index], count))
+        return {
+          from: source.map(({ x, y }) => ({ x, y: y + wordmarkY })),
+          to: target.map(({ x, y }) => ({ x: x * compactScale + compactInset, y: y * compactScale + compactInset })),
+        }
+      })
+      return { path, from, to, contours }
+    })
+    let progress = header.classList.contains('is-scrolled') ? 1 : 0
+    let target = progress
+    let frame = 0
+    const render = (value: number) => {
+      progress = value
+      letters.forEach(({ path, from, to, contours }) => {
+        if (value === 0 || value === 1) {
+          path.setAttribute('d', value ? to : from)
+          path.setAttribute('transform', value ? compactTransform : `translate(0 ${wordmarkY})`)
+          return
+        }
+        path.removeAttribute('transform')
+        path.setAttribute('d', contours.map((contour) => contour.from.map((point, index) => {
+          const end = contour.to[index]
+          const x = point.x + (end.x - point.x) * value
+          const y = point.y + (end.y - point.y) * value
+          return `${index ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`
+        }).join('') + 'Z').join(''))
+      })
+      rest.setAttribute('opacity', String(1 - clamp(value / 0.45)))
+      rest.setAttribute('transform', `translate(${value * 28} ${wordmarkY})`)
+      const finish = clamp((value - 0.65) / 0.35)
+      details.setAttribute('opacity', String(finish))
+      const scale = 0.7 + 0.3 * finish
+      details.setAttribute('transform', `translate(${canvas / 2} ${canvas / 2}) scale(${scale}) translate(${-canvas / 2} ${-canvas / 2}) ${compactTransform}`)
+    }
+    const sync = () => {
+      const next = header.classList.contains('is-scrolled') ? 1 : 0
+      if (next === target && !reducedMotion.matches) return
+      target = next
+      cancelAnimationFrame(frame)
+      if (reducedMotion.matches || !header.hasAttribute('data-surface-ready')) {
+        render(target)
+        return
+      }
+      const from = progress
+      const started = performance.now()
+      const duration = 440 * Math.abs(target - from)
+      if (!duration) return
+      const tick = (now: number) => {
+        const time = clamp((now - started) / duration)
+        const eased = 1 - (1 - time) ** 3
+        render(time === 1 ? target : from + (target - from) * eased)
+        if (time < 1) frame = requestAnimationFrame(tick)
+      }
+      frame = requestAnimationFrame(tick)
+    }
+    render(progress)
+    new MutationObserver(sync).observe(header, { attributes: true, attributeFilter: ['class'] })
+    reducedMotion.addEventListener('change', sync)
+  })
+</script>
+
+<style>
+  .morph-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    overflow: visible;
+    pointer-events: none;
+  }
+</style>
