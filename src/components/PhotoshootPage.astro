@@ -12,6 +12,8 @@ import '../styles/gallery-study.css'
 interface Props { shoot: Photoshoot }
 const { shoot } = Astro.props
 const { hero, frames } = shoot
+const mobileHero = shoot.mobileHero && frames.find(frame => frame.id === shoot.mobileHero!.frameId)
+if (shoot.mobileHero && !mobileHero) throw new Error(`Unknown mobile hero: ${shoot.slug}/${shoot.mobileHero.frameId}`)
 const context = [shoot.name, shoot.schema.description, ...shoot.chapters.flatMap(chapter => chapter.before.flatMap(story => story.paragraphs))]
 const jsonLd = buildPhotoshootSchema({ slug: shoot.slug, ...shoot.schema, hero: hero.original, location: shoot.location, galleryImages: frames.map(frame => ({ src: frame.original, alt: frame.alt })) })
 const browserFrames = frames.map(({ original, src, alt }) => ({ original, src, alt }))
@@ -19,11 +21,14 @@ const browserFrames = frames.map(({ original, src, alt }) => ({ original, src, a
 <BaseLayout title={shoot.title} description={shoot.description} image={hero.original} imageAlt={hero.alt} jsonLd={jsonLd}>
   <div class="gs gs-shoot" data-gallery-study data-shoot={shoot.slug}>
     <script type="application/json" data-gallery-frames set:html={JSON.stringify(browserFrames).replace(/</g, '\\u003c')} />
-    <section class="gs-hero hero--dark" data-hero-layout={shoot.heroLayout} aria-label={`${shoot.name} — photoshoot in ${shoot.location}`} style={photoStyle(hero)}>
-      <div class="gs-hero__motion"><img class="gs-hero__image" src={hero.src} srcset={hero.srcset} sizes={shoot.heroLayout === 'panorama' ? `(max-width: 900px) 100vw, max(100vw, ${(hero.width / hero.height * 100).toFixed(1)}svh)` : `max(100vw, ${(hero.width / hero.height * 100).toFixed(1)}svh)`} alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" loading="eager" /></div>
+    <section class="gs-hero hero--dark" data-hero-layout={shoot.heroLayout} data-mobile-heading={shoot.mobileHero?.headingPosition} aria-label={`${shoot.name} — photoshoot in ${shoot.location}`} style={photoStyle({ ...hero, mobileFocal: shoot.mobileHero?.focal || hero.mobileFocal })}>
+      <picture class="gs-hero__motion">
+        {mobileHero && <source media="(max-width: 900px) and (orientation: portrait)" srcset={mobileHero.srcset} sizes={`max(100vw, ${(mobileHero.width / mobileHero.height * 100).toFixed(1)}svh)`} width={mobileHero.width} height={mobileHero.height} />}
+        <img class="gs-hero__image" src={hero.src} srcset={hero.srcset} sizes={`max(100vw, ${(hero.width / hero.height * 100).toFixed(1)}svh)`} alt={mobileHero ? `${shoot.name} — photoshoot in ${shoot.location}` : hero.alt} width={hero.width} height={hero.height} fetchpriority="high" loading="eager" />
+      </picture>
       <div class="gs-hero__veil"></div>
       <div class="gs-hero__content">
-        <div class="gs-eyebrow"><CityLabel name={shoot.location} />, Italy {shoot.date && <span>{shoot.date}</span>}</div>
+        <div class="gs-eyebrow"><div class="gs-hero__location"><CityLabel name={shoot.location} />, Italy</div>{shoot.date && <span>{shoot.date}</span>}</div>
         <h1>{shoot.heading.lead}<br /><em>{shoot.heading.accent}</em></h1>
         <div class="gs-hero__bottom"><PhotoshootHeroSummary description={shoot.summary} context={context} images={frames} inline /><a href="#gs-story" aria-label="Discover the story"><span>Discover</span><i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a></div>
       </div>

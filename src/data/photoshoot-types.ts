@@ -55,6 +55,7 @@ export type PhotoshootSource = {
   summary: string
   schema: { name: string; description: string; datePublished?: string; keywords: string[] }
   hero: PhotoSource
+  mobileHero?: { frameId: string; focal: string; headingPosition?: 'top' }
   frames: PhotoSource[]
   chapters: PhotoChapter[]
   quote?: { text: string; author: string }

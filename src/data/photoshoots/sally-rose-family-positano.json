@@ -433,5 +433,10 @@
       "mobileFocal": "60% 12%",
       "zoom": 1
     }
+  },
+  "mobileHero": {
+    "frameId": "cnr1313",
+    "focal": "70% 45%",
+    "headingPosition": "top"
   }
 }

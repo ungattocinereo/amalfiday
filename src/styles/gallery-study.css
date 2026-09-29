@@ -28,8 +28,10 @@
 .gs-hero.is-paused .gs-hero__image { animation-play-state: paused; }
 .gs-hero__veil { position: absolute; inset: 0; background: linear-gradient(180deg, #090e1326 15%, #090e130a 35%, #090e135c 60%, #090e13d9 100%); }
 .gs-hero__content { position: absolute; bottom: 40px; left: max(56px, calc((100vw - 1320px) / 2)); right: max(56px, calc((100vw - 1320px) / 2)); }
-.gs-hero .gs-eyebrow { display: flex; gap: 28px; color: #fff; margin-bottom: 28px; font-size: 11px; }
-.gs-hero .gs-eyebrow span { opacity: .75; }
+.gs-hero .gs-eyebrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 28px; color: #fff; margin-bottom: 28px; font-size: 11px; }
+.gs-hero .gs-eyebrow > span { opacity: .75; }
+.gs-hero__location { min-width: 0; }
+.gs-hero__location .city-label__place { white-space: nowrap; }
 .gs-hero h1 { font-size: clamp(58px, 7.7vw, 116px); line-height: 1.08; font-weight: 400; letter-spacing: -.055em; margin: 0 0 42px; text-shadow: 0 4px 28px #0002; }
 .gs-hero h1 em { font-style: italic; }
 .gs-hero__bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; border-top: 1px solid #ffffff4d; }
@@ -308,8 +310,8 @@
   .gs-wrap { width: calc(100% - 40px); }
   .gs-hero { min-height: 540px; }
   .gs-hero__content { left: 24px; right: 24px; bottom: 26px; }
-  .gs-hero .gs-eyebrow { display: block; font-size: 9px; line-height: 2.2; margin-bottom: 22px; }
-  .gs-hero .gs-eyebrow span { display: block; }
+  .gs-hero .gs-eyebrow { font-size: 9px; line-height: 1.8; margin-bottom: 16px; }
+  .gs-hero .gs-eyebrow > span { flex-basis: 100%; }
   .gs-hero h1 { font-size: clamp(43px, 10.5vw, 72px); line-height: 1.12; margin-bottom: 30px; }
   .gs-hero__bottom { font-size: 8px; letter-spacing: .02em; gap: 16px; padding-top: 14px; }
   .gs-hero__bottom a { gap: 10px; }
@@ -418,23 +420,31 @@
   .gs-motion-ready [data-reveal] { opacity: 1; transform: none; }
 }
 
-/* A wide cover needs its own space on narrow screens to keep every person visible. */
+/* Wide desktop covers retain their compact heading; every mobile hero fills the screen. */
 .gs-hero[data-hero-layout='panorama'] h1 { font-size: clamp(54px, 6.6vw, 98px); }
 @media (max-width: 900px) {
-  .gs-hero[data-hero-layout='panorama'] { height: auto; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 100px; background: #172127; }
-  .gs-hero[data-hero-layout='panorama'] .gs-hero__motion { position: relative; inset: auto; width: 100%; transform: none; overflow: hidden; flex-shrink: 0; }
-  .gs-hero[data-hero-layout='panorama'] .gs-hero__image { display: block; height: auto; object-fit: contain; animation-name: gs-panorama-breathe; }
-  .gs-hero[data-hero-layout='panorama'] .gs-hero__veil { background: linear-gradient(180deg, transparent 65%, #090e1380); pointer-events: none; }
-  .gs-hero[data-hero-layout='panorama'] .gs-hero__content { position: relative; inset: auto; padding: 28px 24px; }
-  .gs-hero[data-hero-layout='panorama'] h1 { font-size: clamp(38px, 7.2vw, 64px); margin-bottom: 24px; }
-  .gs-hero[data-hero-layout='panorama'] .gs-eyebrow { margin-bottom: 16px; }
-  .gs-hero[data-hero-layout='panorama'] .gs-motion-toggle { top: 100px; right: 12px; }
+  .gs-shoot .gs-hero { height: 100svh; min-height: 0; }
+  .gs-shoot .gs-hero__motion { inset: 0; transform: none; }
+  .gs-shoot .gs-hero__image { display: block; animation-name: gs-mobile-breathe; transform-origin: var(--mobile-focal-point, var(--focal-point)); }
+  .gs-shoot .gs-hero h1 { font-size: clamp(36px, 9.5vw, 64px); line-height: 1.12; margin-bottom: 22px; }
 }
-@keyframes gs-panorama-breathe { from { transform: scale(1); } to { transform: scale(1.018); } }
+@media (max-width: 900px) and (orientation: portrait) {
+  .gs-shoot .gs-hero__image { object-position: var(--mobile-focal-point, var(--focal-point)); }
+  .gs-hero[data-mobile-heading='top'] .gs-hero__content { top: 110px; bottom: 26px; display: flex; flex-direction: column; }
+  .gs-hero[data-mobile-heading='top'] .gs-hero__bottom { margin-top: auto; }
+  .gs-hero[data-mobile-heading='top'] .gs-hero__veil { background: linear-gradient(180deg, #090e1399, #090e1333 42%, transparent 62%, #090e13d9); }
+}
+@media (max-width: 900px) and (max-height: 650px) and (orientation: portrait) {
+  .gs-shoot .gs-hero h1 { font-size: 32px; margin-bottom: 16px; }
+  .gs-shoot .gs-hero .gs-eyebrow { margin-bottom: 10px; }
+  .gs-shoot .gs-hero__content { bottom: 20px; }
+}
+@keyframes gs-mobile-breathe { from { transform: scale(1); } to { transform: scale(1.025); } }
 @media (max-width: 900px) and (orientation: landscape) {
-  .gs-hero[data-hero-layout='panorama'] { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; padding: 88px 24px 24px; align-items: center; }
-  .gs-hero[data-hero-layout='panorama'] .gs-hero__content { padding: 0; }
-  .gs-hero[data-hero-layout='panorama'] h1 { font-size: clamp(28px, 4vw, 38px); margin-bottom: 16px; }
-  .gs-hero[data-hero-layout='panorama'] .gs-eyebrow { font-size: 8px; margin-bottom: 10px; }
-  .gs-hero[data-hero-layout='panorama'] .gs-motion-toggle { top: 88px; right: 50%; }
+  .gs-shoot .gs-hero__image { object-position: var(--focal-point); transform-origin: var(--focal-point); }
+  .gs-shoot .gs-hero__content { left: 24px; right: 24px; bottom: 12px; }
+  .gs-shoot .gs-hero h1 { font-size: clamp(26px, 3.3vw, 30px); margin-bottom: 8px; }
+  .gs-shoot .gs-hero .gs-eyebrow { font-size: 8px; line-height: 1.6; margin-bottom: 6px; }
+  .gs-shoot .gs-hero__bottom { padding-top: 6px; font-size: 8px; }
+  .gs-shoot .gs-motion-toggle { top: 88px; right: 20px; }
 }

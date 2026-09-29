@@ -38,7 +38,13 @@ The cover may also be one of a shoot's gallery photographs.
 The nine stories imported from `new_photoshoots/` use `sourceFile` for the private
 input JPEG and `original` for a full-frame, metadata-free WebP (up to 2560 px on
 its longest edge). Their originals stay untouched and are not copied into public
-assets. `heroLayout: "panorama"` preserves the wide cover on narrow screens.
+assets. Every hero fills the viewport with `cover`, including phones and tablets;
+`heroLayout: "panorama"` only keeps the compact heading for these wide covers.
+Use `hero.mobileFocal` to protect faces in portrait crops. When a wide group cannot
+fit, `mobileHero` selects an existing gallery `frameId` with its own `focal` for
+portrait screens up to 900 px. Optional `headingPosition: "top"` keeps the heading
+above people positioned low in that frame; the summary remains at the bottom.
+Check all faces at both animation endpoints and preserve the desktop cover.
 Gallery photographs and thumbnails use `contain` to retain the original framing.
 
 Rebuild selected shoots without regenerating other photographs:

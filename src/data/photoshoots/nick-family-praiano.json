@@ -332,5 +332,9 @@
       "focal": "50% 12%",
       "mobileFocal": "50% 12%"
     }
+  },
+  "mobileHero": {
+    "frameId": "cnr2126",
+    "focal": "34% 30%"
   }
 }
