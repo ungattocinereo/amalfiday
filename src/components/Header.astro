@@ -8,7 +8,7 @@ const isActive = (item: (typeof navigation)[number]) =>
   isWithin(item.href) || item.dropdownSections?.some((section) => section.items.some((link) => isWithin(link.href)))
 ---
 
-<header class="header" id="header">
+<header class="header" id="header" data-home={currentPath === '/' ? '' : undefined}>
   <div class="glass-bar">
     <a class="brand" href="/" aria-label={`${site.name} home`}>
       <img class="brand__day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
@@ -234,7 +234,8 @@ const isActive = (item: (typeof navigation)[number]) =>
     const updateSurface = () => {
       scheduled = false
       if (menu.open) return
-      header.classList.toggle('is-scrolled', window.scrollY > 16)
+      const scrolled = window.scrollY > 0
+      header.classList.toggle('is-scrolled', scrolled)
       const y = Math.min(bar.getBoundingClientRect().height / 2, window.innerHeight - 1)
       const tones = [0.12, 0.5, 0.88].map((position) => {
         const underneath = document.elementsFromPoint(window.innerWidth * position, y)
@@ -242,8 +243,11 @@ const isActive = (item: (typeof navigation)[number]) =>
         const section = underneath?.closest('section, footer, article, main') || document.body
         return sectionTone(section)
       })
-      const surface = tones.filter((tone) => tone === 'dark').length >= 2 ? 'dark' : 'light'
-      if (bar.dataset.surface !== surface) bar.dataset.surface = surface
+      const surface = (!scrolled && header.hasAttribute('data-home')) || tones.filter((tone) => tone === 'dark').length >= 2 ? 'dark' : 'light'
+      if (bar.dataset.surface !== surface) {
+        bar.dataset.surface = surface
+        header.dataset.surface = surface
+      }
     }
     const scheduleSurface = () => {
       if (scheduled) return
@@ -292,6 +296,8 @@ const isActive = (item: (typeof navigation)[number]) =>
     --night-logo: block;
   }
   .header {
+    --nav-background: rgba(255, 255, 255, 0.94);
+    --nav-rule: rgba(20, 20, 20, 0.12);
     position: fixed;
     z-index: 30;
     top: 0;
@@ -299,14 +305,34 @@ const isActive = (item: (typeof navigation)[number]) =>
     isolation: isolate;
     color: var(--glass-ink);
   }
+  .header[data-surface='dark'] {
+    --nav-background: rgba(13, 16, 19, 0.92);
+    --nav-rule: rgba(255, 255, 255, 0.18);
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--nav-background);
+    border-bottom: 1px solid var(--nav-rule);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .header.is-scrolled::before { opacity: 1; transition: opacity 180ms ease; }
   .glass-bar {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: 24px;
     min-height: 88px;
-    padding: 16px max(32px, env(safe-area-inset-right)) 16px max(32px, env(safe-area-inset-left));
+    padding: 16px max(24px, env(safe-area-inset-right)) 16px max(24px, env(safe-area-inset-left));
     padding-top: max(16px, env(safe-area-inset-top));
     border: 0;
     border-radius: 0;
@@ -332,6 +358,12 @@ const isActive = (item: (typeof navigation)[number]) =>
     --glass-ink: #ffffff;
     --glass-muted: #b8b8b8;
     --glass-hover: rgba(255, 89, 0, 0.13);
+    --day-logo: none;
+    --night-logo: block;
+  }
+  .header[data-home]:not(.is-scrolled) .glass-bar {
+    --glass-ink: #ffffff;
+    --glass-muted: #ffffff;
     --day-logo: none;
     --night-logo: block;
   }
@@ -386,7 +418,7 @@ const isActive = (item: (typeof navigation)[number]) =>
   .mobile-menu { position: fixed; inset: 0; width: 100%; max-width: 640px; height: 100%; height: 100dvh; max-height: none; margin: 0 auto; padding: 0; border: 0; border-radius: 0; color: var(--glass-ink); background: var(--glass-solid); overflow: clip; }
   .mobile-menu[open] { display: flex; flex-direction: column; animation: reveal 200ms ease-out; }
   .mobile-menu::backdrop { background: rgba(12, 20, 25, 0.46); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-  .mobile-menu__bar { position: sticky; top: 0; z-index: 1; background: var(--glass-solid); flex-shrink: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; min-height: 76px; padding: 12px max(20px, env(safe-area-inset-right)) 12px max(20px, env(safe-area-inset-left)); padding-top: max(12px, env(safe-area-inset-top)); }
+  .mobile-menu__bar { position: sticky; top: 0; z-index: 1; background: var(--glass-solid); flex-shrink: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; min-height: 76px; padding: 12px max(24px, env(safe-area-inset-right)) 12px max(24px, env(safe-area-inset-left)); padding-top: max(12px, env(safe-area-inset-top)); }
   .mobile-menu__body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 28px max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); display: flex; flex-direction: column; flex: 1; }
   .mobile-menu__body > * { flex-shrink: 0; }
   .mobile-menu__intro { margin-bottom: 24px; }
@@ -421,19 +453,28 @@ const isActive = (item: (typeof navigation)[number]) =>
   }
   @keyframes reveal { from { opacity: 0; margin-top: -5px; } to { opacity: 1; margin-top: 0; } }
   @media (max-width: 1099px) {
-    .glass-bar { min-height: 76px; gap: 12px; padding: 12px max(20px, env(safe-area-inset-right)) 12px max(20px, env(safe-area-inset-left)); padding-top: max(12px, env(safe-area-inset-top)); }
+    .glass-bar { min-height: 76px; gap: 12px; padding: 12px max(24px, env(safe-area-inset-right)) 12px max(24px, env(safe-area-inset-left)); padding-top: max(12px, env(safe-area-inset-top)); }
     .is-scrolled .glass-bar { min-height: 68px; }
     .brand img { width: 132px; }
     .header__center { display: none; }
     .menu-toggle { display: flex; }
   }
   @media (max-width: 380px) {
-    .glass-bar, .mobile-menu__bar { padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right)); gap: 8px; }
+    .glass-bar, .mobile-menu__bar { gap: 8px; }
     .menu-toggle, .menu-close { gap: 8px; padding-inline: 12px; }
     .mobile-menu__body { padding-inline: 20px; }
   }
-  .header:not([data-surface-ready]) *, .header:not([data-surface-ready]) *::before { transition: none !important; }
+  .header:not([data-surface-ready])::before, .header:not([data-surface-ready]) *, .header:not([data-surface-ready]) *::before { transition: none !important; }
   @media (prefers-reduced-motion: reduce) {
-    .header *, .header *::before, .header *::after { transition: none !important; animation: none !important; }
+    .header::before, .header *, .header *::before, .header *::after { transition: none !important; animation: none !important; }
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .header::before { background: var(--glass-solid); backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .header[data-surface='dark']::before { background: #111417; }
+    .header[data-surface='light']::before { background: #ffffff; }
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .header::before { background: #ffffff; }
+    .header[data-surface='dark']::before { background: #111417; }
   }
 </style>
