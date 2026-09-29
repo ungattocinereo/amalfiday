@@ -1,0 +1,275 @@
+{
+  "slug": "hinad-amalfi-sunrise",
+  "name": "Hinad",
+  "title": "Hinad — Sunrise Photoshoot in Amalfi & Atrani | Amalfi.Day",
+  "description": "A spontaneous sunrise photoshoot with Hinad, from Amalfi to the shore in Atrani. A personal photographic story by Greg on the Amalfi Coast.",
+  "heading": {
+    "lead": "Just in time",
+    "accent": "for sunrise."
+  },
+  "date": "",
+  "location": "Amalfi & Atrani",
+  "summary": "A spontaneous journey. A sunrise worth getting up for.",
+  "heroLayout": "panorama",
+  "category": "individual",
+  "tag": "Sunrise",
+  "schema": {
+    "name": "Hinad — Amalfi & Atrani Photoshoot",
+    "description": "A spontaneous sunrise photoshoot with Hinad, from Amalfi to the shore in Atrani. A personal photographic story by Greg on the Amalfi Coast.",
+    "keywords": [
+      "amalfi & atrani photographer",
+      "sunrise photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr1077",
+    "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR1077.jpg",
+    "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr1077-full.webp",
+    "alt": "Sunrise behind Hinad and the mountains at the shore",
+    "focal": "54% 34%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr0170",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR0170.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr0170-full.webp",
+      "alt": "Hinad on a flower-lined staircase above Amalfi",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0241",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR0241.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr0241-full.webp",
+      "alt": "Hinad beside the waterfront railing in early light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0252",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR0252.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr0252-full.webp",
+      "alt": "Hinad looking across Amalfi from the promenade",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0347",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR0347.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr0347-full.webp",
+      "alt": "Hinad taking a selfie above the water",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0708",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR0708.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr0708-full.webp",
+      "alt": "A portrait of Hinad with Amalfi behind her",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0809",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR0809.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr0809-full.webp",
+      "alt": "Hinad looking towards the water through a leafy arch",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0926",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR0926.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr0926-full.webp",
+      "alt": "Hinad by the railing as the sun rises",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1032",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR1032.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr1032-full.webp",
+      "alt": "Hinad walking along the shore in a pink floral dress",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1054",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR1054.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr1054-full.webp",
+      "alt": "Hinad on the beach beside the old stone tower",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1108",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR1108.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr1108-full.webp",
+      "alt": "Hinad walking towards the camera across the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1294",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR1294.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr1294-full.webp",
+      "alt": "Hinad at the water’s edge beside the arches",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1456",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR1456.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr1456-full.webp",
+      "alt": "Hinad standing on the rocks above the water",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1938",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR1938.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr1938-full.webp",
+      "alt": "Sunlight shining through Hinad’s hair on the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2029",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR2029.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr2029-full.webp",
+      "alt": "Hinad sitting among the rocks in a colourful dress",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2038",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR2038.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr2038-full.webp",
+      "alt": "A close portrait of Hinad beside the rocks",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2134",
+      "sourceFile": "new_photoshoots/2026-Hinad-Amalfi/_CNR2134.jpg",
+      "original": "/photoshootings/optimized/hinad-amalfi-sunrise/cnr2134-full.webp",
+      "alt": "Hinad by the water with sunlit buildings behind her",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / A last-minute idea",
+      "heading": {
+        "lead": "A change",
+        "accent": "of plans."
+      },
+      "frameIds": [
+        "cnr0170",
+        "cnr0241",
+        "cnr0252",
+        "cnr0347",
+        "cnr0708",
+        "cnr0809"
+      ],
+      "before": [
+        {
+          "eyebrow": "A last-minute idea",
+          "heading": {
+            "lead": "A change",
+            "accent": "of plans."
+          },
+          "paragraphs": [
+            "Hinad was staying in Minori when she decided she would rather be in Amalfi for our photoshoot. Everything came together at the last minute. She moved over the evening before, with two boys along for the trip.",
+            "I explained where we would meet, and she went to find the spot that same evening. I love that little detail. By morning, we could simply meet in the centre of Amalfi and set off towards Atrani."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / The light we came for",
+      "heading": {
+        "lead": "Right place.",
+        "accent": "Right moment."
+      },
+      "frameIds": [
+        "cnr0926",
+        "cnr1032",
+        "cnr1054",
+        "cnr1108",
+        "cnr1294",
+        "cnr1456"
+      ],
+      "before": [
+        {
+          "eyebrow": "The light we came for",
+          "heading": {
+            "lead": "Right place.",
+            "accent": "Right moment."
+          },
+          "paragraphs": [
+            "This time, I got the timing exactly right. We reached the shore for the sunrise I had been hoping to catch, with the sun coming up behind her and the mountains still holding the softer light.",
+            "Her colourful dress, the water, the first light on the buildings: there was so much to work with. These are the mornings when I find it very difficult to put the camera down."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / A morning to keep",
+      "heading": {
+        "lead": "Nothing planned.",
+        "accent": "Everything there."
+      },
+      "frameIds": [
+        "cnr1938",
+        "cnr2029",
+        "cnr2038",
+        "cnr2134"
+      ],
+      "before": [
+        {
+          "eyebrow": "A morning to keep",
+          "heading": {
+            "lead": "Nothing planned.",
+            "accent": "Everything there."
+          },
+          "paragraphs": [
+            "That is what I remember most about this session. It started with a sudden change of plans, and somehow brought us to precisely the right place at precisely the right time.",
+            "We carried on by the water as the light changed. For me, this is one of those shoots where the morning itself becomes part of the story."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "cnr0926",
+    "focal": "45% 35%",
+    "hover": {
+      "frameId": "cnr0708",
+      "focal": "48% 25%"
+    }
+  }
+}

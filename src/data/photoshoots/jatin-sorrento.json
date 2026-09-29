@@ -1,0 +1,466 @@
+{
+  "slug": "jatin-sorrento",
+  "name": "Jatin",
+  "title": "Jatin — Portrait Photoshoot in Sorrento | Amalfi.Day",
+  "description": "Jatin’s first portrait photoshoot in Sorrento: an extraordinary hotel, sea-view terraces, and the small things that helped him feel at ease.",
+  "heading": {
+    "lead": "A first time.",
+    "accent": "A little freedom."
+  },
+  "date": "",
+  "location": "Sorrento",
+  "summary": "Jatin’s first photoshoot, from a Sorrento hotel to its sea-view terraces.",
+  "heroLayout": "panorama",
+  "category": "individual",
+  "tag": "Portrait",
+  "schema": {
+    "name": "Jatin — Sorrento Photoshoot",
+    "description": "Jatin’s first portrait photoshoot in Sorrento: an extraordinary hotel, sea-view terraces, and the small things that helped him feel at ease.",
+    "keywords": [
+      "sorrento photographer",
+      "portrait photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr3910",
+    "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3910.jpg",
+    "original": "/photoshootings/optimized/jatin-sorrento/cnr3910-full.webp",
+    "alt": "A wide portrait of Jatin above the sea and Sorrento",
+    "focal": "53% 26%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr2175",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2175.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2175-full.webp",
+      "alt": "Jatin leaning on a sea-view terrace railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2188",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2188.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2188-full.webp",
+      "alt": "Jatin standing on his hotel terrace in Sorrento",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2255",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2255.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2255-full.webp",
+      "alt": "Jatin in a green shirt above the rooftops",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2310",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2310.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2310-full.webp",
+      "alt": "A portrait of Jatin beside the terrace railings",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2316",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2316.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2316-full.webp",
+      "alt": "Jatin seated on a white chair above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2349",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2349.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2349-full.webp",
+      "alt": "Jatin looking out from a chair on the terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2568",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2568.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2568-full.webp",
+      "alt": "Jatin among paintings in the hotel lounge",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2597",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2597.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2597-full.webp",
+      "alt": "A black-and-white portrait among the hotel’s ceramics",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2600",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2600.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2600-full.webp",
+      "alt": "Jatin beside a mirror in the hotel lounge",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2654",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2654.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2654-full.webp",
+      "alt": "Jatin seated in the lounge among paintings",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2699",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2699.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2699-full.webp",
+      "alt": "Jatin smiling in the bright hotel lounge",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2791",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2791.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2791-full.webp",
+      "alt": "Jatin at a wooden table in the hotel",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2929",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2929.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2929-full.webp",
+      "alt": "Jatin resting his arms on a table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2935",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2935.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2935-full.webp",
+      "alt": "A close portrait of Jatin smiling",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2946",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR2946.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr2946-full.webp",
+      "alt": "A black-and-white portrait of Jatin in an armchair",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3032",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3032.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3032-full.webp",
+      "alt": "Jatin wearing a hat on the sea-view terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3044",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3044.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3044-full.webp",
+      "alt": "Jatin leaning on the terrace railing in his hat",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3105",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3105.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3105-full.webp",
+      "alt": "A black-and-white portrait of Jatin at a terrace table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3125",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3125.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3125-full.webp",
+      "alt": "Jatin seated with his hat at the terrace table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3318",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3318.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3318-full.webp",
+      "alt": "Jatin watching the sun set over the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3329",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3329.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3329-full.webp",
+      "alt": "Jatin on the terrace with the sunset behind him",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3375",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3375.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3375-full.webp",
+      "alt": "Jatin in a navy shirt between large terracotta planters",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3387",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3387.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3387-full.webp",
+      "alt": "Jatin resting beside a planter on the terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3436",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3436.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3436-full.webp",
+      "alt": "Jatin looking across the hotel terraces",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3487",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3487.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3487-full.webp",
+      "alt": "Jatin seated beside a tree on the terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3549",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3549.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3549-full.webp",
+      "alt": "Jatin taking a selfie above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3577",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3577.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3577-full.webp",
+      "alt": "Jatin silhouetted against the orange sunset",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3700",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3700.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3700-full.webp",
+      "alt": "Jatin leaning on the white railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3779",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3779.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3779-full.webp",
+      "alt": "Jatin lifting his hat beside the terrace railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3811",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3811.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3811-full.webp",
+      "alt": "Jatin smiling in his hat above Sorrento",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3815",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3815.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3815-full.webp",
+      "alt": "Jatin relaxing beside the hotel railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3826",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3826.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3826-full.webp",
+      "alt": "A portrait of Jatin in his hat and navy shirt",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3842",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3842.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3842-full.webp",
+      "alt": "Jatin laughing and holding his hat",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3871",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3871.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3871-full.webp",
+      "alt": "Jatin holding his hat and looking towards the town",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3966",
+      "sourceFile": "new_photoshoots/2026-Jatin-Sorrento-Rooftops/_CNR3966.jpg",
+      "original": "/photoshootings/optimized/jatin-sorrento/cnr3966-full.webp",
+      "alt": "Jatin smiling on the sea-view terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / A different meeting place",
+      "heading": {
+        "lead": "Sorrento",
+        "accent": "it is."
+      },
+      "frameIds": [
+        "cnr2175",
+        "cnr2188",
+        "cnr2255",
+        "cnr2310",
+        "cnr2316",
+        "cnr2349",
+        "cnr2568",
+        "cnr2597",
+        "cnr2600",
+        "cnr2654"
+      ],
+      "before": [
+        {
+          "eyebrow": "A different meeting place",
+          "heading": {
+            "lead": "Sorrento",
+            "accent": "it is."
+          },
+          "paragraphs": [
+            "I usually suggest meeting in Amalfi, but Jatin had little time and could not make the journey. He was happy to wait for me in Sorrento, so we decided to photograph him at his hotel, away from the busy streets.",
+            "What a place it turned out to be. Every corner offered something: mirrors, paintings, ceramics, beautiful chairs. We could have spent the whole session there without running out of backgrounds."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / One very close call",
+      "heading": {
+        "lead": "The photograph.",
+        "accent": "And the statue."
+      },
+      "frameIds": [
+        "cnr2699",
+        "cnr2791",
+        "cnr2929",
+        "cnr2935",
+        "cnr2946",
+        "cnr3032",
+        "cnr3044",
+        "cnr3105",
+        "cnr3125",
+        "cnr3318",
+        "cnr3329",
+        "cnr3375"
+      ],
+      "before": [
+        {
+          "eyebrow": "One very close call",
+          "heading": {
+            "lead": "The photograph.",
+            "accent": "And the statue."
+          },
+          "paragraphs": [
+            "There is one moment from this shoot I will remember for a very long time. I carry an enormous backpack, and while concentrating on a photograph I caught a ceramic statue with it. The statue wobbled, began to fall, and somehow I caught it at the last second.",
+            "I have no idea what it was worth. It looked expensive enough to make me very grateful for that catch. Sometimes I get so absorbed in the frame that I forget how much is going on around me."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Finding his own rhythm",
+      "heading": {
+        "lead": "Less thinking.",
+        "accent": "More Jatin."
+      },
+      "frameIds": [
+        "cnr3387",
+        "cnr3436",
+        "cnr3487",
+        "cnr3549",
+        "cnr3577",
+        "cnr3700",
+        "cnr3779",
+        "cnr3811",
+        "cnr3815",
+        "cnr3826",
+        "cnr3842",
+        "cnr3871",
+        "cnr3966"
+      ],
+      "before": [
+        {
+          "eyebrow": "Finding his own rhythm",
+          "heading": {
+            "lead": "Less thinking.",
+            "accent": "More Jatin."
+          },
+          "paragraphs": [
+            "This was Jatin’s first photoshoot. At first he kept noticing the camera and wondering how to pose. I have a posing guide for exactly this reason, but sometimes what helps most is simply a little pause and a change of mood.",
+            "We took a short break for a drink, and afterwards something shifted. He laughed more, his expression softened, and he stopped following the camera. By the time we were out on the terraces, photographing him felt completely different.",
+            "Finding that way in is one of my favourite parts of the job. You do not need experience in front of a camera. We just need to find what makes you comfortable enough to enjoy being there."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "cnr3032",
+    "focal": "53% 30%",
+    "hover": {
+      "frameId": "cnr2175",
+      "focal": "50% 20%"
+    }
+  }
+}

@@ -1,0 +1,365 @@
+{
+  "slug": "ashley-positano",
+  "name": "Ashley",
+  "title": "Ashley — Couple Photoshoot in Positano | Amalfi.Day",
+  "description": "An early summer photoshoot with Ashley in Positano. Quiet streets, soft golden light, and a couple completely at ease in front of the camera.",
+  "heading": {
+    "lead": "Before Positano",
+    "accent": "wakes up."
+  },
+  "date": "Summer · Early morning",
+  "location": "Positano",
+  "summary": "Ashley, a summer morning, and the rare pleasure of quiet streets.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Couple",
+  "schema": {
+    "name": "Ashley — Positano Photoshoot",
+    "description": "An early summer photoshoot with Ashley in Positano. Quiet streets, soft golden light, and a couple completely at ease in front of the camera.",
+    "keywords": [
+      "positano photographer",
+      "couple photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "1_cnr1314",
+    "sourceFile": "new_photoshoots/Ashley/1_CNR1314.jpg",
+    "original": "/photoshootings/optimized/ashley-positano/1_cnr1314-full.webp",
+    "alt": "The couple on Positano beach beneath the morning sunbeams",
+    "focal": "46% 27%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr0138",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0138.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0138-full.webp",
+      "alt": "Ashley and her partner above the beach in Positano",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0157",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0157.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0157-full.webp",
+      "alt": "An embrace above Positano’s blue beach chairs",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0204",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0204.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0204-full.webp",
+      "alt": "The couple looking across the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0317",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0317.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0317-full.webp",
+      "alt": "The couple embracing with Positano rising behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0496",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0496.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0496-full.webp",
+      "alt": "A selfie together on the Positano waterfront",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0561",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0561.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0561-full.webp",
+      "alt": "The couple smiling at each other beside the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0637",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0637.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0637-full.webp",
+      "alt": "The couple holding hands across a café table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0655",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0655.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0655-full.webp",
+      "alt": "Ashley smiling at her partner at the table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0756",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0756.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0756-full.webp",
+      "alt": "A portrait together above the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0805",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0805.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0805-full.webp",
+      "alt": "The couple looking up towards Positano",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0816",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0816.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0816-full.webp",
+      "alt": "A quiet moment with Positano behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0895",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0895.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0895-full.webp",
+      "alt": "A black-and-white portrait of the couple",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0901",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0901.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0901-full.webp",
+      "alt": "The couple beneath the waterfront buildings",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0961",
+      "sourceFile": "new_photoshoots/Ashley/_CNR0961.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr0961-full.webp",
+      "alt": "The couple together in a black-and-white portrait",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1105",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1105.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1105-full.webp",
+      "alt": "A black-and-white embrace by the beach steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1118",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1118.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1118-full.webp",
+      "alt": "The couple at the beach steps in black and white",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1152",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1152.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1152-full.webp",
+      "alt": "The couple holding hands on the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1230",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1230.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1230-full.webp",
+      "alt": "The couple beside a waterfront lamp",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1305",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1305.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1305-full.webp",
+      "alt": "The couple standing in the first rays of sun",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1322",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1322.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1322-full.webp",
+      "alt": "A wide view of the couple beneath the sunlit cliffs",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1334",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1334.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1334-full.webp",
+      "alt": "The couple on the beach with the mountains behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1398",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1398.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1398-full.webp",
+      "alt": "A close portrait together in the morning sun",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1526",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1526.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1526-full.webp",
+      "alt": "The couple beneath a green wall of climbing plants",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1577",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1577.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1577-full.webp",
+      "alt": "The couple embracing in a Positano lane",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1682",
+      "sourceFile": "new_photoshoots/Ashley/_CNR1682.jpg",
+      "original": "/photoshootings/optimized/ashley-positano/cnr1682-full.webp",
+      "alt": "The couple holding hands on flower-lined steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / An early start",
+      "heading": {
+        "lead": "Positano,",
+        "accent": "just for a moment."
+      },
+      "frameIds": [
+        "cnr0138",
+        "cnr0157",
+        "cnr0204",
+        "cnr0317",
+        "cnr0496",
+        "cnr0561",
+        "cnr0637",
+        "cnr0655"
+      ],
+      "before": [
+        {
+          "eyebrow": "An early start",
+          "heading": {
+            "lead": "Positano,",
+            "accent": "just for a moment."
+          },
+          "paragraphs": [
+            "I do not photograph in Positano very often, but these two really wanted their session here. I am so glad we did it. From the beginning, they looked like they had stepped out of a film, and everything between us felt easy.",
+            "It was summer, so we began very early. In a town where people usually fill every little street, those quiet morning hours are something special. We could walk, stop, and photograph without constantly waiting for space."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / An easy connection",
+      "heading": {
+        "lead": "Very little",
+        "accent": "direction needed."
+      },
+      "frameIds": [
+        "cnr0756",
+        "cnr0805",
+        "cnr0816",
+        "cnr0895",
+        "cnr0901",
+        "cnr0961",
+        "cnr1105",
+        "cnr1118",
+        "cnr1152"
+      ],
+      "before": [
+        {
+          "eyebrow": "An easy connection",
+          "heading": {
+            "lead": "Very little",
+            "accent": "direction needed."
+          },
+          "paragraphs": [
+            "I hardly had to tell them what to do. There was trust from the start, and they were so natural together that I could simply follow what was happening in front of me.",
+            "I love sessions like this. You are still looking carefully at the light and every small detail, but the people bring so much of themselves that the photographs seem to find their own way."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Summer light",
+      "heading": {
+        "lead": "Worth the",
+        "accent": "early alarm."
+      },
+      "frameIds": [
+        "cnr1230",
+        "cnr1305",
+        "cnr1322",
+        "cnr1334",
+        "cnr1398",
+        "cnr1526",
+        "cnr1577",
+        "cnr1682"
+      ],
+      "before": [
+        {
+          "eyebrow": "Summer light",
+          "heading": {
+            "lead": "Worth the",
+            "accent": "early alarm."
+          },
+          "paragraphs": [
+            "Morning golden hour is my favourite time to begin. I enjoy getting up early, especially in summer, and I was very happy that they were willing to do the same.",
+            "That morning gave us everything: a lovely connection, quiet corners, and light that needed almost no adjustment afterwards. I like these photographs exactly for that feeling of ease. It was there when we made them."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "1_cnr1314",
+    "focal": "46% 27%",
+    "hover": {
+      "frameId": "cnr0138",
+      "focal": "53% 15%"
+    }
+  }
+}

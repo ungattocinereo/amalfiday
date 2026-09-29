@@ -1,4 +1,5 @@
 ---
+import { getCityIcon } from '../../../data/city-icons'
 import BaseLayout from '../../../layouts/BaseLayout.astro'
 
 const pageTitle = 'Private Amalfi Coast Car Tours — Full-Day with a Local Guide'
@@ -85,16 +86,16 @@ const pricingCards = [
 ]
 
 const stops = [
-  { name: 'Positano', icon: 'fa-house', desc: 'Cliffside village' },
-  { name: 'Amalfi', icon: 'fa-building', desc: 'Historic harbor' },
-  { name: 'Atrani', icon: 'fa-video', desc: 'Hidden gem' },
-  { name: 'Ravello', icon: 'fa-music', desc: 'Mountain terrace' },
-  { name: 'Tramonti', icon: 'fa-mug-hot', desc: 'Wine experience' },
-  { name: 'Chiunzi', icon: 'fa-binoculars', desc: 'Mountain panorama' },
+  { name: 'Positano', desc: 'Cliffside village' },
+  { name: 'Amalfi', desc: 'Historic harbor' },
+  { name: 'Atrani', desc: 'Hidden gem' },
+  { name: 'Ravello', desc: 'Mountain terrace' },
+  { name: 'Tramonti', desc: 'Wine experience' },
+  { name: 'Chiunzi', desc: 'Mountain panorama' },
 ]
 
 const tramontiStops = [
-  { name: 'Tramonti', icon: 'fa-tree', desc: 'Mountain valley' },
+  { name: 'Tramonti', icon: getCityIcon('Tramonti'), desc: 'Mountain valley' },
   { name: 'Winery', icon: 'fa-mug-hot', desc: 'Hillside vineyard' },
   { name: 'Farm', icon: 'fa-leaf', desc: 'Buffalo mozzarella' },
   { name: 'Restaurant', icon: 'fa-star', desc: 'Michelin desserts' },
@@ -195,7 +196,7 @@ const tramontiStops = [
                   <div class="ct-route__card">
                     <span class="ct-route__num">{String(i + 1).padStart(2, '0')}</span>
                     <div class="ct-route__icon">
-                      <i class={`fa-solid ${stop.icon}`} aria-hidden="true"></i>
+                      <i class={`fa-solid ${getCityIcon(stop.name)}`} aria-hidden="true"></i>
                     </div>
                     <div class="ct-route__text">
                       <span class="ct-route__name">{stop.name}</span>

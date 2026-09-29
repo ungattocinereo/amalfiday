@@ -17,6 +17,7 @@ const occasion: IconRule[] = [
   { match: /\b(travel|trip|journey|explor(?:e|ing|ation)|adventure)\b|путешеств|прогулк/i, name: 'fa-compass', label: 'A journey to remember' },
 ]
 const setting: IconRule[] = [
+  { match: /\b(path of the gods|mountain trail|hiking|hikers|trekking)\b/i, name: 'fa-mountain', label: 'In the mountains' },
   { match: /\b(motorbike|motorcycle|scooter|vespa)\b|мотоцикл|скутер/i, name: 'fa-motorcycle', label: 'On the open road' },
   { match: /\b(harbou?r|pier|boat|sailing|yacht)\b|гаван|причал|яхт|лодк/i, name: 'fa-anchor', label: 'By the harbour' },
   { match: /\b(gardens?|vineyards?|forest|woods|flowers?)\b|сад[ыу]|виноград|лесу|цветы/i, name: 'fa-leaf', label: 'Surrounded by nature' },
@@ -27,9 +28,11 @@ const setting: IconRule[] = [
 
 /** Runs at build time, using the story and image captions rather than fetching images in the browser. */
 export function selectPhotoshootHeroIcons(context: readonly string[], images: readonly { alt: string }[] = []): PhotoshootHeroIcon[] {
-  const text = [...context, ...images.map(image => image.alt)].join(' ')
+  const text = context.join(' ')
+  const imageText = images.map(image => image.alt).join(' ')
   const pick = (rules: IconRule[], fallback: PhotoshootHeroIcon): PhotoshootHeroIcon => {
-    const rule = rules.find(rule => rule.match.test(text))
+    // The story sets the context; an incidental prop in one caption must not override it.
+    const rule = rules.find(rule => rule.match.test(text)) || rules.find(rule => rule.match.test(imageText))
     return rule ? { name: rule.name, label: rule.label } : fallback
   }
   return [

@@ -1,4 +1,5 @@
 ---
+import CityLabel from '../components/CityLabel.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 
 const pageTitle = 'Design Guidelines — CristallPont Amalfi Day'
@@ -182,10 +183,13 @@ const rules = [
         </div>
         <div class="card guide-meta">
           <h3>Icons</h3>
-          <p>We use Bootstrap Icons: <code>bi</code> + icon name.</p>
+          <p>We use Font Awesome: <code>fa-solid</code> + icon name.</p>
+          <p>City labels share one icon per city through <code>CityLabel.astro</code> and <code>src/data/city-icons.ts</code>.</p>
           <div class="guide-icons">
             <i class="fa-solid fa-camera"></i>
-            <i class="fa-solid fa-location-dot"></i>
+            <CityLabel name="Amalfi" />
+            <CityLabel name="Positano" />
+            <CityLabel name="Ravello" />
             <i class="fa-solid fa-star"></i>
             <i class="fa-solid fa-sun"></i>
           </div>

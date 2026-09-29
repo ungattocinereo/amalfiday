@@ -1,0 +1,12 @@
+# PhotoPoses phone render
+
+Generated with the built-in image_gen tool, with a transparent background. The original PNG is preserved alongside this file; responsive WebP assets are in public/pose-guide/.
+
+## Final prompt
+
+Use case: product-mockup.
+Asset type: isolated transparent premium smartphone render for the right-hand visual of an existing photography website.
+Input image 1 is the exact mobile website screen to faithfully insert. Input image 2 is contextual reference of the current block; improve the PHONE ONLY, do not reproduce the surrounding webpage, text, buttons or background.
+Create a stunning photorealistic studio product render of one modern, elegant smartphone with satin natural titanium silver frame, precision polished chamfered edges, convincing depth, subtle side controls, immaculate curved glass and slim black bezels. Realistic flagship proportions (physical device about 2.12 times taller than wide, NOT an elongated narrow phone). Portrait device floating in a restrained three-quarter isometric presentation: top leaning slightly right, camera sees front display prominently and a beautifully lit left metal edge, subtle 10 degree in-plane tilt and about 15 degree yaw. Screen should remain very readable. Premium restrained studio lighting: large softbox, beautiful soft rim highlights, extremely subtle warm reflection, realistic metallic microtexture. Stronger dimensional realism and polish than input image 2.
+Composite the supplied PhotoPoses mobile screenshot (input image 1) faithfully onto the screen, keeping its black and white editorial design and imagery, clear PHOTOPOSES title, SOLO WOMAN heading and the two women photographs with their faces intact. Do not invent another UI or add artwork. Keep screen text sharp, unobstructed by glare; discreet camera island and status bar. If necessary crop only the very bottom of the screenshot to achieve correct device proportions.
+One complete phone only, centered in a portrait 2:3 canvas, with 6-10% transparent margin around all edges, no clipping. Genuine alpha transparent background, no checkerboard, no surface, no environment, no hand, no props, no pedestal, no logos on body, no extraneous lettering, no watermark. Very subtle soft translucent contact shadow below phone is okay but no opaque background. The render will be used on both a pale grey and dark charcoal website. High-end consumer electronics campaign quality, finely detailed, crisp silhouette.

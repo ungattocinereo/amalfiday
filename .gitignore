@@ -26,3 +26,6 @@ files
 /.deploy-backups/
 /.release-*/
 /.dist-before-*/
+
+# Private, full-resolution photoshoot imports; publish only optimized WebP assets.
+/new_photoshoots/

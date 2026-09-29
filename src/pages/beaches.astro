@@ -1,4 +1,5 @@
 ---
+import { getCityIcon } from '../data/city-icons'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import CldImage from '../components/CldImage.astro'
 import { site } from '../data/site'
@@ -37,77 +38,66 @@ const quickFacts = [
 
 const beaches = [
   {
-    icon: 'fa-location-dot',
     name: 'Vietri Sul Mare',
     accent: 'wide',
     description:
       'The widest and most accessible beach on the coast, with easy parking, democratic prices, and steady cleaning. A great base if you prefer to stay closer to the edge of the coast.',
   },
   {
-    icon: 'fa-compass',
     name: 'Erchie',
     accent: 'hidden',
     description:
       'A tiny fishing village tucked into a quiet bay. Boat-only coves hide along the cliffs, perfect for privacy and slow, quiet swims.',
   },
   {
-    icon: 'fa-users',
     name: 'Maiori',
     accent: 'long',
     description:
       'The longest beach on the Amalfi Coast, popular with families. You can find budget stays, but premium zones can charge higher to keep crowds down.',
   },
   {
-    icon: 'fa-heart',
     name: 'Minori',
     accent: 'cozy',
     description:
       'A smaller, softer cousin to Maiori. It feels intimate and sweet, but it fills up fast in peak season.',
   },
   {
-    icon: 'fa-signs-post',
     name: 'Castiglione',
     accent: 'cliffside',
     description:
       'Ravello’s official beach, wedged between cliffs. Reach it via a 120-step staircase from the road. Motorcycle parking only, yet Atrani is an easy swim away.',
   },
   {
-    icon: 'fa-water',
     name: 'Atrani',
     accent: 'quiet',
     description:
       'Split by a small river, with clean water and a handful of bars. It stays calm most of the year but fills up in July and August.',
   },
   {
-    icon: 'fa-city',
     name: 'Amalfi',
     accent: 'central',
     description:
       'The main beach and the most crowded, especially near the cruise pier. Prices range from budget to premium, with private hotel clubs nearby and wilder cliffs beyond the port.',
   },
   {
-    icon: 'fa-star',
     name: 'Conca dei Marini',
     accent: 'emerald',
     description:
       'Home to Grotta dello Smeraldo, the emerald-lit sea cave. The beach itself is small, cozy, and wrapped in rock and greenery.',
   },
   {
-    icon: 'fa-camera',
     name: 'Furore (Fiordo di Furore)',
     accent: 'dramatic',
     description:
       'One of the coast’s most photogenic spots. There’s no parking, so cars line the road with the risk of a fine. The view is the reward.',
   },
   {
-    icon: 'fa-sun',
     name: 'Praiano',
     accent: 'sunset',
     description:
       'Praiano nails the golden hour. Marina di Praia is framed by cliffs and feels secluded. It also hosts one of the rare seaside discos with music right by the water.',
   },
   {
-    icon: 'fa-music',
     name: 'Positano',
     accent: 'iconic',
     description:
@@ -285,7 +275,7 @@ const beachesJsonLd = [
           {beaches.map((beach) => (
             <article class="beach-row">
               <div class="beach-row__icon" aria-hidden="true">
-                <i class={`fa-solid ${beach.icon}`}></i>
+                <i class={`fa-solid ${getCityIcon(beach.name)}`} aria-hidden="true"></i>
               </div>
               <div class="beach-row__content">
                 <h3>

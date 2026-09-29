@@ -8,6 +8,7 @@ export type PhotoStory = {
 }
 export type PhotoSource = {
   id: string
+  sourceFile?: string
   original: string
   alt: string
   focal: string
@@ -41,9 +42,18 @@ export type PhotoshootSource = {
   description: string
   heading: PhotoHeading
   date: string
+  heroLayout?: 'panorama'
+  category?: 'individual' | 'couple' | 'family'
+  tag?: string
+  card?: {
+    frameId: string
+    focal: string
+    mobileFocal?: string
+    hover?: { frameId: string; focal: string; mobileFocal?: string; zoom?: number }
+  }
   location: string
   summary: string
-  schema: { name: string; description: string; datePublished: string; keywords: string[] }
+  schema: { name: string; description: string; datePublished?: string; keywords: string[] }
   hero: PhotoSource
   frames: PhotoSource[]
   chapters: PhotoChapter[]

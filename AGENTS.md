@@ -18,6 +18,12 @@ For new photoshoots and changes to their hero, galleries, images, or request for
 - `npm run update-calendars`, `npm run optimize-images`, and `npm run precompress` run individual maintenance tasks.
 - `npm run contact:api` starts the local contact API helper used by the Vite `/api` proxy.
 
+## City Icons and Catalog Cards
+
+Use the shared city identities in `src/data/city-icons.ts` wherever a UI label or card identifies a city. Use `CityLabel.astro` for an icon with its city name (including compound labels such as Amalfi & Atrani), or `getCityIcon(name)` inside existing icon wrappers. Never assign a different icon locally or use a generic map pin for a registered city. Add new cities and spelling aliases to this registry once, then reuse them throughout the project. Keep every city's icon distinct; the generic pin is only a fallback for unregistered locations. Icons beside readable city names are decorative (`aria-hidden="true"`). This rule does not add icons inside ordinary prose or replace functional icons for maps, directions, transport, or session themes.
+
+Photoshoot catalog cards use full-bleed photographs, the existing gradient overlay, a category badge, and overlaid location/title. Select card images and focal points in the photoshoot's `card` data; verify faces at desktop and mobile sizes rather than assuming the hero image fits a card.
+
 ## Coding Style & Naming Conventions
 
 Use ES modules and match the existing Astro style: two-space indentation, single quotes in JavaScript/TypeScript config files, and semicolon-free statements. Name Astro components in PascalCase, for example `AvailabilityCalendar.astro`; route files should follow URL-oriented lowercase names such as `parking.astro` or `blog/[slug].astro`. Keep page content close to the relevant `.astro` route unless it is reused, then move shared values to `src/data`.

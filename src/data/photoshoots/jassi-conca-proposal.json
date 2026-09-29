@@ -1,0 +1,495 @@
+{
+  "slug": "jassi-conca-proposal",
+  "name": "Jassi",
+  "title": "Jassi — Proposal Photoshoot in Conca dei Marini | Amalfi.Day",
+  "description": "A secret proposal at a villa in Conca dei Marini: Jassi, a terrace above the sea, and the moment everything changed. Photographed by Greg.",
+  "heading": {
+    "lead": "A secret",
+    "accent": "above the sea."
+  },
+  "date": "",
+  "location": "Conca dei Marini",
+  "summary": "Jassi’s surprise proposal, on a villa terrace in Conca.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Proposal",
+  "schema": {
+    "name": "Jassi — Conca dei Marini Photoshoot",
+    "description": "A secret proposal at a villa in Conca dei Marini: Jassi, a terrace above the sea, and the moment everything changed. Photographed by Greg.",
+    "keywords": [
+      "conca dei marini photographer",
+      "proposal photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr0334",
+    "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0334.jpg",
+    "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0334-full.webp",
+    "alt": "The couple framed by the terrace and distant mountains",
+    "focal": "54% 36%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr0001",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0001.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0001-full.webp",
+      "alt": "The couple on the villa terrace, framed by leaves",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0017",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0017.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0017-full.webp",
+      "alt": "Jassi beginning his proposal above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0050",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0050.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0050-full.webp",
+      "alt": "The proposal seen through the villa garden",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0056",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0056.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0056-full.webp",
+      "alt": "His partner reacting to the surprise proposal",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0066",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0066.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0066-full.webp",
+      "alt": "Jassi holding the ring as his partner covers her face",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0076",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0076.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0076-full.webp",
+      "alt": "A surprised smile on the villa terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0083",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0083.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0083-full.webp",
+      "alt": "The proposal framed by the garden and sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0114",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0114.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0114-full.webp",
+      "alt": "Jassi smiling beside the decorated terrace table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0124",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0124.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0124-full.webp",
+      "alt": "Jassi placing the ring on his partner’s hand",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0142",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0142.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0142-full.webp",
+      "alt": "A close view of the ring exchange",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0181",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0181.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0181-full.webp",
+      "alt": "An embrace after the proposal",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0241",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0241.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0241-full.webp",
+      "alt": "The couple kissing on the sea-view terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0301",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0301.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0301-full.webp",
+      "alt": "The couple together beside the ceramic table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0387",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0387.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0387-full.webp",
+      "alt": "The engagement ring against a colourful ceramic table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0508",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0508.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0508-full.webp",
+      "alt": "Wine glasses on the painted ceramic table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0520",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0520.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0520-full.webp",
+      "alt": "The couple raising their glasses above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0564",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0564.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0564-full.webp",
+      "alt": "A toast on the terrace after the proposal",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0628",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0628.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0628-full.webp",
+      "alt": "The couple enjoying wine with the coastline behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0676",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0676.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0676-full.webp",
+      "alt": "A wide view of the couple and villa terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0722",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0722.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0722-full.webp",
+      "alt": "A quiet moment together beside the terrace table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0892",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0892.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0892-full.webp",
+      "alt": "A close view of the engagement ring and joined hands",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0948",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR0948.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr0948-full.webp",
+      "alt": "Their hands together with a small pink flower",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1004",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1004.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1004-full.webp",
+      "alt": "The couple beneath the villa’s leafy pergola",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1040",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1040.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1040-full.webp",
+      "alt": "An embrace among the villa flowers",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1193",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1193.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1193-full.webp",
+      "alt": "The couple seated beneath the garden pergola",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1266",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1266.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1266-full.webp",
+      "alt": "The couple smiling with wine glasses in the garden",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1282",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1282.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1282-full.webp",
+      "alt": "A shared laugh at the garden table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1417",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1417.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1417-full.webp",
+      "alt": "The couple framed by a doorway overlooking the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1510",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1510.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1510-full.webp",
+      "alt": "A portrait together above the blue water",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1553",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1553.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1553-full.webp",
+      "alt": "The couple raising a glass towards the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1562",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1562.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1562-full.webp",
+      "alt": "A toast above the coastline from the villa balcony",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1647",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1647.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1647-full.webp",
+      "alt": "The couple looking at the engagement ring in the garden",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1682",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1682.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1682-full.webp",
+      "alt": "An embrace beneath the trees",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1744",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1744.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1744-full.webp",
+      "alt": "A quiet conversation beneath the garden canopy",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1844",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1844.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1844-full.webp",
+      "alt": "The couple walking down the villa steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1978",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1978.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1978-full.webp",
+      "alt": "A portrait together beside the hillside railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1988",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR1988.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr1988-full.webp",
+      "alt": "The couple smiling above the garden",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2135",
+      "sourceFile": "new_photoshoots/2026-Jassi-proposal/2-print/_CNR2135.jpg",
+      "original": "/photoshootings/optimized/jassi-conca-proposal/cnr2135-full.webp",
+      "alt": "The couple showing the engagement ring",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Behind the scenes",
+      "heading": {
+        "lead": "A very",
+        "accent": "well-kept secret."
+      },
+      "frameIds": [
+        "cnr0001",
+        "cnr0017",
+        "cnr0050",
+        "cnr0056",
+        "cnr0066",
+        "cnr0076",
+        "cnr0083",
+        "cnr0114",
+        "cnr0124",
+        "cnr0142",
+        "cnr0181",
+        "cnr0241",
+        "cnr0301"
+      ],
+      "before": [
+        {
+          "eyebrow": "Behind the scenes",
+          "heading": {
+            "lead": "A very",
+            "accent": "well-kept secret."
+          },
+          "paragraphs": [
+            "Jassi had been planning this for a long time. He and his partner had come from Britain and were staying at a beautiful villa belonging to good friends of mine in Conca. The view alone was enough to make you stop talking.",
+            "We arranged everything in advance. The owner called to explain when and how I could slip inside without being seen. We chose a moment before the couple left for their planned excursion, and I waited behind the farthest corner of the villa."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / The question",
+      "heading": {
+        "lead": "Everything happens",
+        "accent": "at once."
+      },
+      "frameIds": [
+        "cnr0387",
+        "cnr0508",
+        "cnr0520",
+        "cnr0564",
+        "cnr0628",
+        "cnr0676",
+        "cnr0722",
+        "cnr0892",
+        "cnr0948",
+        "cnr1004",
+        "cnr1040",
+        "cnr1193"
+      ],
+      "before": [
+        {
+          "eyebrow": "The question",
+          "heading": {
+            "lead": "Everything happens",
+            "accent": "at once."
+          },
+          "paragraphs": [
+            "She came outside without suspecting a thing. First there was the table, the wine, the view. Then Jassi began his proposal, and I was already in position with my camera, photographing every second.",
+            "The frames follow one another so closely that, together, they almost move. But it is the expressions I keep coming back to: surprise, excitement, and the way they looked at each other."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / After the yes",
+      "heading": {
+        "lead": "Time to",
+        "accent": "take it in."
+      },
+      "frameIds": [
+        "cnr1266",
+        "cnr1282",
+        "cnr1417",
+        "cnr1510",
+        "cnr1553",
+        "cnr1562",
+        "cnr1647",
+        "cnr1682",
+        "cnr1744",
+        "cnr1844",
+        "cnr1978",
+        "cnr1988",
+        "cnr2135"
+      ],
+      "before": [
+        {
+          "eyebrow": "After the yes",
+          "heading": {
+            "lead": "Time to",
+            "accent": "take it in."
+          },
+          "paragraphs": [
+            "Afterwards they had a little wine and began to relax. We photographed the ring, the flowers around the villa, and the two of them enjoying a moment that no longer needed to be kept secret.",
+            "Some sessions stay with me for a long time. The careful preparation, that extraordinary terrace, and the emotion of the proposal made this one impossible to forget."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "cnr0334",
+    "focal": "57% 35%",
+    "hover": {
+      "frameId": "cnr0181",
+      "focal": "50% 22%"
+    }
+  }
+}

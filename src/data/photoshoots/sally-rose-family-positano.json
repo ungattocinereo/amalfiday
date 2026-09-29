@@ -1,0 +1,437 @@
+{
+  "slug": "sally-rose-family-positano",
+  "name": "Sally & Rose’s family",
+  "title": "Sally & Rose’s family — Family Photoshoot in Positano | Amalfi.Day",
+  "description": "A family photoshoot with Sally and Rose in Positano. Two hours by the sea, a yearly tradition, and photographs made for the family album.",
+  "heading": {
+    "lead": "All together.",
+    "accent": "All the way here."
+  },
+  "date": "Early morning",
+  "location": "Positano",
+  "summary": "A family tradition, a Positano morning, and room for everyone.",
+  "heroLayout": "panorama",
+  "category": "family",
+  "tag": "Family",
+  "schema": {
+    "name": "Sally & Rose’s family — Positano Photoshoot",
+    "description": "A family photoshoot with Sally and Rose in Positano. Two hours by the sea, a yearly tradition, and photographs made for the family album.",
+    "keywords": [
+      "positano photographer",
+      "family photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr0409",
+    "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0409.jpg",
+    "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0409-full.webp",
+    "alt": "The whole family on the beach beneath Positano",
+    "focal": "50% 30%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr0068",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0068.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0068-full.webp",
+      "alt": "The whole family with Positano behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0244",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0244.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0244-full.webp",
+      "alt": "The family lined up on the beach steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0367",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0367.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0367-full.webp",
+      "alt": "A shared laugh in the family group",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0506",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0506.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0506-full.webp",
+      "alt": "The family arranged around the beach steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0535",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0535.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0535-full.webp",
+      "alt": "The family together by the beach railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0692",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0692.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0692-full.webp",
+      "alt": "A couple portrait with the family in the background",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0744",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0744.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0744-full.webp",
+      "alt": "The couple smiling by the water with the children behind",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0760",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0760.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0760-full.webp",
+      "alt": "The couple holding hands in front of the beach steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0846",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0846.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0846-full.webp",
+      "alt": "The children together on the beach steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0960",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR0960.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr0960-full.webp",
+      "alt": "The children looking up towards the camera",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1045",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1045.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1045-full.webp",
+      "alt": "The whole family beside the waterfront railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1060",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1060.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1060-full.webp",
+      "alt": "A closer portrait of the family by the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1086",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1086.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1086-full.webp",
+      "alt": "A child relaxing on a striped beach lounger",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1120",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1120.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1120-full.webp",
+      "alt": "Part of the family together by the beach café",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1155",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1155.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1155-full.webp",
+      "alt": "A conversation beside the café loungers",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1217",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1217.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1217-full.webp",
+      "alt": "A portrait on a striped beach lounger",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1313",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1313.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1313-full.webp",
+      "alt": "The family gathered beside the waterfront café",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1351",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1351.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1351-full.webp",
+      "alt": "The whole family around the striped loungers",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1522",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1522.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1522-full.webp",
+      "alt": "Two family members walking along the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1595",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1595.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1595-full.webp",
+      "alt": "The family on the sand beneath the colourful town",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1711",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1711.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1711-full.webp",
+      "alt": "The family walking out of the water together",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1766",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1766.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1766-full.webp",
+      "alt": "The family playing at the water’s edge",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1778",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1778.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1778-full.webp",
+      "alt": "A mother and daughter portrait beside the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1855",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1855.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1855-full.webp",
+      "alt": "The couple together at the water’s edge",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1889",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR1889.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr1889-full.webp",
+      "alt": "The couple standing on the beach beneath the cliffs",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2054",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR2054.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr2054-full.webp",
+      "alt": "Three family members with Positano behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2097",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR2097.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr2097-full.webp",
+      "alt": "A playful group portrait on the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2183",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR2183.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr2183-full.webp",
+      "alt": "A child riding on shoulders by the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2239",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR2239.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr2239-full.webp",
+      "alt": "Three family members laughing beside the beach umbrellas",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2325",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR2325.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr2325-full.webp",
+      "alt": "The whole family beside the rocks and splashing water",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2440",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR2440.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr2440-full.webp",
+      "alt": "The family together beside a terracotta wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2468",
+      "sourceFile": "new_photoshoots/SallyAnn-Rose/_CNR2468.jpg",
+      "original": "/photoshootings/optimized/sally-rose-family-positano/cnr2468-full.webp",
+      "alt": "The family sitting together on the church steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / A yearly tradition",
+      "heading": {
+        "lead": "A whole car",
+        "accent": "full of stories."
+      },
+      "frameIds": [
+        "cnr0068",
+        "cnr0244",
+        "cnr0367",
+        "cnr0506",
+        "cnr0535",
+        "cnr0692",
+        "cnr0744",
+        "cnr0760",
+        "cnr0846",
+        "cnr0960"
+      ],
+      "before": [
+        {
+          "eyebrow": "A yearly tradition",
+          "heading": {
+            "lead": "A whole car",
+            "accent": "full of stories."
+          },
+          "paragraphs": [
+            "We spent quite a while planning this session. The family had rented a beautiful villa in Praiano, were still getting to know the area, and had a lot to organise. I waited for them at a car park in Positano, where an enormous car arrived and out came the whole family.",
+            "To my delight, they were wonderfully prepared for the photographs. They do this every year, in a different place. They knew how to pose, enjoyed being together, and made my part of the morning very easy."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Time together",
+      "heading": {
+        "lead": "One hour",
+        "accent": "became two."
+      },
+      "frameIds": [
+        "cnr1045",
+        "cnr1060",
+        "cnr1086",
+        "cnr1120",
+        "cnr1155",
+        "cnr1217",
+        "cnr1313",
+        "cnr1351",
+        "cnr1522",
+        "cnr1595",
+        "cnr1711"
+      ],
+      "before": [
+        {
+          "eyebrow": "Time together",
+          "heading": {
+            "lead": "One hour",
+            "accent": "became two."
+          },
+          "paragraphs": [
+            "Getting everyone ready and over to Positano meant we missed golden hour. By the time we reached my favourite spots, other people were beginning to arrive. But it was still early, with lovely light and plenty of room to work.",
+            "The hour we had planned became two wonderful hours together. We had sunshine, the town behind us, and a family who were comfortable enough with one another to make every combination of people feel natural."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / For the family album",
+      "heading": {
+        "lead": "A place",
+        "accent": "on the wall."
+      },
+      "frameIds": [
+        "cnr1766",
+        "cnr1778",
+        "cnr1855",
+        "cnr1889",
+        "cnr2054",
+        "cnr2097",
+        "cnr2183",
+        "cnr2239",
+        "cnr2325",
+        "cnr2440",
+        "cnr2468"
+      ],
+      "before": [
+        {
+          "eyebrow": "For the family album",
+          "heading": {
+            "lead": "A place",
+            "accent": "on the wall."
+          },
+          "paragraphs": [
+            "After the session, we spent time on the finishing touches. The family had particular wishes for the photographs, and I was happy to work through the details. There was plenty of retouching, but it mattered to me that the people and the feeling of the morning still looked like themselves.",
+            "I hope these find a place in their family album. Perhaps one will be printed large, framed, and hung above a fireplace. I like imagining it bringing them back to Positano for a moment, long after the trip is over."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "cnr0068",
+    "focal": "49% 30%",
+    "hover": {
+      "frameId": "cnr0244",
+      "focal": "57% 12%",
+      "mobileFocal": "60% 12%",
+      "zoom": 1
+    }
+  }
+}

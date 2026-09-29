@@ -1,0 +1,113 @@
+---
+interface Props { href: string }
+const { href } = Astro.props
+---
+
+<pose-guide-phone class="pose-phone">
+  <a class="pose-phone__device" href={href} target="_blank" rel="noopener noreferrer" aria-label="Open PhotoPoses, Greg's free posing guide (opens in a new tab)">
+    <img
+      src="/pose-guide/photoposes-phone-render-1024.webp"
+      srcset="/pose-guide/photoposes-phone-render-512.webp 512w, /pose-guide/photoposes-phone-render-1024.webp 1024w"
+      sizes="(min-width: 1025px) 620px, (max-width: 508px) calc(100vw - 48px), 460px"
+      alt="Titanium smartphone displaying PhotoPoses, with portrait posing ideas from the Amalfi Coast"
+      width="1024" height="1536" loading="lazy" decoding="async" draggable="false"
+    />
+  </a>
+</pose-guide-phone>
+
+<style>
+  .pose-phone {
+    --phone-rx: 0deg;
+    --phone-ry: 0deg;
+    display: grid;
+    place-items: center;
+    position: relative;
+    min-width: 0;
+    height: 660px;
+    perspective: 1200px;
+    isolation: isolate;
+  }
+  .pose-phone__device {
+    display: block;
+    width: min(100%, 460px);
+    border-radius: 36px;
+    text-decoration: none;
+    transform: rotateX(var(--phone-rx)) rotateY(var(--phone-ry));
+    transition: transform 600ms cubic-bezier(.2, .75, .25, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pose-phone[data-tracking] .pose-phone__device { transition-duration: 180ms; }
+  .pose-phone__device:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 5px; }
+  .pose-phone__device img {
+    display: block;
+    width: 100%;
+    height: auto;
+    user-select: none;
+    filter: drop-shadow(-12px 26px 22px #18202c26);
+  }
+  :global([data-theme='night']) .pose-phone__device img { filter: drop-shadow(-12px 26px 22px #0006); }
+  @media (min-width: 1025px) {
+    .pose-phone { height: 540px; }
+    .pose-phone__device {
+      position: absolute;
+      width: clamp(520px, 43vw, 620px);
+      translate: 0 16px;
+    }
+  }
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .pose-phone { height: 580px; }
+  }
+  @media (max-width: 768px) {
+    .pose-phone { height: auto; }
+    .pose-phone__device { width: min(100%, 380px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pose-phone__device { transition: none; }
+  }
+</style>
+
+<script>
+  class PoseGuidePhone extends HTMLElement {
+    private controller?: AbortController
+    private frame = 0
+
+    connectedCallback() {
+      this.controller?.abort()
+      this.controller = new AbortController()
+      const { signal } = this.controller
+      const surface = this.closest('section') || this
+      const motion = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)')
+      const reset = () => {
+        cancelAnimationFrame(this.frame)
+        this.frame = 0
+        this.removeAttribute('data-tracking')
+        this.style.removeProperty('--phone-rx')
+        this.style.removeProperty('--phone-ry')
+      }
+      surface.addEventListener('pointermove', (event) => {
+        if (!(event instanceof PointerEvent) || event.pointerType !== 'mouse' || !motion.matches) return
+        cancelAnimationFrame(this.frame)
+        this.frame = requestAnimationFrame(() => {
+          const bounds = surface.getBoundingClientRect()
+          const x = Math.max(-1, Math.min(1, (event.clientX - bounds.left) / bounds.width * 2 - 1))
+          const y = Math.max(-1, Math.min(1, (event.clientY - bounds.top) / bounds.height * 2 - 1))
+          this.setAttribute('data-tracking', '')
+          this.style.setProperty('--phone-rx', `${-y * 4}deg`)
+          this.style.setProperty('--phone-ry', `${x * 6}deg`)
+          this.frame = 0
+        })
+      }, { passive: true, signal })
+      surface.addEventListener('pointerleave', reset, { signal })
+      surface.addEventListener('pointercancel', reset, { signal })
+      window.addEventListener('blur', reset, { signal })
+      document.addEventListener('visibilitychange', () => { if (document.hidden) reset() }, { signal })
+      motion.addEventListener('change', reset, { signal })
+    }
+
+    disconnectedCallback() {
+      cancelAnimationFrame(this.frame)
+      this.controller?.abort()
+    }
+  }
+  if (!customElements.get('pose-guide-phone')) customElements.define('pose-guide-phone', PoseGuidePhone)
+</script>

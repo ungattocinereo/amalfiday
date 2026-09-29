@@ -1,0 +1,375 @@
+{
+  "slug": "nathalie-amalfi",
+  "name": "Nathalie",
+  "title": "Nathalie — Couple Photoshoot in Amalfi | Amalfi.Day",
+  "description": "An autumn photoshoot with Nathalie in Amalfi. Warm morning light, a short visit from Finland, and photographs to take home from the coast.",
+  "heading": {
+    "lead": "A little longer",
+    "accent": "in the light."
+  },
+  "date": "Early autumn",
+  "location": "Amalfi",
+  "summary": "Nathalie’s autumn visit, with a morning in Amalfi to remember.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Couple",
+  "schema": {
+    "name": "Nathalie — Amalfi Photoshoot",
+    "description": "An autumn photoshoot with Nathalie in Amalfi. Warm morning light, a short visit from Finland, and photographs to take home from the coast.",
+    "keywords": [
+      "amalfi photographer",
+      "couple photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr0816",
+    "sourceFile": "new_photoshoots/2026-Nathalie/_CNR0816.jpg",
+    "original": "/photoshootings/optimized/nathalie-amalfi/cnr0816-full.webp",
+    "alt": "The couple beside the railing in warm morning light",
+    "focal": "50% 28%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr0282",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR0282.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr0282-full.webp",
+      "alt": "Nathalie and her companion beneath the cathedral arches",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0312",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR0312.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr0312-full.webp",
+      "alt": "The couple between striped stone columns",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0458",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR0458.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr0458-full.webp",
+      "alt": "The couple walking along the waterfront",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0657",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR0657.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr0657-full.webp",
+      "alt": "The couple together beneath the waterfront trees",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0904",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR0904.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr0904-full.webp",
+      "alt": "Nathalie leaning against her companion",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1030",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1030.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1030-full.webp",
+      "alt": "A kiss beside the waterfront railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1128",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1128.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1128-full.webp",
+      "alt": "The couple with the coastline behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1289",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1289.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1289-full.webp",
+      "alt": "Nathalie in a blue dress beside the palm trees",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1335",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1335.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1335-full.webp",
+      "alt": "The couple beneath the trees in morning light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1534",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1534.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1534-full.webp",
+      "alt": "An embrace beside a stone railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1732",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1732.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1732-full.webp",
+      "alt": "The couple on the waterfront near the stone tower",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1820",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1820.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1820-full.webp",
+      "alt": "The couple walking beside the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1911",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1911.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1911-full.webp",
+      "alt": "The couple laughing near the water",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1969",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR1969.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr1969-full.webp",
+      "alt": "Nathalie and her companion by the harbour chain",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2017",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2017.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2017-full.webp",
+      "alt": "Nathalie looking across the water",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2034",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2034.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2034-full.webp",
+      "alt": "Nathalie in profile beside the waterfront",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2112",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2112.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2112-full.webp",
+      "alt": "Nathalie smiling in the morning sun",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2172",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2172.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2172-full.webp",
+      "alt": "The couple sitting together on the waterfront rocks",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2375",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2375.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2375-full.webp",
+      "alt": "The couple descending a flight of village steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2532",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2532.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2532-full.webp",
+      "alt": "Nathalie embracing her companion beneath an arch",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2564",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2564.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2564-full.webp",
+      "alt": "The couple holding hands in the village",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2634",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2634.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2634-full.webp",
+      "alt": "A portrait of Nathalie beside the village railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2659",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2659.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2659-full.webp",
+      "alt": "Nathalie in her blue dress by the church",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2770",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2770.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2770-full.webp",
+      "alt": "Nathalie standing above the village square",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2819",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2819.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2819-full.webp",
+      "alt": "A close portrait of Nathalie with her hand in her hair",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2913",
+      "sourceFile": "new_photoshoots/2026-Nathalie/_CNR2913.jpg",
+      "original": "/photoshootings/optimized/nathalie-amalfi/cnr2913-full.webp",
+      "alt": "The couple laughing together beside the church",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / My favourite time of year",
+      "heading": {
+        "lead": "Amalfi,",
+        "accent": "in autumn."
+      },
+      "frameIds": [
+        "cnr0282",
+        "cnr0312",
+        "cnr0458",
+        "cnr0657",
+        "cnr0904",
+        "cnr1030",
+        "cnr1128",
+        "cnr1289"
+      ],
+      "before": [
+        {
+          "eyebrow": "My favourite time of year",
+          "heading": {
+            "lead": "Amalfi,",
+            "accent": "in autumn."
+          },
+          "paragraphs": [
+            "The end of September and the beginning of October are my favourite time here. Even outside golden hour, the colours in Amalfi make me want to photograph everything, then stop and look at it all again.",
+            "Nathalie and her companion had come from Finland, where it was already getting cold. They did not often have photoshoots, but here we had a beautiful town, lovely light, and a chance to remember a short Italian escape."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / More than photographs",
+      "heading": {
+        "lead": "A few days.",
+        "accent": "Plenty to discover."
+      },
+      "frameIds": [
+        "cnr1335",
+        "cnr1534",
+        "cnr1732",
+        "cnr1820",
+        "cnr1911",
+        "cnr1969",
+        "cnr2017",
+        "cnr2034",
+        "cnr2112"
+      ],
+      "before": [
+        {
+          "eyebrow": "More than photographs",
+          "heading": {
+            "lead": "A few days.",
+            "accent": "Plenty to discover."
+          },
+          "paragraphs": [
+            "They only had a few days in Amalfi, and I wanted them to enjoy more than our time with the camera. I shared my guide: places to visit, things to see, and restaurants I thought they would like.",
+            "Knowing where to begin makes a short trip much easier. Afterwards they told me how useful those recommendations had been. I was happy that something so simple could add to their time here."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / The messages afterwards",
+      "heading": {
+        "lead": "The nicest",
+        "accent": "part of the job."
+      },
+      "frameIds": [
+        "cnr2172",
+        "cnr2375",
+        "cnr2532",
+        "cnr2564",
+        "cnr2634",
+        "cnr2659",
+        "cnr2770",
+        "cnr2819",
+        "cnr2913"
+      ],
+      "before": [
+        {
+          "eyebrow": "The messages afterwards",
+          "heading": {
+            "lead": "The nicest",
+            "accent": "part of the job."
+          },
+          "paragraphs": [
+            "They had booked through GetYourGuide, and the messages afterwards meant a great deal to me. First came a thank-you for the time we had spent together. Then, after seeing the photographs, came the excitement about the pictures and that beautiful morning light.",
+            "Nathalie was so glad she had booked the session. Seeing people enjoy their photographs and feel good about themselves is one of the nicest parts of what I do. I hope these bring a little of that morning back whenever they look at them."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "cnr0816",
+    "focal": "55% 28%",
+    "hover": {
+      "frameId": "cnr1030",
+      "focal": "54% 20%"
+    }
+  }
+}

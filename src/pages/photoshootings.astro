@@ -1,7 +1,63 @@
 ---
+import PoseGuidePhone from '../components/PoseGuidePhone.astro'
+import CityLabel from '../components/CityLabel.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { site } from '../data/site'
 import { photography, photographerSchema, photographyPackages } from '../data/photographer'
+import { getPhotoshoot, newPhotoshootSources } from '../data/photoshoots'
+
+type ShootCard = {
+  title: string
+  location: string
+  desc: string
+  href: string
+  image: string
+  hoverImage?: string
+  hoverSrcset?: string
+  hoverWidth?: number
+  hoverHeight?: number
+  hoverZoom?: number
+  hoverFocal?: string
+  hoverMobileFocal?: string
+  tag: string
+  srcset?: string
+  width?: number
+  height?: number
+  alt?: string
+  focal?: string
+  mobileFocal?: string
+}
+
+const importedCards = newPhotoshootSources.map(({ slug, category }) => {
+  const shoot = getPhotoshoot(slug)
+  const cover = shoot.card ? [shoot.hero, ...shoot.frames].find(frame => frame.id === shoot.card?.frameId) : shoot.hero
+  if (!cover) throw new Error(`Missing card image for ${slug}`)
+  const hover = shoot.card?.hover
+  const hoverFrame = hover && [shoot.hero, ...shoot.frames].find(frame => frame.id === hover.frameId)
+  if (hover && !hoverFrame) throw new Error(`Missing hover image for ${slug}`)
+  return {
+    category,
+    title: shoot.name,
+    location: shoot.location,
+    desc: shoot.summary,
+    href: `/photoshootings/${slug}/`,
+    image: cover.src,
+    hoverImage: hoverFrame?.src,
+    hoverSrcset: hoverFrame?.srcset,
+    hoverWidth: hoverFrame?.width,
+    hoverHeight: hoverFrame?.height,
+    hoverZoom: hover?.zoom,
+    hoverFocal: hover?.focal,
+    hoverMobileFocal: hover?.mobileFocal || hover?.focal,
+    srcset: cover.srcset,
+    width: cover.width,
+    height: cover.height,
+    alt: cover.alt,
+    tag: shoot.tag || 'Personal',
+    focal: shoot.card?.focal || cover.focal,
+    mobileFocal: shoot.card?.mobileFocal || shoot.card?.focal || cover.mobileFocal || cover.focal,
+  }
+})
 
 const whatsappHref = 'https://wa.me/393270972329'
 
@@ -38,12 +94,17 @@ const heroTags = [
   'Cinematic style',
   'Posing guidance',
 ]
-const individualShoots = [
+const individualShoots: ShootCard[] = [
   {
     title: 'Amalfi Influencer Photoshoot',
     location: 'Amalfi',
     desc: 'Bold poses, sun-kissed streets, and content that stops the scroll.',
     href: '/photoshootings/shifa',
+    focal: '25% 30%',
+    mobileFocal: '25% 30%',
+    hoverFocal: '51% 12%',
+    hoverMobileFocal: '51% 12%',
+    hoverZoom: 1.04,
     image: '/photoshootings/individual/Shifa/Hero.webp',
     hoverImage: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-2.webp',
     tag: 'Influencer',
@@ -53,6 +114,11 @@ const individualShoots = [
     location: 'Ravello',
     desc: 'A solo escape through Ravello\'s gardens and terraces at golden hour.',
     href: '/photoshootings/loreana',
+    focal: '52% 25%',
+    mobileFocal: '52% 25%',
+    hoverFocal: '52% 0%',
+    hoverMobileFocal: '52% 0%',
+    hoverZoom: 1.04,
     image: '/photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp',
     hoverImage: '/photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-05.webp',
     tag: 'Personal',
@@ -62,6 +128,11 @@ const individualShoots = [
     location: 'Atrani',
     desc: 'Early light on pastel walls — Atrani before the world wakes up.',
     href: '/photoshootings/lashada',
+    focal: '25% 20%',
+    mobileFocal: '25% 20%',
+    hoverFocal: '68% 15%',
+    hoverMobileFocal: '68% 15%',
+    hoverZoom: 1.04,
     image: '/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp',
     hoverImage: '/photoshootings/individual/Lashada/gallery-1/Lashanda_Brown-August-2025_14.webp',
     tag: 'Personal',
@@ -71,6 +142,11 @@ const individualShoots = [
     location: 'Maiori',
     desc: 'Warm tones and forest paths — a gift wrapped in golden coastal light.',
     href: '/photoshootings/julietta',
+    focal: '50% 15%',
+    mobileFocal: '50% 15%',
+    hoverFocal: '57% 0%',
+    hoverMobileFocal: '57% 0%',
+    hoverZoom: 1.04,
     image: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp',
     hoverImage: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20242.webp',
     tag: 'Personal',
@@ -80,6 +156,11 @@ const individualShoots = [
     location: 'Ravello',
     desc: 'Villa Rufolo backdrop, soft drapery, and Mediterranean elegance.',
     href: '/photoshootings/ravello-photoshooting',
+    focal: '61% 28%',
+    mobileFocal: '61% 28%',
+    hoverFocal: '44% 12%',
+    hoverMobileFocal: '44% 12%',
+    hoverZoom: 1.04,
     image: '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp',
     hoverImage: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293.webp',
     tag: 'Editorial',
@@ -89,6 +170,11 @@ const individualShoots = [
     location: 'Atrani',
     desc: 'A visual diary through the alleyways and staircases of Atrani.',
     href: '/photoshootings/ayuna',
+    focal: '54% 10%',
+    mobileFocal: '54% 10%',
+    hoverFocal: '57% 18%',
+    hoverMobileFocal: '57% 18%',
+    hoverZoom: 1.04,
     image: '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp',
     hoverImage: '/photoshootings/ayuna/14-Ayuna-Atrani-2023.webp',
     tag: 'Personal',
@@ -98,20 +184,31 @@ const individualShoots = [
     location: 'Tramonti',
     desc: 'Mountain roads, vintage Vespa, and cinematic countryside frames.',
     href: '/photoshootings/camelia',
+    focal: '78% 25%',
+    mobileFocal: '78% 25%',
+    hoverFocal: '52% 18%',
+    hoverMobileFocal: '52% 18%',
+    hoverZoom: 1.04,
     image: '/photoshootings/camelia/4-camelia-photoshooting-moto.webp',
     hoverImage: '/photoshootings/camelia/002-camelia-photoshooting-moto.webp',
     tag: 'Moto',
   },
+  ...importedCards.filter(shoot => shoot.category === 'individual'),
 ]
 
-const coupleShoots = [
+const coupleAndFamilyShoots: ShootCard[] = [
   {
     title: 'Ravello Romance',
     location: 'Ravello',
     desc: 'Taylor & Regan — a love story among Ravello\'s infinite views and ancient gardens.',
     href: '/photoshootings/regan-tay-ravello',
+    focal: '60% 22%',
+    mobileFocal: '60% 22%',
+    hoverFocal: '52% 15%',
+    hoverMobileFocal: '52% 15%',
+    hoverZoom: 1.04,
     image: '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp',
-    hoverImage: '/photoshootings/regan-tay-ravello/02-slideshow-regan-walk-ravello-love.webp',
+    hoverImage: '/photoshootings/regan-tay-ravello/04-slideshow-regan-walk-ravello-love.webp',
     tag: 'Couple',
   },
   {
@@ -119,10 +216,16 @@ const coupleShoots = [
     location: 'Atrani',
     desc: 'Olga & Marat — stolen glances and laughter in the heart of Atrani.',
     href: '/photoshootings/olga-marat',
+    focal: '49% 15%',
+    mobileFocal: '49% 15%',
+    hoverFocal: '48% 12%',
+    hoverMobileFocal: '48% 12%',
+    hoverZoom: 1.04,
     image: '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp',
     hoverImage: '/photoshootings/olga-marat/0002-olga-marat-atrani-2023.webp',
     tag: 'Couple',
   },
+  ...importedCards.filter(shoot => shoot.category === 'couple' || shoot.category === 'family'),
 ]
 
 const testimonials = [
@@ -167,7 +270,7 @@ const testimonials = [
   },
 ]
 
-const allShoots = [...individualShoots, ...coupleShoots]
+const allShoots = [...individualShoots, ...coupleAndFamilyShoots]
 const hubJsonLd = [
   photographerSchema,
   {
@@ -408,15 +511,12 @@ const hubJsonLd = [
         <a class="button" href={photography.poseGuideUrl} target="_blank" rel="noopener noreferrer">Explore the free posing guide <span aria-hidden="true">↗</span></a>
         <p class="posing-guide__note">Bring your favorite ideas, or let me guide you from the first frame.</p>
       </div>
-      <a class="posing-guide__preview" href={photography.poseGuideUrl} target="_blank" rel="noopener noreferrer" aria-label="Preview PhotoPoses, Greg's free posing guide">
-        <img src="/pose-guide/photoposes-preview.jpg" alt="PhotoPoses guide with posing ideas for photos around Amalfi" width="1800" height="871" loading="lazy" decoding="async" />
-        <span>PhotoPoses <span aria-hidden="true">↗</span></span>
-      </a>
+      <PoseGuidePhone href={photography.poseGuideUrl} />
     </div>
   </section>
 
   <!-- ═══════ 1. INDIVIDUAL GALLERY ═══════ -->
-  <section class="section section--individual">
+  <section class="section section--individual" id="individual">
     <div class="container">
       <div class="cat-header">
         <h2>Individual <span class="accent-italic">Sessions</span></h2>
@@ -427,14 +527,14 @@ const hubJsonLd = [
       </div>
       <div class="shoot-grid">
         {individualShoots.map((item) => (
-          <a class="shoot-card" href={item.href}>
+          <a class:list={['shoot-card', { 'shoot-card--swap': item.hoverImage }]} href={item.href} style={`--card-focal:${item.focal || 'top center'};--card-mobile-focal:${item.mobileFocal || item.focal || 'top center'}`}>
             <div class="shoot-card__media">
-              <img class="shoot-card__img shoot-card__img--main" src={item.image} alt={item.title} loading="lazy" decoding="async" />
-              <img class="shoot-card__img shoot-card__img--hover" src={item.hoverImage} alt="" loading="lazy" decoding="async" />
+              <img class="shoot-card__img shoot-card__img--main" src={item.image} srcset={item.srcset} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" width={item.width} height={item.height} alt={item.alt || item.title} loading="lazy" decoding="async" />
+              {item.hoverImage && <img class="shoot-card__img shoot-card__img--hover" src={item.hoverImage} srcset={item.hoverSrcset} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" width={item.hoverWidth} height={item.hoverHeight} style={`${item.hoverZoom ? `--card-hover-scale:${item.hoverZoom};` : ''}--card-focal:${item.hoverFocal || item.focal || 'top center'};--card-mobile-focal:${item.hoverMobileFocal || item.hoverFocal || item.mobileFocal || item.focal || 'top center'}`} alt="" loading="lazy" decoding="async" />}
             </div>
             <span class="shoot-card__tag">{item.tag}</span>
             <div class="shoot-card__overlay">
-              <div class="shoot-card__location"><i class="fa-solid fa-location-dot"></i> {item.location}</div>
+              <div class="shoot-card__location"><CityLabel name={item.location} /></div>
               <h3 class="shoot-card__title">{item.title}</h3>
               <p class="shoot-card__desc">{item.desc}</p>
               <span class="shoot-card__cta">View story <i class="fa-solid fa-arrow-right"></i></span>
@@ -504,27 +604,26 @@ const hubJsonLd = [
     </div>
   </section>
 
-  <!-- ═══════ 3. COUPLES GALLERY ═══════ -->
+  <!-- ═══════ 3. COUPLES & FAMILIES GALLERY ═══════ -->
   <section class="section section--couples" id="couples">
     <div class="container">
       <div class="cat-header">
-        <h2>Couple <span class="accent-italic">Sessions</span></h2>
+        <h2>Couples <span class="accent-italic">&amp; Families</span></h2>
         <p class="cat-header__desc">
-          Two people, one coast, and light that makes everything feel timeless.
-          Whether it's an engagement, anniversary, or simply being in love — the Amalfi Coast
-          turns every glance into a frame worth keeping forever.
+          A proposal, an anniversary, or a morning with the whole family.
+          Time together on the Amalfi Coast, with photographs to bring you back to it.
         </p>
       </div>
       <div class="shoot-grid shoot-grid--couple">
-        {coupleShoots.map((item) => (
-          <a class="shoot-card shoot-card--wide" href={item.href}>
+        {coupleAndFamilyShoots.map((item) => (
+          <a class:list={['shoot-card', 'shoot-card--wide', { 'shoot-card--swap': item.hoverImage }]} href={item.href} style={`--card-focal:${item.focal || 'top center'};--card-mobile-focal:${item.mobileFocal || item.focal || 'top center'}`}>
             <div class="shoot-card__media">
-              <img class="shoot-card__img shoot-card__img--main" src={item.image} alt={item.title} loading="lazy" decoding="async" />
-              <img class="shoot-card__img shoot-card__img--hover" src={item.hoverImage} alt="" loading="lazy" decoding="async" />
+              <img class="shoot-card__img shoot-card__img--main" src={item.image} srcset={item.srcset} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" width={item.width} height={item.height} alt={item.alt || item.title} loading="lazy" decoding="async" />
+              {item.hoverImage && <img class="shoot-card__img shoot-card__img--hover" src={item.hoverImage} srcset={item.hoverSrcset} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" width={item.hoverWidth} height={item.hoverHeight} style={`${item.hoverZoom ? `--card-hover-scale:${item.hoverZoom};` : ''}--card-focal:${item.hoverFocal || item.focal || 'top center'};--card-mobile-focal:${item.hoverMobileFocal || item.hoverFocal || item.mobileFocal || item.focal || 'top center'}`} alt="" loading="lazy" decoding="async" />}
             </div>
             <span class="shoot-card__tag">{item.tag}</span>
             <div class="shoot-card__overlay">
-              <div class="shoot-card__location"><i class="fa-solid fa-location-dot"></i> {item.location}</div>
+              <div class="shoot-card__location"><CityLabel name={item.location} /></div>
               <h3 class="shoot-card__title">{item.title}</h3>
               <p class="shoot-card__desc">{item.desc}</p>
               <span class="shoot-card__cta">View story <i class="fa-solid fa-arrow-right"></i></span>
@@ -984,12 +1083,18 @@ const hubJsonLd = [
   }
 
   .posing-guide {
+    position: relative;
+    z-index: 1;
     margin-top: 4rem;
     background: var(--color-surface);
   }
 
   .posing-guide__grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  }
+
+  @media (min-width: 1025px) {
+    #posing-guide { scroll-margin-top: 12rem; }
   }
 
   .posing-guide__copy .button {
@@ -1000,30 +1105,6 @@ const hubJsonLd = [
   .posing-guide__copy .posing-guide__note {
     font-size: 0.85rem;
     margin-top: 1rem;
-  }
-
-  .posing-guide__preview {
-    display: block;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-card);
-    color: var(--color-text);
-    text-decoration: none;
-  }
-
-  .posing-guide__preview img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .posing-guide__preview > span {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
   }
 
   .photography-faq__inner {
@@ -1536,7 +1617,7 @@ const hubJsonLd = [
   }
 
   .shoot-grid--couple {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .shoot-card {
@@ -1557,7 +1638,12 @@ const hubJsonLd = [
   }
 
   .shoot-card--wide {
-    height: 480px;
+    height: auto;
+    aspect-ratio: 7 / 6;
+  }
+
+  @media (min-width: 1025px) {
+    .shoot-card--wide { aspect-ratio: 1; }
   }
 
   /* --- Media: dual image with hover swap --- */
@@ -1573,7 +1659,7 @@ const hubJsonLd = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: var(--card-focal, top center);
     display: block;
     transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 6s cubic-bezier(0.25, 0, 0.4, 1);
   }
@@ -1586,16 +1672,17 @@ const hubJsonLd = [
   .shoot-card__img--hover {
     opacity: 0;
     z-index: 2;
-    transform: scale(1.04);
+    transform: scale(var(--card-hover-scale, 1.04));
+    transform-origin: var(--card-focal, top center);
   }
 
-  .shoot-card:hover .shoot-card__img--main {
+  .shoot-card--swap:hover .shoot-card__img--main {
     opacity: 0;
   }
 
   .shoot-card:hover .shoot-card__img--hover {
     opacity: 1;
-    transform: scale(1.08);
+    transform: scale(var(--card-hover-scale, 1.08));
   }
 
   /* --- Tag badge --- */
@@ -1668,7 +1755,7 @@ const hubJsonLd = [
   }
 
   .shoot-card__desc {
-    margin: 0.5rem 0 0;
+    margin: 0;
     font-size: 0.82rem;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.55);
@@ -1688,16 +1775,20 @@ const hubJsonLd = [
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    margin-top: 0.8rem;
+    margin-top: 0;
+    max-height: 0;
+    overflow: hidden;
     font-weight: 600;
     font-size: 0.8rem;
     color: var(--color-accent);
     opacity: 0;
     transform: translateY(6px);
-    transition: opacity 0.35s ease 0.05s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, gap 0.3s ease;
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), margin 0.35s ease, opacity 0.35s ease 0.05s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, gap 0.3s ease;
   }
 
   .shoot-card:hover .shoot-card__cta {
+    max-height: 3rem;
+    margin-top: 0.8rem;
     opacity: 1;
     transform: translateY(0);
   }
@@ -1724,7 +1815,15 @@ const hubJsonLd = [
       height: 380px;
     }
     .shoot-card--wide {
-      height: 400px;
+      height: clamp(320px, 92vw, 400px);
+      aspect-ratio: auto;
+    }
+    .shoot-card__img {
+      object-position: var(--card-mobile-focal, top center);
+    }
+
+    .shoot-card__img--hover {
+      transform-origin: var(--card-mobile-focal, top center);
     }
 
     /* Show desc on mobile since no hover */
@@ -1735,6 +1834,8 @@ const hubJsonLd = [
     }
 
     .shoot-card__cta {
+      max-height: 3rem;
+      margin-top: 0.8rem;
       opacity: 1;
       transform: translateY(0);
     }

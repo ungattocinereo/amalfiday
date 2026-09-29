@@ -1,0 +1,545 @@
+{
+  "slug": "renaud-path-of-the-gods",
+  "name": "Renaud",
+  "title": "Renaud — Proposal Photoshoot in Path of the Gods | Amalfi.Day",
+  "description": "A proposal photoshoot with Renaud on the Path of the Gods. A mountain walk, a change of plans, and golden-hour portraits above the Amalfi Coast.",
+  "heading": {
+    "lead": "A little further.",
+    "accent": "Worth every step."
+  },
+  "date": "Summer",
+  "location": "Path of the Gods",
+  "summary": "Renaud’s proposal story, high above the coast on the Path of the Gods.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Proposal",
+  "schema": {
+    "name": "Renaud — Path of the Gods Photoshoot",
+    "description": "A proposal photoshoot with Renaud on the Path of the Gods. A mountain walk, a change of plans, and golden-hour portraits above the Amalfi Coast.",
+    "keywords": [
+      "path of the gods photographer",
+      "proposal photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr0322",
+    "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0322.jpg",
+    "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0322-full.webp",
+    "alt": "A wide portrait of the couple on the Path of the Gods",
+    "focal": "63% 23%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr0188",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0188.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0188-full.webp",
+      "alt": "The couple sitting high above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0192",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0192.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0192-full.webp",
+      "alt": "The couple framed by trees on the mountain trail",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0202",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0202.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0202-full.webp",
+      "alt": "The couple on a rock above the coast at sunset",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0226-hdr",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0226-HDR.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0226-hdr-full.webp",
+      "alt": "A wide view of the couple overlooking the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0270",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0270.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0270-full.webp",
+      "alt": "The couple in red and blue above the coastline",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0280-hdr",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0280-HDR.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0280-hdr-full.webp",
+      "alt": "An embrace on the mountain viewpoint",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0346",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0346.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0346-full.webp",
+      "alt": "The couple beside the sunlit mountain slope",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0374",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0374.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0374-full.webp",
+      "alt": "The couple smiling beside the mountain trail",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0389",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0389.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0389-full.webp",
+      "alt": "The couple laughing at the viewpoint",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0404",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0404.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0404-full.webp",
+      "alt": "A playful moment on the mountain path",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0435",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0435.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0435-full.webp",
+      "alt": "The couple looking out over the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0480",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0480.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0480-full.webp",
+      "alt": "Recreating the proposal on the mountain viewpoint",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0481",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0481.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0481-full.webp",
+      "alt": "The proposal scene above the coast at golden hour",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0502",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0502.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0502-full.webp",
+      "alt": "Renaud on one knee as his partner smiles",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0521",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0521.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0521-full.webp",
+      "alt": "The proposal scene with the distant coastline behind",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0558",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0558.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0558-full.webp",
+      "alt": "The couple holding hands during the proposal portraits",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0596",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0596.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0596-full.webp",
+      "alt": "Recreating the proposal in a second outfit",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0614",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0614.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0614-full.webp",
+      "alt": "The couple on the rocks in soft evening light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0628",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0628.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0628-full.webp",
+      "alt": "An embrace during the proposal portraits",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0645",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0645.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0645-full.webp",
+      "alt": "A portrait of the proposal scene on the rocks",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0657",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0657.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0657-full.webp",
+      "alt": "The couple laughing during their proposal portraits",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0664",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0664.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0664-full.webp",
+      "alt": "The couple smiling at one another above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0672",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0672.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0672-full.webp",
+      "alt": "A wide view of the proposal portraits",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0718",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0718.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0718-full.webp",
+      "alt": "A shared laugh on the mountain viewpoint",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0745",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0745.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0745-full.webp",
+      "alt": "Renaud holding his partner’s hand during the proposal portraits",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0810",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0810.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0810-full.webp",
+      "alt": "Their hands with the engagement ring above the coastline",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0815",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0815.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0815-full.webp",
+      "alt": "The ring and joined hands with the sea far below",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0844",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0844.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0844-full.webp",
+      "alt": "A close detail of the engagement ring",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0856",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0856.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0856-full.webp",
+      "alt": "The couple looking at one another in evening light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0864",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0864.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0864-full.webp",
+      "alt": "A close portrait of the couple above the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0909",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0909.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0909-full.webp",
+      "alt": "The couple standing together on the rocks",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0918",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0918.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0918-full.webp",
+      "alt": "The couple sitting together above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0935",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0935.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0935-full.webp",
+      "alt": "The couple seated at the mountain viewpoint",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0958",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0958.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0958-full.webp",
+      "alt": "A quiet moment seated above the coastline",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0987",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR0987.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr0987-full.webp",
+      "alt": "A kiss above the sea in the evening light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1129",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR1129.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr1129-full.webp",
+      "alt": "A seated portrait at the mountain viewpoint",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1220",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR1220.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr1220-full.webp",
+      "alt": "A relaxed portrait on the rocks above the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1270",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR1270.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr1270-full.webp",
+      "alt": "A close portrait with the coastline in the distance",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1288",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR1288.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr1288-full.webp",
+      "alt": "The couple together on the rocks at sunset",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1411",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR1411.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr1411-full.webp",
+      "alt": "The couple smiling in the soft evening light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1434",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR1434.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr1434-full.webp",
+      "alt": "The couple laughing together on the rocks",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1509",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR1509.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr1509-full.webp",
+      "alt": "An embrace at the end of the mountain photoshoot",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1548",
+      "sourceFile": "new_photoshoots/Renaud_F-Brien/_CNR1548.jpg",
+      "original": "/photoshootings/optimized/renaud-path-of-the-gods/cnr1548-full.webp",
+      "alt": "The couple standing against the evening coastline",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Not quite the original plan",
+      "heading": {
+        "lead": "They had",
+        "accent": "another spot in mind."
+      },
+      "frameIds": [
+        "cnr0188",
+        "cnr0192",
+        "cnr0202",
+        "cnr0226-hdr",
+        "cnr0270",
+        "cnr0280-hdr",
+        "cnr0346",
+        "cnr0374",
+        "cnr0389",
+        "cnr0404",
+        "cnr0435",
+        "cnr0480"
+      ],
+      "before": [
+        {
+          "eyebrow": "Not quite the original plan",
+          "heading": {
+            "lead": "They had",
+            "accent": "another spot in mind."
+          },
+          "paragraphs": [
+            "These two found me through GetYourGuide and turned their proposal photoshoot into one of my biggest adventures of the summer. We had arranged to meet at the start of the Path of the Gods in Agerola, where there is already a lovely viewpoint.",
+            "But they are keen hikers. By the time we met, they had explored farther along and found somewhere else. They asked if we could go there instead. I agreed, without quite understanding what I was letting myself in for."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Two kilometres later",
+      "heading": {
+        "lead": "A good view",
+        "accent": "has its price."
+      },
+      "frameIds": [
+        "cnr0481",
+        "cnr0502",
+        "cnr0521",
+        "cnr0558",
+        "cnr0596",
+        "cnr0614",
+        "cnr0628",
+        "cnr0645",
+        "cnr0657",
+        "cnr0664",
+        "cnr0672",
+        "cnr0718",
+        "cnr0745",
+        "cnr0810",
+        "cnr0815"
+      ],
+      "before": [
+        {
+          "eyebrow": "Two kilometres later",
+          "heading": {
+            "lead": "A good view",
+            "accent": "has its price."
+          },
+          "paragraphs": [
+            "Two kilometres does not sound like much until you add mountain paths, steps, and a camera bag. I do not think of myself as unfit, but they certainly tested that theory. They kept apologising while we walked, talked, and laughed our way there.",
+            "The plan had been for me to hide and photograph the proposal unnoticed. Finding their spot on my own was not realistic, so we went together and later recreated the proposal in a few different outfits. These photographs are that shared retelling of the moment."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Above the coast",
+      "heading": {
+        "lead": "Yes, I would",
+        "accent": "walk it again."
+      },
+      "frameIds": [
+        "cnr0844",
+        "cnr0856",
+        "cnr0864",
+        "cnr0909",
+        "cnr0918",
+        "cnr0935",
+        "cnr0958",
+        "cnr0987",
+        "cnr1129",
+        "cnr1220",
+        "cnr1270",
+        "cnr1288",
+        "cnr1411",
+        "cnr1434",
+        "cnr1509",
+        "cnr1548"
+      ],
+      "before": [
+        {
+          "eyebrow": "Above the coast",
+          "heading": {
+            "lead": "Yes, I would",
+            "accent": "walk it again."
+          },
+          "paragraphs": [
+            "They had brought several changes of clothes, and we had enough time to choose the looks together. Then golden hour arrived. With those mountains, that view, and the light changing around us, every step suddenly felt like a very good idea.",
+            "I came home tired and very happy. It was an adventure with wonderful company, and I hope these photographs will remain a much-loved memory of their proposal in the mountains."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "cnr0322",
+    "focal": "68% 23%",
+    "hover": {
+      "frameId": "cnr0374",
+      "focal": "50% 12%"
+    }
+  }
+}

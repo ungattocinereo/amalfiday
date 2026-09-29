@@ -1,0 +1,336 @@
+{
+  "slug": "nick-family-praiano",
+  "name": "Nick & family",
+  "title": "Nick & family — Family Photoshoot in Praiano | Amalfi.Day",
+  "description": "Nick’s family photoshoot in Praiano on a May morning: village lanes, happy children, an ice-cream stop, and a final view towards Positano.",
+  "heading": {
+    "lead": "One more stop.",
+    "accent": "One more memory."
+  },
+  "date": "May · 23",
+  "location": "Praiano",
+  "summary": "A May morning with Nick’s family, wandering through Praiano.",
+  "heroLayout": "panorama",
+  "category": "family",
+  "tag": "Family",
+  "schema": {
+    "name": "Nick & family — Praiano Photoshoot",
+    "description": "Nick’s family photoshoot in Praiano on a May morning: village lanes, happy children, an ice-cream stop, and a final view towards Positano.",
+    "keywords": [
+      "praiano photographer",
+      "family photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr2186",
+    "sourceFile": "new_photoshoots/NicksFamily/_CNR2186.jpg",
+    "original": "/photoshootings/optimized/nick-family-praiano/cnr2186-full.webp",
+    "alt": "A wide view of the family walking through Praiano",
+    "focal": "50% 28%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr0071",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR0071.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr0071-full.webp",
+      "alt": "Nick and his family above the coastline in Praiano",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0119",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR0119.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr0119-full.webp",
+      "alt": "Mother and daughter sharing a moment in the village",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0405",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR0405.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr0405-full.webp",
+      "alt": "The children sitting together on a red scooter",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0660",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR0660.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr0660-full.webp",
+      "alt": "The family on a colourful tiled bench",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0732",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR0732.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr0732-full.webp",
+      "alt": "Nick walking through Praiano with his son",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1144",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1144.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1144-full.webp",
+      "alt": "Mother and daughter beside a village fountain",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1200",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1200.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1200-full.webp",
+      "alt": "The family beside the stone fountain in Praiano",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1305",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1305.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1305-full.webp",
+      "alt": "A portrait of Nick’s son against a pale wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1420",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1420.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1420-full.webp",
+      "alt": "Nick tipping his hat beside the stone steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1501",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1501.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1501-full.webp",
+      "alt": "Mother and daughter smiling above the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1642",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1642.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1642-full.webp",
+      "alt": "Mother and son sharing a kiss beside a stone column",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1750",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1750.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1750-full.webp",
+      "alt": "The family walking hand in hand across the piazza",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1896",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1896.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1896-full.webp",
+      "alt": "The family exploring a narrow village lane",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1965",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1965.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1965-full.webp",
+      "alt": "Nick and his son talking on the steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1980",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1980.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1980-full.webp",
+      "alt": "Nick and his son on the steps in black and white",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1996",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR1996.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr1996-full.webp",
+      "alt": "Father and son looking along the village street",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2126",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR2126.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr2126-full.webp",
+      "alt": "Nick and his son walking along a sunny lane",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2127",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR2127.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr2127-full.webp",
+      "alt": "Nick and his son together on the village walk",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2144",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR2144.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr2144-full.webp",
+      "alt": "Nick with his son and family in the lane",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2270",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR2270.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr2270-full.webp",
+      "alt": "The family together with a view towards Positano",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2333",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR2333.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr2333-full.webp",
+      "alt": "Nick tossing an apple beside his family",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2452",
+      "sourceFile": "new_photoshoots/NicksFamily/_CNR2452.jpg",
+      "original": "/photoshootings/optimized/nick-family-praiano/cnr2452-full.webp",
+      "alt": "The family enjoying their final stop above Positano",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / A May morning",
+      "heading": {
+        "lead": "Everyone",
+        "accent": "is coming along."
+      },
+      "frameIds": [
+        "cnr0071",
+        "cnr0119",
+        "cnr0405",
+        "cnr0660",
+        "cnr0732",
+        "cnr1144",
+        "cnr1200"
+      ],
+      "before": [
+        {
+          "eyebrow": "A May morning",
+          "heading": {
+            "lead": "Everyone",
+            "accent": "is coming along."
+          },
+          "paragraphs": [
+            "We met very early in Praiano on 23 May. The family were staying closer to the main road and had a bit of a climb to reach our meeting point. By the time they arrived, golden hour was almost over, but everyone was in a wonderful mood.",
+            "I especially remember the children. They were curious, cheerful, and completely unfazed by the early start or the idea of walking around town with a photographer. That made our morning together a pleasure."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Around the village",
+      "heading": {
+        "lead": "Praiano",
+        "accent": "in bloom."
+      },
+      "frameIds": [
+        "cnr1305",
+        "cnr1420",
+        "cnr1501",
+        "cnr1642",
+        "cnr1750",
+        "cnr1896",
+        "cnr1965",
+        "cnr1980"
+      ],
+      "before": [
+        {
+          "eyebrow": "Around the village",
+          "heading": {
+            "lead": "Praiano",
+            "accent": "in bloom."
+          },
+          "paragraphs": [
+            "We walked from the main street and its open views towards the church, then into the little lanes. Praiano was full of flowers, and there was something lovely to photograph at every turn.",
+            "Nick and his family were happy to join in, and the pictures came easily. I enjoy the little moments between the group photographs just as much: a look, a laugh, the children finding something interesting."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / After the session",
+      "heading": {
+        "lead": "I kept",
+        "accent": "the camera out."
+      },
+      "frameIds": [
+        "cnr1996",
+        "cnr2126",
+        "cnr2127",
+        "cnr2144",
+        "cnr2270",
+        "cnr2333",
+        "cnr2452"
+      ],
+      "before": [
+        {
+          "eyebrow": "After the session",
+          "heading": {
+            "lead": "I kept",
+            "accent": "the camera out."
+          },
+          "paragraphs": [
+            "The best part happened after the photoshoot had officially finished. We carried on walking and stopped at a fruit shop for a little rest. The children had ice cream and some fruit, which went down very well.",
+            "A little farther on, we found a beautiful view towards Positano. Of course, I took a few more photographs. It was a lovely way to finish a morning that none of us seemed in a hurry to end."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "cnr2270",
+    "focal": "48% 30%",
+    "hover": {
+      "frameId": "cnr0405",
+      "focal": "50% 12%",
+      "mobileFocal": "50% 12%"
+    }
+  }
+}

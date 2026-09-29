@@ -1,0 +1,525 @@
+{
+  "slug": "stephanie-positano",
+  "name": "Stephanie",
+  "title": "Stephanie — Couple Photoshoot in Positano | Amalfi.Day",
+  "description": "Stephanie’s couple photoshoot in Positano: thoughtful preparation, beautiful colour, and a shared wish to continue the story in Ravello.",
+  "heading": {
+    "lead": "Everything",
+    "accent": "fell into place."
+  },
+  "date": "",
+  "location": "Positano",
+  "summary": "Stephanie, her partner, and a morning full of colour in Positano.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Couple",
+  "schema": {
+    "name": "Stephanie — Positano Photoshoot",
+    "description": "Stephanie’s couple photoshoot in Positano: thoughtful preparation, beautiful colour, and a shared wish to continue the story in Ravello.",
+    "keywords": [
+      "positano photographer",
+      "couple photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr1252",
+    "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1252.jpg",
+    "original": "/photoshootings/optimized/stephanie-positano/cnr1252-full.webp",
+    "alt": "A wide view of the couple on Positano beach",
+    "focal": "50% 30%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "frames": [
+    {
+      "id": "cnr0080",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0080.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0080-full.webp",
+      "alt": "Stephanie and her partner above Positano beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0106",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0106.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0106-full.webp",
+      "alt": "The couple leaning together by the blue beach chairs",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0165",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0165.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0165-full.webp",
+      "alt": "The couple with Positano rising behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0201",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0201.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0201-full.webp",
+      "alt": "The couple holding hands and looking towards the town",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0233",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0233.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0233-full.webp",
+      "alt": "A kiss on the cheek above the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0340",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0340.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0340-full.webp",
+      "alt": "The couple framed by the café curtains",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0358",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0358.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0358-full.webp",
+      "alt": "The couple smiling beside the waterfront café",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0424",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0424.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0424-full.webp",
+      "alt": "A close portrait of the couple sharing a kiss",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0438",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0438.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0438-full.webp",
+      "alt": "Stephanie smiling across the café table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0474",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0474.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0474-full.webp",
+      "alt": "The couple laughing together at a wooden table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0489",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0489.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0489-full.webp",
+      "alt": "The couple beside the striped beach loungers",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0504",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0504.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0504-full.webp",
+      "alt": "A tender moment beside the beach café",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0520",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0520.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0520-full.webp",
+      "alt": "Stephanie seated with her partner behind her",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0604",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0604.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0604-full.webp",
+      "alt": "The couple walking together through the beach café",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0646",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0646.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0646-full.webp",
+      "alt": "The couple beside the waterfront railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0672",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0672.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0672-full.webp",
+      "alt": "A wide view of the couple above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0750",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0750.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0750-full.webp",
+      "alt": "The couple leaning on the railing above the water",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0786",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0786.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0786-full.webp",
+      "alt": "A kiss at a table overlooking the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0824",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0824.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0824-full.webp",
+      "alt": "The couple sitting on a striped beach lounger",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0898",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR0898.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr0898-full.webp",
+      "alt": "The couple walking beneath the café awning",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1000",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1000.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1000-full.webp",
+      "alt": "The couple sharing a look beside the beach umbrellas",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1030",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1030.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1030-full.webp",
+      "alt": "The couple holding hands on the beach steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1112",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1112.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1112-full.webp",
+      "alt": "The couple together on the sand beside the rocks",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1201",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1201.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1201-full.webp",
+      "alt": "The couple smiling with the town behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1272",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1272.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1272-full.webp",
+      "alt": "An embrace on the beach beneath Positano",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1581",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1581.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1581-full.webp",
+      "alt": "The couple kissing beside the blue beach chairs",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1631",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1631.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1631-full.webp",
+      "alt": "The couple holding hands on the beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1671",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1671.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1671-full.webp",
+      "alt": "The couple on flower-covered village steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1681",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1681.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1681-full.webp",
+      "alt": "The couple holding hands beneath bougainvillea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1709",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1709.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1709-full.webp",
+      "alt": "A wide view of the couple on the flower-lined stairs",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1769",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1769.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1769-full.webp",
+      "alt": "A close embrace beneath the bougainvillea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1791",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1791.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1791-full.webp",
+      "alt": "The couple laughing on the village steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1805",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1805.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1805-full.webp",
+      "alt": "The couple smiling beneath the flowers",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1815",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1815.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1815-full.webp",
+      "alt": "The couple beside a boat on Positano beach",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1823",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1823.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1823-full.webp",
+      "alt": "The couple sharing a moment beside the beach boat",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1870",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1870.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1870-full.webp",
+      "alt": "A kiss beside the Positano boat sign",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1891",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1891.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1891-full.webp",
+      "alt": "Stephanie and her partner beside the wooden boat sign",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1921",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1921.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1921-full.webp",
+      "alt": "The couple laughing together beside the boat",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1969",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR1969.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr1969-full.webp",
+      "alt": "The couple stretching out their arms beside the boat",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2157",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR2157.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr2157-full.webp",
+      "alt": "A close portrait together in the sunshine",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2172",
+      "sourceFile": "new_photoshoots/Stephanie_Dowdle/_CNR2172.jpg",
+      "original": "/photoshootings/optimized/stephanie-positano/cnr2172-full.webp",
+      "alt": "The couple smiling at the end of the beach walk",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / A lovely beginning",
+      "heading": {
+        "lead": "They knew",
+        "accent": "what they loved."
+      },
+      "frameIds": [
+        "cnr0080",
+        "cnr0106",
+        "cnr0165",
+        "cnr0201",
+        "cnr0233",
+        "cnr0340",
+        "cnr0358",
+        "cnr0424",
+        "cnr0438",
+        "cnr0474",
+        "cnr0489",
+        "cnr0504",
+        "cnr0520"
+      ],
+      "before": [
+        {
+          "eyebrow": "A lovely beginning",
+          "heading": {
+            "lead": "They knew",
+            "accent": "what they loved."
+          },
+          "paragraphs": [
+            "Stephanie and her partner arrived beautifully prepared. They knew what they wanted from their photoshoot and how they hoped to spend the time. It is always a pleasure to work with people who have thought about the photographs they would love to take home.",
+            "The place suited them so well. The two of them, the colours, and the feeling of the morning came together, and they were clearly enjoying being there."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / The little things",
+      "heading": {
+        "lead": "Every detail",
+        "accent": "has a part to play."
+      },
+      "frameIds": [
+        "cnr0604",
+        "cnr0646",
+        "cnr0672",
+        "cnr0750",
+        "cnr0786",
+        "cnr0824",
+        "cnr0898",
+        "cnr1000",
+        "cnr1030",
+        "cnr1112",
+        "cnr1201",
+        "cnr1272",
+        "cnr1581",
+        "cnr1631"
+      ],
+      "before": [
+        {
+          "eyebrow": "The little things",
+          "heading": {
+            "lead": "Every detail",
+            "accent": "has a part to play."
+          },
+          "paragraphs": [
+            "I am someone who pays a lot of attention to small things. There are more of them during a photoshoot than you might imagine: a hand, a fold of fabric, what sits behind someone’s shoulder, the way the light falls across a face.",
+            "With these two, everything ran smoothly. We had time to notice those details, the photographs had beautiful colour, and the warm thank-you when I delivered them made me very happy."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Another place in mind",
+      "heading": {
+        "lead": "Next time,",
+        "accent": "Ravello."
+      },
+      "frameIds": [
+        "cnr1671",
+        "cnr1681",
+        "cnr1709",
+        "cnr1769",
+        "cnr1791",
+        "cnr1805",
+        "cnr1815",
+        "cnr1823",
+        "cnr1870",
+        "cnr1891",
+        "cnr1921",
+        "cnr1969",
+        "cnr2157",
+        "cnr2172"
+      ],
+      "before": [
+        {
+          "eyebrow": "Another place in mind",
+          "heading": {
+            "lead": "Next time,",
+            "accent": "Ravello."
+          },
+          "paragraphs": [
+            "Before we finished, we talked about another photoshoot in Ravello, either during this visit or on their next trip. I am always inviting people up there. It is one of my favourite places to photograph.",
+            "I would love to continue their story among its gardens and terraces. For now, these are the photographs from a day when the people, the place, and all those little details came together."
+          ]
+        }
+      ]
+    }
+  ],
+  "card": {
+    "frameId": "cnr1252",
+    "focal": "50% 30%",
+    "hover": {
+      "frameId": "cnr0233",
+      "focal": "52% 20%"
+    }
+  }
+}

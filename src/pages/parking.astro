@@ -1,4 +1,5 @@
 ---
+import { getCityIcon } from '../data/city-icons'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import CldImage from '../components/CldImage.astro'
 import { site } from '../data/site'
@@ -12,7 +13,6 @@ const shareImageAlt = 'Cars parked along the Amalfi Coast road'
 const towns = [
   {
     name: 'Amalfi',
-    icon: 'fa-building',
     badge: 'Best for overnight',
     options: [
       {
@@ -36,7 +36,6 @@ const towns = [
   },
   {
     name: 'Positano',
-    icon: 'fa-location-dot',
     badge: 'Most difficult',
     options: [
       {
@@ -68,7 +67,6 @@ const towns = [
   },
   {
     name: 'Ravello',
-    icon: 'fa-music',
     badge: 'Mountain town',
     options: [
       {
@@ -92,7 +90,6 @@ const towns = [
   },
   {
     name: 'Atrani',
-    icon: 'fa-water',
     badge: 'Strict limits',
     options: [
       {
@@ -108,7 +105,6 @@ const towns = [
   },
   {
     name: 'Praiano',
-    icon: 'fa-sun',
     badge: 'Clear pricing',
     options: [
       {
@@ -124,7 +120,6 @@ const towns = [
   },
   {
     name: 'Maiori',
-    icon: 'fa-shop',
     badge: 'More accessible',
     options: [
       {
@@ -148,7 +143,6 @@ const towns = [
   },
   {
     name: 'Minori',
-    icon: 'fa-mug-hot',
     badge: 'Small town',
     options: [
       {
@@ -164,7 +158,6 @@ const towns = [
   },
   {
     name: 'Cetara',
-    icon: 'fa-fish',
     badge: 'Fishing village',
     options: [
       {
@@ -180,7 +173,6 @@ const towns = [
   },
   {
     name: 'Vietri sul Mare',
-    icon: 'fa-palette',
     badge: 'Budget pick',
     options: [
       {
@@ -196,7 +188,6 @@ const towns = [
   },
   {
     name: 'Conca dei Marini',
-    icon: 'fa-signs-post',
     badge: 'Limited',
     options: [
       {
@@ -212,7 +203,6 @@ const towns = [
   },
   {
     name: 'Furore',
-    icon: 'fa-circle-down',
     badge: 'Remote',
     options: [
       {
@@ -472,7 +462,7 @@ const parkingJsonLd = [
           <article class="town-card" id={town.name.toLowerCase().replace(/\s+/g, '-')}>
             <div class="town-card__header">
               <div class="town-card__icon">
-                <i class={`fa-solid ${town.icon}`}></i>
+                <i class={`fa-solid ${getCityIcon(town.name)}`} aria-hidden="true"></i>
               </div>
               <div>
                 <h3>{town.name}</h3>

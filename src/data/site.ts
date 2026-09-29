@@ -56,7 +56,7 @@ export const navigation: NavigationItem[] = [
         heading: 'Capture Your Story',
         items: [
           { label: 'Individual Photo Shooting', href: '/photoshootings', icon: 'fa-person' },
-          { label: 'Couple Photo Shooting', href: '/photoshootings#couples', icon: 'fa-users' },
+          { label: 'Couple & Family Photo Shooting', href: '/photoshootings#couples', icon: 'fa-users' },
         ],
       },
       {

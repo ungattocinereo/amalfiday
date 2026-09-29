@@ -7,10 +7,20 @@ import olgaMarat from './photoshoots/olga-marat.json'
 import ravello from './photoshoots/ravello-photoshooting.json'
 import reganTay from './photoshoots/regan-tay-ravello.json'
 import shifa from './photoshoots/shifa.json'
+import hinad from './photoshoots/hinad-amalfi-sunrise.json'
+import jassi from './photoshoots/jassi-conca-proposal.json'
+import jatin from './photoshoots/jatin-sorrento.json'
+import nathalie from './photoshoots/nathalie-amalfi.json'
+import ashley from './photoshoots/ashley-positano.json'
+import nick from './photoshoots/nick-family-praiano.json'
+import renaud from './photoshoots/renaud-path-of-the-gods.json'
+import sallyRose from './photoshoots/sally-rose-family-positano.json'
+import stephanie from './photoshoots/stephanie-positano.json'
 import assets from './photoshoot-images.json'
 import type { PhotoAsset, PhotoFrame, PhotoSource, Photoshoot, PhotoshootSource } from './photoshoot-types'
 
-const sources = [ayuna, camelia, julietta, lashada, loreana, olgaMarat, ravello, reganTay, shifa] as PhotoshootSource[]
+export const newPhotoshootSources = [hinad, jassi, jatin, nathalie, ashley, nick, renaud, sallyRose, stephanie] as PhotoshootSource[]
+const sources = [ayuna, camelia, julietta, lashada, loreana, olgaMarat, ravello, reganTay, shifa, ...newPhotoshootSources] as PhotoshootSource[]
 const imageAssets = assets as Record<string, Record<string, PhotoAsset>>
 
 export function getPhotoshoot(slug: string): Photoshoot {

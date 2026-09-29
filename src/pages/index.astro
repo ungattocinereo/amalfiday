@@ -1,4 +1,5 @@
 ---
+import CityLabel from '../components/CityLabel.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import CldImage from '../components/CldImage.astro'
 import { featuredPhotoshoots, heroLinks } from '../data/site'
@@ -305,7 +306,7 @@ const fallbackQuatrain =
             </div>
             <div class="scroll__overlay">
               <h3>{item.title}</h3>
-              <span><i class="fa-solid fa-location-dot"></i> {item.location}</span>
+              <span><CityLabel name={item.location} /></span>
             </div>
           </a>
         ))}
