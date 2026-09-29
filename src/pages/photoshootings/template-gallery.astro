@@ -11,6 +11,7 @@ const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) 
 ---
 <BaseLayout title="Loreana — A Photographic Story | Amalfi.Day" description="An afternoon in Ravello. A birthday gift to yourself. Four ways to relive a photographic story on the Amalfi Coast." image={galleryHero} noindex={true}>
   <div class="gs" data-gallery-study>
+    <script type="application/json" data-gallery-frames set:html={JSON.stringify(images.map(({ original, src, alt }) => ({ original, src, alt }))).replace(/</g, '\\u003c')} />
     <section class="gs-hero hero--dark" aria-label="Loreana’s photoshoot in Ravello">
       <div class="gs-hero__motion"><img class="gs-hero__image" src={galleryHero} alt="Loreana overlooking the Amalfi Coast in Ravello" width="2499" height="1666" fetchpriority="high" loading="eager" /></div>
       <div class="gs-hero__veil"></div>
@@ -50,7 +51,7 @@ const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) 
               </figure>)}
             </div>
           </div>
-          <GalleryStudyControls label="The journey" />
+          <GalleryStudyControls images={images} label="The journey" />
         </div>
       </div>
     </section>
@@ -62,10 +63,10 @@ const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) 
       <div class="gs-spreads__viewport" tabindex="0" aria-label="Photo spreads. Drag, swipe or use the arrow keys to browse.">
         {spreads.map((spread, index) => <div class="gs-spread" data-spread={index}>
           <div class="gs-spread__photos">{spread.map(image => <figure class:list={['gs-spread__frame', { 'is-portrait': image.portrait }]} style={`--photo-ratio:${image.ratio}`}><a class="gs-photo" href={image.original} data-open-photo={image.index} aria-label={`Open photograph ${image.index + 1}: ${image.alt}`}><img src={image.src} srcset={image.srcset} sizes="(max-width: 700px) 44vw, 42vw" width={image.width} height={image.height} alt={image.alt} loading="lazy" decoding="async" draggable="false" /><span class="gs-photo__expand"><i class="fa-solid fa-expand" aria-hidden="true"></i></span></a><figcaption>{String(image.index + 1).padStart(2, '0')} / Loreana in Ravello</figcaption></figure>)}</div>
-          <span class="gs-spread__number">{String(index + 1).padStart(2, '0')} <span>/ 06</span></span>
+          <span class="gs-spread__number">{String(index + 1).padStart(2, '0')} <span>/ {String(spreads.length).padStart(2, '0')}</span></span>
         </div>)}
       </div>
-      <GalleryStudyControls label="In good company" />
+      <GalleryStudyControls images={images} label="In good company" paired />
     </section>
 
     <section class="gs-bridge gs-wrap" data-reveal><span class="gs-eyebrow">Nothing to rush</span><p>Some moments deserve<br /><em>a little longer.</em></p><span class="gs-bridge__line"></span></section>
@@ -78,11 +79,11 @@ const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) 
             <a class="gs-photo" href={image.original} data-open-photo={index} aria-label={`Open photograph ${index + 1}: ${image.alt}`}><img src={image.src} srcset={image.srcset} sizes="(max-width: 700px) 90vw, 85vw" width={image.width} height={image.height} alt={image.alt} loading="lazy" decoding="async" draggable="false" /><span class="gs-photo__expand"><i class="fa-solid fa-expand" aria-hidden="true"></i></span></a>
           </figure>)}
         </div>
-        <GalleryStudyControls label="Stay a moment" />
+        <GalleryStudyControls images={images} label="Stay a moment" />
       </div></div>
     </section>
 
-    <GalleryFour />
+    <GalleryFour images={images} name="Loreana" location="Ravello" />
 
     <section class="gs-cta gs-wrap" data-reveal>
       <span class="gs-eyebrow"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i> Your turn to remember</span>
@@ -96,7 +97,7 @@ const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) 
   <dialog class="gs-dialog gs-lightbox" id="gs-lightbox" aria-label="Photograph viewer">
     <div class="gs-lightbox__top"><span class="gs-eyebrow">Loreana / Ravello</span><button class="gs-icon" type="button" data-close aria-label="Close photograph viewer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
     <div class="gs-lightbox__image"><img alt="" /></div>
-    <GalleryStudyControls label="Full-size photographs" />
+    <GalleryStudyControls images={images} label="Full-size photographs" />
     <p class="sr-only" data-lightbox-status aria-live="polite"></p>
   </dialog>
   <PhotoRequestDialog />

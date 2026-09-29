@@ -1,0 +1,160 @@
+{
+  "slug": "olga-marat",
+  "name": "Olga & Marat",
+  "title": "Atrani Couple Photoshoot — Olga & Marat | Amalfi.Day",
+  "description": "A Symphony of Love: Olga and Marat's couple photoshoot in Atrani — golden Amalfi Coast light, intimate moments, and the village as backdrop.",
+  "heading": {
+    "lead": "Symphony",
+    "accent": "of Love"
+  },
+  "date": "September · 08 · 2023",
+  "location": "Atrani",
+  "summary": "A photographic story with Olga & Marat",
+  "schema": {
+    "name": "Atrani Couple Photoshoot — Olga & Marat",
+    "description": "A Symphony of Love: Olga and Marat's couple photoshoot in Atrani — golden Amalfi Coast light, intimate moments, and the village as backdrop.",
+    "datePublished": "2023-09-08",
+    "keywords": [
+      "atrani couple photoshoot",
+      "amalfi coast couple photography",
+      "romantic photoshoot italy",
+      "destination photoshoot amalfi"
+    ]
+  },
+  "hero": {
+    "id": "hero",
+    "original": "/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp",
+    "alt": "Olga and Marat in Atrani on the Amalfi Coast",
+    "focal": "49% 30%"
+  },
+  "frames": [
+    {
+      "id": "0001-olga-marat-atrani-2023",
+      "original": "/photoshootings/olga-marat/0001-olga-marat-atrani-2023.webp",
+      "alt": "Olga and Marat in Atrani 1",
+      "focal": "49% 27%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "0002-olga-marat-atrani-2023",
+      "original": "/photoshootings/olga-marat/0002-olga-marat-atrani-2023.webp",
+      "alt": "Olga and Marat in Atrani 2",
+      "focal": "51% 27%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "0003-olga-marat-atrani-2023",
+      "original": "/photoshootings/olga-marat/0003-olga-marat-atrani-2023.webp",
+      "alt": "Olga and Marat in Atrani 3",
+      "focal": "55% 26%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "0004-olga-marat-atrani-2023",
+      "original": "/photoshootings/olga-marat/0004-olga-marat-atrani-2023.webp",
+      "alt": "Olga and Marat in Atrani 4",
+      "focal": "48% 21%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "0005-olga-marat-atrani-2023",
+      "original": "/photoshootings/olga-marat/0005-olga-marat-atrani-2023.webp",
+      "alt": "Olga and Marat in Atrani 5",
+      "focal": "50% 30%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "0006-olga-marat-atrani-2023",
+      "original": "/photoshootings/olga-marat/0006-olga-marat-atrani-2023.webp",
+      "alt": "Olga and Marat in Atrani 6",
+      "focal": "54% 40%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "28-olga-marat-atrani-2023",
+      "original": "/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp",
+      "alt": "Olga and Marat in Atrani 28",
+      "focal": "49% 30%",
+      "thumbFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Olga & Marat",
+      "heading": {
+        "lead": "Atrani Morning",
+        "accent": "Photoshoot"
+      },
+      "frameIds": [
+        "0001-olga-marat-atrani-2023",
+        "0002-olga-marat-atrani-2023"
+      ],
+      "before": [
+        {
+          "eyebrow": "Morning Notes",
+          "heading": {
+            "lead": "Atrani Morning",
+            "accent": "Photoshoot",
+            "tail": "– Capturing Dreams at Sunrise"
+          },
+          "paragraphs": [
+            "A sunrise photoshoot in Atrani, where beauty meets ambition. Discover the magic of morning light and timeless memories on the Amalfi Coast."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Olga & Marat",
+      "heading": {
+        "lead": "Capture",
+        "accent": "Essential Memories"
+      },
+      "frameIds": [
+        "0003-olga-marat-atrani-2023",
+        "0004-olga-marat-atrani-2023",
+        "0005-olga-marat-atrani-2023"
+      ],
+      "before": [
+        {
+          "eyebrow": "Shoot Details",
+          "heading": {
+            "lead": "Capture",
+            "accent": "Essential",
+            "tail": "Memories"
+          },
+          "paragraphs": [
+            "What started as a professional photoshoot soon transformed into a journey of discovery. As the sun climbed higher, the confidence shone brighter, and the pictures resonated with the spirit of the moment.",
+            "To the onlooker, it might seem like a regular photoshoot, but it was a memoir – one that would remind us of that beautiful morning in Atrani when dreams were captured, one snap at a time."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Olga & Marat",
+      "heading": {
+        "lead": "A story",
+        "accent": "for two."
+      },
+      "frameIds": [
+        "0006-olga-marat-atrani-2023",
+        "28-olga-marat-atrani-2023"
+      ],
+      "before": [
+        {
+          "eyebrow": "Your story",
+          "heading": {
+            "lead": "A couple photoshoot",
+            "accent": "in Atrani"
+          },
+          "paragraphs": [
+            "If you are planning a couple photoshoot on the Amalfi Coast, Atrani is one of the most romantic spots to start the day. The quiet streets and soft sunrise light create a cinematic feel that works beautifully for engagement photos, anniversary sessions, and intimate travel stories.",
+            "Every couple photoshoot here is paced to feel natural and effortless, with gentle direction, flattering angles, and scenic backdrops that highlight real connection. Whether you want classic romance or a modern, editorial look, we shape the shoot to match your story."
+          ]
+        }
+      ]
+    }
+  ]
+}

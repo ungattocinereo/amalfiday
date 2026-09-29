@@ -1,5 +1,4 @@
-import { galleryFrames } from '../data/gallery-study'
-
+type BrowserFrame = { original: string; src: string; alt: string }
 const root = document.querySelector<HTMLElement>('[data-gallery-study]')
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
 const desktop = window.matchMedia('(min-width: 1100px) and (hover: hover) and (pointer: fine)')
@@ -8,6 +7,15 @@ const two = (n: number) => String(n + 1).padStart(2, '0')
 const smooth = () => reduced.matches ? 'instant' as const : 'smooth' as const
 
 if (root) {
+  const galleryFrames: BrowserFrame[] = JSON.parse(root.querySelector('[data-gallery-frames]')!.textContent!)
+  const header = document.querySelector<HTMLElement>('.header')
+  const immersiveGalleries = Array.from(root.querySelectorAll<HTMLElement>('[data-gallery="immersive"]'))
+  const updateHeaderContrast = () => {
+    header?.classList.toggle('gs-over-contained-photo', immersiveGalleries.some(gallery => {
+      const rect = gallery.getBoundingClientRect()
+      return gallery.dataset.activeFit === 'contain' && rect.top < 80 && rect.bottom > 80
+    }))
+  }
   const isPinned = () => desktop.matches && !reduced.matches
   const hero = root.querySelector<HTMLElement>('.gs-hero')!
   const pauseButton = root.querySelector<HTMLButtonElement>('.gs-motion-toggle')!
@@ -33,15 +41,19 @@ if (root) {
   }), { threshold: .08 })
   root.querySelectorAll('[data-reveal]').forEach(element => reveal.observe(element))
 
-  function updateControls(container: HTMLElement, index: number, last = galleryFrames.length - 1) {
+  function updateControls(container: HTMLElement, index: number, count = galleryFrames.length, paired = false) {
+    const start = paired ? Math.floor(index / 2) * 2 : index
+    const end = paired ? Math.min(start + 1, count - 1) : index
+    const label = start === end ? two(start) : `${two(start)}–${two(end)}`
     const counter = container.querySelector<HTMLElement>('[data-current]')!
-    if (counter.textContent !== two(index)) {
-      counter.textContent = two(index)
+    if (counter.textContent !== label) {
+      counter.textContent = label
       if (!reduced.matches) counter.animate([{ opacity: .25, transform: 'translateY(4px)' }, { opacity: 1, transform: 'none' }], { duration: 250 })
     }
     container.querySelectorAll<HTMLButtonElement>('[data-frame]').forEach(button => {
       const active = Number(button.dataset.frame) === index
       button.setAttribute('aria-current', String(active))
+      button.dataset.visible = String(Number(button.dataset.frame) >= start && Number(button.dataset.frame) <= end)
       if (active) {
         const strip = button.parentElement!
         const left = button.offsetLeft - strip.offsetLeft
@@ -50,12 +62,14 @@ if (root) {
         }
       }
     })
-    container.querySelector<HTMLButtonElement>('[data-prev]')!.disabled = index === 0
-    container.querySelector<HTMLButtonElement>('[data-next]')!.disabled = index >= last
+    container.querySelector<HTMLButtonElement>('[data-prev]')!.disabled = start === 0
+    container.querySelector<HTMLButtonElement>('[data-next]')!.disabled = end >= count - 1
   }
 
   const controllers = Array.from(root.querySelectorAll<HTMLElement>('[data-gallery]')).map(gallery => {
     const type = gallery.dataset.gallery!
+    const indices: number[] = gallery.dataset.frameIndices ? JSON.parse(gallery.dataset.frameIndices) : galleryFrames.map((_, index) => index)
+    const galleryImages = indices.map(index => galleryFrames[index])
     const viewport = gallery.querySelector<HTMLElement>(`.gs-${type === 'spreads' ? 'spreads' : type}__viewport`)!
     const track = gallery.querySelector<HTMLElement>('.gs-rail__track')
     const scene = gallery.querySelector<HTMLElement>('.gs-scroll-scene')
@@ -76,22 +90,24 @@ if (root) {
       if (type !== 'immersive' || gallery.getBoundingClientRect().top < window.innerHeight * 1.5) {
         visible.querySelectorAll<HTMLImageElement>('img').forEach(image => { image.loading = 'eager' })
       }
-      updateControls(gallery, index, type === 'spreads' ? 10 : 11)
+      updateControls(gallery, index, galleryImages.length, type === 'spreads')
       if (type === 'dissolve') frames.forEach((frame, i) => {
         frame.classList.toggle('is-active', i === index)
         // Invisible overlapping slides must not receive keyboard focus.
         frame.inert = isPinned() && i !== index
       })
       if (type === 'immersive') {
-        const image = galleryFrames[index]
+        gallery.dataset.activeFit = frames[index].dataset.fit || 'cover'
+        updateHeaderContrast()
+        const image = galleryImages[index]
         const open = gallery.querySelector<HTMLAnchorElement>('[data-immersive-open]')!
-        open.dataset.openPhoto = String(index)
+        open.dataset.openPhoto = String(indices[index])
         open.href = image.original
         open.setAttribute('aria-label', `Open photograph ${index + 1} in full`)
         const caption = gallery.querySelector<HTMLElement>('[data-immersive-caption]')!
         if (caption.textContent !== image.alt) {
           caption.textContent = image.alt
-          gallery.querySelector('[data-immersive-status]')!.textContent = `Photograph ${index + 1} of ${galleryFrames.length}. ${image.alt}`
+          gallery.querySelector('[data-immersive-status]')!.textContent = `Photograph ${index + 1} of ${galleryImages.length}. ${image.alt}`
         }
         frames.forEach((frame, i) => frame.setAttribute('aria-hidden', String(i !== index)))
       }
@@ -99,7 +115,7 @@ if (root) {
     const measure = () => {
       maxX = track ? Math.max(0, track.scrollWidth - viewport.clientWidth) : 0
       positions = frames.map(frame => clamp(frame.offsetLeft + frame.offsetWidth / 2 - viewport.clientWidth / 2, 0, maxX))
-      distance = type === 'rail' ? Math.min(maxX, window.innerHeight * 4) : window.innerHeight * 3.2
+      distance = type === 'rail' ? Math.min(maxX, window.innerHeight * 4) : window.innerHeight * Math.min(3.2, Math.max(0, frames.length - 1))
       if (scene && stage) scene.style.setProperty('--scene-height', isPinned() ? `${stage.offsetHeight + distance}px` : 'auto')
       if (track && !isPinned()) track.style.transform = ''
       if (pinnedScene()) viewport.scrollLeft = 0
@@ -122,16 +138,19 @@ if (root) {
       } else paint(Math.round(p * (frames.length - 1)))
     }
     const go = (index: number) => {
-      index = clamp(index, 0, galleryFrames.length - 1)
+      index = clamp(index, 0, galleryImages.length - 1)
       if (pinnedScene() && scene) {
-        const p = type === 'rail' ? (maxX ? positions[index] / maxX : 0) : index / (frames.length - 1)
+        const p = type === 'rail' ? (maxX ? positions[index] / maxX : 0) : (frames.length > 1 ? index / (frames.length - 1) : 0)
         window.scrollTo({ top: window.scrollY + scene.getBoundingClientRect().top - 92 + p * distance, behavior: smooth() })
       } else {
         const page = type === 'spreads' ? Math.floor(index / 2) : index
         const frame = frames[page]
         const left = type === 'rail' ? positions[index] : frame.offsetLeft - frames[0].offsetLeft
+        const alreadyVisible = Math.abs(viewport.scrollLeft - left) < 1
         viewport.scrollTo({ left, behavior: smooth() })
-        paint(index)
+        // During a smooth transition, controls and the viewer opener must track
+        // the photograph actually on screen, not briefly jump ahead and back.
+        if (reduced.matches || alreadyVisible) paint(index)
       }
     }
     if (type === 'spreads') {
@@ -214,6 +233,7 @@ if (root) {
   function tick() {
     raf = 0
     controllers.forEach(controller => controller.onPageScroll())
+    updateHeaderContrast()
     if (!reduced.matches && !paused && hero.getBoundingClientRect().bottom > 0) hero.style.setProperty('--hero-drift', `${Math.min(window.scrollY * .12, 90)}px`)
   }
   window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(tick) }, { passive: true })
@@ -227,7 +247,9 @@ if (root) {
 
   const dialogs = Array.from(document.querySelectorAll<HTMLDialogElement>('.gs-dialog'))
   let previousOverflow = ''
-  const openDialog = (dialog: HTMLDialogElement) => {
+  const dialogTriggers = new WeakMap<HTMLDialogElement, HTMLElement>()
+  const openDialog = (dialog: HTMLDialogElement, trigger: HTMLElement) => {
+    dialogTriggers.set(dialog, trigger)
     previousOverflow = document.documentElement.style.overflow
     document.documentElement.style.overflow = 'hidden'
     dialog.classList.remove('is-closing')
@@ -249,7 +271,10 @@ if (root) {
       const r = dialog.getBoundingClientRect()
       if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) closeDialog(dialog)
     })
-    dialog.addEventListener('close', () => { document.documentElement.style.overflow = previousOverflow })
+    dialog.addEventListener('close', () => {
+      document.documentElement.style.overflow = previousOverflow
+      dialogTriggers.get(dialog)?.focus({ preventScroll: true })
+    })
   })
 
   const lightbox = document.querySelector<HTMLDialogElement>('#gs-lightbox')!
@@ -260,7 +285,7 @@ if (root) {
     lightboxIndex = clamp(index, 0, galleryFrames.length - 1)
     const frame = galleryFrames[lightboxIndex]
     updateControls(lightbox, lightboxIndex)
-    lightbox.querySelector('[data-lightbox-status]')!.textContent = `Photograph ${lightboxIndex + 1} of 12. ${frame.alt}`
+    lightbox.querySelector('[data-lightbox-status]')!.textContent = `Photograph ${lightboxIndex + 1} of ${galleryFrames.length}. ${frame.alt}`
     largeImage.alt = frame.alt
     largeImage.src = frame.src
     const token = ++loadToken
@@ -276,7 +301,7 @@ if (root) {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
     event.preventDefault()
     showPhoto(Number(link.dataset.openPhoto))
-    openDialog(lightbox)
+    openDialog(lightbox, link)
   }))
   lightbox.querySelectorAll<HTMLButtonElement>('[data-frame]').forEach(button => button.addEventListener('click', () => showPhoto(Number(button.dataset.frame))))
   lightbox.querySelector('[data-prev]')!.addEventListener('click', () => showPhoto(lightboxIndex - 1))
@@ -326,7 +351,7 @@ if (root) {
       }
       if (!cancelled) {
         if (!started.value) started.value = String(Date.now())
-        openDialog(request)
+        openDialog(request, button)
       }
     } finally {
       button.classList.remove('is-opening')

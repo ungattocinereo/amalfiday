@@ -1,24 +1,25 @@
 ---
 import GalleryStudyControls from './GalleryStudyControls.astro'
-import { galleryFrames as images } from '../data/gallery-study'
-
-// Keep the subject in view when a photograph fills a differently shaped screen.
-const focalPoints: Record<string, string> = {
-  '02': '64% 35%', '05': '52% 15%', '08': '50% 20%',
-  '07': '60% 14%', '20': '62% 24%', '10': '50% 32%',
-  '13': '50% 8%', '12': '50% 15%', '23': '62% 10%',
-  '29': '54% 72%', '33': '49% 8%', '34': '62% 6%',
+import { photoStyle, type PhotoFrame, type PhotoHeading } from '../data/photoshoot-types'
+interface Props {
+  images: PhotoFrame[]
+  number?: number
+  name: string
+  location: string
+  eyebrow?: string
+  heading?: PhotoHeading
 }
+const { images, number = 4, name, location, eyebrow = '04 / The whole picture', heading = { lead: 'A view', accent: 'to keep.' } } = Astro.props
 ---
 
 <!-- Gallery 4: an optional, full-viewport treatment of the same sequence. -->
-<section class="gs-immersive" id="gs-gallery-4" data-gallery="immersive" aria-labelledby="gs-title-4" aria-roledescription="carousel">
+<section class="gs-immersive" id={`gs-chapter-${number}`} data-gallery="immersive" data-frame-indices={JSON.stringify(images.map(image => image.index))} data-active-fit={images[0].immersiveFit || 'cover'} aria-labelledby={`gs-title-${number}`} aria-roledescription="carousel">
   <div class="gs-immersive__viewport" tabindex="0" aria-label="Photographs. Swipe or use the arrow keys to browse.">
     {images.map((image, index) => (
-      <figure class="gs-immersive__frame" style={`--focal-point: ${focalPoints[image.id] ?? '50% 25%'}`} role="group" aria-roledescription="slide" aria-label={`Photograph ${index + 1} of ${images.length}`}>
+      <figure class="gs-immersive__frame" data-fit={image.immersiveFit || 'cover'} style={photoStyle(image)} role="group" aria-roledescription="slide" aria-label={`Photograph ${index + 1} of ${images.length}`}>
         <img
           src={image.src}
-          srcset={`${image.srcset}, ${image.original} ${image.width}w`}
+          srcset={image.srcset}
           sizes={`max(100vw, ${(image.width / image.height * 100).toFixed(1)}svh)`}
           width={image.width}
           height={image.height}
@@ -32,18 +33,18 @@ const focalPoints: Record<string, string> = {
   </div>
   <div class="gs-immersive__veil" aria-hidden="true"></div>
   <div class="gs-immersive__top">
-    <span class="gs-eyebrow">Loreana <span>/ Ravello, Italy</span></span>
-    <a class="gs-icon" data-immersive-open data-open-photo="0" href={images[0].original} aria-label="Open photograph 1 in full">
+    <span class="gs-eyebrow">{name} <span>/ {location}, Italy</span></span>
+    <a class="gs-icon" data-immersive-open data-open-photo={images[0].index} href={images[0].original} aria-label="Open photograph 1 in full">
       <i class="fa-solid fa-expand" aria-hidden="true"></i>
     </a>
   </div>
   <div class="gs-immersive__overlay">
     <div class="gs-immersive__story">
-      <span class="gs-eyebrow">04 / The whole picture</span>
-      <h2 id="gs-title-4">A view<br /> <em>to keep.</em></h2>
+      <span class="gs-eyebrow">{eyebrow}</span>
+      <h2 id={`gs-title-${number}`}>{heading.lead}<br /> <em>{heading.accent}</em>{heading.tail && ` ${heading.tail}`}</h2>
       <p data-immersive-caption>{images[0].alt}</p>
     </div>
-    <GalleryStudyControls label="The whole picture" />
+    <GalleryStudyControls label={eyebrow} images={images} />
   </div>
   <p class="sr-only" data-immersive-status aria-live="polite" aria-atomic="true"></p>
 </section>

@@ -1,0 +1,182 @@
+{
+  "slug": "regan-tay-ravello",
+  "name": "Taylor & Regan",
+  "title": "Ravello Engagement Photoshoot — Regan & Taylor | Amalfi.Day",
+  "description": "Capturing love in Ravello: Taylor and Regan's engagement photoshoot on the Amalfi Coast — gardens, piazzas, and the soft Italian light.",
+  "heading": {
+    "lead": "Ravello Romance",
+    "accent": "Photoshoot"
+  },
+  "date": "October · 05 · 2023",
+  "location": "Ravello",
+  "summary": "A photographic story with Taylor & Regan",
+  "schema": {
+    "name": "Ravello Engagement Photoshoot — Regan & Taylor",
+    "description": "Taylor and Regan's engagement photoshoot in Ravello on the Amalfi Coast — gardens, piazzas, and the soft Italian light.",
+    "datePublished": "2023-10-05",
+    "keywords": [
+      "ravello engagement photoshoot",
+      "amalfi coast engagement photographer",
+      "destination engagement photos italy",
+      "ravello couple photographer"
+    ]
+  },
+  "hero": {
+    "id": "hero",
+    "original": "/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp",
+    "alt": "Taylor and Regan engagement photoshoot in Ravello",
+    "focal": "60% 35%"
+  },
+  "frames": [
+    {
+      "id": "01-slideshow-regan-walk-ravello-love",
+      "original": "/photoshootings/regan-tay-ravello/01-slideshow-regan-walk-ravello-love.webp",
+      "alt": "Taylor and Regan in Ravello — frame 01",
+      "focal": "50% 25%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "02-slideshow-regan-walk-ravello-love",
+      "original": "/photoshootings/regan-tay-ravello/02-slideshow-regan-walk-ravello-love.webp",
+      "alt": "Taylor and Regan in Ravello — frame 02",
+      "focal": "62% 35%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "03-slideshow-regan-walk-ravello-love",
+      "original": "/photoshootings/regan-tay-ravello/03-slideshow-regan-walk-ravello-love.webp",
+      "alt": "Taylor and Regan in Ravello — frame 03",
+      "focal": "70% 33%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "04-slideshow-regan-walk-ravello-love",
+      "original": "/photoshootings/regan-tay-ravello/04-slideshow-regan-walk-ravello-love.webp",
+      "alt": "Taylor and Regan in Ravello — frame 04",
+      "focal": "50% 39%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "05-slideshow-regan-walk-ravello-love",
+      "original": "/photoshootings/regan-tay-ravello/05-slideshow-regan-walk-ravello-love.webp",
+      "alt": "Taylor and Regan in Ravello — frame 05",
+      "focal": "52% 35%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "06-slideshow-regan-walk-ravello-love",
+      "original": "/photoshootings/regan-tay-ravello/06-slideshow-regan-walk-ravello-love.webp",
+      "alt": "Taylor and Regan in Ravello — frame 06",
+      "focal": "42% 25%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "01-regan-walk-ravello-love",
+      "original": "/photoshootings/regan-tay-ravello/01-regan-walk-ravello-love.webp",
+      "alt": "Taylor and Regan in Ravello — finale frame",
+      "focal": "51% 57%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "HERO-regan-walk-ravello-love",
+      "original": "/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp",
+      "alt": "Taylor and Regan in Ravello — hero frame",
+      "focal": "60% 35%",
+      "thumbFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Taylor & Regan",
+      "heading": {
+        "lead": "A Timeless",
+        "accent": "Romance"
+      },
+      "frameIds": [
+        "01-slideshow-regan-walk-ravello-love",
+        "02-slideshow-regan-walk-ravello-love",
+        "03-slideshow-regan-walk-ravello-love"
+      ],
+      "before": [
+        {
+          "eyebrow": "Ravello Romance",
+          "heading": {
+            "lead": "A Timeless",
+            "accent": "Romance",
+            "tail": "in Ravello"
+          },
+          "paragraphs": [
+            "Gorgeous Couple Engagement Amalfi Coast Photoshoot in Ravello",
+            "Enchanting engagement photoshoot in Ravello. A romantic Amalfi Coast photoshoot with historic villas, and the stunning panoramas of Italy.",
+            "In the embrace of Ravello's captivating scenery on the illustrious Amalfi Coast, a tale of love and commitment was beautifully captured in frames of everlasting memories. Taylor and Regan, a couple radiant with love, chose this enchanting setting to celebrate and capture their engagement, a sweet beginning marked by Regan's heartfelt proposal to Taylor."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Taylor & Regan",
+      "heading": {
+        "lead": "Crafting",
+        "accent": "Visual Love Stories"
+      },
+      "frameIds": [
+        "04-slideshow-regan-walk-ravello-love",
+        "05-slideshow-regan-walk-ravello-love",
+        "06-slideshow-regan-walk-ravello-love"
+      ],
+      "before": [
+        {
+          "eyebrow": "Crafted Frames",
+          "heading": {
+            "lead": "Crafting",
+            "accent": "Visual Love Stories",
+            "tail": "by a Skilled Photographer"
+          },
+          "paragraphs": [
+            "Guided by the adept hands of a skilled photographer, their love story was meticulously painted in each snapshot, turning moments into timeless treasures. The photographer, a maestro in leveraging natural light and scenery, wielded the camera with an artful touch, turning each moment, each glance, each smile, into a lovingly captured memory. Navigating through the woven paths flanked by lush gardens and historical villas, each photograph resonated with the natural romance of Ravello and the Amalfi Coast, turning the picturesque scenery into a canvas that mirrored their love and happiness."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Taylor & Regan",
+      "heading": {
+        "lead": "The Most",
+        "accent": "Cherished Moments"
+      },
+      "frameIds": [
+        "01-regan-walk-ravello-love",
+        "HERO-regan-walk-ravello-love"
+      ],
+      "before": [
+        {
+          "eyebrow": "October Light",
+          "heading": {
+            "lead": "The Amalfi",
+            "accent": "Allure",
+            "tail": ": A Canvas of Romance"
+          },
+          "paragraphs": [
+            "The sun, a golden artist in the October sky, bathed Taylor and Regan in warm, glowing hues, providing a natural illumination that heightened the romance and tenderness captured in each frame. The radiant sunshine complemented the outdoor beauty, making every color pop and every moment shine in the labyrinth of Ravello's charm."
+          ]
+        },
+        {
+          "eyebrow": "Keepsake",
+          "heading": {
+            "lead": "The Most",
+            "accent": "Cherished Moments",
+            "tail": ""
+          },
+          "paragraphs": [
+            "The most cherished moments in life deserve to be eternally remembered. These fleeting instances are crafted once, leaving an indelible mark that never fades away…",
+            "One small detail: Overflowing with a delightful assortment of photos, Taylor and Regan's heart was set on turning these visual memories into a beautiful book — a cherished collection that tells the tale of their love amidst the enchanting allure of Ravello's romantic landscape. The couple's journey, marked by these visually arresting images, became a symphony of love, each photograph a note, a memory, a beautiful moment in their amorous melody.",
+            "Capture memories that will last a lifetime!"
+          ]
+        }
+      ]
+    }
+  ]
+}

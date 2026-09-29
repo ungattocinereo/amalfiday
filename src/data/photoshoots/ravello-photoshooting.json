@@ -1,0 +1,181 @@
+{
+  "slug": "ravello-photoshooting",
+  "name": "Ravello Light Elegance",
+  "title": "Ravello Fashion Photoshoot — Light & Elegance | Amalfi.Day",
+  "description": "Stunning Ravello fashion photoshoots: romance, light, and timeless Amalfi elegance — captured in the gardens and piazzas of Ravello.",
+  "heading": {
+    "lead": "Ravello Light",
+    "accent": "Elegance"
+  },
+  "date": "June · 09 · 2024",
+  "location": "Ravello",
+  "summary": "A fashion story in Ravello",
+  "schema": {
+    "name": "Ravello Fashion Photoshoot — Light & Elegance",
+    "description": "Ravello fashion photoshoots: a story of romance, light, and timeless Amalfi elegance, captured in the gardens and piazzas of Ravello.",
+    "datePublished": "2024-06-09",
+    "keywords": [
+      "ravello fashion photoshoot",
+      "amalfi coast photographer",
+      "ravello photographer",
+      "editorial photoshoot italy"
+    ]
+  },
+  "hero": {
+    "id": "hero",
+    "original": "/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp",
+    "alt": "Ravello fashion photoshoot with classic Amalfi light",
+    "focal": "54% 44%"
+  },
+  "frames": [
+    {
+      "id": "amalfi-beauty-in-ravello-_0000__CNR1568",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0000__CNR1568.webp",
+      "alt": "Fashion portrait in Ravello — frame 01",
+      "focal": "48% 27%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "amalfi-beauty-in-ravello-_0001__CNR1293",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293.webp",
+      "alt": "Fashion portrait in Ravello — frame 02",
+      "focal": "47% 23%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "amalfi-beauty-in-ravello-_0002__CNR1182",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0002__CNR1182.webp",
+      "alt": "Fashion portrait in Ravello — frame 03",
+      "focal": "56% 22%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "amalfi-beauty-in-ravello-_0003__CNR0839",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0003__CNR0839.webp",
+      "alt": "Fashion portrait in Ravello — frame 04",
+      "focal": "46% 41%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "amalfi-beauty-in-ravello-_0004__CNR0757-2",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0004__CNR0757-2.webp",
+      "alt": "Fashion portrait in Ravello — frame 05",
+      "focal": "54% 37%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "amalfi-beauty-in-ravello-_0005__CNR0633",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0005__CNR0633.webp",
+      "alt": "Fashion portrait in Ravello — frame 06",
+      "focal": "45% 27%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "amalfi-beauty-in-ravello-_0006__CNR0447",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0006__CNR0447.webp",
+      "alt": "Fashion portrait in Ravello — frame 07",
+      "focal": "54% 29%",
+      "thumbFit": "cover",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "amalfi-beauty-in-ravello-_0007__CNR0371",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0007__CNR0371.webp",
+      "alt": "Fashion portrait in Ravello — frame 08",
+      "focal": "49% 43%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "amalfi-beauty-in-ravello-_0008_new-001",
+      "original": "/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0008_new-001.webp",
+      "alt": "Fashion portrait in Ravello — frame 09",
+      "focal": "43% 29%",
+      "thumbFit": "cover",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Ravello Light Elegance",
+      "heading": {
+        "lead": "Capturing the Romance",
+        "accent": "of Ravello"
+      },
+      "frameIds": [
+        "amalfi-beauty-in-ravello-_0000__CNR1568",
+        "amalfi-beauty-in-ravello-_0001__CNR1293",
+        "amalfi-beauty-in-ravello-_0002__CNR1182"
+      ],
+      "before": [
+        {
+          "eyebrow": "Ravello notes",
+          "heading": {
+            "lead": "Capturing the Romance",
+            "accent": "of Ravello",
+            "tail": "in Classic Amalfi Dress"
+          },
+          "paragraphs": [
+            "Ravello gives every frame a sense of elevation — terraces stacked above the sea, stone lanes that curve softly, and villas that feel like cinematic sets. The light moves slowly here, wrapping the subject in a glow that feels both elegant and natural, perfect for a fashion-forward story.",
+            "It is my favorite place because Ravello is quiet in the right way. You can hear the breeze in the gardens, feel the calm in the piazza, and create without distraction. That atmosphere turns a photoshoot into a ritual: unhurried, attentive, and full of poetic detail."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "02 / Ravello Light Elegance",
+      "heading": {
+        "lead": "Classic Amalfi",
+        "accent": "Dress"
+      },
+      "frameIds": [
+        "amalfi-beauty-in-ravello-_0003__CNR0839",
+        "amalfi-beauty-in-ravello-_0004__CNR0757-2",
+        "amalfi-beauty-in-ravello-_0005__CNR0633"
+      ],
+      "before": [
+        {
+          "eyebrow": "Classic Amalfi Dress",
+          "heading": {
+            "lead": "Capturing the Romance",
+            "accent": "of Ravello",
+            "tail": "in Classic Amalfi Dress"
+          },
+          "paragraphs": [
+            "Any dress looks striking in Ravello because the palette is timeless — sun-washed stone, deep greens, and the endless blue of the coast. The fabrics pick up the light, the silhouettes stay crisp against the architecture, and every movement becomes dramatic without trying.",
+            "From classic Amalfi dresses to modern fashion looks, the town adds romance to every pose. It is a place where elegance feels effortless, and the images come out layered with history, light, and unmistakable beauty."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "immersive",
+      "eyebrow": "03 / Ravello Light Elegance",
+      "heading": {
+        "lead": "Timeless",
+        "accent": "frames."
+      },
+      "frameIds": [
+        "amalfi-beauty-in-ravello-_0006__CNR0447",
+        "amalfi-beauty-in-ravello-_0007__CNR0371",
+        "amalfi-beauty-in-ravello-_0008_new-001"
+      ],
+      "before": [
+        {
+          "eyebrow": "Amalfi signature",
+          "heading": {
+            "lead": "Ravello",
+            "accent": "Photoshoot",
+            "tail": "— timeless frames"
+          },
+          "paragraphs": [
+            "Ravello offers quiet, altitude, and air that set a perfect rhythm for photography. Every location feels like a ready-made set: narrow lanes, terraces above the sea, grand villas, and gardens where the light stays soft and even for most of the day.",
+            "If you are looking for a Ravello photoshoot, this place delivers a true cinematic feeling. The architecture sculpts the silhouette, while the natural landscape adds depth and drama. A photographer in Ravello can shape the route so the frames stay varied yet cohesive in mood.",
+            "Ravello is especially flattering for elegant looks: any dress appears striking here because the background never competes — it elevates. That is why Amalfi Coast photosessions, and Ravello in particular, become favorites: they preserve not only beauty, but the atmosphere of the place itself."
+          ]
+        }
+      ]
+    }
+  ]
+}

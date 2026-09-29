@@ -1,0 +1,137 @@
+{
+  "slug": "ayuna",
+  "name": "Ayuna",
+  "title": "Atrani Solo Photoshoot — Ayuna's Memoir | Amalfi.Day",
+  "description": "Bella Vita in Atrani: Ayuna's photographic memoir on the Amalfi Coast — solo travel, morning light, and the quiet streets of the village.",
+  "heading": {
+    "lead": "Ayuna’s",
+    "accent": "Photographic Memoir"
+  },
+  "date": "August · 01 · 2023",
+  "location": "Atrani",
+  "summary": "A photographic story with Ayuna",
+  "schema": {
+    "name": "Atrani Solo Photoshoot — Ayuna's Memoir",
+    "description": "Ayuna's photographic memoir in Atrani — solo travel on the Amalfi Coast, morning light, and the quiet streets of the village.",
+    "datePublished": "2023-08-01",
+    "keywords": [
+      "atrani photoshoot",
+      "amalfi coast solo photographer",
+      "travel photoshoot italy",
+      "memoir photography amalfi"
+    ]
+  },
+  "hero": {
+    "id": "hero",
+    "original": "/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp",
+    "alt": "Ayuna photoshoot in Atrani on the Amalfi Coast",
+    "focal": "49% 27%"
+  },
+  "frames": [
+    {
+      "id": "2-Ayuna-Atrani-2023",
+      "original": "/photoshootings/ayuna/2-Ayuna-Atrani-2023.webp",
+      "alt": "Ayuna in Atrani, morning light by the sea",
+      "focal": "59% 39%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "11-Ayuna-Atrani-2023",
+      "original": "/photoshootings/ayuna/11-Ayuna-Atrani-2023.webp",
+      "alt": "Soft portrait on stone steps",
+      "focal": "49% 27%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "14-Ayuna-Atrani-2023",
+      "original": "/photoshootings/ayuna/14-Ayuna-Atrani-2023.webp",
+      "alt": "Sunrise profile with coastal breeze",
+      "focal": "62% 31%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "22-Ayuna-Atrani-2023",
+      "original": "/photoshootings/ayuna/22-Ayuna-Atrani-2023.webp",
+      "alt": "Elegant pose against pastel walls",
+      "focal": "52% 36%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "38-Ayuna-Atrani-2023",
+      "original": "/photoshootings/ayuna/38-Ayuna-Atrani-2023.webp",
+      "alt": "Quiet moment in the Atrani streets",
+      "focal": "50% 44%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "39-Ayuna-Atrani-2023",
+      "original": "/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp",
+      "alt": "Cinematic frame with golden reflections",
+      "focal": "49% 27%",
+      "thumbFit": "cover"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Ayuna",
+      "heading": {
+        "lead": "Morning Elegance",
+        "accent": "in Atrani"
+      },
+      "frameIds": [
+        "2-Ayuna-Atrani-2023",
+        "11-Ayuna-Atrani-2023"
+      ],
+      "before": [
+        {
+          "eyebrow": "Morning Notes",
+          "heading": {
+            "lead": "Morning Elegance",
+            "accent": "in Atrani"
+          },
+          "paragraphs": [
+            "Morning Elegance in Atrani tells Ayuna's story — a young model with a calm strength and a bright, curious gaze. She came to build her portfolio, carrying the fresh energy of a new day. As we walked Atrani's quiet lanes, her confidence opened naturally, and each frame revealed a softer, more luminous side of her personality."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "02 / Ayuna",
+      "heading": {
+        "lead": "A Breathtaking",
+        "accent": "Photoshoot"
+      },
+      "frameIds": [
+        "14-Ayuna-Atrani-2023",
+        "22-Ayuna-Atrani-2023"
+      ],
+      "before": [
+        {
+          "eyebrow": "Shoot Details",
+          "heading": {
+            "lead": "A Breathtaking",
+            "accent": "Photoshoot"
+          },
+          "paragraphs": [
+            "A Breathtaking Photoshoot focuses on the craft: sunrise light, textured stone, and the sea's gentle haze. We mixed casual and elegant looks, explored different lenses, and used angles that held both Ayuna and Atrani in balance. The result is a cinematic sequence of images that feels effortless, yet carefully composed."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "immersive",
+      "eyebrow": "03 / Ayuna",
+      "heading": {
+        "lead": "A brighter",
+        "accent": "perspective."
+      },
+      "frameIds": [
+        "38-Ayuna-Atrani-2023",
+        "39-Ayuna-Atrani-2023"
+      ],
+      "before": []
+    }
+  ]
+}

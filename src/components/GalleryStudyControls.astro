@@ -1,12 +1,14 @@
 ---
-import { galleryFrames } from '../data/gallery-study'
-const { label } = Astro.props
+import { photoStyle, type PhotoFrame } from '../data/photoshoot-types'
+interface Props { label: string; images: PhotoFrame[]; paired?: boolean }
+const { label, images, paired = false } = Astro.props
+const initialCount = paired && images.length > 1 ? '01–02' : '01'
 ---
 <div class="gs-controls">
-  <span class="gs-count"><span data-current>01</span><span class="gs-count__line"></span>12</span>
+  <span class="gs-count"><span data-current>{initialCount}</span><span class="gs-count__line"></span><span data-total>{String(images.length).padStart(2, '0')}</span></span>
   <div class="gs-thumbs" aria-label={`${label}: choose a photograph`}>
-    {galleryFrames.map((image, index) => (
-      <button type="button" class="gs-thumb" data-frame={index} aria-label={`View photograph ${index + 1}`} aria-current={index === 0 ? 'true' : 'false'}>
+    {images.map((image, index) => (
+      <button type="button" class="gs-thumb" data-frame={index} style={photoStyle(image)} aria-label={`View photograph ${index + 1}`} aria-current={index === 0 ? 'true' : 'false'}>
         <img src={image.thumb} alt="" width="32" height="38" loading="lazy" />
       </button>
     ))}

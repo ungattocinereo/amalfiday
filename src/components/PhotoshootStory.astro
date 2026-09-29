@@ -1,0 +1,16 @@
+---
+import type { PhotoStory } from '../data/photoshoot-types'
+interface Props { story: PhotoStory; id?: string; location: string }
+const { story, id, location } = Astro.props
+---
+<section class="gs-story gs-wrap" id={id}>
+  <div class="gs-story__heading" data-reveal>
+    <span class="gs-eyebrow">{story.eyebrow}</span>
+    <h2>{story.heading.lead}<br /><em>{story.heading.accent}</em>{story.heading.tail && ` ${story.heading.tail}`}</h2>
+  </div>
+  <div class="gs-story__copy" data-reveal>
+    <span class="gs-small-index">{location}, Italy</span>
+    {story.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+    {story.items && story.items.length > 0 && <ul>{story.items.map(item => <li>{item}</li>)}</ul>}
+  </div>
+</section>

@@ -23,7 +23,7 @@
 .gs p { color: var(--gs-muted); }
 .gs-hero { height: 100svh; min-height: 620px; position: relative; overflow: hidden; color: white; background: #30352f; }
 .gs-hero__motion { position: absolute; inset: -3%; transform: translate3d(0, var(--hero-drift, 0px), 0); }
-.gs-hero__image { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; animation: gs-breathe 22s ease-in-out infinite alternate; }
+.gs-hero__image { width: 100%; height: 100%; object-fit: cover; object-position: var(--focal-point, center 35%); animation: gs-breathe 22s ease-in-out infinite alternate; }
 @keyframes gs-breathe { from { transform: scale(1.015) translateX(-.25%); } to { transform: scale(1.055) translateX(.25%); } }
 .gs-hero.is-paused .gs-hero__image { animation-play-state: paused; }
 .gs-hero__veil { position: absolute; inset: 0; background: linear-gradient(180deg, #090e1326 15%, #090e130a 35%, #090e135c 60%, #090e13d9 100%); }
@@ -75,10 +75,11 @@
 .gs-count__line { width: 24px; height: 1px; background: var(--gs-line); }
 .gs-thumbs { display: flex; justify-content: safe center; gap: 3px; overflow-x: auto; scrollbar-width: none; padding: 4px; }
 .gs-thumb { flex: 0 0 34px; height: 48px; display: grid; place-items: center; border: 0; padding: 4px; background: none; position: relative; }
-.gs-thumb img { width: 25px; height: 32px; object-fit: cover; opacity: .45; transition: opacity .4s, transform .45s var(--gs-ease); }
+.gs-thumb img { width: 25px; height: 32px; object-fit: var(--thumb-fit, cover); object-position: var(--focal-point, center); opacity: .45; transition: opacity .4s, transform .45s var(--gs-ease); }
 .gs-thumb::after { content: ''; position: absolute; inset: auto 6px 0; height: 2px; background: var(--color-accent); transform: scaleX(0); transition: transform .45s var(--gs-ease); }
 .gs-thumb[aria-current='true'] img, .gs-thumb:hover img { opacity: 1; transform: translateY(-2px); }
 .gs-thumb[aria-current='true']::after { transform: scaleX(1); }
+.gs-thumb[data-visible='true'] img { opacity: 1; }
 .gs-arrows { display: flex; gap: 8px; }
 .gs-icon { display: inline-grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid var(--gs-line); border-radius: 50%; background: transparent; color: var(--gs-ink); transition: background .25s, transform .25s; font-size: 13px !important; }
 .gs-icon:hover { background: color-mix(in srgb, var(--gs-ink) 8%, transparent); }
@@ -96,6 +97,9 @@
 .gs.is-enhanced .gs-spreads__viewport.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
 .gs-spread { flex: 0 0 100%; min-width: 0; padding-inline: max(56px, calc((100vw - 1320px) / 2)); scroll-snap-align: center; }
 .gs-spread__photos { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(20px, 6vw, 100px); align-items: center; min-height: 64svh; }
+.gs-spread__photos.is-single { grid-template-columns: minmax(0, 1fr); }
+.gs-spread__photos.is-single .gs-spread__frame { width: min(100%, 650px); justify-self: center; }
+.gs-spread__photos.is-single .gs-spread__frame.is-portrait { width: min(70%, 380px); }
 .gs-spread__frame { margin: 0; min-width: 0; }
 .gs-spread__frame.is-portrait { width: 82%; justify-self: center; }
 .gs-spread__frame .gs-photo { aspect-ratio: var(--photo-ratio); max-height: 62svh; }
@@ -126,6 +130,16 @@
 .gs .gs-immersive__viewport:focus-visible { outline-offset: -6px; }
 .gs-immersive__frame { flex: 0 0 100%; min-width: 0; height: 100%; margin: 0; scroll-snap-align: center; }
 .gs-immersive__frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--focal-point, 50% 25%); }
+/* Some originals have faces against the top edge: retain the full frame in a
+   clear area between navigation and captions instead of adding another crop. */
+.gs-immersive__frame[data-fit='contain'] { padding: 104px 24px 310px; }
+.gs-immersive__frame[data-fit='contain'] img { object-fit: contain; object-position: center !important; }
+.gs-immersive[data-active-fit='contain'] .gs-immersive__top .gs-eyebrow { visibility: hidden; }
+.gs-immersive[data-active-fit='contain'] .gs-immersive__veil { opacity: .2; }
+@media (max-width: 900px) {
+  /* The mobile logo has no header pill behind it on these dark margins. */
+  .header.gs-over-contained-photo .logo__mark { filter: brightness(0) invert(1); }
+}
 .gs-immersive__veil { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, #070c1259 0%, #070c121a 26%, transparent 42%, #070c1233 57%, #070c12c2 88%, #070c12e0 100%); }
 .gs-immersive__top { position: absolute; top: max(112px, env(safe-area-inset-top)); inset-inline: clamp(24px, 4vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 20px; pointer-events: none; }
 .gs-immersive__top .gs-eyebrow { line-height: 1.8; text-shadow: 0 1px 12px #0005; }
@@ -272,6 +286,10 @@
 .gs-lightbox__image { height: calc(100dvh - 172px); padding: 16px 24px 0; display: grid; place-items: center; }
 .gs-lightbox__image img { width: 100%; height: 100%; object-fit: contain; min-height: 0; }
 .gs-lightbox .gs-controls { width: min(100%, 1000px); margin-top: 14px; }
+/* Retain each published crop, including panoramic and square originals. */
+.gs-shoot .gs-photo img { object-fit: contain; object-position: center; }
+.gs-shoot .gs-story__copy ul { padding-left: 20px; color: var(--gs-muted); font-size: 15px; line-height: 1.9; }
+.gs-shoot .gs-controls { grid-template-columns: minmax(90px, auto) minmax(0, 1fr) 96px; }
 @media (max-width: 1099px), (pointer: coarse) {
   .gs-wrap { width: calc(100% - 64px); }
   .gs-hero__content { left: 32px; right: 32px; }
@@ -284,6 +302,9 @@
   .gs-thumb { flex-basis: 40px; }
 }
 @media (max-width: 700px) {
+  .gs-immersive__frame[data-fit='contain'] { padding: 90px 12px 270px; }
+  .gs-shoot .gs-hero__image, .gs-shoot .gs-immersive__frame img { object-position: var(--mobile-focal-point, var(--focal-point)); }
+  .gs-shoot .gs-controls { grid-template-columns: 1fr auto; }
   .gs-wrap { width: calc(100% - 40px); }
   .gs-hero { min-height: 540px; }
   .gs-hero__content { left: 24px; right: 24px; bottom: 26px; }
@@ -373,12 +394,20 @@
   .gs-send { margin-top: 12px; padding-block: 11px; }
 }
 @media (max-height: 600px) {
+  .gs-immersive__frame[data-fit='contain'] { padding: 78px 12px 210px; }
   .gs-immersive__top { top: 94px; }
   .gs-immersive__overlay { bottom: max(12px, env(safe-area-inset-bottom)); }
   .gs-immersive__story { padding-bottom: 12px; }
   .gs-immersive__story .gs-eyebrow { margin-bottom: 8px; }
   .gs-immersive h2 { font-size: 36px; margin-bottom: 8px; }
   .gs-immersive h2 br { display: none; }
+}
+@media (max-height: 450px) and (min-width: 701px) {
+  .gs-immersive__frame[data-fit='contain'] { padding: 84px 42% 22px 24px; }
+  .gs-immersive[data-active-fit='contain'] .gs-immersive__overlay { left: auto; right: 24px; width: 36%; }
+  .gs-immersive[data-active-fit='contain'] h2 { font-size: 28px; }
+  .gs-immersive[data-active-fit='contain'] .gs-controls { grid-template-columns: 1fr auto; gap: 4px 12px; }
+  .gs-immersive[data-active-fit='contain'] .gs-thumbs { grid-column: 1 / -1; grid-row: 2; }
 }
 @media (prefers-reduced-motion: reduce) {
   html:has(.gs) { scroll-behavior: auto; }

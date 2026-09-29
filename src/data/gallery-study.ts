@@ -20,9 +20,18 @@ const frames = [
   ['34', 2000, 2500, 'The final portrait in the sequence'],
 ] as const
 
+// Focal points belong to the study's Loreana photographs only.
+const focalPoints: Record<string, string> = {
+  '02': '64% 35%', '05': '52% 15%', '08': '50% 20%',
+  '07': '60% 14%', '20': '62% 24%', '10': '50% 32%',
+  '13': '50% 8%', '12': '50% 15%', '23': '62% 10%',
+  '29': '54% 72%', '33': '49% 8%', '34': '62% 6%',
+}
+
 export const galleryFrames = frames.map(([id, width, height, alt], index) => ({
   id,
   index,
+  focal: focalPoints[id],
   width,
   height,
   alt,
@@ -30,6 +39,6 @@ export const galleryFrames = frames.map(([id, width, height, alt], index) => ({
   portrait: height > width,
   original: `${base}Loreana-photoshooting-in-amalfi-ravello-september-2025-${id}.webp`,
   src: `/photoshootings/gallery-study/${id}-1440.webp`,
-  srcset: `/photoshootings/gallery-study/${id}-720.webp 720w, /photoshootings/gallery-study/${id}-1440.webp 1440w`,
+  srcset: `/photoshootings/gallery-study/${id}-720.webp 720w, /photoshootings/gallery-study/${id}-1440.webp 1440w, ${base}Loreana-photoshooting-in-amalfi-ravello-september-2025-${id}.webp ${width}w`,
   thumb: `/photoshootings/gallery-study/${id}-thumb.webp`,
 }))

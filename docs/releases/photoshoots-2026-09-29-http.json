@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "ayuna",
+    "status": 200,
+    "galleries": 3,
+    "photos": 6
+  },
+  {
+    "slug": "camelia",
+    "status": 200,
+    "galleries": 3,
+    "photos": 10
+  },
+  {
+    "slug": "julietta",
+    "status": 200,
+    "galleries": 3,
+    "photos": 13
+  },
+  {
+    "slug": "lashada",
+    "status": 200,
+    "galleries": 3,
+    "photos": 16
+  },
+  {
+    "slug": "loreana",
+    "status": 200,
+    "galleries": 3,
+    "photos": 20
+  },
+  {
+    "slug": "olga-marat",
+    "status": 200,
+    "galleries": 3,
+    "photos": 7
+  },
+  {
+    "slug": "ravello-photoshooting",
+    "status": 200,
+    "galleries": 3,
+    "photos": 9
+  },
+  {
+    "slug": "regan-tay-ravello",
+    "status": 200,
+    "galleries": 3,
+    "photos": 8
+  },
+  {
+    "slug": "shifa",
+    "status": 200,
+    "galleries": 3,
+    "photos": 19
+  }
+]

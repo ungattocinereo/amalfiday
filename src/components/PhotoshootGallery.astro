@@ -1,0 +1,49 @@
+---
+import GalleryStudyControls from './GalleryStudyControls.astro'
+import GalleryFour from './GalleryFour.astro'
+import PhotoshootPhoto from './PhotoshootPhoto.astro'
+import { photoStyle, type PhotoChapter, type PhotoFrame } from '../data/photoshoot-types'
+interface Props { chapter: PhotoChapter; images: PhotoFrame[]; number: number; name: string; location: string }
+const { chapter, images, number, name, location } = Astro.props
+const { type } = chapter
+const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) => images.slice(index * 2, index * 2 + 2))
+---
+{type === 'immersive' ? <GalleryFour images={images} number={number} name={name} location={location} eyebrow={chapter.eyebrow} heading={chapter.heading} /> : (
+  <section class={`gs-chapter gs-${type}`} id={`gs-chapter-${number}`} data-gallery={type} data-frame-indices={JSON.stringify(images.map(image => image.index))} aria-labelledby={`gs-title-${number}`}>
+    <header class="gs-chapter__heading gs-wrap" data-reveal>
+      <div><span class="gs-eyebrow">{chapter.eyebrow}</span><h2 id={`gs-title-${number}`}>{chapter.heading.lead} <em>{chapter.heading.accent}</em>{chapter.heading.tail && ` ${chapter.heading.tail}`}</h2></div>
+    </header>
+    {type === 'rail' && <div class="gs-scroll-scene"><div class="gs-stage">
+      <div class="gs-stage__meta gs-wrap"><span class="gs-small-index">{location} / The sequence</span><span class="gs-gesture"><i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i><span class="gs-desktop-hint">Scroll to wander</span><span class="gs-touch-hint">Swipe to wander</span></span></div>
+      <div class="gs-rail__viewport" tabindex="0" aria-label="Photographs. Use the arrow keys to browse."><div class="gs-rail__track">
+        {images.map((image, index) => <figure class:list={['gs-rail__frame', { 'is-portrait': image.portrait }]} style={`--photo-ratio:${image.ratio};${photoStyle(image)}`}>
+          <PhotoshootPhoto image={image} sizes="(max-width: 700px) 85vw, 65vw" />
+          <figcaption><span>{String(index + 1).padStart(2, '0')}</span><span>{location}, Italy</span></figcaption>
+        </figure>)}
+      </div></div>
+      <GalleryStudyControls label={chapter.eyebrow} images={images} />
+    </div></div>}
+    {type === 'spreads' && <>
+      <div class="gs-spreads__viewport" tabindex="0" aria-label="Photo spreads. Drag, swipe or use the arrow keys to browse.">
+        {spreads.map((spread, index) => <div class="gs-spread" data-spread={index}>
+          <div class:list={['gs-spread__photos', { 'is-single': spread.length === 1 }]}>
+            {spread.map(image => <figure class:list={['gs-spread__frame', { 'is-portrait': image.portrait }]} style={`--photo-ratio:${image.ratio};${photoStyle(image)}`}>
+              <PhotoshootPhoto image={image} sizes={spread.length === 1 ? '(max-width: 700px) 85vw, 55vw' : '(max-width: 700px) 44vw, 42vw'} />
+              <figcaption>{String(images.indexOf(image) + 1).padStart(2, '0')} / {name}</figcaption>
+            </figure>)}
+          </div>
+          <span class="gs-spread__number">{String(index + 1).padStart(2, '0')} <span>/ {String(spreads.length).padStart(2, '0')}</span></span>
+        </div>)}
+      </div>
+      <GalleryStudyControls label={chapter.eyebrow} images={images} paired />
+    </>}
+    {type === 'dissolve' && <div class="gs-scroll-scene"><div class="gs-stage">
+      <div class="gs-dissolve__viewport" tabindex="0" aria-label="Photographs. Use the arrow keys to browse.">
+        {images.map((image, index) => <figure class:list={['gs-dissolve__frame', { 'is-active': index === 0 }]} style={`--photo-ratio:${image.ratio};${photoStyle(image)}`}>
+          <PhotoshootPhoto image={image} sizes="(max-width: 700px) 90vw, 85vw" />
+        </figure>)}
+      </div>
+      <GalleryStudyControls label={chapter.eyebrow} images={images} />
+    </div></div>}
+  </section>
+)}

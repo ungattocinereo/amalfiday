@@ -1,0 +1,839 @@
+{
+  "ayuna": {
+    "2-Ayuna-Atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/ayuna/2-Ayuna-Atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/ayuna/2-Ayuna-Atrani-2023-720.webp 720w, /photoshootings/optimized/ayuna/2-Ayuna-Atrani-2023-1440.webp 1440w, /photoshootings/optimized/ayuna/2-Ayuna-Atrani-2023-1920.webp 1920w, /photoshootings/ayuna/2-Ayuna-Atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/ayuna/2-Ayuna-Atrani-2023-thumb.webp"
+    },
+    "11-Ayuna-Atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/ayuna/11-Ayuna-Atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/ayuna/11-Ayuna-Atrani-2023-720.webp 720w, /photoshootings/optimized/ayuna/11-Ayuna-Atrani-2023-1440.webp 1440w, /photoshootings/optimized/ayuna/11-Ayuna-Atrani-2023-1920.webp 1920w, /photoshootings/ayuna/11-Ayuna-Atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/ayuna/11-Ayuna-Atrani-2023-thumb.webp"
+    },
+    "14-Ayuna-Atrani-2023": {
+      "width": 2500,
+      "height": 1203,
+      "src": "/photoshootings/optimized/ayuna/14-Ayuna-Atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/ayuna/14-Ayuna-Atrani-2023-720.webp 720w, /photoshootings/optimized/ayuna/14-Ayuna-Atrani-2023-1440.webp 1440w, /photoshootings/optimized/ayuna/14-Ayuna-Atrani-2023-1920.webp 1920w, /photoshootings/ayuna/14-Ayuna-Atrani-2023.webp 2500w",
+      "thumb": "/photoshootings/optimized/ayuna/14-Ayuna-Atrani-2023-thumb.webp"
+    },
+    "22-Ayuna-Atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/ayuna/22-Ayuna-Atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/ayuna/22-Ayuna-Atrani-2023-720.webp 720w, /photoshootings/optimized/ayuna/22-Ayuna-Atrani-2023-1440.webp 1440w, /photoshootings/optimized/ayuna/22-Ayuna-Atrani-2023-1920.webp 1920w, /photoshootings/ayuna/22-Ayuna-Atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/ayuna/22-Ayuna-Atrani-2023-thumb.webp"
+    },
+    "38-Ayuna-Atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/ayuna/38-Ayuna-Atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/ayuna/38-Ayuna-Atrani-2023-720.webp 720w, /photoshootings/optimized/ayuna/38-Ayuna-Atrani-2023-1440.webp 1440w, /photoshootings/optimized/ayuna/38-Ayuna-Atrani-2023-1920.webp 1920w, /photoshootings/ayuna/38-Ayuna-Atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/ayuna/38-Ayuna-Atrani-2023-thumb.webp"
+    },
+    "39-Ayuna-Atrani-2023": {
+      "width": 2500,
+      "height": 1667,
+      "src": "/photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-720.webp 720w, /photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-1440.webp 1440w, /photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-1920.webp 1920w, /photoshootings/ayuna/39-Ayuna-Atrani-2023.webp 2500w",
+      "thumb": "/photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-thumb.webp"
+    },
+    "hero": {
+      "width": 2500,
+      "height": 1667,
+      "src": "/photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-720.webp 720w, /photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-1440.webp 1440w, /photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-1920.webp 1920w, /photoshootings/ayuna/39-Ayuna-Atrani-2023.webp 2500w",
+      "thumb": "/photoshootings/optimized/ayuna/39-Ayuna-Atrani-2023-thumb.webp"
+    }
+  },
+  "camelia": {
+    "001-camelia-photoshooting-moto": {
+      "width": 2000,
+      "height": 1339,
+      "src": "/photoshootings/optimized/camelia/001-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/001-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/001-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/001-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/001-camelia-photoshooting-moto.webp 2000w",
+      "thumb": "/photoshootings/optimized/camelia/001-camelia-photoshooting-moto-thumb.webp"
+    },
+    "002-camelia-photoshooting-moto": {
+      "width": 2000,
+      "height": 1339,
+      "src": "/photoshootings/optimized/camelia/002-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/002-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/002-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/002-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/002-camelia-photoshooting-moto.webp 2000w",
+      "thumb": "/photoshootings/optimized/camelia/002-camelia-photoshooting-moto-thumb.webp"
+    },
+    "003-camelia-photoshooting-moto": {
+      "width": 2000,
+      "height": 1339,
+      "src": "/photoshootings/optimized/camelia/003-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/003-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/003-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/003-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/003-camelia-photoshooting-moto.webp 2000w",
+      "thumb": "/photoshootings/optimized/camelia/003-camelia-photoshooting-moto-thumb.webp"
+    },
+    "004-camelia-photoshooting-moto": {
+      "width": 2000,
+      "height": 1339,
+      "src": "/photoshootings/optimized/camelia/004-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/004-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/004-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/004-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/004-camelia-photoshooting-moto.webp 2000w",
+      "thumb": "/photoshootings/optimized/camelia/004-camelia-photoshooting-moto-thumb.webp"
+    },
+    "005-camelia-photoshooting-moto": {
+      "width": 2000,
+      "height": 1339,
+      "src": "/photoshootings/optimized/camelia/005-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/005-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/005-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/005-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/005-camelia-photoshooting-moto.webp 2000w",
+      "thumb": "/photoshootings/optimized/camelia/005-camelia-photoshooting-moto-thumb.webp"
+    },
+    "006-camelia-photoshooting-moto": {
+      "width": 2000,
+      "height": 1339,
+      "src": "/photoshootings/optimized/camelia/006-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/006-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/006-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/006-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/006-camelia-photoshooting-moto.webp 2000w",
+      "thumb": "/photoshootings/optimized/camelia/006-camelia-photoshooting-moto-thumb.webp"
+    },
+    "007-camelia-photoshooting-moto": {
+      "width": 2000,
+      "height": 1339,
+      "src": "/photoshootings/optimized/camelia/007-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/007-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/007-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/007-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/007-camelia-photoshooting-moto.webp 2000w",
+      "thumb": "/photoshootings/optimized/camelia/007-camelia-photoshooting-moto-thumb.webp"
+    },
+    "4-camelia-photoshooting-moto": {
+      "width": 2500,
+      "height": 1674,
+      "src": "/photoshootings/optimized/camelia/4-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/4-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/4-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/4-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/4-camelia-photoshooting-moto.webp 2500w",
+      "thumb": "/photoshootings/optimized/camelia/4-camelia-photoshooting-moto-thumb.webp"
+    },
+    "111-camelia-photoshooting-moto": {
+      "width": 2500,
+      "height": 1674,
+      "src": "/photoshootings/optimized/camelia/111-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/111-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/111-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/111-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/111-camelia-photoshooting-moto.webp 2500w",
+      "thumb": "/photoshootings/optimized/camelia/111-camelia-photoshooting-moto-thumb.webp"
+    },
+    "222-camelia-photoshooting-moto": {
+      "width": 2500,
+      "height": 1452,
+      "src": "/photoshootings/optimized/camelia/222-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/222-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/222-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/222-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/222-camelia-photoshooting-moto.webp 2500w",
+      "thumb": "/photoshootings/optimized/camelia/222-camelia-photoshooting-moto-thumb.webp"
+    },
+    "hero": {
+      "width": 2500,
+      "height": 1674,
+      "src": "/photoshootings/optimized/camelia/4-camelia-photoshooting-moto-1440.webp",
+      "srcset": "/photoshootings/optimized/camelia/4-camelia-photoshooting-moto-720.webp 720w, /photoshootings/optimized/camelia/4-camelia-photoshooting-moto-1440.webp 1440w, /photoshootings/optimized/camelia/4-camelia-photoshooting-moto-1920.webp 1920w, /photoshootings/camelia/4-camelia-photoshooting-moto.webp 2500w",
+      "thumb": "/photoshootings/optimized/camelia/4-camelia-photoshooting-moto-thumb.webp"
+    }
+  },
+  "julietta": {
+    "Julietta_woods-Maiori-20242": {
+      "width": 1999,
+      "height": 2499,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20242-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20242-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20242-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20242-1920.webp 1920w, /photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20242.webp 1999w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20242-thumb.webp"
+    },
+    "Julietta_woods-Maiori-20243": {
+      "width": 2500,
+      "height": 1906,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20243-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20243-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20243-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20243-1920.webp 1920w, /photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20243.webp 2500w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20243-thumb.webp"
+    },
+    "Julietta_woods-Maiori-20244": {
+      "width": 1999,
+      "height": 2499,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20244-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20244-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20244-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20244-1920.webp 1920w, /photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20244.webp 1999w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20244-thumb.webp"
+    },
+    "Julietta_woods-Maiori-20245": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-1920.webp 1920w, /photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp 2499w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-thumb.webp"
+    },
+    "Julietta_woods-Maiori-20247": {
+      "width": 1666,
+      "height": 2499,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20247-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20247-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20247-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20247-1666.webp 1666w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20247-thumb.webp"
+    },
+    "Julietta_woods-Maiori-20249": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20249-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20249-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20249-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20249-1920.webp 1920w, /photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20249.webp 2000w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20249-thumb.webp"
+    },
+    "Julietta_woods-Maiori-202410": {
+      "width": 1666,
+      "height": 2499,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202410-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202410-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202410-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202410-1666.webp 1666w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202410-thumb.webp"
+    },
+    "Julietta_woods-Maiori-202411": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202411-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202411-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202411-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202411-1920.webp 1920w, /photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-202411.webp 2499w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202411-thumb.webp"
+    },
+    "Julietta_woods-Maiori-20241": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20241-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20241-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20241-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20241-1920.webp 1920w, /photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20241.webp 2000w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20241-thumb.webp"
+    },
+    "Julietta_woods-Maiori-202412": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202412-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202412-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202412-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202412-1920.webp 1920w, /photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202412.webp 2499w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202412-thumb.webp"
+    },
+    "Julietta_woods-Maiori-202413": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202413-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202413-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202413-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202413-1920.webp 1920w, /photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202413.webp 2499w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202413-thumb.webp"
+    },
+    "Julietta_woods-Maiori-202414": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202414-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202414-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202414-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202414-1920.webp 1920w, /photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202414.webp 2499w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202414-thumb.webp"
+    },
+    "Julietta_woods-Maiori-202415": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202415-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202415-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202415-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-202415-1920.webp 1920w, /photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202415.webp 2499w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-202415-thumb.webp"
+    },
+    "hero": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-1440.webp",
+      "srcset": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-720.webp 720w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-1440.webp 1440w, /photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-1920.webp 1920w, /photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp 2499w",
+      "thumb": "/photoshootings/optimized/julietta/Julietta_woods-Maiori-20245-thumb.webp"
+    }
+  },
+  "lashada": {
+    "Lashanda_Brown-August-2025_4": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_4-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_4-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_4-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_4-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-1/Lashanda_Brown-August-2025_4.webp 2499w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_4-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_9": {
+      "width": 2500,
+      "height": 2000,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_9-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_9-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_9-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_9-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-1/Lashanda_Brown-August-2025_9.webp 2500w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_9-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_14": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_14-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_14-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_14-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_14-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-1/Lashanda_Brown-August-2025_14.webp 2499w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_14-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_20": {
+      "width": 2500,
+      "height": 2000,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_20-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_20-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_20-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_20-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-1/Lashanda_Brown-August-2025_20.webp 2500w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_20-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_27": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_27-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_27-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_27-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_27-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-1/Lashanda_Brown-August-2025_27.webp 2499w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_27-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_3": {
+      "width": 1666,
+      "height": 2499,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_3-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_3-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_3-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_3-1666.webp 1666w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_3-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_13": {
+      "width": 2500,
+      "height": 2000,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_13-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_13-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_13-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_13-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-2/Lashanda_Brown-August-2025_13.webp 2500w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_13-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_21": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_21-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_21-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_21-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_21-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-2/Lashanda_Brown-August-2025_21.webp 2499w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_21-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_29": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_29-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_29-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_29-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_29-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-2/Lashanda_Brown-August-2025_29.webp 2000w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_29-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_33": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_33-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_33-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_33-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_33-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-2/Lashanda_Brown-August-2025_33.webp 2000w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_33-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_38": {
+      "width": 1816,
+      "height": 2500,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_38-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_38-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_38-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_38-1816.webp 1816w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_38-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_47": {
+      "width": 1999,
+      "height": 2499,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_47-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_47-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_47-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_47-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-2/Lashanda_Brown-August-2025_47.webp 1999w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_47-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_7": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_7-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_7-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_7-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_7-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-3/Lashanda_Brown-August-2025_7.webp 2499w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_7-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_32": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_32-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_32-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_32-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_32-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-3/Lashanda_Brown-August-2025_32.webp 2499w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_32-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_34": {
+      "width": 2500,
+      "height": 2000,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_34-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_34-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_34-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_34-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-3/Lashanda_Brown-August-2025_34.webp 2500w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_34-thumb.webp"
+    },
+    "Lashanda_Brown-August-2025_44": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_44-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_44-720.webp 720w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_44-1440.webp 1440w, /photoshootings/optimized/lashada/Lashanda_Brown-August-2025_44-1920.webp 1920w, /photoshootings/individual/Lashada/gallery-3/Lashanda_Brown-August-2025_44.webp 2499w",
+      "thumb": "/photoshootings/optimized/lashada/Lashanda_Brown-August-2025_44-thumb.webp"
+    },
+    "hero": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/lashada/hero-1440.webp",
+      "srcset": "/photoshootings/optimized/lashada/hero-720.webp 720w, /photoshootings/optimized/lashada/hero-1440.webp 1440w, /photoshootings/optimized/lashada/hero-1920.webp 1920w, /photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp 2499w",
+      "thumb": "/photoshootings/optimized/lashada/hero-thumb.webp"
+    }
+  },
+  "loreana": {
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-02": {
+      "width": 2500,
+      "height": 2000,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-02-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-02-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-02-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-02-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-02.webp 2500w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-02-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-08": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-08-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-08-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-08-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-08-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-08.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-08-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-09": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-09-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-09-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-09-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-09-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-09.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-09-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-11": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-11-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-11-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-11-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-11-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-11.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-11-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-14": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-14-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-14-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-14-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-14-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-14.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-14-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-20": {
+      "width": 2499,
+      "height": 1999,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-20-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-20-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-20-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-20-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-20.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-20-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-26": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-26-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-26-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-26-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-26-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-26.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-26-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-33": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-33-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-33-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-33-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-33-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-33.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-33-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-36": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-36-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-36-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-36-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-36-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-36.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-36-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-05": {
+      "width": 1666,
+      "height": 2499,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-05-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-05-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-05-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-05-1666.webp 1666w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-05-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-07": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-07-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-07-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-07-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-07-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-07.webp 2000w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-07-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-10": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-10-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-10-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-10-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-10-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-10.webp 2000w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-10-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-12": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-12-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-12-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-12-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-12-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-12.webp 2000w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-12-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-13": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-13-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-13-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-13-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-13-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-13.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-13-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-16": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-16-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-16-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-16-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-16-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-16.webp 2000w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-16-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-15": {
+      "width": 2500,
+      "height": 2500,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-15-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-15-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-15-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-15-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-15.webp 2500w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-15-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-17": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-17-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-17-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-17-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-17-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-17.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-17-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-23": {
+      "width": 2500,
+      "height": 2000,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-23-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-23-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-23-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-23-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-23.webp 2500w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-23-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-31": {
+      "width": 2500,
+      "height": 2000,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-31-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-31-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-31-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-31-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-31.webp 2500w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-31-thumb.webp"
+    },
+    "Loreana-photoshooting-in-amalfi-ravello-september-2025-35": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-35-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-35-720.webp 720w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-35-1440.webp 1440w, /photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-35-1920.webp 1920w, /photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-35.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-35-thumb.webp"
+    },
+    "hero": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/loreana/hero-1440.webp",
+      "srcset": "/photoshootings/optimized/loreana/hero-720.webp 720w, /photoshootings/optimized/loreana/hero-1440.webp 1440w, /photoshootings/optimized/loreana/hero-1920.webp 1920w, /photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp 2499w",
+      "thumb": "/photoshootings/optimized/loreana/hero-thumb.webp"
+    }
+  },
+  "olga-marat": {
+    "0001-olga-marat-atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/olga-marat/0001-olga-marat-atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/olga-marat/0001-olga-marat-atrani-2023-720.webp 720w, /photoshootings/optimized/olga-marat/0001-olga-marat-atrani-2023-1440.webp 1440w, /photoshootings/optimized/olga-marat/0001-olga-marat-atrani-2023-1920.webp 1920w, /photoshootings/olga-marat/0001-olga-marat-atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/olga-marat/0001-olga-marat-atrani-2023-thumb.webp"
+    },
+    "0002-olga-marat-atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/olga-marat/0002-olga-marat-atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/olga-marat/0002-olga-marat-atrani-2023-720.webp 720w, /photoshootings/optimized/olga-marat/0002-olga-marat-atrani-2023-1440.webp 1440w, /photoshootings/optimized/olga-marat/0002-olga-marat-atrani-2023-1920.webp 1920w, /photoshootings/olga-marat/0002-olga-marat-atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/olga-marat/0002-olga-marat-atrani-2023-thumb.webp"
+    },
+    "0003-olga-marat-atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/olga-marat/0003-olga-marat-atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/olga-marat/0003-olga-marat-atrani-2023-720.webp 720w, /photoshootings/optimized/olga-marat/0003-olga-marat-atrani-2023-1440.webp 1440w, /photoshootings/optimized/olga-marat/0003-olga-marat-atrani-2023-1920.webp 1920w, /photoshootings/olga-marat/0003-olga-marat-atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/olga-marat/0003-olga-marat-atrani-2023-thumb.webp"
+    },
+    "0004-olga-marat-atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/olga-marat/0004-olga-marat-atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/olga-marat/0004-olga-marat-atrani-2023-720.webp 720w, /photoshootings/optimized/olga-marat/0004-olga-marat-atrani-2023-1440.webp 1440w, /photoshootings/optimized/olga-marat/0004-olga-marat-atrani-2023-1920.webp 1920w, /photoshootings/olga-marat/0004-olga-marat-atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/olga-marat/0004-olga-marat-atrani-2023-thumb.webp"
+    },
+    "0005-olga-marat-atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/olga-marat/0005-olga-marat-atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/olga-marat/0005-olga-marat-atrani-2023-720.webp 720w, /photoshootings/optimized/olga-marat/0005-olga-marat-atrani-2023-1440.webp 1440w, /photoshootings/optimized/olga-marat/0005-olga-marat-atrani-2023-1920.webp 1920w, /photoshootings/olga-marat/0005-olga-marat-atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/olga-marat/0005-olga-marat-atrani-2023-thumb.webp"
+    },
+    "0006-olga-marat-atrani-2023": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/olga-marat/0006-olga-marat-atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/olga-marat/0006-olga-marat-atrani-2023-720.webp 720w, /photoshootings/optimized/olga-marat/0006-olga-marat-atrani-2023-1440.webp 1440w, /photoshootings/optimized/olga-marat/0006-olga-marat-atrani-2023-1920.webp 1920w, /photoshootings/olga-marat/0006-olga-marat-atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/olga-marat/0006-olga-marat-atrani-2023-thumb.webp"
+    },
+    "28-olga-marat-atrani-2023": {
+      "width": 2000,
+      "height": 1130,
+      "src": "/photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-720.webp 720w, /photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-1440.webp 1440w, /photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-1920.webp 1920w, /photoshootings/olga-marat/28-olga-marat-atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-thumb.webp"
+    },
+    "hero": {
+      "width": 2000,
+      "height": 1130,
+      "src": "/photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-1440.webp",
+      "srcset": "/photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-720.webp 720w, /photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-1440.webp 1440w, /photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-1920.webp 1920w, /photoshootings/olga-marat/28-olga-marat-atrani-2023.webp 2000w",
+      "thumb": "/photoshootings/optimized/olga-marat/28-olga-marat-atrani-2023-thumb.webp"
+    }
+  },
+  "ravello-photoshooting": {
+    "amalfi-beauty-in-ravello-_0000__CNR1568": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0000__CNR1568-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0000__CNR1568-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0000__CNR1568-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0000__CNR1568-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0000__CNR1568-thumb.webp"
+    },
+    "amalfi-beauty-in-ravello-_0001__CNR1293": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293-thumb.webp"
+    },
+    "amalfi-beauty-in-ravello-_0002__CNR1182": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0002__CNR1182-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0002__CNR1182-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0002__CNR1182-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0002__CNR1182-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0002__CNR1182-thumb.webp"
+    },
+    "amalfi-beauty-in-ravello-_0003__CNR0839": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0003__CNR0839-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0003__CNR0839-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0003__CNR0839-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0003__CNR0839-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0003__CNR0839-thumb.webp"
+    },
+    "amalfi-beauty-in-ravello-_0004__CNR0757-2": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0004__CNR0757-2-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0004__CNR0757-2-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0004__CNR0757-2-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0004__CNR0757-2-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0004__CNR0757-2-thumb.webp"
+    },
+    "amalfi-beauty-in-ravello-_0005__CNR0633": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0005__CNR0633-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0005__CNR0633-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0005__CNR0633-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0005__CNR0633-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0005__CNR0633-thumb.webp"
+    },
+    "amalfi-beauty-in-ravello-_0006__CNR0447": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0006__CNR0447-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0006__CNR0447-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0006__CNR0447-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0006__CNR0447-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0006__CNR0447-thumb.webp"
+    },
+    "amalfi-beauty-in-ravello-_0007__CNR0371": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0007__CNR0371-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0007__CNR0371-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0007__CNR0371-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0007__CNR0371-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0007__CNR0371-thumb.webp"
+    },
+    "amalfi-beauty-in-ravello-_0008_new-001": {
+      "width": 1500,
+      "height": 1000,
+      "src": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0008_new-001-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0008_new-001-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0008_new-001-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0008_new-001-1500.webp 1500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/amalfi-beauty-in-ravello-_0008_new-001-thumb.webp"
+    },
+    "hero": {
+      "width": 2500,
+      "height": 1667,
+      "src": "/photoshootings/optimized/ravello-photoshooting/hero-1440.webp",
+      "srcset": "/photoshootings/optimized/ravello-photoshooting/hero-720.webp 720w, /photoshootings/optimized/ravello-photoshooting/hero-1440.webp 1440w, /photoshootings/optimized/ravello-photoshooting/hero-1920.webp 1920w, /photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp 2500w",
+      "thumb": "/photoshootings/optimized/ravello-photoshooting/hero-thumb.webp"
+    }
+  },
+  "regan-tay-ravello": {
+    "01-slideshow-regan-walk-ravello-love": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/regan-tay-ravello/01-slideshow-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/01-slideshow-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/01-slideshow-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/01-slideshow-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/01-slideshow-regan-walk-ravello-love.webp 2000w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/01-slideshow-regan-walk-ravello-love-thumb.webp"
+    },
+    "02-slideshow-regan-walk-ravello-love": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/regan-tay-ravello/02-slideshow-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/02-slideshow-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/02-slideshow-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/02-slideshow-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/02-slideshow-regan-walk-ravello-love.webp 2000w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/02-slideshow-regan-walk-ravello-love-thumb.webp"
+    },
+    "03-slideshow-regan-walk-ravello-love": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/regan-tay-ravello/03-slideshow-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/03-slideshow-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/03-slideshow-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/03-slideshow-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/03-slideshow-regan-walk-ravello-love.webp 2000w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/03-slideshow-regan-walk-ravello-love-thumb.webp"
+    },
+    "04-slideshow-regan-walk-ravello-love": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/regan-tay-ravello/04-slideshow-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/04-slideshow-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/04-slideshow-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/04-slideshow-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/04-slideshow-regan-walk-ravello-love.webp 2000w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/04-slideshow-regan-walk-ravello-love-thumb.webp"
+    },
+    "05-slideshow-regan-walk-ravello-love": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/regan-tay-ravello/05-slideshow-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/05-slideshow-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/05-slideshow-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/05-slideshow-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/05-slideshow-regan-walk-ravello-love.webp 2000w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/05-slideshow-regan-walk-ravello-love-thumb.webp"
+    },
+    "06-slideshow-regan-walk-ravello-love": {
+      "width": 2000,
+      "height": 1333,
+      "src": "/photoshootings/optimized/regan-tay-ravello/06-slideshow-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/06-slideshow-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/06-slideshow-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/06-slideshow-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/06-slideshow-regan-walk-ravello-love.webp 2000w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/06-slideshow-regan-walk-ravello-love-thumb.webp"
+    },
+    "01-regan-walk-ravello-love": {
+      "width": 2500,
+      "height": 1667,
+      "src": "/photoshootings/optimized/regan-tay-ravello/01-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/01-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/01-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/01-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/01-regan-walk-ravello-love.webp 2500w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/01-regan-walk-ravello-love-thumb.webp"
+    },
+    "HERO-regan-walk-ravello-love": {
+      "width": 2500,
+      "height": 1667,
+      "src": "/photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp 2500w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-thumb.webp"
+    },
+    "hero": {
+      "width": 2500,
+      "height": 1667,
+      "src": "/photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-1440.webp",
+      "srcset": "/photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-720.webp 720w, /photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-1440.webp 1440w, /photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-1920.webp 1920w, /photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp 2500w",
+      "thumb": "/photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-thumb.webp"
+    }
+  },
+  "shifa": {
+    "Shifa-amalfi-photoshooting-september-2025-7": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-7-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-7-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-7-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-7-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-7.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-7-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-8": {
+      "width": 2500,
+      "height": 2037,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-8-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-8-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-8-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-8-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-8.webp 2500w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-8-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-10": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-10-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-10-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-10-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-10-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-10.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-10-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-13": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-13-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-13-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-13-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-13-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-13.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-13-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-19": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-19-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-19-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-19-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-19-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-19.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-19-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-24": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-24-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-24-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-24-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-24-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-24.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-24-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-3": {
+      "width": 1999,
+      "height": 2499,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-3-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-3-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-3-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-3-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-3.webp 1999w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-3-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-6": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-6-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-6-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-6-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-6-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-6.webp 2000w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-6-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-9": {
+      "width": 1720,
+      "height": 2500,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-9-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-9-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-9-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-9-1720.webp 1720w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-9-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-11": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-11-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-11-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-11-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-11-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-11.webp 2000w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-11-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-12": {
+      "width": 1666,
+      "height": 2499,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-12-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-12-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-12-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-12-1666.webp 1666w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-12-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-16": {
+      "width": 2000,
+      "height": 2500,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-16-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-16-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-16-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-16-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-16.webp 2000w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-16-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-1": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-1-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-1-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-1-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-1-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-1.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-1-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-2": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-2-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-2-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-2-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-2-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-2.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-2-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-14": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-14-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-14-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-14-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-14-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-14.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-14-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-15": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-15-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-15-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-15-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-15-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-15.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-15-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-25": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-25-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-25-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-25-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-25-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-25.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-25-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-27": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-27-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-27-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-27-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-27-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-27.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-27-thumb.webp"
+    },
+    "Shifa-amalfi-photoshooting-september-2025-29": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-29-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-29-720.webp 720w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-29-1440.webp 1440w, /photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-29-1920.webp 1920w, /photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-29.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/Shifa-amalfi-photoshooting-september-2025-29-thumb.webp"
+    },
+    "hero": {
+      "width": 2499,
+      "height": 1666,
+      "src": "/photoshootings/optimized/shifa/hero-1440.webp",
+      "srcset": "/photoshootings/optimized/shifa/hero-720.webp 720w, /photoshootings/optimized/shifa/hero-1440.webp 1440w, /photoshootings/optimized/shifa/hero-1920.webp 1920w, /photoshootings/individual/Shifa/Hero.webp 2499w",
+      "thumb": "/photoshootings/optimized/shifa/hero-thumb.webp"
+    }
+  }
+}

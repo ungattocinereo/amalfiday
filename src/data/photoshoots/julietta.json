@@ -1,0 +1,206 @@
+{
+  "slug": "julietta",
+  "name": "Julietta",
+  "title": "Maiori Sunset Photoshoot — Julietta | Amalfi.Day",
+  "description": "A sunset photoshoot in Maiori — a gift between friends on the Amalfi Coast. Natural light, real emotions, and memories that last for years.",
+  "heading": {
+    "lead": "Gifted Sunset",
+    "accent": "Memories"
+  },
+  "date": "July · 20 · 2024",
+  "location": "Maiori",
+  "summary": "A photographic story with Julietta",
+  "schema": {
+    "name": "Maiori Sunset Photoshoot — Julietta",
+    "description": "A sunset photoshoot in Maiori — a gift between friends on the Amalfi Coast. Natural light, real emotions, and memories that last.",
+    "datePublished": "2024-07-20",
+    "keywords": [
+      "maiori photoshoot",
+      "amalfi coast sunset photoshoot",
+      "gift photoshoot italy",
+      "friendship photoshoot amalfi"
+    ]
+  },
+  "hero": {
+    "id": "hero",
+    "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp",
+    "alt": "Julietta — sunset photoshoot in Maiori, Amalfi Coast, July 2024",
+    "focal": "47% 26%"
+  },
+  "frames": [
+    {
+      "id": "Julietta_woods-Maiori-20242",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20242.webp",
+      "alt": "Evening walk through Maiori streets",
+      "focal": "51% 18%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-20243",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20243.webp",
+      "alt": "Warm sunset light on the promenade",
+      "focal": "51% 22%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-20244",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20244.webp",
+      "alt": "Laughter between friends",
+      "focal": "53% 19%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-20245",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp",
+      "alt": "Golden hour portrait",
+      "focal": "47% 26%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-20247",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20247.webp",
+      "alt": "Seaside moment at dusk",
+      "focal": "48% 26%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-20249",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20249.webp",
+      "alt": "Sun disappearing behind the mountains",
+      "focal": "54% 35%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-202410",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-202410.webp",
+      "alt": "Strong backlight silhouette",
+      "focal": "55% 24%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-202411",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-202411.webp",
+      "alt": "Friendship captured in the last rays",
+      "focal": "55% 25%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-20241",
+      "original": "/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20241.webp",
+      "alt": "Natural pose in the evening glow",
+      "focal": "50% 24%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-202412",
+      "original": "/photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202412.webp",
+      "alt": "Frame 01 — Sunset over Maiori",
+      "focal": "49% 24%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Julietta_woods-Maiori-202413",
+      "original": "/photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202413.webp",
+      "alt": "Frame 02 — Unplanned dog moment",
+      "focal": "53% 32%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "Julietta_woods-Maiori-202414",
+      "original": "/photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202414.webp",
+      "alt": "Frame 03 — Friends together",
+      "focal": "49% 29%",
+      "thumbFit": "contain"
+    },
+    {
+      "id": "Julietta_woods-Maiori-202415",
+      "original": "/photoshootings/individual/Julietta/gallery2/Julietta_woods-Maiori-202415.webp",
+      "alt": "Frame 04 — Evening finale",
+      "focal": "53% 33%",
+      "thumbFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Julietta",
+      "heading": {
+        "lead": "An Evening",
+        "accent": "That Became a Gift"
+      },
+      "frameIds": [
+        "Julietta_woods-Maiori-20242",
+        "Julietta_woods-Maiori-20243",
+        "Julietta_woods-Maiori-20244",
+        "Julietta_woods-Maiori-20245",
+        "Julietta_woods-Maiori-20247"
+      ],
+      "before": [
+        {
+          "eyebrow": "The Story",
+          "heading": {
+            "lead": "An Evening That Became",
+            "accent": "a Gift"
+          },
+          "paragraphs": [
+            "On July 20, 2024, in Maiori, the atmosphere was light, natural, and full of real emotions. This photoshoot was a gift from Juliet to her friend — that's why most of the photos feature her. At the end, we also captured photos of them together to preserve the feeling of their trip and friendship.",
+            "It was a story about two friends traveling along the Amalfi Coast — walking through the town, talking, laughing at simple things, and feeling time slow down for a while. These sessions always feel authentic because people are simply living their moment, while I capture it.",
+            "A photoshoot as a gift is different from a physical present. It gives an experience, emotions, and professional photos that stay with you for years."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Julietta",
+      "heading": {
+        "lead": "Living",
+        "accent": "the moment."
+      },
+      "frameIds": [
+        "Julietta_woods-Maiori-20249",
+        "Julietta_woods-Maiori-202410",
+        "Julietta_woods-Maiori-202411",
+        "Julietta_woods-Maiori-20241"
+      ],
+      "before": []
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Julietta",
+      "heading": {
+        "lead": "Memories",
+        "accent": "together."
+      },
+      "frameIds": [
+        "Julietta_woods-Maiori-202412",
+        "Julietta_woods-Maiori-202413",
+        "Julietta_woods-Maiori-202414",
+        "Julietta_woods-Maiori-202415"
+      ],
+      "before": [
+        {
+          "eyebrow": "Behind the Lens",
+          "heading": {
+            "lead": "Unplanned moments that became",
+            "accent": "the best ones"
+          },
+          "paragraphs": [
+            "During the session, many moments happened naturally: the last sunset rays, the sun disappearing behind the mountains, creating strong backlight that made us keep shooting non-stop.",
+            "At one point, a random dog ran straight into our photoshoot just to get some attention — and instantly became part of the story of that evening. These moments can't be planned, but they are what make a photoshoot feel alive.",
+            "An Amalfi Coast photoshoot works especially well as a gift for a friend or loved one because it combines:"
+          ],
+          "items": [
+            "travel and experience",
+            "professional photography in a unique location",
+            "memories you can return to years later"
+          ]
+        }
+      ]
+    }
+  ],
+  "quote": {
+    "text": "The best photos happen when you are simply living the moment.",
+    "author": "Greg, Amalfi Day"
+  }
+}

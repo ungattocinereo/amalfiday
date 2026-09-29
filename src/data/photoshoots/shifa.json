@@ -1,0 +1,258 @@
+{
+  "slug": "shifa",
+  "name": "Shifa",
+  "title": "Amalfi Influencer Photoshoot at Sunrise — Shifa | Amalfi.Day",
+  "description": "Private sunrise photoshoot in Amalfi harbor. Empty streets, golden light, the cathedral steps as the meeting point — a premium influencer session and a meaningful gift.",
+  "heading": {
+    "lead": "Amalfi Influencer",
+    "accent": "Photoshoot"
+  },
+  "date": "September · 20 · 2025",
+  "location": "Amalfi",
+  "summary": "A photographic story with Shifa",
+  "schema": {
+    "name": "Amalfi Influencer Photoshoot — Shifa",
+    "description": "Private sunrise photoshoot in Amalfi harbor — empty streets, soft sea light, and the cathedral steps as the meeting point.",
+    "datePublished": "2025-09-20",
+    "keywords": [
+      "amalfi photoshoot",
+      "amalfi photographer",
+      "influencer photoshoot amalfi",
+      "sunrise portrait amalfi coast"
+    ]
+  },
+  "hero": {
+    "id": "hero",
+    "original": "/photoshootings/individual/Shifa/Hero.webp",
+    "alt": "Shifa — private sunrise photoshoot in Amalfi harbor, September 2025",
+    "focal": "31% 48%"
+  },
+  "frames": [
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-7",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-7.webp",
+      "alt": "Shifa on the Amalfi Cathedral steps at dawn",
+      "focal": "60% 27%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-8",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-8.webp",
+      "alt": "First light on the empty streets",
+      "focal": "48% 25%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-10",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-10.webp",
+      "alt": "Soft reflected light from the harbor",
+      "focal": "56% 34%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-13",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-13.webp",
+      "alt": "Walking toward the pier at sunrise",
+      "focal": "53% 25%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-19",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-19.webp",
+      "alt": "Editorial fashion in natural Amalfi light",
+      "focal": "44% 23%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-24",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-24.webp",
+      "alt": "Golden morning glow on the coastline",
+      "focal": "49% 31%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-3",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-3.webp",
+      "alt": "Sunrise portrait at Amalfi harbor",
+      "focal": "52% 27%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-6",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-6.webp",
+      "alt": "Confident pose on the pier",
+      "focal": "48% 38%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-9",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-9.webp",
+      "alt": "Calm water reflections behind Shifa",
+      "focal": "56% 30%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-11",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-11.webp",
+      "alt": "Coastal lifestyle moment on the beach",
+      "focal": "54% 36%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-12",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-12.webp",
+      "alt": "Movement between pier and shoreline",
+      "focal": "54% 25%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-16",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-16.webp",
+      "alt": "Warm tones on the Amalfi waterfront",
+      "focal": "60% 24%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-1",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-1.webp",
+      "alt": "Frame 01 — Dawn over Amalfi",
+      "focal": "50% 25%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-2",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-2.webp",
+      "alt": "Frame 02 — Cathedral backdrop",
+      "focal": "48% 28%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-14",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-14.webp",
+      "alt": "Frame 03 — Harbor light",
+      "focal": "65% 39%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-15",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-15.webp",
+      "alt": "Frame 04 — Shoreline editorial",
+      "focal": "51% 29%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-25",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-25.webp",
+      "alt": "Frame 05 — Sea and sand",
+      "focal": "49% 36%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-27",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-27.webp",
+      "alt": "Frame 06 — Swimwear on the coast",
+      "focal": "55% 45%",
+      "thumbFit": "cover"
+    },
+    {
+      "id": "Shifa-amalfi-photoshooting-september-2025-29",
+      "original": "/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-29.webp",
+      "alt": "Frame 07 — Final sunrise frame",
+      "focal": "62% 53%",
+      "thumbFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Shifa",
+      "heading": {
+        "lead": "Before the",
+        "accent": "World Wakes Up"
+      },
+      "frameIds": [
+        "Shifa-amalfi-photoshooting-september-2025-7",
+        "Shifa-amalfi-photoshooting-september-2025-8",
+        "Shifa-amalfi-photoshooting-september-2025-10",
+        "Shifa-amalfi-photoshooting-september-2025-13",
+        "Shifa-amalfi-photoshooting-september-2025-19",
+        "Shifa-amalfi-photoshooting-september-2025-24"
+      ],
+      "before": [
+        {
+          "eyebrow": "The Story",
+          "heading": {
+            "lead": "Before the",
+            "accent": "World Wakes Up"
+          },
+          "paragraphs": [
+            "That morning started before sunrise — the quietest time in Amalfi. No traffic, no beach activity, no crowds. Only soft sea light and empty streets. We met for the first time on the staircase of the Amalfi Cathedral — the easiest and most recognizable meeting point in town. The plan was clear: a private individual photoshoot with classic Amalfi atmosphere and architectural background."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Shifa",
+      "heading": {
+        "lead": "When the harbor",
+        "accent": "belongs to you"
+      },
+      "frameIds": [
+        "Shifa-amalfi-photoshooting-september-2025-3",
+        "Shifa-amalfi-photoshooting-september-2025-6",
+        "Shifa-amalfi-photoshooting-september-2025-9",
+        "Shifa-amalfi-photoshooting-september-2025-11",
+        "Shifa-amalfi-photoshooting-september-2025-12",
+        "Shifa-amalfi-photoshooting-september-2025-16"
+      ],
+      "before": [
+        {
+          "eyebrow": "Sunrise Session",
+          "heading": {
+            "lead": "When the harbor",
+            "accent": "belongs to you"
+          },
+          "paragraphs": [
+            "Sunrise in the port creates conditions impossible later in the day — soft reflected light from the sea, clean backgrounds without tourists, and full freedom to move between pier, sand, and shoreline."
+          ],
+          "items": []
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Shifa",
+      "heading": {
+        "lead": "Visual stories",
+        "accent": "for life"
+      },
+      "frameIds": [
+        "Shifa-amalfi-photoshooting-september-2025-1",
+        "Shifa-amalfi-photoshooting-september-2025-2",
+        "Shifa-amalfi-photoshooting-september-2025-14",
+        "Shifa-amalfi-photoshooting-september-2025-15",
+        "Shifa-amalfi-photoshooting-september-2025-25",
+        "Shifa-amalfi-photoshooting-september-2025-27",
+        "Shifa-amalfi-photoshooting-september-2025-29"
+      ],
+      "before": [
+        {
+          "eyebrow": "A Gift That Lasts",
+          "heading": {
+            "lead": "More than memories —",
+            "accent": "visual stories for life"
+          },
+          "paragraphs": [
+            "A professional photoshoot on the Amalfi Coast creates visual assets for years — social media, personal branding, or printed keepsakes. Sunrise sessions are especially valuable for iconic locations without crowds."
+          ],
+          "items": []
+        }
+      ]
+    }
+  ],
+  "quote": {
+    "text": "Great photos are not only memories. They are ready-to-use visual stories you can keep for life.",
+    "author": "Greg, Amalfi Day"
+  }
+}

@@ -19,3 +19,10 @@ dist
 files
 
 *.sql
+
+# Local browser checks and deployment backups
+/.playwright-cli/
+/output/playwright/
+/.deploy-backups/
+/.release-*/
+/.dist-before-*/
