@@ -87,6 +87,8 @@ GHOST_CONTENT_API_KEY=...
 
 Проект рассчитан на статический хостинг (Vercel, Netlify, Cloudflare Pages или любой S3‑подобный CDN). Сборка: `npm run build:static`.
 
+Последняя согласованная точка отката: `rollback/mobile-heroes-production-2026-09-29` — все 18 фотосессий, обновлённые карточки и полноэкранные мобильные hero. [Состав версии, точная копия на VPS и инструкция восстановления](docs/releases/mobile-heroes-2026-09-29.md).
+
 ## Контент
 
 - Фотосессии: `src/pages/photoshootings/*`
