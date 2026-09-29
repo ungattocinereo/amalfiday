@@ -10,9 +10,12 @@ const isActive = (item: (typeof navigation)[number]) =>
 
 <header class="header" id="header" data-home={currentPath === '/' ? '' : undefined}>
   <div class="glass-bar">
-    <a class="brand" href="/" aria-label={`${site.name} home`}>
-      <img class="brand__day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
-      <img class="brand__night" src="/brand/logo-light.svg" alt="" aria-hidden="true" width="267" height="63" />
+    <a class="brand brand--morph" href="/" aria-label={`${site.name} home`}>
+      <span class="brand__wordmark" aria-hidden="true">
+        <img class="brand__day" src="/brand/logo-dark.svg" alt="" width="267" height="63" />
+        <img class="brand__night" src="/brand/logo-light.svg" alt="" width="267" height="63" />
+      </span>
+      <span class="brand__monogram" aria-hidden="true"></span>
     </a>
 
     <div class="header__center">
@@ -43,9 +46,15 @@ const isActive = (item: (typeof navigation)[number]) =>
             </div>
           </details>
         ) : (
-          <a class:list={['nav-link', { 'is-active': isActive(item) }]} href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+          <a class:list={['nav-link', 'nav-link--compact', { 'is-active': isActive(item) }]} href={item.href} aria-label={item.label} title={item.label} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            <span class="nav-link__label" aria-hidden="true">{item.label}</span>
+            <i class={`fa-regular ${item.icon} nav-link__symbol`} aria-hidden="true"></i>
+          </a>
         ))}
-        <a class:list={['nav-link', { 'is-active': isCurrent('/contact') }]} href="/contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>Contact</a>
+        <a class:list={['nav-link', 'nav-link--compact', 'nav-link--contact', { 'is-active': isCurrent('/contact') }]} href="/contact" aria-label="Contact" title="Contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>
+          <span class="nav-link__label" aria-hidden="true">Contact</span>
+          <i class="fa-regular fa-envelope nav-link__symbol" aria-hidden="true"></i>
+        </a>
       </nav>
       <div class="header__connect" aria-label="Social media">
         {headerSocials.map((item) => (
@@ -56,8 +65,8 @@ const isActive = (item: (typeof navigation)[number]) =>
       </div>
     </div>
 
-    <button class="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog">
-      <span class="menu-lines" aria-hidden="true"></span><span>Menu</span>
+    <button class="menu-toggle" type="button" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog">
+      <span class="menu-lines" aria-hidden="true"></span><span class="menu-toggle__label" aria-hidden="true">Menu</span>
     </button>
     <button class="theme-switch" type="button" role="switch" data-theme-toggle aria-label="Dark mode" aria-checked="false" title="Switch to dark theme">
       <span class="theme-switch__track" aria-hidden="true">
@@ -242,11 +251,13 @@ const isActive = (item: (typeof navigation)[number]) =>
     const updateSurface = () => {
       scheduled = false
       if (menu.open) return
-      const scrolled = window.scrollY > 0
+      // Separate enter/exit thresholds keep the morph steady near the top.
+      const scrolled = window.scrollY > (header.classList.contains('is-scrolled') ? 16 : 48)
       header.classList.toggle('is-scrolled', scrolled)
-      const y = Math.min(bar.getBoundingClientRect().height / 2, window.innerHeight - 1)
+      const bounds = bar.getBoundingClientRect()
+      const y = Math.min(bounds.top + bounds.height / 2, window.innerHeight - 1)
       const tones = [0.12, 0.5, 0.88].map((position) => {
-        const underneath = document.elementsFromPoint(window.innerWidth * position, y)
+        const underneath = document.elementsFromPoint(bounds.left + bounds.width * position, y)
           .find((element) => !header.contains(element) && element.closest('main, footer, .prefooter'))
         const section = underneath?.closest('section, footer, article, main') || document.body
         return sectionTone(section)
@@ -304,35 +315,28 @@ const isActive = (item: (typeof navigation)[number]) =>
     --night-logo: block;
   }
   .header {
-    --nav-background: rgba(255, 255, 255, 0.94);
-    --nav-rule: rgba(20, 20, 20, 0.12);
+    --nav-background: rgba(255, 255, 255, 0.42);
+    --nav-sheen: rgba(255, 255, 255, 0.38);
+    --nav-edge: rgba(255, 255, 255, 0.6);
+    --morph-duration: 440ms;
+    --morph-ease: cubic-bezier(0.22, 1, 0.36, 1);
     position: fixed;
     z-index: 30;
     top: 0;
     inset-inline: 0;
-    isolation: isolate;
+    padding: 0 max(24px, env(safe-area-inset-right)) 0 max(24px, env(safe-area-inset-left));
     color: var(--glass-ink);
+    transition: padding-top var(--morph-duration) var(--morph-ease);
   }
   .header[data-surface='dark'] {
-    --nav-background: rgba(13, 16, 19, 0.92);
-    --nav-rule: rgba(255, 255, 255, 0.18);
+    --nav-background: rgba(13, 16, 19, 0.42);
+    --nav-sheen: rgba(255, 255, 255, 0.1);
+    --nav-edge: rgba(255, 255, 255, 0.22);
   }
-  .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: var(--nav-background);
-    border-bottom: 1px solid var(--nav-rule);
-    backdrop-filter: blur(20px) saturate(120%);
-    -webkit-backdrop-filter: blur(20px) saturate(120%);
-    opacity: 0;
-    pointer-events: none;
-  }
-  .header.is-scrolled::before { opacity: 1; transition: opacity 180ms ease; }
+  .header.is-scrolled { padding-top: max(12px, env(safe-area-inset-top)); }
   .glass-bar {
     width: 100%;
-    max-width: var(--container-max);
+    max-width: calc(var(--container-max) - 48px);
     margin-inline: auto;
     position: relative;
     display: grid;
@@ -340,17 +344,41 @@ const isActive = (item: (typeof navigation)[number]) =>
     align-items: center;
     gap: 24px;
     min-height: 88px;
-    padding: 16px max(24px, env(safe-area-inset-right)) 16px max(24px, env(safe-area-inset-left));
+    padding: 16px 0;
     padding-top: max(16px, env(safe-area-inset-top));
     border: 0;
-    border-radius: 0;
+    border-radius: 999px;
     background: transparent;
     box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    -webkit-backdrop-filter: blur(0) saturate(100%);
+    backdrop-filter: blur(0) saturate(100%);
     color: var(--glass-ink);
-    transition: min-height 200ms ease, padding-block 200ms ease, color 160ms ease;
+    isolation: isolate;
+    transition: min-height var(--morph-duration) var(--morph-ease), padding-block var(--morph-duration) var(--morph-ease), gap var(--morph-duration) var(--morph-ease), color 200ms ease, backdrop-filter 320ms ease, -webkit-backdrop-filter 320ms ease;
   }
+  .glass-bar::before, .glass-bar::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 320ms ease, transform var(--morph-duration) var(--morph-ease);
+  }
+  .glass-bar::before {
+    inset: 0;
+    z-index: -1;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--nav-sheen), transparent 55%), var(--nav-background);
+    box-shadow: inset 0 0 0 1px var(--nav-edge), inset 0 1px 0 rgba(255, 255, 255, 0.32), 0 4px 16px rgba(15, 20, 28, 0.035);
+    transform: scaleY(0.86);
+  }
+  .glass-bar::after {
+    inset: 20px 30px -7px;
+    z-index: -2;
+    border-radius: 999px;
+    background: linear-gradient(100deg, rgba(255, 89, 0, 0.1), rgba(30, 48, 70, 0.12) 52%, rgba(21, 31, 44, 0.08));
+    filter: blur(16px);
+  }
+  .is-scrolled .glass-bar::before, .is-scrolled .glass-bar::after { opacity: 1; transform: none; }
   .glass-bar[data-surface='light'] {
     --glass-solid: #ffffff;
     --glass-line: rgba(20, 20, 20, 0.12);
@@ -375,20 +403,39 @@ const isActive = (item: (typeof navigation)[number]) =>
     --day-logo: none;
     --night-logo: block;
   }
-  .is-scrolled .glass-bar { min-height: 72px; padding-block: max(8px, env(safe-area-inset-top)) 8px; }
+  .is-scrolled .glass-bar { min-height: 64px; padding-block: 10px; gap: 12px; -webkit-backdrop-filter: blur(24px) saturate(170%); backdrop-filter: blur(24px) saturate(170%); }
   .header a, .header button, .header summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
   .header a:hover { text-decoration: none; }
   .header :is(a, button, summary):focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 3px; }
-  .brand { display: inline-flex; align-items: center; justify-self: start; min-width: 0; min-height: 44px; max-width: 100%; }
-  .brand img { width: 176px; height: auto; }
+  .brand { position: relative; display: inline-flex; align-items: center; justify-self: start; width: 176px; min-width: 0; height: 44px; max-width: 100%; color: var(--glass-ink); }
+  .brand img { width: 100%; height: auto; }
+  .brand--morph { margin-left: 0; transition: width var(--morph-duration) var(--morph-ease), margin-left var(--morph-duration) var(--morph-ease); }
+  .brand__wordmark { position: absolute; width: 100%; left: 0; top: 50%; transform: translateY(-50%); transform-origin: left center; opacity: 1; filter: blur(0); transition: opacity 200ms ease 100ms, filter 300ms ease, transform var(--morph-duration) var(--morph-ease); }
+  .brand__monogram { position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; background: currentColor; mask: url('/brand/logo-monogram.svg') center / contain no-repeat; -webkit-mask: url('/brand/logo-monogram.svg') center / contain no-repeat; opacity: 0; filter: blur(4px); transform: translate(-50%, -50%) scale(0.55) rotate(-8deg); transition: opacity 180ms ease, filter 320ms ease, transform var(--morph-duration) var(--morph-ease); }
+  .is-scrolled .brand--morph { width: 64px; margin-left: calc(100% - 64px); }
+  .is-scrolled .brand__wordmark { opacity: 0; filter: blur(4px); transform: translateY(-50%) scale(0.65); transition-delay: 0ms; }
+  .is-scrolled .brand__monogram { opacity: 1; filter: blur(0); transform: translate(-50%, -50%) scale(1) rotate(0deg); transition-delay: 80ms; }
+  .glass-bar > .theme-switch { justify-self: start; margin-left: calc(100% - 64px); transition: margin-left var(--morph-duration) var(--morph-ease); }
+  .is-scrolled .glass-bar > .theme-switch { margin-left: 0; }
   .brand__day { display: var(--day-logo); }
   .brand__night { display: var(--night-logo); }
   .header__center, .desktop-nav, .header__connect { display: flex; align-items: center; }
-  .header__center { justify-self: center; gap: 24px; height: 44px; }
-  .desktop-nav { gap: 8px; height: 44px; }
+  .header__center { justify-self: center; gap: 24px; height: 44px; transition: gap var(--morph-duration) var(--morph-ease); }
+  .desktop-nav { gap: 8px; height: 44px; transition: gap var(--morph-duration) var(--morph-ease); }
+  .is-scrolled .header__center { gap: 12px; }
+  .is-scrolled .desktop-nav { gap: 4px; }
+  .is-scrolled .nav-link, .is-scrolled .icon-link { border-radius: 22px; }
+  .is-scrolled .nav-sheet { top: calc(100% + 10px); border-radius: 24px; }
   .nav-disclosure { height: 44px; }
   .header__connect { gap: 4px; height: 44px; }
   .nav-link { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; height: 44px; padding: 0 14px; border-radius: 4px; color: var(--glass-ink); font-size: 15px; line-height: 20px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background 160ms ease; }
+  .nav-link--compact { width: 64px; transition: width var(--morph-duration) var(--morph-ease), background 160ms ease, border-radius 240ms ease; }
+  .nav-link--contact { width: 82px; }
+  .nav-link__label { opacity: 1; transform: scale(1); transition: opacity 180ms ease 100ms, transform 300ms ease; }
+  .nav-link__symbol { position: absolute; display: grid; place-items: center; width: 20px; height: 20px; font-size: 18px; line-height: 1; opacity: 0; transform: scale(0.6); transition: opacity 200ms ease, transform var(--morph-duration) var(--morph-ease); }
+  .is-scrolled .nav-link--compact { width: 44px; }
+  .is-scrolled .nav-link__label { opacity: 0; transform: scale(0.7); transition-delay: 0ms; }
+  .is-scrolled .nav-link__symbol { opacity: 1; transform: scale(1); transition-delay: 100ms; }
   .nav-link::after { content: ''; position: absolute; height: 2px; bottom: 3px; left: 14px; right: 14px; background: var(--glass-accent); transform: scaleX(0); transform-origin: left; transition: transform 180ms ease; }
   .nav-link.is-active::after, details[open] > .nav-link::after { transform: scaleX(1); }
   .nav-link.is-active, details[open] > .nav-link { background: transparent; }
@@ -423,8 +470,12 @@ const isActive = (item: (typeof navigation)[number]) =>
   .sub-link i { width: 18px; flex-shrink: 0; color: var(--glass-muted); text-align: center; font-size: 14px; }
   .sub-link:hover, .sub-link[aria-current='page'] { background: var(--glass-hover); color: var(--glass-ink); }
   .sub-link:hover i, .sub-link[aria-current='page'] i { color: var(--glass-accent); }
-  .menu-toggle, .menu-close { display: flex; align-items: center; justify-content: center; justify-self: center; gap: 8px; width: 84px; height: 44px; padding: 0 10px; background: transparent; color: var(--glass-ink); border: 0; border-radius: 4px; font: 500 14px/20px var(--font-body); cursor: pointer; transition: background 180ms ease, color 180ms ease, transform 180ms ease; }
+  .menu-toggle, .menu-close { display: flex; align-items: center; justify-content: center; justify-self: center; gap: 8px; width: 84px; height: 44px; padding: 0 10px; background: transparent; color: var(--glass-ink); border: 0; border-radius: 4px; font: 500 14px/20px var(--font-body); cursor: pointer; transition: width var(--morph-duration) var(--morph-ease), gap var(--morph-duration) var(--morph-ease), background 180ms ease, color 180ms ease, transform 180ms ease; }
   .menu-toggle { display: none; }
+  .menu-toggle__label { max-width: 40px; overflow: hidden; opacity: 1; transition: max-width var(--morph-duration) var(--morph-ease), opacity 180ms ease; }
+  .is-scrolled .menu-toggle { width: 44px; gap: 0; border-radius: 22px; }
+  .is-scrolled .menu-toggle__label { max-width: 0; opacity: 0; }
+  .is-scrolled .menu-toggle .menu-lines::after { width: 18px; }
   .menu-lines { position: relative; width: 18px; height: 20px; flex-shrink: 0; }
   .menu-lines::before, .menu-lines::after { content: ''; position: absolute; left: 0; height: 2px; background: currentColor; transition: width 180ms ease, background 180ms ease; }
   .menu-lines::before { width: 18px; top: 6px; }
@@ -434,7 +485,7 @@ const isActive = (item: (typeof navigation)[number]) =>
   .mobile-menu { position: fixed; inset: 0; width: 100%; max-width: 640px; height: 100%; height: 100dvh; max-height: none; margin: 0 auto; padding: 0; border: 0; border-radius: 0; color: var(--glass-ink); background: var(--glass-solid); overflow: clip; }
   .mobile-menu, .mobile-menu__bar { transition: background 240ms ease, color 240ms ease; }
   .mobile-menu[open] { display: flex; flex-direction: column; animation: reveal 200ms ease-out; }
-  .mobile-menu::backdrop { background: rgba(12, 20, 25, 0.46); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .mobile-menu::backdrop { background: rgba(12, 20, 25, 0.46); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
   .mobile-menu__bar { position: sticky; top: 0; z-index: 1; background: var(--glass-solid); flex-shrink: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; min-height: 72px; padding: 14px max(24px, env(safe-area-inset-right)) 14px max(24px, env(safe-area-inset-left)); padding-top: max(14px, env(safe-area-inset-top)); }
   .mobile-menu__body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 28px max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); display: flex; flex-direction: column; flex: 1; }
   .mobile-menu__body > * { flex-shrink: 0; }
@@ -472,8 +523,9 @@ const isActive = (item: (typeof navigation)[number]) =>
   }
   @keyframes reveal { from { opacity: 0; margin-top: -5px; } to { opacity: 1; margin-top: 0; } }
   @media (max-width: 1099px) {
-    .header { --nav-background: rgba(255, 255, 255, 0.98); }
-    .glass-bar, .is-scrolled .glass-bar { min-height: 72px; gap: 12px; padding: 14px max(24px, env(safe-area-inset-right)) 14px max(24px, env(safe-area-inset-left)); padding-top: max(14px, env(safe-area-inset-top)); }
+    .glass-bar { min-height: 72px; gap: 12px; padding: 14px 0; padding-top: max(14px, env(safe-area-inset-top)); }
+    .is-scrolled .glass-bar { min-height: 60px; padding-block: 8px; gap: 12px; }
+    .brand__monogram { width: 30px; height: 30px; }
     .brand { width: 112px; height: 44px; }
     .brand img { width: 100%; }
     .header__center { display: none; }
@@ -483,20 +535,18 @@ const isActive = (item: (typeof navigation)[number]) =>
     .brand { width: 104px; }
   }
   @media (max-width: 380px) {
-    .glass-bar, .is-scrolled .glass-bar, .mobile-menu__bar { gap: 8px; }
+    .glass-bar, .mobile-menu__bar { gap: 8px; }
     .mobile-menu__body { padding-inline: 20px; }
   }
-  .header:not([data-surface-ready])::before, .header:not([data-surface-ready]) *, .header:not([data-surface-ready]) *::before { transition: none !important; }
+  .header:not([data-surface-ready]), .header:not([data-surface-ready]) *, .header:not([data-surface-ready]) *::before, .header:not([data-surface-ready]) *::after { transition: none !important; }
   @media (prefers-reduced-motion: reduce) {
-    .header::before, .header *, .header *::before, .header *::after { transition: none !important; animation: none !important; }
+    .header, .header *, .header *::before, .header *::after { transition: none !important; animation: none !important; }
   }
   @media (prefers-reduced-transparency: reduce) {
-    .header::before { background: var(--glass-solid); backdrop-filter: none; -webkit-backdrop-filter: none; }
-    .header[data-surface='dark']::before { background: #111417; }
-    .header[data-surface='light']::before { background: #ffffff; }
+    .is-scrolled .glass-bar { -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .glass-bar::before { background: var(--glass-solid); }
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .header::before { background: #ffffff; }
-    .header[data-surface='dark']::before { background: #111417; }
+    .glass-bar::before { background: var(--glass-solid); }
   }
 </style>
