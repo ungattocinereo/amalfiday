@@ -11,6 +11,7 @@ const isActive = (item: (typeof navigation)[number]) =>
 
 <header class="header" id="header" data-home={currentPath === '/' ? '' : undefined}>
   <div class="glass-bar">
+    <span class="glass-bar__edge" aria-hidden="true"></span>
     <a class="brand brand--morph" href="/" aria-label={`${site.name} home`}>
       <MorphingLogo />
     </a>
@@ -62,8 +63,8 @@ const isActive = (item: (typeof navigation)[number]) =>
       </div>
     </div>
 
-    <button class="menu-toggle" type="button" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog">
-      <span class="menu-lines" aria-hidden="true"></span><span class="menu-toggle__label" aria-hidden="true">Menu</span>
+    <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog">
+      <span class="menu-toggle__label" aria-hidden="true">МЕНЮ</span>
     </button>
     <button class="theme-switch" type="button" role="switch" data-theme-toggle aria-label="Dark mode" aria-checked="false" title="Switch to dark theme">
       <span class="theme-switch__track" aria-hidden="true">
@@ -80,7 +81,7 @@ const isActive = (item: (typeof navigation)[number]) =>
         <img class="brand__day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
         <img class="brand__night" src="/brand/logo-light.svg" alt="" aria-hidden="true" width="267" height="63" />
       </a>
-      <button class="menu-close" type="button" autofocus><i class="fa-solid fa-xmark" aria-hidden="true"></i> Close</button>
+      <button class="menu-close" type="button" aria-label="Закрыть меню" autofocus>ЗАКРЫТЬ</button>
       <button class="theme-switch" type="button" role="switch" data-theme-toggle aria-label="Dark mode" aria-checked="false" title="Switch to dark theme">
         <span class="theme-switch__track" aria-hidden="true">
           <span class="theme-switch__thumb"></span>
@@ -174,30 +175,83 @@ const isActive = (item: (typeof navigation)[number]) =>
     const menu = header.querySelector('#mobile-menu')
     const menuToggle = header.querySelector('.menu-toggle')
     const desktop = window.matchMedia('(min-width: 1100px)')
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     let previousOverflow = ''
+    let menuState = 'closed'
+    let menuFrame = 0
+    let closeTimer
+    const finishClose = () => {
+      cancelAnimationFrame(menuFrame)
+      clearTimeout(closeTimer)
+      if (menu.open) menu.close()
+    }
+    const closeMenu = (immediately = false) => {
+      if (!menu.open) return
+      if (immediately || reducedMotion.matches) { finishClose(); return }
+      if (menuState === 'closing') return
+      cancelAnimationFrame(menuFrame)
+      const wasVisible = menu.classList.contains('is-visible')
+      menuState = 'closing'
+      menu.classList.add('is-closing')
+      menu.classList.remove('is-visible')
+      if (!wasVisible) { finishClose(); return }
+      // Keep the native focus trap until the panel has faded out.
+      closeTimer = setTimeout(finishClose, 300)
+    }
     menuToggle.addEventListener('click', () => {
+      if (menu.open || menuState !== 'closed') return
+      cancelAnimationFrame(menuFrame)
+      clearTimeout(closeTimer)
       closeDisclosures()
       previousOverflow = document.body.style.overflow
+      menuState = 'opening'
+      menu.classList.remove('is-visible', 'is-closing')
       menu.showModal()
       menu.querySelector('.mobile-menu__body').scrollTop = 0
       document.body.style.overflow = 'hidden'
       menuToggle.setAttribute('aria-expanded', 'true')
+      // Commit the starting pose before transitioning into the open state.
+      menu.getBoundingClientRect()
+      if (reducedMotion.matches) { menu.classList.add('is-visible'); menuState = 'open' }
+      else menuFrame = requestAnimationFrame(() => {
+        if (menu.open && menuState === 'opening') menu.classList.add('is-visible')
+      })
     })
-    const closeMenu = () => menu.close()
-    menu.querySelector('.menu-close').addEventListener('click', closeMenu)
+    menu.querySelector('.menu-close').addEventListener('click', () => closeMenu())
+    menu.addEventListener('cancel', (event) => {
+      event.preventDefault()
+      closeMenu()
+    })
+    menu.addEventListener('transitionend', (event) => {
+      if (event.target !== menu || event.propertyName !== 'opacity') return
+      if (menuState === 'closing') finishClose()
+      else if (menuState === 'opening') menuState = 'open'
+    })
     menu.addEventListener('click', (event) => {
-      if (event.target === menu || event.target.closest('a')) closeMenu()
+      if (event.target.closest('a')) { closeMenu(true); return }
+      if (event.target !== menu) return
+      const bounds = menu.getBoundingClientRect()
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeMenu()
     })
     menu.addEventListener('close', () => {
+      cancelAnimationFrame(menuFrame)
+      clearTimeout(closeTimer)
+      menuState = 'closed'
+      menu.classList.remove('is-visible', 'is-closing')
       document.body.style.overflow = previousOverflow
       menuToggle.setAttribute('aria-expanded', 'false')
       menu.querySelectorAll('details').forEach((details) => { details.open = false })
       if (desktop.matches) header.querySelector('.brand').focus({ preventScroll: true })
       else menuToggle.focus({ preventScroll: true })
     })
+    reducedMotion.addEventListener('change', () => {
+      if (!reducedMotion.matches || !menu.open) return
+      if (menuState === 'closing') finishClose()
+      else { menu.classList.add('is-visible'); menuState = 'open' }
+    })
     desktop.addEventListener('change', () => {
       closeDisclosures()
-      if (menu.open) closeMenu()
+      if (menu.open) closeMenu(true)
     })
     // Read the sections behind the fixed bar, ignoring the navigation itself.
     // Photo heroes declare their dark treatment. All other sections use their
@@ -327,9 +381,9 @@ const isActive = (item: (typeof navigation)[number]) =>
     --night-logo: block;
   }
   .header {
-    --nav-background: rgba(255, 255, 255, 0.42);
-    --nav-sheen: rgba(255, 255, 255, 0.38);
-    --nav-edge: rgba(255, 255, 255, 0.6);
+    --nav-background: rgba(255, 255, 255, 0.23);
+    --nav-sheen: rgba(255, 255, 255, 0.28);
+    --nav-glint: rgba(255, 255, 255, 0.85);
     --morph-duration: 440ms;
     --morph-ease: cubic-bezier(0.33, 1, 0.68, 1);
     --compact-center-width: 451px;
@@ -342,9 +396,9 @@ const isActive = (item: (typeof navigation)[number]) =>
     transition: padding-top var(--morph-duration) var(--morph-ease);
   }
   .header[data-surface='dark'] {
-    --nav-background: rgba(13, 16, 19, 0.42);
+    --nav-background: rgba(13, 16, 19, 0.26);
     --nav-sheen: rgba(255, 255, 255, 0.1);
-    --nav-edge: rgba(255, 255, 255, 0.22);
+    --nav-glint: rgba(255, 255, 255, 0.62);
   }
   .header.is-scrolled { padding-top: max(12px, env(safe-area-inset-top)); }
   .glass-bar {
@@ -380,10 +434,31 @@ const isActive = (item: (typeof navigation)[number]) =>
     inset: 0;
     z-index: -1;
     border-radius: 999px;
-    background: linear-gradient(135deg, var(--nav-sheen), transparent 55%), var(--nav-background);
-    box-shadow: inset 0 0 0 1px var(--nav-edge), inset 0 1px 0 rgba(255, 255, 255, 0.32), 0 4px 16px rgba(15, 20, 28, 0.035);
+    background: linear-gradient(135deg, var(--nav-sheen), transparent 48%), linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 60%), var(--nav-background);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 -1px 0 rgba(13, 24, 37, 0.05), 0 5px 20px rgba(15, 20, 28, 0.045);
     transform: scaleY(0.86);
   }
+  /* A masked light reflection follows the perimeter without a solid border. */
+  .glass-bar__edge {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(135deg, var(--nav-glint), rgba(255, 255, 255, 0.16) 24%, rgba(255, 255, 255, 0.04) 46%, rgba(255, 255, 255, 0.3) 74%, var(--nav-glint));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: opacity 320ms ease;
+  }
+  @supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+    .glass-bar__edge { display: block; }
+  }
+  .is-scrolled .glass-bar__edge { opacity: 1; }
   .glass-bar::after {
     inset: 20px 30px -7px;
     z-index: -2;
@@ -416,7 +491,7 @@ const isActive = (item: (typeof navigation)[number]) =>
     --day-logo: none;
     --night-logo: block;
   }
-  .is-scrolled .glass-bar { width: calc(var(--compact-center-width) + 128px); min-height: 60px; padding: 8px 12px; gap: 8px; -webkit-backdrop-filter: blur(24px) saturate(170%); backdrop-filter: blur(24px) saturate(170%); }
+  .is-scrolled .glass-bar { width: calc(var(--compact-center-width) + 128px); min-height: 60px; padding: 8px 12px; gap: 8px; -webkit-backdrop-filter: blur(28px) saturate(155%); backdrop-filter: blur(28px) saturate(155%); }
   .header a, .header button, .header summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
   .header a:hover { text-decoration: none; }
   .header :is(a, button, summary):focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 3px; }
@@ -476,25 +551,32 @@ const isActive = (item: (typeof navigation)[number]) =>
   .sub-link i { width: 18px; flex-shrink: 0; color: var(--glass-muted); text-align: center; font-size: 14px; }
   .sub-link:hover, .sub-link[aria-current='page'] { background: var(--glass-hover); color: var(--glass-ink); }
   .sub-link:hover i, .sub-link[aria-current='page'] i { color: var(--glass-accent); }
-  .menu-toggle, .menu-close { display: flex; align-items: center; justify-content: center; justify-self: center; gap: 8px; width: 84px; height: 44px; padding: 0 10px; background: transparent; color: var(--glass-ink); border: 0; border-radius: 4px; font: 500 14px/20px var(--font-body); cursor: pointer; transition: width var(--morph-duration) var(--morph-ease), gap var(--morph-duration) var(--morph-ease), background 180ms ease, color 180ms ease, transform 180ms ease; }
-  .menu-toggle { display: none; }
-  .menu-toggle__label { max-width: 40px; overflow: hidden; opacity: 1; transition: max-width var(--morph-duration) var(--morph-ease), opacity 180ms ease; }
-  .is-scrolled .menu-toggle { width: 44px; gap: 0; border-radius: 22px; }
-  .is-scrolled .menu-toggle__label { max-width: 0; opacity: 0; }
-  .is-scrolled .menu-toggle .menu-lines::after { width: 18px; }
-  .menu-lines { position: relative; width: 18px; height: 20px; flex-shrink: 0; }
-  .menu-lines::before, .menu-lines::after { content: ''; position: absolute; left: 0; height: 2px; background: currentColor; transition: width 180ms ease, background 180ms ease; }
-  .menu-lines::before { width: 18px; top: 6px; }
-  .menu-lines::after { width: 12px; bottom: 6px; }
-  .menu-close i { width: 18px; line-height: 20px; text-align: center; color: var(--glass-accent); transition: transform 180ms ease; }
-  .menu-toggle:active, .menu-close:active { transform: scale(0.96); }
-  .mobile-menu { position: fixed; inset: 0; width: 100%; max-width: 640px; height: 100%; height: 100dvh; max-height: none; margin: 0 auto; padding: 0; border: 0; border-radius: 0; color: var(--glass-ink); background: var(--glass-solid); overflow: clip; }
-  .mobile-menu, .mobile-menu__bar { transition: background 240ms ease, color 240ms ease; }
-  .mobile-menu[open] { display: flex; flex-direction: column; animation: reveal 200ms ease-out; }
-  .mobile-menu::backdrop { background: rgba(12, 20, 25, 0.46); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-  .mobile-menu__bar { position: sticky; top: 0; z-index: 1; background: var(--glass-solid); flex-shrink: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; min-height: 72px; padding: 14px max(24px, env(safe-area-inset-right)) 14px max(24px, env(safe-area-inset-left)); padding-top: max(14px, env(safe-area-inset-top)); }
+  .menu-toggle, .menu-close { display: flex; align-items: center; justify-content: center; justify-self: center; position: relative; height: 44px; padding: 0 10px; background: transparent; color: var(--glass-ink); border: 0; border-radius: 24px; font: 500 11px/1 var(--font-body); letter-spacing: 0.16em; cursor: pointer; transition: background 180ms ease, color 180ms ease, transform 180ms ease; }
+  .menu-toggle { display: none; width: 64px; }
+  .menu-close { width: 84px; font-size: 10px; }
+  .menu-toggle__label { display: block; padding-left: 0.16em; white-space: nowrap; }
+  .menu-toggle::after { content: ''; position: absolute; bottom: 10px; inset-inline: 15px; height: 1px; background: currentColor; opacity: 0; transform: scaleX(0.5); transition: opacity 180ms ease, transform 180ms ease; }
+  .menu-toggle:active, .menu-close:active { transform: scale(0.96); background: color-mix(in srgb, currentColor 8%, transparent); }
+  .mobile-menu { position: fixed; inset: 0; width: 100%; max-width: 640px; height: 100%; height: 100dvh; max-height: none; margin: 0 auto; padding: 0; border: 0; border-radius: 28px; color: var(--glass-ink); background: color-mix(in srgb, var(--glass-solid) 94%, transparent); -webkit-backdrop-filter: blur(28px); backdrop-filter: blur(28px); overflow: clip; opacity: 0; transform: translateY(-20px) scale(0.985); transform-origin: 50% 0; transition: opacity 260ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms ease, background 240ms ease, color 240ms ease; }
+  .mobile-menu[open] { display: flex; flex-direction: column; }
+  .mobile-menu.is-visible { opacity: 1; transform: none; border-radius: 0; }
+  .mobile-menu.is-closing { transition-duration: 240ms; }
+  .mobile-menu::backdrop { background: rgba(12, 20, 25, 0); -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0); transition: background 300ms ease, backdrop-filter 360ms ease, -webkit-backdrop-filter 360ms ease; }
+  .mobile-menu.is-visible::backdrop { background: rgba(12, 20, 25, 0.34); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .mobile-menu.is-closing::backdrop { transition-duration: 240ms; }
+  .mobile-menu__bar { transition: background 240ms ease, color 240ms ease; }
+  .mobile-menu__bar { position: sticky; top: 0; z-index: 1; background: transparent; flex-shrink: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; min-height: 72px; padding: 14px max(24px, env(safe-area-inset-right)) 14px max(24px, env(safe-area-inset-left)); padding-top: max(14px, env(safe-area-inset-top)); }
   .mobile-menu__body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 28px max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); display: flex; flex-direction: column; flex: 1; }
   .mobile-menu__body > * { flex-shrink: 0; }
+  .mobile-menu__intro, .mobile-menu .mobile-nav > *, .mobile-connect { opacity: 0; transform: translateY(14px); transition: opacity 280ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1), background 160ms ease; }
+  .mobile-menu.is-visible :is(.mobile-menu__intro, .mobile-nav > *, .mobile-connect) { opacity: 1; transform: none; }
+  .mobile-menu.is-visible .mobile-menu__intro { transition-delay: 70ms; }
+  .mobile-menu.is-visible .mobile-nav > :nth-child(1) { transition-delay: 100ms; }
+  .mobile-menu.is-visible .mobile-nav > :nth-child(2) { transition-delay: 130ms; }
+  .mobile-menu.is-visible .mobile-nav > :nth-child(3) { transition-delay: 160ms; }
+  .mobile-menu.is-visible .mobile-nav > :nth-child(4) { transition-delay: 190ms; }
+  .mobile-menu.is-visible .mobile-connect { transition-delay: 220ms; }
+  .mobile-menu.is-closing :is(.mobile-menu__intro, .mobile-nav > *, .mobile-connect) { transition-duration: 160ms; transition-delay: 0ms; }
   .mobile-menu__intro { margin-bottom: 24px; }
   .mobile-menu__title { display: block; margin-top: 9px; font-family: var(--font-display); font-style: italic; font-size: 17px; line-height: 1.6; }
   .mobile-nav { border-top: 1px solid var(--glass-line); }
@@ -520,15 +602,14 @@ const isActive = (item: (typeof navigation)[number]) =>
     .nav-link:hover::after { transform: scaleX(1); }
     .icon-link:hover { background: var(--glass-accent); color: #141414; transform: translateY(-2px); }
     .theme-switch:hover .theme-switch__track { background: color-mix(in srgb, currentColor 12%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 38%, transparent); }
-    .menu-toggle:hover, .menu-close:hover { background: var(--glass-accent); color: #141414; }
-    .menu-toggle:hover .menu-lines::before, .menu-toggle:hover .menu-lines::after { background: #141414; width: 18px; }
-    .menu-close:hover i { color: #141414; transform: rotate(90deg); }
+    .menu-toggle:hover, .menu-close:hover { background: color-mix(in srgb, currentColor 7%, transparent); }
+    .menu-toggle:hover::after { opacity: 0.55; transform: scaleX(1); }
     .mobile-nav__link:hover { background: var(--glass-hover); color: var(--glass-ink); }
     .mobile-socials a:hover { text-decoration: underline; text-decoration-color: var(--glass-accent); text-underline-offset: 5px; }
   }
   @keyframes reveal { from { opacity: 0; margin-top: -5px; } to { opacity: 1; margin-top: 0; } }
   @media (max-width: 1099px) {
-    .glass-bar { --compact-center-width: 44px; min-height: 72px; gap: 12px; padding: 14px 0; padding-top: max(14px, env(safe-area-inset-top)); }
+    .glass-bar { --compact-center-width: 64px; min-height: 72px; gap: 12px; padding: 14px 0; padding-top: max(14px, env(safe-area-inset-top)); }
     .is-scrolled .glass-bar { min-height: 56px; padding: 6px 12px; gap: 8px; }
     .brand { width: 112px; height: 44px; }
     .brand img { width: 100%; }
@@ -549,6 +630,8 @@ const isActive = (item: (typeof navigation)[number]) =>
   @media (prefers-reduced-transparency: reduce) {
     .is-scrolled .glass-bar { -webkit-backdrop-filter: none; backdrop-filter: none; }
     .glass-bar::before { background: var(--glass-solid); }
+    .mobile-menu { background: var(--glass-solid); -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .mobile-menu.is-visible::backdrop { -webkit-backdrop-filter: none; backdrop-filter: none; }
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .glass-bar::before { background: var(--glass-solid); }
