@@ -20,8 +20,11 @@ const isActive = (item: (typeof navigation)[number]) =>
       <nav class="desktop-nav" aria-label="Main navigation">
         {navigation.map((item) => item.dropdownSections?.length ? (
           <details class="nav-disclosure" data-desktop-disclosure>
-            <summary class:list={['nav-link', { 'is-active': isActive(item) }]}>
-              {item.label}<i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+            <summary class:list={['nav-link', 'nav-link--compact', 'nav-link--disclosure', { 'is-active': isActive(item) }]} aria-label={item.label}>
+              <span class="nav-link__label" aria-hidden="true">{item.label}</span>
+              <i class={`fa-regular ${item.icon} nav-link__symbol`} aria-hidden="true"></i>
+              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+              <span class="nav-link__hint" aria-hidden="true">{item.label}</span>
             </summary>
             <div class="nav-sheet">
               <div class="nav-sheet__intro">
@@ -44,14 +47,16 @@ const isActive = (item: (typeof navigation)[number]) =>
             </div>
           </details>
         ) : (
-          <a class:list={['nav-link', 'nav-link--compact', { 'is-active': isActive(item) }]} href={item.href} aria-label={item.label} title={item.label} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+          <a class:list={['nav-link', 'nav-link--compact', { 'is-active': isActive(item) }]} href={item.href} aria-label={item.label} aria-current={isCurrent(item.href) ? 'page' : undefined}>
             <span class="nav-link__label" aria-hidden="true">{item.label}</span>
             <i class={`fa-regular ${item.icon} nav-link__symbol`} aria-hidden="true"></i>
+            <span class="nav-link__hint" aria-hidden="true">{item.label}</span>
           </a>
         ))}
-        <a class:list={['nav-link', 'nav-link--compact', 'nav-link--contact', { 'is-active': isCurrent('/contact') }]} href="/contact" aria-label="Contact" title="Contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>
+        <a class:list={['nav-link', 'nav-link--compact', 'nav-link--contact', { 'is-active': isCurrent('/contact') }]} href="/contact" aria-label="Contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>
           <span class="nav-link__label" aria-hidden="true">Contact</span>
           <i class="fa-regular fa-envelope nav-link__symbol" aria-hidden="true"></i>
+          <span class="nav-link__hint" aria-hidden="true">Contact</span>
         </a>
       </nav>
       <div class="header__connect" aria-label="Social media">
@@ -257,20 +262,22 @@ const isActive = (item: (typeof navigation)[number]) =>
     // Photo heroes declare their dark treatment. All other sections use their
     // computed background to choose light or dark navigation lettering.
     const bar = header.querySelector('.glass-bar')
-    // Size the capsule from its contents, including the actual loaded typeface.
-    // Only disclosure labels remain text in compact mode; other links are 44px.
+    // Use the final icon sizes so the capsule does not chase animated widths.
     const measureCompactWidth = () => {
       if (!desktop.matches) return
-      const nav = bar.querySelector('.desktop-nav')
-      const links = [...nav.children]
-      const linksWidth = links.reduce((width, item) => width + (item.matches('.nav-link--compact') ? 44 : item.getBoundingClientRect().width), 0)
-      const socialsWidth = bar.querySelector('.header__connect').getBoundingClientRect().width
-      const centerWidth = linksWidth + Math.max(0, links.length - 1) * 4 + 12 + socialsWidth
-      header.style.setProperty('--compact-center-width', `${Math.ceil(centerWidth)}px`)
+      const style = getComputedStyle(header)
+      const size = (property) => parseFloat(style.getPropertyValue(property))
+      const linkSize = size('--compact-link-size')
+      const disclosureSize = size('--compact-disclosure-size')
+      const links = [...bar.querySelector('.desktop-nav').children]
+      const socials = [...bar.querySelector('.header__connect').children]
+      const linksWidth = links.reduce((width, item) => width + (item.matches('.nav-disclosure') ? disclosureSize : linkSize), 0)
+      const centerWidth = linksWidth + Math.max(0, links.length - 1) * size('--compact-nav-gap')
+        + size('--compact-group-gap') + socials.length * linkSize + Math.max(0, socials.length - 1) * size('--compact-nav-gap')
+      header.style.setProperty('--compact-center-width', `${centerWidth}px`)
     }
-    const compactSizeObserver = new ResizeObserver(measureCompactWidth)
-    bar.querySelectorAll('.nav-disclosure, .header__connect').forEach((element) => compactSizeObserver.observe(element))
-    document.fonts.ready.then(measureCompactWidth)
+    measureCompactWidth()
+    desktop.addEventListener('change', measureCompactWidth)
     const parseColor = (value) => {
       const channels = value.match(/[\d.]+/g)?.map(Number)
       return value.startsWith('rgb') && channels?.length >= 3
@@ -386,7 +393,11 @@ const isActive = (item: (typeof navigation)[number]) =>
     --nav-glint: rgba(255, 255, 255, 0.85);
     --morph-duration: 440ms;
     --morph-ease: cubic-bezier(0.33, 1, 0.68, 1);
-    --compact-center-width: 451px;
+    --compact-link-size: 44px;
+    --compact-disclosure-size: 64px;
+    --compact-nav-gap: 4px;
+    --compact-group-gap: 25px;
+    --compact-center-width: 345px;
     position: fixed;
     z-index: 30;
     top: 0;
@@ -504,20 +515,30 @@ const isActive = (item: (typeof navigation)[number]) =>
   .header__center, .desktop-nav, .header__connect { display: flex; align-items: center; }
   .header__center { justify-self: center; gap: 24px; height: 44px; transition: gap var(--morph-duration) var(--morph-ease); }
   .desktop-nav { gap: 8px; height: 44px; transition: gap var(--morph-duration) var(--morph-ease); }
-  .is-scrolled .header__center { gap: 12px; }
-  .is-scrolled .desktop-nav { gap: 4px; }
+  .is-scrolled .header__center { gap: var(--compact-group-gap); }
+  .is-scrolled .desktop-nav { gap: var(--compact-nav-gap); }
   .is-scrolled .nav-link, .is-scrolled .icon-link { border-radius: 22px; }
   .is-scrolled .nav-sheet { top: calc(100% + 10px); border-radius: 24px; }
   .nav-disclosure { height: 44px; }
-  .header__connect { gap: 4px; height: 44px; }
+  .header__connect { position: relative; gap: 4px; height: 44px; }
+  .header__connect::before, .glass-bar > .theme-switch::before { content: ''; position: absolute; top: 50%; width: 1px; height: 18px; transform: translateY(-50%); background: var(--glass-ink); opacity: 0; pointer-events: none; transition: opacity 240ms ease; }
+  .header__connect::before { left: -13px; }
   .nav-link { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; height: 44px; padding: 0 14px; border-radius: 4px; color: var(--glass-ink); font-size: 15px; line-height: 20px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background 160ms ease; }
   .nav-link--compact { width: 64px; transition: width var(--morph-duration) var(--morph-ease), background 160ms ease, border-radius 240ms ease; }
   .nav-link--contact { width: 82px; }
+  .nav-link--disclosure { width: 148px; padding-inline: 12px; }
+  .nav-link--disclosure .nav-link__label { position: absolute; left: 12px; right: 32px; text-align: center; }
+  .nav-link--disclosure .chevron { margin-left: auto; flex-shrink: 0; }
+  .nav-link--disclosure .nav-link__symbol { left: 12px; }
   .nav-link__label { opacity: 1; transform: scale(1); transition: opacity 180ms ease 100ms, transform 300ms ease; }
   .nav-link__symbol { position: absolute; display: grid; place-items: center; width: 20px; height: 20px; font-size: 18px; line-height: 1; opacity: 0; transform: scale(0.6); transition: opacity 200ms ease, transform var(--morph-duration) var(--morph-ease); }
-  .is-scrolled .nav-link--compact { width: 44px; }
+  .is-scrolled .nav-link--compact { width: var(--compact-link-size); }
+  .is-scrolled .nav-link--disclosure { width: var(--compact-disclosure-size); }
   .is-scrolled .nav-link__label { opacity: 0; transform: scale(0.7); transition-delay: 0ms; }
   .is-scrolled .nav-link__symbol { opacity: 1; transform: scale(1); transition-delay: 100ms; }
+  .nav-link__hint { position: absolute; z-index: 2; top: calc(100% + 12px); left: 50%; padding: 7px 10px; border-radius: 8px; background: var(--glass-solid); color: var(--glass-ink); box-shadow: 0 4px 16px rgba(10, 20, 25, 0.12); font-size: 11px; line-height: 1.4; font-weight: 500; opacity: 0; visibility: hidden; transform: translate(-50%, -4px); pointer-events: none; transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease; }
+  .is-scrolled .nav-link:focus-visible .nav-link__hint { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  .is-scrolled .nav-disclosure[open] > .nav-link .nav-link__hint { opacity: 0; visibility: hidden; transition-delay: 0ms; }
   .nav-link::after { content: ''; position: absolute; height: 2px; bottom: 3px; left: 14px; right: 14px; background: var(--glass-accent); transform: scaleX(0); transform-origin: left; transition: transform 180ms ease; }
   .nav-link.is-active::after, details[open] > .nav-link::after { transform: scaleX(1); }
   .nav-link.is-active, details[open] > .nav-link { background: transparent; }
@@ -527,9 +548,9 @@ const isActive = (item: (typeof navigation)[number]) =>
   details[open] > summary .chevron { transform: rotate(180deg); }
   .icon-link { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--glass-ink); border-radius: 4px; font-size: 18px; line-height: 1; padding: 0; flex-shrink: 0; transition: background 160ms ease, color 160ms ease, transform 180ms ease; }
   .icon-link > i { width: 20px; line-height: 20px; text-align: center; }
-  .theme-switch { display: inline-flex; align-items: center; justify-content: center; justify-self: end; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: var(--glass-ink); cursor: pointer; }
+  .theme-switch { position: relative; display: inline-flex; align-items: center; justify-content: center; justify-self: end; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: var(--glass-ink); cursor: pointer; }
   .header .theme-switch:focus-visible { border-radius: 999px; }
-  .theme-switch__track { position: relative; display: block; width: 44px; height: 24px; border-radius: 999px; background: color-mix(in srgb, currentColor 6%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent); transition: background 240ms ease, box-shadow 240ms ease; }
+  .theme-switch__track { flex-shrink: 0; position: relative; display: block; width: 44px; height: 24px; border-radius: 999px; background: color-mix(in srgb, currentColor 6%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent); transition: background 240ms ease, box-shadow 240ms ease; }
   .theme-switch__thumb { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: color-mix(in srgb, currentColor 88%, transparent); transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background 240ms ease; }
   .theme-switch svg { position: absolute; top: 2px; width: 20px; height: 20px; padding: 3px; transition: color 240ms ease, opacity 240ms ease; }
   .theme-switch__sun { left: 2px; color: var(--glass-solid); }
@@ -600,6 +621,7 @@ const isActive = (item: (typeof navigation)[number]) =>
   @media (hover: hover) {
     .nav-link:hover { background: var(--glass-hover); color: var(--glass-ink); }
     .nav-link:hover::after { transform: scaleX(1); }
+    .is-scrolled .nav-link:hover .nav-link__hint { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 180ms; }
     .icon-link:hover { background: var(--glass-accent); color: #141414; transform: translateY(-2px); }
     .theme-switch:hover .theme-switch__track { background: color-mix(in srgb, currentColor 12%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 38%, transparent); }
     .menu-toggle:hover, .menu-close:hover { background: color-mix(in srgb, currentColor 7%, transparent); }
@@ -608,6 +630,12 @@ const isActive = (item: (typeof navigation)[number]) =>
     .mobile-socials a:hover { text-decoration: underline; text-decoration-color: var(--glass-accent); text-underline-offset: 5px; }
   }
   @keyframes reveal { from { opacity: 0; margin-top: -5px; } to { opacity: 1; margin-top: 0; } }
+  @media (min-width: 1100px) {
+    .is-scrolled .glass-bar { grid-template-columns: 44px auto 57px; width: calc(var(--compact-center-width) + 149px); gap: 12px; }
+    .is-scrolled .header__connect::before, .is-scrolled .glass-bar > .theme-switch::before { opacity: 0.18; }
+    .is-scrolled .glass-bar > .theme-switch { width: 57px; padding-left: 13px; }
+    .glass-bar > .theme-switch::before { left: 0; }
+  }
   @media (max-width: 1099px) {
     .glass-bar { --compact-center-width: 64px; min-height: 72px; gap: 12px; padding: 14px 0; padding-top: max(14px, env(safe-area-inset-top)); }
     .is-scrolled .glass-bar { min-height: 56px; padding: 6px 12px; gap: 8px; }
