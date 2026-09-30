@@ -42,57 +42,60 @@ type NavigationItem = {
   label: string
   href?: string
   icon: string
+  iconWeight?: 'regular' | 'fill'
   dropdownSections?: NavigationDropdownSection[]
 }
 
 export const navigation: NavigationItem[] = [
-  { label: 'News', href: '/blog', icon: 'fa-newspaper' },
+  { label: 'News', href: '/blog', icon: 'ph-newspaper' },
   {
     label: 'Experience',
     href: '/experience',
-    icon: 'fa-star',
+    icon: 'ph-star',
+    iconWeight: 'fill',
     dropdownSections: [
       {
         heading: 'Capture Your Story',
         items: [
-          { label: 'Individual Photo Shooting', href: '/photoshootings', icon: 'fa-person' },
-          { label: 'Couple & Family Photo Shooting', href: '/photoshootings#couples', icon: 'fa-users' },
+          { label: 'Individual Photo Shooting', href: '/photoshootings', icon: 'ph-person' },
+          { label: 'Couple & Family Photo Shooting', href: '/photoshootings#couples', icon: 'ph-users' },
         ],
       },
       {
         heading: 'Tours',
         items: [
-          { label: 'Scenic Coast', href: '/experience/car-tours#tour-scenic', icon: 'fa-location-dot' },
-          { label: 'Peak Flavors', href: '/experience/car-tours#tour-tramonti', icon: 'fa-tree' },
-          { label: 'Scooter Photo Tour', href: '/experience/scooter', icon: 'fa-gauge-high' },
+          { label: 'Scenic Coast', href: '/experience/car-tours#tour-scenic', icon: 'ph-map-pin' },
+          { label: 'Peak Flavors', href: '/experience/car-tours#tour-tramonti', icon: 'ph-tree' },
+          { label: 'Scooter Photo Tour', href: '/experience/scooter', icon: 'ph-gauge' },
         ],
       },
     ],
   },
   {
     label: 'Coast Intel',
-    icon: 'fa-compass',
+    icon: 'ph-compass',
+    iconWeight: 'fill',
     dropdownSections: [
       {
         heading: 'Stay',
         items: [
-          { label: 'Apartments', href: '/apartments', icon: 'fa-house' },
+          { label: 'Apartments', href: '/apartments', icon: 'ph-house' },
         ],
       },
       {
         heading: 'Transport',
         items: [
-          { label: 'How to get here', href: '/how-to-get', icon: 'fa-route' },
-          { label: 'Ferry timetables', href: '/ferry-timetables', icon: 'fa-ship' },
-          { label: 'Bus & public transport', href: '/timetables', icon: 'fa-bus' },
-          { label: 'Parking tips', href: '/parking', icon: 'fa-square-parking' },
+          { label: 'How to get here', href: '/how-to-get', icon: 'ph-path' },
+          { label: 'Ferry timetables', href: '/ferry-timetables', icon: 'ph-boat' },
+          { label: 'Bus & public transport', href: '/timetables', icon: 'ph-bus' },
+          { label: 'Parking tips', href: '/parking', icon: 'ph-park' },
         ],
       },
       {
         heading: 'Field Notes',
         items: [
-          { label: 'Beach reviews', href: '/beaches', icon: 'fa-umbrella-beach' },
-          { label: 'Moto roads', href: '/moto', icon: 'fa-motorcycle' },
+          { label: 'Beach reviews', href: '/beaches', icon: 'ph-umbrella' },
+          { label: 'Moto roads', href: '/moto', icon: 'ph-motorcycle' },
         ],
       },
     ],

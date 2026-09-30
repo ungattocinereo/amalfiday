@@ -57,7 +57,7 @@ const heroTags = [
 
 const routeChoices = [
   {
-    icon: 'fa-bus',
+    icon: 'ph-bus',
     label: 'Best Value',
     title: 'Direct Shuttle',
     route: 'Pintour from Naples Airport',
@@ -67,7 +67,7 @@ const routeChoices = [
     href: '#tickets',
   },
   {
-    icon: 'fa-ship',
+    icon: 'ph-boat',
     label: 'Best Scenery',
     title: 'Train + Ferry',
     route: 'Alibus, train to Salerno, ferry',
@@ -77,7 +77,7 @@ const routeChoices = [
     href: '#routes',
   },
   {
-    icon: 'fa-location-dot',
+    icon: 'ph-map-pin',
     label: 'Positano',
     title: 'Ferry or Transfer',
     route: 'Beverello, Salerno, or private car',
@@ -87,7 +87,7 @@ const routeChoices = [
     href: '#destinations',
   },
   {
-    icon: 'fa-car-side',
+    icon: 'ph-car-profile',
     label: 'No Stress',
     title: 'Private Transfer',
     route: 'Door to door from arrivals',
@@ -286,7 +286,7 @@ const partyCosts = [
   {
     route: 'Pintour Direct Shuttle',
     tag: 'Direct airport shuttle',
-    icon: 'fa-bus',
+    icon: 'ph-bus',
     solo: 'EUR 20',
     couple: 'EUR 40',
     four: 'EUR 80',
@@ -295,7 +295,7 @@ const partyCosts = [
   {
     route: 'Train + Salerno Ferry',
     tag: 'Alibus, train, ferry',
-    icon: 'fa-train',
+    icon: 'ph-train',
     solo: 'EUR 22-35',
     couple: 'EUR 44-70',
     four: 'EUR 88-140',
@@ -304,7 +304,7 @@ const partyCosts = [
   {
     route: 'Naples Ferry Route',
     tag: 'Alibus, Beverello, ferry',
-    icon: 'fa-ship',
+    icon: 'ph-boat',
     solo: 'EUR 36-45',
     couple: 'EUR 72-90',
     four: 'EUR 144-180',
@@ -313,7 +313,7 @@ const partyCosts = [
   {
     route: 'Taxi Fixed Fare',
     tag: 'Door-to-door private car',
-    icon: 'fa-taxi',
+    icon: 'ph-taxi',
     solo: 'EUR 145-160',
     couple: 'EUR 145-160',
     four: 'EUR 145-160',
@@ -329,7 +329,7 @@ const finalMeterCards = [
     imageAlt: 'Porter and luggage on Amalfi Coast steps',
     imageWidth: 1200,
     imageHeight: 896,
-    icon: 'fa-ship',
+    icon: 'ph-boat',
     text: 'Ferries are easier than buses, but the port can still mean stairs, cobblestones, and a walk uphill.',
     note: 'Ask your host whether to walk, take a taxi, or book porter help.',
   },
@@ -340,7 +340,7 @@ const finalMeterCards = [
     imageAlt: 'Private transfer car on the Amalfi Coast road',
     imageWidth: 1200,
     imageHeight: 896,
-    icon: 'fa-car-side',
+    icon: 'ph-car-profile',
     text: 'In Positano, Atrani, and Ravello, a transfer can get close, but not always to the front door.',
     note: 'Confirm the closest legal drop-off before choosing a route.',
   },
@@ -351,7 +351,7 @@ const finalMeterCards = [
     imageAlt: 'Map guide illustration for Amalfi Coast arrival paths',
     imageWidth: 1024,
     imageHeight: 1024,
-    icon: 'fa-route',
+    icon: 'ph-path',
     text: 'A bus stop below your town can be correct on Google Maps and still be painful with suitcases.',
     note: 'Keep at least 45 minutes of buffer after landing.',
   },
@@ -359,22 +359,22 @@ const finalMeterCards = [
 
 const warnings = [
   {
-    icon: 'fa-map-location-dot',
+    icon: 'ph-map-pin-area',
     title: 'Google Maps can be technically right',
     text: 'It may suggest tight transfers, hidden station walks, or bus stops below your hotel. Check the luggage reality, not just the route line.',
   },
   {
-    icon: 'fa-people-arrows',
+    icon: 'ph-user-switch',
     title: 'July and August buses fill fast',
     text: 'SITA buses are useful and cheap, but standing-room boarding with suitcases is not a relaxing start to the trip.',
   },
   {
-    icon: 'fa-cloud-showers-heavy',
+    icon: 'ph-cloud-rain',
     title: 'Ferries are weather dependent',
     text: 'Always recheck ferry operators the day before and again in the morning, especially around rough sea or wind.',
   },
   {
-    icon: 'fa-person-walking-luggage',
+    icon: 'ph-person-simple-walk',
     title: 'The last 500 meters matter',
     text: 'Ports, bus stops, steps, and pedestrian lanes can be the hardest part. Ask your accommodation for the exact bag-friendly arrival point.',
   },
@@ -536,7 +536,7 @@ const airportJsonLd = [
   jsonLd={airportJsonLd}
 >
   <article class="airport-page">
-    <section class="airport-hero hero--dark">
+    <section class="airport-hero hero--dark hero-centered">
       <div class="airport-hero__slides" aria-hidden="true">
         {heroSlides.map((slide, i) => (
           <div class={`airport-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -554,8 +554,8 @@ const airportJsonLd = [
         ))}
       </div>
       <div class="airport-hero__vignette"></div>
-      <div class="airport-hero__content">
-        <div class="container">
+      <div class="airport-hero__content hero-content">
+        <div class="container hero-container">
           <div class="airport-hero__grid">
             <div class="airport-hero__copy">
               <span class="airport-eyebrow">Airport transfer planner 2026</span>
@@ -577,11 +577,11 @@ const airportJsonLd = [
               </div>
               <div class="airport-hero__actions">
                 <a class="airport-button airport-button--primary" href="#routes">
-                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  <i class="ph ph-path" aria-hidden="true"></i>
                   Compare Routes
                 </a>
                 <a class="airport-button airport-button--ghost" href="#tickets">
-                  <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                  <i class="ph ph-ticket" aria-hidden="true"></i>
                   Ticket Apps
                 </a>
               </div>
@@ -621,7 +621,7 @@ const airportJsonLd = [
           {routeChoices.map((choice) => (
             <a class="choice-card" href={choice.href}>
               <span class="choice-card__icon">
-                <i class={`fa-solid ${choice.icon}`} aria-hidden="true"></i>
+                <i class={`ph ${choice.icon}`} aria-hidden="true"></i>
               </span>
               <span class="choice-card__label">{choice.label}</span>
               <strong>{choice.title}</strong>
@@ -676,7 +676,7 @@ const airportJsonLd = [
                 <div class="route-card__divider"></div>
 
                 <div class="route-card__meta route-card__meta--time">
-                  <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                  <i class="ph ph-clock" aria-hidden="true"></i>
                   <div>
                     <strong>{route.timeMain}</strong>
                     <span>{route.timeNote}</span>
@@ -686,7 +686,7 @@ const airportJsonLd = [
                 <div class="route-card__divider"></div>
 
                 <div class="route-card__meta route-card__meta--cost">
-                  <i class="fa-solid fa-euro-sign" aria-hidden="true"></i>
+                  <i class="ph ph-currency-eur" aria-hidden="true"></i>
                   <span>{route.cost}</span>
                 </div>
               </div>
@@ -730,14 +730,14 @@ const airportJsonLd = [
                 <div class="ticket-card__divider"></div>
 
                 <div class="ticket-card__meta ticket-card__meta--buy">
-                  <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                  <i class="ph ph-ticket" aria-hidden="true"></i>
                   <strong>{app.buy}</strong>
                 </div>
 
                 <div class="ticket-card__divider"></div>
 
                 <div class="ticket-card__meta">
-                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  <i class="ph ph-path" aria-hidden="true"></i>
                   <span>{app.bestFor}</span>
                 </div>
               </div>
@@ -745,7 +745,7 @@ const airportJsonLd = [
               <div class="ticket-card__footer">
                 <p class="ticket-card__note">{app.note}</p>
                 <span class="ticket-card__action" aria-label={app.action}>
-                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                  <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
                 </span>
               </div>
             </a>
@@ -785,7 +785,7 @@ const airportJsonLd = [
                 <div class="destination-card__divider"></div>
 
                 <div class="destination-card__meta destination-card__meta--answer">
-                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  <i class="ph ph-path" aria-hidden="true"></i>
                   <strong>{destination.answer}</strong>
                 </div>
 
@@ -794,7 +794,7 @@ const airportJsonLd = [
                 <div class="destination-card__steps">
                   {destination.steps.map((step) => (
                     <div class="destination-card__step">
-                      <i class="fa-solid fa-check" aria-hidden="true"></i>
+                      <i class="ph ph-check" aria-hidden="true"></i>
                       <span>{step}</span>
                     </div>
                   ))}
@@ -826,7 +826,7 @@ const airportJsonLd = [
             <article class="cost-card">
               <div class="cost-card__body">
                 <div class="cost-card__header">
-                  <i class={`fa-solid ${item.icon}`} aria-hidden="true"></i>
+                  <i class={`ph ${item.icon}`} aria-hidden="true"></i>
                   <div>
                     <h3>{item.route}</h3>
                     <p class="cost-card__tag">{item.tag}</p>
@@ -882,28 +882,28 @@ const airportJsonLd = [
             <p>Pre-book a transfer unless your exact ferry or shuttle is confirmed and has enough buffer.</p>
             <a class="late-card__button" href="/contact">
               <span>Ask for Transfer Help</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
             </a>
           </aside>
         </div>
 
         <div class="late-signals" aria-label="Late arrival warning signals">
           <article class="late-signal">
-            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+            <i class="ph ph-moon" aria-hidden="true"></i>
             <div>
               <h3>Ferries and SITA thin out</h3>
               <p>After evening, one missed step can remove the whole public route.</p>
             </div>
           </article>
           <article class="late-signal">
-            <i class="fa-solid fa-suitcase-rolling" aria-hidden="true"></i>
+            <i class="ph ph-suitcase-rolling" aria-hidden="true"></i>
             <div>
               <h3>Luggage turns changes into work</h3>
               <p>Late station walks, bus queues, and stairs feel very different with suitcases.</p>
             </div>
           </article>
           <article class="late-signal">
-            <i class="fa-solid fa-bed" aria-hidden="true"></i>
+            <i class="ph ph-bed" aria-hidden="true"></i>
             <div>
               <h3>A night nearby can be smarter</h3>
               <p>Naples or Salerno may cost less than forcing a risky coastal connection.</p>
@@ -944,7 +944,7 @@ const airportJsonLd = [
                 <div class="final-meter-card__divider"></div>
 
                 <div class="final-meter-card__meta">
-                  <i class={`fa-solid ${card.icon}`} aria-hidden="true"></i>
+                  <i class={`ph ${card.icon}`} aria-hidden="true"></i>
                   <span>{card.text}</span>
                 </div>
               </div>
@@ -968,7 +968,7 @@ const airportJsonLd = [
         <div class="warning-grid">
           {warnings.map((warning) => (
             <article class="warning-card">
-              <i class={`fa-solid ${warning.icon}`} aria-hidden="true"></i>
+              <i class={`ph ${warning.icon}`} aria-hidden="true"></i>
               <h3>{warning.title}</h3>
               <p>{warning.text}</p>
             </article>
@@ -1033,7 +1033,7 @@ const airportJsonLd = [
               <a class="source-link" href={source.href} target="_blank" rel="noreferrer">
                 <strong>{source.label}</strong>
                 <span>{source.note}</span>
-                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
               </a>
             ))}
           </div>

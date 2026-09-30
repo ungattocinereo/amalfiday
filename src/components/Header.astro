@@ -22,47 +22,52 @@ const isActive = (item: (typeof navigation)[number]) =>
           <details class="nav-disclosure" data-desktop-disclosure>
             <summary class:list={['nav-link', 'nav-link--compact', 'nav-link--disclosure', { 'is-active': isActive(item) }]} aria-label={item.label}>
               <span class="nav-link__label" aria-hidden="true">{item.label}</span>
-              <i class={`fa-regular ${item.icon} nav-link__symbol`} aria-hidden="true"></i>
-              <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
+              <i class={`${item.iconWeight === 'fill' ? 'ph-fill' : 'ph'} ${item.icon} nav-link__symbol`} aria-hidden="true"></i>
+              <i class="ph ph-caret-down chevron" aria-hidden="true"></i>
               <span class="nav-link__hint" aria-hidden="true">{item.label}</span>
             </summary>
-            <div class="nav-sheet">
-              <div class="nav-sheet__intro">
-                <span class="eyebrow">Explore the coast</span>
-                <span class="nav-sheet__title">{item.label}</span>
-                {item.href && <a class="overview" href={item.href}>Discover all <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>}
-              </div>
-              <div class="nav-sheet__sections">
-                {item.dropdownSections.map((section) => (
-                  <div class="nav-section">
-                    <span class="eyebrow">{section.heading}</span>
-                    {section.items.map((link) => (
-                      <a class="sub-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
-                        <i class={`fa-solid ${link.icon}`} aria-hidden="true"></i><span>{link.label}</span>
-                      </a>
+            <div class="nav-reveal">
+              <span class="nav-reveal__line" aria-hidden="true"></span>
+              <div class="nav-reveal__clip">
+                <div class="nav-sheet">
+                  <div class="nav-sheet__intro">
+                    <span class="eyebrow">Explore the coast</span>
+                    <span class="nav-sheet__title">{item.label}</span>
+                    {item.href && <a class="overview" href={item.href}>Discover all <i class="ph ph-arrow-right" aria-hidden="true"></i></a>}
+                  </div>
+                  <div class="nav-sheet__sections">
+                    {item.dropdownSections.map((section) => (
+                      <div class="nav-section">
+                        <span class="eyebrow">{section.heading}</span>
+                        {section.items.map((link) => (
+                          <a class="sub-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                            <i class={`ph ${link.icon}`} aria-hidden="true"></i><span>{link.label}</span>
+                          </a>
+                        ))}
+                      </div>
                     ))}
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </details>
         ) : (
           <a class:list={['nav-link', 'nav-link--compact', { 'is-active': isActive(item) }]} href={item.href} aria-label={item.label} aria-current={isCurrent(item.href) ? 'page' : undefined}>
             <span class="nav-link__label" aria-hidden="true">{item.label}</span>
-            <i class={`fa-regular ${item.icon} nav-link__symbol`} aria-hidden="true"></i>
+            <i class={`${item.iconWeight === 'fill' ? 'ph-fill' : 'ph'} ${item.icon} nav-link__symbol`} aria-hidden="true"></i>
             <span class="nav-link__hint" aria-hidden="true">{item.label}</span>
           </a>
         ))}
         <a class:list={['nav-link', 'nav-link--compact', 'nav-link--contact', { 'is-active': isCurrent('/contact') }]} href="/contact" aria-label="Contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>
           <span class="nav-link__label" aria-hidden="true">Contact</span>
-          <i class="fa-regular fa-envelope nav-link__symbol" aria-hidden="true"></i>
+          <span class="nav-link__symbol nav-link__contact-label" aria-hidden="true">CONTACT</span>
           <span class="nav-link__hint" aria-hidden="true">Contact</span>
         </a>
       </nav>
       <div class="header__connect" aria-label="Social media">
         {headerSocials.map((item) => (
           <a class="icon-link" href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.label} (opens in a new tab)`} title={item.label}>
-            <i class={`fa-brands fa-${item.label.toLowerCase()}`} aria-hidden="true"></i>
+            <i class={`ph-light ph-${item.label.toLowerCase()}-logo`} aria-hidden="true"></i>
           </a>
         ))}
       </div>
@@ -74,8 +79,8 @@ const isActive = (item: (typeof navigation)[number]) =>
     <button class="theme-switch" type="button" role="switch" data-theme-toggle aria-label="Dark mode" aria-checked="false" title="Switch to dark theme">
       <span class="theme-switch__track" aria-hidden="true">
         <span class="theme-switch__thumb"></span>
-        <svg class="theme-switch__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" /></svg>
-        <svg class="theme-switch__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.3 14.2A8.5 8.5 0 0 1 9.8 3.7a8.5 8.5 0 1 0 10.5 10.5Z" /></svg>
+        <i class="ph ph-sun theme-switch__sun" aria-hidden="true"></i>
+        <i class="ph ph-moon theme-switch__moon" aria-hidden="true"></i>
       </span>
     </button>
   </div>
@@ -90,36 +95,36 @@ const isActive = (item: (typeof navigation)[number]) =>
       <button class="theme-switch" type="button" role="switch" data-theme-toggle aria-label="Dark mode" aria-checked="false" title="Switch to dark theme">
         <span class="theme-switch__track" aria-hidden="true">
           <span class="theme-switch__thumb"></span>
-          <svg class="theme-switch__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3.5" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" /></svg>
-          <svg class="theme-switch__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.3 14.2A8.5 8.5 0 0 1 9.8 3.7a8.5 8.5 0 1 0 10.5 10.5Z" /></svg>
+          <i class="ph ph-sun theme-switch__sun" aria-hidden="true"></i>
+          <i class="ph ph-moon theme-switch__moon" aria-hidden="true"></i>
         </span>
       </button>
     </div>
     <div class="mobile-menu__body">
       <div class="mobile-menu__intro"><span class="eyebrow">Amalfi coast, your way</span><span class="mobile-menu__title">A little closer to paradise.</span></div>
       <nav class="mobile-nav" aria-label="Mobile navigation">
-        <a class="mobile-nav__link" href="/" aria-current={isCurrent('/') ? 'page' : undefined}><span class="nav-number" aria-hidden="true">01</span><span>Home</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        <a class="mobile-nav__link" href="/" aria-current={isCurrent('/') ? 'page' : undefined}><span class="nav-number" aria-hidden="true">01</span><span>Home</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
         {navigation.map((item, index) => item.dropdownSections?.length ? (
           <details class="mobile-disclosure">
-            <summary class:list={['mobile-nav__link', { 'is-active': isActive(item) }]}><span class="nav-number" aria-hidden="true">0{index + 2}</span><span>{item.label}</span><i class="fa-solid fa-plus" aria-hidden="true"></i></summary>
+            <summary class:list={['mobile-nav__link', { 'is-active': isActive(item) }]}><span class="nav-number" aria-hidden="true">0{index + 2}</span><span>{item.label}</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
             <div class="mobile-subnav">
-              {item.href && <a class="overview" href={item.href}>Discover all {item.label.toLowerCase()} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>}
+              {item.href && <a class="overview" href={item.href}>Discover all {item.label.toLowerCase()} <i class="ph ph-arrow-right" aria-hidden="true"></i></a>}
               {item.dropdownSections.map((section) => (
                 <div class="nav-section">
                   <span class="eyebrow">{section.heading}</span>
-                  {section.items.map((link) => <a class="sub-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}><i class={`fa-solid ${link.icon}`} aria-hidden="true"></i><span>{link.label}</span></a>)}
+                  {section.items.map((link) => <a class="sub-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}><i class={`ph ${link.icon}`} aria-hidden="true"></i><span>{link.label}</span></a>)}
                 </div>
               ))}
             </div>
           </details>
         ) : (
-          <a class="mobile-nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}><span class="nav-number" aria-hidden="true">0{index + 2}</span><span>{item.label}</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="mobile-nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}><span class="nav-number" aria-hidden="true">0{index + 2}</span><span>{item.label}</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
         ))}
       </nav>
       <div class="mobile-connect">
-        <a class="mobile-contact" href="/contact"><span>Let’s plan your day</span><span>Get in touch <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span></a>
+        <a class="mobile-contact" href="/contact"><span>Let’s plan your day</span><span>Get in touch <i class="ph ph-arrow-square-out" aria-hidden="true"></i></span></a>
         <div class="mobile-socials">
-          {headerSocials.map((item) => <a href={item.href} target="_blank" rel="noreferrer"><i class={`fa-brands fa-${item.label.toLowerCase()}`} aria-hidden="true"></i>{item.label}<span class="sr-only"> (opens in a new tab)</span></a>)}
+          {headerSocials.map((item) => <a href={item.href} target="_blank" rel="noreferrer"><i class={`ph-light ph-${item.label.toLowerCase()}-logo`} aria-hidden="true"></i>{item.label}<span class="sr-only"> (opens in a new tab)</span></a>)}
         </div>
       </div>
     </div>
@@ -155,14 +160,77 @@ const isActive = (item: (typeof navigation)[number]) =>
       if (followSystem) setTheme(event.matches ? 'night' : 'day')
     })
 
+    const desktop = window.matchMedia('(min-width: 1100px)')
+    const hoverNavigation = window.matchMedia('(min-width: 1100px) and (hover: hover) and (pointer: fine)')
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const disclosures = [...header.querySelectorAll('[data-desktop-disclosure]')]
+    const disclosureTimers = new Map()
+    const clearDisclosureTimer = (details) => {
+      clearTimeout(disclosureTimers.get(details))
+      disclosureTimers.delete(details)
+    }
+    const closeDisclosure = (details, immediately = false) => {
+      clearDisclosureTimer(details)
+      details.classList.remove('is-visible')
+      if (!details.open) return
+      if (immediately || reducedMotion.matches) { details.open = false; return }
+      disclosureTimers.set(details, setTimeout(() => {
+        details.open = false
+        disclosureTimers.delete(details)
+      }, 360))
+    }
     const closeDisclosures = (except) => disclosures.forEach((details) => {
-      if (details !== except) details.open = false
+      if (details !== except) closeDisclosure(details, true)
     })
+    const positionDisclosure = (details) => {
+      const summaryBounds = details.querySelector('summary').getBoundingClientRect()
+      const barBounds = bar.getBoundingClientRect()
+      const revealBounds = details.querySelector('.nav-reveal').getBoundingClientRect()
+      // The expanded line stays at the trigger's underline and becomes the panel's top edge.
+      details.style.setProperty('--nav-reveal-top', `${summaryBounds.bottom - barBounds.top - 3}px`)
+      const origin = (summaryBounds.left + summaryBounds.width / 2 - revealBounds.left) / revealBounds.width
+      details.style.setProperty('--nav-reveal-origin', `${Math.max(0, Math.min(1, origin)) * 100}%`)
+    }
+    const openDisclosure = (details) => {
+      clearDisclosureTimer(details)
+      closeDisclosures(details)
+      if (details.open && details.classList.contains('is-visible')) return
+      details.open = true
+      positionDisclosure(details)
+      // Commit the retracted panel before expanding the line, then sliding the panel down.
+      details.querySelector('.nav-sheet').getBoundingClientRect()
+      details.classList.add('is-visible')
+    }
     disclosures.forEach((details) => {
-      details.querySelector('summary').addEventListener('click', () => closeDisclosures(details))
+      const summary = details.querySelector('summary')
+      const sheet = details.querySelector('.nav-sheet')
+      details.classList.add('is-enhanced')
+      details.addEventListener('pointerenter', (event) => {
+        if (hoverNavigation.matches && event.pointerType !== 'touch') openDisclosure(details)
+      })
+      details.addEventListener('pointerleave', () => {
+        if (!hoverNavigation.matches || sheet.contains(document.activeElement)) return
+        clearDisclosureTimer(details)
+        // Allow the pointer to cross the gap between the bar and the panel.
+        disclosureTimers.set(details, setTimeout(() => closeDisclosure(details), 180))
+      })
+      summary.addEventListener('click', (event) => {
+        event.preventDefault()
+        if (hoverNavigation.matches && event.detail > 0 && event.pointerType !== 'touch') {
+          openDisclosure(details)
+          return
+        }
+        if (details.classList.contains('is-visible')) closeDisclosure(details)
+        else openDisclosure(details)
+      })
+      summary.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowDown') return
+        event.preventDefault()
+        openDisclosure(details)
+        sheet.querySelector('a')?.focus({ preventScroll: true })
+      })
       details.addEventListener('focusout', (event) => {
-        if (!details.contains(event.relatedTarget)) details.open = false
+        if (!details.contains(event.relatedTarget) && !details.matches(':hover')) closeDisclosure(details)
       })
     })
     document.addEventListener('click', (event) => {
@@ -179,8 +247,6 @@ const isActive = (item: (typeof navigation)[number]) =>
 
     const menu = header.querySelector('#mobile-menu')
     const menuToggle = header.querySelector('.menu-toggle')
-    const desktop = window.matchMedia('(min-width: 1100px)')
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     let previousOverflow = ''
     let menuState = 'closed'
     let menuFrame = 0
@@ -258,20 +324,26 @@ const isActive = (item: (typeof navigation)[number]) =>
       closeDisclosures()
       if (menu.open) closeMenu(true)
     })
+    hoverNavigation.addEventListener('change', () => closeDisclosures())
     // Read the sections behind the fixed bar, ignoring the navigation itself.
     // Photo heroes declare their dark treatment. All other sections use their
     // computed background to choose light or dark navigation lettering.
     const bar = header.querySelector('.glass-bar')
-    // Use the final icon sizes so the capsule does not chase animated widths.
+    // Use the final control sizes so the capsule does not chase animated widths.
     const measureCompactWidth = () => {
       if (!desktop.matches) return
       const style = getComputedStyle(header)
       const size = (property) => parseFloat(style.getPropertyValue(property))
       const linkSize = size('--compact-link-size')
       const disclosureSize = size('--compact-disclosure-size')
+      const contactSize = size('--compact-contact-size')
       const links = [...bar.querySelector('.desktop-nav').children]
       const socials = [...bar.querySelector('.header__connect').children]
-      const linksWidth = links.reduce((width, item) => width + (item.matches('.nav-disclosure') ? disclosureSize : linkSize), 0)
+      const linksWidth = links.reduce((width, item) => {
+        if (item.matches('.nav-disclosure')) return width + disclosureSize
+        if (item.matches('.nav-link--contact')) return width + contactSize
+        return width + linkSize
+      }, 0)
       const centerWidth = linksWidth + Math.max(0, links.length - 1) * size('--compact-nav-gap')
         + size('--compact-group-gap') + socials.length * linkSize + Math.max(0, socials.length - 1) * size('--compact-nav-gap')
       header.style.setProperty('--compact-center-width', `${centerWidth}px`)
@@ -327,6 +399,7 @@ const isActive = (item: (typeof navigation)[number]) =>
       const scrolled = window.scrollY > (header.classList.contains('is-scrolled') ? 16 : 48)
       header.classList.toggle('is-scrolled', scrolled)
       const bounds = bar.getBoundingClientRect()
+      disclosures.filter((details) => details.open).forEach(positionDisclosure)
       const y = Math.min(bounds.top + bounds.height / 2, window.innerHeight - 1)
       const tones = [0.12, 0.5, 0.88].map((position) => {
         const underneath = document.elementsFromPoint(bounds.left + bounds.width * position, y)
@@ -347,6 +420,9 @@ const isActive = (item: (typeof navigation)[number]) =>
     }
     window.addEventListener('scroll', scheduleSurface, { passive: true })
     window.addEventListener('resize', () => { measureCompactWidth(); scheduleSurface() }, { passive: true })
+    bar.addEventListener('transitionend', (event) => {
+      if (event.target === bar && event.propertyName === 'width') scheduleSurface()
+    })
     window.addEventListener('pageshow', scheduleSurface)
     window.addEventListener('load', scheduleSurface, { once: true })
     menu.addEventListener('close', scheduleSurface)
@@ -395,14 +471,15 @@ const isActive = (item: (typeof navigation)[number]) =>
     --morph-ease: cubic-bezier(0.33, 1, 0.68, 1);
     --compact-link-size: 44px;
     --compact-disclosure-size: 64px;
+    --compact-contact-size: 76px;
     --compact-nav-gap: 4px;
     --compact-group-gap: 25px;
-    --compact-center-width: 345px;
+    --compact-center-width: 377px;
     position: fixed;
     z-index: 30;
     top: 0;
     inset-inline: 0;
-    padding: 0 max(24px, env(safe-area-inset-right)) 0 max(24px, env(safe-area-inset-left));
+    padding: 0 max(var(--page-gutter), env(safe-area-inset-right)) 0 max(var(--page-gutter), env(safe-area-inset-left));
     color: var(--glass-ink);
     transition: padding-top var(--morph-duration) var(--morph-ease);
   }
@@ -414,7 +491,7 @@ const isActive = (item: (typeof navigation)[number]) =>
   .header.is-scrolled { padding-top: max(12px, env(safe-area-inset-top)); }
   .glass-bar {
     width: 100%;
-    max-width: min(100%, calc(var(--container-max) - 48px));
+    max-width: min(100%, var(--content-max));
     margin-inline: auto;
     position: relative;
     display: grid;
@@ -518,7 +595,7 @@ const isActive = (item: (typeof navigation)[number]) =>
   .is-scrolled .header__center { gap: var(--compact-group-gap); }
   .is-scrolled .desktop-nav { gap: var(--compact-nav-gap); }
   .is-scrolled .nav-link, .is-scrolled .icon-link { border-radius: 22px; }
-  .is-scrolled .nav-sheet { top: calc(100% + 10px); border-radius: 24px; }
+  .is-scrolled .nav-sheet, .is-scrolled .nav-reveal__clip { border-radius: 0 0 24px 24px; }
   .nav-disclosure { height: 44px; }
   .header__connect { position: relative; gap: 4px; height: 44px; }
   .header__connect::before, .glass-bar > .theme-switch::before { content: ''; position: absolute; top: 50%; width: 1px; height: 18px; transform: translateY(-50%); background: var(--glass-ink); opacity: 0; pointer-events: none; transition: opacity 240ms ease; }
@@ -541,6 +618,7 @@ const isActive = (item: (typeof navigation)[number]) =>
   .is-scrolled .nav-disclosure[open] > .nav-link .nav-link__hint { opacity: 0; visibility: hidden; transition-delay: 0ms; }
   .nav-link::after { content: ''; position: absolute; height: 2px; bottom: 3px; left: 14px; right: 14px; background: var(--glass-accent); transform: scaleX(0); transform-origin: left; transition: transform 180ms ease; }
   .nav-link.is-active::after, details[open] > .nav-link::after { transform: scaleX(1); }
+  .nav-disclosure.is-enhanced[open] > .nav-link::after { display: none; }
   .nav-link.is-active, details[open] > .nav-link { background: transparent; }
   summary { list-style: none; }
   summary::-webkit-details-marker { display: none; }
@@ -552,14 +630,21 @@ const isActive = (item: (typeof navigation)[number]) =>
   .header .theme-switch:focus-visible { border-radius: 999px; }
   .theme-switch__track { flex-shrink: 0; position: relative; display: block; width: 44px; height: 24px; border-radius: 999px; background: color-mix(in srgb, currentColor 6%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent); transition: background 240ms ease, box-shadow 240ms ease; }
   .theme-switch__thumb { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: color-mix(in srgb, currentColor 88%, transparent); transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background 240ms ease; }
-  .theme-switch svg { position: absolute; top: 2px; width: 20px; height: 20px; padding: 3px; transition: color 240ms ease, opacity 240ms ease; }
+  .theme-switch__track > i { position: absolute; top: 2px; display: grid; place-items: center; width: 20px; height: 20px; font-size: 14px; transition: color 240ms ease, opacity 240ms ease; }
   .theme-switch__sun { left: 2px; color: var(--glass-solid); }
   .theme-switch__moon { right: 2px; opacity: 0.55; }
   :global([data-theme='night']) .theme-switch__thumb { transform: translateX(20px); }
   :global([data-theme='night']) .theme-switch__sun { color: inherit; opacity: 0.55; }
   :global([data-theme='night']) .theme-switch__moon { color: var(--glass-solid); opacity: 1; }
   .theme-switch:active .theme-switch__thumb { scale: 0.9; }
-  .nav-sheet { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); width: min(760px, calc(100vw - 64px)); max-height: calc(100dvh - 100px); overflow-y: auto; display: grid; grid-template-columns: 190px 1fr; padding: 32px; gap: 28px; border: 0; border-radius: 0 0 6px 6px; background: var(--glass-solid); color: var(--glass-ink); box-shadow: 0 22px 45px rgba(10, 20, 25, 0.12); animation: reveal 180ms ease-out; }
+  .nav-reveal { position: absolute; z-index: 3; top: var(--nav-reveal-top, calc(100% - 22px)); left: 50%; width: min(760px, calc(100vw - 64px)); transform: translateX(-50%); pointer-events: none; filter: drop-shadow(0 16px 24px rgba(10, 20, 25, 0.12)); }
+  .nav-reveal__line { display: block; height: 2px; background: var(--glass-accent); transform-origin: var(--nav-reveal-origin, 50%) 50%; transition: transform 140ms cubic-bezier(0.4, 0, 0.2, 1) 220ms; }
+  .nav-reveal__clip { overflow: clip; border-radius: 0 0 6px 6px; }
+  .nav-sheet { position: relative; max-height: calc(100dvh - 100px); overflow-y: auto; display: grid; grid-template-columns: 190px 1fr; padding: 32px; gap: 28px; border: 0; border-radius: 0 0 6px 6px; background: var(--glass-solid); color: var(--glass-ink); pointer-events: auto; transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .nav-disclosure.is-enhanced .nav-reveal__line { transform: scaleX(0); }
+  .nav-disclosure.is-enhanced .nav-sheet { transform: translateY(-100%); }
+  .nav-disclosure.is-visible .nav-reveal__line { transform: scaleX(1); transition-delay: 0ms; }
+  .nav-disclosure.is-visible .nav-sheet { transform: translateY(0); transition-delay: 160ms; }
   .nav-sheet__intro { display: flex; flex-direction: column; align-items: flex-start; padding-right: 20px; border-right: 1px solid var(--glass-line); }
   .eyebrow { display: block; font-family: var(--font-mono); font-size: 10px; line-height: 1.6; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--glass-muted); }
   .nav-sheet__title { margin: 15px 0 24px; font-family: var(--font-display); font-size: 25px; line-height: 1.35; }
@@ -629,8 +714,13 @@ const isActive = (item: (typeof navigation)[number]) =>
     .mobile-nav__link:hover { background: var(--glass-hover); color: var(--glass-ink); }
     .mobile-socials a:hover { text-decoration: underline; text-decoration-color: var(--glass-accent); text-underline-offset: 5px; }
   }
-  @keyframes reveal { from { opacity: 0; margin-top: -5px; } to { opacity: 1; margin-top: 0; } }
   @media (min-width: 1100px) {
+    .nav-link__contact-label { width: 64px; height: 26px; border: 1px solid var(--glass-ink); border-radius: 999px; background-color: transparent; color: var(--glass-ink); font-family: var(--font-mono); font-size: 9px; font-weight: 500; letter-spacing: 0.12em; padding-left: 0.12em; transition: opacity 200ms ease, transform var(--morph-duration) var(--morph-ease), background-color 280ms ease, color 280ms ease, border-color 280ms ease; }
+    .is-scrolled .nav-link--contact { width: var(--compact-contact-size); background: transparent; }
+    .is-scrolled .nav-link__contact-label { transition-delay: 100ms, 100ms, 0ms, 0ms, 0ms; }
+    .is-scrolled .nav-link--contact::after, .is-scrolled .nav-link--contact .nav-link__hint { display: none; }
+    .header.is-scrolled .nav-link--contact:focus-visible { border-radius: 999px; }
+    .is-scrolled .nav-link--contact:is(:hover, :focus-visible) .nav-link__contact-label { background-color: var(--glass-ink); color: var(--glass-solid); }
     .is-scrolled .glass-bar { grid-template-columns: 44px auto 57px; width: calc(var(--compact-center-width) + 149px); gap: 12px; }
     .is-scrolled .header__connect::before, .is-scrolled .glass-bar > .theme-switch::before { opacity: 0.18; }
     .is-scrolled .glass-bar > .theme-switch { width: 57px; padding-left: 13px; }

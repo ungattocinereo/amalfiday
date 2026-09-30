@@ -52,10 +52,10 @@ const { packages } = Astro.props
         </>)}
       </div>
       <ul class="package-card__features">
-        <li><i class="fa-solid fa-route" aria-hidden="true"></i><span>{pkg.route}</span></li>
-        <li><i class="fa-solid fa-shirt" aria-hidden="true"></i><span>{pkg.outfits}</span></li>
-        <li><i class={`fa-solid ${pkg.previews ? 'fa-bolt' : 'fa-cloud-arrow-down'}`} aria-hidden="true"></i><span>{pkg.previews ? `${pkg.previews} previews within 24 hours` : 'Private online gallery'}</span></li>
-        <li><i class="fa-solid fa-calendar-check" aria-hidden="true"></i><span>All photos within 7 business days</span></li>
+        <li><i class="ph ph-path" aria-hidden="true"></i><span>{pkg.route}</span></li>
+        <li><i class="ph ph-t-shirt" aria-hidden="true"></i><span>{pkg.outfits}</span></li>
+        <li><i class={`ph ${pkg.previews ? 'ph-lightning' : 'ph-cloud-arrow-down'}`} aria-hidden="true"></i><span>{pkg.previews ? `${pkg.previews} previews within 24 hours` : 'Private online gallery'}</span></li>
+        <li><i class="ph ph-calendar-check" aria-hidden="true"></i><span>All photos within 7 business days</span></li>
       </ul>
 
       <p class="package-card__ideal">Made for <span>{pkg.idealFor.toLowerCase()}.</span></p>
@@ -64,15 +64,15 @@ const { packages } = Astro.props
         href={`/contact?${new URLSearchParams({ service: 'Photoshooting', package: pkg.id })}#contact-form`}
         aria-label={`Choose ${pkg.name}, €${pkg.price}, ${pkg.durationMinutes} minutes and ${pkg.photoCount}+ retouched photos`}
       >
-        Choose {pkg.tier}<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        Choose {pkg.tier}<i class="ph ph-arrow-right" aria-hidden="true"></i>
       </a>
     </article>
   ))}
 </div>
 
 <div class="package-assurance">
-  <p><i class="fa-solid fa-camera" aria-hidden="true"></i> Posing guidance &amp; professional retouching in every session</p>
-  <p>Base prices include Atrani &amp; Amalfi. <a href="#travel-fees">See travel fees for other towns <span aria-hidden="true">↗</span></a></p>
+  <p><i class="ph ph-camera" aria-hidden="true"></i> Posing guidance &amp; professional retouching in every session</p>
+  <p>Base prices include Atrani &amp; Amalfi. <a href="#travel-fees">See travel fees for other towns <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></p>
 </div>
 
 <style>

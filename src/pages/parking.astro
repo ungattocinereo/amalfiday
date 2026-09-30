@@ -220,28 +220,28 @@ const towns = [
 
 const strategies = [
   {
-    icon: 'fa-location-dot',
+    icon: 'ph-map-pin',
     title: 'Park & Ride',
     accent: 'Strategy',
     description:
       'Leave your car in a cheaper, high-capacity location (Salerno, Vietri sul Mare, or Sorrento) and travel along the coast by ferry or SITA bus. In peak season, the problem is often not price but availability.',
   },
   {
-    icon: 'fa-clock-rotate-left',
+    icon: 'ph-clock-counter-clockwise',
     title: 'Arrive Early',
     accent: 'Before 9 AM',
     description:
       'After 10:00 in summer, even paid garages in Positano and Amalfi are full. Early arrival is the single most effective trick for securing a spot.',
   },
   {
-    icon: 'fa-mobile-screen-button',
+    icon: 'ph-device-mobile',
     title: 'Use EasyPark App',
     accent: 'Remotely',
     description:
       'Pay and extend parking time remotely in blue zones across Italy. No need to run back to the meter. Works in most Amalfi Coast towns.',
   },
   {
-    icon: 'fa-house-circle-check',
+    icon: 'ph-house-line',
     title: 'Book Hotels with Parking',
     accent: 'Included',
     description:
@@ -251,19 +251,19 @@ const strategies = [
 
 const warnings = [
   {
-    icon: 'fa-triangle-exclamation',
+    icon: 'ph-warning',
     text: 'Never park on the shoulder of SS163 (the coastal highway). Mass towing operations happen regularly. Fine + towing = 150-250+.',
   },
   {
-    icon: 'fa-square',
+    icon: 'ph-square',
     text: 'White lines = residents only. Yellow lines = local services only. Parking there guarantees a fine. Always look for "Solo Residenti" signs.',
   },
   {
-    icon: 'fa-gas-pump',
+    icon: 'ph-gas-pump',
     text: 'Almost no gas stations on the coast. Fill up in Salerno or before entering the coastal road.',
   },
   {
-    icon: 'fa-money-bill-wave',
+    icon: 'ph-money-wavy',
     text: 'Many parking meters and small lots are cash-only. Keep small bills and coins handy.',
   },
 ]
@@ -336,7 +336,7 @@ const parkingJsonLd = [
   jsonLd={parkingJsonLd}
 >
   <!-- Hero -->
-  <section class="parking-hero hero--dark">
+  <section class="parking-hero hero--dark hero-centered">
     <CldImage
       class="parking-hero__image"
       src={heroImage}
@@ -347,10 +347,10 @@ const parkingJsonLd = [
       sizes="100vw"
     />
     <div class="parking-hero__veil" aria-hidden="true"></div>
-    <div class="container parking-hero__content">
+    <div class="container parking-hero__content hero-content hero-container">
       <div class="parking-hero__copy">
         <span class="badge parking-hero__badge">
-          <i class="fa-solid fa-car"></i>
+          <i class="ph ph-car" aria-hidden="true"></i>
           Updated 2026
         </span>
         <h1>
@@ -361,11 +361,11 @@ const parkingJsonLd = [
         </p>
         <div class="parking-hero__actions">
           <a class="parking-hero__cta" href="#prices">
-            <i class="fa-solid fa-circle-down"></i>
+            <i class="ph ph-arrow-circle-down" aria-hidden="true"></i>
             See prices by town
           </a>
           <a class="parking-hero__cta parking-hero__cta--ghost" href="#ztl">
-            <i class="fa-solid fa-video"></i>
+            <i class="ph ph-video-camera" aria-hidden="true"></i>
             ZTL zones
           </a>
         </div>
@@ -373,7 +373,7 @@ const parkingJsonLd = [
       <div class="parking-hero__stats">
         <div class="parking-hero__stat">
           <div class="parking-hero__stat-icon">
-            <i class="fa-solid fa-location-dot"></i>
+            <i class="ph ph-map-pin" aria-hidden="true"></i>
           </div>
           <div class="parking-hero__stat-text">
             <span class="parking-hero__stat-num">11</span>
@@ -382,7 +382,7 @@ const parkingJsonLd = [
         </div>
         <div class="parking-hero__stat">
           <div class="parking-hero__stat-icon">
-            <i class="fa-solid fa-euro-sign"></i>
+            <i class="ph ph-currency-eur" aria-hidden="true"></i>
           </div>
           <div class="parking-hero__stat-text">
             <span class="parking-hero__stat-num">1.50–12</span>
@@ -391,7 +391,7 @@ const parkingJsonLd = [
         </div>
         <div class="parking-hero__stat">
           <div class="parking-hero__stat-icon">
-            <i class="fa-solid fa-calendar-check"></i>
+            <i class="ph ph-calendar-check" aria-hidden="true"></i>
           </div>
           <div class="parking-hero__stat-text">
             <span class="parking-hero__stat-num">2026</span>
@@ -462,7 +462,7 @@ const parkingJsonLd = [
           <article class="town-card" id={town.name.toLowerCase().replace(/\s+/g, '-')}>
             <div class="town-card__header">
               <div class="town-card__icon">
-                <i class={`fa-solid ${getCityIcon(town.name)}`} aria-hidden="true"></i>
+                <i class={`ph ${getCityIcon(town.name)}`} aria-hidden="true"></i>
               </div>
               <div>
                 <h3>{town.name}</h3>
@@ -496,7 +496,7 @@ const parkingJsonLd = [
                   <p class="parking-option__notes">{opt.notes}</p>
                   {opt.restrictions && (
                     <p class="parking-option__restrictions">
-                      <i class="fa-solid fa-circle-exclamation"></i>
+                      <i class="ph ph-warning-circle" aria-hidden="true"></i>
                       {opt.restrictions}
                     </p>
                   )}
@@ -504,7 +504,7 @@ const parkingJsonLd = [
               ))}
             </div>
             <div class="town-card__tip">
-              <i class="fa-solid fa-lightbulb"></i>
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
               <span>{town.tip}</span>
             </div>
           </article>
@@ -519,7 +519,7 @@ const parkingJsonLd = [
       <div class="ztl-grid">
         <div class="ztl-content">
           <span class="parking-eyebrow">
-            <i class="fa-solid fa-video"></i>
+            <i class="ph ph-video-camera" aria-hidden="true"></i>
             Critical to know
           </span>
           <h2>
@@ -530,29 +530,29 @@ const parkingJsonLd = [
           </p>
           <div class="ztl-checks">
             <div class="ztl-check">
-              <i class="fa-solid fa-clock"></i>
+              <i class="ph ph-clock" aria-hidden="true"></i>
               <span><strong>Restriction times</strong> are posted on signs at each zone entrance. Read them carefully.</span>
             </div>
             <div class="ztl-check">
-              <i class="fa-solid fa-car"></i>
+              <i class="ph ph-car" aria-hidden="true"></i>
               <span><strong>Vehicle class</strong> restrictions apply. Euro 0-3 vehicles are typically prohibited.</span>
             </div>
             <div class="ztl-check">
-              <i class="fa-solid fa-house"></i>
+              <i class="ph ph-house" aria-hidden="true"></i>
               <span><strong>Hotel guests</strong> with pre-registration can be exempted. Contact your hotel or ask at reception.</span>
             </div>
           </div>
         </div>
         <div class="ztl-alert-card">
           <div class="ztl-alert-icon">
-            <i class="fa-solid fa-shield-halved"></i>
+            <i class="ph ph-shield-check" aria-hidden="true"></i>
           </div>
           <h3>Fine: from 150 and up</h3>
           <p>
             Violations are punished with a fine starting from 150 euros plus towing expenses if necessary.
           </p>
           <div class="ztl-tip">
-            <i class="fa-solid fa-circle-info"></i>
+            <i class="ph ph-info" aria-hidden="true"></i>
             <p>
               <strong>Good to know:</strong> Even if you've already left the hotel, your accommodation can usually register your plate retroactively. Guest registration documents are typically collected by the commune within 1-2 months.
             </p>
@@ -574,7 +574,7 @@ const parkingJsonLd = [
         {strategies.map((s) => (
           <div class="strategy-card">
             <div class="strategy-icon">
-              <i class={`fa-solid ${s.icon}`}></i>
+              <i class={`ph ${s.icon}`} aria-hidden="true"></i>
             </div>
             <h3>
               {s.title} <span class="accent-italic">{s.accent}</span>
@@ -597,7 +597,7 @@ const parkingJsonLd = [
       <div class="routes-grid">
         <article class="route-card route-card--recommended">
           <div class="route-card__label">Recommended</div>
-          <div class="route-card__icon"><i class="fa-solid fa-star"></i></div>
+          <div class="route-card__icon"><i class="ph ph-star" aria-hidden="true"></i></div>
           <h3>Budget + Comfort</h3>
           <p class="route-card__base">Base: <strong>Maiori or Minori</strong></p>
           <ul>
@@ -608,7 +608,7 @@ const parkingJsonLd = [
           </ul>
         </article>
         <article class="route-card">
-          <div class="route-card__icon"><i class="fa-solid fa-ship"></i></div>
+          <div class="route-card__icon"><i class="ph ph-boat" aria-hidden="true"></i></div>
           <h3>No Car Needed</h3>
           <p class="route-card__base">Base: <strong>Salerno or Vietri sul Mare</strong></p>
           <ul>
@@ -619,7 +619,7 @@ const parkingJsonLd = [
           </ul>
         </article>
         <article class="route-card">
-          <div class="route-card__icon"><i class="fa-solid fa-car"></i></div>
+          <div class="route-card__icon"><i class="ph ph-car" aria-hidden="true"></i></div>
           <h3>Full Mobility</h3>
           <p class="route-card__base">Base: <strong>Hotel with parking in Ravello</strong></p>
           <ul>
@@ -645,7 +645,7 @@ const parkingJsonLd = [
         {warnings.map((w) => (
           <div class="warning-item">
             <div class="warning-icon">
-              <i class={`fa-solid ${w.icon}`}></i>
+              <i class={`ph ${w.icon}`} aria-hidden="true"></i>
             </div>
             <p>{w.text}</p>
           </div>
@@ -675,10 +675,10 @@ const parkingJsonLd = [
             />
           </div>
           <div class="alt-card__content">
-            <h3><i class="fa-solid fa-water"></i> TravelMar Ferries</h3>
+            <h3><i class="ph ph-waves" aria-hidden="true"></i> TravelMar Ferries</h3>
             <p>Connect Salerno, Cetara, Maiori, Minori, Amalfi, and Positano. Running April through October. From 5 per ride.</p>
             <a class="alt-card__link" href="/timetables">
-              <i class="fa-solid fa-arrow-right"></i>
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
               See ferry timetables
             </a>
           </div>
@@ -692,10 +692,10 @@ const parkingJsonLd = [
             />
           </div>
           <div class="alt-card__content">
-            <h3><i class="fa-solid fa-bus"></i> SITA Buses</h3>
+            <h3><i class="ph ph-bus" aria-hidden="true"></i> SITA Buses</h3>
             <p>Cover the entire coast for 1.50-2.40 per ride. Frequent service. Can be very crowded in summer, but reliable year-round.</p>
             <a class="alt-card__link" href="/timetables">
-              <i class="fa-solid fa-arrow-right"></i>
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
               See bus timetables
             </a>
           </div>
@@ -715,33 +715,33 @@ const parkingJsonLd = [
           </h2>
           <div class="apps-list">
             <a class="app-item" href="https://www.easypark.com/" target="_blank" rel="noreferrer">
-              <div class="app-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+              <div class="app-icon"><i class="ph ph-device-mobile" aria-hidden="true"></i></div>
               <div>
                 <strong>EasyPark App</strong>
                 <span>Pay & extend parking remotely across Italy</span>
               </div>
-              <i class="fa-solid fa-arrow-up-right-from-square app-item__arrow"></i>
+              <i class="ph ph-arrow-square-out app-item__arrow" aria-hidden="true"></i>
             </a>
             <a class="app-item" href="https://www.travelmar.it/en/index" target="_blank" rel="noreferrer">
-              <div class="app-icon"><i class="fa-solid fa-ship"></i></div>
+              <div class="app-icon"><i class="ph ph-boat" aria-hidden="true"></i></div>
               <div>
                 <strong>TravelMar Website</strong>
                 <span>Ferry schedules and ticket booking</span>
               </div>
-              <i class="fa-solid fa-arrow-up-right-from-square app-item__arrow"></i>
+              <i class="ph ph-arrow-square-out app-item__arrow" aria-hidden="true"></i>
             </a>
             <a class="app-item" href="/timetables">
-              <div class="app-icon"><i class="fa-solid fa-clock"></i></div>
+              <div class="app-icon"><i class="ph ph-clock" aria-hidden="true"></i></div>
               <div>
                 <strong>All timetables</strong>
                 <span>Our dedicated page for public transport timetables</span>
               </div>
-              <i class="fa-solid fa-arrow-right app-item__arrow"></i>
+              <i class="ph ph-arrow-right app-item__arrow" aria-hidden="true"></i>
             </a>
           </div>
         </div>
         <div class="contacts-card">
-          <h3><i class="fa-solid fa-phone"></i> Useful contacts</h3>
+          <h3><i class="ph ph-phone" aria-hidden="true"></i> Useful contacts</h3>
           <div class="contact-row">
             <span class="contact-label">Luna Rossa (Amalfi)</span>
             <a href="tel:+39089871082" class="contact-phone">+39 089 871 082</a>
@@ -749,7 +749,7 @@ const parkingJsonLd = [
           <div class="contact-row">
             <span class="contact-label">Parcheggio MA.CRI (Positano)</span>
             <a href="https://wa.me/393338146221" class="contact-phone" target="_blank" rel="noreferrer">
-              <i class="fa-brands fa-whatsapp"></i> +39 333 814 6221
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> +39 333 814 6221
             </a>
           </div>
         </div>
@@ -767,7 +767,7 @@ const parkingJsonLd = [
       <div class="faq-list">
         {parkingFaqs.map((f) => (
           <details class="faq-item">
-            <summary class="faq-q">{f.q}</summary>
+            <summary class="faq-q">{f.q}<i class="ph ph-plus" aria-hidden="true"></i></summary>
             <p class="faq-a">{f.a}</p>
           </details>
         ))}
@@ -1958,8 +1958,7 @@ const parkingJsonLd = [
     display: none;
   }
 
-  .faq-q::after {
-    content: '+';
+  .faq-q > i {
     font-size: 1.4rem;
     line-height: 1;
     color: var(--color-accent);
@@ -1967,7 +1966,7 @@ const parkingJsonLd = [
     transition: transform 0.2s ease;
   }
 
-  .faq-item[open] .faq-q::after {
+  .faq-item[open] .faq-q > i {
     transform: rotate(45deg);
   }
 

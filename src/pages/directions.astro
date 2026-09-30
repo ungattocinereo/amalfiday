@@ -48,7 +48,7 @@ const heroSlides = [
 const transportSteps = [
   {
     step: '01',
-    icon: 'fa-train',
+    icon: 'ph-train',
     title: 'Naples',
     accent: 'to Salerno',
     mapSrc:
@@ -56,13 +56,13 @@ const transportSteps = [
     description:
       'Start at Napoli Centrale and take a train to Salerno. Multiple trains run daily and the ride takes roughly the same time on all of them. Check schedules and buy tickets at trenitalia.com. Coming from other Italian cities? italotreno.it offers faster, more comfortable options.',
     links: [
-      { text: 'trenitalia.com', url: 'https://www.trenitalia.com', icon: 'fa-up-right-from-square' },
-      { text: 'italotreno.it', url: 'https://www.italotreno.it/en', icon: 'fa-up-right-from-square' },
+      { text: 'trenitalia.com', url: 'https://www.trenitalia.com', icon: 'ph-arrow-square-out' },
+      { text: 'italotreno.it', url: 'https://www.italotreno.it/en', icon: 'ph-arrow-square-out' },
     ],
   },
   {
     step: '02',
-    icon: 'fa-water',
+    icon: 'ph-waves',
     title: 'Salerno',
     accent: 'to Amalfi',
     mapSrc: null,
@@ -73,7 +73,7 @@ const transportSteps = [
 
 const ferryBus = [
   {
-    icon: 'fa-water',
+    icon: 'ph-waves',
     mode: 'Ferry',
     accent: 'scenic route',
     time: '~35 min',
@@ -85,7 +85,7 @@ const ferryBus = [
     link: { text: 'Ferry timetables (PDF)', url: '/files/FERRY-timetables.pdf' },
   },
   {
-    icon: 'fa-bus',
+    icon: 'ph-bus',
     mode: 'Bus',
     accent: 'budget route',
     time: '~75 min',
@@ -111,7 +111,7 @@ const walkingMapSrc =
 
 const drivingRoutes = [
   {
-    icon: 'fa-signs-post',
+    icon: 'ph-signpost',
     name: 'Via Vietri Sul Mare',
     tag: 'Recommended',
     tagColor: 'green',
@@ -120,7 +120,7 @@ const drivingRoutes = [
       'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d193406.8796035415!2d14.368275172026657!3d40.7624097678548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x133ba81e8986d9e3%3A0xbf48c58ba6c9356d!2sNaples+International+Airport%2C+Viale+F.+Ruffo+di+Calabria%2C+80144+Napoli+NA!3m2!1d40.884749299999996!2d14.289242999999999!4m5!1s0x133bc1c1b213bded%3A0x1c97dd0bbf1cf787!2sVietri+Sul+Mare%2C+Province+of+Salerno!3m2!1d40.667944899999995!2d14.7278743!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C+Province+of+Salerno!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1549449540895',
   },
   {
-    icon: 'fa-leaf',
+    icon: 'ph-leaf',
     name: 'Via Sorrento',
     tag: 'Scenic',
     tagColor: 'blue',
@@ -129,7 +129,7 @@ const drivingRoutes = [
       'https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d193444.73588044615!2d14.306266970445343!3d40.749398424498246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x133ba81e8986d9e3%3A0xbf48c58ba6c9356d!2sNaples+International+Airport%2C+Viale+F.+Ruffo+di+Calabria%2C+80144+Napoli+NA!3m2!1d40.884749299999996!2d14.289242999999999!4m5!1s0x133b9908fa0c0919%3A0xb396785a92762205!2sMeta%2C+Metropolitan+City+of+Naples!3m2!1d40.6428867!2d14.417339799999999!4m5!1s0x133b95a8e2219069%3A0xb6fe52d5ce1da27e!2sAtrani%2C+Province+of+Salerno!3m2!1d40.6357929!2d14.608620199999999!5e0!3m2!1sen!2sit!4v1549451299042',
   },
   {
-    icon: 'fa-triangle-exclamation',
+    icon: 'ph-warning',
     name: 'Via Chiunzi & Ravello',
     tag: 'Challenging',
     tagColor: 'orange',
@@ -141,7 +141,7 @@ const drivingRoutes = [
 
 const parkingOptions = [
   {
-    icon: 'fa-square-parking',
+    icon: 'ph-park',
     title: 'Street parking outside Atrani',
     accent: 'cheapest',
     price: '24€/24h',
@@ -153,7 +153,7 @@ const parkingOptions = [
     },
   },
   {
-    icon: 'fa-location-dot',
+    icon: 'ph-map-pin',
     title: 'Parcheggio Luna Rossa',
     accent: 'closest',
     price: 'from 40€/day',
@@ -165,7 +165,7 @@ const parkingOptions = [
     },
   },
   {
-    icon: 'fa-clock-rotate-left',
+    icon: 'ph-clock-counter-clockwise',
     title: 'Atrani town parking',
     accent: 'limited',
     price: '3€/hr',
@@ -236,7 +236,7 @@ const directionsJsonLd = [
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage} jsonLd={directionsJsonLd}>
   <!-- ─── HERO ─── -->
-  <section class="dir-hero hero--dark">
+  <section class="dir-hero hero--dark hero-centered">
     <div class="dir-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`dir-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -252,9 +252,9 @@ const directionsJsonLd = [
         </div>
       ))}
     </div>
-    <div class="dir-hero__vignette" aria-hidden="true"></div>
-    <div class="dir-hero__content">
-      <div class="container">
+    <div class="dir-hero__vignette hero-shade" aria-hidden="true"></div>
+    <div class="dir-hero__content hero-content">
+      <div class="container hero-container">
         <div class="dir-hero__grid">
           <div class="dir-hero__copy">
             <span class="dir-hero__eyebrow">Three-step guide</span>
@@ -265,10 +265,10 @@ const directionsJsonLd = [
               Reach the Amalfi Coast in two simple steps: train to Salerno, then ferry or bus to Amalfi. Atrani is a 10-minute walk from there.
             </p>
             <nav class="dir-hero__actions" aria-label="Directions sections">
-              <a class="dir-hero__btn dir-hero__btn--primary" href="#public-transport"><i class="fa-solid fa-train"></i> Public transport</a>
-              <a class="dir-hero__btn dir-hero__btn--ghost" href="#walking"><i class="fa-solid fa-signs-post"></i> Walking route</a>
-              <a class="dir-hero__btn dir-hero__btn--ghost" href="#driving"><i class="fa-solid fa-car"></i> Driving</a>
-              <a class="dir-hero__btn dir-hero__btn--ghost" href="#parking"><i class="fa-solid fa-square-parking"></i> Parking</a>
+              <a class="dir-hero__btn dir-hero__btn--primary" href="#public-transport"><i class="ph ph-train" aria-hidden="true"></i> Public transport</a>
+              <a class="dir-hero__btn dir-hero__btn--ghost" href="#walking"><i class="ph ph-signpost" aria-hidden="true"></i> Walking route</a>
+              <a class="dir-hero__btn dir-hero__btn--ghost" href="#driving"><i class="ph ph-car" aria-hidden="true"></i> Driving</a>
+              <a class="dir-hero__btn dir-hero__btn--ghost" href="#parking"><i class="ph ph-park" aria-hidden="true"></i> Parking</a>
             </nav>
           </div>
           <aside class="dir-hero__aside">
@@ -313,14 +313,14 @@ const directionsJsonLd = [
         <div class="dir-step__number">{transportSteps[0].step}</div>
         <div class="dir-step__body">
           <div class="dir-step__header">
-            <i class={`fa-solid ${transportSteps[0].icon}`}></i>
+            <i class={`ph ${transportSteps[0].icon}`} aria-hidden="true"></i>
             <h3>{transportSteps[0].title} <span class="accent-italic">{transportSteps[0].accent}</span></h3>
           </div>
           <p>{transportSteps[0].description}</p>
           <div class="dir-step__links">
             {transportSteps[0].links.map((l) => (
               <a href={l.url} target="_blank" rel="noopener">
-                {l.text} <i class={`fa-solid ${l.icon}`}></i>
+                {l.text} <i class={`ph ${l.icon}`} aria-hidden="true"></i>
               </a>
             ))}
           </div>
@@ -344,7 +344,7 @@ const directionsJsonLd = [
         <div class="dir-step__number">{transportSteps[1].step}</div>
         <div class="dir-step__body">
           <div class="dir-step__header">
-            <i class={`fa-solid ${transportSteps[1].icon}`}></i>
+            <i class={`ph ${transportSteps[1].icon}`} aria-hidden="true"></i>
             <h3>{transportSteps[1].title} <span class="accent-italic">{transportSteps[1].accent}</span></h3>
           </div>
           <p>{transportSteps[1].description}</p>
@@ -359,11 +359,11 @@ const directionsJsonLd = [
                 )}
                 <div class="dir-option__head">
                   <div class="dir-option__icon">
-                    <i class={`fa-solid ${opt.icon}`}></i>
+                    <i class={`ph ${opt.icon}`} aria-hidden="true"></i>
                   </div>
                   <div>
                     <h4>{opt.mode} <span class="accent-italic">{opt.accent}</span></h4>
-                    <span class="dir-option__time"><i class="fa-solid fa-clock"></i> {opt.time}</span>
+                    <span class="dir-option__time"><i class="ph ph-clock" aria-hidden="true"></i> {opt.time}</span>
                   </div>
                 </div>
                 <p>{opt.description}</p>
@@ -376,12 +376,12 @@ const directionsJsonLd = [
                 <div class="dir-option__links">
                   {opt.link && (
                     <a class="dir-option__dl" href={opt.link.url} target="_blank" rel="noopener">
-                      <i class="fa-solid fa-file-pdf"></i> {opt.link.text}
+                      <i class="ph ph-file-pdf" aria-hidden="true"></i> {opt.link.text}
                     </a>
                   )}
                   {opt.bookLink && (
                     <a class="dir-option__book" href={opt.bookLink.url} target="_blank" rel="noopener">
-                      <i class="fa-solid fa-ticket"></i> {opt.bookLink.text}
+                      <i class="ph ph-ticket" aria-hidden="true"></i> {opt.bookLink.text}
                     </a>
                   )}
                 </div>
@@ -393,28 +393,28 @@ const directionsJsonLd = [
             <h4>Useful links</h4>
             <div class="dir-useful-links__grid">
               <a href="https://www.travelmar.it/en/index" target="_blank" rel="noopener" class="dir-useful-link">
-                <span class="dir-useful-link__icon"><i class="fa-solid fa-water"></i></span>
+                <span class="dir-useful-link__icon"><i class="ph ph-waves" aria-hidden="true"></i></span>
                 <span class="dir-useful-link__body">
                   <span class="dir-useful-link__name">Travelmar</span>
                   <span class="dir-useful-link__desc">Ferry tickets & schedules</span>
                 </span>
-                <i class="fa-solid fa-up-right-from-square dir-useful-link__arrow"></i>
+                <i class="ph ph-arrow-square-out dir-useful-link__arrow" aria-hidden="true"></i>
               </a>
               <a href="https://www.unicocampania.it" target="_blank" rel="noopener" class="dir-useful-link">
-                <span class="dir-useful-link__icon"><i class="fa-solid fa-credit-card"></i></span>
+                <span class="dir-useful-link__icon"><i class="ph ph-credit-card" aria-hidden="true"></i></span>
                 <span class="dir-useful-link__body">
                   <span class="dir-useful-link__name">Unico Campania</span>
                   <span class="dir-useful-link__desc">Regional transport passes</span>
                 </span>
-                <i class="fa-solid fa-up-right-from-square dir-useful-link__arrow"></i>
+                <i class="ph ph-arrow-square-out dir-useful-link__arrow" aria-hidden="true"></i>
               </a>
               <a href="https://moovitapp.com/" target="_blank" rel="noopener" class="dir-useful-link">
-                <span class="dir-useful-link__icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                <span class="dir-useful-link__icon"><i class="ph ph-device-mobile" aria-hidden="true"></i></span>
                 <span class="dir-useful-link__body">
                   <span class="dir-useful-link__name">Moovit</span>
                   <span class="dir-useful-link__desc">Live bus & ferry tracker</span>
                 </span>
-                <i class="fa-solid fa-up-right-from-square dir-useful-link__arrow"></i>
+                <i class="ph ph-arrow-square-out dir-useful-link__arrow" aria-hidden="true"></i>
               </a>
             </div>
           </div>
@@ -426,7 +426,7 @@ const directionsJsonLd = [
         <div class="dir-step__number">03</div>
         <div class="dir-step__body">
           <div class="dir-step__header">
-            <i class="fa-solid fa-signs-post"></i>
+            <i class="ph ph-signpost" aria-hidden="true"></i>
             <h3>Amalfi <span class="accent-italic">to Atrani</span></h3>
           </div>
           <div class="dir-eyebrow" style="margin-top: -0.5rem;">On foot · ~10 min</div>
@@ -470,14 +470,14 @@ const directionsJsonLd = [
             </p>
             <div class="dir-porters__meta">
               <div class="dir-porters__price"><strong>From 20€</strong> per person</div>
-              <div class="dir-porters__hours"><i class="fa-solid fa-clock"></i> Every day 7:00–20:00</div>
+              <div class="dir-porters__hours"><i class="ph ph-clock" aria-hidden="true"></i> Every day 7:00–20:00</div>
             </div>
             <div class="dir-porters__links">
               <a href="https://amalfiporters.it" target="_blank" rel="noopener">
-                <i class="fa-solid fa-globe"></i> amalfiporters.it
+                <i class="ph ph-globe" aria-hidden="true"></i> amalfiporters.it
               </a>
               <a href="https://wa.me/393392768989" target="_blank" rel="noopener">
-                <i class="fa-brands fa-whatsapp"></i> +39 339 2768989
+                <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> +39 339 2768989
               </a>
             </div>
           </div>
@@ -504,7 +504,7 @@ const directionsJsonLd = [
         {drivingRoutes.map((route) => (
           <article class="dir-route card">
             <div class="dir-route__head">
-              <div class="dir-route__icon"><i class={`fa-solid ${route.icon}`}></i></div>
+              <div class="dir-route__icon"><i class={`ph ${route.icon}`} aria-hidden="true"></i></div>
               <div>
                 <h3>{route.name}</h3>
                 <span class={`dir-route__tag dir-route__tag--${route.tagColor}`}>{route.tag}</span>
@@ -541,7 +541,7 @@ const directionsJsonLd = [
       <div class="dir-parking__grid">
         {parkingOptions.map((opt) => (
           <article class="dir-parking__card card">
-            <div class="dir-parking__icon"><i class={`fa-solid ${opt.icon}`}></i></div>
+            <div class="dir-parking__icon"><i class={`ph ${opt.icon}`} aria-hidden="true"></i></div>
             <h3>{opt.title} <span class="accent-italic">{opt.accent}</span></h3>
             <div class="dir-parking__detail">
               <span class="dir-parking__price">{opt.price}</span>
@@ -550,7 +550,7 @@ const directionsJsonLd = [
             <p>{opt.description}</p>
             {opt.link && (
               <a class="dir-parking__link" href={opt.link.url} target="_blank" rel="noopener">
-                <i class="fa-solid fa-location-dot"></i> {opt.link.text}
+                <i class="ph ph-map-pin" aria-hidden="true"></i> {opt.link.text}
               </a>
             )}
           </article>
@@ -567,7 +567,7 @@ const directionsJsonLd = [
       <div class="dir-faq__list">
         {directionsFaqs.map((f) => (
           <details class="dir-faq__item">
-            <summary class="dir-faq__q">{f.q}</summary>
+            <summary class="dir-faq__q">{f.q}<i class="ph ph-plus" aria-hidden="true"></i></summary>
             <p class="dir-faq__a">{f.a}</p>
           </details>
         ))}
@@ -1619,8 +1619,7 @@ const directionsJsonLd = [
     display: none;
   }
 
-  .dir-faq__q::after {
-    content: '+';
+  .dir-faq__q > i {
     font-size: 1.4rem;
     line-height: 1;
     color: var(--color-accent);
@@ -1628,7 +1627,7 @@ const directionsJsonLd = [
     transition: transform 0.2s ease;
   }
 
-  .dir-faq__item[open] .dir-faq__q::after {
+  .dir-faq__item[open] .dir-faq__q > i {
     transform: rotate(45deg);
   }
 

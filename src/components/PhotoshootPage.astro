@@ -27,12 +27,12 @@ const browserFrames = frames.map(({ original, src, alt }) => ({ original, src, a
         <img class="gs-hero__image" src={hero.src} srcset={hero.srcset} sizes={`max(100vw, ${(hero.width / hero.height * 100).toFixed(1)}svh)`} alt={mobileHero ? `${shoot.name} — photoshoot in ${shoot.location}` : hero.alt} width={hero.width} height={hero.height} fetchpriority="high" loading="eager" />
       </picture>
       <div class="gs-hero__veil"></div>
-      <div class="gs-hero__content">
+      <div class="gs-hero__content hero-container">
         <div class="gs-eyebrow"><div class="gs-hero__location"><CityLabel name={shoot.location} />, Italy</div>{shoot.date && <span>{shoot.date}</span>}</div>
         <h1>{shoot.heading.lead}<br /><em>{shoot.heading.accent}</em></h1>
-        <div class="gs-hero__bottom"><PhotoshootHeroSummary description={shoot.summary} context={context} images={frames} inline /><a href="#gs-story" aria-label="Discover the story"><span>Discover</span><i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a></div>
+        <div class="gs-hero__bottom"><PhotoshootHeroSummary description={shoot.summary} context={context} images={frames} inline /><a href="#gs-story" aria-label="Discover the story"><span>Discover</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a></div>
       </div>
-      <button class="gs-motion-toggle" type="button" aria-label="Pause cover animation" aria-pressed="false"><i class="fa-solid fa-pause" aria-hidden="true"></i></button>
+      <button class="gs-motion-toggle" type="button" aria-label="Pause cover animation" aria-pressed="false"><i class="ph ph-pause" aria-hidden="true"></i></button>
     </section>
     {shoot.chapters.map((chapter, index) => <>
       {chapter.before.map((story, storyIndex) => <PhotoshootStory story={story} location={shoot.location} id={index === 0 && storyIndex === 0 ? 'gs-story' : undefined} />)}
@@ -42,15 +42,15 @@ const browserFrames = frames.map(({ original, src, alt }) => ({ original, src, a
       <PhotoshootGallery chapter={chapter} images={chapter.frameIds.map(id => frames.find(frame => frame.id === id)!)} number={index + 1} name={shoot.name} location={shoot.location} />
     </>)}
     <section class="gs-cta gs-wrap" data-reveal>
-      <span class="gs-eyebrow"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i> Your turn to remember</span>
+      <span class="gs-eyebrow"><i class="ph ph-camera" aria-hidden="true"></i> Your turn to remember</span>
       <h2>A place. A feeling.<br /><em>A story that’s yours.</em></h2>
       <p>Tell me a little about yourself.<br />I’ll take care of the light, the places, and the quiet moments in between.</p>
-      <a class="gs-button gs-request-trigger" href="/contact?service=Photoshooting" data-request aria-haspopup="dialog" aria-controls="gs-request"><span class="gs-request-trigger__label">Request a photoshoot</span><span class="gs-request-trigger__icon" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i><i class="fa-solid fa-camera"></i></span></a>
+      <a class="gs-button gs-request-trigger" href="/contact?service=Photoshooting" data-request aria-haspopup="dialog" aria-controls="gs-request"><span class="gs-request-trigger__label">Request a photoshoot</span><span class="gs-request-trigger__icon" aria-hidden="true"><i class="ph ph-arrow-right" aria-hidden="true"></i><i class="ph ph-camera" aria-hidden="true"></i></span></a>
       <span class="gs-cta__note">Made with you, on the Amalfi Coast.</span>
     </section>
   </div>
   <dialog class="gs-dialog gs-lightbox" id="gs-lightbox" aria-label="Photograph viewer">
-    <div class="gs-lightbox__top"><span class="gs-eyebrow">{shoot.name} / {shoot.location}</span><button class="gs-icon" type="button" data-close aria-label="Close photograph viewer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+    <div class="gs-lightbox__top"><span class="gs-eyebrow">{shoot.name} / {shoot.location}</span><button class="gs-icon" type="button" data-close aria-label="Close photograph viewer"><i class="ph ph-x" aria-hidden="true"></i></button></div>
     <div class="gs-lightbox__image"><img alt="" /></div>
     <GalleryStudyControls label="Full-size photographs" images={frames} />
     <p class="sr-only" data-lightbox-status aria-live="polite"></p>

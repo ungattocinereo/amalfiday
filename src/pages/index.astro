@@ -76,7 +76,7 @@ const fallbackQuatrain =
   browserChromeColor="#FF5900"
 >
   <section class="hero hero--orange">
-    <div class="container hero__inner">
+    <div class="container hero__inner hero-container">
       <div class="hero__intro">
         <h1 class="hero__h1 sr-only">Amalfi Coast Photoshoots, Tours & Local Guide</h1>
         <div class="hero__quatrain" data-quatrains={JSON.stringify(quatrains)}>
@@ -118,7 +118,7 @@ const fallbackQuatrain =
             </div>
             <span class="guide-card__badge">
               <span class="guide-card__badge-text">guide.amalfi.day</span>
-              <i class="fa-solid fa-up-right-from-square"></i>
+              <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
             </span>
           </a>
         </div>
@@ -158,12 +158,12 @@ const fallbackQuatrain =
         </div>
         <div class="hero__tile hero__tile--bottom">
           <a class="hero__mini" href="/photoshootings">
-            <i class="fa-solid fa-camera-retro"></i>
+            <i class="ph ph-camera" aria-hidden="true"></i>
             <div>
               <strong>Photoshoots</strong>
               <span>Get the best professional photos of yourself.</span>
             </div>
-            <i class="fa-solid fa-up-right-from-square"></i>
+            <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
           </a>
         </div>
       </div>
@@ -193,6 +193,7 @@ const fallbackQuatrain =
         </h2>
         <a class="section__subtitle-link" href="/experience">
           We offer the most creative ways to experience the Amalfi Coast.
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
       <div class="xp-grid">
@@ -219,7 +220,7 @@ const fallbackQuatrain =
               <span class="xp-card__tag">Up to 6 ppl</span>
             </div>
           </div>
-          <span class="xp-card__arrow"><i class="fa-solid fa-up-right-from-square"></i></span>
+          <span class="xp-card__arrow"><i class="ph ph-arrow-square-out" aria-hidden="true"></i></span>
         </a>
 
         <a class="xp-card" href="/experience/car-tours">
@@ -245,7 +246,7 @@ const fallbackQuatrain =
               <span class="xp-card__tag">Wine tasting</span>
             </div>
           </div>
-          <span class="xp-card__arrow"><i class="fa-solid fa-up-right-from-square"></i></span>
+          <span class="xp-card__arrow"><i class="ph ph-arrow-square-out" aria-hidden="true"></i></span>
         </a>
 
         <a class="xp-card" href="/experience/scooter">
@@ -271,7 +272,7 @@ const fallbackQuatrain =
               <span class="xp-card__tag">Photo included</span>
             </div>
           </div>
-          <span class="xp-card__arrow"><i class="fa-solid fa-up-right-from-square"></i></span>
+          <span class="xp-card__arrow"><i class="ph ph-arrow-square-out" aria-hidden="true"></i></span>
         </a>
       </div>
     </div>
@@ -288,6 +289,7 @@ const fallbackQuatrain =
         <p>
           <a class="section__subtitle-link" href="/photoshootings">
             Scroll through the latest stories and shooting concepts.
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
           </a>
         </p>
       </div>
@@ -313,7 +315,7 @@ const fallbackQuatrain =
       </div>
       <div class="photos-cta">
         <a class="photos-cta__btn" href="/contact">
-          <i class="fa-solid fa-camera"></i>
+          <i class="ph ph-camera" aria-hidden="true"></i>
           Book a photoshoot
         </a>
       </div>
@@ -328,6 +330,7 @@ const fallbackQuatrain =
         </h2>
         <a class="section__subtitle-link" href="/blog">
           Fresh stories and local insights are always waiting...
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
       <div class="news-scroll" aria-label="Latest blog posts">
@@ -883,8 +886,7 @@ const fallbackQuatrain =
     text-align: right;
   }
 
-  .section__subtitle-link::after {
-    content: '→';
+  .section__subtitle-link > i {
     transition: transform 0.2s ease;
   }
 
@@ -895,7 +897,7 @@ const fallbackQuatrain =
     text-decoration: none;
   }
 
-  .section__subtitle-link:hover::after {
+  .section__subtitle-link:hover > i {
     transform: translateX(4px);
   }
 

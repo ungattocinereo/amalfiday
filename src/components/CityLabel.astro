@@ -8,7 +8,7 @@ const cities = name.split(/\s+&\s+/)
 <span class="city-label">
   {cities.map((city, index) => <>
     {index > 0 && <span class="city-label__separator">&amp;</span>}
-    <span class="city-label__place"><i class={`fa-solid ${getCityIcon(city)}`} aria-hidden="true"></i> {city}</span>
+    <span class="city-label__place"><i class={`ph ${getCityIcon(city)}`} aria-hidden="true"></i> {city}</span>
   </>)}
 </span>
 

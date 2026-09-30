@@ -160,9 +160,9 @@ const rules = [
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage}>
   <section class="guide-hero hero--dark">
-    <div class="container guide-hero__inner">
+    <div class="container guide-hero__inner hero-container">
       <span class="badge guide-hero__badge">
-        <i class="fa-solid fa-compass"></i> Design system
+        <i class="ph ph-compass" aria-hidden="true"></i> Design system
       </span>
       <h1>Amalfi.Day Design Guidelines</h1>
       <p>
@@ -183,15 +183,15 @@ const rules = [
         </div>
         <div class="card guide-meta">
           <h3>Icons</h3>
-          <p>We use Font Awesome: <code>fa-solid</code> + icon name.</p>
+          <p>We use <a href="https://phosphoricons.com">Phosphor Icons</a>: <code>ph</code> (regular) + icon name. Icons identifying Experience and Coast Intel use <code>ph-fill</code>; social icons in the navigation use <code>ph-light</code>.</p>
           <p>City labels share one icon per city through <code>CityLabel.astro</code> and <code>src/data/city-icons.ts</code>.</p>
           <div class="guide-icons">
-            <i class="fa-solid fa-camera"></i>
+            <i class="ph ph-camera" aria-hidden="true"></i>
             <CityLabel name="Amalfi" />
             <CityLabel name="Positano" />
             <CityLabel name="Ravello" />
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-sun"></i>
+            <i class="ph ph-star" aria-hidden="true"></i>
+            <i class="ph ph-sun" aria-hidden="true"></i>
           </div>
         </div>
       </div>
@@ -357,15 +357,15 @@ const rules = [
         <div class="card guide-components__card">
           <h3>Buttons</h3>
           <div class="guide-components__row">
-            <button class="button" type="button"><i class="fa-solid fa-up-right-from-square"></i> Primary</button>
+            <button class="button" type="button"><i class="ph ph-arrow-square-out" aria-hidden="true"></i> Primary</button>
             <button class="button secondary" type="button">Secondary</button>
           </div>
         </div>
         <div class="card guide-components__card">
           <h3>Badges</h3>
           <div class="guide-components__row">
-            <span class="badge"><i class="fa-solid fa-shield"></i> Trust</span>
-            <span class="badge"><i class="fa-solid fa-heart"></i> Story</span>
+            <span class="badge"><i class="ph ph-shield" aria-hidden="true"></i> Trust</span>
+            <span class="badge"><i class="ph ph-heart" aria-hidden="true"></i> Story</span>
           </div>
         </div>
         <div class="card guide-components__card">
@@ -446,7 +446,7 @@ const rules = [
       <div class="guide-rules">
         {rules.map((rule) => (
           <div class="card guide-rule">
-            <i class="fa-solid fa-check"></i>
+            <i class="ph ph-check" aria-hidden="true"></i>
             <span>{rule}</span>
           </div>
         ))}

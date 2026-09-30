@@ -27,7 +27,7 @@
 @keyframes gs-breathe { from { transform: scale(1.015) translateX(-.25%); } to { transform: scale(1.055) translateX(.25%); } }
 .gs-hero.is-paused .gs-hero__image { animation-play-state: paused; }
 .gs-hero__veil { position: absolute; inset: 0; background: linear-gradient(180deg, #090e1326 15%, #090e130a 35%, #090e135c 60%, #090e13d9 100%); }
-.gs-hero__content { position: absolute; bottom: 40px; left: max(56px, calc((100vw - 1320px) / 2)); right: max(56px, calc((100vw - 1320px) / 2)); }
+.gs-hero__content { position: absolute; bottom: 40px; left: var(--page-gutter); right: var(--page-gutter); }
 .gs-hero .gs-eyebrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 28px; color: #fff; margin-bottom: 28px; font-size: 11px; }
 .gs-hero .gs-eyebrow > span { opacity: .75; }
 .gs-hero__location { min-width: 0; }
@@ -178,11 +178,11 @@
 .gs-request-trigger__label { font-weight: 500; }
 .gs-request-trigger__icon { position: relative; width: 44px; height: 44px; flex: none; display: grid; place-items: center; overflow: hidden; border-radius: 50%; background: #25170e; color: white; }
 .gs-request-trigger__icon i { position: absolute; transition: transform .28s var(--gs-ease), opacity .2s; }
-.gs-request-trigger__icon .fa-camera { opacity: 0; transform: scale(.6) rotate(-18deg); }
-.gs-request-trigger:hover .fa-arrow-right { transform: translateX(2px); }
-.gs-request-trigger:hover .fa-camera { transform: scale(.6) rotate(-18deg); }
-.gs-request-trigger.is-opening .fa-arrow-right { transform: translateX(32px); opacity: 0; }
-.gs-request-trigger.is-opening .fa-camera { transform: none; opacity: 1; }
+.gs-request-trigger__icon .ph-camera { opacity: 0; transform: scale(.6) rotate(-18deg); }
+.gs-request-trigger:hover .ph-arrow-right { transform: translateX(2px); }
+.gs-request-trigger:hover .ph-camera { transform: scale(.6) rotate(-18deg); }
+.gs-request-trigger.is-opening .ph-arrow-right { transform: translateX(32px); opacity: 0; }
+.gs-request-trigger.is-opening .ph-camera { transform: none; opacity: 1; }
 .gs-cta__note { display: block; margin-top: 22px; color: var(--gs-muted); letter-spacing: .03em; font-size: 9px; }
 .gs-motion-ready [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 1s var(--gs-ease), transform 1s var(--gs-ease); }
 .gs-motion-ready [data-reveal].is-visible { opacity: 1; transform: none; }
@@ -246,7 +246,7 @@
 .gs-fields .gs-contact-input input { padding-right: 48px; margin-top: 0; }
 .gs-contact-icons { position: absolute; right: 11px; inset-block: 0; display: flex; align-items: center; gap: 6px; color: var(--gs-muted); font-size: 12px; pointer-events: none; }
 .gs-contact-icons i { opacity: .45; transition: opacity .2s, transform .3s var(--gs-ease); }
-[data-contact-kind='email'] .fa-envelope, [data-contact-kind='whatsapp'] .fa-whatsapp { color: var(--color-accent); opacity: 1; transform: translateY(-1px); }
+[data-contact-kind='email'] .ph-envelope, [data-contact-kind='whatsapp'] .ph-whatsapp-logo { color: var(--color-accent); opacity: 1; transform: translateY(-1px); }
 .gs-contact-hint { margin: -5px 0 0; font-size: 10px; line-height: 1.4; }
 .gs-select { position: relative; display: block; }
 .gs-fields .gs-select select { appearance: none; padding-right: 30px; }
@@ -294,7 +294,7 @@
 .gs-shoot .gs-controls { grid-template-columns: minmax(90px, auto) minmax(0, 1fr) 96px; }
 @media (max-width: 1099px), (pointer: coarse) {
   .gs-wrap { width: calc(100% - 64px); }
-  .gs-hero__content { left: 32px; right: 32px; }
+  .gs-hero__content { left: var(--page-gutter); right: var(--page-gutter); }
   .gs-controls { width: calc(100% - 64px); gap: 16px; }
   .gs-story { gap: 6%; }
   .gs-rail__track { padding-inline: 32px; gap: 20px; }

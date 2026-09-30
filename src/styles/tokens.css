@@ -26,6 +26,8 @@
 
   /* Sizing */
   --container-max: 1200px;
+  --page-gutter: 24px;
+  --content-max: calc(var(--container-max) - 2 * var(--page-gutter));
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;

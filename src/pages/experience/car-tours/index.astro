@@ -60,7 +60,7 @@ const pricingCards = [
     priceLarge: '€600',
     labelSmall: '1–3 ppl',
     labelLarge: '4–6 ppl',
-    icon: 'fa-location-dot',
+    icon: 'ph-map-pin',
   },
   {
     title: 'Peak Flavors',
@@ -70,7 +70,7 @@ const pricingCards = [
     priceLarge: '€650',
     labelSmall: '1–3 ppl',
     labelLarge: '4–6 ppl',
-    icon: 'fa-mug-hot',
+    icon: 'ph-coffee',
   },
   {
     title: 'Amalfi Your Way',
@@ -80,7 +80,7 @@ const pricingCards = [
     priceLarge: '',
     labelSmall: 'depends on itinerary',
     labelLarge: '',
-    icon: 'fa-compass',
+    icon: 'ph-compass',
     isCustom: true,
   },
 ]
@@ -96,9 +96,9 @@ const stops = [
 
 const tramontiStops = [
   { name: 'Tramonti', icon: getCityIcon('Tramonti'), desc: 'Mountain valley' },
-  { name: 'Winery', icon: 'fa-mug-hot', desc: 'Hillside vineyard' },
-  { name: 'Farm', icon: 'fa-leaf', desc: 'Buffalo mozzarella' },
-  { name: 'Restaurant', icon: 'fa-star', desc: 'Michelin desserts' },
+  { name: 'Winery', icon: 'ph-coffee', desc: 'Hillside vineyard' },
+  { name: 'Farm', icon: 'ph-leaf', desc: 'Buffalo mozzarella' },
+  { name: 'Restaurant', icon: 'ph-star', desc: 'Michelin desserts' },
 ]
 ---
 
@@ -111,7 +111,7 @@ const tramontiStops = [
   <div class="car-tours">
 
     <!-- ═══ HERO — Slideshow ═══ -->
-    <section class="ct-hero hero--dark">
+  <section class="ct-hero hero--dark hero-centered">
       <div class="ct-hero__slides" aria-hidden="true">
         {heroSlides.map((slide, i) => (
           <div class={`ct-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -119,9 +119,9 @@ const tramontiStops = [
           </div>
         ))}
       </div>
-      <div class="ct-hero__vignette"></div>
-      <div class="ct-hero__content">
-        <div class="container">
+    <div class="ct-hero__vignette hero-shade"></div>
+    <div class="ct-hero__content hero-content">
+      <div class="container hero-container">
           <div class="ct-hero__grid">
             <div class="ct-hero__copy">
               <span class="ct-hero__eyebrow">Private Car Tours</span>
@@ -134,7 +134,7 @@ const tramontiStops = [
               </p>
               <div class="ct-hero__actions">
                 <a class="ct-btn ct-btn--primary" href="/contact">
-                  <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request a tour
+                  <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Request a tour
                 </a>
                 <a class="ct-btn ct-btn--ghost" href="#pricing">
                   See pricing
@@ -196,7 +196,7 @@ const tramontiStops = [
                   <div class="ct-route__card">
                     <span class="ct-route__num">{String(i + 1).padStart(2, '0')}</span>
                     <div class="ct-route__icon">
-                      <i class={`fa-solid ${getCityIcon(stop.name)}`} aria-hidden="true"></i>
+                      <i class={`ph ${getCityIcon(stop.name)}`} aria-hidden="true"></i>
                     </div>
                     <div class="ct-route__text">
                       <span class="ct-route__name">{stop.name}</span>
@@ -318,7 +318,7 @@ const tramontiStops = [
     <!-- ═══ DIVIDER ═══ -->
     <div class="ct-divider" aria-hidden="true">
       <div class="ct-divider__line"></div>
-      <div class="ct-divider__icon"><i class="fa-solid fa-arrow-down"></i></div>
+      <div class="ct-divider__icon"><i class="ph ph-arrow-down" aria-hidden="true"></i></div>
       <div class="ct-divider__line"></div>
     </div>
 
@@ -432,7 +432,7 @@ const tramontiStops = [
               <!-- Default card content -->
               <div class="ct-price-card__default">
                 <div class="ct-price-card__icon">
-                  <i class={`fa-solid ${card.icon}`} aria-hidden="true"></i>
+                  <i class={`ph ${card.icon}`} aria-hidden="true"></i>
                 </div>
                 <h3 class="ct-price-card__title">{card.title}</h3>
                 <p class="ct-price-card__subtitle">{card.subtitle}</p>
@@ -467,7 +467,7 @@ const tramontiStops = [
                 <div class="ct-tour-form__header">
                   <span class="ct-tour-form__tour-name">{card.title}</span>
                   <button class="ct-tour-form__back" type="button" aria-label="Back to tour info">
-                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    <i class="ph ph-x" aria-hidden="true"></i>
                   </button>
                 </div>
                 <label class="ct-tour-form__label">
@@ -492,16 +492,16 @@ const tramontiStops = [
                       readonly
                     />
                     <button class="ct-tour-form__date-toggle" type="button" aria-label="Open calendar">
-                      <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+                      <i class="ph ph-calendar-blank" aria-hidden="true"></i>
                     </button>
                     <div class="ct-calendar" aria-hidden="true">
                       <div class="ct-calendar__nav">
                         <button class="ct-calendar__arrow" type="button" data-cal-prev aria-label="Previous month">
-                          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                          <i class="ph ph-caret-left" aria-hidden="true"></i>
                         </button>
                         <span class="ct-calendar__month-year"></span>
                         <button class="ct-calendar__arrow" type="button" data-cal-next aria-label="Next month">
-                          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                          <i class="ph ph-caret-right" aria-hidden="true"></i>
                         </button>
                       </div>
                       <div class="ct-calendar__weekdays">
@@ -513,7 +513,7 @@ const tramontiStops = [
                 </label>
                 <div class="ct-tour-form__actions">
                   <button class="ct-btn ct-btn--primary ct-tour-form__submit" type="submit">
-                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Request
+                    <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Request
                   </button>
                   <span class="ct-tour-form__status"></span>
                 </div>
@@ -522,7 +522,7 @@ const tramontiStops = [
               <!-- Success state -->
               <div class="ct-tour-form__success" aria-hidden="true">
                 <div class="ct-tour-form__success-icon">
-                  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                  <i class="ph ph-check-circle" aria-hidden="true"></i>
                 </div>
                 <h4 class="ct-tour-form__success-title">Thank you!</h4>
                 <p class="ct-tour-form__success-text">Your request has been sent. We'll get back to you shortly.</p>
@@ -543,10 +543,10 @@ const tramontiStops = [
       <img class="ct-lightbox__img" src="" alt="" />
     </div>
     <button class="ct-lightbox__nav ct-lightbox__nav--prev" aria-label="Previous image">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      <i class="ph ph-caret-left" aria-hidden="true" style="font-size: 24px"></i>
     </button>
     <button class="ct-lightbox__nav ct-lightbox__nav--next" aria-label="Next image">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      <i class="ph ph-caret-right" aria-hidden="true" style="font-size: 24px"></i>
     </button>
     <div class="ct-lightbox__counter" aria-hidden="true">
       <span data-lb-current>1</span> / <span data-lb-total>1</span>
@@ -1050,7 +1050,7 @@ const tramontiStops = [
     animation: ct-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .ct-hero__progress { display: flex; gap: 0.6rem; }
+  .ct-hero__progress { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
   .ct-hero__dot {
     background: none;

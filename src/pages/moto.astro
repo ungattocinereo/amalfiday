@@ -166,7 +166,7 @@ const motoJsonLd = [
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage} jsonLd={motoJsonLd}>
   <!-- HERO -->
-  <section class="mh section hero--dark">
+  <section class="mh section hero--dark hero-centered">
     <div class="mh__bg" aria-hidden="true">
       <svg class="mh__road" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
         <defs>
@@ -190,7 +190,7 @@ const motoJsonLd = [
       </svg>
       <div class="mh__grain"></div>
     </div>
-    <div class="container mh__content">
+    <div class="container mh__content hero-content hero-container">
       <div class="mh__grid">
         <div class="mh__copy">
           <div class="mh__top">
@@ -209,11 +209,11 @@ const motoJsonLd = [
           </p>
           <div class="mh__actions">
             <a class="button" href="#route">
-              <i class="fa-solid fa-circle-down"></i>
+              <i class="ph ph-arrow-circle-down" aria-hidden="true"></i>
               Explore the route
             </a>
             <a class="mh__ghost-btn" href={mapShare} target="_blank" rel="noreferrer">
-              <i class="fa-solid fa-map"></i>
+              <i class="ph ph-map-trifold" aria-hidden="true"></i>
               Open in Google Maps
             </a>
           </div>
@@ -305,7 +305,7 @@ const motoJsonLd = [
                 target="_blank"
                 rel="noreferrer"
               >
-                <i class="fa-solid fa-download"></i>
+                <i class="ph ph-download-simple" aria-hidden="true"></i>
                 KMZ
               </a>
               <a
@@ -314,7 +314,7 @@ const motoJsonLd = [
                 target="_blank"
                 rel="noreferrer"
               >
-                <i class="fa-solid fa-download"></i>
+                <i class="ph ph-download-simple" aria-hidden="true"></i>
                 GPX
               </a>
               <a
@@ -323,12 +323,12 @@ const motoJsonLd = [
                 target="_blank"
                 rel="noreferrer"
               >
-                <i class="fa-solid fa-map"></i>
+                <i class="ph ph-map-trifold" aria-hidden="true"></i>
                 Google Maps
               </a>
             </div>
             <div class="mr__route-tag">
-              <i class="fa-solid fa-signs-post"></i>
+              <i class="ph ph-signpost" aria-hidden="true"></i>
               Atrani → Valico Chiunzi → Minori
             </div>
           </div>
@@ -364,7 +364,7 @@ const motoJsonLd = [
               <p class="mt__card-text">{stop.text}</p>
               {stop.hint && (
                 <p class="mt__card-hint">
-                  <i class="fa-solid fa-comment-dots"></i>
+                  <i class="ph ph-chat-dots" aria-hidden="true"></i>
                   {stop.hint}
                 </p>
               )}
@@ -372,14 +372,14 @@ const motoJsonLd = [
           </article>
         ))}
         <div class="mt__end">
-          <i class="fa-solid fa-flag"></i>
+          <i class="ph ph-flag" aria-hidden="true"></i>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ====== ROUTE 2 — HERO ====== -->
-  <section class="mh2 section hero--dark" id="route2">
+  <section class="mh2 section hero--dark hero-centered" id="route2">
     <div class="mh2__bg" aria-hidden="true">
       <svg class="mh__road" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
         <defs>
@@ -403,7 +403,7 @@ const motoJsonLd = [
       </svg>
       <div class="mh__grain"></div>
     </div>
-    <div class="container mh__content">
+    <div class="container mh__content hero-content hero-container">
       <div class="mh__grid">
         <div class="mh__copy">
           <div class="mh__top mh2__fade" style="--fade-delay: 0.1s">
@@ -422,11 +422,11 @@ const motoJsonLd = [
           </p>
           <div class="mh__actions mh2__fade" style="--fade-delay: 0.3s">
             <a class="button" href="#route2-map">
-              <i class="fa-solid fa-circle-down"></i>
+              <i class="ph ph-arrow-circle-down" aria-hidden="true"></i>
               Explore the route
             </a>
             <a class="mh__ghost-btn" href={mapShare2} target="_blank" rel="noreferrer">
-              <i class="fa-solid fa-map"></i>
+              <i class="ph ph-map-trifold" aria-hidden="true"></i>
               Open in Google Maps
             </a>
           </div>
@@ -504,7 +504,7 @@ const motoJsonLd = [
                 target="_blank"
                 rel="noreferrer"
               >
-                <i class="fa-solid fa-download"></i>
+                <i class="ph ph-download-simple" aria-hidden="true"></i>
                 KMZ
               </a>
               <a
@@ -513,7 +513,7 @@ const motoJsonLd = [
                 target="_blank"
                 rel="noreferrer"
               >
-                <i class="fa-solid fa-download"></i>
+                <i class="ph ph-download-simple" aria-hidden="true"></i>
                 GPX
               </a>
               <a
@@ -522,12 +522,12 @@ const motoJsonLd = [
                 target="_blank"
                 rel="noreferrer"
               >
-                <i class="fa-solid fa-map"></i>
+                <i class="ph ph-map-trifold" aria-hidden="true"></i>
                 Google Maps
               </a>
             </div>
             <div class="mr__route-tag">
-              <i class="fa-solid fa-signs-post"></i>
+              <i class="ph ph-signpost" aria-hidden="true"></i>
               Amalfi → Conca dei Marini → Agerola
             </div>
           </div>
@@ -564,13 +564,13 @@ const motoJsonLd = [
               {stop.hint && (
                 <div class="mt__card-hint">
                   <span class="mt__card-hint-text">
-                    <i class="fa-solid fa-comment-dots"></i>
+                    <i class="ph ph-chat-dots" aria-hidden="true"></i>
                     {stop.hint}
                   </span>
                   {stop.hintLink && (
                     <a class="mt__card-link" href={stop.hintLink.url} target="_blank" rel="noreferrer">
                       {stop.hintLink.label}
-                      <i class="fa-solid fa-up-right-from-square"></i>
+                      <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
                     </a>
                   )}
                 </div>
@@ -579,7 +579,7 @@ const motoJsonLd = [
           </article>
         ))}
         <div class="mt__end">
-          <i class="fa-solid fa-flag"></i>
+          <i class="ph ph-flag" aria-hidden="true"></i>
         </div>
       </div>
     </div>

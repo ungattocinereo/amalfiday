@@ -23,6 +23,7 @@ files
 # Local browser checks and deployment backups
 /.playwright-cli/
 /output/playwright/
+/output/menu-motion-*/
 /.deploy-backups/
 /.release-*/
 /.dist-before-*/

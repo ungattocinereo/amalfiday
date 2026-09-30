@@ -74,9 +74,9 @@ const operators = [
     id: 'travelmar',
     summary: 'Frequent coastal ferries between Salerno, Cetara, Maiori, Amalfi, and Positano.',
     highlights: [
-      { icon: 'fa-route', title: 'Best for coast hopping', text: 'Useful for Salerno, Amalfi, Positano, Maiori, and Cetara.' },
-      { icon: 'fa-clock', title: 'Fast Amalfi link', text: 'Salerno to Amalfi is usually 35 minutes; starred trips take about 60 minutes.' },
-      { icon: 'fa-cloud-sun-rain', title: 'Weather dependent', text: 'Always recheck the live schedule before boarding.' },
+      { icon: 'ph-path', title: 'Best for coast hopping', text: 'Useful for Salerno, Amalfi, Positano, Maiori, and Cetara.' },
+      { icon: 'ph-clock', title: 'Fast Amalfi link', text: 'Salerno to Amalfi is usually 35 minutes; starred trips take about 60 minutes.' },
+      { icon: 'ph-cloud-rain', title: 'Weather dependent', text: 'Always recheck the live schedule before boarding.' },
     ],
     tables: [
       {
@@ -142,9 +142,9 @@ const operators = [
     id: 'grassi-junior-ferries',
     summary: 'Coastal ferries with routes between Salerno, Amalfi, Positano, Cetara, Maiori, Minori, and Capri.',
     highlights: [
-      { icon: 'fa-suitcase-rolling', title: 'Luggage extra', text: 'Luggage is printed as EUR 3; bike or pet ticket is EUR 5.' },
-      { icon: 'fa-umbrella-beach', title: 'Capri links', text: 'Includes Positano, Capri, Amalfi, and Salerno route tables.' },
-      { icon: 'fa-circle-info', title: 'Some prices differ', text: 'Promotional cards and main timetable show a few different prices.' },
+      { icon: 'ph-suitcase-rolling', title: 'Luggage extra', text: 'Luggage is printed as EUR 3; bike or pet ticket is EUR 5.' },
+      { icon: 'ph-umbrella', title: 'Capri links', text: 'Includes Positano, Capri, Amalfi, and Salerno route tables.' },
+      { icon: 'ph-info', title: 'Some prices differ', text: 'Promotional cards and main timetable show a few different prices.' },
     ],
     tables: [
       {
@@ -239,9 +239,9 @@ const operators = [
     id: 'nlg',
     summary: 'Longer seasonal links from Amalfi to Capri, Sorrento, Naples, Salerno, Castellammare, and Positano.',
     highlights: [
-      { icon: 'fa-calendar-days', title: 'Main season', text: 'Most 2026 routes run from 01 April to 03 November.' },
-      { icon: 'fa-right-left', title: 'Check changes', text: 'Some Naples to Amalfi trips require a change at Capri.' },
-      { icon: 'fa-ticket', title: 'Amalfi office', text: 'Ticket office phone: 0815520763 / 3483441759.' },
+      { icon: 'ph-calendar', title: 'Main season', text: 'Most 2026 routes run from 01 April to 03 November.' },
+      { icon: 'ph-arrows-left-right', title: 'Check changes', text: 'Some Naples to Amalfi trips require a change at Capri.' },
+      { icon: 'ph-ticket', title: 'Amalfi office', text: 'Ticket office phone: 0815520763 / 3483441759.' },
     ],
     tables: [
       {
@@ -320,7 +320,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
   imageAlt="Ferry on the Amalfi Coast"
   jsonLd={ferryJsonLd}
 >
-  <section class="apt-hero hero--dark">
+  <section class="apt-hero hero--dark hero-centered">
     <div class="apt-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`apt-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -332,9 +332,9 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
         </div>
       ))}
     </div>
-    <div class="apt-hero__vignette"></div>
-    <div class="apt-hero__content">
-      <div class="container">
+    <div class="apt-hero__vignette hero-shade"></div>
+    <div class="apt-hero__content hero-content">
+      <div class="container hero-container">
         <div class="apt-hero__grid">
           <div class="apt-hero__copy">
             <span class="apt-hero__eyebrow">Amalfi Coast ferries 2026</span>
@@ -414,7 +414,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
           </div>
           <div class="ferry-content">
             <h3>
-              <i class="fa-solid fa-water"></i>
+              <i class="ph ph-waves" aria-hidden="true"></i>
               TravelMar
             </h3>
             <p>
@@ -425,7 +425,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
               operations may be temporarily suspended during rough sea conditions.
             </p>
             <p class="ferry-route">
-              <i class="fa-solid fa-circle-info"></i>
+              <i class="ph ph-info" aria-hidden="true"></i>
               <span>Salerno → Cetara → Maiori → Minori → Vietri sul Mare → Amalfi</span>
             </p>
             <a
@@ -434,7 +434,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
               target="_blank"
               rel="noreferrer"
             >
-              <i class="fa-solid fa-cloud-arrow-down"></i>
+              <i class="ph ph-cloud-arrow-down" aria-hidden="true"></i>
               TravelMar timetables
             </a>
           </div>
@@ -449,7 +449,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
           </div>
           <div class="ferry-content">
             <h3>
-              <i class="fa-solid fa-compass"></i>
+              <i class="ph ph-compass" aria-hidden="true"></i>
               PositanoJet
             </h3>
             <p>
@@ -466,7 +466,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
               </a>
             </p>
             <p class="ferry-fees">
-              <i class="fa-solid fa-circle-info"></i>
+              <i class="ph ph-info" aria-hidden="true"></i>
               <span>
                 Additional Fees:
                 <br />
@@ -483,7 +483,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
               target="_blank"
               rel="noreferrer"
             >
-              <i class="fa-solid fa-cloud-arrow-down"></i>
+              <i class="ph ph-cloud-arrow-down" aria-hidden="true"></i>
               Positanojet timetables
             </a>
           </div>
@@ -498,9 +498,9 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
           </div>
           <div class="ferry-content">
             <div class="ferry-title-row">
-            <h3 id="alicost-title"><i class="fa-solid fa-sun" aria-hidden="true"></i> Alicost</h3>
+            <h3 id="alicost-title"><i class="ph ph-sun" aria-hidden="true"></i> Alicost</h3>
             <details class="ferry-info" id="alicost-info">
-              <summary aria-label="Alicost service information" title="Service information"><i class="fa-solid fa-circle-info" aria-hidden="true"></i></summary>
+              <summary aria-label="Alicost service information" title="Service information"><i class="ph ph-info" aria-hidden="true"></i></summary>
               <div class="ferry-info-panel">
                 <p><strong>Checked <time datetime="2026-09-13">13 September 2026</time>.</strong>{' '}
                   Recheck your travel date; schedules and sea conditions can affect sailings.</p>
@@ -538,21 +538,21 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
       </div>
       <div class="tourist-note-grid">
         <article class="tourist-note">
-          <i class="fa-solid fa-clock"></i>
+          <i class="ph ph-clock" aria-hidden="true"></i>
           <div>
             <h3>Local time</h3>
             <p>All departures are shown in local Italian time.</p>
           </div>
         </article>
         <article class="tourist-note">
-          <i class="fa-solid fa-euro-sign"></i>
+          <i class="ph ph-currency-eur" aria-hidden="true"></i>
           <div>
             <h3>EUR fares</h3>
             <p>Prices are in euros and may not include luggage or port extras.</p>
           </div>
         </article>
         <article class="tourist-note">
-          <i class="fa-solid fa-cloud-sun-rain"></i>
+          <i class="ph ph-cloud-rain" aria-hidden="true"></i>
           <div>
             <h3>Sea conditions</h3>
             <p>Weather, technical issues, and operator updates can change service.</p>
@@ -573,11 +573,11 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
 
         <div class="operator-sticky-label" aria-label={`Current ferry operator: ${operator.name}`}>
           <div class="operator-pill">
-            <i class="fa-solid fa-ship"></i>
+            <i class="ph ph-boat" aria-hidden="true"></i>
             <strong>{operator.shortName}</strong>
           </div>
           <div class="operator-route-note" aria-live="polite">
-            <i class="fa-solid fa-location-dot"></i>
+            <i class="ph ph-map-pin" aria-hidden="true"></i>
             <span data-current-route>{getStickyRouteLabel(operator.tables[0]?.title ?? '')}</span>
           </div>
         </div>
@@ -585,7 +585,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
         <div class="operator-highlights">
           {operator.highlights.map((item) => (
             <article class="operator-highlight">
-              <i class={`fa-solid ${item.icon}`}></i>
+              <i class={`ph ${item.icon}`} aria-hidden="true"></i>
               <div>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>

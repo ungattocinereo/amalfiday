@@ -118,7 +118,7 @@ const testimonials = [
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} image={shareImage} jsonLd={apartmentsSchema}>
-  <section class="apt-hero hero--dark">
+  <section class="apt-hero hero--dark hero-centered">
     <div class="apt-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`apt-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -126,9 +126,9 @@ const testimonials = [
         </div>
       ))}
     </div>
-    <div class="apt-hero__vignette"></div>
-    <div class="apt-hero__content">
-      <div class="container">
+    <div class="apt-hero__vignette hero-shade"></div>
+    <div class="apt-hero__content hero-content">
+      <div class="container hero-container">
         <div class="apt-hero__grid">
           <div class="apt-hero__copy">
             <span class="apt-hero__eyebrow">Comfortable stays in Atrani</span>

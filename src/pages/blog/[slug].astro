@@ -78,7 +78,7 @@ const postJsonLd = [
 <BaseLayout title={`${post.title} — Amalfi Notes`} description={post.excerpt} image={post.image ?? undefined} jsonLd={postJsonLd}>
 
   <!-- POST HERO -->
-  <section class:list={['post-hero', 'hero--dark', !post.image && 'post-hero--empty']}>
+  <section class:list={['post-hero', 'hero--dark', 'hero-centered', !post.image && 'post-hero--empty']}>
     {post.image ? (
       <CldImage
         class="post-hero__image"
@@ -93,9 +93,9 @@ const postJsonLd = [
     ) : (
       <div class="post-hero__fallback" aria-hidden="true"></div>
     )}
-    <div class="post-hero__vignette"></div>
-    <div class="post-hero__content">
-      <div class="container">
+    <div class="post-hero__vignette hero-shade"></div>
+    <div class="post-hero__content hero-content">
+      <div class="container hero-container">
         <div class="post-hero__copy">
           <a class="post-hero__section" href="/blog">Amalfi Notes</a>
           <span class="post-hero__cat">{post.tag}</span>
@@ -103,8 +103,8 @@ const postJsonLd = [
           {post.excerpt && <p class="post-hero__lead">{post.excerpt}</p>}
           <div class="post-hero__meta">
             <span>{post.author.name}</span>
-            <span><i class="fa-solid fa-calendar"></i> {post.date}</span>
-            {post.readingTime > 0 && <span><i class="fa-solid fa-clock"></i> {post.readingTime} min read</span>}
+            <span><i class="ph ph-calendar-blank" aria-hidden="true"></i> {post.date}</span>
+            {post.readingTime > 0 && <span><i class="ph ph-clock" aria-hidden="true"></i> {post.readingTime} min read</span>}
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@ const postJsonLd = [
 
     {isTransportPost && (
       <aside class="post-callout">
-        <div class="post-callout__icon"><i class="fa-solid fa-bus"></i></div>
+        <div class="post-callout__icon"><i class="ph ph-bus" aria-hidden="true"></i></div>
         <div class="post-callout__content">
           <strong class="post-callout__title">Plan your route</strong>
           <p>Need ferry or bus times for the Amalfi Coast? Our <a href="/timetables">public transport timetables</a> page has the latest SITA, TravelMar, and shuttle schedules.</p>
@@ -157,7 +157,7 @@ const postJsonLd = [
 
     <!-- BACK LINK -->
     <div class="back-link">
-      <a href="/blog"><i class="fa-solid fa-arrow-left"></i> Back to all posts</a>
+      <a href="/blog"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to all posts</a>
     </div>
   </article>
 

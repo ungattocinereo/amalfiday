@@ -14,7 +14,7 @@ const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) 
       <div><span class="gs-eyebrow">{chapter.eyebrow}</span><h2 id={`gs-title-${number}`}>{chapter.heading.lead} <em>{chapter.heading.accent}</em>{chapter.heading.tail && ` ${chapter.heading.tail}`}</h2></div>
     </header>
     {type === 'rail' && <div class="gs-scroll-scene"><div class="gs-stage">
-      <div class="gs-stage__meta gs-wrap"><span class="gs-small-index">{location} / The sequence</span><span class="gs-gesture"><i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i><span class="gs-desktop-hint">Scroll to wander</span><span class="gs-touch-hint">Swipe to wander</span></span></div>
+      <div class="gs-stage__meta gs-wrap"><span class="gs-small-index">{location} / The sequence</span><span class="gs-gesture"><i class="ph ph-arrow-right" aria-hidden="true"></i><span class="gs-desktop-hint">Scroll to wander</span><span class="gs-touch-hint">Swipe to wander</span></span></div>
       <div class="gs-rail__viewport" tabindex="0" aria-label="Photographs. Use the arrow keys to browse."><div class="gs-rail__track">
         {images.map((image, index) => <figure class:list={['gs-rail__frame', { 'is-portrait': image.portrait }]} style={`--photo-ratio:${image.ratio};${photoStyle(image)}`}>
           <PhotoshootPhoto image={image} sizes="(max-width: 700px) 85vw, 65vw" />

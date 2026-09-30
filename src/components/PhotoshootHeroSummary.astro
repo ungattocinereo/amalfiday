@@ -15,7 +15,7 @@ const iconDescription = icons.map(icon => icon.label).join(' · ')
 
 <span class:list={['photo-hero-summary', { 'photo-hero-summary--ruled': !inline }]}>
   <span class="photo-hero-summary__icons" role="img" aria-label={iconDescription} title={iconDescription}>
-    {icons.map(icon => <i class={`fa-solid ${icon.name}`} aria-hidden="true"></i>)}
+    {icons.map(icon => <i class={`ph ${icon.name}`} aria-hidden="true"></i>)}
   </span>
   <span class="photo-hero-summary__text">{description}</span>
 </span>

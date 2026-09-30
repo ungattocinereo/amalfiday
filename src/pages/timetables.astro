@@ -242,7 +242,7 @@ const timetablesJsonLd = [
   imageAlt={shareImageAlt}
   jsonLd={timetablesJsonLd}
 >
-  <section class="timetables-hero hero--dark">
+  <section class="timetables-hero hero--dark hero-centered">
     <div class="timetables-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`timetables-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -255,9 +255,9 @@ const timetablesJsonLd = [
         </div>
       ))}
     </div>
-    <div class="timetables-hero__vignette"></div>
-    <div class="timetables-hero__content">
-      <div class="container">
+    <div class="timetables-hero__vignette hero-shade"></div>
+    <div class="timetables-hero__content hero-content">
+      <div class="container hero-container">
         <div class="timetables-hero__grid">
           <div class="timetables-hero__copy">
             <span class="timetables-hero__eyebrow">Amalfi Coast public transport 2026</span>
@@ -331,7 +331,7 @@ const timetablesJsonLd = [
         </div>
         <div class="timetables-update">
           <span class="badge">
-            <i class="fa-solid fa-clock"></i>
+            <i class="ph ph-clock" aria-hidden="true"></i>
             Updated: July 6, 2026
           </span>
         </div>
@@ -345,7 +345,7 @@ const timetablesJsonLd = [
             <div class="timetable-card__meta">
               <span class="timetable-chip timetable-chip--number">{line.number}</span>
               <span class="timetable-chip timetable-chip--date">
-                <i class="fa-solid fa-calendar"></i>
+                <i class="ph ph-calendar-blank" aria-hidden="true"></i>
                 {line.updated}
               </span>
             </div>
@@ -369,7 +369,7 @@ const timetablesJsonLd = [
             </div>
             <div class="timetable-card__actions">
               <a class="timetable-download" href={line.link} target="_blank" rel="noreferrer">
-                <i class="fa-solid fa-cloud-arrow-down"></i>
+                <i class="ph ph-cloud-arrow-down" aria-hidden="true"></i>
                 Download
               </a>
             </div>
@@ -401,7 +401,7 @@ const timetablesJsonLd = [
         this bus
       </p>
       <a class="timetable-download amico-block__download" href="https://cnr.pw/amico" target="_blank" rel="noreferrer">
-        <i class="fa-solid fa-cloud-arrow-down"></i>
+        <i class="ph ph-cloud-arrow-down" aria-hidden="true"></i>
         Download timetable
       </a>
     </div>
@@ -421,7 +421,7 @@ const timetablesJsonLd = [
       <div class="tickets-grid">
         <div class="tickets-info">
           <div class="tickets-icon">
-            <i class="fa-solid fa-ticket"></i>
+            <i class="ph ph-ticket" aria-hidden="true"></i>
           </div>
 
           <ol class="ticket-steps">
@@ -457,7 +457,7 @@ const timetablesJsonLd = [
           </ol>
 
           <div class="tickets-note">
-            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <i class="ph ph-warning-circle" aria-hidden="true"></i>
             <p>
               Drivers usually expect passengers to board with a paper ticket or an already
               activated digital ticket.
@@ -503,14 +503,14 @@ const timetablesJsonLd = [
                 <div class="ticket-card__divider"></div>
 
                 <div class="ticket-card__meta ticket-card__meta--buy">
-                  <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                  <i class="ph ph-ticket" aria-hidden="true"></i>
                   <strong>{app.buy}</strong>
                 </div>
 
                 <div class="ticket-card__divider"></div>
 
                 <div class="ticket-card__meta">
-                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  <i class="ph ph-path" aria-hidden="true"></i>
                   <span>{app.bestFor}</span>
                 </div>
               </div>
@@ -518,7 +518,7 @@ const timetablesJsonLd = [
               <div class="ticket-card__footer">
                 <p class="ticket-card__note">{app.note}</p>
                 <span class="ticket-card__action" aria-label={app.action}>
-                  <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                  <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
                 </span>
               </div>
             </a>
@@ -551,7 +551,7 @@ const timetablesJsonLd = [
           </div>
           <div class="travel-card__content">
             <h3>
-              <i class="fa-solid fa-bus"></i>
+              <i class="ph ph-bus" aria-hidden="true"></i>
               Shuttle from airport
             </h3>
             <p>
@@ -578,7 +578,7 @@ const timetablesJsonLd = [
           </div>
           <div class="travel-card__content">
             <h3>
-              <i class="fa-solid fa-taxi"></i>
+              <i class="ph ph-taxi" aria-hidden="true"></i>
               Taxi
             </h3>
             <p>

@@ -7,7 +7,7 @@
     <title>{{meta_title}}</title>
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap">
-    <link rel="stylesheet" href="{{asset "built/bootstrap-icons.css"}}">
+    <link rel="stylesheet" href="{{asset "built/phosphor-icons.css"}}">
     <script>
         try {
             const stored = localStorage.getItem('theme')
@@ -420,30 +420,30 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
         }
 
-        .theme-switch__icon .bi-moon-stars {
+        .theme-switch__icon .ph-moon-stars {
             left: 6px;
             top: 50%;
             transform: translateY(-50%);
         }
 
-        .theme-switch__icon .bi-sun {
+        .theme-switch__icon .ph-sun {
             right: 6px;
             top: 50%;
             transform: translateY(-50%);
         }
 
-        .theme-switch__icon .bi-moon-stars {
+        .theme-switch__icon .ph-moon-stars {
             opacity: 0;
             transform: translateY(-50%) scale(0.8);
             color: #ffffff;
         }
 
-        [data-theme='night'] .theme-switch__icon .bi-sun {
+        [data-theme='night'] .theme-switch__icon .ph-sun {
             opacity: 0;
             transform: translateY(-50%) scale(0.8);
         }
 
-        [data-theme='night'] .theme-switch__icon .bi-moon-stars {
+        [data-theme='night'] .theme-switch__icon .ph-moon-stars {
             opacity: 1;
             transform: translateY(-50%) scale(1);
             color: #ffffff;
@@ -521,15 +521,15 @@
             font-size: 1.05rem;
         }
 
-        .menu-toggle .bi-x-lg {
+        .menu-toggle .ph-x {
             display: none;
         }
 
-        .header.menu-open .menu-toggle .bi-list {
+        .header.menu-open .menu-toggle .ph-list {
             display: none;
         }
 
-        .header.menu-open .menu-toggle .bi-x-lg {
+        .header.menu-open .menu-toggle .ph-x {
             display: inline;
         }
 
@@ -1144,6 +1144,9 @@
         .gh-main {
             margin-top: 15px;
         }
+        .gh-topic-link .ph { font-size: 16px; margin-left: 4px; }
+        .gh-author-social .ph { font-size: 18px; }
+        .gh-author-icon .ph { display: block; font-size: 64px; }
     </style>
 
     {{ghost_head}}
@@ -1158,15 +1161,15 @@
                 <div class="header__primary">
                     <nav class="nav">
                         <a class="nav__link" href="/blog">
-                            <i class="bi bi-newspaper"></i>
+                            <i class="ph ph-newspaper" aria-hidden="true"></i>
                             News
                         </a>
                         <a class="nav__link" href="/experience">
-                            <i class="bi bi-stars"></i>
+                            <i class="ph-fill ph-star" aria-hidden="true"></i>
                             Experience
                         </a>
                         <a class="nav__link" href="/apartments">
-                            <i class="bi bi-house-door"></i>
+                            <i class="ph ph-house" aria-hidden="true"></i>
                             Apartments
                         </a>
                     </nav>
@@ -1179,15 +1182,15 @@
                     <div class="social">
                         <a class="social__link" href="https://instagram.com/amalfi.day" target="_blank" rel="noreferrer">
                             <span class="sr-only">Instagram</span>
-                            <i class="bi bi-instagram"></i>
+                            <i class="ph-light ph-instagram-logo" aria-hidden="true"></i>
                         </a>
                         <a class="social__link" href="https://facebook.com/amalfi.day" target="_blank" rel="noreferrer">
                             <span class="sr-only">Facebook</span>
-                            <i class="bi bi-facebook"></i>
+                            <i class="ph-light ph-facebook-logo" aria-hidden="true"></i>
                         </a>
                         <a class="social__link" href="https://twitter.com/amalfiday" target="_blank" rel="noreferrer">
                             <span class="sr-only">Twitter</span>
-                            <i class="bi bi-twitter-x"></i>
+                            <i class="ph-light ph-x-logo" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -1199,13 +1202,13 @@
                             <span class="theme-switch__thumb"></span>
                         </span>
                         <span class="theme-switch__icon" aria-hidden="true">
-                            <i class="bi bi-sun"></i>
-                            <i class="bi bi-moon-stars"></i>
+                            <i class="ph ph-sun" aria-hidden="true"></i>
+                            <i class="ph ph-moon-stars" aria-hidden="true"></i>
                         </span>
                     </label>
                     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-                        <i class="bi bi-list"></i>
-                        <i class="bi bi-x-lg"></i>
+                        <i class="ph ph-list" aria-hidden="true"></i>
+                        <i class="ph ph-x" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -1214,25 +1217,25 @@
             <div class="mobile-panel__links">
                 <a class="mobile-panel__link" href="/">
                     <span class="mobile-panel__link-label">
-                        <i class="bi bi-house-door-fill"></i>
+                        <i class="ph ph-house" aria-hidden="true"></i>
                         Home
                     </span>
                 </a>
                 <a class="mobile-panel__link" href="/blog">
                     <span class="mobile-panel__link-label">
-                        <i class="bi bi-newspaper"></i>
+                        <i class="ph ph-newspaper" aria-hidden="true"></i>
                         News
                     </span>
                 </a>
                 <a class="mobile-panel__link" href="/experience">
                     <span class="mobile-panel__link-label">
-                        <i class="bi bi-stars"></i>
+                        <i class="ph-fill ph-star" aria-hidden="true"></i>
                         Experience
                     </span>
                 </a>
                 <a class="mobile-panel__link" href="/apartments">
                     <span class="mobile-panel__link-label">
-                        <i class="bi bi-house-door"></i>
+                        <i class="ph ph-house" aria-hidden="true"></i>
                         Apartments
                     </span>
                 </a>
@@ -1244,22 +1247,22 @@
                         <span class="theme-switch__thumb"></span>
                     </span>
                     <span class="theme-switch__icon" aria-hidden="true">
-                        <i class="bi bi-sun"></i>
-                        <i class="bi bi-moon-stars"></i>
+                        <i class="ph ph-sun" aria-hidden="true"></i>
+                        <i class="ph ph-moon-stars" aria-hidden="true"></i>
                     </span>
                 </label>
             </div>
             <div class="mobile-panel__social">
                 <a class="mobile-panel__social-link" href="https://instagram.com/amalfi.day" target="_blank" rel="noreferrer">
-                    <i class="bi bi-instagram"></i>
+                    <i class="ph-light ph-instagram-logo" aria-hidden="true"></i>
                     <span>Instagram</span>
                 </a>
                 <a class="mobile-panel__social-link" href="https://facebook.com/amalfi.day" target="_blank" rel="noreferrer">
-                    <i class="bi bi-facebook"></i>
+                    <i class="ph-light ph-facebook-logo" aria-hidden="true"></i>
                     <span>Facebook</span>
                 </a>
                 <a class="mobile-panel__social-link" href="https://twitter.com/amalfiday" target="_blank" rel="noreferrer">
-                    <i class="bi bi-twitter-x"></i>
+                    <i class="ph-light ph-x-logo" aria-hidden="true"></i>
                     <span>X (Twitter)</span>
                 </a>
             </div>
@@ -1280,10 +1283,10 @@
                 </p>
                 <div class="prefooter__actions">
                     <a class="button" href="/contact">
-                        <i class="bi bi-send"></i> Send a request
+                        <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Send a request
                     </a>
                     <a class="prefooter__link" href="/experience">
-                        <i class="bi bi-stars"></i> Check our experiences
+                        <i class="ph-fill ph-star" aria-hidden="true"></i> Check our experiences
                     </a>
                 </div>
             </div>
@@ -1326,86 +1329,86 @@
                 </div>
                 <div class="footer__social">
                     <a class="footer__social-link footer__social-link--instagram" href="https://instagram.com/amalfi.day" target="_blank" rel="noreferrer">
-                        <i class="bi bi-instagram"></i>
+                        <i class="ph ph-instagram-logo" aria-hidden="true"></i>
                     </a>
                     <a class="footer__social-link footer__social-link--facebook" href="https://facebook.com/amalfi.day" target="_blank" rel="noreferrer">
-                        <i class="bi bi-facebook"></i>
+                        <i class="ph ph-facebook-logo" aria-hidden="true"></i>
                     </a>
                     <a class="footer__social-link footer__social-link--twitter" href="https://twitter.com/amalfiday" target="_blank" rel="noreferrer">
-                        <i class="bi bi-twitter-x"></i>
+                        <i class="ph ph-x-logo" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
 
             <div class="footer__column">
                 <a class="footer__link" href="https://cnr.pw/ferry" target="_blank" rel="noreferrer">
-                    <i class="bi bi-download footer__icon"></i>
+                    <i class="ph ph-download-simple footer__icon" aria-hidden="true"></i>
                     Ferry timetables
                 </a>
                 <a class="footer__link" href="https://cnr.pw/bus" target="_blank" rel="noreferrer">
-                    <i class="bi bi-download footer__icon"></i>
+                    <i class="ph ph-download-simple footer__icon" aria-hidden="true"></i>
                     Bus timetables
                 </a>
                 <a class="footer__link" href="/how-to-get">
-                    <i class="bi bi-airplane footer__icon"></i>
+                    <i class="ph ph-airplane footer__icon" aria-hidden="true"></i>
                     Airport shuttle
                 </a>
                 <a class="footer__link" href="/timetables">
-                    <i class="bi bi-map footer__icon"></i>
+                    <i class="ph ph-map-trifold footer__icon" aria-hidden="true"></i>
                     All public transport
                 </a>
             </div>
 
             <div class="footer__column">
                 <a class="footer__link footer__link--nowrap" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
-                    <i class="bi bi-signpost-split footer__icon"></i>
+                    <i class="ph ph-signpost footer__icon" aria-hidden="true"></i>
                     Greg's guide
                 </a>
                 <a class="footer__link" href="/apartments">
-                    <i class="bi bi-house-heart footer__icon"></i>
+                    <i class="ph ph-house-line footer__icon" aria-hidden="true"></i>
                     Apartment overview
                 </a>
                 <a class="footer__link" href="https://www.booking.com/hotel/it/cristallpont-amalfi-day.html" target="_blank" rel="noreferrer">
-                    <i class="bi bi-building footer__icon"></i>
+                    <i class="ph ph-buildings footer__icon" aria-hidden="true"></i>
                     Booking.com
                 </a>
                 <a class="footer__link" href="https://airbnb.com/p/atrani" target="_blank" rel="noreferrer">
-                    <i class="bi bi-house-door footer__icon"></i>
+                    <i class="ph ph-house footer__icon" aria-hidden="true"></i>
                     AirBnb.com
                 </a>
             </div>
 
             <div class="footer__column">
                 <a class="footer__link" href="/experience">
-                    <i class="bi bi-stars footer__icon"></i>
+                    <i class="ph ph-star footer__icon" aria-hidden="true"></i>
                     What to do
                 </a>
                 <a class="footer__link" href="/parking">
-                    <i class="bi bi-p-circle footer__icon"></i>
+                    <i class="ph ph-park footer__icon" aria-hidden="true"></i>
                     Parking tips
                 </a>
                 <a class="footer__link" href="/beaches">
-                    <i class="bi bi-umbrella footer__icon"></i>
+                    <i class="ph ph-umbrella footer__icon" aria-hidden="true"></i>
                     Beach reviews
                 </a>
                 <a class="footer__link" href="/moto">
-                    <i class="bi bi-map footer__icon"></i>
+                    <i class="ph ph-map-trifold footer__icon" aria-hidden="true"></i>
                     Moto roads
                 </a>
             </div>
 
             <div class="footer__column">
                 <a class="footer__link" href="/blog">
-                    <i class="bi bi-newspaper footer__icon"></i>
+                    <i class="ph ph-newspaper footer__icon" aria-hidden="true"></i>
                     Amalfi News
                 </a>
                 <a class="footer__link" href="/contact">
-                    <i class="bi bi-envelope footer__icon"></i>
+                    <i class="ph ph-envelope footer__icon" aria-hidden="true"></i>
                     Contact us
                 </a>
                 <span class="footer__spacer" aria-hidden="true"></span>
                 <a class="footer__link" href="#bookmark" data-bookmark="true">
-                    <i class="bi bi-bookmark-plus footer__icon"></i>
+                    <i class="ph ph-bookmark-simple footer__icon" aria-hidden="true"></i>
                     Add to bookmarks
                 </a>
             </div>

@@ -1,10 +1,17 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import '@phosphor-icons/web/regular';
+@import '@phosphor-icons/web/fill';
+@import '@phosphor-icons/web/light';
 
 @import './fonts.css';
 @import './tokens.css';
 
 * {
   box-sizing: border-box;
+}
+
+:where(.ph, .ph-fill, .ph-light) {
+  display: inline-block;
+  vertical-align: -0.125em;
 }
 
 html {
@@ -78,6 +85,32 @@ p {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Hero copy shares the expanded navigation's content width and safe gutters. */
+main :is(.hero--dark, .hero--orange, .hero404) .hero-container {
+  width: calc(100% - 2 * max(var(--page-gutter), env(safe-area-inset-left), env(safe-area-inset-right)));
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+main .hero--dark.hero-centered,
+main .hero404.hero-centered {
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--header-space) + 1.5rem);
+  padding-inline: 0;
+}
+
+main .hero-centered > .hero-content {
+  padding-block: 0;
+}
+
+main .hero-centered > .hero-shade {
+  background:
+    linear-gradient(90deg, rgba(5, 10, 14, 0.66), rgba(5, 10, 14, 0.42) 60%, rgba(5, 10, 14, 0.16)),
+    linear-gradient(0deg, rgba(5, 10, 14, 0.6), rgba(5, 10, 14, 0.14) 50%, rgba(5, 10, 14, 0.22));
 }
 
 .section {

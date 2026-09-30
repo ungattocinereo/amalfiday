@@ -64,8 +64,8 @@ const destinations = [
   noindex={true}
   imageAlt={shareImageAlt}
 >
-  <section class="hero404">
-    <div class="container hero404__inner">
+  <section class="hero404 hero-centered">
+    <div class="container hero404__inner hero-container">
       <p class="hero404__eyebrow">404 — Hai sbagliato strada</p>
       <div class="hero404__quatrain" data-quatrains={JSON.stringify(quatrains)}>
         <p class="hero404__line" data-quatrain-line>{fallbackQuatrain[0]}</p>
@@ -74,7 +74,7 @@ const destinations = [
         <p class="hero404__line" data-quatrain-line>{fallbackQuatrain[3]}</p>
       </div>
       <a class="hero404__cta" href="/">
-        <i class="fa-solid fa-arrow-left"></i>
+        <i class="ph ph-arrow-left" aria-hidden="true"></i>
         Torna a casa
       </a>
     </div>

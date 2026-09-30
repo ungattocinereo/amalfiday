@@ -28,7 +28,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
     <div class="container contact-hero__content">
       <div class="contact-hero__copy">
         <span class="badge contact-hero__badge">
-          <i class="bi bi-chat-heart"></i> Contact Amalfi.Day
+          <i class="ph ph-chat-circle" aria-hidden="true"></i> Contact Amalfi.Day
         </span>
         <h1>
           Contact us <span class="accent-italic">right now</span>
@@ -39,10 +39,10 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         </p>
         <div class="contact-hero__actions">
           <a class="button" href="#contact-form">
-            <i class="bi bi-send"></i> Send a request
+            <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Send a request
           </a>
           <a class="button button--ghost" href={whatsappHref} target="_blank" rel="noreferrer">
-            <i class="bi bi-whatsapp"></i> WhatsApp
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp
           </a>
         </div>
         <p class="contact-hero__note">
@@ -61,7 +61,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
             rel="noreferrer"
           >
             <span class="contact-hero__social-icon">
-              <i class="bi bi-instagram"></i>
+              <i class="ph ph-instagram-logo" aria-hidden="true"></i>
             </span>
             <span class="contact-hero__social-text">
               <strong>Instagram</strong>
@@ -76,7 +76,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
             rel="noreferrer"
           >
             <span class="contact-hero__social-icon">
-              <i class="bi bi-facebook"></i>
+              <i class="ph ph-facebook-logo" aria-hidden="true"></i>
             </span>
             <span class="contact-hero__social-text">
               <strong>Facebook</strong>
@@ -170,14 +170,14 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         </p>
         <div class="contact__links">
           <a class="contact-link" href={whatsappHref} target="_blank" rel="noreferrer">
-            <span class="contact-link__icon"><i class="bi bi-whatsapp"></i></span>
+            <span class="contact-link__icon"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i></span>
             <span class="contact-link__text">
               <strong>WhatsApp</strong>
               <span>Send a message on WhatsApp</span>
             </span>
           </a>
           <a class="contact-link" href="mailto:hello@amalfi.day">
-            <span class="contact-link__icon"><i class="bi bi-envelope"></i></span>
+            <span class="contact-link__icon"><i class="ph ph-envelope" aria-hidden="true"></i></span>
             <span class="contact-link__text">
               <strong>Email</strong>
               <span>Write us an email</span>
@@ -189,7 +189,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       <form class="contact-form" action="/api/contact" method="post">
         <div class="contact-form__body">
           <div class="contact-form__header">
-            <span class="badge"><i class="bi bi-stars"></i> Telegram-ready request</span>
+            <span class="badge"><i class="ph ph-star" aria-hidden="true"></i> Telegram-ready request</span>
             <h2>
               Send your <span class="accent-italic">plan</span> in minutes
             </h2>
@@ -221,7 +221,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
               Service
               <div class="service-select" data-placeholder="Select a service">
                 <span class="service-select__icon">
-                  <i class="bi bi-grid-3x3-gap"></i>
+                  <i class="ph ph-squares-four" aria-hidden="true"></i>
                 </span>
                 <input
                   class="service-select__input"
@@ -237,51 +237,51 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
                   aria-expanded="false"
                   aria-label="Open service list"
                 >
-                  <i class="bi bi-chevron-down"></i>
+                  <i class="ph ph-caret-down" aria-hidden="true"></i>
                 </button>
                 <div class="service-select__menu" role="listbox">
                   <button
                     class="service-select__option"
                     type="button"
                     data-value="Porters/taxi"
-                    data-icon="bi-car-front-fill"
+                    data-icon="ph-car"
                     role="option"
                     aria-selected="false"
                   >
-                    <i class="bi bi-car-front-fill"></i>
+                    <i class="ph ph-car" aria-hidden="true"></i>
                     <span>Porters/taxi</span>
                   </button>
                   <button
                     class="service-select__option"
                     type="button"
                     data-value="Photoshooting"
-                    data-icon="bi-camera"
+                    data-icon="ph-camera"
                     role="option"
                     aria-selected="false"
                   >
-                    <i class="bi bi-camera"></i>
+                    <i class="ph ph-camera" aria-hidden="true"></i>
                     <span>Photoshooting</span>
                   </button>
                   <button
                     class="service-select__option"
                     type="button"
                     data-value="Apartment"
-                    data-icon="bi-house-heart"
+                    data-icon="ph-house-line"
                     role="option"
                     aria-selected="false"
                   >
-                    <i class="bi bi-house-heart"></i>
+                    <i class="ph ph-house-line" aria-hidden="true"></i>
                     <span>Apartment</span>
                   </button>
                   <button
                     class="service-select__option"
                     type="button"
                     data-value="Other"
-                    data-icon="bi-stars"
+                    data-icon="ph-star"
                     role="option"
                     aria-selected="false"
                   >
-                    <i class="bi bi-stars"></i>
+                    <i class="ph ph-star" aria-hidden="true"></i>
                     <span>Other</span>
                   </button>
                 </div>
@@ -294,7 +294,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
           </label>
           <div class="contact-form__submit-row">
             <button class="button contact-form__submit-button" type="submit">
-              <i class="bi bi-send"></i> Send request
+              <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Send request
             </button>
             <p class="form__status" aria-live="polite">
               We will send your request directly to Telegram.
@@ -305,9 +305,9 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
         <div class="contact-form__success" role="status" aria-live="polite" aria-hidden="true">
           <div class="contact-form__success-inner">
             <div class="contact-form__envelope" aria-hidden="true">
-              <i class="bi bi-envelope-fill contact-form__envelope-icon"></i>
+              <i class="ph ph-envelope contact-form__envelope-icon" aria-hidden="true"></i>
               <span class="contact-form__envelope-check">
-                <i class="bi bi-check-lg"></i>
+                <i class="ph ph-check" aria-hidden="true"></i>
               </span>
             </div>
             <div class="contact-form__success-text">
@@ -382,7 +382,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       serviceInput.setCustomValidity('')
       serviceSelect.classList.remove('has-value', 'is-invalid')
       if (serviceIcon) {
-        serviceIcon.className = 'bi bi-grid-3x3-gap'
+        serviceIcon.className = 'ph ph-squares-four'
       }
       serviceOptions?.forEach((option) => option.setAttribute('aria-selected', 'false'))
       closeServiceSelect()
@@ -398,7 +398,7 @@ const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : 'https
       serviceSelect.classList.add('has-value')
       serviceSelect.classList.remove('is-invalid')
       if (serviceIcon && icon) {
-        serviceIcon.className = `bi ${icon}`
+        serviceIcon.className = `ph ${icon}`
       }
       serviceOptions?.forEach((item) => {
         item.setAttribute('aria-selected', item === option ? 'true' : 'false')

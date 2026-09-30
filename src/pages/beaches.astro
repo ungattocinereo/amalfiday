@@ -19,19 +19,19 @@ const quickFacts = [
   {
     title: 'Water',
     accent: 'warmth',
-    icon: 'fa-temperature-arrow-up',
+    icon: 'ph-thermometer-hot',
     text: 'The most comfortable swim comes from June to September, when the sea hovers around 26–28°C (79–82°F).',
   },
   {
     title: 'Beach',
     accent: 'texture',
-    icon: 'fa-gem',
+    icon: 'ph-diamond',
     text: 'Most Amalfi beaches are pebbly. Big towns counter it with full service, smooth walkways, and shaded terraces.',
   },
   {
     title: 'Sunbed',
     accent: 'ritual',
-    icon: 'fa-umbrella',
+    icon: 'ph-umbrella',
     text: 'A standard setup is two loungers plus one umbrella for the day. In July–August, reserve ahead in Amalfi and Positano.',
   },
 ]
@@ -109,19 +109,19 @@ const practicalNotes = [
   {
     title: 'Free water',
     accent: 'access',
-    icon: 'fa-water',
+    icon: 'ph-waves',
     text: 'Every beach keeps a public strip where you can lay a towel and swim. For comfort, rent a set — especially if you plan to stay all day.',
   },
   {
     title: 'Boat',
     accent: 'rentals',
-    icon: 'fa-life-ring',
+    icon: 'ph-lifebuoy',
     text: 'Amalfi rentals often offer license-free boats within local limits. They are perfect for the Galli Islands, sea caves, and hidden coves. Keep distance from the shore and ask the operator about allowed zones.',
   },
   {
     title: 'Beach',
     accent: 'restaurants',
-    icon: 'fa-mug-hot',
+    icon: 'ph-coffee',
     text: 'Some trattorias are accessible only from the water. Arrive by boat, anchor, swim in, and enjoy a long, slow lunch between swims.',
   },
 ]
@@ -174,7 +174,7 @@ const beachesJsonLd = [
   imageAlt={shareImageAlt}
   jsonLd={beachesJsonLd}
 >
-  <section class="beach-hero hero--dark">
+  <section class="beach-hero hero--dark hero-centered">
     <CldImage
       class="beach-hero__image"
       src={heroImage}
@@ -185,9 +185,9 @@ const beachesJsonLd = [
       sizes="100vw"
     />
     <div class="beach-hero__veil" aria-hidden="true"></div>
-    <div class="container beach-hero__content">
+    <div class="container beach-hero__content hero-content hero-container">
       <div class="beach-hero__copy">
-        <span class="badge beach-hero__badge"><i class="fa-solid fa-water"></i> Personal guide</span>
+        <span class="badge beach-hero__badge"><i class="ph ph-waves" aria-hidden="true"></i> Personal guide</span>
         <h1>
           Amalfi Beach <span class="accent-italic">review</span>
         </h1>
@@ -250,7 +250,7 @@ const beachesJsonLd = [
         {quickFacts.map((item) => (
           <article class="card fact-card">
             <div class="fact-card__icon">
-              <i class={`fa-solid ${item.icon}`}></i>
+              <i class={`ph ${item.icon}`} aria-hidden="true"></i>
             </div>
             <h3>
               {item.title} <span class="accent-italic">{item.accent}</span>
@@ -275,7 +275,7 @@ const beachesJsonLd = [
           {beaches.map((beach) => (
             <article class="beach-row">
               <div class="beach-row__icon" aria-hidden="true">
-                <i class={`fa-solid ${getCityIcon(beach.name)}`} aria-hidden="true"></i>
+                <i class={`ph ${getCityIcon(beach.name)}`} aria-hidden="true"></i>
               </div>
               <div class="beach-row__content">
                 <h3>
@@ -302,7 +302,7 @@ const beachesJsonLd = [
         {practicalNotes.map((item) => (
           <article class="card note-card">
             <div class="note-card__icon">
-              <i class={`fa-solid ${item.icon}`}></i>
+              <i class={`ph ${item.icon}`} aria-hidden="true"></i>
             </div>
             <h3>
               {item.title} <span class="accent-italic">{item.accent}</span>

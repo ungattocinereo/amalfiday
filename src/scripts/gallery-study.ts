@@ -25,7 +25,7 @@ if (root) {
     hero.classList.toggle('is-paused', paused)
     pauseButton.setAttribute('aria-pressed', String(paused))
     pauseButton.setAttribute('aria-label', paused ? 'Play cover animation' : 'Pause cover animation')
-    pauseButton.innerHTML = `<i class="fa-solid fa-${paused ? 'play' : 'pause'}" aria-hidden="true"></i>`
+    pauseButton.innerHTML = `<i class="ph ph-${paused ? 'play' : 'pause'}" aria-hidden="true"></i>`
     if (paused) hero.style.setProperty('--hero-drift', '0px')
   })
   new IntersectionObserver(entries => {

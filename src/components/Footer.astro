@@ -35,10 +35,11 @@ import { footerLinks, socialLinks } from '../data/site'
               href={item.href}
               target="_blank"
               rel="noreferrer"
+              aria-label={`${item.label} (opens in a new tab)`}
             >
-              {item.label === 'Instagram' && <i class="fa-brands fa-instagram"></i>}
-              {item.label === 'Facebook' && <i class="fa-brands fa-facebook"></i>}
-              {item.label === 'Twitter' && <i class="fa-brands fa-x-twitter"></i>}
+              {item.label === 'Instagram' && <i class="ph ph-instagram-logo" aria-hidden="true"></i>}
+              {item.label === 'Facebook' && <i class="ph ph-facebook-logo" aria-hidden="true"></i>}
+              {item.label === 'Twitter' && <i class="ph ph-x-logo" aria-hidden="true"></i>}
             </a>
           ))}
       </div>
@@ -53,19 +54,19 @@ import { footerLinks, socialLinks } from '../data/site'
           rel={item.external ? 'noreferrer' : undefined}
         >
           {item.label === 'Ferry timetables' && (
-            <i class="fa-solid fa-water footer__icon"></i>
+            <i class="ph ph-waves footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Bus timetables' && (
-            <i class="fa-solid fa-download footer__icon"></i>
+            <i class="ph ph-download-simple footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Book Airport Shuttle' && (
-            <i class="fa-solid fa-ticket footer__icon"></i>
+            <i class="ph ph-ticket footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Naples to Amalfi' && (
-            <i class="fa-solid fa-route footer__icon"></i>
+            <i class="ph ph-path footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'All public transport' && (
-            <i class="fa-solid fa-map footer__icon"></i>
+            <i class="ph ph-map-trifold footer__icon" aria-hidden="true"></i>
           )}
           {item.label}
         </a>
@@ -81,16 +82,16 @@ import { footerLinks, socialLinks } from '../data/site'
           rel={item.external ? 'noreferrer' : undefined}
         >
           {item.label === 'Booking.com' && (
-            <i class="fa-solid fa-bed footer__icon" aria-hidden="true"></i>
+            <i class="ph ph-bed footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'AirBnb.com' && (
-            <i class="fa-solid fa-house footer__icon" aria-hidden="true"></i>
+            <i class="ph ph-house footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Apartment overview' && (
-            <i class="fa-solid fa-house footer__icon"></i>
+            <i class="ph ph-house footer__icon" aria-hidden="true"></i>
           )}
           {item.label === "Greg's guide" && (
-            <i class="fa-solid fa-signs-post footer__icon"></i>
+            <i class="ph ph-signpost footer__icon" aria-hidden="true"></i>
           )}
           {item.label}
         </a>
@@ -101,16 +102,16 @@ import { footerLinks, socialLinks } from '../data/site'
       {footerLinks.info.map((item) => (
         <a class="footer__link" href={item.href}>
           {item.label === 'What to do' && (
-            <i class="fa-solid fa-star footer__icon"></i>
+            <i class="ph-fill ph-star footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Parking tips' && (
-            <i class="fa-solid fa-square-parking footer__icon"></i>
+            <i class="ph ph-park footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Beach reviews' && (
-            <i class="fa-solid fa-umbrella footer__icon"></i>
+            <i class="ph ph-umbrella footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Moto roads' && (
-            <i class="fa-solid fa-map footer__icon"></i>
+            <i class="ph ph-map-trifold footer__icon" aria-hidden="true"></i>
           )}
           {item.label}
         </a>
@@ -121,10 +122,10 @@ import { footerLinks, socialLinks } from '../data/site'
       {footerLinks.blog.map((item) => (
         <a class="footer__link" href={item.href}>
           {item.label === 'Amalfi News' && (
-            <i class="fa-solid fa-newspaper footer__icon"></i>
+            <i class="ph ph-newspaper footer__icon" aria-hidden="true"></i>
           )}
           {item.label === 'Contact us' && (
-            <i class="fa-solid fa-envelope footer__icon"></i>
+            <i class="ph ph-envelope footer__icon" aria-hidden="true"></i>
           )}
           {item.label}
         </a>
@@ -172,14 +173,13 @@ import { footerLinks, socialLinks } from '../data/site'
 
 <style>
   .footer {
-    padding: 4rem 0 0;
-    background: var(--color-bg);
-    border-top: 1px solid var(--color-border);
+    padding: 5rem 0 0;
+    background: color-mix(in srgb, var(--color-bg) 96%, #000);
   }
 
   .footer__inner {
     display: grid;
-    gap: 2.5rem;
+    gap: 3rem;
     grid-template-columns: 1.2fr repeat(4, 1fr);
     align-items: start;
   }
@@ -258,7 +258,7 @@ import { footerLinks, socialLinks } from '../data/site'
   .footer__column {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.5rem;
   }
 
   .footer__link {
@@ -266,10 +266,11 @@ import { footerLinks, socialLinks } from '../data/site'
     gap: 0.6rem;
     align-items: center;
     color: var(--color-text);
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.4rem;
+    line-height: 1.5;
+    min-height: 36px;
+    padding-block: 0.25rem;
   }
 
   .footer__icon {
@@ -278,9 +279,8 @@ import { footerLinks, socialLinks } from '../data/site'
   }
 
   .footer__bottom {
-    margin-top: 3rem;
+    margin-top: 3.5rem;
     padding: 1.2rem 0;
-    border-top: 1px solid var(--color-border);
     color: var(--color-text-muted);
     font-size: 0.85rem;
   }
@@ -377,6 +377,26 @@ import { footerLinks, socialLinks } from '../data/site'
   }
 
   @media (max-width: 720px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .footer__brand,
+    .footer__column,
+    .footer__bottom-inner,
+    .footer__meta {
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer__social,
+    .footer__link {
+      justify-content: center;
+    }
+
     .footer__logo {
       height: 75px;
       max-width: min(360px, 96vw);
@@ -384,6 +404,7 @@ import { footerLinks, socialLinks } from '../data/site'
 
     .footer__link {
       font-size: 1.425rem;
+      min-height: 44px;
     }
 
     .footer__link--nowrap {
@@ -400,7 +421,7 @@ import { footerLinks, socialLinks } from '../data/site'
 
     .footer__meta {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       gap: 0.3rem;
     }
 
