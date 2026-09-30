@@ -1,32 +1,12 @@
 ---
 import PoseGuidePhone from '../components/PoseGuidePhone.astro'
-import CityLabel from '../components/CityLabel.astro'
+import PhotoshootCard from '../components/PhotoshootCard.astro'
+import type { PhotoshootCardData } from '../data/photoshoot-types'
+import PhotoshootPricing from '../components/PhotoshootPricing.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { site } from '../data/site'
-import { photography, photographerSchema, photographyPackages } from '../data/photographer'
+import { photography, photographerSchema, photographyPackages, photographyExtraHour, describePhotographyPackage } from '../data/photographer'
 import { getPhotoshoot, newPhotoshootSources } from '../data/photoshoots'
-
-type ShootCard = {
-  title: string
-  location: string
-  desc: string
-  href: string
-  image: string
-  hoverImage?: string
-  hoverSrcset?: string
-  hoverWidth?: number
-  hoverHeight?: number
-  hoverZoom?: number
-  hoverFocal?: string
-  hoverMobileFocal?: string
-  tag: string
-  srcset?: string
-  width?: number
-  height?: number
-  alt?: string
-  focal?: string
-  mobileFocal?: string
-}
 
 const importedCards = newPhotoshootSources.map(({ slug, category }) => {
   const shoot = getPhotoshoot(slug)
@@ -46,7 +26,6 @@ const importedCards = newPhotoshootSources.map(({ slug, category }) => {
     hoverSrcset: hoverFrame?.srcset,
     hoverWidth: hoverFrame?.width,
     hoverHeight: hoverFrame?.height,
-    hoverZoom: hover?.zoom,
     hoverFocal: hover?.focal,
     hoverMobileFocal: hover?.mobileFocal || hover?.focal,
     srcset: cover.srcset,
@@ -94,7 +73,7 @@ const heroTags = [
   'Cinematic style',
   'Posing guidance',
 ]
-const individualShoots: ShootCard[] = [
+const individualShoots: PhotoshootCardData[] = [
   {
     title: 'Amalfi Influencer Photoshoot',
     location: 'Amalfi',
@@ -104,7 +83,6 @@ const individualShoots: ShootCard[] = [
     mobileFocal: '25% 30%',
     hoverFocal: '51% 12%',
     hoverMobileFocal: '51% 12%',
-    hoverZoom: 1.04,
     image: '/photoshootings/individual/Shifa/Hero.webp',
     hoverImage: '/photoshootings/individual/Shifa/Shifa-amalfi-photoshooting-september-2025-2.webp',
     tag: 'Influencer',
@@ -118,7 +96,6 @@ const individualShoots: ShootCard[] = [
     mobileFocal: '52% 25%',
     hoverFocal: '52% 0%',
     hoverMobileFocal: '52% 0%',
-    hoverZoom: 1.04,
     image: '/photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp',
     hoverImage: '/photoshootings/individual/Loreana/Loreana-photoshooting-in-amalfi-ravello-september-2025-05.webp',
     tag: 'Personal',
@@ -132,7 +109,6 @@ const individualShoots: ShootCard[] = [
     mobileFocal: '25% 20%',
     hoverFocal: '68% 15%',
     hoverMobileFocal: '68% 15%',
-    hoverZoom: 1.04,
     image: '/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp',
     hoverImage: '/photoshootings/individual/Lashada/gallery-1/Lashanda_Brown-August-2025_14.webp',
     tag: 'Personal',
@@ -146,7 +122,6 @@ const individualShoots: ShootCard[] = [
     mobileFocal: '50% 15%',
     hoverFocal: '57% 0%',
     hoverMobileFocal: '57% 0%',
-    hoverZoom: 1.04,
     image: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20245.webp',
     hoverImage: '/photoshootings/individual/Julietta/gallery1/Julietta_woods-Maiori-20242.webp',
     tag: 'Personal',
@@ -160,7 +135,6 @@ const individualShoots: ShootCard[] = [
     mobileFocal: '61% 28%',
     hoverFocal: '44% 12%',
     hoverMobileFocal: '44% 12%',
-    hoverZoom: 1.04,
     image: '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp',
     hoverImage: '/photoshootings/ravello-photoshooting/amalfi-beauty-in-ravello-_0001__CNR1293.webp',
     tag: 'Editorial',
@@ -174,7 +148,6 @@ const individualShoots: ShootCard[] = [
     mobileFocal: '54% 10%',
     hoverFocal: '57% 18%',
     hoverMobileFocal: '57% 18%',
-    hoverZoom: 1.04,
     image: '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp',
     hoverImage: '/photoshootings/ayuna/14-Ayuna-Atrani-2023.webp',
     tag: 'Personal',
@@ -188,7 +161,6 @@ const individualShoots: ShootCard[] = [
     mobileFocal: '78% 25%',
     hoverFocal: '52% 18%',
     hoverMobileFocal: '52% 18%',
-    hoverZoom: 1.04,
     image: '/photoshootings/camelia/4-camelia-photoshooting-moto.webp',
     hoverImage: '/photoshootings/camelia/002-camelia-photoshooting-moto.webp',
     tag: 'Moto',
@@ -196,7 +168,7 @@ const individualShoots: ShootCard[] = [
   ...importedCards.filter(shoot => shoot.category === 'individual'),
 ]
 
-const coupleAndFamilyShoots: ShootCard[] = [
+const coupleAndFamilyShoots: PhotoshootCardData[] = [
   {
     title: 'Ravello Romance',
     location: 'Ravello',
@@ -206,7 +178,6 @@ const coupleAndFamilyShoots: ShootCard[] = [
     mobileFocal: '60% 22%',
     hoverFocal: '52% 15%',
     hoverMobileFocal: '52% 15%',
-    hoverZoom: 1.04,
     image: '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp',
     hoverImage: '/photoshootings/regan-tay-ravello/04-slideshow-regan-walk-ravello-love.webp',
     tag: 'Couple',
@@ -220,7 +191,6 @@ const coupleAndFamilyShoots: ShootCard[] = [
     mobileFocal: '49% 15%',
     hoverFocal: '48% 12%',
     hoverMobileFocal: '48% 12%',
-    hoverZoom: 1.04,
     image: '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp',
     hoverImage: '/photoshootings/olga-marat/0002-olga-marat-atrani-2023.webp',
     tag: 'Couple',
@@ -271,6 +241,8 @@ const testimonials = [
 ]
 
 const allShoots = [...individualShoots, ...coupleAndFamilyShoots]
+const soloPackages = Object.values(photographyPackages).filter(pkg => pkg.session === 'solo')
+const couplePackages = Object.values(photographyPackages).filter(pkg => pkg.session === 'couple')
 const hubJsonLd = [
   photographerSchema,
   {
@@ -288,7 +260,7 @@ const hubJsonLd = [
     offers: Object.values(photographyPackages).map((pkg) => ({
       '@type': 'Offer',
       name: pkg.name,
-      description: `${pkg.description} Posing guidance included. Base price; travel fees, add-ons and seasonal offers are listed on the page.`,
+      description: `${describePhotographyPackage(pkg)} Posing guidance included. Base price; travel fees, add-ons and seasonal offers are listed on the page.`,
       price: pkg.price,
       priceCurrency: 'EUR',
       url: `${photography.url}#${pkg.id}`,
@@ -526,81 +498,22 @@ const hubJsonLd = [
         </p>
       </div>
       <div class="shoot-grid">
-        {individualShoots.map((item) => (
-          <a class:list={['shoot-card', { 'shoot-card--swap': item.hoverImage }]} href={item.href} style={`--card-focal:${item.focal || 'top center'};--card-mobile-focal:${item.mobileFocal || item.focal || 'top center'}`}>
-            <div class="shoot-card__media">
-              <img class="shoot-card__img shoot-card__img--main" src={item.image} srcset={item.srcset} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" width={item.width} height={item.height} alt={item.alt || item.title} loading="lazy" decoding="async" />
-              {item.hoverImage && <img class="shoot-card__img shoot-card__img--hover" src={item.hoverImage} srcset={item.hoverSrcset} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" width={item.hoverWidth} height={item.hoverHeight} style={`${item.hoverZoom ? `--card-hover-scale:${item.hoverZoom};` : ''}--card-focal:${item.hoverFocal || item.focal || 'top center'};--card-mobile-focal:${item.hoverMobileFocal || item.hoverFocal || item.mobileFocal || item.focal || 'top center'}`} alt="" loading="lazy" decoding="async" />}
-            </div>
-            <span class="shoot-card__tag">{item.tag}</span>
-            <div class="shoot-card__overlay">
-              <div class="shoot-card__location"><CityLabel name={item.location} /></div>
-              <h3 class="shoot-card__title">{item.title}</h3>
-              <p class="shoot-card__desc">{item.desc}</p>
-              <span class="shoot-card__cta">View story <i class="fa-solid fa-arrow-right"></i></span>
-            </div>
-          </a>
-        ))}
+        {individualShoots.map((item) => <PhotoshootCard item={item} />)}
       </div>
     </div>
   </section>
 
   <!-- ═══════ 2. SOLO PRICING ═══════ -->
-  <section class="section pricing" id="pricing">
+  <section class="section pricing" id="pricing" aria-labelledby="solo-pricing-title">
     <div class="container">
       <div class="cat-header cat-header--center">
         <span class="pricing__eyebrow">Transparent Pricing</span>
-        <h2>Solo &amp; Individual <span class="accent-italic">Packages</span></h2>
+        <h2 id="solo-pricing-title">Solo &amp; Individual <span class="accent-italic">Packages</span></h2>
         <p class="cat-header__desc">
-          No hidden fees, no platform commissions. Direct booking with a local photographer who lives on the coast.
+          A few favorite portraits or a whole coastal story. Choose your pace and book directly with Greg.
         </p>
       </div>
-      <div class="pricing__cards">
-        <div class="pricing-card" id={photographyPackages.portrait.id}>
-          <div class="pricing-card__head">
-            <span class="pricing-card__tag">Personal</span>
-            <h3 class="pricing-card__name">{photographyPackages.portrait.name}</h3>
-            <p class="pricing-card__tagline">Quick &amp; cinematic — your Amalfi moment</p>
-            <div class="pricing-card__price">&euro;{photographyPackages.portrait.price}</div>
-          </div>
-          <ul class="pricing-card__list">
-            <li><i class="fa-solid fa-clock"></i> ~45 minutes</li>
-            <li><i class="fa-solid fa-location-dot"></i> 2 locations in Atrani</li>
-            <li><i class="fa-solid fa-image"></i> 25+ retouched photos</li>
-            <li><i class="fa-solid fa-sun"></i> Morning or golden hour</li>
-            <li><i class="fa-solid fa-mobile-screen-button"></i> Social-ready formats (IG, LinkedIn)</li>
-            <li><i class="fa-solid fa-cloud-arrow-down"></i> Online gallery, 7 business days</li>
-          </ul>
-          <div class="pricing-card__ideal">
-            <strong>Ideal for:</strong> Solo travelers, content creators, professional portraits abroad
-          </div>
-          <a class="pricing-card__btn" href="/contact">Book this session</a>
-        </div>
-
-        <div class="pricing-card pricing-card--featured" id={photographyPackages.coastal.id}>
-          <div class="pricing-card__ribbon">Popular</div>
-          <div class="pricing-card__head">
-            <span class="pricing-card__tag">Influencer</span>
-            <h3 class="pricing-card__name">{photographyPackages.coastal.name}</h3>
-            <p class="pricing-card__tagline">Extended storytelling with hidden-gem locations</p>
-            <div class="pricing-card__price">&euro;{photographyPackages.coastal.price}</div>
-          </div>
-          <ul class="pricing-card__list">
-            <li><i class="fa-solid fa-clock"></i> ~1.5 hours</li>
-            <li><i class="fa-solid fa-location-dot"></i> 3–4 locations in Atrani &amp; beyond</li>
-            <li><i class="fa-solid fa-image"></i> 50+ retouched photos</li>
-            <li><i class="fa-solid fa-calendar-check"></i> Flexible timing</li>
-            <li><i class="fa-solid fa-circle-half-stroke"></i> 3 black &amp; white edits included</li>
-            <li><i class="fa-solid fa-bolt"></i> 3 express previews within 24h</li>
-            <li><i class="fa-solid fa-map"></i> Off-the-beaten-path locations</li>
-            <li><i class="fa-solid fa-cloud-arrow-down"></i> Online gallery, 7 business days</li>
-          </ul>
-          <div class="pricing-card__ideal">
-            <strong>Ideal for:</strong> Influencers, travel bloggers, birthday gift to yourself, portfolio content
-          </div>
-          <a class="pricing-card__btn" href="/contact">Book this session</a>
-        </div>
-      </div>
+      <PhotoshootPricing packages={soloPackages} />
     </div>
   </section>
 
@@ -615,78 +528,20 @@ const hubJsonLd = [
         </p>
       </div>
       <div class="shoot-grid shoot-grid--couple">
-        {coupleAndFamilyShoots.map((item) => (
-          <a class:list={['shoot-card', 'shoot-card--wide', { 'shoot-card--swap': item.hoverImage }]} href={item.href} style={`--card-focal:${item.focal || 'top center'};--card-mobile-focal:${item.mobileFocal || item.focal || 'top center'}`}>
-            <div class="shoot-card__media">
-              <img class="shoot-card__img shoot-card__img--main" src={item.image} srcset={item.srcset} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" width={item.width} height={item.height} alt={item.alt || item.title} loading="lazy" decoding="async" />
-              {item.hoverImage && <img class="shoot-card__img shoot-card__img--hover" src={item.hoverImage} srcset={item.hoverSrcset} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" width={item.hoverWidth} height={item.hoverHeight} style={`${item.hoverZoom ? `--card-hover-scale:${item.hoverZoom};` : ''}--card-focal:${item.hoverFocal || item.focal || 'top center'};--card-mobile-focal:${item.hoverMobileFocal || item.hoverFocal || item.mobileFocal || item.focal || 'top center'}`} alt="" loading="lazy" decoding="async" />}
-            </div>
-            <span class="shoot-card__tag">{item.tag}</span>
-            <div class="shoot-card__overlay">
-              <div class="shoot-card__location"><CityLabel name={item.location} /></div>
-              <h3 class="shoot-card__title">{item.title}</h3>
-              <p class="shoot-card__desc">{item.desc}</p>
-              <span class="shoot-card__cta">View story <i class="fa-solid fa-arrow-right"></i></span>
-            </div>
-          </a>
-        ))}
+        {coupleAndFamilyShoots.map((item) => <PhotoshootCard item={item} wide />)}
       </div>
     </div>
   </section>
 
   <!-- ═══════ 4. COUPLES PRICING ═══════ -->
-  <section class="section pricing pricing--alt">
+  <section class="section pricing pricing--alt" id="couples-pricing" aria-labelledby="couples-pricing-title">
     <div class="container">
       <div class="cat-header cat-header--center">
         <span class="pricing__eyebrow">Couples Pricing</span>
-        <h2>Two of You, <span class="accent-italic">One Coast</span></h2>
+        <h2 id="couples-pricing-title">Two of You, <span class="accent-italic">One Coast</span></h2>
+        <p class="cat-header__desc">Time together, beautifully photographed. Every price below covers both of you.</p>
       </div>
-      <div class="pricing__cards">
-        <div class="pricing-card" id={photographyPackages.golden.id}>
-          <div class="pricing-card__head">
-            <span class="pricing-card__tag">Couple</span>
-            <h3 class="pricing-card__name">{photographyPackages.golden.name}</h3>
-            <p class="pricing-card__tagline">One hour of pure magic in the most photogenic village</p>
-            <div class="pricing-card__price">&euro;{photographyPackages.golden.price}</div>
-          </div>
-          <ul class="pricing-card__list">
-            <li><i class="fa-solid fa-clock"></i> ~1 hour</li>
-            <li><i class="fa-solid fa-location-dot"></i> 2–3 locations in Atrani</li>
-            <li><i class="fa-solid fa-image"></i> 40+ retouched photos</li>
-            <li><i class="fa-solid fa-sun"></i> Golden hour (sunrise or sunset)</li>
-            <li><i class="fa-solid fa-comment-dots"></i> Style &amp; outfit consultation</li>
-            <li><i class="fa-solid fa-cloud-arrow-down"></i> Online gallery, 7 business days</li>
-          </ul>
-          <div class="pricing-card__ideal">
-            <strong>Ideal for:</strong> Honeymoon, anniversary, romantic getaway, save-the-date
-          </div>
-          <a class="pricing-card__btn" href="/contact">Book this session</a>
-        </div>
-
-        <div class="pricing-card pricing-card--featured" id={photographyPackages.panorama.id}>
-          <div class="pricing-card__ribbon">Best Value</div>
-          <div class="pricing-card__head">
-            <span class="pricing-card__tag">Couple</span>
-            <h3 class="pricing-card__name">{photographyPackages.panorama.name}</h3>
-            <p class="pricing-card__tagline">Atrani + Amalfi — the full cinematic experience</p>
-            <div class="pricing-card__price">&euro;{photographyPackages.panorama.price}</div>
-          </div>
-          <ul class="pricing-card__list">
-            <li><i class="fa-solid fa-clock"></i> ~2 hours</li>
-            <li><i class="fa-solid fa-location-dot"></i> 4–6 locations across Atrani &amp; Amalfi</li>
-            <li><i class="fa-solid fa-image"></i> 80+ retouched photos</li>
-            <li><i class="fa-solid fa-calendar-check"></i> Flexible timing</li>
-            <li><i class="fa-solid fa-circle-half-stroke"></i> 5 black &amp; white edits included</li>
-            <li><i class="fa-solid fa-bolt"></i> 3–5 express previews within 24h</li>
-            <li><i class="fa-solid fa-video"></i> Walking + posed styles</li>
-            <li><i class="fa-solid fa-cloud-arrow-down"></i> Online gallery, 7 business days</li>
-          </ul>
-          <div class="pricing-card__ideal">
-            <strong>Ideal for:</strong> Engagement, proposal, elopement, anniversary, social media content
-          </div>
-          <a class="pricing-card__btn" href="/contact">Book this session</a>
-        </div>
-      </div>
+      <PhotoshootPricing packages={couplePackages} />
     </div>
   </section>
 
@@ -732,7 +587,7 @@ const hubJsonLd = [
   </section>
 
   <!-- ═══════ 6. TRAVEL ZONES ═══════ -->
-  <section class="section pricing-travel">
+  <section class="section pricing-travel" id="travel-fees">
     <div class="container">
       <div class="cat-header">
         <h2>Travel <span class="accent-italic">Zones</span></h2>
@@ -784,7 +639,7 @@ const hubJsonLd = [
         </table>
       </div>
       <div class="travel-notes">
-        <p>Travel time is not deducted from your session. For zones 3–5, minimum session is 1.5 hours. Booking 2+ hours in zones 1–2 reduces the travel fee by 50%.</p>
+        <p>Travel time is not deducted from your session. For zones 3–5, minimum session is 90 minutes. Booking 120+ minutes in zones 1–2 reduces the travel fee by 50%.</p>
       </div>
     </div>
   </section>
@@ -827,9 +682,9 @@ const hubJsonLd = [
           <div class="addon-card__icon"><i class="fa-solid fa-hourglass-half"></i></div>
           <div class="addon-card__body">
             <h3 class="addon-card__name">Extra Time</h3>
-            <p class="addon-card__desc">Extend any session by one hour</p>
+            <p class="addon-card__desc">60 extra minutes: solo €{photographyExtraHour.solo}, couples €{photographyExtraHour.couple}. Includes 60 more retouched photos.</p>
           </div>
-          <span class="addon-card__price">+&euro;120/hr</span>
+          <span class="addon-card__price">from +&euro;{photographyExtraHour.solo}/60 min</span>
         </div>
         <div class="addon-card">
           <div class="addon-card__icon"><i class="fa-solid fa-file-image"></i></div>
@@ -867,7 +722,7 @@ const hubJsonLd = [
           <div class="addon-card__icon"><i class="fa-solid fa-user-plus"></i></div>
           <div class="addon-card__body">
             <h3 class="addon-card__name">Extra Person</h3>
-            <p class="addon-card__desc">Additional person in the session</p>
+            <p class="addon-card__desc">Add a third or further guest to a couple session</p>
           </div>
           <span class="addon-card__price">+&euro;30/person</span>
         </div>
@@ -968,7 +823,7 @@ const hubJsonLd = [
       </details>
       <details>
         <summary>How much does a photoshoot with Greg cost?</summary>
-        <p>Base solo packages are €{photographyPackages.portrait.price} for about 45 minutes with 25+ retouched photos, or €{photographyPackages.coastal.price} for about 1.5 hours with 50+ photos. Couple packages are €{photographyPackages.golden.price} for about one hour with 40+ photos, or €{photographyPackages.panorama.price} for about two hours with 80+ photos. Travel fees, add-ons and seasonal offers are listed on this page. <a href="#pricing">Compare the packages.</a></p>
+        <p>Solo packages are {soloPackages.map((pkg, index) => <>{index > 0 && '; '}€{pkg.price} for {pkg.durationMinutes} minutes with {pkg.photoCount}+ retouched photos</>)}. Couple packages are {couplePackages.map((pkg, index) => <>{index > 0 && '; '}€{pkg.price} for {pkg.durationMinutes} minutes with {pkg.photoCount}+ retouched photos</>)}. Couple prices cover both people. Travel fees, add-ons and seasonal offers are listed on this page. <a href="#pricing">Compare solo packages</a> or <a href="#couples-pricing">couple packages.</a></p>
       </details>
       <details>
         <summary>Can I book through Airbnb, Localgrapher or GetYourGuide?</summary>
@@ -1141,7 +996,7 @@ const hubJsonLd = [
     outline-offset: 5px;
   }
 
-  :is(section, .pricing-card)[id] {
+  section[id] {
     scroll-margin-top: 6rem;
   }
 
@@ -1620,187 +1475,8 @@ const hubJsonLd = [
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .shoot-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    height: 440px;
-    display: block;
-    text-decoration: none;
-    color: #ffffff;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
-  }
-
-  .shoot-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-    text-decoration: none;
-  }
-
-  .shoot-card--wide {
-    height: auto;
-    aspect-ratio: 7 / 6;
-  }
-
-  @media (min-width: 1025px) {
-    .shoot-card--wide { aspect-ratio: 1; }
-  }
-
-  /* --- Media: dual image with hover swap --- */
-  .shoot-card__media {
-    position: absolute;
-    inset: 0;
-    background-color: #111;
-  }
-
-  .shoot-card__img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: var(--card-focal, top center);
-    display: block;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 6s cubic-bezier(0.25, 0, 0.4, 1);
-  }
-
-  .shoot-card__img--main {
-    opacity: 1;
-    z-index: 1;
-  }
-
-  .shoot-card__img--hover {
-    opacity: 0;
-    z-index: 2;
-    transform: scale(var(--card-hover-scale, 1.04));
-    transform-origin: var(--card-focal, top center);
-  }
-
-  .shoot-card--swap:hover .shoot-card__img--main {
-    opacity: 0;
-  }
-
-  .shoot-card:hover .shoot-card__img--hover {
-    opacity: 1;
-    transform: scale(var(--card-hover-scale, 1.08));
-  }
-
-  /* --- Tag badge --- */
-  .shoot-card__tag {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    z-index: 4;
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.9);
-    transition: background 0.3s ease, border-color 0.3s ease;
-  }
-
-  .shoot-card:hover .shoot-card__tag {
-    background: rgba(255, 89, 0, 0.75);
-    border-color: rgba(255, 89, 0, 0.3);
-  }
-
-  /* --- Overlay with gradient + content --- */
-  .shoot-card__overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 1.6rem;
-    background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.72) 0%,
-      rgba(0, 0, 0, 0.25) 40%,
-      rgba(0, 0, 0, 0.03) 70%,
-      transparent 100%
-    );
-    color: #ffffff;
-  }
-
-  .shoot-card__location {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 0.4rem;
-  }
-
-  .shoot-card__title {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    line-height: 1.25;
-    margin: 0;
-    color: #ffffff;
-    transition: color 0.3s ease;
-  }
-
-  .shoot-card--wide .shoot-card__title {
-    font-size: 1.35rem;
-  }
-
-  .shoot-card__desc {
-    margin: 0;
-    font-size: 0.82rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.55);
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin 0.35s ease;
-  }
-
-  .shoot-card:hover .shoot-card__desc {
-    max-height: 4rem;
-    opacity: 1;
-    margin-top: 0.5rem;
-  }
-
-  .shoot-card__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    margin-top: 0;
-    max-height: 0;
-    overflow: hidden;
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: var(--color-accent);
-    opacity: 0;
-    transform: translateY(6px);
-    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), margin 0.35s ease, opacity 0.35s ease 0.05s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, gap 0.3s ease;
-  }
-
-  .shoot-card:hover .shoot-card__cta {
-    max-height: 3rem;
-    margin-top: 0.8rem;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .shoot-card:hover .shoot-card__cta:hover {
-    gap: 0.6rem;
-  }
-
   @media (max-width: 1024px) {
-    .shoot-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    .shoot-grid,
     .shoot-grid--couple {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -1810,34 +1486,6 @@ const hubJsonLd = [
     .shoot-grid,
     .shoot-grid--couple {
       grid-template-columns: 1fr;
-    }
-    .shoot-card {
-      height: 380px;
-    }
-    .shoot-card--wide {
-      height: clamp(320px, 92vw, 400px);
-      aspect-ratio: auto;
-    }
-    .shoot-card__img {
-      object-position: var(--card-mobile-focal, top center);
-    }
-
-    .shoot-card__img--hover {
-      transform-origin: var(--card-mobile-focal, top center);
-    }
-
-    /* Show desc on mobile since no hover */
-    .shoot-card__desc {
-      max-height: 4rem;
-      opacity: 1;
-      margin-top: 0.4rem;
-    }
-
-    .shoot-card__cta {
-      max-height: 3rem;
-      margin-top: 0.8rem;
-      opacity: 1;
-      transform: translateY(0);
     }
   }
 
@@ -1961,158 +1609,6 @@ const hubJsonLd = [
 
   .pricing--alt {
     background: var(--color-surface);
-  }
-
-  .pricing__cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  /* ── Pricing card ── */
-  .pricing-card {
-    position: relative;
-    background: var(--color-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 2.2rem 2rem;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .pricing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lift);
-  }
-
-  .pricing-card--featured {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 1px var(--color-accent), var(--shadow-soft);
-  }
-
-  .pricing-card__ribbon {
-    position: absolute;
-    top: -1px;
-    right: 1.5rem;
-    background: var(--color-accent);
-    color: #ffffff;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    padding: 0.35rem 0.8rem;
-    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-  }
-
-  .pricing-card__head {
-    margin-bottom: 1.5rem;
-  }
-
-  .pricing-card__tag {
-    display: inline-block;
-    padding: 0.25rem 0.6rem;
-    border-radius: 999px;
-    background: var(--color-surface);
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-text-muted);
-    margin-bottom: 0.8rem;
-  }
-
-  .pricing-card__name {
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    line-height: 1.2;
-    color: var(--color-text);
-    margin: 0 0 0.4rem;
-  }
-
-  .pricing-card__tagline {
-    font-size: 0.88rem;
-    color: var(--color-text-muted);
-    margin: 0 0 1rem;
-    line-height: 1.5;
-  }
-
-  .pricing-card__price {
-    font-family: var(--font-display);
-    font-size: 2.6rem;
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: 1;
-  }
-
-  .pricing-card__list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    flex: 1;
-  }
-
-  .pricing-card__list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: var(--color-text-muted);
-  }
-
-  .pricing-card__list li i {
-    color: var(--color-accent);
-    font-size: 0.9rem;
-    flex-shrink: 0;
-    margin-top: 0.15rem;
-  }
-
-  .pricing-card__ideal {
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    padding: 0.8rem 0;
-    border-top: 1px solid var(--color-border);
-    margin-bottom: 1.2rem;
-    line-height: 1.6;
-  }
-
-  .pricing-card__ideal strong {
-    color: var(--color-text);
-  }
-
-  .pricing-card__btn {
-    display: block;
-    text-align: center;
-    padding: 0.8rem 1.5rem;
-    border-radius: 999px;
-    background: var(--color-accent);
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .pricing-card__btn:hover {
-    background: #e94f00;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 30px rgba(255, 89, 0, 0.3);
-    text-decoration: none;
-    color: #ffffff;
-  }
-
-  .pricing-card--featured .pricing-card__btn {
-    background: var(--color-accent);
-  }
-
-  @media (max-width: 768px) {
-    .pricing__cards {
-      grid-template-columns: 1fr;
-    }
   }
 
   /* ── Every session includes — mini cards ── */

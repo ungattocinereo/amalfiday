@@ -1,0 +1,82 @@
+---
+interface Props {
+  value: number
+  duration?: number
+}
+
+const { value, duration = 1.5 } = Astro.props
+---
+
+<span
+  class="stats-counter"
+  data-stats-counter
+  data-value={value}
+  data-duration={duration}
+>
+  <span class="sr-only">{value}</span>
+  <span data-counter-number aria-hidden="true">{value}</span>
+</span>
+
+<script>
+  const counters = [...document.querySelectorAll<HTMLElement>('[data-stats-counter]')]
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+    const frames = new Map<HTMLElement, number>()
+    const finish = (counter: HTMLElement) => {
+      cancelAnimationFrame(frames.get(counter) ?? 0)
+      counter.querySelector('[data-counter-number]')!.textContent = counter.dataset.value!
+      frames.delete(counter)
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        const counter = entry.target as HTMLElement
+        const number = counter.querySelector('[data-counter-number]')!
+        const value = Number(counter.dataset.value)
+        const duration = Number(counter.dataset.duration) * 1000
+        const started = performance.now()
+        observer.unobserve(counter)
+
+        const tick = (now: number) => {
+          const progress = Math.min((now - started) / duration, 1)
+          const eased = 1 - (1 - progress) ** 3
+          number.textContent = String(Math.round(value * eased))
+          if (progress < 1) frames.set(counter, requestAnimationFrame(tick))
+          else finish(counter)
+        }
+        frames.set(counter, requestAnimationFrame(tick))
+      })
+    }, { rootMargin: '0px 0px -80px 0px', threshold: 0.5 })
+
+    counters.forEach((counter) => {
+      counter.querySelector('[data-counter-number]')!.textContent = '0'
+      observer.observe(counter)
+    })
+
+    reducedMotion.addEventListener('change', (event) => {
+      if (!event.matches) return
+      observer.disconnect()
+      counters.forEach(finish)
+    })
+  }
+</script>
+
+<style>
+  .stats-counter {
+    position: relative;
+    display: inline-block;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  .stats-counter::before {
+    content: attr(data-value);
+    visibility: hidden;
+  }
+
+  [data-counter-number] {
+    position: absolute;
+    inset: 0;
+  }
+</style>

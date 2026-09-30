@@ -1,4 +1,24 @@
 export type GalleryType = 'rail' | 'spreads' | 'dissolve' | 'immersive'
+export type PhotoshootCardData = {
+  title: string
+  location: string
+  desc: string
+  href: string
+  image: string
+  hoverImage?: string
+  hoverSrcset?: string
+  hoverWidth?: number
+  hoverHeight?: number
+  hoverFocal?: string
+  hoverMobileFocal?: string
+  tag: string
+  srcset?: string
+  width?: number
+  height?: number
+  alt?: string
+  focal?: string
+  mobileFocal?: string
+}
 export type PhotoHeading = { lead: string; accent: string; tail?: string }
 export type PhotoStory = {
   eyebrow: string
@@ -49,7 +69,7 @@ export type PhotoshootSource = {
     frameId: string
     focal: string
     mobileFocal?: string
-    hover?: { frameId: string; focal: string; mobileFocal?: string; zoom?: number }
+    hover?: { frameId: string; focal: string; mobileFocal?: string }
   }
   location: string
   summary: string

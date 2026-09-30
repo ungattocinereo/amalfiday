@@ -29,30 +29,124 @@ export const photographerSchema = {
   })),
 }
 
-// Base package prices are shared by the visible cards and their structured data.
+export type PhotographyPackage = {
+  id: string
+  session: 'solo' | 'couple'
+  tier: 'Mini' | 'Signature' | 'Coastal Story'
+  name: string
+  price: number
+  durationMinutes: number
+  photoCount: number
+  tagline: string
+  locations: string
+  route: string
+  outfits: string
+  previews: number
+  idealFor: string
+  recommended: boolean
+}
+
+// Cards, booking requests, FAQ and structured data share these package details.
 export const photographyPackages = {
   portrait: {
     id: 'travelers-portrait',
-    name: "Traveler's Portrait",
+    session: 'solo',
+    tier: 'Mini',
+    name: 'Solo Mini',
     price: 200,
-    description: 'Solo photoshoot: approximately 45 minutes, 2 locations in Atrani, 25+ retouched photos, and delivery in 7 business days.',
+    durationMinutes: 30,
+    photoCount: 20,
+    tagline: 'A little time. A beautiful memory of the coast.',
+    locations: 'Atrani or Amalfi',
+    route: 'One compact area',
+    outfits: 'One outfit',
+    previews: 0,
+    idealFor: 'A few favorite portraits from your trip',
+    recommended: false,
+  },
+  soloSignature: {
+    id: 'solo-signature',
+    session: 'solo',
+    tier: 'Signature',
+    name: 'Solo Signature',
+    price: 300,
+    durationMinutes: 60,
+    photoCount: 60,
+    tagline: 'Time to settle in, explore and find your favorite angles.',
+    locations: 'Atrani or Amalfi',
+    route: '2–3 nearby photo spots',
+    outfits: 'Time for one outfit change',
+    previews: 3,
+    idealFor: 'Travel portraits, birthdays & fresh profile photos',
+    recommended: true,
   },
   coastal: {
     id: 'coastal-stories',
-    name: 'Coastal Stories',
-    price: 320,
-    description: 'Solo or influencer photoshoot: approximately 1.5 hours, 3–4 locations in Atrani and beyond, 50+ retouched photos, and delivery in 7 business days.',
+    session: 'solo',
+    tier: 'Coastal Story',
+    name: 'Solo Coastal Story',
+    price: 480,
+    durationMinutes: 120,
+    photoCount: 120,
+    tagline: 'Two towns, different looks and a story that feels like you.',
+    locations: 'Atrani & Amalfi',
+    route: '4–6 photo spots across two towns',
+    outfits: 'Time for two outfit changes',
+    previews: 5,
+    idealFor: 'A full travel story, creators & personal portfolios',
+    recommended: false,
+  },
+  coupleMini: {
+    id: 'couple-mini',
+    session: 'couple',
+    tier: 'Mini',
+    name: 'Couple Mini',
+    price: 250,
+    durationMinutes: 30,
+    photoCount: 20,
+    tagline: 'A short coastal escape, just for the two of you.',
+    locations: 'Atrani or Amalfi',
+    route: 'One compact area',
+    outfits: 'One outfit each',
+    previews: 0,
+    idealFor: 'A few favorite moments together',
+    recommended: false,
   },
   golden: {
     id: 'golden-hour-atrani',
-    name: 'Golden Hour Atrani',
-    price: 280,
-    description: 'Couple photoshoot: approximately 1 hour, 2–3 locations in Atrani, 40+ retouched photos, and delivery in 7 business days.',
+    session: 'couple',
+    tier: 'Signature',
+    name: 'Couple Signature',
+    price: 350,
+    durationMinutes: 60,
+    photoCount: 60,
+    tagline: '60 unhurried minutes of sea views, quiet streets and you.',
+    locations: 'Atrani or Amalfi',
+    route: '2–3 nearby photo spots',
+    outfits: 'Time for one outfit change',
+    previews: 3,
+    idealFor: 'Honeymoons, anniversaries & romantic getaways',
+    recommended: true,
   },
   panorama: {
     id: 'two-towns-panorama',
-    name: 'Two Towns Panorama',
-    price: 400,
-    description: 'Couple photoshoot: approximately 2 hours, 4–6 locations across Atrani and Amalfi, 80+ retouched photos, and delivery in 7 business days.',
+    session: 'couple',
+    tier: 'Coastal Story',
+    name: 'Couple Coastal Story',
+    price: 550,
+    durationMinutes: 120,
+    photoCount: 120,
+    tagline: 'Follow the coast together, with room for every little moment.',
+    locations: 'Atrani & Amalfi',
+    route: '4–6 photo spots across two towns',
+    outfits: 'Time for two outfit changes',
+    previews: 5,
+    idealFor: 'A longer love story & a relaxed two-town experience',
+    recommended: false,
   },
-}
+} satisfies Record<string, PhotographyPackage>
+
+export const photographyExtraHour = { solo: 180, couple: 200 }
+
+export const describePhotographyPackage = (pkg: PhotographyPackage) =>
+  `${pkg.session === 'solo' ? 'Solo' : 'Couple'} photoshoot: ${pkg.durationMinutes} minutes, ${pkg.route.toLowerCase()} in ${pkg.locations}, ${pkg.photoCount}+ retouched photos${pkg.previews ? `, ${pkg.previews} preview photos within 24 hours` : ''}, and private online gallery delivery within 7 business days.`

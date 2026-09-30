@@ -1,0 +1,329 @@
+---
+import CityLabel from './CityLabel.astro'
+import type { PhotoshootCardData } from '../data/photoshoot-types'
+
+interface Props {
+  item: PhotoshootCardData
+  wide?: boolean
+}
+
+const { item, wide = false } = Astro.props
+const sizes = `(max-width: 640px) 100vw, (max-width: 1024px) 50vw, ${wide ? '33vw' : '25vw'}`
+const focal = item.focal || 'top center'
+const mobileFocal = item.mobileFocal || focal
+const hoverFocal = item.hoverFocal || focal
+const hoverMobileFocal = item.hoverMobileFocal || item.hoverFocal || mobileFocal
+---
+
+<a
+  class:list={['shoot-card', { 'shoot-card--wide': wide, 'shoot-card--swap': item.hoverImage }]}
+  href={item.href}
+  style={`--card-focal:${focal};--card-mobile-focal:${mobileFocal}`}
+>
+  <div class="shoot-card__media">
+    <img
+      class="shoot-card__img shoot-card__img--main"
+      src={item.image}
+      srcset={item.srcset}
+      sizes={sizes}
+      width={item.width}
+      height={item.height}
+      alt={item.alt || item.title}
+      loading="lazy"
+      decoding="async"
+    />
+    {item.hoverImage && (
+      <img
+        class="shoot-card__img shoot-card__img--hover"
+        src={item.hoverImage}
+        srcset={item.hoverSrcset}
+        sizes={sizes}
+        width={item.hoverWidth}
+        height={item.hoverHeight}
+        style={`--card-focal:${hoverFocal};--card-mobile-focal:${hoverMobileFocal}`}
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    )}
+  </div>
+  <span class="shoot-card__tag">{item.tag}</span>
+  <div class="shoot-card__overlay">
+    <div class="shoot-card__location"><CityLabel name={item.location} /></div>
+    <h3 class="shoot-card__title">{item.title}</h3>
+    <p class="shoot-card__desc">{item.desc}</p>
+    <span class="shoot-card__cta">View story <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+  </div>
+</a>
+
+<style>
+  .shoot-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    height: 440px;
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  }
+
+  .shoot-card:is(:hover, :focus-visible) {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+  }
+
+  .shoot-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 5px;
+  }
+
+  .shoot-card--wide {
+    height: auto;
+    aspect-ratio: 7 / 6;
+  }
+
+  @media (min-width: 1025px) {
+    .shoot-card--wide { aspect-ratio: 1; }
+  }
+
+  /* --- Media: dual image with hover swap --- */
+  .shoot-card__media {
+    position: absolute;
+    inset: 0;
+    background-color: #111;
+  }
+
+  .shoot-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--card-focal, top center);
+    display: block;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 6s cubic-bezier(0.25, 0, 0.4, 1);
+  }
+
+  .shoot-card__img--main {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .shoot-card__img--hover {
+    opacity: 0;
+    z-index: 2;
+    transform: scale(1);
+    transform-origin: var(--card-focal, top center);
+  }
+
+  .shoot-card--swap:is(:hover, :focus-visible) .shoot-card__img--main {
+    opacity: 0;
+  }
+
+  .shoot-card:is(:hover, :focus-visible) .shoot-card__img--hover {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+
+  .shoot-card:not(.shoot-card--swap):is(:hover, :focus-visible) .shoot-card__img--main {
+    transform: scale(1.04);
+    transform-origin: var(--card-focal, top center);
+  }
+
+  /* --- Tag badge --- */
+  .shoot-card__tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 4;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.9);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .shoot-card:is(:hover, :focus-visible) .shoot-card__tag {
+    background: rgba(255, 89, 0, 0.75);
+    border-color: rgba(255, 89, 0, 0.3);
+  }
+
+  /* --- Overlay with gradient + content --- */
+  .shoot-card__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.6rem;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.25) 40%,
+      rgba(0, 0, 0, 0.03) 70%,
+      transparent 100%
+    );
+    color: #ffffff;
+  }
+
+  .shoot-card__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.4rem;
+  }
+
+  .shoot-card__title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    line-height: 1.25;
+    margin: 0;
+    color: #ffffff;
+    transition: color 0.3s ease;
+  }
+
+  .shoot-card--wide .shoot-card__title {
+    font-size: 1.35rem;
+  }
+
+  .shoot-card__desc {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin 0.35s ease;
+  }
+
+  .shoot-card:is(:hover, :focus-visible) .shoot-card__desc {
+    max-height: 4rem;
+    opacity: 1;
+    margin-top: 0.5rem;
+  }
+
+  .shoot-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0;
+    max-height: 0;
+    overflow: hidden;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), margin 0.35s ease, opacity 0.35s ease 0.05s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, gap 0.3s ease;
+  }
+
+  .shoot-card:is(:hover, :focus-visible) .shoot-card__cta {
+    max-height: 3rem;
+    margin-top: 0.8rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .shoot-card:is(:hover, :focus-visible) .shoot-card__cta:hover {
+    gap: 0.6rem;
+  }
+
+  @media (max-width: 640px) {
+    .shoot-card {
+      height: 380px;
+    }
+    .shoot-card--wide {
+      height: clamp(320px, 92vw, 400px);
+      aspect-ratio: auto;
+    }
+    .shoot-card__img {
+      object-position: var(--card-mobile-focal, top center);
+    }
+
+    .shoot-card__img--hover {
+      transform-origin: var(--card-mobile-focal, top center);
+    }
+
+    .shoot-card:not(.shoot-card--swap) .shoot-card__img--main {
+      transform-origin: var(--card-mobile-focal, top center);
+    }
+
+    /* Show desc on mobile since no hover */
+    .shoot-card__desc {
+      max-height: 4rem;
+      opacity: 1;
+      margin-top: 0.4rem;
+    }
+
+    .shoot-card__cta {
+      max-height: 3rem;
+      margin-top: 0.8rem;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (hover: none) {
+    .shoot-card:hover:not(:focus-visible) {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .shoot-card:hover:not(:focus-visible) .shoot-card__img--main {
+      opacity: 1;
+      transform: none;
+    }
+
+    .shoot-card:hover:not(:focus-visible) .shoot-card__img--hover {
+      opacity: 0;
+      transform: scale(1);
+    }
+
+    .shoot-card__desc {
+      max-height: 4rem;
+      opacity: 1;
+      margin-top: 0.4rem;
+    }
+
+    .shoot-card__cta {
+      max-height: 3rem;
+      margin-top: 0.8rem;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shoot-card,
+    .shoot-card__img,
+    .shoot-card__tag,
+    .shoot-card__title,
+    .shoot-card__desc,
+    .shoot-card__cta {
+      transition: none;
+    }
+
+    .shoot-card:is(:hover, :focus-visible),
+    .shoot-card:is(:hover, :focus-visible) .shoot-card__img,
+    .shoot-card:not(.shoot-card--swap):is(:hover, :focus-visible) .shoot-card__img--main,
+    .shoot-card:is(:hover, :focus-visible) .shoot-card__cta {
+      transform: none;
+    }
+  }
+</style>

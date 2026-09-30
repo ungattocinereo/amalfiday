@@ -355,6 +355,8 @@ const whatsappHref = 'https://wa.me/393270972329'
   </section>
 
   <script>
+    import { photographyPackages } from '../data/photographer'
+
     const form = document.querySelector('.contact-form')
     const status = document.querySelector('.form__status')
     const submitButton = form?.querySelector('button[type="submit"]')
@@ -581,10 +583,11 @@ const whatsappHref = 'https://wa.me/393270972329'
       const spot = params.get('spot')
       const location = params.get('location')
       const dates = params.get('dates')
+      const selectedPackage = Object.values(photographyPackages).find(pkg => pkg.id === params.get('package'))
 
       if (service) {
         applyServiceValue(service)
-      } else if (spot) {
+      } else if (spot || selectedPackage) {
         applyServiceValue('Photoshooting')
       }
 
@@ -594,7 +597,9 @@ const whatsappHref = 'https://wa.me/393270972329'
         datesInput.placeholder = `Dates, ${location}`
       }
 
-      if (messageInput && spot && !messageInput.value.trim()) {
+      if (messageInput && selectedPackage && !messageInput.value.trim()) {
+        messageInput.value = `I'd like to book ${selectedPackage.name}: ${selectedPackage.durationMinutes} minutes, ${selectedPackage.photoCount}+ retouched photos, base price €${selectedPackage.price}.`
+      } else if (messageInput && spot && !messageInput.value.trim()) {
         const place = location ? `${spot}, ${location}` : spot
         messageInput.value = `I'm interested in a photoshooting at ${place}.`
       }
