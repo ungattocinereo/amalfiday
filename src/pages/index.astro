@@ -73,9 +73,9 @@ const fallbackQuatrain =
   image={shareImage}
   imageAlt={shareImageAlt}
   themeColor="#FF5900"
-  themeColorDark="#FF5900"
+  themeColorDark="#031E4D"
   bodyClass="home-page"
-  browserChromeColor="#FF5900"
+  browserChromeColor="var(--home-hero-bg)"
 >
   <section class="hero hero--orange">
     <div class="container hero__inner hero-container">
@@ -378,12 +378,20 @@ const fallbackQuatrain =
 
 <style>
   :global(html) {
-    background-color: #FF5900;
+    --home-hero-bg: #ff5900;
+    --home-hero-glow-core: rgba(255, 195, 0, 0.95);
+    --home-hero-glow-mid: rgba(255, 126, 0, 0.9);
+    background-color: var(--home-hero-bg);
   }
 
-  :global(html[data-theme='night']),
+  :global(html[data-theme='night']) {
+    --home-hero-bg: #031e4d;
+    --home-hero-glow-core: rgba(151, 210, 255, 0.82);
+    --home-hero-glow-mid: rgba(35, 104, 190, 0.72);
+  }
+
   :global(body.home-page) {
-    background-color: #FF5900;
+    background-color: var(--home-hero-bg);
   }
 
   :global(body.home-page main) {
@@ -395,7 +403,7 @@ const fallbackQuatrain =
     position: relative;
     color: #ffffff;
     box-sizing: border-box;
-    background: #ff5900;
+    background: var(--home-hero-bg);
     overflow: hidden;
   }
 
@@ -409,9 +417,9 @@ const fallbackQuatrain =
     transform: translate(-50%, -50%);
     background: radial-gradient(
       circle at 50% 50%,
-      rgba(255, 195, 0, 0.95) 0%,
-      rgba(255, 126, 0, 0.9) 45%,
-      rgba(255, 89, 0, 1) 72%
+      var(--home-hero-glow-core) 0%,
+      var(--home-hero-glow-mid) 45%,
+      var(--home-hero-bg) 72%
     );
     opacity: 0.95;
   }
@@ -526,6 +534,12 @@ const fallbackQuatrain =
     object-fit: contain;
     opacity: 1;
     transition: opacity 0.2s ease;
+  }
+
+  /* Recolor the existing particles and SVG together without changing their scripts. */
+  :global(html[data-theme='night']) .hero__logo-canvas,
+  :global(html[data-theme='night']) .hero__logo-fallback {
+    filter: brightness(0) invert(80%) sepia(37%) saturate(858%) hue-rotate(173deg) brightness(105%) contrast(103%);
   }
 
   .hero__logo.is-ready .hero__logo-canvas {
