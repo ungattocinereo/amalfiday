@@ -1,14 +1,14 @@
 ---
-interface Props { href: string }
-const { href } = Astro.props
+interface Props { href: string; compact?: boolean }
+const { href, compact = false } = Astro.props
 ---
 
-<pose-guide-phone class="pose-phone">
+<pose-guide-phone class:list={['pose-phone', { 'pose-phone--compact': compact }]}>
   <a class="pose-phone__device" href={href} target="_blank" rel="noopener noreferrer" aria-label="Open PhotoPoses, Greg's free posing guide (opens in a new tab)">
     <img
       src="/pose-guide/photoposes-phone-render-1024.webp"
       srcset="/pose-guide/photoposes-phone-render-512.webp 512w, /pose-guide/photoposes-phone-render-1024.webp 1024w"
-      sizes="(min-width: 1025px) 620px, (max-width: 508px) calc(100vw - 48px), 460px"
+      sizes={compact ? '(min-width: 769px) 380px, (max-width: 428px) calc(100vw - 48px), 380px' : '(min-width: 1025px) 620px, (max-width: 508px) calc(100vw - 48px), 460px'}
       alt="Titanium smartphone displaying PhotoPoses, with portrait posing ideas from the Amalfi Coast"
       width="1024" height="1536" loading="lazy" decoding="async" draggable="false"
     />
@@ -36,6 +36,32 @@ const { href } = Astro.props
     transition: transform 600ms cubic-bezier(.2, .75, .25, 1);
     -webkit-tap-highlight-color: transparent;
   }
+  .pose-phone--compact {
+    --phone-glow-center: #ffffffb3;
+    --phone-glow-warm: #ff59002b;
+    --phone-glow-cool: #009cff1f;
+  }
+  .pose-phone--compact::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: min(100%, 420px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background:
+      radial-gradient(ellipse at 42% 45%, var(--phone-glow-center) 0%, var(--phone-glow-warm) 42%, transparent 72%),
+      radial-gradient(ellipse at 65% 60%, var(--phone-glow-cool) 0%, transparent 68%);
+    filter: blur(24px);
+    pointer-events: none;
+  }
+  :global([data-theme='night']) .pose-phone--compact {
+    --phone-glow-center: #fff0db26;
+    --phone-glow-warm: #ff590040;
+    --phone-glow-cool: #009cff33;
+  }
   .pose-phone[data-tracking] .pose-phone__device { transition-duration: 180ms; }
   .pose-phone__device:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 5px; }
   .pose-phone__device img {
@@ -60,6 +86,14 @@ const { href } = Astro.props
   @media (max-width: 768px) {
     .pose-phone { height: auto; }
     .pose-phone__device { width: min(100%, 380px); }
+  }
+  @media (min-width: 769px) {
+    .pose-phone--compact { height: auto; }
+    .pose-phone--compact .pose-phone__device {
+      position: relative;
+      width: min(100%, 380px);
+      translate: none;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .pose-phone__device { transition: none; }
