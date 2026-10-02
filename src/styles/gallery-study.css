@@ -30,6 +30,9 @@
 .gs-hero__content { position: absolute; bottom: 40px; left: var(--page-gutter); right: var(--page-gutter); }
 .gs-hero .gs-eyebrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 28px; color: #fff; margin-bottom: 28px; font-size: 11px; }
 .gs-hero .gs-eyebrow > span { opacity: .75; }
+.gs-hero .gs-eyebrow > .gs-hero__date { display: inline-flex; align-items: center; gap: .65em; opacity: .9; letter-spacing: .12em; }
+.gs-hero .gs-hero__date i { margin: 0; flex-shrink: 0; font-size: 1.25em; }
+.gs-hero__date time, .gs-hero__date > span { min-width: 0; }
 .gs-hero__location { min-width: 0; }
 .gs-hero__location .city-label__place { white-space: nowrap; }
 .gs-hero h1 { font-size: clamp(58px, 7.7vw, 116px); line-height: 1.08; font-weight: 400; letter-spacing: -.055em; margin: 0 0 42px; text-shadow: 0 4px 28px #0002; }

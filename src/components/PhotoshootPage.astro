@@ -2,6 +2,7 @@
 import CityLabel from './CityLabel.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PhotoshootHeroSummary from './PhotoshootHeroSummary.astro'
+import PhotoshootHeroDate from './PhotoshootHeroDate.astro'
 import PhotoshootStory from './PhotoshootStory.astro'
 import PhotoshootGallery from './PhotoshootGallery.astro'
 import GalleryStudyControls from './GalleryStudyControls.astro'
@@ -28,7 +29,7 @@ const browserFrames = frames.map(({ original, src, alt }) => ({ original, src, a
       </picture>
       <div class="gs-hero__veil"></div>
       <div class="gs-hero__content hero-container">
-        <div class="gs-eyebrow"><div class="gs-hero__location"><CityLabel name={shoot.location} />, Italy</div>{shoot.date && <span>{shoot.date}</span>}</div>
+        <div class="gs-eyebrow"><div class="gs-hero__location"><CityLabel name={shoot.location} />, Italy</div><PhotoshootHeroDate date={shoot.date} dateTime={shoot.dateTime} /></div>
         <h1>{shoot.heading.lead}<br /><em>{shoot.heading.accent}</em></h1>
         <div class="gs-hero__bottom"><PhotoshootHeroSummary description={shoot.summary} context={context} images={frames} inline /><a href="#gs-story" aria-label="Discover the story"><span>Discover</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a></div>
       </div>

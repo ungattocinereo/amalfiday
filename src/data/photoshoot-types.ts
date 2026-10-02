@@ -62,6 +62,7 @@ export type PhotoshootSource = {
   description: string
   heading: PhotoHeading
   date: string
+  dateTime?: string
   heroLayout?: 'panorama'
   category?: 'individual' | 'couple' | 'family'
   tag?: string

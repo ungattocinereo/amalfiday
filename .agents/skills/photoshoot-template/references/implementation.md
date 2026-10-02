@@ -14,6 +14,7 @@
 | `src/components/GalleryFour.astro` | Дополнительный вариант на весь экран и текущие точки фокуса |
 | `src/components/PhotoRequestDialog.astro` | Компактная форма заказа |
 | `src/components/PhotoshootHeroSummary.astro` | Три контекстные иконки перед описанием hero |
+| `src/components/PhotoshootHeroDate.astro` | Обязательная дата фотосъёмки в главном hero |
 | `src/data/photoshoot-hero-icons.ts` | Общие правила выбора иконок |
 | `scripts/build-gallery-study-images.mjs` | Производные изображения образца |
 | `scripts/contact-server.mjs` | Локальный обработчик отправки формы |

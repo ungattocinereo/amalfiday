@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PhotoshootHeroSummary from '../../components/PhotoshootHeroSummary.astro'
+import PhotoshootHeroDate from '../../components/PhotoshootHeroDate.astro'
+import loreana from '../../data/photoshoots/loreana.json'
 import GalleryStudyControls from '../../components/GalleryStudyControls.astro'
 import PhotoRequestDialog from '../../components/PhotoRequestDialog.astro'
 import GalleryFour from '../../components/GalleryFour.astro'
@@ -16,7 +18,7 @@ const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) 
       <div class="gs-hero__motion"><img class="gs-hero__image" src={galleryHero} alt="Loreana overlooking the Amalfi Coast in Ravello" width="2499" height="1666" fetchpriority="high" loading="eager" /></div>
       <div class="gs-hero__veil"></div>
       <div class="gs-hero__content hero-container">
-        <div class="gs-eyebrow">Ravello, Italy <span>September · 7 · 2025</span></div>
+        <div class="gs-eyebrow">Ravello, Italy <PhotoshootHeroDate date={loreana.date} dateTime={loreana.dateTime} /></div>
         <h1>The Perfect Gift<br /><em>to Yourself</em></h1>
         <div class="gs-hero__bottom"><PhotoshootHeroSummary description={galleryStory.summary} context={galleryStory.context} images={images} inline /><a href="#gs-story" aria-label="Discover the story"><span>Discover</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a></div>
       </div>

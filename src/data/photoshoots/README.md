@@ -4,6 +4,17 @@ Each JSON file supplies an existing route with its own copy, SEO metadata, cover
 photographs and three ordered gallery chapters. `PhotoshootPage.astro` renders the
 shared design; `template-gallery.astro` remains the four-gallery demonstration.
 
+Every main hero displays `PhotoshootHeroDate.astro` above the heading beside the
+location, wrapping onto its own line on phones. `date` is the confirmed shooting
+date or known period; optional `dateTime` is its ISO calendar value for `<time>`.
+Do not derive shooting dates from `schema.datePublished`, export timestamps,
+Photoshop/XMP creation dates, file modification dates or folder years. Use the
+confirmed story or original capture metadata (`DateTimeOriginal`). Keep partial
+dates partial, and mark file-based estimates explicitly only when authorized.
+An empty `date` displays `Date to be confirmed`, so the date position remains
+visible until the photographer supplies it. Time of day belongs in the story,
+not in the date field.
+
 - Keep frame IDs stable and use each frame in exactly one chapter. Chapter types
   are `rail`, `spreads`, `dissolve` and `immersive`.
 - `before` contains the story blocks displayed before that chapter. Quotes with
@@ -64,7 +75,7 @@ Source decisions:
 - Nick's `_CNR0994.jpg` is empty and was excluded.
 - Nathalie's WhatsApp screenshot is not part of the public gallery.
 - No year was inferred from folder names. Nick's supplied date is shown as May 23;
-  other dates are omitted or use only the season supplied in the description.
+  other dates use the season supplied in the description or `Date to be confirmed`.
 - Stephanie's photographs show Positano (including named signs), although the
   Russian description says Amalfi. The page follows the photographed location.
 - Renaud's story explicitly describes the proposal scenes as recreations.

@@ -1,0 +1,12 @@
+---
+interface Props {
+  date: string
+  dateTime?: string
+}
+const { date: suppliedDate, dateTime } = Astro.props
+const date = suppliedDate.trim() || 'Date to be confirmed'
+---
+<span class="gs-hero__date" aria-label={`Photoshoot date: ${date}`}>
+  <i class="ph ph-calendar-blank" aria-hidden="true"></i>
+  {dateTime ? <time datetime={dateTime}>{date}</time> : <span>{date}</span>}
+</span>
