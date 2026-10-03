@@ -12,6 +12,8 @@ const session: IconRule[] = [
 const occasion: IconRule[] = [
   { match: /\b(engagement|proposal|wedding|honeymoon)\b|помолв|свадьб|медовый месяц/i, name: 'ph-diamond', label: 'A new chapter together' },
   { match: /\b(birthday|gifts?|celebration)\b|день рождения|подар|праздник/i, name: 'ph-gift', label: 'A gift to remember' },
+  // An explicit dawn or golden-hour shoot outweighs a passing mention of the night before.
+  { match: /\b(sunrise|sunset|dawn|golden hour)\b|рассвет|закат/i, name: 'ph-sun', label: 'Natural light' },
   { match: /\b(night|moonlight|after dark)\b|ночн|лунн/i, name: 'ph-moon', label: 'After dark' },
   { match: /\b(sunrise|sunset|dawn|golden hour|morning|sunlight|sun|afternoon)\b|рассвет|закат|утрен|солнеч/i, name: 'ph-sun', label: 'Natural light' },
   { match: /\b(travel|trip|journey|explor(?:e|ing|ation)|adventure)\b|путешеств|прогулк/i, name: 'ph-compass', label: 'A journey to remember' },

@@ -2,7 +2,9 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PhotoshootHeroSummary from '../../components/PhotoshootHeroSummary.astro'
 import PhotoshootHeroDate from '../../components/PhotoshootHeroDate.astro'
+import PhotoshootReview from '../../components/PhotoshootReview.astro'
 import loreana from '../../data/photoshoots/loreana.json'
+import { getPhotoshoot } from '../../data/photoshoots'
 import GalleryStudyControls from '../../components/GalleryStudyControls.astro'
 import PhotoRequestDialog from '../../components/PhotoRequestDialog.astro'
 import GalleryFour from '../../components/GalleryFour.astro'
@@ -10,6 +12,7 @@ import { galleryFrames as images, galleryHero, galleryStory } from '../../data/g
 import '../../styles/gallery-study.css'
 
 const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) => images.slice(index * 2, index * 2 + 2))
+const reviewExample = getPhotoshoot('nathalie-amalfi')
 ---
 <BaseLayout title="Loreana — A Photographic Story | Amalfi.Day" description="An afternoon in Ravello. A birthday gift to yourself. Four ways to relive a photographic story on the Amalfi Coast." image={galleryHero} noindex={true}>
   <div class="gs" data-gallery-study>
@@ -94,6 +97,7 @@ const spreads = Array.from({ length: Math.ceil(images.length / 2) }, (_, index) 
       <a class="gs-button gs-request-trigger" href="/contact?service=Photoshooting" data-request aria-haspopup="dialog" aria-controls="gs-request"><span class="gs-request-trigger__label">Request a photoshoot</span><span class="gs-request-trigger__icon" aria-hidden="true"><i class="ph ph-arrow-right" aria-hidden="true"></i><i class="ph ph-camera" aria-hidden="true"></i></span></a>
       <span class="gs-cta__note">Made with you, on the Amalfi Coast.</span>
     </section>
+    {reviewExample.review && <PhotoshootReview review={reviewExample.review} location={reviewExample.location} example />}
   </div>
 
   <dialog class="gs-dialog gs-lightbox" id="gs-lightbox" aria-label="Photograph viewer">

@@ -433,6 +433,7 @@
 }
 @media (max-width: 900px) and (orientation: portrait) {
   .gs-shoot .gs-hero__image { object-position: var(--mobile-focal-point, var(--focal-point)); }
+  .gs-shoot .gs-hero[data-mobile-fit='contain'] .gs-hero__image { object-fit: contain; }
   .gs-hero[data-mobile-heading='top'] .gs-hero__content { top: 110px; bottom: 26px; display: flex; flex-direction: column; }
   .gs-hero[data-mobile-heading='top'] .gs-hero__bottom { margin-top: auto; }
   .gs-hero[data-mobile-heading='top'] .gs-hero__veil { background: linear-gradient(180deg, #090e1399, #090e1333 42%, transparent 62%, #090e13d9); }

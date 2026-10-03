@@ -25,6 +25,7 @@ export type PhotoStory = {
   heading: PhotoHeading
   paragraphs: string[]
   items?: string[]
+  links?: { label: string; href: string }[]
 }
 export type PhotoSource = {
   id: string
@@ -55,6 +56,18 @@ export type PhotoChapter = {
   frameIds: string[]
   before: PhotoStory[]
 }
+export type PhotoReview = {
+  author: string
+  authorDetail?: string
+  paragraphs: string[]
+  original?: { lang: string; paragraphs: string[] }
+  rating?: 1 | 2 | 3 | 4 | 5
+  source?: {
+    name: string
+    url?: string
+    logo?: string
+  }
+}
 export type PhotoshootSource = {
   slug: string
   name: string
@@ -76,10 +89,11 @@ export type PhotoshootSource = {
   summary: string
   schema: { name: string; description: string; datePublished?: string; keywords: string[] }
   hero: PhotoSource
-  mobileHero?: { frameId: string; focal: string; headingPosition?: 'top' }
+  mobileHero?: { frameId: string; focal: string; fit?: 'cover' | 'contain'; headingPosition?: 'top' }
   frames: PhotoSource[]
   chapters: PhotoChapter[]
   quote?: { text: string; author: string }
+  review?: PhotoReview
 }
 export type Photoshoot = Omit<PhotoshootSource, 'hero' | 'frames'> & {
   hero: PhotoFrame

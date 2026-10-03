@@ -1,0 +1,7 @@
+---
+import PhotoshootPage from '../../components/PhotoshootPage.astro'
+import { getPhotoshoot } from '../../data/photoshoots'
+
+const shoot = getPhotoshoot('anh-hoang-conca-dei-marini')
+---
+<PhotoshootPage shoot={shoot} />

@@ -1,0 +1,98 @@
+---
+import type { PhotoReview } from '../data/photoshoot-types'
+
+interface Props {
+  review: PhotoReview
+  location: string
+  example?: boolean
+}
+const { review, location, example = false } = Astro.props
+const source = review.source
+if (review.rating !== undefined && (!Number.isInteger(review.rating) || review.rating < 1 || review.rating > 5)) {
+  throw new Error(`Invalid review rating for ${review.author}`)
+}
+---
+<section class="shoot-review gs-wrap" id="photoshoot-review" aria-labelledby="photoshoot-review-title">
+  <header class="shoot-review__heading">
+    <span class="gs-eyebrow">After the last frame</span>
+    <h2 id="photoshoot-review-title">In their <em>own words.</em></h2>
+    {example && <p class="shoot-review__example">Review example — {review.author}’s photoshoot in {location}.</p>}
+  </header>
+  <figure class="shoot-review__layout">
+    <figcaption class="shoot-review__identity">
+      <span class="shoot-review__author">{review.author}</span>
+      {review.authorDetail && <span class="shoot-review__detail">{review.authorDetail}</span>}
+      <span class="shoot-review__session">Photoshoot in {location}</span>
+      {review.rating !== undefined && <div class="shoot-review__rating" role="img" aria-label={`${review.rating} out of 5 stars`}>
+        <span class="shoot-review__stars" aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <i class={`${index < review.rating! ? 'ph-fill' : 'ph'} ph-star`}></i>)}</span>
+        <span class="shoot-review__score" aria-hidden="true">{review.rating}.0 <span>/ 5</span></span>
+      </div>}
+      {source && <div class="shoot-review__source">
+        <span class="shoot-review__source-label">Shared on</span>
+        {source.logo ? <img src={source.logo} alt={source.name} width="104" height="80" loading="lazy" decoding="async" /> : <span>{source.name}</span>}
+        {source.url && <a href={source.url} target="_blank" rel="noopener noreferrer">Reviews on {source.name}<i class="ph ph-arrow-up-right" aria-hidden="true"></i><span class="sr-only"> (opens in a new tab)</span></a>}
+      </div>}
+    </figcaption>
+    <blockquote class="shoot-review__quote">
+      <span class="shoot-review__mark" aria-hidden="true">“</span>
+      {review.paragraphs.map((paragraph, index) => <p class:list={{ 'shoot-review__lead': index === 0 }}>{paragraph}</p>)}
+      {review.original && <div class="shoot-review__original">
+        <span class="gs-eyebrow">Original review</span>
+        <div lang={review.original.lang}>{review.original.paragraphs.map(paragraph => <p>{paragraph}</p>)}</div>
+      </div>}
+    </blockquote>
+  </figure>
+</section>
+
+<style>
+  .shoot-review { padding-block: 68px 132px; border-top: 1px solid var(--gs-line); scroll-margin-top: 110px; }
+  .shoot-review__heading { margin-bottom: 60px; }
+  .shoot-review__heading .gs-eyebrow { color: var(--gs-muted); margin-bottom: 20px; }
+  .shoot-review__heading h2 { margin: 0; font-size: clamp(32px, 4vw, 56px); }
+  .shoot-review__heading h2 em { color: var(--gs-muted); }
+  .shoot-review__example { margin: 18px 0 0; font-size: 13px; }
+  .shoot-review__layout { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(0, 2.7fr); gap: 7%; margin: 0; }
+  .shoot-review__identity { display: flex; flex-direction: column; align-items: flex-start; padding-top: 8px; }
+  .shoot-review__author { font: 26px/1.4 var(--font-display); }
+  .shoot-review__detail { margin-top: 8px; color: var(--gs-muted); font-size: 14px; }
+  .shoot-review__session { margin-top: 6px; color: var(--gs-muted); font-size: 13px; }
+  .shoot-review__rating { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; margin-top: 26px; }
+  .shoot-review__stars { display: flex; gap: 4px; color: var(--color-accent); font-size: 17px; }
+  .shoot-review__score { font: 12px/1.5 var(--font-mono); white-space: nowrap; }
+  .shoot-review__score > span { color: var(--gs-muted); }
+  .shoot-review__source { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-top: 30px; padding-top: 25px; border-top: 1px solid var(--gs-line); }
+  .shoot-review__source-label { font: 9px/1.5 var(--font-mono); text-transform: uppercase; letter-spacing: .16em; color: var(--gs-muted); }
+  .shoot-review__source img { width: 104px; height: 80px; object-fit: contain; object-position: left center; }
+  .shoot-review__source a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--gs-ink); font-size: 12px; text-decoration: underline; text-decoration-color: var(--gs-line); text-underline-offset: 5px; }
+  .shoot-review__source a:hover { text-decoration-color: currentColor; }
+  .shoot-review__source a i { flex: none; }
+  .shoot-review__quote { position: relative; margin: 0; padding: 0; }
+  .shoot-review__mark { position: absolute; top: -46px; left: -34px; color: var(--color-accent); font: 94px/1 var(--font-display); opacity: .65; pointer-events: none; }
+  .shoot-review__quote p { position: relative; margin: 0 0 22px; font-size: 17px; line-height: 1.85; color: var(--gs-muted); }
+  .shoot-review__quote p.shoot-review__lead { font: 25px/1.65 var(--font-display); letter-spacing: -.025em; color: var(--gs-ink); margin-bottom: 28px; }
+  .shoot-review__quote p:last-child { margin-bottom: 0; }
+  .shoot-review__original { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--gs-line); }
+  .shoot-review__original .gs-eyebrow { display: block; margin-bottom: 16px; }
+  @media (max-width: 900px) {
+    .shoot-review__layout { grid-template-columns: minmax(155px, 1fr) minmax(0, 2.3fr); gap: 6%; }
+    .shoot-review__quote p.shoot-review__lead { font-size: 22px; }
+  }
+  @media (max-width: 700px) {
+    .shoot-review { padding-block: 44px 72px; }
+    .shoot-review__heading { margin-bottom: 42px; }
+    .shoot-review__layout { display: flex; flex-direction: column; gap: 40px; }
+    .shoot-review__identity { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 18px; padding: 0; }
+    .shoot-review__author, .shoot-review__detail, .shoot-review__session { grid-column: 1; margin: 0; }
+    .shoot-review__author { font-size: 23px; }
+    .shoot-review__rating { grid-column: 1 / -1; gap: 14px; margin-top: 14px; }
+    .shoot-review__source { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 4px 20px; margin-top: 20px; padding-top: 22px; }
+    .shoot-review__source img { grid-column: 1; grid-row: 1 / 3; width: 78px; height: 60px; }
+    .shoot-review__source-label, .shoot-review__source a { grid-column: 2; }
+    .shoot-review__source-label { align-self: end; }
+    .shoot-review__source a { align-self: start; line-height: 1.5; font-size: 11px; }
+    .shoot-review__quote { padding-top: 24px; }
+    .shoot-review__mark { top: -18px; left: 0; font-size: 76px; }
+    .shoot-review__quote p { font-size: 16px; line-height: 1.8; }
+    .shoot-review__quote p.shoot-review__lead { font-size: 21px; line-height: 1.65; }
+  }
+</style>

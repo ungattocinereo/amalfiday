@@ -3,6 +3,7 @@ import CityLabel from './CityLabel.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PhotoshootHeroSummary from './PhotoshootHeroSummary.astro'
 import PhotoshootHeroDate from './PhotoshootHeroDate.astro'
+import PhotoshootReview from './PhotoshootReview.astro'
 import PhotoshootStory from './PhotoshootStory.astro'
 import PhotoshootGallery from './PhotoshootGallery.astro'
 import GalleryStudyControls from './GalleryStudyControls.astro'
@@ -22,7 +23,7 @@ const browserFrames = frames.map(({ original, src, alt }) => ({ original, src, a
 <BaseLayout title={shoot.title} description={shoot.description} image={hero.original} imageAlt={hero.alt} jsonLd={jsonLd}>
   <div class="gs gs-shoot" data-gallery-study data-shoot={shoot.slug}>
     <script type="application/json" data-gallery-frames set:html={JSON.stringify(browserFrames).replace(/</g, '\\u003c')} />
-    <section class="gs-hero hero--dark" data-hero-layout={shoot.heroLayout} data-mobile-heading={shoot.mobileHero?.headingPosition} aria-label={`${shoot.name} — photoshoot in ${shoot.location}`} style={photoStyle({ ...hero, mobileFocal: shoot.mobileHero?.focal || hero.mobileFocal })}>
+    <section class="gs-hero hero--dark" data-hero-layout={shoot.heroLayout} data-mobile-heading={shoot.mobileHero?.headingPosition} data-mobile-fit={shoot.mobileHero?.fit} aria-label={`${shoot.name} — photoshoot in ${shoot.location}`} style={photoStyle({ ...hero, mobileFocal: shoot.mobileHero?.focal || hero.mobileFocal })}>
       <picture class="gs-hero__motion">
         {mobileHero && <source media="(max-width: 900px) and (orientation: portrait)" srcset={mobileHero.srcset} sizes={`max(100vw, ${(mobileHero.width / mobileHero.height * 100).toFixed(1)}svh)`} width={mobileHero.width} height={mobileHero.height} />}
         <img class="gs-hero__image" src={hero.src} srcset={hero.srcset} sizes={`max(100vw, ${(hero.width / hero.height * 100).toFixed(1)}svh)`} alt={mobileHero ? `${shoot.name} — photoshoot in ${shoot.location}` : hero.alt} width={hero.width} height={hero.height} fetchpriority="high" loading="eager" />
@@ -49,6 +50,7 @@ const browserFrames = frames.map(({ original, src, alt }) => ({ original, src, a
       <a class="gs-button gs-request-trigger" href="/contact?service=Photoshooting" data-request aria-haspopup="dialog" aria-controls="gs-request"><span class="gs-request-trigger__label">Request a photoshoot</span><span class="gs-request-trigger__icon" aria-hidden="true"><i class="ph ph-arrow-right" aria-hidden="true"></i><i class="ph ph-camera" aria-hidden="true"></i></span></a>
       <span class="gs-cta__note">Made with you, on the Amalfi Coast.</span>
     </section>
+    {shoot.review && <PhotoshootReview review={shoot.review} location={shoot.location} />}
   </div>
   <dialog class="gs-dialog gs-lightbox" id="gs-lightbox" aria-label="Photograph viewer">
     <div class="gs-lightbox__top"><span class="gs-eyebrow">{shoot.name} / {shoot.location}</span><button class="gs-icon" type="button" data-close aria-label="Close photograph viewer"><i class="ph ph-x" aria-hidden="true"></i></button></div>

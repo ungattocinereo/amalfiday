@@ -12,6 +12,7 @@ const { story, id, location } = Astro.props
   <div class="gs-story__copy" data-reveal>
     <span class="gs-small-index"><CityLabel name={location} />, Italy</span>
     {story.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+    {story.links?.map(link => <p><a href={link.href}>{link.label}</a></p>)}
     {story.items && story.items.length > 0 && <ul>{story.items.map(item => <li>{item}</li>)}</ul>}
   </div>
 </section>

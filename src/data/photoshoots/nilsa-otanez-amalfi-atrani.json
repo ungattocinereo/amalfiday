@@ -1,0 +1,399 @@
+{
+  "slug": "nilsa-otanez-amalfi-atrani",
+  "name": "Nilsa Otanez",
+  "title": "Nilsa Otanez — Morning Photoshoot in Amalfi & Atrani | Amalfi.Day",
+  "description": "A June morning post-wedding photoshoot with Nilsa Otanez and her husband, from Amalfi harbour and the cathedral to the coastal views of Atrani.",
+  "heading": {
+    "lead": "The coast",
+    "accent": "in morning light."
+  },
+  "date": "20 June 2026",
+  "location": "Amalfi & Atrani",
+  "summary": "Nilsa’s June morning, from Amalfi harbour to the streets of Atrani.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Post-wedding",
+  "schema": {
+    "name": "Nilsa Otanez — Morning Photoshoot in Amalfi & Atrani",
+    "description": "A June morning post-wedding photoshoot with Nilsa Otanez and her husband, from Amalfi harbour and the cathedral to the coastal views of Atrani.",
+    "keywords": [
+      "Amalfi & Atrani photographer",
+      "post-wedding photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr0126",
+    "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0126.jpg",
+    "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0126-full.webp",
+    "alt": "The couple standing on the rocks beside the coast",
+    "focal": "52% 23%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "mobileHero": {
+    "frameId": "cnr2148",
+    "focal": "50% 22%"
+  },
+  "card": {
+    "frameId": "cnr2148",
+    "focal": "50% 20%",
+    "hover": {
+      "frameId": "cnr0688",
+      "focal": "50% 20%"
+    }
+  },
+  "frames": [
+    {
+      "id": "cnr0021",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0021.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0021-full.webp",
+      "alt": "Nilsa and her husband overlooking Amalfi harbour",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0126",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0126.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0126-full.webp",
+      "alt": "The couple standing on the rocks beside the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0156",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0156.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0156-full.webp",
+      "alt": "Nilsa looking towards her husband on the waterfront rocks",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0293",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0293.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0293-full.webp",
+      "alt": "The couple embracing beside flowering bougainvillea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0383",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0383.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0383-full.webp",
+      "alt": "The couple walking along Amalfi’s waterfront",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0462",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0462.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0462-full.webp",
+      "alt": "Nilsa and her husband beside the harbour in sunglasses",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0515",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0515.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0515-full.webp",
+      "alt": "The couple standing together by the harbour",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0688",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0688.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0688-full.webp",
+      "alt": "The couple beneath the waterfront trees",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0725",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0725.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0725-full.webp",
+      "alt": "Nilsa and her husband looking at one another on the promenade",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0739",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0739.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0739-full.webp",
+      "alt": "The couple holding hands on the morning promenade",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0784",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0784.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0784-full.webp",
+      "alt": "Nilsa seated beneath a tree with her husband beside her",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0851",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0851.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0851-full.webp",
+      "alt": "A portrait of the couple beside a waterfront street lamp",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0905",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0905.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0905-full.webp",
+      "alt": "Nilsa and her husband smiling beneath the flowers",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0992-2",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR0992-2.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr0992-2-full.webp",
+      "alt": "A black-and-white portrait of the couple at the waterfront railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1122",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR1122.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr1122-full.webp",
+      "alt": "The couple on the steps of Amalfi Cathedral",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1192",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR1192.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr1192-full.webp",
+      "alt": "A wide view of the couple beneath the cathedral facade",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1221",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR1221.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr1221-full.webp",
+      "alt": "Nilsa and her husband at the top of the cathedral steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1364",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR1364.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr1364-full.webp",
+      "alt": "The couple standing between the cathedral’s striped columns",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1381-2",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR1381-2.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr1381-2-full.webp",
+      "alt": "A black-and-white portrait of the couple beneath the cathedral portico",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1444",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR1444.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr1444-full.webp",
+      "alt": "The couple leaning together between the cathedral columns",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1805",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR1805.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr1805-full.webp",
+      "alt": "The couple embracing above the water with Amalfi behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1954",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR1954.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr1954-full.webp",
+      "alt": "An embrace beneath the trees beside the sea wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2084",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR2084.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr2084-full.webp",
+      "alt": "The couple at the coastal overlook above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2120",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR2120.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr2120-full.webp",
+      "alt": "Nilsa smiling in her husband’s arms above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2148",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR2148.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr2148-full.webp",
+      "alt": "A full-length portrait of the couple at the Atrani overlook",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2307",
+      "sourceFile": "new_photoshoots/Nilsa_Otanez/_CNR2307.jpg",
+      "original": "/photoshootings/optimized/nilsa-otanez-amalfi-atrani/cnr2307-full.webp",
+      "alt": "Nilsa and her husband leaning together above the village",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / A June morning",
+      "heading": {
+        "lead": "Just after",
+        "accent": "sunrise."
+      },
+      "frameIds": [
+        "cnr0021",
+        "cnr0126",
+        "cnr0156",
+        "cnr0293",
+        "cnr0383",
+        "cnr0462",
+        "cnr0515",
+        "cnr0688",
+        "cnr0725"
+      ],
+      "before": [
+        {
+          "eyebrow": "A June morning",
+          "heading": {
+            "lead": "Just after",
+            "accent": "sunrise."
+          },
+          "paragraphs": [
+            "Nilsa booked only a couple of days before we met. We photographed on 20 June, when sunrise comes very early on the coast.",
+            "At first they struck me as serious and well prepared for the shoot. They had set off by car while it was still dark, but even at that hour the morning traffic had other plans. They reached Amalfi a little after sunrise. We still made some lovely photographs."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Along the coast",
+      "heading": {
+        "lead": "From the harbour",
+        "accent": "to Atrani."
+      },
+      "frameIds": [
+        "cnr0739",
+        "cnr0784",
+        "cnr0851",
+        "cnr0905",
+        "cnr0992-2",
+        "cnr1122",
+        "cnr1192",
+        "cnr1221",
+        "cnr1364"
+      ],
+      "before": [
+        {
+          "eyebrow": "Along the coast",
+          "heading": {
+            "lead": "From the harbour",
+            "accent": "to Atrani."
+          },
+          "paragraphs": [
+            "We began by the harbour, near the large car park, and followed the coast towards Atrani. It was a good morning on a route I know well. Afterwards, as always, I shared my Amalfi Coast guide with them, just as I do with everyone who comes for a photoshoot.",
+            "This morning is another reason I often talk about starting early. I am a perfectionist about photographs. In bright Amalfi sunshine, pictures feel hot and wonderfully summery, almost as though they were made on film. That is a lovely effect, too."
+          ],
+          "links": [
+            {
+              "label": "My Amalfi Coast guide",
+              "href": "https://guide.amalfi.day"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Time to find the moment",
+      "heading": {
+        "lead": "A little earlier,",
+        "accent": "a little more time."
+      },
+      "frameIds": [
+        "cnr1381-2",
+        "cnr1444",
+        "cnr1805",
+        "cnr1954",
+        "cnr2084",
+        "cnr2120",
+        "cnr2148",
+        "cnr2307"
+      ],
+      "before": [
+        {
+          "eyebrow": "Time to find the moment",
+          "heading": {
+            "lead": "A little earlier,",
+            "accent": "a little more time."
+          },
+          "paragraphs": [
+            "My own preference is for modern digital photography. I like the freedom to make thousands of frames, as I did during this shoot, and look for the best moments among them. For that, I want both enough time and the right light.",
+            "I always ask guests to meet as early as they can, ideally a couple of minutes before sunrise. Then we have time to begin calmly, walk through the places we have chosen and enjoy the morning light before the sun becomes really strong."
+          ]
+        }
+      ]
+    }
+  ],
+  "dateTime": "2026-06-20",
+  "review": {
+    "author": "Nilsa O",
+    "authorDetail": "United States · 26 June 2026",
+    "rating": 5,
+    "paragraphs": [
+      "Gregory was super helpful and flexible. My husband and I were doing a post wedding photoshoot, he gave us suggestions, was flexible, super friendly and easy to communicate with. He sent us some of the pictures right away, so we could see the editing and picture quality. Our pictures were beautiful and he walked Amalfi coast with us to find the best spots for pictures. I recommend him 100% Book him! Nilsa O"
+    ],
+    "source": {
+      "name": "GetYourGuide",
+      "url": "https://www.getyourguide.com/atrani-l128528/amalfi-sunrise-photoshoot-t1013879/",
+      "logo": "/brand/getyourguide-logo.svg"
+    }
+  }
+}

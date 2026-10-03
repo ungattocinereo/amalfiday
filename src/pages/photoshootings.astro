@@ -6,37 +6,12 @@ import PhotoshootPricing from '../components/PhotoshootPricing.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { site } from '../data/site'
 import { photography, photographerSchema, photographyPackages, photographyExtraHour, describePhotographyPackage } from '../data/photographer'
-import { getPhotoshoot, newPhotoshootSources } from '../data/photoshoots'
+import { getPhotoshootCard, newPhotoshootSources } from '../data/photoshoots'
 
-const importedCards = newPhotoshootSources.map(({ slug, category }) => {
-  const shoot = getPhotoshoot(slug)
-  const cover = shoot.card ? [shoot.hero, ...shoot.frames].find(frame => frame.id === shoot.card?.frameId) : shoot.hero
-  if (!cover) throw new Error(`Missing card image for ${slug}`)
-  const hover = shoot.card?.hover
-  const hoverFrame = hover && [shoot.hero, ...shoot.frames].find(frame => frame.id === hover.frameId)
-  if (hover && !hoverFrame) throw new Error(`Missing hover image for ${slug}`)
-  return {
-    category,
-    title: shoot.name,
-    location: shoot.location,
-    desc: shoot.summary,
-    href: `/photoshootings/${slug}/`,
-    image: cover.src,
-    hoverImage: hoverFrame?.src,
-    hoverSrcset: hoverFrame?.srcset,
-    hoverWidth: hoverFrame?.width,
-    hoverHeight: hoverFrame?.height,
-    hoverFocal: hover?.focal,
-    hoverMobileFocal: hover?.mobileFocal || hover?.focal,
-    srcset: cover.srcset,
-    width: cover.width,
-    height: cover.height,
-    alt: cover.alt,
-    tag: shoot.tag || 'Personal',
-    focal: shoot.card?.focal || cover.focal,
-    mobileFocal: shoot.card?.mobileFocal || shoot.card?.focal || cover.mobileFocal || cover.focal,
-  }
-})
+const importedCards = newPhotoshootSources.map(({ slug, category }) => ({
+  category,
+  ...getPhotoshootCard(slug),
+}))
 
 const whatsappHref = 'https://wa.me/393270972329'
 

@@ -1,0 +1,680 @@
+{
+  "slug": "anh-hoang-conca-dei-marini",
+  "name": "Anh Hoang",
+  "title": "Anh Hoang — Villa Photoshoot in Conca dei Marini | Amalfi.Day",
+  "description": "An April morning with Anh Hoang at a villa in Conca dei Marini: soft light, coffee on the terrace, individual portraits and photographs together.",
+  "heading": {
+    "lead": "A morning",
+    "accent": "above the sea."
+  },
+  "date": "10 April 2026",
+  "location": "Conca dei Marini",
+  "summary": "Coffee on the terrace, soft April light and Anh’s villa in Conca dei Marini.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Couple",
+  "schema": {
+    "name": "Anh Hoang — Villa Photoshoot in Conca dei Marini",
+    "description": "An April morning with Anh Hoang at a villa in Conca dei Marini: soft light, coffee on the terrace, individual portraits and photographs together.",
+    "keywords": [
+      "Conca dei Marini photographer",
+      "couple photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr0021",
+    "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0021.jpg",
+    "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0021-full.webp",
+    "alt": "Anh and her companion on a villa terrace overlooking the coast",
+    "focal": "52% 34%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "mobileHero": {
+    "frameId": "cnr0048",
+    "focal": "50% 22%"
+  },
+  "card": {
+    "frameId": "cnr0048",
+    "focal": "50% 20%",
+    "hover": {
+      "frameId": "cnr0021",
+      "focal": "56% 28%"
+    }
+  },
+  "frames": [
+    {
+      "id": "cnr0021",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0021.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0021-full.webp",
+      "alt": "Anh and her companion on a villa terrace overlooking the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0048",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0048.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0048-full.webp",
+      "alt": "The couple standing together on the villa balcony",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0055",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0055.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0055-full.webp",
+      "alt": "The couple looking out to sea beside the painted terrace table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0066",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0066.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0066-full.webp",
+      "alt": "Anh turning towards her companion at the balcony railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0071",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0071.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0071-full.webp",
+      "alt": "The couple holding hands while looking across the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0073",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0073.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0073-full.webp",
+      "alt": "The couple on the terrace, framed by the villa doorway",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0083",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0083.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0083-full.webp",
+      "alt": "A close portrait of the couple above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0099",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0099.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0099-full.webp",
+      "alt": "Anh and her companion smiling on the villa balcony",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0108",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0108.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0108-full.webp",
+      "alt": "The couple facing each other beside the terrace plants",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0120",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0120.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0120-full.webp",
+      "alt": "Anh embracing her companion beside the villa",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0123",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0123.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0123-full.webp",
+      "alt": "A portrait of the couple together by the terrace railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0172",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0172.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0172-full.webp",
+      "alt": "The couple standing outside the villa among flowering plants",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0199",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0199.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0199-full.webp",
+      "alt": "Anh and her companion laughing together outside the villa",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0240",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0240.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0240-full.webp",
+      "alt": "The couple holding hands beside the garden plants",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0263",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0263.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0263-full.webp",
+      "alt": "Anh laughing as her companion embraces her",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0324",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0324.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0324-full.webp",
+      "alt": "Anh seated at the painted table overlooking the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0350",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0350.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0350-full.webp",
+      "alt": "Anh looking back from her chair on the terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0367",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0367.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0367-full.webp",
+      "alt": "Anh facing the sea from the villa terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0381",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0381.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0381-full.webp",
+      "alt": "Anh holding a coffee cup above the coastal view",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0400",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0400.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0400-full.webp",
+      "alt": "A portrait of Anh with her coffee at the painted table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0419",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0419.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0419-full.webp",
+      "alt": "Anh lifting her coffee cup on the terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0441",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0441.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0441-full.webp",
+      "alt": "Anh standing beside a statue on the villa balcony",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0454",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0454.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0454-full.webp",
+      "alt": "Anh looking across the coast from the balcony railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0464",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0464.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0464-full.webp",
+      "alt": "Anh in a floral outfit beside the terrace statue",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0483",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0483.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0483-full.webp",
+      "alt": "Anh standing above the sea with the cliffs behind her",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0501",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0501.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0501-full.webp",
+      "alt": "A portrait of Anh against the coastline and cliffs",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0507",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0507.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0507-full.webp",
+      "alt": "Anh looking across the villa terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0513",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0513.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0513-full.webp",
+      "alt": "Anh resting her hand on a pillar above the village",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0517",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0517.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0517-full.webp",
+      "alt": "Anh brushing her hair back beside the terrace pillar",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0535",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0535.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0535-full.webp",
+      "alt": "Anh smiling beside the terrace railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0559",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0559.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0559-full.webp",
+      "alt": "The couple laughing together behind the painted table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0577",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0577.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0577-full.webp",
+      "alt": "Anh gesturing towards her companion on the terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0600",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0600.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0600-full.webp",
+      "alt": "The couple smiling together above the coastal view",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0667",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0667.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0667-full.webp",
+      "alt": "The couple facing one another at the balcony railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0683",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0683.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0683-full.webp",
+      "alt": "Anh holding her companion’s arms beside the painted table",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0727",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0727.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0727-full.webp",
+      "alt": "The couple together beneath the garden trees",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0755",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0755.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0755-full.webp",
+      "alt": "The couple laughing beneath an arch of foliage",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0809",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0809.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0809-full.webp",
+      "alt": "Anh leading the way up a stone staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0824",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0824.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0824-full.webp",
+      "alt": "The couple climbing the steps through the village",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0852",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0852.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0852-full.webp",
+      "alt": "Anh smiling on the steps with her companion behind her",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0884",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0884.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0884-full.webp",
+      "alt": "The couple holding hands as they climb the stone steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0901",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0901.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0901-full.webp",
+      "alt": "The couple at a village viewpoint above the coast",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0936",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0936.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0936-full.webp",
+      "alt": "Anh and her companion talking beside the viewpoint railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0958",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0958.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0958-full.webp",
+      "alt": "The couple laughing at the coastal viewpoint",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0993",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR0993.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr0993-full.webp",
+      "alt": "A portrait of the couple with the sea behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1011",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1011.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1011-full.webp",
+      "alt": "Anh standing on a stone staircase above the village",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1065",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1065.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1065-full.webp",
+      "alt": "A black-and-white portrait of Anh through a staircase railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1072",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1072.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1072-full.webp",
+      "alt": "Anh on the stone steps, photographed through the railing in black and white",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1094",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1094.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1094-full.webp",
+      "alt": "The couple standing apart beside a stone wall and staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1107",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1107.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1107-full.webp",
+      "alt": "Anh on the steps with her companion leaning against the wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1137",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1137.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1137-full.webp",
+      "alt": "Anh in the foreground beside the stone wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1158",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1158.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1158-full.webp",
+      "alt": "Anh smiling with her companion behind her beside the staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1184",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1184.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1184-full.webp",
+      "alt": "Anh brushing her hair back in front of the stone wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1199",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1199.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1199-full.webp",
+      "alt": "Anh looking away with her companion beside the village steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1223",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1223.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1223-full.webp",
+      "alt": "The couple looking out over the coast from the railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1314",
+      "sourceFile": "new_photoshoots/Anh_Hoang/_CNR1314.jpg",
+      "original": "/photoshootings/optimized/anh-hoang-conca-dei-marini/cnr1314-full.webp",
+      "alt": "Anh leaning towards her companion above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / Planned well ahead",
+      "heading": {
+        "lead": "A villa",
+        "accent": "worth waiting for."
+      },
+      "frameIds": [
+        "cnr0021",
+        "cnr0048",
+        "cnr0055",
+        "cnr0066",
+        "cnr0071",
+        "cnr0073",
+        "cnr0083",
+        "cnr0099",
+        "cnr0108",
+        "cnr0120",
+        "cnr0123",
+        "cnr0172",
+        "cnr0199",
+        "cnr0240",
+        "cnr0263",
+        "cnr0324",
+        "cnr0350",
+        "cnr0367"
+      ],
+      "before": [
+        {
+          "eyebrow": "Planned well ahead",
+          "heading": {
+            "lead": "A villa",
+            "accent": "worth waiting for."
+          },
+          "paragraphs": [
+            "Anh knew exactly what she wanted. She booked almost four months ahead and chose one of my favourite villas in Conca dei Marini. I had photographed there several times before and already loved the place. She and her boyfriend had reserved this beautiful villa with its extraordinary view.",
+            "We met on 10 April 2026. April and October are my favourite months on the coast. You can see its beauty clearly, and in the morning there are still so few people that nothing gets in the way of enjoying it."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Coffee and cloud cover",
+      "heading": {
+        "lead": "The softest",
+        "accent": "April light."
+      },
+      "frameIds": [
+        "cnr0381",
+        "cnr0400",
+        "cnr0419",
+        "cnr0441",
+        "cnr0454",
+        "cnr0464",
+        "cnr0483",
+        "cnr0501",
+        "cnr0507",
+        "cnr0513",
+        "cnr0517",
+        "cnr0535",
+        "cnr0559",
+        "cnr0577",
+        "cnr0600",
+        "cnr0667",
+        "cnr0683",
+        "cnr0727",
+        "cnr0755"
+      ],
+      "before": [
+        {
+          "eyebrow": "Coffee and cloud cover",
+          "heading": {
+            "lead": "The softest",
+            "accent": "April light."
+          },
+          "paragraphs": [
+            "When I arrived, they had only just had their first coffee. The morning was overcast, but in that particular Amalfi way. It was nothing like the grey skies I know from Eastern Europe: here it felt as though we were inside an enormous softbox.",
+            "The sun stayed somewhere in the distance, and no direct rays reached our photographs. Everything else was wonderful. The soft light and the view from the villa were almost unreal."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / A walk above the villa",
+      "heading": {
+        "lead": "Out for a walk,",
+        "accent": "then home again."
+      },
+      "frameIds": [
+        "cnr0809",
+        "cnr0824",
+        "cnr0852",
+        "cnr0884",
+        "cnr0901",
+        "cnr0936",
+        "cnr0958",
+        "cnr0993",
+        "cnr1011",
+        "cnr1065",
+        "cnr1072",
+        "cnr1094",
+        "cnr1107",
+        "cnr1137",
+        "cnr1158",
+        "cnr1184",
+        "cnr1199",
+        "cnr1223",
+        "cnr1314"
+      ],
+      "before": [
+        {
+          "eyebrow": "A walk above the villa",
+          "heading": {
+            "lead": "Out for a walk,",
+            "accent": "then home again."
+          },
+          "paragraphs": [
+            "We made both individual portraits and couple photographs on that balcony. Then we walked a little higher into Conca dei Marini before returning to the villa.",
+            "We worked so well together. It was a calm, beautiful morning and a very enjoyable shoot, with lovely memories to take away."
+          ]
+        }
+      ]
+    }
+  ],
+  "dateTime": "2026-04-10"
+}

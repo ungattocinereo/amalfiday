@@ -371,5 +371,20 @@
       "frameId": "cnr1030",
       "focal": "54% 20%"
     }
+  },
+  "review": {
+    "author": "Nathalie",
+    "authorDetail": "Finland",
+    "rating": 5,
+    "source": {
+      "name": "GetYourGuide",
+      "url": "https://www.getyourguide.com/atrani-l128528/amalfi-sunrise-photoshoot-t1013879/",
+      "logo": "/brand/getyourguide-logo.svg"
+    },
+    "paragraphs": [
+      "We met the photographer Gregory at 6:50 AM by the cathedral in Amalfi. At that time, the town was still quiet and almost empty.",
+      "Gregory is a fantastic photographer whose warm energy and positivity made us feel relaxed, and we had fun throughout the entire photoshoot. The photos turned out amazing, and we will cherish them as lifelong memories of our trip to the Amalfi Coast.",
+      "The pictures were delivered quickly and smoothly. We ended the session at a local café, where Gregory also shared helpful tips on where to find great food, among other things. Everything was truly wonderful, and we highly recommend this experience to anyone considering booking a photoshoot on the Amalfi Coast."
+    ]
   }
 }

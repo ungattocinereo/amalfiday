@@ -1,0 +1,1138 @@
+{
+  "slug": "esmeralda-cortez-amalfi",
+  "name": "Esmeralda Cortez",
+  "title": "Esmeralda Cortez — Sunrise Photoshoot in Amalfi & Atrani | Amalfi.Day",
+  "description": "A sunrise couple photoshoot with Esmeralda Cortez: Amalfi Cathedral, quiet streets and the first light over Atrani, in a story told through 102 photographs.",
+  "heading": {
+    "lead": "Before the town",
+    "accent": "wakes up."
+  },
+  "date": "Around 8 August 2026",
+  "location": "Amalfi & Atrani",
+  "summary": "Esmeralda’s morning, from the cathedral steps to the first light over Atrani.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Couple",
+  "schema": {
+    "name": "Esmeralda Cortez — Sunrise Photoshoot in Amalfi & Atrani",
+    "description": "A sunrise couple photoshoot with Esmeralda Cortez: Amalfi Cathedral, quiet streets and the first light over Atrani, in a story told through 102 photographs.",
+    "keywords": [
+      "Amalfi & Atrani photographer",
+      "couple photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr1569",
+    "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1569.jpg",
+    "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1569-full.webp",
+    "alt": "The couple walking hand in hand along the coastal road",
+    "focal": "52% 25%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "mobileHero": {
+    "frameId": "cnr1226",
+    "focal": "50% 24%"
+  },
+  "card": {
+    "frameId": "cnr2639",
+    "focal": "50% 24%",
+    "hover": {
+      "frameId": "cnr1171",
+      "focal": "50% 22%"
+    }
+  },
+  "frames": [
+    {
+      "id": "cnr0086",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0086.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0086-full.webp",
+      "alt": "Esmeralda and her companion on the steps of Amalfi Cathedral",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0098",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0098.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0098-full.webp",
+      "alt": "The couple among the striped columns of Amalfi Cathedral",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0111",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0111.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0111-full.webp",
+      "alt": "A close portrait of Esmeralda and her companion beneath the cathedral portico",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0150",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0150.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0150-full.webp",
+      "alt": "The couple leaning out between the cathedral columns",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0225",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0225.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0225-full.webp",
+      "alt": "The couple standing together in the cathedral arcade",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0287",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0287.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0287-full.webp",
+      "alt": "Esmeralda smiling as her companion embraces her in the cathedral portico",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0301",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0301.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0301-full.webp",
+      "alt": "A portrait of the couple beneath the cathedral arches",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0369",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0369.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0369-full.webp",
+      "alt": "The couple framed by the cathedral columns and patterned floor",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0472",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0472.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0472-full.webp",
+      "alt": "The couple walking down the cathedral steps together",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0474",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0474.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0474-full.webp",
+      "alt": "Esmeralda and her companion holding hands on the cathedral steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0560",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0560.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0560-full.webp",
+      "alt": "Esmeralda pointing towards the cathedral as her companion looks up",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0617",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0617.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0617-full.webp",
+      "alt": "The couple seated at different heights beside Amalfi harbour",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0714",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0714.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0714-full.webp",
+      "alt": "The couple holding hands on Amalfi’s quiet waterfront",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0789",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0789.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0789-full.webp",
+      "alt": "Esmeralda and her companion at the railing overlooking Amalfi",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0884",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0884.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0884-full.webp",
+      "alt": "The couple looking at one another with Amalfi behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0992",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR0992.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr0992-full.webp",
+      "alt": "An embrace at the waterfront railing beneath climbing plants",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1035",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1035.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1035-full.webp",
+      "alt": "Esmeralda pointing across the coast from the waterfront railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1066",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1066.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1066-full.webp",
+      "alt": "The couple beside the railing with Amalfi’s hillside behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1127",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1127.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1127-full.webp",
+      "alt": "The couple taking a selfie on the morning walk",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1149",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1149.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1149-full.webp",
+      "alt": "The couple standing beside a low sea wall under the trees",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1166",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1166.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1166-full.webp",
+      "alt": "A portrait of the couple with Amalfi across the water",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1171",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1171.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1171-full.webp",
+      "alt": "Esmeralda and her companion beside the sea wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1226",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1226.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1226-full.webp",
+      "alt": "Esmeralda standing in front of her companion in the morning light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1286",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1286.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1286-full.webp",
+      "alt": "The couple holding hands and looking at one another beside the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1305",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1305.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1305-full.webp",
+      "alt": "The couple side by side against the coastal hillside",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1311",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1311.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1311-full.webp",
+      "alt": "Esmeralda smiling beside her companion at the sea wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1323",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1323.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1323-full.webp",
+      "alt": "The couple embracing at the railing overlooking Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1347",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1347.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1347-full.webp",
+      "alt": "A portrait of the couple with Atrani and the mountains behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1362",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1362.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1362-full.webp",
+      "alt": "Esmeralda laughing beside her companion on the coastal road",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1377",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1377.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1377-full.webp",
+      "alt": "The couple laughing at the railing above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1385",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1385.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1385-full.webp",
+      "alt": "Esmeralda resting her head on her companion’s shoulder",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1397",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1397.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1397-full.webp",
+      "alt": "A close portrait of the couple above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1423",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1423.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1423-full.webp",
+      "alt": "The couple photographed through a scooter mirror beside the coastal road",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1443",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1443.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1443-full.webp",
+      "alt": "The couple smiling in a scooter mirror with Atrani behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1446",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1446.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1446-full.webp",
+      "alt": "A playful reflection of the couple in a scooter mirror",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1490",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1490.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1490-full.webp",
+      "alt": "The couple turning towards the camera above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1505",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1505.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1505-full.webp",
+      "alt": "An embrace beside the railing overlooking Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1559",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1559.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1559-full.webp",
+      "alt": "The couple facing one another above Atrani’s waterfront",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1569",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1569.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1569-full.webp",
+      "alt": "The couple walking hand in hand along the coastal road",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1585",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1585.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1585-full.webp",
+      "alt": "A passing scooter in front of the couple above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1621",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1621.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1621-full.webp",
+      "alt": "The couple standing together at the coastal overlook",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1662",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1662.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1662-full.webp",
+      "alt": "Esmeralda and her companion laughing while holding hands",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1693",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1693.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1693-full.webp",
+      "alt": "The couple walking towards the camera above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1793",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1793.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1793-full.webp",
+      "alt": "A black-and-white portrait of the couple beneath leafy branches",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1798",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1798.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1798-full.webp",
+      "alt": "Esmeralda and her companion beside flowers on a village stairway",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1918",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR1918.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr1918-full.webp",
+      "alt": "The couple framed by plants at the top of a stone staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2049",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2049.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2049-full.webp",
+      "alt": "The couple standing beside Atrani’s church in the early light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2088",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2088.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2088-full.webp",
+      "alt": "The couple leaning towards a kiss as the sun rises over the mountains",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2122",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2122.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2122-full.webp",
+      "alt": "Esmeralda looking at her companion with Atrani’s church behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2167",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2167.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2167-full.webp",
+      "alt": "An embrace against the sunlit mountain backdrop",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2183",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2183.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2183-full.webp",
+      "alt": "The couple turning towards the camera beside Atrani’s church",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2337",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2337.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2337-full.webp",
+      "alt": "A close kiss with the first sunlight between their faces",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2360",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2360.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2360-full.webp",
+      "alt": "The couple kissing above the water in the sunrise",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2405",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2405.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2405-full.webp",
+      "alt": "The couple holding hands in a flare of morning sunlight",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2448",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2448.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2448-full.webp",
+      "alt": "Esmeralda and her companion holding hands above the village square",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2475",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2475.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2475-full.webp",
+      "alt": "An embrace in front of Atrani’s clock tower",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2523",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2523.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2523-full.webp",
+      "alt": "A kiss on Esmeralda’s cheek above the village square",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2540",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2540.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2540-full.webp",
+      "alt": "The couple standing together by the railing in Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2560",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2560.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2560-full.webp",
+      "alt": "The couple standing back to back above Atrani’s square",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2629",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2629.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2629-full.webp",
+      "alt": "The couple smiling and holding hands by the village railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2632",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2632.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2632-full.webp",
+      "alt": "Esmeralda and her companion looking at one another above the square",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2639",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2639.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2639-full.webp",
+      "alt": "A full-length portrait of the couple by the village railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2701",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2701.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2701-full.webp",
+      "alt": "The couple sharing a smile in the morning light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2713",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2713.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2713-full.webp",
+      "alt": "The couple standing together beside Atrani’s church",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2735",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2735.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2735-full.webp",
+      "alt": "Esmeralda resting her head towards her companion",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2763",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2763.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2763-full.webp",
+      "alt": "The couple laughing together beside the stone pavement",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2805",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2805.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2805-full.webp",
+      "alt": "Esmeralda and her companion turning towards the camera",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2812",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2812.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2812-full.webp",
+      "alt": "The couple holding hands beside the stone balustrade",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2869",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2869.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2869-full.webp",
+      "alt": "A close portrait of Esmeralda looking at her companion",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2930",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2930.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2930-full.webp",
+      "alt": "The couple kissing beside the stone railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2959",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2959.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2959-full.webp",
+      "alt": "An embrace beside Atrani’s quiet road",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr2987",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR2987.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr2987-full.webp",
+      "alt": "The couple smiling beside the balustrade in the sunlight",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3014",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3014.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3014-full.webp",
+      "alt": "The couple walking past Atrani’s sunlit houses",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3029",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3029.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3029-full.webp",
+      "alt": "The couple climbing the seaside steps hand in hand",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3043",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3043.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3043-full.webp",
+      "alt": "Esmeralda and her companion smiling on the seaside steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3082",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3082.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3082-full.webp",
+      "alt": "The couple silhouetted between two street lamps above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3138",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3138.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3138-full.webp",
+      "alt": "A wide view of the couple and street lamps in the morning light",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3162",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3162.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3162-full.webp",
+      "alt": "The couple standing above the shining sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3173",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3173.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3173-full.webp",
+      "alt": "The couple looking at one another beside the white terrace wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3185",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3185.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3185-full.webp",
+      "alt": "An embrace above the sea on the white terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3217",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3217.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3217-full.webp",
+      "alt": "Esmeralda turning towards the camera in her companion’s arms",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3236",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3236.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3236-full.webp",
+      "alt": "A close embrace with the mountains and water behind the couple",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3274",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3274.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3274-full.webp",
+      "alt": "The couple walking hand in hand in silhouette",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3290",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3290.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3290-full.webp",
+      "alt": "A black-and-white photograph of the couple walking above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3316",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3316.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3316-full.webp",
+      "alt": "The couple dancing between street lamps in black and white",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3335",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3335.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3335-full.webp",
+      "alt": "The couple seated together on white village steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3340",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3340.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3340-full.webp",
+      "alt": "Esmeralda and her companion smiling at each other on the steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3350",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3350.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3350-full.webp",
+      "alt": "The couple leaning together on the village staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3368",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3368.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3368-full.webp",
+      "alt": "The couple standing on a narrow white staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3375",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3375.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3375-full.webp",
+      "alt": "Esmeralda leaning towards her companion on the village steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3407",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3407.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3407-full.webp",
+      "alt": "A full-length portrait of the couple on the white staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3465",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3465.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3465-full.webp",
+      "alt": "A close portrait of the couple beside a white wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3515",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3515.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3515-full.webp",
+      "alt": "The couple beside a ceramic vase beneath a stone arch",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3520",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3520.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3520-full.webp",
+      "alt": "Esmeralda smiling with her companion beneath the village arch",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3540",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3540.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3540-full.webp",
+      "alt": "A black-and-white embrace on the stone steps beneath an arch",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3555",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3555.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3555-full.webp",
+      "alt": "The couple standing together beside the stone archway",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3569",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3569.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3569-full.webp",
+      "alt": "The couple holding hands beside a ceramic vase and stone arch",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3616",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3616.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3616-full.webp",
+      "alt": "An embrace on the curving stone staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3630",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3630.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3630-full.webp",
+      "alt": "The couple laughing together beside a village doorway",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3655",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3655.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3655-full.webp",
+      "alt": "A black-and-white portrait of the couple beside the stone railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3669",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3669.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3669-full.webp",
+      "alt": "The couple in front of a curved seaside sculpture",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr3711",
+      "sourceFile": "new_photoshoots/2026-Esmeralda-Cortez-Amalfi/_CNR3711.jpg",
+      "original": "/photoshootings/optimized/esmeralda-cortez-amalfi/cnr3711-full.webp",
+      "alt": "The couple embracing beside the sculpture and the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / An early start",
+      "heading": {
+        "lead": "Amalfi,",
+        "accent": "still asleep."
+      },
+      "frameIds": [
+        "cnr0086",
+        "cnr0098",
+        "cnr0111",
+        "cnr0150",
+        "cnr0225",
+        "cnr0287",
+        "cnr0301",
+        "cnr0369",
+        "cnr0472",
+        "cnr0474",
+        "cnr0560",
+        "cnr0617",
+        "cnr0714",
+        "cnr0789",
+        "cnr0884",
+        "cnr0992",
+        "cnr1035",
+        "cnr1066",
+        "cnr1127",
+        "cnr1149",
+        "cnr1166",
+        "cnr1171",
+        "cnr1226",
+        "cnr1286",
+        "cnr1305",
+        "cnr1311",
+        "cnr1323",
+        "cnr1347",
+        "cnr1362",
+        "cnr1377",
+        "cnr1385",
+        "cnr1397",
+        "cnr1423",
+        "cnr1443",
+        "cnr1446",
+        "cnr1490"
+      ],
+      "before": [
+        {
+          "eyebrow": "An early start",
+          "heading": {
+            "lead": "Amalfi,",
+            "accent": "still asleep."
+          },
+          "paragraphs": [
+            "Esmeralda is such a beautiful, unusual name. Our photoshoot turned out to be just as memorable. They agreed to meet early in the morning, which always makes me happy: it is the time I most enjoy photographing Amalfi.",
+            "We visited my favourite places, from the Cathedral of Saint Andrew to the empty streets, and caught the first light of dawn. In August that means getting up incredibly early, but I find those colours impossible to resist. The photographs take us along the coast to Atrani, too."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / Following the light",
+      "heading": {
+        "lead": "One morning.",
+        "accent": "102 photographs."
+      },
+      "frameIds": [
+        "cnr1505",
+        "cnr1559",
+        "cnr1569",
+        "cnr1585",
+        "cnr1621",
+        "cnr1662",
+        "cnr1693",
+        "cnr1793",
+        "cnr1798",
+        "cnr1918",
+        "cnr2049",
+        "cnr2088",
+        "cnr2122",
+        "cnr2167",
+        "cnr2183",
+        "cnr2337",
+        "cnr2360",
+        "cnr2405",
+        "cnr2448",
+        "cnr2475",
+        "cnr2523",
+        "cnr2540",
+        "cnr2560",
+        "cnr2629",
+        "cnr2632",
+        "cnr2639",
+        "cnr2701",
+        "cnr2713",
+        "cnr2735",
+        "cnr2763",
+        "cnr2805",
+        "cnr2812",
+        "cnr2869",
+        "cnr2930",
+        "cnr2959",
+        "cnr2987"
+      ],
+      "before": [
+        {
+          "eyebrow": "Following the light",
+          "heading": {
+            "lead": "One morning.",
+            "accent": "102 photographs."
+          },
+          "paragraphs": [
+            "I enjoyed working with them so much that we went a little further than usual. We made exactly 102 photographs. It was a pleasure to keep walking, taking pictures and finding another place for the story to continue.",
+            "This was another lovely morning while the town was still asleep. I love being here at that hour. In summer I almost never sleep through the mornings; sometimes I would rather sleep in the afternoon than miss a sunrise like this."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / A morning to remember",
+      "heading": {
+        "lead": "A few more",
+        "accent": "before we go."
+      },
+      "frameIds": [
+        "cnr3014",
+        "cnr3029",
+        "cnr3043",
+        "cnr3082",
+        "cnr3138",
+        "cnr3162",
+        "cnr3173",
+        "cnr3185",
+        "cnr3217",
+        "cnr3236",
+        "cnr3274",
+        "cnr3290",
+        "cnr3316",
+        "cnr3335",
+        "cnr3340",
+        "cnr3350",
+        "cnr3368",
+        "cnr3375",
+        "cnr3407",
+        "cnr3465",
+        "cnr3515",
+        "cnr3520",
+        "cnr3540",
+        "cnr3555",
+        "cnr3569",
+        "cnr3616",
+        "cnr3630",
+        "cnr3655",
+        "cnr3669",
+        "cnr3711"
+      ],
+      "before": [
+        {
+          "eyebrow": "A morning to remember",
+          "heading": {
+            "lead": "A few more",
+            "accent": "before we go."
+          },
+          "paragraphs": [
+            "I thought the shoot went wonderfully. They loved the photographs, and I delivered them very quickly. It was one of those meetings that leaves me with the nicest memories."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,480 @@
+{
+  "slug": "takamasa-shigemi-amalfi-atrani",
+  "name": "Takamasa Shigemi",
+  "title": "Takamasa Shigemi — Post-Wedding Photoshoot in Amalfi & Atrani | Amalfi.Day",
+  "description": "A sunrise post-wedding photoshoot with Takamasa Shigemi: a wedding dress brought from Japan, the streets of Amalfi and a warm welcome in Atrani.",
+  "heading": {
+    "lead": "A dress",
+    "accent": "to remember."
+  },
+  "date": "9 June 2026",
+  "location": "Amalfi & Atrani",
+  "summary": "A wedding dress from Japan, sunrise in Atrani and “Auguri!” at every turn.",
+  "heroLayout": "panorama",
+  "category": "couple",
+  "tag": "Post-wedding",
+  "schema": {
+    "name": "Takamasa Shigemi — Post-Wedding Photoshoot in Amalfi & Atrani",
+    "description": "A sunrise post-wedding photoshoot with Takamasa Shigemi: a wedding dress brought from Japan, the streets of Amalfi and a warm welcome in Atrani.",
+    "keywords": [
+      "Amalfi & Atrani photographer",
+      "post-wedding photoshoot",
+      "Amalfi Coast photography"
+    ]
+  },
+  "hero": {
+    "id": "cnr0379",
+    "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0379.jpg",
+    "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0379-full.webp",
+    "alt": "A full-length portrait of the couple with the wedding dress spread across the road",
+    "focal": "50% 25%",
+    "thumbFit": "contain",
+    "immersiveFit": "contain"
+  },
+  "mobileHero": {
+    "frameId": "cnr0958",
+    "focal": "50% 25%"
+  },
+  "card": {
+    "frameId": "cnr0958",
+    "focal": "50% 20%",
+    "hover": {
+      "frameId": "cnr1548",
+      "focal": "50% 18%"
+    }
+  },
+  "frames": [
+    {
+      "id": "cnr0021",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0021.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0021-full.webp",
+      "alt": "Takamasa and his partner in wedding clothes on the hotel steps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0051",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0051.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0051-full.webp",
+      "alt": "The couple together beside the hotel’s flowering plants",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0120",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0120.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0120-full.webp",
+      "alt": "The couple holding their bouquet beside the waterfront railing",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0164",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0164.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0164-full.webp",
+      "alt": "An embrace beside the sea wall with Amalfi behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0229",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0229.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0229-full.webp",
+      "alt": "The couple raising the bouquet in a playful waterfront portrait",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0238",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0238.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0238-full.webp",
+      "alt": "The couple smiling at one another beside the sea wall",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0307",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0307.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0307-full.webp",
+      "alt": "The couple and the sweeping wedding dress above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0379",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0379.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0379-full.webp",
+      "alt": "A full-length portrait of the couple with the wedding dress spread across the road",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0389",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0389.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0389-full.webp",
+      "alt": "The couple with their bouquet at the Atrani overlook",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0419",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0419.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0419-full.webp",
+      "alt": "The couple turning towards one another above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0475",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0475.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0475-full.webp",
+      "alt": "An embrace beside the railing with Atrani behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0486",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0486.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0486-full.webp",
+      "alt": "The couple looking across the coast as a bird passes",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0504",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0504.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0504-full.webp",
+      "alt": "A close portrait of the couple and their bouquet above Atrani",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0509",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0509.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0509-full.webp",
+      "alt": "The couple smiling together against the mountain backdrop",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0594",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0594.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0594-full.webp",
+      "alt": "The couple leaning over a railing with their bouquet",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0710",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0710.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0710-full.webp",
+      "alt": "Takamasa raising his partner’s hand on a plant-lined staircase",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0825",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0825.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0825-full.webp",
+      "alt": "The couple standing close beside Atrani’s church",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0887",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0887.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0887-full.webp",
+      "alt": "A detail of the white bouquet, ribbons and wedding clothes",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr0958",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR0958.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr0958-full.webp",
+      "alt": "The couple with their bouquet in front of Atrani’s church",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1073",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1073.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1073-full.webp",
+      "alt": "The couple standing together as sunlight reaches the mountains",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1159",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1159.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1159-full.webp",
+      "alt": "The couple looking at one another in the first sunlight",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1172",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1172.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1172-full.webp",
+      "alt": "The couple framed by the mountain skyline at sunrise",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1307",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1307.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1307-full.webp",
+      "alt": "The couple beside the railing above Atrani’s square",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1327",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1327.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1327-full.webp",
+      "alt": "The couple looking down at the wedding dress together",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1403",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1403.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1403-full.webp",
+      "alt": "The couple waving to the camera above the village square",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1513",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1513.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1513-full.webp",
+      "alt": "The couple with their bouquet against the sunlit hillside",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1525",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1525.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1525-full.webp",
+      "alt": "A portrait of the couple beneath Atrani’s hillside houses",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1548",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1548.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1548-full.webp",
+      "alt": "The couple on the seaside steps with the dress train spread below them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1585",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1585.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1585-full.webp",
+      "alt": "A wide view of the wedding dress on the seaside terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1648",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1648.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1648-full.webp",
+      "alt": "The couple together on the white terrace above the sea",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1668",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1668.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1668-full.webp",
+      "alt": "A lone portrait in the wedding dress between seaside street lamps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1781",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1781.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1781-full.webp",
+      "alt": "The couple embracing with Atrani behind them",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1851",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1851.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1851-full.webp",
+      "alt": "A black-and-white portrait of the couple and wedding dress on the terrace",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    },
+    {
+      "id": "cnr1907",
+      "sourceFile": "new_photoshoots/Takamasa_Shigemi/_CNR1907.jpg",
+      "original": "/photoshootings/optimized/takamasa-shigemi-amalfi-atrani/cnr1907-full.webp",
+      "alt": "The couple smiling beside the seaside street lamps",
+      "focal": "50% 50%",
+      "thumbFit": "contain",
+      "immersiveFit": "contain"
+    }
+  ],
+  "chapters": [
+    {
+      "type": "rail",
+      "eyebrow": "01 / All the way from Japan",
+      "heading": {
+        "lead": "The dress",
+        "accent": "came with them."
+      },
+      "frameIds": [
+        "cnr0021",
+        "cnr0051",
+        "cnr0120",
+        "cnr0164",
+        "cnr0229",
+        "cnr0238",
+        "cnr0307",
+        "cnr0379",
+        "cnr0389",
+        "cnr0419",
+        "cnr0475"
+      ],
+      "before": [
+        {
+          "eyebrow": "All the way from Japan",
+          "heading": {
+            "lead": "The dress",
+            "accent": "came with them."
+          },
+          "paragraphs": [
+            "This wonderful shoot began at a hotel in Amalfi. As I understood it, they had arrived from Japan only the day before, so the jet lag was severe. But what I remember most clearly about that morning is the wedding dress.",
+            "We were making post-wedding photographs, and they had brought their actual wedding dress all the way from Japan. It made such an impression that I have been telling people about this shoot ever since."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spreads",
+      "eyebrow": "02 / A welcome from the town",
+      "heading": {
+        "lead": "“Auguri!”",
+        "accent": "at every turn."
+      },
+      "frameIds": [
+        "cnr0486",
+        "cnr0504",
+        "cnr0509",
+        "cnr0594",
+        "cnr0710",
+        "cnr0825",
+        "cnr0887",
+        "cnr0958",
+        "cnr1073",
+        "cnr1159",
+        "cnr1172",
+        "cnr1307"
+      ],
+      "before": [
+        {
+          "eyebrow": "A welcome from the town",
+          "heading": {
+            "lead": "“Auguri!”",
+            "accent": "at every turn."
+          },
+          "paragraphs": [
+            "I love starting at six in the morning. We walked through Amalfi towards Atrani to catch the first rays as the sun appeared from behind the mountain. I wanted us to be there at exactly that moment.",
+            "The dress took up almost the whole road. Every passing car—and I do mean every one—stopped so that people could admire it and call out “Auguri!”, the Italian way of offering congratulations. It was quite a procession.",
+            "We had barely walked any distance before collecting enough compliments for the next three weeks. In Atrani we stopped for photographs at sunrise, but the congratulations kept coming. People here know me, and the locals who were already walking their dogs or getting ready for the day greeted us on foot and from their cars. Again and again: “Auguri!”"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dissolve",
+      "eyebrow": "03 / Room for a little silliness",
+      "heading": {
+        "lead": "The formal portraits,",
+        "accent": "and the laughter."
+      },
+      "frameIds": [
+        "cnr1327",
+        "cnr1403",
+        "cnr1513",
+        "cnr1525",
+        "cnr1548",
+        "cnr1585",
+        "cnr1648",
+        "cnr1668",
+        "cnr1781",
+        "cnr1851",
+        "cnr1907"
+      ],
+      "before": [
+        {
+          "eyebrow": "Room for a little silliness",
+          "heading": {
+            "lead": "The formal portraits,",
+            "accent": "and the laughter."
+          },
+          "paragraphs": [
+            "I tend to fool around during a shoot. It is part of how I work with emotion: in a photograph, it can help to show a feeling a little more strongly than you would in everyday life. This is one still frame, after all, rather than a video showing every change of expression. I shoot in bursts of ten, so I can choose the moment when everything comes together.",
+            "Getting this lovely couple from Japan to laugh and join in with my silliness was not easy, but we got there. Alongside the serious, beautiful wedding portraits, we caught a few wonderfully playful moments. Those will stay with all of us."
+          ]
+        }
+      ]
+    }
+  ],
+  "dateTime": "2026-06-09",
+  "review": {
+    "author": "Takamasa",
+    "authorDetail": "Japan · 10 June 2026",
+    "rating": 5,
+    "paragraphs": [
+      "Amazing! Gregory, who took the photos, not only took wonderful pictures, but also kindly guided us around the area in a way that was easy to understand for us, who don't speak much Italian or English. He was cheerful the whole time, and he also introduced us to lesser-known landmarks and recommended restaurants in the area. The recommended restaurants were of course delicious, and the photos were excellent and delivered very quickly! I'd like to ask him to be my photographer and guide again when I go to Atrani! (We brought these costumes with us)"
+    ],
+    "original": {
+      "lang": "ja",
+      "paragraphs": [
+        "素晴らしい！写真を撮ってくれたGregoryは素晴らしい写真を撮るだけではなく、イタリア語と英語の乏しい私たちに親切に分かりやすいように現地をガイドしてくれるだけでなく、始終朗らかで、おまけに現地のあまり知られていない名所やお勧めレストランも紹介してくれた。お勧めのレストランはもちろん美味しかったし、写真の仕上がりも素晴らしくとても早く届けてくれた！またアトラーニに行った時は彼に写真兼ガイドを頼みたい！ （この衣装は私達の持込です）"
+      ]
+    },
+    "source": {
+      "name": "GetYourGuide",
+      "url": "https://www.getyourguide.com/atrani-l128528/amalfi-sunrise-photoshoot-t1013879/",
+      "logo": "/brand/getyourguide-logo.svg"
+    }
+  }
+}
