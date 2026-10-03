@@ -238,7 +238,16 @@ if (root) {
   }
   window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(tick) }, { passive: true })
   const refresh = () => { controllers.forEach(controller => controller.measure()); tick() }
-  window.addEventListener('resize', refresh)
+  const touchViewport = window.matchMedia('(hover: none), (pointer: coarse)')
+  let layoutWidth = document.documentElement.clientWidth
+  window.addEventListener('resize', () => {
+    const width = document.documentElement.clientWidth
+    // Browser toolbars change the height while scrolling. Leave native swipes
+    // alone; svh keeps the scenes stable until the width/orientation changes.
+    if (touchViewport.matches && width === layoutWidth) return
+    layoutWidth = width
+    refresh()
+  }, { passive: true })
   desktop.addEventListener('change', refresh)
   reduced.addEventListener('change', refresh)
   document.fonts.ready.then(refresh)

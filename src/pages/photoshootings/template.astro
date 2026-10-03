@@ -156,7 +156,7 @@ const galleryTwoImages = [
       <div class="container">
         <div class="shoot-gallery-label">Gallery 1</div>
         <div class="shoot-pan" data-horizontal-gallery aria-label="Photoshoot gallery">
-          <div class="shoot-pan__sticky">
+          <div class="shoot-pan__sticky" tabindex="0" aria-label="Photographs. Swipe or use the arrow keys to browse.">
             <div class="shoot-pan__track" data-horizontal-track>
               {galleryOneImages.map((image, index) => (
                 <figure class="shoot-pan__card">
@@ -193,7 +193,7 @@ const galleryTwoImages = [
         <div class="shoot-gallery-label">Gallery 2</div>
         <div class="shoot-scroll" data-scroll-gallery aria-label="Photoshoot scroll gallery">
           <div class="shoot-scroll__media">
-            <div class="shoot-scroll__media-frame">
+            <div class="shoot-scroll__media-frame" tabindex="0" aria-label="Photographs. Swipe or use the arrow keys to browse.">
               {galleryTwoImages.map((image, index) => (
                 <img
                   class={index === 0 ? 'is-active' : ''}
@@ -240,13 +240,20 @@ const galleryTwoImages = [
   <script is:inline>
     ;(() => {
       const hero = document.querySelector('.shoot-hero')
-      if (hero) {
-        const setHeroHeight = () => {
-          hero.style.setProperty('--hero-height', `${window.innerHeight}px`)
-        }
-        setHeroHeight()
-        window.addEventListener('resize', setHeroHeight)
-
+      const scrollMotion = window.matchMedia(
+        '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
+      )
+      const touchInput = window.matchMedia('(hover: none), (pointer: coarse)')
+      const viewportHeight = () => hero?.clientHeight || window.innerHeight
+      const onLayoutChange = (callback) => {
+        let width = window.innerWidth
+        window.addEventListener('resize', () => {
+          // Browser toolbar changes must not rebuild the page while a finger is scrolling.
+          if (touchInput.matches && window.innerWidth === width) return
+          width = window.innerWidth
+          callback()
+        })
+        scrollMotion.addEventListener('change', callback)
       }
 
       const gallery = document.querySelector('[data-horizontal-gallery]')
@@ -258,15 +265,22 @@ const galleryTwoImages = [
           let rafId = null
 
           const updateLayout = () => {
+            if (!scrollMotion.matches) {
+              gallery.style.removeProperty('height')
+              gallery.dataset.scrollDistance = '0'
+              if (rafId) cancelAnimationFrame(rafId)
+              rafId = null
+              currentX = 0
+              targetX = 0
+              track.style.removeProperty('transform')
+              return
+            }
             const viewportWidth = gallery.clientWidth
             const trackWidth = track.scrollWidth
             const scrollDistance = Math.max(0, trackWidth - viewportWidth)
-            const height = scrollDistance + window.innerHeight
+            const height = scrollDistance + viewportHeight()
             gallery.style.height = `${height}px`
             gallery.dataset.scrollDistance = String(scrollDistance)
-            targetX = 0
-            currentX = 0
-            track.style.transform = 'translate3d(0, 0, 0)'
           }
 
           const animate = () => {
@@ -285,6 +299,7 @@ const galleryTwoImages = [
 
           let ticking = false
           const onScroll = () => {
+            if (!scrollMotion.matches) return
             const scrollDistance = Number(gallery.dataset.scrollDistance || 0)
             if (scrollDistance <= 0) {
               targetX = 0
@@ -294,7 +309,7 @@ const galleryTwoImages = [
               return
             }
             const rect = gallery.getBoundingClientRect()
-            const totalScroll = gallery.offsetHeight - window.innerHeight
+            const totalScroll = gallery.offsetHeight - viewportHeight()
             const progress =
               totalScroll > 0 ? Math.min(Math.max(-rect.top / totalScroll, 0), 1) : 0
             targetX = -scrollDistance * progress
@@ -316,7 +331,7 @@ const galleryTwoImages = [
           requestTick()
 
           window.addEventListener('scroll', requestTick, { passive: true })
-          window.addEventListener('resize', () => {
+          onLayoutChange(() => {
             updateLayout()
             requestTick()
           })
@@ -335,6 +350,7 @@ const galleryTwoImages = [
       if (scrollGallery) {
         const images = Array.from(scrollGallery.querySelectorAll('[data-scroll-image]'))
         const spacer = scrollGallery.querySelector('[data-scroll-spacer]')
+        const frame = scrollGallery.querySelector('.shoot-scroll__media-frame')
         const dots = Array.from(scrollGallery.querySelectorAll('[data-scroll-dot]'))
         if (images.length && spacer) {
           let activeIndex = 0
@@ -350,14 +366,20 @@ const galleryTwoImages = [
           }
 
           const updateLayout = () => {
-            const stepHeight = window.innerHeight * 0.7
-            const totalHeight = Math.max(images.length * stepHeight, window.innerHeight * 1.1)
+            if (!scrollMotion.matches) {
+              spacer.style.removeProperty('height')
+              return
+            }
+            const height = viewportHeight()
+            const stepHeight = height * 0.7
+            const totalHeight = Math.max(images.length * stepHeight, height * 1.1)
             spacer.style.height = `${totalHeight}px`
           }
 
           let ticking = false
           const onScroll = () => {
-            const totalScroll = scrollGallery.offsetHeight - window.innerHeight
+            if (!scrollMotion.matches) return
+            const totalScroll = scrollGallery.offsetHeight - viewportHeight()
             const rect = scrollGallery.getBoundingClientRect()
             const progress =
               totalScroll > 0 ? Math.min(Math.max(-rect.top / totalScroll, 0), 1) : 0
@@ -381,7 +403,13 @@ const galleryTwoImages = [
           requestTick()
 
           window.addEventListener('scroll', requestTick, { passive: true })
-          window.addEventListener('resize', () => {
+          frame?.addEventListener('scroll', () => {
+            if (scrollMotion.matches) return
+            setActive(Math.min(images.length - 1, Math.max(0,
+              Math.round(frame.scrollLeft / Math.max(1, frame.clientWidth))
+            )))
+          }, { passive: true })
+          onLayoutChange(() => {
             updateLayout()
             requestTick()
           })
@@ -399,7 +427,7 @@ const galleryTwoImages = [
 
   .shoot-hero {
     position: relative;
-    height: var(--hero-height, 100svh);
+    height: 100svh;
     min-height: 100svh;
     display: flex;
     align-items: flex-end;
@@ -515,7 +543,7 @@ const galleryTwoImages = [
   .shoot-pan__sticky {
     position: sticky;
     top: calc(var(--header-space) + 1.5rem);
-    height: clamp(320px, 70vh, 720px);
+    height: clamp(320px, 70svh, 720px);
     display: flex;
     align-items: flex-start;
     padding-bottom: 1.5rem;
@@ -598,7 +626,7 @@ const galleryTwoImages = [
     width: 100%;
     aspect-ratio: 16 / 9;
     height: auto;
-    max-height: 85vh;
+    max-height: 85svh;
     border-radius: 18px;
     overflow: hidden;
     background: #0f1117;
@@ -647,7 +675,7 @@ const galleryTwoImages = [
   }
 
   .shoot-scroll__spacer {
-    height: 60vh;
+    height: 60svh;
   }
 
   .shoot-cta-section {
@@ -774,7 +802,7 @@ const galleryTwoImages = [
 
     .shoot-pan__sticky {
       top: calc(var(--header-space) + 1rem);
-      height: clamp(260px, 65vh, 520px);
+      height: clamp(260px, 65svh, 520px);
     }
 
     .shoot-pan__track {
@@ -793,7 +821,7 @@ const galleryTwoImages = [
     }
 
     .shoot-scroll__media-frame {
-      max-height: 78vh;
+      max-height: 78svh;
     }
 
     .shoot-cta {
@@ -817,7 +845,7 @@ const galleryTwoImages = [
     }
 
     .shoot-pan__sticky {
-      height: clamp(220px, 60vh, 420px);
+      height: clamp(220px, 60svh, 420px);
     }
 
     .shoot-pan__card {
@@ -825,7 +853,7 @@ const galleryTwoImages = [
     }
 
     .shoot-scroll__media-frame {
-      max-height: 62vh;
+      max-height: 62svh;
       border-radius: 14px;
     }
 
@@ -840,6 +868,57 @@ const galleryTwoImages = [
 
     .shoot-cta {
       padding: 1.5rem;
+    }
+  }
+
+  @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .shoot-pan__sticky {
+      position: relative;
+      top: auto;
+      height: auto;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      overscroll-behavior-x: contain;
+    }
+
+    .shoot-pan__track {
+      width: max-content;
+      will-change: auto;
+    }
+
+    .shoot-pan__card {
+      scroll-snap-align: start;
+    }
+
+    .shoot-scroll__media {
+      position: relative;
+      top: auto;
+      min-width: 0;
+    }
+
+    .shoot-scroll__media-frame {
+      display: flex;
+      aspect-ratio: auto;
+      max-height: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+    }
+
+    .shoot-scroll__media-frame img {
+      position: relative;
+      flex: 0 0 100%;
+      min-width: 0;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      opacity: 1;
+      scroll-snap-align: start;
+      transition: none;
+    }
+
+    .shoot-scroll__fade,
+    .shoot-scroll__spacer {
+      display: none;
     }
   }
 
