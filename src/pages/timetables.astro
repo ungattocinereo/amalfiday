@@ -391,19 +391,15 @@ const timetablesJsonLd = [
                 <span class="timetable-card__dash" aria-hidden="true">—</span>
                 <span class="timetable-card__destination">{line.to}</span>
               </h3>
+              <p class="timetable-card__via">{line.via}</p>
               <div class="timetable-card__identity">
                 <span class="timetable-card__line">
                   <i class="ph ph-bus" aria-hidden="true"></i>
-                  <span>Line <strong>{line.number}</strong></span>
+                  <span>Line {line.number}</span>
                 </span>
                 <span class="timetable-card__operator">SITA Sud</span>
               </div>
-              <p class="timetable-card__via">{line.via}</p>
             </header>
-            <p class="timetable-card__route">
-              <span class="timetable-card__route-label">Route</span>
-              {line.route.join(' → ')}
-            </p>
             <div class="timetable-card__meta">
               <span class="timetable-chip timetable-chip--date timetable-chip--updated">
                 <i class="ph ph-clock" aria-hidden="true"></i>
@@ -1204,22 +1200,16 @@ const timetablesJsonLd = [
     align-items: center;
     gap: 0.55rem;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 
   .timetable-card__line i {
-    font-size: 1.2rem;
+    font-size: 1em;
     color: var(--color-accent);
   }
 
-  .timetable-card__line strong {
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: -0.05em;
-  }
-
-  .timetable-card__operator,
-  .timetable-card__route-label {
+  .timetable-card__operator {
     font-family: var(--font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.13em;
@@ -1269,18 +1259,6 @@ const timetablesJsonLd = [
   .timetable-chip--updated {
     color: var(--color-text);
     font-weight: 600;
-  }
-
-  .timetable-card__route {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: var(--color-text-muted);
-  }
-
-  .timetable-card__route-label {
-    display: block;
-    margin-bottom: 0.35rem;
   }
 
   .timetable-download {
@@ -1818,12 +1796,6 @@ const timetablesJsonLd = [
     .travel-card__media {
       flex: none;
       height: 200px;
-    }
-  }
-
-  @media (max-width: 720px) {
-    .timetable-card__route {
-      font-size: 1rem;
     }
   }
 
