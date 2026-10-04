@@ -277,7 +277,7 @@ const timetablesJsonLd = [
   imageAlt={shareImageAlt}
   jsonLd={timetablesJsonLd}
 >
-  <section class="timetables-hero hero--dark hero-centered">
+  <section class="timetables-hero hero--dark hero-bottom">
     <div class="timetables-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`timetables-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -297,7 +297,7 @@ const timetablesJsonLd = [
           <div class="timetables-hero__copy">
             <span class="timetables-hero__eyebrow">Amalfi Coast public transport 2026</span>
             <h1 class="timetables-hero__title">
-              Local<br />transport<br />timetables
+              Local transport<br />timetables
             </h1>
             <p class="timetables-hero__lead">
               SITA bus lines, local shuttles, taxis, trains, and ticket apps for moving between
@@ -771,7 +771,7 @@ const timetablesJsonLd = [
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: brightness(0.86) saturate(1.02);
+    filter: saturate(1.02);
     transform: scale(1.01);
     backface-visibility: hidden;
   }

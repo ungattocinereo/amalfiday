@@ -78,7 +78,7 @@ const postJsonLd = [
 <BaseLayout title={`${post.title} — Amalfi Notes`} description={post.excerpt} image={post.image ?? undefined} jsonLd={postJsonLd}>
 
   <!-- POST HERO -->
-  <section class:list={['post-hero', 'hero--dark', 'hero-centered', !post.image && 'post-hero--empty']}>
+  <section class:list={['post-hero', 'hero--dark', post.image ? 'hero-bottom' : 'hero-centered', !post.image && 'post-hero--empty']}>
     {post.image ? (
       <CldImage
         class="post-hero__image"

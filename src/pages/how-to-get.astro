@@ -536,7 +536,7 @@ const airportJsonLd = [
   jsonLd={airportJsonLd}
 >
   <article class="airport-page">
-    <section class="airport-hero hero--dark hero-centered">
+    <section class="airport-hero hero--dark hero-bottom">
       <div class="airport-hero__slides" aria-hidden="true">
         {heroSlides.map((slide, i) => (
           <div class={`airport-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -553,7 +553,7 @@ const airportJsonLd = [
           </div>
         ))}
       </div>
-      <div class="airport-hero__vignette"></div>
+      <div class="airport-hero__vignette hero-shade" aria-hidden="true"></div>
       <div class="airport-hero__content hero-content">
         <div class="container hero-container">
           <div class="airport-hero__grid">

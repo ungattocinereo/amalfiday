@@ -320,7 +320,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
   imageAlt="Ferry on the Amalfi Coast"
   jsonLd={ferryJsonLd}
 >
-  <section class="apt-hero hero--dark hero-centered">
+  <section class="apt-hero hero--dark hero-bottom">
     <div class="apt-hero__slides" aria-hidden="true">
       {heroSlides.map((slide, i) => (
         <div class={`apt-hero__slide ${i === 0 ? 'is-active' : ''}`}>
@@ -817,7 +817,7 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     height: 100%;
     object-fit: cover;
     display: block;
-    filter: brightness(0.86) saturate(1.02);
+    filter: saturate(1.02);
     transform: scale(1.01);
     backface-visibility: hidden;
   }
