@@ -176,7 +176,7 @@ export const blogTags = [
 export const footerLinks = {
   transport: [
     { label: 'Ferry timetables', href: '/ferry-timetables' },
-    { label: 'Bus timetables', href: 'https://cnr.pw/bus', external: true },
+    { label: 'Bus timetables', href: '/timetables' },
     { label: 'Book Airport Shuttle', href: 'https://shuttlebus.pintourbus.com', external: true },
     { label: 'Naples to Amalfi', href: '/how-to-get' },
     { label: 'All public transport', href: '/timetables' },

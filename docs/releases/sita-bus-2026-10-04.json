@@ -1,0 +1,101 @@
+{
+  "checkedOn": "2026-10-04",
+  "catalogue": "https://sitasudtrasporti.it/campania/orari/",
+  "noticeEffective": "2026-10-05",
+  "notice": "https://sitasudtrasporti.it/campania/avvisi/variazioni-orario-corse-scolastiche-amalfi/",
+  "note": "No future PDFs present in catalogue HTML or the Oct2 school-services notice at check. For cautious display, use the earlier catalogue expiry rather than the printed PDF end where they conflict, and link the Oct5 notice. 5110 and 5120 are separate official combined PDFs with differing late-night Ravello/Scala times.",
+  "routes": [
+    {
+      "line": "5120",
+      "route": "Amalfi–Maiori–Salerno",
+      "sourceUrl": "https://sitasudtrasporti.it/campania/wp-content/uploads/sites/3/2024/02/5120_5110_5070_14_09_2026-2.pdf",
+      "catalogueUrl": "https://sitasudtrasporti.it/campania/orari/page/3/",
+      "pdfValidFrom": "2026-09-14",
+      "pdfValidUntil": "2026-11-01",
+      "catalogueValidUntil": "2026-10-04",
+      "schoolChangesOct5": true,
+      "bytes": 793747,
+      "sha256": "d609a2e818ac11c95915ef58f8ee8eba1cac398897471025b10eaa8ccf342331",
+      "pdfHeader": "ORARIO DAL 14/09 AL 01/11/2026",
+      "validityDiscrepancy": "PDF printed end 2026-11-01 conflicts with catalogue end 2026-10-04. Official notice changes related school services effective 2026-10-05.",
+      "publishedPath": "/files/BUS-5120-AMALFI-MAIORI-SALERNO.pdf"
+    },
+    {
+      "line": "5110",
+      "route": "Scala–Ravello–Amalfi",
+      "sourceUrl": "https://sitasudtrasporti.it/campania/wp-content/uploads/sites/3/2024/02/5120_5110_5070_14_09_2026-1.pdf",
+      "catalogueUrl": "https://sitasudtrasporti.it/campania/orari/",
+      "pdfValidFrom": "2026-09-14",
+      "pdfValidUntil": "2026-11-01",
+      "catalogueValidUntil": "2026-10-04",
+      "schoolChangesOct5": true,
+      "bytes": 793724,
+      "sha256": "da25424fba52752c0b27d9d5a1419a6c422d967ebc9f7d342cfe2833ab140617",
+      "pdfHeader": "ORARIO DAL 14/09 AL 01/11/2026",
+      "validityDiscrepancy": "PDF printed end 2026-11-01 conflicts with catalogue end 2026-10-04. Official notice changes related school services effective 2026-10-05.",
+      "publishedPath": "/files/BUS-5110-SCALA-RAVELLO-AMALFI.pdf"
+    },
+    {
+      "line": "5080",
+      "route": "Amalfi–Agerola–Gragnano–Castellammare–Napoli",
+      "sourceUrl": "https://sitasudtrasporti.it/campania/wp-content/uploads/sites/3/2024/02/5080_14_09_2026-1.pdf",
+      "catalogueUrl": "https://sitasudtrasporti.it/campania/orari/page/3/",
+      "pdfValidFrom": "2026-09-14",
+      "pdfValidUntil": null,
+      "catalogueValidUntil": "2026-10-04",
+      "schoolChangesOct5": true,
+      "bytes": 741843,
+      "sha256": "af460a07b88b32d11d4652fb96f957494d852b807eb7a2cf1d882d5d37afa641",
+      "pdfHeader": "ORARIO DAL 14/09/2026",
+      "publishedPath": "/files/BUS-5080-AMALFI-AGEROLA-GRAGNANO-CASTELLAMMARE-NAPOLI.pdf"
+    },
+    {
+      "line": "5020",
+      "route": "Amalfi–Napoli",
+      "sourceUrl": "https://sitasudtrasporti.it/campania/wp-content/uploads/sites/3/2024/02/5020-3.pdf",
+      "catalogueUrl": "https://sitasudtrasporti.it/campania/orari/page/3/",
+      "pdfValidFrom": null,
+      "pdfValidUntil": null,
+      "catalogueValidUntil": "2026-12-31",
+      "schoolChangesOct5": false,
+      "bytes": 526493,
+      "sha256": "71b02c46c6b7013edaea5b29b11c2adb88cab5a84dc7d52027d5b4d2b649247b",
+      "pdfHeader": null,
+      "pdfDateNote": "No general validity header. Summer exception: DAL 01/08 AL 05/09/26 LA PARTENZA È ANTICIPATA ALLE ORE 14:00.",
+      "publishedPath": "/files/BUS-5020-AMALFI-NAPOLI.pdf"
+    },
+    {
+      "line": "5010",
+      "route": "Maiori–Tramonti–Nocera–Cava–Salerno",
+      "sourceUrl": "https://sitasudtrasporti.it/campania/wp-content/uploads/sites/3/2024/02/5010_28_09_26-.pdf",
+      "catalogueUrl": "https://sitasudtrasporti.it/campania/orari/page/2/",
+      "pdfValidFrom": "2026-09-28",
+      "pdfValidUntil": null,
+      "catalogueValidUntil": "2026-10-04",
+      "schoolChangesOct5": true,
+      "bytes": 549820,
+      "sha256": "ea94156b362eec512fa49cd0e31d7601679391a562aae60abcfcbcdfa453c669",
+      "pdfHeader": "IN VIGORE DAL 28/09/2026",
+      "publishedPath": "/files/BUS-5010-MAIORI-TRAMONTI-NOCERA-INFERIORE-CAVA-SALERNO.pdf"
+    },
+    {
+      "line": "5070",
+      "route": "Amalfi–Positano–Sorrento",
+      "sourceUrl": "https://sitasudtrasporti.it/campania/wp-content/uploads/sites/3/2024/02/5070_14_09_26.pdf",
+      "catalogueUrl": "https://sitasudtrasporti.it/campania/orari/page/2/",
+      "pdfValidFrom": "2026-09-14",
+      "pdfValidUntil": null,
+      "catalogueValidUntil": "2026-11-01",
+      "schoolChangesOct5": false,
+      "bytes": 470005,
+      "sha256": "f3a7548efde383351223a34beb3dcecdd66aa571988aad6c4cbad0239bdb27bb",
+      "pdfHeader": "ORARIO DAL 14/09/2026",
+      "publishedPath": "/files/BUS-5070-AMALFI-POSITANO-SORRENTO.pdf"
+    }
+  ],
+  "legacyCombinedPdf": {
+    "publishedPath": "/files/BUS-timetables.pdf",
+    "matchesLine": "5120",
+    "action": "Preserved unchanged; matches the official 5120 PDF."
+  }
+}

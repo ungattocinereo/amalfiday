@@ -7,6 +7,9 @@ const pageTitle = 'Local Transport Timetables — Amalfi Coast Buses & Shuttles'
 const pageDescription =
   'Download the latest SitaBus (SITA) timetables for the Amalfi Coast and plan bus, shuttle, train, and taxi connections between Salerno, Amalfi, Positano, and Sorrento.'
 const shareImageAlt = 'SITA bus traveling along the Amalfi Coast'
+const checkedDate = 'October 4, 2026'
+const sitaTimetablesUrl = 'https://sitasudtrasporti.it/campania/orari/'
+const schoolServiceNoticeUrl = 'https://sitasudtrasporti.it/campania/avvisi/variazioni-orario-corse-scolastiche-amalfi/'
 
 const heroSlides = [
   {
@@ -40,27 +43,25 @@ const heroTags = [
 
 const heroStats = [
   { value: '6', label: 'bus lines' },
-  { value: '2026', label: 'updated files' },
+  { value: '2026', label: 'SITA PDFs' },
   { value: '4', label: 'ticket apps' },
 ]
 
 const introParagraphs = [
-  'Planning your dream vacation along the breathtaking Amalfi Coast? Perfect timing! The official 2025 SITA bus schedules are now available for download, offering seamless connectivity between all the iconic coastal gems - Salerno, Maiori, Minori, Amalfi, Positano, and Sorrento.',
-  "These updated timetables ensure you can effortlessly navigate Italy's most spectacular coastline while maximizing your time in each charming destination. Download now to experience the Amalfi Coast's winding cliffside roads and panoramic Mediterranean views with complete confidence in your travel plans.",
-  'Experience the Amalfi Coast like a local:',
-  'Embrace the relaxed pace of life and enjoy the scenic coastal journey. The new 2025 bus timetables empower you to discover the hidden gems and captivating beauty of each town along the Amalfi Coast, making your Italian adventure unforgettable.',
+  'These are copies of the PDFs linked by SITA Sud for six Amalfi Coast bus lines, checked on October 4, 2026. Download the file for your line and check the weekday, holiday and school-day symbols before travelling.',
+  'The dates below come from the official SITA catalogue. For lines 5110 and 5120, the catalogue says October 4, while the combined PDF headers say November 1. Service notices may change individual departures before a new PDF is published.',
 ]
 
 const timetables = [
   {
     number: '5120',
-    updated: 'Updated: July 6, 2026',
+    validity: 'SITA listing: until October 4, 2026',
     route: ['Amalfi', 'Atrani', 'Minori', 'Maiori', 'Cetara', 'Vietri sul Mare', 'Salerno'],
-    link: 'https://amalfi.day/files/BUS-timetables.pdf',
+    link: '/files/BUS-5120-AMALFI-MAIORI-SALERNO.pdf',
   },
   {
     number: '5110',
-    updated: 'Updated: July 6, 2026',
+    validity: 'SITA listing: until October 4, 2026',
     route: [
       'Scala',
       'Minuta',
@@ -71,17 +72,17 @@ const timetables = [
       'Ravello',
       'Amalfi',
     ],
-    link: 'https://amalfi.day/files/BUS-timetables.pdf',
+    link: '/files/BUS-5110-SCALA-RAVELLO-AMALFI.pdf',
   },
   {
     number: '5080',
-    updated: 'Updated: July 6, 2026',
+    validity: 'SITA listing: until October 4, 2026',
     route: ['Amalfi', 'Conca', 'Furore', 'Agerola', 'Pimonte', 'Gragnano', 'Castellammare', 'Napoli'],
     link: 'https://amalfi.day/files/BUS-5080-AMALFI-AGEROLA-GRAGNANO-CASTELLAMMARE-NAPOLI.pdf',
   },
   {
     number: '5020',
-    updated: 'Updated: July 6, 2026',
+    validity: 'SITA listing: until December 31, 2026',
     route: [
       'Amalfi',
       'Atrani',
@@ -97,7 +98,7 @@ const timetables = [
   },
   {
     number: '5010',
-    updated: 'Updated: July 6, 2026',
+    validity: 'SITA listing: until October 4, 2026',
     route: [
       'Maiori',
       'Tramonti',
@@ -112,7 +113,7 @@ const timetables = [
   },
   {
     number: '5070',
-    updated: 'Updated: July 6, 2026',
+    validity: 'SITA listing: until November 1, 2026',
     route: [
       'Amalfi',
       'Conca',
@@ -277,7 +278,7 @@ const timetablesJsonLd = [
               ))}
             </div>
             <div class="timetables-hero__actions">
-              <a class="timetables-hero__btn timetables-hero__btn--primary" href="https://cnr.pw/bus" target="_blank" rel="noreferrer">Download bus PDFs</a>
+              <a class="timetables-hero__btn timetables-hero__btn--primary" href="#bus-timetables">Download bus PDFs</a>
               <a class="timetables-hero__btn timetables-hero__btn--ghost" href="#tickets">Ticket apps</a>
             </div>
           </div>
@@ -309,16 +310,16 @@ const timetablesJsonLd = [
     </div>
   </section>
 
-  <section class="section timetables-section">
+  <section class="section timetables-section" id="bus-timetables">
     <div class="container timetables-intro">
       <div class="section-heading">
         <span class="section-kicker">SITA bus files</span>
         <h2>
-          New 2026 <span class="accent-italic">Timetables</span>
+          SITA bus <span class="accent-italic">Timetables</span>
         </h2>
         <p>
-          Download the latest SITA bus schedules for the main Amalfi Coast routes and keep
-          them offline for quick route checks.
+          Download the official bus PDFs for the main Amalfi Coast routes, then check
+          SITA service notices for changes affecting your travel date.
         </p>
       </div>
 
@@ -326,13 +327,21 @@ const timetablesJsonLd = [
         <div class="timetables-copy">
           <p>{introParagraphs[0]}</p>
           <p>{introParagraphs[1]}</p>
-          <p class="timetables-copy__highlight">{introParagraphs[2]}</p>
-          <p>{introParagraphs[3]}</p>
+          <p class="timetables-copy__highlight">
+            From October 5, 2026: SITA has announced changes to school-day services on
+            lines 5110, 5010, 5080 and 5120. These changes are not reflected in the PDFs
+            checked on October 4.
+            {' '}<a href={schoolServiceNoticeUrl} target="_blank" rel="noreferrer">Read the official service notice</a>.
+          </p>
+          <p>
+            <a href={sitaTimetablesUrl} target="_blank" rel="noreferrer">Check the SITA Sud timetable catalogue</a>
+            {' '}for newer files before travelling.
+          </p>
         </div>
         <div class="timetables-update">
           <span class="badge">
             <i class="ph ph-clock" aria-hidden="true"></i>
-            Updated: July 6, 2026
+            PDFs checked: {checkedDate}
           </span>
         </div>
       </div>
@@ -346,7 +355,7 @@ const timetablesJsonLd = [
               <span class="timetable-chip timetable-chip--number">{line.number}</span>
               <span class="timetable-chip timetable-chip--date">
                 <i class="ph ph-calendar-blank" aria-hidden="true"></i>
-                {line.updated}
+                {line.validity}
               </span>
             </div>
             <div class="timetable-card__route">
@@ -368,9 +377,9 @@ const timetablesJsonLd = [
               ))}
             </div>
             <div class="timetable-card__actions">
-              <a class="timetable-download" href={line.link} target="_blank" rel="noreferrer">
+              <a class="timetable-download" href={line.link} target="_blank" rel="noreferrer" aria-label={`Download SITA line ${line.number} timetable PDF`}>
                 <i class="ph ph-cloud-arrow-down" aria-hidden="true"></i>
-                Download
+                Download PDF
               </a>
             </div>
           </article>
