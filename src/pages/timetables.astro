@@ -391,13 +391,12 @@ const timetablesJsonLd = [
                 <span class="timetable-card__dash" aria-hidden="true">—</span>
                 <span class="timetable-card__destination">{line.to}</span>
               </h3>
-              <p class="timetable-card__via">{line.via}</p>
               <div class="timetable-card__identity">
+                <p class="timetable-card__via">{line.via}</p>
                 <span class="timetable-card__line">
                   <i class="ph ph-bus" aria-hidden="true"></i>
                   <span>Line {line.number}</span>
                 </span>
-                <span class="timetable-card__operator">SITA Sud</span>
               </div>
             </header>
             <div class="timetable-card__meta">
@@ -1155,14 +1154,14 @@ const timetablesJsonLd = [
     padding: clamp(1.5rem, 3.4vw, 2.75rem);
     border-radius: var(--radius-lg);
     background: var(--color-card);
-    border: 1px solid var(--color-border);
+    border: 0;
     border-top: 3px solid var(--color-accent);
     box-shadow: var(--shadow-soft);
   }
 
   .timetable-card__header {
     display: grid;
-    gap: 1.15rem;
+    gap: 0.5rem;
   }
 
   .timetable-card__title {
@@ -1188,11 +1187,10 @@ const timetablesJsonLd = [
   }
 
   .timetable-card__identity {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 1rem;
   }
 
   .timetable-card__line {
@@ -1202,19 +1200,12 @@ const timetablesJsonLd = [
     font-family: var(--font-mono);
     font-size: 0.85rem;
     line-height: 1.5;
+    white-space: nowrap;
   }
 
   .timetable-card__line i {
     font-size: 1em;
     color: var(--color-accent);
-  }
-
-  .timetable-card__operator {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
   }
 
   .timetable-card__via {
