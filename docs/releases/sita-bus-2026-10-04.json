@@ -18,7 +18,9 @@
       "sha256": "d609a2e818ac11c95915ef58f8ee8eba1cac398897471025b10eaa8ccf342331",
       "pdfHeader": "ORARIO DAL 14/09 AL 01/11/2026",
       "validityDiscrepancy": "PDF printed end 2026-11-01 conflicts with catalogue end 2026-10-04. Official notice changes related school services effective 2026-10-05.",
-      "publishedPath": "/files/BUS-5120-AMALFI-MAIORI-SALERNO.pdf"
+      "publishedPath": "/files/BUS-5120-AMALFI-MAIORI-SALERNO.pdf",
+      "pdfModificationDate": "D:20260914150038+02'00'",
+      "pdfUpdatedOn": "2026-09-14"
     },
     {
       "line": "5110",
@@ -33,7 +35,9 @@
       "sha256": "da25424fba52752c0b27d9d5a1419a6c422d967ebc9f7d342cfe2833ab140617",
       "pdfHeader": "ORARIO DAL 14/09 AL 01/11/2026",
       "validityDiscrepancy": "PDF printed end 2026-11-01 conflicts with catalogue end 2026-10-04. Official notice changes related school services effective 2026-10-05.",
-      "publishedPath": "/files/BUS-5110-SCALA-RAVELLO-AMALFI.pdf"
+      "publishedPath": "/files/BUS-5110-SCALA-RAVELLO-AMALFI.pdf",
+      "pdfModificationDate": "D:20260911083203+02'00'",
+      "pdfUpdatedOn": "2026-09-11"
     },
     {
       "line": "5080",
@@ -47,7 +51,9 @@
       "bytes": 741843,
       "sha256": "af460a07b88b32d11d4652fb96f957494d852b807eb7a2cf1d882d5d37afa641",
       "pdfHeader": "ORARIO DAL 14/09/2026",
-      "publishedPath": "/files/BUS-5080-AMALFI-AGEROLA-GRAGNANO-CASTELLAMMARE-NAPOLI.pdf"
+      "publishedPath": "/files/BUS-5080-AMALFI-AGEROLA-GRAGNANO-CASTELLAMMARE-NAPOLI.pdf",
+      "pdfModificationDate": "D:20260922103121+02'00'",
+      "pdfUpdatedOn": "2026-09-22"
     },
     {
       "line": "5020",
@@ -62,7 +68,9 @@
       "sha256": "71b02c46c6b7013edaea5b29b11c2adb88cab5a84dc7d52027d5b4d2b649247b",
       "pdfHeader": null,
       "pdfDateNote": "No general validity header. Summer exception: DAL 01/08 AL 05/09/26 LA PARTENZA È ANTICIPATA ALLE ORE 14:00.",
-      "publishedPath": "/files/BUS-5020-AMALFI-NAPOLI.pdf"
+      "publishedPath": "/files/BUS-5020-AMALFI-NAPOLI.pdf",
+      "pdfModificationDate": "D:20260811095804+02'00'",
+      "pdfUpdatedOn": "2026-08-11"
     },
     {
       "line": "5010",
@@ -76,7 +84,9 @@
       "bytes": 549820,
       "sha256": "ea94156b362eec512fa49cd0e31d7601679391a562aae60abcfcbcdfa453c669",
       "pdfHeader": "IN VIGORE DAL 28/09/2026",
-      "publishedPath": "/files/BUS-5010-MAIORI-TRAMONTI-NOCERA-INFERIORE-CAVA-SALERNO.pdf"
+      "publishedPath": "/files/BUS-5010-MAIORI-TRAMONTI-NOCERA-INFERIORE-CAVA-SALERNO.pdf",
+      "pdfModificationDate": "D:20260924111302+02'00'",
+      "pdfUpdatedOn": "2026-09-24"
     },
     {
       "line": "5070",
@@ -90,7 +100,9 @@
       "bytes": 470005,
       "sha256": "f3a7548efde383351223a34beb3dcecdd66aa571988aad6c4cbad0239bdb27bb",
       "pdfHeader": "ORARIO DAL 14/09/2026",
-      "publishedPath": "/files/BUS-5070-AMALFI-POSITANO-SORRENTO.pdf"
+      "publishedPath": "/files/BUS-5070-AMALFI-POSITANO-SORRENTO.pdf",
+      "pdfModificationDate": "D:20260911083314+02'00'",
+      "pdfUpdatedOn": "2026-09-11"
     }
   ],
   "legacyCombinedPdf": {

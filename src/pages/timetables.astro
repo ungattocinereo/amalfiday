@@ -8,6 +8,10 @@ const pageDescription =
   'Download the latest SitaBus (SITA) timetables for the Amalfi Coast and plan bus, shuttle, train, and taxi connections between Salerno, Amalfi, Positano, and Sorrento.'
 const shareImageAlt = 'SITA bus traveling along the Amalfi Coast'
 const checkedDate = 'October 4, 2026'
+const pdfDateFormat = new Intl.DateTimeFormat('en-US', {
+  month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC',
+})
+const formatPdfDate = (value: string) => pdfDateFormat.format(new Date(value))
 const sitaTimetablesUrl = 'https://sitasudtrasporti.it/campania/orari/'
 const schoolServiceNoticeUrl = 'https://sitasudtrasporti.it/campania/avvisi/variazioni-orario-corse-scolastiche-amalfi/'
 
@@ -48,19 +52,23 @@ const heroStats = [
 ]
 
 const introParagraphs = [
-  'These are copies of the PDFs linked by SITA Sud for six Amalfi Coast bus lines, checked on October 4, 2026. Download the file for your line and check the weekday, holiday and school-day symbols before travelling.',
-  'The dates below come from the official SITA catalogue. For lines 5110 and 5120, the catalogue says October 4, while the combined PDF headers say November 1. Service notices may change individual departures before a new PDF is published.',
+  'These official SITA Sud PDF copies were refreshed on October 4, 2026. Each card shows the update date recorded inside the PDF and, separately, the start date printed in the timetable. Check the weekday, holiday and school-day symbols before travelling.',
+  'The SITA listing dates show how long each file is listed as valid in the official catalogue. For lines 5110 and 5120, the catalogue says October 4, while the combined PDF headers say November 1. Service notices may change individual departures before a new PDF is published.',
 ]
 
 const timetables = [
   {
     number: '5120',
+    pdfUpdated: '2026-09-14',
+    timetableFrom: '2026-09-14',
     validity: 'SITA listing: until October 4, 2026',
     route: ['Amalfi', 'Atrani', 'Minori', 'Maiori', 'Cetara', 'Vietri sul Mare', 'Salerno'],
     link: '/files/BUS-5120-AMALFI-MAIORI-SALERNO.pdf',
   },
   {
     number: '5110',
+    pdfUpdated: '2026-09-11',
+    timetableFrom: '2026-09-14',
     validity: 'SITA listing: until October 4, 2026',
     route: [
       'Scala',
@@ -76,12 +84,16 @@ const timetables = [
   },
   {
     number: '5080',
+    pdfUpdated: '2026-09-22',
+    timetableFrom: '2026-09-14',
     validity: 'SITA listing: until October 4, 2026',
     route: ['Amalfi', 'Conca', 'Furore', 'Agerola', 'Pimonte', 'Gragnano', 'Castellammare', 'Napoli'],
     link: 'https://amalfi.day/files/BUS-5080-AMALFI-AGEROLA-GRAGNANO-CASTELLAMMARE-NAPOLI.pdf',
   },
   {
     number: '5020',
+    pdfUpdated: '2026-08-11',
+    timetableFrom: null,
     validity: 'SITA listing: until December 31, 2026',
     route: [
       'Amalfi',
@@ -98,6 +110,8 @@ const timetables = [
   },
   {
     number: '5010',
+    pdfUpdated: '2026-09-24',
+    timetableFrom: '2026-09-28',
     validity: 'SITA listing: until October 4, 2026',
     route: [
       'Maiori',
@@ -113,6 +127,8 @@ const timetables = [
   },
   {
     number: '5070',
+    pdfUpdated: '2026-09-11',
+    timetableFrom: '2026-09-14',
     validity: 'SITA listing: until November 1, 2026',
     route: [
       'Amalfi',
@@ -341,7 +357,7 @@ const timetablesJsonLd = [
         <div class="timetables-update">
           <span class="badge">
             <i class="ph ph-clock" aria-hidden="true"></i>
-            PDFs checked: {checkedDate}
+            Downloads refreshed: {checkedDate}
           </span>
         </div>
       </div>
@@ -353,6 +369,18 @@ const timetablesJsonLd = [
           <article class="timetable-card">
             <div class="timetable-card__meta">
               <span class="timetable-chip timetable-chip--number">{line.number}</span>
+              <span class="timetable-chip timetable-chip--date timetable-chip--updated">
+                <i class="ph ph-clock" aria-hidden="true"></i>
+                <span>PDF updated: <time datetime={line.pdfUpdated}>{formatPdfDate(line.pdfUpdated)}</time></span>
+              </span>
+              <span class="timetable-chip timetable-chip--date">
+                <i class="ph ph-calendar-blank" aria-hidden="true"></i>
+                <span>
+                  {line.timetableFrom ? (
+                    <>Timetable from: <time datetime={line.timetableFrom}>{formatPdfDate(line.timetableFrom)}</time></>
+                  ) : 'Timetable start date not stated in PDF'}
+                </span>
+              </span>
               <span class="timetable-chip timetable-chip--date">
                 <i class="ph ph-calendar-blank" aria-hidden="true"></i>
                 {line.validity}
@@ -1144,6 +1172,11 @@ const timetablesJsonLd = [
     font-size: 0.85rem;
     letter-spacing: 0.02em;
     color: var(--color-text-muted);
+  }
+
+  .timetable-chip--updated {
+    color: var(--color-text);
+    font-weight: 600;
   }
 
   .timetable-card__route {
