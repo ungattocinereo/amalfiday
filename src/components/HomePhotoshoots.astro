@@ -1,6 +1,7 @@
 ---
 import CityLabel from './CityLabel.astro'
 import PhotoshootCard from './PhotoshootCard.astro'
+import PhotoRequestDialog from './PhotoRequestDialog.astro'
 import { getPhotoshoot, getPhotoshootCard } from '../data/photoshoots'
 
 // A curated selection from the recently imported stories; dates are not inferred.
@@ -11,6 +12,7 @@ const storySlugs = [
 ]
 // Homepage covers are selected independently of each story's hero.
 const slides = [
+  { slug: 'tom-sam-atrani', frameId: 'cnr0188-2', focal: '50% 0%', headTop: .04, category: 'couple' },
   { slug: 'ashley-positano', frameId: 'cnr0561', focal: '50% 0%', headTop: .186, category: 'couple' },
   { slug: 'ayuna', frameId: '11-Ayuna-Atrani-2023', focal: '49% 0%', headTop: .2305, category: 'individual' },
   { slug: 'regan-tay-ravello', frameId: '05-slideshow-regan-walk-ravello-love', focal: '52% 0%', headTop: .082, category: 'couple' },
@@ -19,7 +21,7 @@ const slides = [
   const shoot = getPhotoshoot(slug)
   const frame = shoot.frames.find(frame => frame.id === frameId)
   if (!frame) throw new Error(`Missing homepage cover: ${slug}/${frameId}`)
-  // Manually measured topmost crown in the original; keep every head below this line.
+  // Manually reviewed upper crop boundary; keep every head below this line.
   return { ...shoot, category, cover: { ...frame, focal, headTop } }
 })
 const cards = storySlugs.map(slug => {
@@ -78,14 +80,14 @@ const cards = storySlugs.map(slug => {
       {cards.map(item => <PhotoshootCard item={item} />)}
     </div>
     <div class="home-photos__footer">
-      <div><h3>The next story could be <span class="accent-italic">yours.</span></h3><p>I’ll help with the places, the light and the posing.</p></div>
-      <div class="home-photos__actions">
-        <a class="home-photos__browse" href="/photoshootings">Explore all photoshoots <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-        <a class="home-photos__book" href="/contact?service=Photoshooting"><i class="ph ph-camera" aria-hidden="true"></i> Book your photoshoot</a>
+      <a class="home-photos__browse" href="/photoshootings/">Explore all photoshoots <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+      <div class="home-photos__book-wrap">
+        <button class="gs-button gs-request-trigger home-photos__book" type="button" data-request aria-haspopup="dialog" aria-controls="gs-request"><span class="gs-request-trigger__label">Book your photoshoot</span><span class="gs-request-trigger__icon" aria-hidden="true"><i class="ph ph-camera" aria-hidden="true"></i></span></button>
       </div>
     </div>
   </div>
 </section>
+<PhotoRequestDialog />
 
 <style>
   .home-photos { padding: 5rem 0; }
@@ -99,14 +101,24 @@ const cards = storySlugs.map(slug => {
   .home-photos__stories-heading h3 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); }
   .home-photos__stories-heading p { color: var(--color-text-muted); max-width: 300px; margin: 0; }
   .home-photos__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
-  .home-photos__footer { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
-  .home-photos__footer h3 { font-size: 1.45rem; margin: 0 0 .6rem; }
-  .home-photos__footer p { color: var(--color-text-muted); margin: 0; }
-  .home-photos__actions { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
-  .home-photos__browse { display: inline-flex; gap: .5rem; align-items: center; font-size: .9rem; color: var(--color-text); }
-  .home-photos__book { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; border-radius: 999px; padding: 1rem 1.5rem; background: var(--color-accent); color: #fff; font-family: var(--font-display); font-size: .95rem; box-shadow: 0 6px 24px #ff590030; transition: transform .2s; text-decoration: none; }
-  .home-photos__book:hover { transform: translateY(-3px); background: #e64f00; text-decoration: none; }
-  .home-photos a:focus-visible, .photo-showcase:focus-visible, .photo-showcase button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
+  .home-photos__footer { margin-top: 3rem; padding-top: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .home-photos__browse { display: inline-flex; gap: .75rem; align-items: center; justify-content: center; min-height: 64px; padding: 1rem 1.5rem; border: 1px solid var(--color-border); border-radius: 6px; background: color-mix(in srgb, var(--color-text) 6%, var(--color-bg)); font-size: .9rem; color: var(--color-text); text-decoration: none; transition: background .2s, transform .2s; }
+  .home-photos__browse:hover { background: color-mix(in srgb, var(--color-text) 11%, var(--color-bg)); transform: translateY(-2px); text-decoration: none; }
+  .home-photos__browse:active { transform: translateY(1px) scale(.97); }
+  .home-photos__book-wrap { position: relative; isolation: isolate; border-radius: 999px; }
+  .home-photos__book-wrap::before { content: ''; position: absolute; inset: 12px 8px -12px; z-index: -1; border-radius: inherit; background: linear-gradient(100deg, #ff5900, #ffae62, #ff5900); filter: blur(22px); opacity: .35; transform: scale(.94); animation: home-book-glow 3.5s ease-in-out infinite alternate; animation-play-state: paused; pointer-events: none; transition: opacity .3s; }
+  .home-photos__footer.is-visible .home-photos__book-wrap::before { animation-play-state: running; }
+  .home-photos__book-wrap:hover::before, .home-photos__book-wrap:focus-within::before { opacity: .65; }
+  .home-photos__book { min-height: 72px; padding: 1.2rem 2rem; gap: 1.1rem; border-radius: 999px; color: #fff; box-shadow: 0 10px 30px #ff590038; cursor: pointer; font: inherit; font-size: 1rem; }
+  .home-photos__book:hover { color: #fff; box-shadow: 0 14px 36px #ff59004d; }
+  .home-photos__book .gs-request-trigger__label { font-weight: 700; }
+  .home-photos__book .gs-request-trigger__icon { width: 24px; height: 24px; background: transparent; color: inherit; overflow: visible; }
+  .home-photos__book .ph-camera { font-size: 22px; opacity: 1; transform: none; }
+  .home-photos__book:hover .ph-camera { transform: rotate(-8deg) scale(1.08); }
+  .home-photos__book.is-opening .ph-camera { transform: rotate(8deg) scale(.85); }
+  .home-photos__book:active { transform: translateY(1px) scale(.975); }
+  @keyframes home-book-glow { to { opacity: .5; transform: scale(1.04); } }
+  .home-photos a:focus-visible, .home-photos button:focus-visible, .photo-showcase:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
   @media (min-width: 1100px) {
     .photo-showcase { display: block; position: relative; height: calc(100svh - var(--header-space)); min-height: 580px; max-height: 1100px; overflow: hidden; background: #252b29; color: #fff; }
     .photo-showcase__slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 1.1s ease, visibility 1.1s; }
@@ -139,23 +151,28 @@ const cards = storySlugs.map(slug => {
   @media (max-width: 1099px) {
     .home-photos__stories { padding-top: .5rem; }
     .home-photos__stories-heading { display: none; }
-    .home-photos__footer { align-items: start; flex-direction: column; }
   }
   @media (max-width: 900px) { .home-photos__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
     .home-photos { padding: 3.5rem 0; }
     .home-photos__intro, .home-photos__stories-heading { flex-direction: column; align-items: start; gap: 1rem; }
     .home-photos__grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
-    .home-photos__actions { flex-direction: column-reverse; align-items: stretch; width: 100%; gap: 1.2rem; }
-    .home-photos__browse { justify-content: center; }
+    .home-photos__footer { align-items: stretch; flex-direction: column; gap: 1.25rem; }
+    .home-photos__browse, .home-photos__book { width: 100%; min-width: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .photo-showcase__slide, .home-photos__book { transition: none; }
-    .home-photos__book:hover { transform: none; }
+    .photo-showcase__slide, .home-photos__book, .home-photos__browse { transition: none; }
+    .home-photos__book:hover, .home-photos__browse:hover, .home-photos__browse:active, .home-photos__book:active { transform: none; }
+    .home-photos__book:hover .ph-camera, .home-photos__book.is-opening .ph-camera { transform: none; }
+    .home-photos__book-wrap::before { animation: none; }
   }
 </style>
 
 <script>
+  const footer = document.querySelector<HTMLElement>('.home-photos__footer')
+  if (footer) new IntersectionObserver(entries => {
+    footer.classList.toggle('is-visible', entries[0].isIntersecting)
+  }).observe(footer)
   const showcase = document.querySelector<HTMLElement>('[data-photo-showcase]')
   if (showcase) {
     const slides = [...showcase.querySelectorAll<HTMLElement>('[data-slide]')]

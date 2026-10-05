@@ -1,21 +1,21 @@
 {
-  "slug": "tom-semb-atrani",
-  "name": "Tom Semb",
-  "title": "Tom Semb — Ripley-Inspired Photoshoot in Atrani | Amalfi.Day",
-  "description": "A Ripley-inspired editorial photoshoot with Tom Semb and his companion from London: sixties style, an August sunrise and a slow walk towards Atrani.",
+  "slug": "tom-sam-atrani",
+  "name": "Tom and Sam",
+  "title": "Tom and Sam — Ripley-Inspired Photoshoot in Atrani | Amalfi.Day",
+  "description": "A Ripley-inspired editorial photoshoot with Tom and Sam from London: sixties style, an August sunrise and a slow walk towards Atrani.",
   "heading": {
-    "lead": "A little",
-    "accent": "like Ripley."
+    "lead": "Tom and Sam,",
+    "accent": "a little like Ripley."
   },
   "date": "20 August 2026",
   "location": "Atrani",
-  "summary": "Tom’s sixties style, London energy and an August sunrise in Atrani.",
+  "summary": "Tom and Sam’s sixties style, London energy and an August sunrise in Atrani.",
   "heroLayout": "panorama",
   "category": "couple",
   "tag": "Editorial",
   "schema": {
-    "name": "Tom Semb — Ripley-Inspired Photoshoot in Atrani",
-    "description": "A Ripley-inspired editorial photoshoot with Tom Semb and his companion from London: sixties style, an August sunrise and a slow walk towards Atrani.",
+    "name": "Tom and Sam — Ripley-Inspired Photoshoot in Atrani",
+    "description": "A Ripley-inspired editorial photoshoot with Tom and Sam from London: sixties style, an August sunrise and a slow walk towards Atrani.",
     "keywords": [
       "Atrani photographer",
       "editorial photoshoot",
@@ -25,7 +25,7 @@
   "hero": {
     "id": "cnr0188-2",
     "sourceFile": "new_photoshoots/TomSam/_CNR0188-2.jpg",
-    "original": "/photoshootings/optimized/tom-semb-atrani/cnr0188-2-full.webp",
+    "original": "/photoshootings/optimized/tom-sam-atrani/cnr0188-2-full.webp",
     "alt": "A black-and-white portrait of the couple above Atrani",
     "focal": "50% 0%",
     "thumbFit": "contain",
@@ -48,8 +48,8 @@
     {
       "id": "cnr0142",
       "sourceFile": "new_photoshoots/TomSam/_CNR0142.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0142-full.webp",
-      "alt": "Tom and his companion beside the sea wall overlooking Atrani",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0142-full.webp",
+      "alt": "Tom and Sam beside the sea wall overlooking Atrani",
       "focal": "50% 50%",
       "thumbFit": "contain",
       "immersiveFit": "contain"
@@ -57,7 +57,7 @@
     {
       "id": "cnr0188-2",
       "sourceFile": "new_photoshoots/TomSam/_CNR0188-2.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0188-2-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0188-2-full.webp",
       "alt": "A black-and-white portrait of the couple above Atrani",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -66,7 +66,7 @@
     {
       "id": "cnr0310",
       "sourceFile": "new_photoshoots/TomSam/_CNR0310.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0310-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0310-full.webp",
       "alt": "The couple seated on the sea wall with Atrani behind them",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -75,8 +75,8 @@
     {
       "id": "cnr0405",
       "sourceFile": "new_photoshoots/TomSam/_CNR0405.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0405-full.webp",
-      "alt": "Tom smiling towards his companion on the coastal road",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0405-full.webp",
+      "alt": "Tom smiling towards Sam on the coastal road",
       "focal": "50% 50%",
       "thumbFit": "contain",
       "immersiveFit": "contain"
@@ -84,8 +84,8 @@
     {
       "id": "cnr0446",
       "sourceFile": "new_photoshoots/TomSam/_CNR0446.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0446-full.webp",
-      "alt": "Tom’s companion laughing beside the waterfront railing",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0446-full.webp",
+      "alt": "Sam laughing beside the waterfront railing",
       "focal": "50% 50%",
       "thumbFit": "contain",
       "immersiveFit": "contain"
@@ -93,7 +93,7 @@
     {
       "id": "cnr0559-2",
       "sourceFile": "new_photoshoots/TomSam/_CNR0559-2.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0559-2-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0559-2-full.webp",
       "alt": "The couple walking above the sea in black and white",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -102,7 +102,7 @@
     {
       "id": "cnr0617",
       "sourceFile": "new_photoshoots/TomSam/_CNR0617.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0617-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0617-full.webp",
       "alt": "The couple beneath street lamps against a colourful dawn sky",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -111,7 +111,7 @@
     {
       "id": "cnr0632",
       "sourceFile": "new_photoshoots/TomSam/_CNR0632.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0632-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0632-full.webp",
       "alt": "A wide view of the couple between lamps at sunrise",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -120,7 +120,7 @@
     {
       "id": "cnr0663-2",
       "sourceFile": "new_photoshoots/TomSam/_CNR0663-2.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0663-2-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0663-2-full.webp",
       "alt": "The couple walking towards the camera in black and white",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -129,7 +129,7 @@
     {
       "id": "cnr0663",
       "sourceFile": "new_photoshoots/TomSam/_CNR0663.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0663-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0663-full.webp",
       "alt": "The couple holding hands beneath the sunrise sky",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -138,7 +138,7 @@
     {
       "id": "cnr0773",
       "sourceFile": "new_photoshoots/TomSam/_CNR0773.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0773-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0773-full.webp",
       "alt": "The couple standing beside a tree on the white terrace",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -147,7 +147,7 @@
     {
       "id": "cnr0880",
       "sourceFile": "new_photoshoots/TomSam/_CNR0880.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0880-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0880-full.webp",
       "alt": "A portrait of the couple beside the white terrace wall",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -156,7 +156,7 @@
     {
       "id": "cnr0907-2",
       "sourceFile": "new_photoshoots/TomSam/_CNR0907-2.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0907-2-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0907-2-full.webp",
       "alt": "The couple descending the terrace steps in black and white",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -165,7 +165,7 @@
     {
       "id": "cnr0955",
       "sourceFile": "new_photoshoots/TomSam/_CNR0955.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr0955-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr0955-full.webp",
       "alt": "The couple walking down the steps beside a street lamp",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -174,7 +174,7 @@
     {
       "id": "cnr1058",
       "sourceFile": "new_photoshoots/TomSam/_CNR1058.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1058-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1058-full.webp",
       "alt": "The couple climbing the seaside staircase",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -183,7 +183,7 @@
     {
       "id": "cnr1183",
       "sourceFile": "new_photoshoots/TomSam/_CNR1183.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1183-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1183-full.webp",
       "alt": "The couple looking towards the camera above the seaside steps",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -192,8 +192,8 @@
     {
       "id": "cnr1273",
       "sourceFile": "new_photoshoots/TomSam/_CNR1273.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1273-full.webp",
-      "alt": "Tom’s companion in a red scarf beside the white steps",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1273-full.webp",
+      "alt": "Sam in a red scarf beside the white steps",
       "focal": "50% 50%",
       "thumbFit": "contain",
       "immersiveFit": "contain"
@@ -201,7 +201,7 @@
     {
       "id": "cnr1489",
       "sourceFile": "new_photoshoots/TomSam/_CNR1489.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1489-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1489-full.webp",
       "alt": "The couple walking hand in hand through Atrani",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -210,7 +210,7 @@
     {
       "id": "cnr1536-2",
       "sourceFile": "new_photoshoots/TomSam/_CNR1536-2.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1536-2-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1536-2-full.webp",
       "alt": "The couple beside the village railing in black and white",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -219,7 +219,7 @@
     {
       "id": "cnr1637",
       "sourceFile": "new_photoshoots/TomSam/_CNR1637.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1637-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1637-full.webp",
       "alt": "A close portrait of the couple with Atrani behind them",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -228,8 +228,8 @@
     {
       "id": "cnr1798",
       "sourceFile": "new_photoshoots/TomSam/_CNR1798.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1798-full.webp",
-      "alt": "Tom twirling his companion above Atrani’s square",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1798-full.webp",
+      "alt": "Tom twirling Sam above Atrani’s square",
       "focal": "50% 50%",
       "thumbFit": "contain",
       "immersiveFit": "contain"
@@ -237,7 +237,7 @@
     {
       "id": "cnr1900",
       "sourceFile": "new_photoshoots/TomSam/_CNR1900.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1900-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1900-full.webp",
       "alt": "The couple leaning against the railing in the early light",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -246,7 +246,7 @@
     {
       "id": "cnr1905-2",
       "sourceFile": "new_photoshoots/TomSam/_CNR1905-2.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1905-2-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1905-2-full.webp",
       "alt": "A black-and-white portrait of the couple beside the village railing",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -255,8 +255,8 @@
     {
       "id": "cnr1967",
       "sourceFile": "new_photoshoots/TomSam/_CNR1967.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1967-full.webp",
-      "alt": "Tom’s companion resting her hands on his shoulders",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1967-full.webp",
+      "alt": "Sam resting her hands on his shoulders",
       "focal": "50% 50%",
       "thumbFit": "contain",
       "immersiveFit": "contain"
@@ -264,7 +264,7 @@
     {
       "id": "cnr1970",
       "sourceFile": "new_photoshoots/TomSam/_CNR1970.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1970-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1970-full.webp",
       "alt": "A vertical portrait of the couple embracing above the square",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -273,7 +273,7 @@
     {
       "id": "cnr1974",
       "sourceFile": "new_photoshoots/TomSam/_CNR1974.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr1974-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr1974-full.webp",
       "alt": "The couple smiling together beside the stone railing",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -282,8 +282,8 @@
     {
       "id": "cnr2015",
       "sourceFile": "new_photoshoots/TomSam/_CNR2015.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2015-full.webp",
-      "alt": "Tom leaning his head towards his companion",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2015-full.webp",
+      "alt": "Tom leaning his head towards Sam",
       "focal": "50% 50%",
       "thumbFit": "contain",
       "immersiveFit": "contain"
@@ -291,7 +291,7 @@
     {
       "id": "cnr2101",
       "sourceFile": "new_photoshoots/TomSam/_CNR2101.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2101-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2101-full.webp",
       "alt": "The couple looking across Atrani from the stone balustrade",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -300,7 +300,7 @@
     {
       "id": "cnr2269",
       "sourceFile": "new_photoshoots/TomSam/_CNR2269.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2269-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2269-full.webp",
       "alt": "The couple standing together above the village square",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -309,7 +309,7 @@
     {
       "id": "cnr2295",
       "sourceFile": "new_photoshoots/TomSam/_CNR2295.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2295-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2295-full.webp",
       "alt": "The couple walking past the church while holding hands",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -318,7 +318,7 @@
     {
       "id": "cnr2341",
       "sourceFile": "new_photoshoots/TomSam/_CNR2341.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2341-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2341-full.webp",
       "alt": "The couple standing on the narrow white village steps",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -327,7 +327,7 @@
     {
       "id": "cnr2358",
       "sourceFile": "new_photoshoots/TomSam/_CNR2358.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2358-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2358-full.webp",
       "alt": "The couple looking at one another beside the stone arch",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -336,7 +336,7 @@
     {
       "id": "cnr2404",
       "sourceFile": "new_photoshoots/TomSam/_CNR2404.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2404-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2404-full.webp",
       "alt": "The couple beside a ceramic vase beneath an archway",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -345,7 +345,7 @@
     {
       "id": "cnr2514",
       "sourceFile": "new_photoshoots/TomSam/_CNR2514.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2514-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2514-full.webp",
       "alt": "A portrait of the couple on the curving stone stairs",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -354,7 +354,7 @@
     {
       "id": "cnr2619",
       "sourceFile": "new_photoshoots/TomSam/_CNR2619.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2619-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2619-full.webp",
       "alt": "The couple standing below a small stone bridge",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -363,7 +363,7 @@
     {
       "id": "cnr2703-2",
       "sourceFile": "new_photoshoots/TomSam/_CNR2703-2.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2703-2-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2703-2-full.webp",
       "alt": "A black-and-white portrait of the couple on a broad white staircase",
       "focal": "50% 50%",
       "thumbFit": "contain",
@@ -372,8 +372,8 @@
     {
       "id": "cnr2830",
       "sourceFile": "new_photoshoots/TomSam/_CNR2830.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2830-full.webp",
-      "alt": "Tom laughing as his companion embraces him on the steps",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2830-full.webp",
+      "alt": "Tom laughing as Sam embraces him on the steps",
       "focal": "50% 50%",
       "thumbFit": "contain",
       "immersiveFit": "contain"
@@ -381,7 +381,7 @@
     {
       "id": "cnr2868-2",
       "sourceFile": "new_photoshoots/TomSam/_CNR2868-2.jpg",
-      "original": "/photoshootings/optimized/tom-semb-atrani/cnr2868-2-full.webp",
+      "original": "/photoshootings/optimized/tom-sam-atrani/cnr2868-2-full.webp",
       "alt": "The couple seated together on the white staircase in black and white",
       "focal": "50% 50%",
       "thumbFit": "contain",

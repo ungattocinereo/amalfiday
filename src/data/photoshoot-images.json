@@ -4664,5 +4664,273 @@
       "srcset": "/photoshootings/optimized/tom-semb-atrani/cnr2868-2-720.webp 720w, /photoshootings/optimized/tom-semb-atrani/cnr2868-2-1440.webp 1440w, /photoshootings/optimized/tom-semb-atrani/cnr2868-2-1920.webp 1920w, /photoshootings/optimized/tom-semb-atrani/cnr2868-2-full.webp 2560w",
       "thumb": "/photoshootings/optimized/tom-semb-atrani/cnr2868-2-thumb.webp"
     }
+  },
+  "tom-sam-atrani": {
+    "cnr0142": {
+      "width": 5636,
+      "height": 3757,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0142-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0142-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0142-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0142-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0142-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0142-thumb.webp"
+    },
+    "cnr0188-2": {
+      "width": 4807,
+      "height": 3846,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0188-2-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0188-2-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0188-2-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0188-2-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0188-2-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0188-2-thumb.webp"
+    },
+    "cnr0310": {
+      "width": 3800,
+      "height": 5561,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0310-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0310-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0310-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0310-full.webp 1749w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0310-thumb.webp"
+    },
+    "cnr0405": {
+      "width": 5606,
+      "height": 3737,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0405-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0405-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0405-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0405-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0405-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0405-thumb.webp"
+    },
+    "cnr0446": {
+      "width": 5734,
+      "height": 3823,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0446-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0446-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0446-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0446-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0446-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0446-thumb.webp"
+    },
+    "cnr0559-2": {
+      "width": 5009,
+      "height": 3331,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0559-2-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0559-2-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0559-2-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0559-2-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0559-2-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0559-2-thumb.webp"
+    },
+    "cnr0617": {
+      "width": 5618,
+      "height": 3745,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0617-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0617-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0617-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0617-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0617-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0617-thumb.webp"
+    },
+    "cnr0632": {
+      "width": 5427,
+      "height": 3618,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0632-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0632-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0632-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0632-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0632-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0632-thumb.webp"
+    },
+    "cnr0663-2": {
+      "width": 5567,
+      "height": 3711,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0663-2-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0663-2-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0663-2-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0663-2-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0663-2-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0663-2-thumb.webp"
+    },
+    "cnr0663": {
+      "width": 5567,
+      "height": 3711,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0663-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0663-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0663-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0663-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0663-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0663-thumb.webp"
+    },
+    "cnr0773": {
+      "width": 5545,
+      "height": 3697,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0773-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0773-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0773-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0773-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0773-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0773-thumb.webp"
+    },
+    "cnr0880": {
+      "width": 3963,
+      "height": 3170,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0880-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0880-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0880-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0880-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0880-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0880-thumb.webp"
+    },
+    "cnr0907-2": {
+      "width": 3706,
+      "height": 3706,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0907-2-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0907-2-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0907-2-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0907-2-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0907-2-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0907-2-thumb.webp"
+    },
+    "cnr0955": {
+      "width": 3034,
+      "height": 3792,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr0955-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr0955-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr0955-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr0955-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr0955-full.webp 2048w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr0955-thumb.webp"
+    },
+    "cnr1058": {
+      "width": 5073,
+      "height": 3382,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1058-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1058-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1058-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1058-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1058-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1058-thumb.webp"
+    },
+    "cnr1183": {
+      "width": 6000,
+      "height": 4000,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1183-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1183-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1183-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1183-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1183-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1183-thumb.webp"
+    },
+    "cnr1273": {
+      "width": 5364,
+      "height": 3576,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1273-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1273-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1273-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1273-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1273-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1273-thumb.webp"
+    },
+    "cnr1489": {
+      "width": 5234,
+      "height": 3489,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1489-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1489-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1489-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1489-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1489-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1489-thumb.webp"
+    },
+    "cnr1536-2": {
+      "width": 5426,
+      "height": 3617,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1536-2-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1536-2-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1536-2-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1536-2-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1536-2-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1536-2-thumb.webp"
+    },
+    "cnr1637": {
+      "width": 6000,
+      "height": 4000,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1637-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1637-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1637-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1637-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1637-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1637-thumb.webp"
+    },
+    "cnr1798": {
+      "width": 5104,
+      "height": 3403,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1798-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1798-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1798-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1798-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1798-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1798-thumb.webp"
+    },
+    "cnr1900": {
+      "width": 5274,
+      "height": 3516,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1900-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1900-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1900-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1900-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1900-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1900-thumb.webp"
+    },
+    "cnr1905-2": {
+      "width": 4715,
+      "height": 3772,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1905-2-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1905-2-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1905-2-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1905-2-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1905-2-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1905-2-thumb.webp"
+    },
+    "cnr1967": {
+      "width": 4932,
+      "height": 3288,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1967-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1967-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1967-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1967-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1967-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1967-thumb.webp"
+    },
+    "cnr1970": {
+      "width": 3010,
+      "height": 3763,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1970-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1970-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1970-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1970-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1970-full.webp 2048w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1970-thumb.webp"
+    },
+    "cnr1974": {
+      "width": 5723,
+      "height": 3815,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr1974-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr1974-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr1974-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr1974-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr1974-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr1974-thumb.webp"
+    },
+    "cnr2015": {
+      "width": 3540,
+      "height": 5267,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2015-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2015-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2015-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2015-full.webp 1721w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2015-thumb.webp"
+    },
+    "cnr2101": {
+      "width": 6000,
+      "height": 4000,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2101-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2101-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2101-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2101-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2101-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2101-thumb.webp"
+    },
+    "cnr2269": {
+      "width": 4599,
+      "height": 3679,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2269-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2269-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2269-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2269-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2269-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2269-thumb.webp"
+    },
+    "cnr2295": {
+      "width": 5104,
+      "height": 3403,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2295-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2295-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2295-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2295-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2295-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2295-thumb.webp"
+    },
+    "cnr2341": {
+      "width": 3285,
+      "height": 4928,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2341-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2341-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2341-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2341-full.webp 1706w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2341-thumb.webp"
+    },
+    "cnr2358": {
+      "width": 4863,
+      "height": 3890,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2358-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2358-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2358-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2358-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2358-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2358-thumb.webp"
+    },
+    "cnr2404": {
+      "width": 3215,
+      "height": 2572,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2404-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2404-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2404-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2404-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2404-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2404-thumb.webp"
+    },
+    "cnr2514": {
+      "width": 5494,
+      "height": 3663,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2514-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2514-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2514-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2514-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2514-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2514-thumb.webp"
+    },
+    "cnr2619": {
+      "width": 5343,
+      "height": 3562,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2619-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2619-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2619-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2619-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2619-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2619-thumb.webp"
+    },
+    "cnr2703-2": {
+      "width": 3557,
+      "height": 5336,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2703-2-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2703-2-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2703-2-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2703-2-full.webp 1707w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2703-2-thumb.webp"
+    },
+    "cnr2830": {
+      "width": 5000,
+      "height": 4000,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2830-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2830-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2830-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2830-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2830-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2830-thumb.webp"
+    },
+    "cnr2868-2": {
+      "width": 5738,
+      "height": 3825,
+      "src": "/photoshootings/optimized/tom-sam-atrani/cnr2868-2-1440.webp",
+      "srcset": "/photoshootings/optimized/tom-sam-atrani/cnr2868-2-720.webp 720w, /photoshootings/optimized/tom-sam-atrani/cnr2868-2-1440.webp 1440w, /photoshootings/optimized/tom-sam-atrani/cnr2868-2-1920.webp 1920w, /photoshootings/optimized/tom-sam-atrani/cnr2868-2-full.webp 2560w",
+      "thumb": "/photoshootings/optimized/tom-sam-atrani/cnr2868-2-thumb.webp"
+    }
   }
 }

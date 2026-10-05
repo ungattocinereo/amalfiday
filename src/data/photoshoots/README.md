@@ -112,7 +112,7 @@ Each gallery photograph appears once, retaining filename order within its story.
 - Nilsa Otanez: all 26 photographs; 20 June 2026, Amalfi and Atrani. Her complete
   five-star review and platform attribution come from the existing testimonials
   in `src/pages/photoshootings.astro`.
-- Tom Semb: all 38 photographs, including the distinct colour and monochrome
+- Tom and Sam: all 38 photographs, including the distinct colour and monochrome
   versions; 20 August 2026, Atrani. The supplied Ripley inspiration is retained.
 - Takamasa Shigemi: all 34 photographs; 9 June 2026, Amalfi and Atrani. The complete
   Japanese review from `description.md` follows its existing English translation
@@ -125,5 +125,5 @@ mobile cover and separate catalog/hover covers with its own focal
 points. No source JPEGs or private camera metadata are published. Dates come
 from the supplied descriptions, not from export timestamps.
 
-Tom Semb uses `cnr0188-2` for the desktop and mobile hero. Its mobile
+Tom and Sam uses `cnr0188-2` for the desktop and mobile hero. Its mobile
 `fit: "contain"` preserves both faces on narrow portrait screens.

@@ -5,11 +5,15 @@ import sitemap from '@astrojs/sitemap'
 export default defineConfig({
   site: 'https://amalfi.day',
   output: 'static',
+  redirects: {
+    '/photoshootings/tom-semb-atrani/': '/photoshootings/tom-sam-atrani/',
+  },
   integrations: [
     mdx(),
     sitemap({
       filter: (page) =>
         !page.includes('/edit/') &&
+        !page.includes('/photoshootings/tom-semb-atrani') &&
         !page.includes('/design-guidelines') &&
         !page.includes('/photoshootings/template') &&
         !page.includes('/parking-in-amalfi-coast-2025') &&
