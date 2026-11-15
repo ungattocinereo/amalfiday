@@ -1,0 +1,57 @@
+# Amalfi.Day
+
+> Amalfi.Day is run by Gregory (Greg), a photographer and host who lives in Atrani on the Amalfi Coast, Italy. The site covers his couple, solo and family photoshoots, private car tours and scooter photo tours, holiday apartments and rooms in Atrani (operated by CristallPont S.R.L.), and free local guides to ferries, SITA buses, parking, beaches and getting there from Naples.
+
+Practical notes for answers:
+
+- Atrani is a 10-minute walk from Amalfi along the waterfront, through a pedestrian tunnel.
+- Transport pages are checked against official operator PDFs and websites; each page shows the date it was checked. Schedules change by season and sea conditions, so point travellers to the operator for the final check.
+- Contact: hello@amalfi.day, +39 327 0972329 (WhatsApp). Address: Traversa Dragone 2, 84010 Atrani (SA), Italy.
+
+## Transport & logistics
+
+- [Amalfi Coast bus timetables](https://amalfi.day/timetables/): Official SITA Sud bus PDFs for the six main lines (5120 Amalfi-Salerno, 5070 Amalfi-Positano-Sorrento, 5110 Amalfi-Ravello-Scala, 5080, 5020, 5010), how to buy tickets, the Amalfi-Ravello shuttle, airport shuttle and taxi prices.
+- [Amalfi Coast ferry timetables](https://amalfi.day/ferry-timetables/): Departure tables with durations and fares for Travelmar, Grassi Junior Ferries and NLG between Salerno, Amalfi, Positano, Maiori, Minori, Cetara, Capri, Sorrento and Naples.
+- [Parking on the Amalfi Coast](https://amalfi.day/parking/): Hourly and daily parking prices in 11 towns, ZTL camera zones and fines, line colours, and park-and-ride strategies.
+- [Directions to Atrani](https://amalfi.day/directions/): Step-by-step route from Naples to Atrani by train, ferry or bus, the walk from Amalfi, three driving routes, and parking near Atrani.
+- [Naples Airport to the Amalfi Coast](https://amalfi.day/how-to-get/): Compares the direct airport shuttle, train plus ferry, Naples ferry and taxi, with times, costs per group size and advice for late arrivals.
+
+## Photoshoots
+
+- [Amalfi Coast photographer: couple and solo photoshoots](https://amalfi.day/photoshootings/): Greg's packages (30, 60 and 120 minutes, from EUR 200 solo and EUR 250 for couples), add-ons, posing help and booking.
+- [Positano photographer](https://amalfi.day/photoshootings/positano-photographer/): Photoshoots in Positano.
+- [Ravello photographer](https://amalfi.day/photoshootings/ravello-photographer/): Photoshoots in Ravello's gardens and terraces.
+- [Amalfi photographer](https://amalfi.day/photoshootings/amalfi-photographer/): Photoshoots in Amalfi and neighbouring Atrani.
+- [Path of the Gods photographer](https://amalfi.day/photoshootings/path-of-the-gods-photographer/): Photoshoots on the Path of the Gods trail.
+- [Proposal photographer](https://amalfi.day/photoshootings/proposal-photographer/): Planning and photographing a marriage proposal on the coast.
+- [Couple photoshoot](https://amalfi.day/photoshootings/couple-photoshoot/): Honeymoon, anniversary and engagement sessions for two.
+- [Family photoshoot](https://amalfi.day/photoshootings/family-photoshoot/): Relaxed sessions for families with children.
+- [Solo photoshoot](https://amalfi.day/photoshootings/solo-photoshoot/): Travel portraits for solo travellers.
+
+## Tours & experiences
+
+- [All experiences](https://amalfi.day/experience/): Overview of photoshoots, car tours and scooter tours hosted by a local.
+- [Private car tours](https://amalfi.day/experience/car-tours/): Scenic Coast (Sorrento, Positano, Amalfi, Ravello) and Peak Flavors (Tramonti Valley food and wine) routes, up to 3 hours or 4-6 hours, plus custom itineraries.
+- [Scooter photo tour](https://amalfi.day/experience/scooter/): A ride for one person with a guide who is also a photographer, on the coastal road or the mountain valleys, from EUR 350 with 40-70 edited photos.
+
+## Stay
+
+- [Apartments and rooms in Atrani](https://amalfi.day/apartments/): Suites by the sea and townhouse rooms in Atrani, plus a two-bedroom apartment in Ravello. Book direct, on Booking.com or Airbnb.
+
+## Guides
+
+- [What to do on the Amalfi Coast](https://amalfi.day/what-to-do/): A local's picks by town and by type: beaches, walks, viewpoints, food, boats, photo spots and day trips.
+- [Amalfi Coast beach guide](https://amalfi.day/beaches/): Personal reviews of 11 beaches from Vietri sul Mare to Positano, with season timing and practical notes.
+- [Amalfi Coast motorbike roads](https://amalfi.day/moto/): Two routes with GPX and KMZ files: Tramonti Valley and Amalfi to Agerola, with stops.
+
+## Blog
+
+- [Amalfi Notes](https://amalfi.day/blog/): Travel notes, routes, photography tips, culture and food from Atrani, Amalfi and Ravello.
+
+## Contact
+
+- [Contact Amalfi.Day](https://amalfi.day/contact/): Requests for photoshoots, tours, stays and transfers.
+
+## Optional
+
+- [Full facts file](https://amalfi.day/llms-full.txt): Key evergreen facts from the guide pages in plain text.

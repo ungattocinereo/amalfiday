@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('julietta')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Sunset',
+  title: 'Sunset Photoshoot in Maiori — Julietta | Amalfi.Day',
+  description: 'Sunset photoshoot in Maiori, given as a gift between two friends: an evening walk through town, and strong backlight as the sun set behind the mountains.',
+  facts: 'This sunset photoshoot took place in Maiori, on the Amalfi Coast, on 20 July 2024. It was a gift between two friends travelling the coast together. We walked through the town in the evening light and finished with photographs of the two of them together.',
+  hubs: ['solo-photoshoot'],
+  related: { lead: 'More gift photoshoots:', links: [{ label: 'Loreana’s birthday in Ravello', href: '/photoshootings/loreana/' }, { label: 'Lashanda’s birthday in Atrani', href: '/photoshootings/lashada/' }] },
+}} />

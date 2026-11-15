@@ -7,6 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import { site } from '../data/site'
 import { photography, photographerSchema, photographyPackages, photographyExtraHour, describePhotographyPackage } from '../data/photographer'
 import { getPhotoshootCard, newPhotoshootSources } from '../data/photoshoots'
+import { landingGroups, landingPath, landingUrl, travelZones, travelNote } from '../data/photoshoot-landings'
 
 const importedCards = newPhotoshootSources.map(({ slug, category }) => ({
   category,
@@ -61,7 +62,7 @@ const individualShoots: PhotoshootCardData[] = [
     title: 'Amalfi Influencer Photoshoot',
     location: 'Amalfi',
     desc: 'Bold poses, sun-kissed streets, and content that stops the scroll.',
-    href: '/photoshootings/shifa',
+    href: '/photoshootings/shifa/',
     focal: '25% 30%',
     mobileFocal: '25% 30%',
     hoverFocal: '51% 12%',
@@ -74,7 +75,7 @@ const individualShoots: PhotoshootCardData[] = [
     title: 'The Perfect Gift to Yourself',
     location: 'Ravello',
     desc: 'A solo escape through Ravello\'s gardens and terraces at golden hour.',
-    href: '/photoshootings/loreana',
+    href: '/photoshootings/loreana/',
     focal: '52% 25%',
     mobileFocal: '52% 25%',
     hoverFocal: '52% 0%',
@@ -87,7 +88,7 @@ const individualShoots: PhotoshootCardData[] = [
     title: 'Morning Glow. True Atrani.',
     location: 'Atrani',
     desc: 'Early light on pastel walls — Atrani before the world wakes up.',
-    href: '/photoshootings/lashada',
+    href: '/photoshootings/lashada/',
     focal: '25% 20%',
     mobileFocal: '25% 20%',
     hoverFocal: '68% 15%',
@@ -100,7 +101,7 @@ const individualShoots: PhotoshootCardData[] = [
     title: 'Gifted Sunset Memories',
     location: 'Maiori',
     desc: 'Warm tones and forest paths — a gift wrapped in golden coastal light.',
-    href: '/photoshootings/julietta',
+    href: '/photoshootings/julietta/',
     focal: '50% 15%',
     mobileFocal: '50% 15%',
     hoverFocal: '57% 0%',
@@ -113,7 +114,7 @@ const individualShoots: PhotoshootCardData[] = [
     title: 'Ravello Light Elegance',
     location: 'Ravello',
     desc: 'Villa Rufolo backdrop, soft drapery, and Mediterranean elegance.',
-    href: '/photoshootings/ravello-photoshooting',
+    href: '/photoshootings/ravello-photoshooting/',
     focal: '61% 28%',
     mobileFocal: '61% 28%',
     hoverFocal: '44% 12%',
@@ -126,7 +127,7 @@ const individualShoots: PhotoshootCardData[] = [
     title: "Ayuna's Photographic Memoir",
     location: 'Atrani',
     desc: 'A visual diary through the alleyways and staircases of Atrani.',
-    href: '/photoshootings/ayuna',
+    href: '/photoshootings/ayuna/',
     focal: '54% 10%',
     mobileFocal: '54% 10%',
     hoverFocal: '57% 18%',
@@ -139,7 +140,7 @@ const individualShoots: PhotoshootCardData[] = [
     title: 'Camelia: Beautiful Experience',
     location: 'Tramonti',
     desc: 'Mountain roads, vintage Vespa, and cinematic countryside frames.',
-    href: '/photoshootings/camelia',
+    href: '/photoshootings/camelia/',
     focal: '78% 25%',
     mobileFocal: '78% 25%',
     hoverFocal: '52% 18%',
@@ -156,7 +157,7 @@ const coupleAndFamilyShoots: PhotoshootCardData[] = [
     title: 'Ravello Romance',
     location: 'Ravello',
     desc: 'Taylor & Regan — a love story among Ravello\'s infinite views and ancient gardens.',
-    href: '/photoshootings/regan-tay-ravello',
+    href: '/photoshootings/regan-tay-ravello/',
     focal: '60% 22%',
     mobileFocal: '60% 22%',
     hoverFocal: '52% 15%',
@@ -169,7 +170,7 @@ const coupleAndFamilyShoots: PhotoshootCardData[] = [
     title: 'Symphony of Love',
     location: 'Atrani',
     desc: 'Olga & Marat — stolen glances and laughter in the heart of Atrani.',
-    href: '/photoshootings/olga-marat',
+    href: '/photoshootings/olga-marat/',
     focal: '49% 15%',
     mobileFocal: '49% 15%',
     hoverFocal: '48% 12%',
@@ -259,12 +260,18 @@ const hubJsonLd = [
     url: photography.url,
     isPartOf: { '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: site.name },
     about: { '@id': photography.photographerId },
+    hasPart: landingGroups.flatMap(group => group.pages).map(page => ({
+      '@type': 'WebPage',
+      '@id': `${landingUrl(page.slug)}#webpage`,
+      url: landingUrl(page.slug),
+      name: page.title,
+    })),
     mainEntity: [{ '@id': photography.serviceId }, {
       '@type': 'ItemList',
       itemListElement: allShoots.map((s, i) => ({
         '@type': 'ListItem',
         position: i + 1,
-        url: new URL(`${s.href}/`, site.url).toString(),
+        url: new URL(s.href, site.url).toString(),
         name: s.title,
       })),
     }],
@@ -303,7 +310,7 @@ const hubJsonLd = [
               I'll find the light, help you pose, and make you feel at ease in front of the camera.
             </p>
             <div class="xp-hero__actions">
-              <a class="xp-hero__btn xp-hero__btn--primary" href="/contact">Book your session</a>
+              <a class="xp-hero__btn xp-hero__btn--primary" href="/contact/">Book your session</a>
               <a class="xp-hero__btn xp-hero__btn--ghost" href="#pricing">Explore packages</a>
             </div>
           </div>
@@ -470,6 +477,35 @@ const hubJsonLd = [
     </div>
   </section>
 
+  <!-- ═══════ FIND YOUR PHOTOSHOOT: LANDING PAGES ═══════ -->
+  <section class="section shoot-finder" aria-labelledby="shoot-finder-title">
+    <div class="container">
+      <div class="cat-header">
+        <span class="pricing__eyebrow">Plan by place or by reason</span>
+        <h2 id="shoot-finder-title">Find your <span class="accent-italic">photoshoot</span></h2>
+        <p class="cat-header__desc">Where you would like to be photographed, and why. Each guide has the real stories, best spots, timing and prices for that choice.</p>
+      </div>
+      <div class="shoot-finder__groups">
+        {landingGroups.map(group => (
+          <div class="shoot-finder__group">
+            <h3 class="shoot-finder__label">{group.label}</h3>
+            <ul class="shoot-finder__list">
+              {group.pages.map(page => (
+                <li>
+                  <a class="shoot-finder__link" href={landingPath(page.slug)}>
+                    <span class="shoot-finder__icon"><i class={`ph ${page.nav.icon}`} aria-hidden="true"></i></span>
+                    <span class="shoot-finder__body"><span class="shoot-finder__name">{page.nav.label}</span><span class="shoot-finder__desc">{page.nav.desc}</span></span>
+                    <i class="ph ph-arrow-right shoot-finder__arrow" aria-hidden="true"></i>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════ 1. INDIVIDUAL GALLERY ═══════ -->
   <section class="section section--individual" id="individual">
     <div class="container">
@@ -588,41 +624,18 @@ const hubJsonLd = [
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><span class="travel-zone travel-zone--0">Base</span></td>
-              <td>Atrani, Amalfi</td>
-              <td class="travel-fee">Included</td>
-            </tr>
-            <tr>
-              <td><span class="travel-zone travel-zone--1">Zone 1</span></td>
-              <td>Ravello, Minori, Maiori</td>
-              <td class="travel-fee">+&euro;30</td>
-            </tr>
-            <tr>
-              <td><span class="travel-zone travel-zone--2">Zone 2</span></td>
-              <td>Cetara, Vietri sul Mare, Tramonti, Scala</td>
-              <td class="travel-fee">+&euro;50</td>
-            </tr>
-            <tr>
-              <td><span class="travel-zone travel-zone--3">Zone 3</span></td>
-              <td>Positano, Praiano, Furore</td>
-              <td class="travel-fee">+&euro;70</td>
-            </tr>
-            <tr>
-              <td><span class="travel-zone travel-zone--4">Zone 4</span></td>
-              <td>Sorrento, Salerno</td>
-              <td class="travel-fee">+&euro;100</td>
-            </tr>
-            <tr>
-              <td><span class="travel-zone travel-zone--5">Zone 5</span></td>
-              <td>Capri, Naples, Pompeii</td>
-              <td class="travel-fee">+&euro;150 + transport</td>
-            </tr>
+            {travelZones.map(zone => (
+              <tr>
+                <td><span class={`travel-zone travel-zone--${zone.level}`}>{zone.zone}</span></td>
+                <td>{zone.towns}</td>
+                <td class="travel-fee">{zone.fee}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
       <div class="travel-notes">
-        <p>Travel time is not deducted from your session. For zones 3–5, minimum session is 90 minutes. Booking 120+ minutes in zones 1–2 reduces the travel fee by 50%.</p>
+        <p>{travelNote}</p>
       </div>
     </div>
   </section>
@@ -802,7 +815,7 @@ const hubJsonLd = [
       </details>
       <details>
         <summary>Where on the Amalfi Coast can we take photos?</summary>
-        <p>I'm based in Atrani and photograph in Amalfi, Ravello, Positano, Maiori and Tramonti too. Atrani and Amalfi are included in the base travel zone; other towns have the travel fees listed above. We'll choose a route together based on the light, your preferences and how much you'd like to walk.</p>
+        <p>I'm based in Atrani and photograph in <a href="/photoshootings/amalfi-photographer/">Amalfi</a>, <a href="/photoshootings/ravello-photographer/">Ravello</a>, <a href="/photoshootings/positano-photographer/">Positano</a>, on the <a href="/photoshootings/path-of-the-gods-photographer/">Path of the Gods</a>, and in Maiori and Tramonti too. Atrani and Amalfi are included in the base travel zone; other towns have the travel fees listed above. We'll choose a route together based on the light, your preferences and how much you'd like to walk.</p>
       </details>
       <details>
         <summary>How much does a photoshoot with Greg cost?</summary>
@@ -810,7 +823,7 @@ const hubJsonLd = [
       </details>
       <details>
         <summary>Can I book through Airbnb, Localgrapher or GetYourGuide?</summary>
-        <p>Yes. You can find my photography on <a href={photography.airbnbUrl} target="_blank" rel="noopener noreferrer">Airbnb</a>, my photographer profile on <a href={photography.localgrapherUrl} target="_blank" rel="noopener noreferrer">Localgrapher</a>, and my sunrise photo walk on <a href={photography.getYourGuideUrl} target="_blank" rel="noopener noreferrer">GetYourGuide</a>. You can also <a href="/contact#contact-form">book directly with me</a>. Check the package and terms on your chosen platform, as they may differ from direct bookings.</p>
+        <p>Yes. You can find my photography on <a href={photography.airbnbUrl} target="_blank" rel="noopener noreferrer">Airbnb</a>, my photographer profile on <a href={photography.localgrapherUrl} target="_blank" rel="noopener noreferrer">Localgrapher</a>, and my sunrise photo walk on <a href={photography.getYourGuideUrl} target="_blank" rel="noopener noreferrer">GetYourGuide</a>. You can also <a href="/contact/#contact-form">book directly with me</a>. Check the package and terms on your chosen platform, as they may differ from direct bookings.</p>
       </details>
       <details>
         <summary>Which languages do you speak, and when will I receive my photos?</summary>
@@ -865,7 +878,7 @@ const hubJsonLd = [
         <h2 class="pricing-cta__title">Tell me your dates, mood, and vision —<br />I'll handle everything else.</h2>
         <p class="pricing-cta__lead">Send your plan in minutes.<br />Languages: English, Italian, Russian.</p>
         <div class="pricing-cta__actions">
-          <a class="button" href="/contact#contact-form">
+          <a class="button" href="/contact/#contact-form">
             <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Get in touch
           </a>
           <a class="xp-hero__btn xp-hero__btn--ghost pricing-cta__whatsapp" href={whatsappHref} target="_blank" rel="noopener">
@@ -991,6 +1004,121 @@ const hubJsonLd = [
 
     .photographer-intro__portrait {
       max-width: 280px;
+    }
+  }
+
+  /* ===== FIND YOUR PHOTOSHOOT ===== */
+
+  .shoot-finder {
+    padding-bottom: 0;
+  }
+
+  .shoot-finder__groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .shoot-finder__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0 0 0.8rem;
+  }
+
+  .shoot-finder__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .shoot-finder__link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    height: 100%;
+    padding: 0.9rem 1rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .shoot-finder__link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .shoot-finder__link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  .shoot-finder__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.08);
+    color: var(--color-accent);
+    font-size: 1rem;
+  }
+
+  .shoot-finder__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .shoot-finder__name {
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .shoot-finder__desc {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+  }
+
+  .shoot-finder__arrow {
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .shoot-finder__link:hover .shoot-finder__arrow {
+    transform: translateX(3px);
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 1024px) {
+    .shoot-finder__groups {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .shoot-finder__list {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 

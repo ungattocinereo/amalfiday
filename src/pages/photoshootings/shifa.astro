@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('shifa')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Sunrise',
+  title: 'Sunrise Photoshoot in Amalfi — Shifa | Amalfi.Day',
+  description: 'Private sunrise photoshoot in Amalfi: meeting on the cathedral steps before dawn, then the empty harbour, pier and shoreline in soft light off the sea.',
+  facts: 'Shifa’s private sunrise photoshoot took place in Amalfi on 20 September 2025. We met before sunrise on the steps of Amalfi Cathedral, then moved down to the harbour, the pier and the shoreline while the town was still empty.',
+  hubs: ['amalfi-photographer', 'solo-photoshoot'],
+  related: { lead: 'More sunrise stories:', links: [{ label: 'Hinad from Amalfi to Atrani', href: '/photoshootings/hinad-amalfi-sunrise/' }, { label: 'Lashanda’s birthday in Atrani', href: '/photoshootings/lashada/' }] },
+}} />

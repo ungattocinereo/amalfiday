@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('sally-rose-family-positano')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Family',
+  title: 'Family Photoshoot in Positano — Sally & Rose | Amalfi.Day',
+  description: 'Family photoshoot in Positano: Sally and Rose’s family keep a yearly tradition, with two hours on the beach and around town in the morning, made for the album.',
+  facts: 'Sally and Rose’s family were staying in a villa in Praiano and came to Positano for this family photoshoot, something they do every year in a different place. We met in the morning at a car park in Positano, and the planned hour became two.',
+  hubs: ['positano-photographer', 'family-photoshoot'],
+  related: { lead: 'More from Positano and nearby:', links: [{ label: 'Nick’s family in Praiano', href: '/photoshootings/nick-family-praiano/' }, { label: 'Ashley and her partner in Positano', href: '/photoshootings/ashley-positano/' }] },
+}} />

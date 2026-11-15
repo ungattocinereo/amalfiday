@@ -1,8 +1,17 @@
 ---
 import CityLabel from './CityLabel.astro'
 import type { PhotoStory } from '../data/photoshoot-types'
-interface Props { story: PhotoStory; id?: string; location: string }
-const { story, id, location } = Astro.props
+type StoryLink = { label: string; href: string }
+interface Props {
+  story: PhotoStory
+  id?: string
+  location: string
+  /** Plain factual paragraph (who, what, where, when) appended after the story. */
+  facts?: string
+  /** Extra paragraphs of text and inline links, rendered in the same copy style. */
+  more?: (string | StoryLink)[][]
+}
+const { story, id, location, facts, more = [] } = Astro.props
 ---
 <section class="gs-story gs-wrap" id={id}>
   <div class="gs-story__heading" data-reveal>
@@ -12,7 +21,9 @@ const { story, id, location } = Astro.props
   <div class="gs-story__copy" data-reveal>
     <span class="gs-small-index"><CityLabel name={location} />, Italy</span>
     {story.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+    {facts && <p>{facts}</p>}
     {story.links?.map(link => <p><a href={link.href}>{link.label}</a></p>)}
     {story.items && story.items.length > 0 && <ul>{story.items.map(item => <li>{item}</li>)}</ul>}
+    {more.map(parts => <p>{parts.map(part => typeof part === 'string' ? part : <a href={part.href}>{part.label}</a>)}</p>)}
   </div>
 </section>

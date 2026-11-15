@@ -2,9 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { site } from '../data/site'
 
-const pageTitle = 'Directions to Atrani — Amalfi.Day'
+const pageTitle = 'How to Get to Atrani — Train, Ferry, Bus, Driving & Parking'
 const pageDescription =
-  'How to reach Atrani on the Amalfi Coast: trains from Naples to Salerno, ferry and bus options, walking directions from Amalfi, driving routes, and parking tips.'
+  'How to get to Atrani from Naples: train to Salerno, then a 35-minute ferry or SITA bus to Amalfi and a 10-minute walk. Driving routes and parking near Atrani.'
+const pageUpdatedISO = '2026-11-15'
+const pageUpdatedLabel = 'November 2026'
 const shareImage = '/staticpages/directions/hero-bb-balcony.webp'
 
 const heroSlides = [
@@ -89,7 +91,7 @@ const ferryBus = [
     mode: 'Bus',
     accent: 'budget route',
     time: '~75 min',
-    price: 'from 2.80€',
+    price: 'about 3€',
     priceNote: 'Luggage included',
     image: '/staticpages/directions/get-here-by-bus.webp',
     description:
@@ -170,7 +172,7 @@ const parkingOptions = [
     accent: 'limited',
     price: '3€/hr',
     note: 'No overnight parking',
-    description: 'There is a small public lot in Atrani itself, but overnight parking is forbidden. You must move your car out by 23:00.',
+    description: 'There is a small public lot in Atrani itself, but overnight parking is forbidden. Parking is banned from 23:00 to 08:00, so you must move your car out by 23:00.',
     link: {
       text: 'Open in Google Maps',
       url: 'https://maps.app.goo.gl/Vq8DE8haYbBivReL7',
@@ -181,11 +183,11 @@ const parkingOptions = [
 const directionsFaqs = [
   {
     q: 'How do I get to Atrani from Naples airport?',
-    a: 'Take a train from Napoli Centrale to Salerno (around an hour), then either a ferry (~35 min, from 12 EUR) or the SITA bus line 5120 (~75 min, from 2.80 EUR) to Amalfi. From Amalfi, walk along the waterfront for about 10 minutes to Atrani.',
+    a: 'Take a train from Napoli Centrale to Salerno (around an hour), then either a ferry (~35 min, from 12 EUR) or the SITA bus line 5120 (~75 min, about 3 EUR) to Amalfi. From Amalfi, walk along the waterfront for about 10 minutes to Atrani.',
   },
   {
     q: 'Is the ferry or the bus faster from Salerno to Amalfi?',
-    a: 'The ferry is faster — about 35 minutes versus 75 minutes by bus — and far more scenic. The bus is cheaper (from 2.80 EUR) and runs more frequently year-round. The ferry costs from 12 EUR with luggage at 3 EUR extra.',
+    a: 'The ferry is faster — about 35 minutes versus 75 minutes by bus — and far more scenic. The bus is cheaper (about 3 EUR) and runs more frequently year-round. The ferry costs from 12 EUR with luggage at 3 EUR extra.',
   },
   {
     q: 'Do I need to buy SITA bus tickets in advance?',
@@ -201,6 +203,63 @@ const directionsFaqs = [
   },
 ]
 
+const nextLinks = [
+  {
+    href: '/photoshootings/',
+    icon: 'ph-camera',
+    name: 'Photoshoots with Greg',
+    desc: 'Couple and solo sessions in Atrani, Amalfi and Ravello, from €200',
+  },
+  {
+    href: '/photoshootings/amalfi-photographer/',
+    icon: 'ph-aperture',
+    name: 'Photographer in Amalfi',
+    desc: 'A session in Amalfi and Atrani, on your doorstep',
+  },
+  {
+    href: '/experience/car-tours/',
+    icon: 'ph-car-profile',
+    name: 'Private car tours',
+    desc: 'Positano, Ravello or Tramonti with a local guide',
+  },
+  {
+    href: '/experience/scooter/',
+    icon: 'ph-gauge',
+    name: 'Scooter photo tour',
+    desc: 'Ride the coast with a photographer, from €350',
+  },
+  {
+    href: '/apartments/',
+    icon: 'ph-house',
+    name: 'Apartments in Atrani',
+    desc: 'Suites and rooms by the sea, book direct',
+  },
+  {
+    href: '/how-to-get/',
+    icon: 'ph-airplane-landing',
+    name: 'Naples Airport to the coast',
+    desc: 'Shuttle, train and ferry, or taxi compared',
+  },
+  {
+    href: '/timetables/',
+    icon: 'ph-bus',
+    name: 'Bus timetables',
+    desc: 'SITA line 5120 and the other coast lines',
+  },
+  {
+    href: '/ferry-timetables/',
+    icon: 'ph-boat',
+    name: 'Ferry timetables',
+    desc: 'Salerno to Amalfi departures and fares',
+  },
+  {
+    href: '/parking/',
+    icon: 'ph-park',
+    name: 'Parking guide',
+    desc: 'Prices in 11 towns and ZTL camera zones',
+  },
+]
+
 const directionsJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -209,6 +268,8 @@ const directionsJsonLd = [
     description: pageDescription,
     url: `${site.url}/directions`,
     image: new URL(shareImage, site.url).toString(),
+    mainEntityOfPage: `${site.url}/directions`,
+    dateModified: pageUpdatedISO,
     author: { '@id': `${site.url}/#business` },
     publisher: { '@id': `${site.url}/#business` },
     inLanguage: 'en',
@@ -300,6 +361,26 @@ const directionsJsonLd = [
       <span></span>
     </div>
   </section>
+
+  <!-- ─── QUICK ANSWER ─── -->
+  <div class="quick-answer" role="region" aria-labelledby="quick-answer-title">
+    <div class="container">
+      <div class="quick-answer__box">
+        <div class="dir-eyebrow">Quick answer</div>
+        <h2 class="quick-answer__title" id="quick-answer-title">How do I get to Atrani?</h2>
+        <p>
+          Take a train from Napoli Centrale to Salerno, then a ferry (about 35 minutes, from 12€)
+          or SITA bus line 5120 (about 75 minutes, about 3€) to Amalfi. From Amalfi, Atrani is a
+          10-minute walk along the waterfront and through a pedestrian tunnel. If you drive, come
+          via Vietri sul Mare and park at Luna Rossa, a 5-minute walk away, because Atrani has no
+          overnight parking.
+        </p>
+        <p class="quick-answer__date">
+          Last updated: <time datetime={pageUpdatedISO}>{pageUpdatedLabel}</time>
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- ─── STEP 1 & 2: PUBLIC TRANSPORT ─── -->
   <section class="section dir-transport" id="public-transport">
@@ -476,8 +557,8 @@ const directionsJsonLd = [
               <a href="https://amalfiporters.it" target="_blank" rel="noopener">
                 <i class="ph ph-globe" aria-hidden="true"></i> amalfiporters.it
               </a>
-              <a href="https://wa.me/393392768989" target="_blank" rel="noopener">
-                <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> +39 339 2768989
+              <a href="https://wa.me/393270972329" target="_blank" rel="noopener">
+                <i class="ph ph-whatsapp-logo" aria-hidden="true"></i> +39 327 0972329
               </a>
             </div>
           </div>
@@ -554,6 +635,30 @@ const directionsJsonLd = [
               </a>
             )}
           </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHILE YOU'RE HERE ─── -->
+  <section class="section next-links" aria-labelledby="next-links-title">
+    <div class="container">
+      <div class="dir-eyebrow">While you're here</div>
+      <h2 id="next-links-title">More from the <span class="accent-italic">coast</span></h2>
+      <p class="dir-parking__sub">
+        Once you have found Atrani, the rest of the coast is close: a photoshoot in the lanes
+        of Atrani, a private tour, or the timetables for your day trips.
+      </p>
+      <div class="dir-useful-links__grid next-links__list">
+        {nextLinks.map((link) => (
+          <a href={link.href} class="dir-useful-link">
+            <span class="dir-useful-link__icon"><i class={`ph ${link.icon}`} aria-hidden="true"></i></span>
+            <span class="dir-useful-link__body">
+              <span class="dir-useful-link__name">{link.name}</span>
+              <span class="dir-useful-link__desc">{link.desc}</span>
+            </span>
+            <i class="ph ph-arrow-right dir-useful-link__arrow" aria-hidden="true"></i>
+          </a>
         ))}
       </div>
     </div>
@@ -1636,5 +1741,94 @@ const directionsJsonLd = [
     padding: 0 1.2rem 1.1rem;
     color: var(--color-text-muted);
     line-height: 1.6;
+  }
+
+  /* Quick answer (first answer block after the hero) */
+  .quick-answer {
+    padding: 3.5rem 0 0;
+  }
+
+  .quick-answer__box {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 52rem;
+    padding: 1.6rem 1.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .quick-answer__title {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+    line-height: 1.2;
+  }
+
+  .quick-answer__box p {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .quick-answer__box .quick-answer__date {
+    margin-top: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* While you're here: cross-links */
+  .next-links__heading {
+    margin-bottom: 2rem;
+  }
+
+  .next-links__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .next-link {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+    padding: 1.25rem 1.35rem;
+    color: var(--color-text);
+  }
+
+  .next-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .next-link__title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .next-link__title i {
+    color: var(--color-accent);
+    font-size: 1.2rem;
+  }
+
+  .next-link__text {
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 640px) {
+    .quick-answer {
+      padding-top: 2.5rem;
+    }
+
+    .quick-answer__box {
+      padding: 1.3rem 1.25rem;
+    }
   }
 </style>

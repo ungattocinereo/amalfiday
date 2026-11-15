@@ -4,6 +4,7 @@ import Header from '../components/Header.astro'
 import Prefooter from '../components/Prefooter.astro'
 import Footer from '../components/Footer.astro'
 import { site, business } from '../data/site'
+import { photography } from '../data/photographer'
 
 const {
   title = site.name,
@@ -45,14 +46,21 @@ const pageUrl = url
     ? new URL(Astro.url.pathname, site.url).toString()
     : site.url
 
+// Site-wide entities. Page-level JSON-LD references these by @id:
+// `${site.url}/#business` (the company) and `${site.url}/#website` (the site).
+// Lodging typing lives on /apartments/, where the apartments are the subject.
+const businessId = `${site.url}/#business`
+const websiteId = `${site.url}/#website`
+
 const businessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LodgingBusiness',
-  '@id': `${site.url}/#business`,
-  name: business.legalName.replace(' S.R.L.', ''),
+  '@type': ['LocalBusiness', 'TravelAgency'],
+  '@id': businessId,
+  name: business.brandName,
   legalName: business.legalName,
-  alternateName: ['Amalfi.Day', 'CristallPont Amalfi Day'],
-  url: site.url,
+  alternateName: ['CristallPont', 'CristallPont Amalfi Day'],
+  description:
+    'Amalfi.Day is run from Atrani on the Amalfi Coast by photographer and local guide Gregory (Greg). It offers photoshoots for couples, families and solo travelers, private car and scooter photo tours, and holiday apartments in Atrani, along with free guides to local transport, beaches and parking.',
+  url: `${site.url}/`,
   logo: toAbsoluteUrl('/brand/amalficarion_logo.svg'),
   image: toAbsoluteUrl(site.defaultImage),
   telephone: business.phone,
@@ -71,17 +79,45 @@ const businessSchema = {
     latitude: business.geo.lat,
     longitude: business.geo.lon,
   },
-  areaServed: {
-    '@type': 'Place',
-    name: 'Amalfi Coast',
+  areaServed: [
+    { '@type': 'Place', name: 'Amalfi Coast' },
+    ...business.areaServed.map((town) => ({
+      '@type': 'City',
+      name: town,
+      containedInPlace: { '@type': 'Country', name: business.countryName },
+    })),
+  ],
+  knowsAbout: business.knowsAbout,
+  founder: {
+    '@type': 'Person',
+    '@id': photography.photographerId,
+    name: 'Gregory',
+    alternateName: 'Greg',
+    jobTitle: 'Amalfi Coast photographer',
   },
   sameAs: [
-    business.bookingUrl,
-    business.airbnbUrl,
     business.instagramUrl,
     business.facebookUrl,
     business.twitterUrl,
+    business.bookingUrl,
+    business.airbnbUrl,
   ],
+}
+
+const websiteSchema = {
+  '@type': 'WebSite',
+  '@id': websiteId,
+  url: `${site.url}/`,
+  name: site.name,
+  alternateName: 'Amalfi Day',
+  description: site.description,
+  inLanguage: 'en',
+  publisher: { '@id': businessId },
+}
+
+const siteGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [businessSchema, websiteSchema],
 }
 
 const pageJsonLd = jsonLd
@@ -89,7 +125,7 @@ const pageJsonLd = jsonLd
     ? jsonLd
     : [jsonLd]
   : []
-const allJsonLd = [businessSchema, ...pageJsonLd]
+const allJsonLd = [siteGraph, ...pageJsonLd]
 const bodyStyle = browserChromeColor
   ? `--browser-chrome-color: ${browserChromeColor};`
   : undefined
@@ -104,7 +140,9 @@ const bodyStyle = browserChromeColor
     <link rel="preload" as="font" type="font/woff2" href="/fonts/libre-baskerville-latin-400-normal.woff2" crossorigin />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {noindex
+      ? <meta name="robots" content="noindex, follow" />
+      : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
     <link rel="canonical" href={pageUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -127,6 +165,7 @@ const bodyStyle = browserChromeColor
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable site summary" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content={themeColor} />
     <meta name="msapplication-TileColor" content={themeColor} />
@@ -213,7 +252,7 @@ const bodyStyle = browserChromeColor
         <p class="cookie-banner__text">
           This site uses analytics cookies (Google Analytics) to improve your experience.
           By accepting, you allow us to collect anonymous browsing data.
-          <a href="/cookie-policy" class="cookie-banner__link">Cookie Policy</a>
+          <a href="/cookie-policy/" class="cookie-banner__link">Cookie Policy</a>
         </p>
         <div class="cookie-banner__actions">
           <button

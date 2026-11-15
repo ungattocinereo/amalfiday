@@ -8,36 +8,194 @@ import PhotoshootStory from './PhotoshootStory.astro'
 import PhotoshootGallery from './PhotoshootGallery.astro'
 import GalleryStudyControls from './GalleryStudyControls.astro'
 import PhotoRequestDialog from './PhotoRequestDialog.astro'
-import { buildPhotoshootSchema } from '../data/photoshoot-schema'
-import { photoStyle, type Photoshoot } from '../data/photoshoot-types'
+import { site, business } from '../data/site'
+import { photography, photographerSchema } from '../data/photographer'
+import { photoStyle, type PhotoFrame, type Photoshoot } from '../data/photoshoot-types'
 import '../styles/gallery-study.css'
-interface Props { shoot: Photoshoot }
-const { shoot } = Astro.props
-const { hero, frames } = shoot
+
+// Landing pages each shoot can point to. Labels read as part of a sentence.
+const hubPages = {
+  'positano-photographer': 'photoshoots in Positano',
+  'ravello-photographer': 'photoshoots in Ravello',
+  'amalfi-photographer': 'photoshoots in Amalfi and Atrani',
+  'path-of-the-gods-photographer': 'photoshoots on the Path of the Gods',
+  'proposal-photographer': 'proposal photography',
+  'couple-photoshoot': 'couple photoshoots',
+  'family-photoshoot': 'family photoshoots',
+  'solo-photoshoot': 'solo photoshoots',
+} as const
+type StoryLink = { label: string; href: string }
+type ShootSeo = {
+  /** Shoot type as a title-case word or phrase, e.g. "Couple", "Post-Wedding". */
+  kind: string
+  /** Search title, led by the query: "<Kind> Photoshoot in <Town> — <Client> | Amalfi.Day". */
+  title: string
+  /** Meta description, 150–160 characters. */
+  description: string
+  /** One self-contained factual paragraph appended to the last story block. */
+  facts: string
+  hubs: (keyof typeof hubPages)[]
+  /** Other shoots worth reading, rendered as one sentence after the facts. */
+  related?: { lead: string; links: StoryLink[] }
+  /** Per-frame alt overrides, keyed by frame id. */
+  alts?: Record<string, string>
+}
+interface Props { shoot: Photoshoot; seo?: ShootSeo }
+const { shoot, seo } = Astro.props
+
+// Place wording: "in Positano", "on the Path of the Gods".
+const towns = shoot.location.split(/\s+&\s+/)
+const onPath = shoot.location === 'Path of the Gods'
+const where = onPath ? 'on the Path of the Gods' : `in ${shoot.location}`
+const kind = seo?.kind || shoot.tag || ''
+const kindPhrase = `${kind ? `${kind.charAt(0)}${kind.slice(1).toLowerCase()} ` : ''}photoshoot`
+const keyword = `${kindPhrase.charAt(0).toUpperCase()}${kindPhrase.slice(1)} ${where}`
+
+// Alt text: keep each authored alt, make sure it names the place, and replace
+// numbered placeholders ("— frame 01", "in Atrani 3") with a position in the set.
+const mentionsPlace = (text: string) => towns.some(town => text.toLowerCase().includes(town.toLowerCase()))
+const placeSuffix = towns.length > 1 ? `, ${towns.join(' and ')}` : ` ${where}`
+const lowerArticle = (text: string) => text.replace(/^(The|A|An) /, match => match.toLowerCase())
+const describe = (frame: PhotoFrame, position: number, total: number) => {
+  const override = seo?.alts?.[frame.id]
+  if (override) return override
+  const authored = frame.alt.trim().replace(/\.$/, '')
+  const numbered = authored.match(/^(.*?)(?:\s*[—–-]\s*frame\s*\d+|\s+\d+)$/i)
+  const base = numbered ? numbered[1] : authored
+  const placed = mentionsPlace(base) ? base : `${base}${placeSuffix}`
+  return numbered ? `${placed}, photograph ${position} of ${total}` : placed
+}
+const frames = shoot.frames.map((frame, index) => ({ ...frame, alt: describe(frame, index + 1, shoot.frames.length) }))
+const heroAlt = /photoshoot/i.test(shoot.hero.alt) ? shoot.hero.alt : `${keyword}: ${lowerArticle(shoot.hero.alt.trim())}`
+const hero = { ...shoot.hero, alt: heroAlt }
+
 const mobileHero = shoot.mobileHero && frames.find(frame => frame.id === shoot.mobileHero!.frameId)
 if (shoot.mobileHero && !mobileHero) throw new Error(`Unknown mobile hero: ${shoot.slug}/${shoot.mobileHero.frameId}`)
 const context = [shoot.name, shoot.schema.description, ...shoot.chapters.flatMap(chapter => chapter.before.flatMap(story => story.paragraphs))]
-const jsonLd = buildPhotoshootSchema({ slug: shoot.slug, ...shoot.schema, hero: hero.original, location: shoot.location, galleryImages: frames.map(frame => ({ src: frame.original, alt: frame.alt })) })
 const browserFrames = frames.map(({ original, src, alt }) => ({ original, src, alt }))
+
+// Facts and internal links go into the last story block, in its own copy style.
+const stories = shoot.chapters.flatMap((chapter, chapterIndex) => chapter.before.map((_, storyIndex) => `${chapterIndex}-${storyIndex}`))
+const lastStory = stories[stories.length - 1]
+const joinLinks = (links: StoryLink[]) => links.flatMap((link, index) => [
+  ...(index === 0 ? [] : [index === links.length - 1 ? ' and ' : ', ']), link,
+])
+const more: (string | StoryLink)[][] = []
+if (seo?.related?.links.length) more.push([`${seo.related.lead} `, ...joinLinks(seo.related.links), '.'])
+if (seo) {
+  const hubs = seo.hubs.map(slug => ({ label: hubPages[slug], href: `/photoshootings/${slug}/` }))
+  more.push(['Planning your own? Read more about ', ...joinLinks(hubs), ', or see ', { label: 'all my photoshoots', href: '/photoshootings/' }, '.'])
+}
+
+// Structured data
+const pageUrl = `${site.url}/photoshootings/${shoot.slug}/`
+const businessId = `${site.url}/#business`
+const toAbs = (path: string) => new URL(path, site.url).toString()
+const title = seo?.title || shoot.title
+const description = seo?.description || shoot.description
+const name = title.replace(/\s*\|\s*Amalfi\.Day$/, '')
+const year = (shoot.dateTime || shoot.schema.datePublished || '').slice(0, 4)
+const copyrightNotice = `© ${year ? `${year} ` : ''}${business.legalName} (Amalfi.Day)`
+const region = (town: string) => town === 'Sorrento' ? 'Sorrento Peninsula' : 'Amalfi Coast'
+const places = towns.map(town => ({
+  '@type': 'Place',
+  name: onPath ? 'Path of the Gods (Sentiero degli Dei), Amalfi Coast, Italy' : `${town}, ${region(town)}, Italy`,
+  ...(onPath ? {} : { address: { '@type': 'PostalAddress', addressLocality: town, addressRegion: 'Campania', addressCountry: 'IT' } }),
+  containedInPlace: { '@type': 'Place', name: `${region(town)}, Italy` },
+}))
+const contentLocation = places.length === 1 ? places[0] : places
+const imageObject = (frame: PhotoFrame, id?: string) => ({
+  '@type': 'ImageObject',
+  ...(id ? { '@id': id } : {}),
+  contentUrl: toAbs(frame.original),
+  url: toAbs(frame.original),
+  thumbnailUrl: toAbs(frame.src),
+  caption: frame.alt,
+  name: frame.alt,
+  creator: { '@id': photography.photographerId },
+  creditText: 'Gregory / Amalfi.Day',
+  copyrightHolder: { '@id': businessId },
+  copyrightNotice,
+  contentLocation,
+})
+const heroImageId = `${pageUrl}#primaryimage`
+const review = shoot.review
+const reviewDate = review?.authorDetail?.match(/\b(\d{1,2}) (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})\b/)
+const reviewSchema = review && {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  '@id': `${pageUrl}#review`,
+  url: `${pageUrl}#photoshoot-review`,
+  itemReviewed: { '@type': 'Service', '@id': photography.serviceId, name: 'Amalfi Coast photoshoots with Gregory', provider: { '@id': photography.photographerId } },
+  author: { '@type': 'Person', name: review.author },
+  reviewBody: review.paragraphs.join('\n\n'),
+  inLanguage: 'en',
+  ...(review.rating ? { reviewRating: { '@type': 'Rating', ratingValue: review.rating, bestRating: 5, worstRating: 1 } } : {}),
+  ...(reviewDate ? { datePublished: new Date(`${reviewDate[2]} ${reviewDate[1]}, ${reviewDate[3]} UTC`).toISOString().slice(0, 10) } : {}),
+  ...(review.source ? { publisher: { '@type': 'Organization', name: review.source.name, ...(review.source.url ? { url: review.source.url } : {}) } } : {}),
+}
+const jsonLd = [
+  { ...photographerSchema, worksFor: { '@id': businessId } },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ImageGallery',
+    '@id': `${pageUrl}#gallery`,
+    url: pageUrl,
+    name,
+    headline: keyword,
+    description,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${photography.url}#hub` },
+    breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+    about: { '@id': photography.serviceId },
+    genre: `${kindPhrase.replace(/photoshoot$/, 'photography')}`,
+    contentLocation,
+    creator: { '@id': photography.photographerId },
+    author: { '@id': photography.photographerId },
+    publisher: { '@id': businessId },
+    copyrightHolder: { '@id': businessId },
+    ...(shoot.dateTime ? { dateCreated: shoot.dateTime } : {}),
+    ...(shoot.schema.datePublished ? { datePublished: shoot.schema.datePublished } : {}),
+    ...(shoot.schema.keywords?.length ? { keywords: [keyword, ...shoot.schema.keywords].join(', ') } : {}),
+    primaryImageOfPage: imageObject(hero, heroImageId),
+    image: [{ '@id': heroImageId }, ...frames.slice(0, 6).map(frame => imageObject(frame))],
+    numberOfItems: frames.length,
+    ...(reviewSchema ? { review: { '@id': reviewSchema['@id'] } } : {}),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${pageUrl}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Photoshoots', item: photography.url },
+      { '@type': 'ListItem', position: 3, name, item: pageUrl },
+    ],
+  },
+  ...(reviewSchema ? [reviewSchema] : []),
+]
 ---
-<BaseLayout title={shoot.title} description={shoot.description} image={hero.original} imageAlt={hero.alt} jsonLd={jsonLd}>
+<BaseLayout title={title} description={description} image={hero.original} imageAlt={hero.alt} jsonLd={jsonLd}>
   <div class="gs gs-shoot" data-gallery-study data-shoot={shoot.slug}>
     <script type="application/json" data-gallery-frames set:html={JSON.stringify(browserFrames).replace(/</g, '\\u003c')} />
-    <section class="gs-hero hero--dark" data-hero-layout={shoot.heroLayout} data-mobile-heading={shoot.mobileHero?.headingPosition} data-mobile-fit={shoot.mobileHero?.fit} aria-label={`${shoot.name} — photoshoot in ${shoot.location}`} style={photoStyle({ ...hero, mobileFocal: shoot.mobileHero?.focal || hero.mobileFocal })}>
+    <section class="gs-hero hero--dark" data-hero-layout={shoot.heroLayout} data-mobile-heading={shoot.mobileHero?.headingPosition} data-mobile-fit={shoot.mobileHero?.fit} aria-label={`${keyword} with ${shoot.name}`} style={photoStyle({ ...hero, mobileFocal: shoot.mobileHero?.focal || hero.mobileFocal })}>
       <picture class="gs-hero__motion">
         {mobileHero && <source media="(max-width: 900px) and (orientation: portrait)" srcset={mobileHero.srcset} sizes={`max(100vw, ${(mobileHero.width / mobileHero.height * 100).toFixed(1)}svh)`} width={mobileHero.width} height={mobileHero.height} />}
-        <img class="gs-hero__image" src={hero.src} srcset={hero.srcset} sizes={`max(100vw, ${(hero.width / hero.height * 100).toFixed(1)}svh)`} alt={mobileHero ? `${shoot.name} — photoshoot in ${shoot.location}` : hero.alt} width={hero.width} height={hero.height} fetchpriority="high" loading="eager" />
+        <img class="gs-hero__image" src={hero.src} srcset={hero.srcset} sizes={`max(100vw, ${(hero.width / hero.height * 100).toFixed(1)}svh)`} alt={mobileHero ? `${shoot.name}, ${kindPhrase.toLowerCase()} ${where}` : hero.alt} width={hero.width} height={hero.height} fetchpriority="high" loading="eager" />
       </picture>
       <div class="gs-hero__veil"></div>
       <div class="gs-hero__content hero-container">
-        <div class="gs-eyebrow"><div class="gs-hero__location"><CityLabel name={shoot.location} />, Italy</div><PhotoshootHeroDate date={shoot.date} dateTime={shoot.dateTime} /></div>
+        <div class="gs-eyebrow"><div class="gs-hero__location">{kindPhrase} {onPath ? 'on the' : 'in'} <CityLabel name={shoot.location} />, Italy</div><PhotoshootHeroDate date={shoot.date} dateTime={shoot.dateTime} /></div>
         <h1>{shoot.heading.lead}<br /><em>{shoot.heading.accent}</em></h1>
-        <div class="gs-hero__bottom"><PhotoshootHeroSummary description={shoot.summary} context={context} images={frames} inline /><a href="#gs-story" aria-label="Discover the story"><span>Discover</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a></div>
+        <div class="gs-hero__bottom"><PhotoshootHeroSummary description={shoot.summary} context={context} images={shoot.frames} inline /><a href="#gs-story" aria-label="Discover the story"><span>Discover</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a></div>
       </div>
       <button class="gs-motion-toggle" type="button" aria-label="Pause cover animation" aria-pressed="false"><i class="ph ph-pause" aria-hidden="true"></i></button>
     </section>
     {shoot.chapters.map((chapter, index) => <>
-      {chapter.before.map((story, storyIndex) => <PhotoshootStory story={story} location={shoot.location} id={index === 0 && storyIndex === 0 ? 'gs-story' : undefined} />)}
+      {chapter.before.map((story, storyIndex) => {
+        const isLast = `${index}-${storyIndex}` === lastStory
+        return <PhotoshootStory story={story} location={shoot.location} id={index === 0 && storyIndex === 0 ? 'gs-story' : undefined} facts={isLast ? seo?.facts : undefined} more={isLast ? more : undefined} />
+      })}
       {index === 0 && shoot.quote && <section class="gs-quote gs-wrap" aria-label={`Words from ${shoot.quote.author}`}>
         <blockquote data-reveal><span class="gs-quote__mark" aria-hidden="true">“</span><p>{shoot.quote.text}</p><footer><span class="gs-quote__rule"></span><cite>{shoot.quote.author}</cite></footer></blockquote>
       </section>}

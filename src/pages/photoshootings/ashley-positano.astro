@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('ashley-positano')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Couple',
+  title: 'Couple Photoshoot in Positano — Ashley | Amalfi.Day',
+  description: 'Couple photoshoot in Positano on an early summer morning: quiet streets, golden-hour light over the beach and a couple completely at ease. Photographed by Greg.',
+  facts: 'Ashley and her partner asked for a couple photoshoot in Positano. We started very early on a summer morning, during the morning golden hour, and photographed around the beach and in the streets while the town was still quiet.',
+  hubs: ['positano-photographer', 'couple-photoshoot'],
+  related: { lead: 'More from Positano:', links: [{ label: 'Stephanie and her partner', href: '/photoshootings/stephanie-positano/' }, { label: 'Sally & Rose’s family', href: '/photoshootings/sally-rose-family-positano/' }] },
+}} />

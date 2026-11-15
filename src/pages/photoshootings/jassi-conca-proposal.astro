@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('jassi-conca-proposal')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Proposal',
+  title: 'Proposal Photoshoot in Conca dei Marini — Jassi | Amalfi.Day',
+  description: 'Surprise proposal photoshoot at a villa in Conca dei Marini: Jassi asks the question on a terrace above the sea, photographed from a hidden corner.',
+  facts: 'Jassi and his partner came from Britain and were staying at a villa in Conca dei Marini that belongs to friends of mine. I waited out of sight at the far corner of the villa, photographed the proposal on the terrace as it happened, and afterwards the couple, the ring and the flowers around the villa.',
+  hubs: ['proposal-photographer', 'couple-photoshoot'],
+  related: { lead: 'More stories like this:', links: [{ label: 'Renaud’s proposal on the Path of the Gods', href: '/photoshootings/renaud-path-of-the-gods/' }, { label: 'Anh’s morning at a villa in Conca dei Marini', href: '/photoshootings/anh-hoang-conca-dei-marini/' }] },
+}} />

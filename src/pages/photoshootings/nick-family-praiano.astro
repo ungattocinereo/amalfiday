@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('nick-family-praiano')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Family',
+  title: 'Family Photoshoot in Praiano — Nick & Family | Amalfi.Day',
+  description: 'Family photoshoot in Praiano on a May morning: village lanes full of flowers, the walk to the church, an ice-cream stop and a final view towards Positano.',
+  facts: 'Nick’s family photoshoot took place in Praiano, on the Amalfi Coast, early on the morning of 23 May. We walked from the main street towards the church and into the village lanes, and finished with a view towards Positano.',
+  hubs: ['family-photoshoot'],
+  related: { lead: 'Another family story:', links: [{ label: 'Sally & Rose’s family in Positano', href: '/photoshootings/sally-rose-family-positano/' }] },
+}} />

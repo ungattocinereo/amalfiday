@@ -21,9 +21,9 @@ const heroSlides = [
   },
 ]
 
-const pageTitle = 'Amalfi Coast Experiences — Tours, Photo Shoots, Tastings'
+const pageTitle = 'Amalfi Coast Tours & Photo Experiences | Amalfi.Day'
 const pageDescription =
-  'Bespoke Amalfi Coast experiences: photo shoots, scenic rides, scooter tours, and curated local tastings hosted by a true local.'
+  'Private Amalfi Coast experiences with a local: Scenic Coast and Peak Flavors car tours, a scooter photo tour from €350, and photoshoots in Atrani and Ravello.'
 const shareImageAlt = 'Amalfi Coast experience hero'
 const shareImage = heroSlides[0].image
 
@@ -33,24 +33,24 @@ const experienceCards = [
     subtitle: 'From the Sea to the Mountain',
     text: 'The classic Amalfi Coast route — cliff-top viewpoints, charming villages, limoncello tasting, and a local lunch by the sea.',
     image: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp',
-    href: '/experience/car-tours',
-    tags: ['8 hours', 'Private car', 'Up to 6 ppl'],
+    href: '/experience/car-tours/',
+    tags: ['Up to 3 / 4–6 hours', 'Private car', 'Up to 6 ppl'],
   },
   {
     title: 'Peak Flavors',
     subtitle: 'The Tramonti Valley',
     text: 'A food-focused day in the mountains — buffalo mozzarella at a local farm, wine from hillside vineyards, and panoramic views you won\'t find in any guidebook.',
     image: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp',
-    href: '/experience/car-tours',
-    tags: ['8 hours', 'Wine & food', 'Mountains'],
+    href: '/experience/car-tours/',
+    tags: ['Up to 3 / 4–6 hours', 'Wine & food', 'Mountains'],
   },
   {
     title: 'Scooter Photo Tour',
     subtitle: 'Ride, Explore & Get Stunning Photos',
     text: 'Discover the coast on a private motorbike tour with a storyteller-guide. Cliffside roads, cinematic overlooks, and 50+ professional photos to take home.',
     image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp',
-    href: '/experience/scooter',
-    tags: ['4 hours', 'Photo included', 'Individual'],
+    href: '/experience/scooter/',
+    tags: ['From €350', 'Photo included', 'Individual'],
   },
 ]
 
@@ -69,8 +69,10 @@ const experienceJsonLd = [
     '@type': 'CollectionPage',
     name: pageTitle,
     description: pageDescription,
-    url: `${site.url}/experience`,
-    isPartOf: { '@id': `${site.url}/#business` },
+    url: `${site.url}/experience/`,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': `${site.url}/#business` },
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: experienceCards.map((card, i) => ({
@@ -92,8 +94,8 @@ const experienceJsonLd = [
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
-      { '@type': 'ListItem', position: 2, name: 'Experiences', item: `${site.url}/experience` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Experiences', item: `${site.url}/experience/` },
     ],
   },
 ]
@@ -121,8 +123,8 @@ const experienceJsonLd = [
               Tailored days of light, flavor, and motion — curated by a local guide who knows where the coast is most alive.
             </p>
             <div class="xp-hero__actions">
-              <a class="xp-hero__btn xp-hero__btn--primary" href="/contact">Plan your experience</a>
-              <a class="xp-hero__btn xp-hero__btn--ghost" href="/photoshootings">See photoshootings</a>
+              <a class="xp-hero__btn xp-hero__btn--primary" href="/contact/">Plan your experience</a>
+              <a class="xp-hero__btn xp-hero__btn--ghost" href="/photoshootings/">See photoshootings</a>
             </div>
           </div>
           <div class="xp-hero__aside">
@@ -199,7 +201,7 @@ const experienceJsonLd = [
             and locations we build for every session.
           </p>
         </div>
-        <a class="link-arrow" href="/photoshootings">
+        <a class="link-arrow" href="/photoshootings/">
           Explore all photoshootings <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
         </a>
       </div>

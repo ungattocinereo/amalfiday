@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('ravello-photoshooting')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Fashion',
+  title: 'Fashion Photoshoot in Ravello — Light & Elegance | Amalfi.Day',
+  description: 'Fashion photoshoot in Ravello: classic Amalfi dresses and modern looks among the terraces, stone lanes, gardens and piazza of Ravello, above the Amalfi Coast.',
+  facts: 'This fashion photoshoot took place in Ravello on 9 June 2024, among the town’s stone lanes, terraces above the sea, gardens and piazza.',
+  hubs: ['ravello-photographer'],
+  related: { lead: 'More from Ravello:', links: [{ label: 'Loreana’s solo photoshoot', href: '/photoshootings/loreana/' }, { label: 'Taylor & Regan’s engagement photoshoot', href: '/photoshootings/regan-tay-ravello/' }] },
+}} />

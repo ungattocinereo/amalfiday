@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('anh-hoang-conca-dei-marini')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Couple',
+  title: 'Couple Photoshoot in Conca dei Marini — Anh Hoang | Amalfi.Day',
+  description: 'Couple photoshoot at a villa in Conca dei Marini on an April morning: soft overcast light, coffee on the terrace and portraits on a balcony above the sea.',
+  facts: 'Anh Hoang booked this couple photoshoot almost four months ahead. We photographed her and her boyfriend on the morning of 10 April 2026 at the villa they had reserved in Conca dei Marini, on the Amalfi Coast: individual portraits and couple photographs on the terrace and balcony, then a short walk higher into the village and back.',
+  hubs: ['couple-photoshoot'],
+  related: { lead: 'Another story from Conca dei Marini:', links: [{ label: 'Jassi’s surprise proposal on a villa terrace', href: '/photoshootings/jassi-conca-proposal/' }] },
+}} />

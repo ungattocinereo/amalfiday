@@ -1,6 +1,6 @@
 export const site = {
   name: 'Amalfi.Day',
-  description: 'Epic photoshoots on the Amalfi Coast. Story-driven sessions with golden light and cinematic locations.',
+  description: 'Amalfi Coast photoshoots, private tours and Atrani apartments, plus local guides to ferries, buses, beaches and parking from a photographer living on the coast.',
   guideUrl: 'https://guide.amalfi.day',
   url: 'https://amalfi.day',
   defaultImage: '/pre-footer/boat-tours-in-amalfi.webp',
@@ -17,7 +17,7 @@ export const business = {
   postalCode: '84010',
   country: 'IT',
   countryName: 'Italy',
-  phone: '+39 339 2768989',
+  phone: '+39 327 0972329',
   email: 'hello@amalfi.day',
   geo: { lat: 40.6394, lon: 14.6064 },
   bookingUrl: 'https://www.booking.com/hotel/it/cristallpont-amalfi-day.html',
@@ -25,6 +25,28 @@ export const business = {
   instagramUrl: 'https://instagram.com/amalfi.day',
   facebookUrl: 'https://facebook.com/amalfi.day',
   twitterUrl: 'https://twitter.com/amalfiday',
+  // Towns the photoshoots, tours and guide pages cover (used in structured data).
+  areaServed: [
+    'Atrani',
+    'Amalfi',
+    'Ravello',
+    'Positano',
+    'Praiano',
+    'Maiori',
+    'Minori',
+    'Conca dei Marini',
+    'Sorrento',
+  ],
+  knowsAbout: [
+    'Amalfi Coast photoshoots',
+    'Couple and family photography',
+    'Private Amalfi Coast car tours',
+    'Scooter photo tours',
+    'Amalfi Coast ferries and buses',
+    'Amalfi Coast beaches',
+    'Parking on the Amalfi Coast',
+    'Holiday apartments in Atrani',
+  ],
 }
 
 type NavigationDropdownItem = {
@@ -47,26 +69,26 @@ type NavigationItem = {
 }
 
 export const navigation: NavigationItem[] = [
-  { label: 'News', href: '/blog', icon: 'ph-newspaper' },
+  { label: 'News', href: '/blog/', icon: 'ph-newspaper' },
   {
     label: 'Experience',
-    href: '/experience',
+    href: '/experience/',
     icon: 'ph-star',
     iconWeight: 'fill',
     dropdownSections: [
       {
         heading: 'Capture Your Story',
         items: [
-          { label: 'Individual Photo Shooting', href: '/photoshootings', icon: 'ph-person' },
-          { label: 'Couple & Family Photo Shooting', href: '/photoshootings#couples', icon: 'ph-users' },
+          { label: 'Individual Photo Shooting', href: '/photoshootings/', icon: 'ph-person' },
+          { label: 'Couple & Family Photo Shooting', href: '/photoshootings/#couples', icon: 'ph-users' },
         ],
       },
       {
         heading: 'Tours',
         items: [
-          { label: 'Scenic Coast', href: '/experience/car-tours#tour-scenic', icon: 'ph-map-pin' },
-          { label: 'Peak Flavors', href: '/experience/car-tours#tour-tramonti', icon: 'ph-tree' },
-          { label: 'Scooter Photo Tour', href: '/experience/scooter', icon: 'ph-gauge' },
+          { label: 'Scenic Coast', href: '/experience/car-tours/#tour-scenic', icon: 'ph-map-pin' },
+          { label: 'Peak Flavors', href: '/experience/car-tours/#tour-tramonti', icon: 'ph-tree' },
+          { label: 'Scooter Photo Tour', href: '/experience/scooter/', icon: 'ph-gauge' },
         ],
       },
     ],
@@ -79,23 +101,23 @@ export const navigation: NavigationItem[] = [
       {
         heading: 'Stay',
         items: [
-          { label: 'Apartments', href: '/apartments', icon: 'ph-house' },
+          { label: 'Apartments', href: '/apartments/', icon: 'ph-house' },
         ],
       },
       {
         heading: 'Transport',
         items: [
-          { label: 'How to get here', href: '/how-to-get', icon: 'ph-path' },
-          { label: 'Ferry timetables', href: '/ferry-timetables', icon: 'ph-boat' },
-          { label: 'Bus & public transport', href: '/timetables', icon: 'ph-bus' },
-          { label: 'Parking tips', href: '/parking', icon: 'ph-park' },
+          { label: 'How to get here', href: '/how-to-get/', icon: 'ph-path' },
+          { label: 'Ferry timetables', href: '/ferry-timetables/', icon: 'ph-boat' },
+          { label: 'Bus & public transport', href: '/timetables/', icon: 'ph-bus' },
+          { label: 'Parking tips', href: '/parking/', icon: 'ph-park' },
         ],
       },
       {
         heading: 'Field Notes',
         items: [
-          { label: 'Beach reviews', href: '/beaches', icon: 'ph-umbrella' },
-          { label: 'Moto roads', href: '/moto', icon: 'ph-motorcycle' },
+          { label: 'Beach reviews', href: '/beaches/', icon: 'ph-umbrella' },
+          { label: 'Moto roads', href: '/moto/', icon: 'ph-motorcycle' },
         ],
       },
     ],
@@ -113,49 +135,49 @@ export const featuredPhotoshoots = [
   {
     title: 'Amalfi Influencer Photoshoot',
     location: 'Amalfi',
-    href: '/photoshootings/shifa',
+    href: '/photoshootings/shifa/',
     image: '/photoshootings/individual/Shifa/Hero.webp',
   },
   {
     title: 'The Perfect Gift to Yourself',
     location: 'Ravello',
-    href: '/photoshootings/loreana',
+    href: '/photoshootings/loreana/',
     image: '/photoshootings/individual/Loreana/HERO-Loreana-photoshooting-in-amalfi-ravello-september-2025-38.webp',
   },
   {
     title: 'Morning Glow. True Atrani.',
     location: 'Atrani',
-    href: '/photoshootings/lashada',
+    href: '/photoshootings/lashada/',
     image: '/photoshootings/individual/Lashada/HERO-Lashanda_Brown-August-2025_2.webp',
   },
   {
     title: 'Ravello Light Elegance',
     location: 'Ravello',
-    href: '/photoshootings/ravello-photoshooting',
+    href: '/photoshootings/ravello-photoshooting/',
     image: '/photoshootings/ravello-photoshooting/hero-Photoshooting-ravello-top-page-001.webp',
   },
   {
     title: 'Ravello Romance (Taylor & Regan)',
     location: 'Ravello',
-    href: '/photoshootings/regan-tay-ravello',
+    href: '/photoshootings/regan-tay-ravello/',
     image: '/photoshootings/regan-tay-ravello/HERO-regan-walk-ravello-love.webp',
   },
   {
     title: 'Symphony of Love',
     location: 'Atrani',
-    href: '/photoshootings/olga-marat',
+    href: '/photoshootings/olga-marat/',
     image: '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp',
   },
   {
     title: "Ayuna's Photographic Memoir",
     location: 'Atrani',
-    href: '/photoshootings/ayuna',
+    href: '/photoshootings/ayuna/',
     image: '/photoshootings/ayuna/39-Ayuna-Atrani-2023.webp',
   },
   {
     title: 'Camelia: Beautiful Experience',
     location: 'Tramonti',
-    href: '/photoshootings/camelia',
+    href: '/photoshootings/camelia/',
     image: '/photoshootings/camelia/4-camelia-photoshooting-moto.webp',
   },
 ]
@@ -175,15 +197,15 @@ export const blogTags = [
 
 export const footerLinks = {
   transport: [
-    { label: 'Ferry timetables', href: '/ferry-timetables' },
-    { label: 'Bus timetables', href: '/timetables' },
+    { label: 'Ferry timetables', href: '/ferry-timetables/' },
+    { label: 'Bus timetables', href: '/timetables/' },
     { label: 'Book Airport Shuttle', href: 'https://shuttlebus.pintourbus.com', external: true },
-    { label: 'Naples to Amalfi', href: '/how-to-get' },
-    { label: 'All public transport', href: '/timetables' },
+    { label: 'Naples to Amalfi', href: '/how-to-get/' },
+    { label: 'All public transport', href: '/timetables/' },
   ],
   apartments: [
     { label: "Greg's guide", href: site.guideUrl, external: true },
-    { label: 'Apartment overview', href: '/apartments' },
+    { label: 'Apartment overview', href: '/apartments/' },
     {
       label: 'Booking.com',
       href: 'https://www.booking.com/hotel/it/cristallpont-amalfi-day.html',
@@ -192,21 +214,21 @@ export const footerLinks = {
     { label: 'AirBnb.com', href: 'https://airbnb.com/p/atrani', external: true },
   ],
   info: [
-    { label: 'What to do', href: '/experience' },
-    { label: 'Parking tips', href: '/parking' },
-    { label: 'Beach reviews', href: '/beaches' },
-    { label: 'Moto roads', href: '/moto' },
+    { label: 'What to do', href: '/experience/' },
+    { label: 'Parking tips', href: '/parking/' },
+    { label: 'Beach reviews', href: '/beaches/' },
+    { label: 'Moto roads', href: '/moto/' },
   ],
   blog: [
-    { label: 'Amalfi News', href: '/blog' },
-    { label: 'Contact us', href: '/contact' },
+    { label: 'Amalfi News', href: '/blog/' },
+    { label: 'Contact us', href: '/contact/' },
   ],
 }
 
 export const heroLinks = {
   ferryPdf: 'https://cnr.pw/ferry',
   busPdf: 'https://cnr.pw/bus',
-  apartments: '/apartments',
+  apartments: '/apartments/',
 }
 
 export const etsyUrl = 'https://www.etsy.com'

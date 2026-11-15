@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('olga-marat')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Couple',
+  title: 'Couple Photoshoot in Atrani — Olga & Marat | Amalfi.Day',
+  description: 'Couple photoshoot in Atrani at sunrise: Olga and Marat in the quiet streets of the village, with soft morning light and the Amalfi Coast as the backdrop.',
+  facts: 'Olga and Marat’s couple photoshoot took place at sunrise in Atrani, on the Amalfi Coast, on 8 September 2023, in the quiet streets of the village.',
+  hubs: ['amalfi-photographer', 'couple-photoshoot'],
+  related: { lead: 'More from Atrani:', links: [{ label: 'Tom and Sam’s editorial morning', href: '/photoshootings/tom-sam-atrani/' }, { label: 'Esmeralda’s sunrise in Amalfi and Atrani', href: '/photoshootings/esmeralda-cortez-amalfi/' }] },
+}} />

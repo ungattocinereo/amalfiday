@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('ayuna')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Solo',
+  title: 'Solo Photoshoot in Atrani — Ayuna | Amalfi.Day',
+  description: 'Solo portfolio photoshoot in Atrani at sunrise: Ayuna in the quiet lanes and on the stone steps of the village, in casual and elegant looks on the Amalfi Coast.',
+  facts: 'Ayuna came to Atrani to build her modelling portfolio. We photographed at sunrise on 1 August 2023, walking through the quiet lanes of Atrani on the Amalfi Coast and mixing casual and elegant looks.',
+  hubs: ['amalfi-photographer', 'solo-photoshoot'],
+  related: { lead: 'More from Atrani:', links: [{ label: 'Lashanda’s birthday sunrise', href: '/photoshootings/lashada/' }, { label: 'Hinad’s sunrise from Amalfi to Atrani', href: '/photoshootings/hinad-amalfi-sunrise/' }] },
+}} />

@@ -39,7 +39,7 @@ const articleHtml = post.html.replace(
   '$1 loading="eager" decoding="async" fetchpriority="low"'
 )
 
-const postUrl = `${site.url}/blog/${post.slug}`
+const postUrl = `${site.url}/blog/${post.slug}/`
 const postJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -48,8 +48,9 @@ const postJsonLd = [
     description: post.excerpt,
     url: postUrl,
     mainEntityOfPage: postUrl,
-    image: post.image ? new URL(post.image, site.url).toString() : undefined,
+    image: new URL(post.image ?? site.defaultImage, site.url).toString(),
     datePublished: post.dateISO,
+    // Ghost's updated_at is not mapped in src/data/ghost.ts yet, so the publish date is the best known value.
     dateModified: post.dateISO,
     author: {
       '@type': 'Person',
@@ -97,7 +98,7 @@ const postJsonLd = [
     <div class="post-hero__content hero-content">
       <div class="container hero-container">
         <div class="post-hero__copy">
-          <a class="post-hero__section" href="/blog">Amalfi Notes</a>
+          <a class="post-hero__section" href="/blog/">Amalfi Notes</a>
           <span class="post-hero__cat">{post.tag}</span>
           <h1 class="post-hero__title">{post.title}</h1>
           {post.excerpt && <p class="post-hero__lead">{post.excerpt}</p>}
@@ -118,12 +119,20 @@ const postJsonLd = [
       <Fragment set:html={articleHtml} />
     </div>
 
-    {isTransportPost && (
+    {isTransportPost ? (
       <aside class="post-callout">
         <div class="post-callout__icon"><i class="ph ph-bus" aria-hidden="true"></i></div>
         <div class="post-callout__content">
           <strong class="post-callout__title">Plan your route</strong>
-          <p>Need ferry or bus times for the Amalfi Coast? Our <a href="/timetables">public transport timetables</a> page has the latest SITA, TravelMar, and shuttle schedules.</p>
+          <p>Need ferry or bus times for the Amalfi Coast? See the <a href="/timetables/">SITA bus timetables</a>, the <a href="/ferry-timetables/">ferry timetables</a> for Travelmar, Grassi and NLG, and the <a href="/parking/">parking guide</a> if you drive. Once you arrive, book a <a href="/photoshootings/">photoshoot with Greg</a> in Atrani or Amalfi.</p>
+        </div>
+      </aside>
+    ) : (
+      <aside class="post-callout">
+        <div class="post-callout__icon"><i class="ph ph-compass" aria-hidden="true"></i></div>
+        <div class="post-callout__content">
+          <strong class="post-callout__title">Planning a trip?</strong>
+          <p>Check the <a href="/timetables/">bus timetables</a> and the <a href="/parking/">parking guide</a> before you move around the coast, and book a <a href="/photoshootings/">photoshoot with Greg</a> in Atrani, Amalfi or Ravello.</p>
         </div>
       </aside>
     )}
@@ -157,7 +166,7 @@ const postJsonLd = [
 
     <!-- BACK LINK -->
     <div class="back-link">
-      <a href="/blog"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to all posts</a>
+      <a href="/blog/"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to all posts</a>
     </div>
   </article>
 

@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('regan-tay-ravello')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Engagement',
+  title: 'Engagement Photoshoot in Ravello — Taylor & Regan | Amalfi.Day',
+  description: 'Engagement photoshoot in Ravello in October: Taylor and Regan among the gardens and historic villas of Ravello, in warm autumn sun above the Amalfi Coast.',
+  facts: 'Taylor and Regan’s engagement photoshoot took place in Ravello on 5 October 2023, after Regan proposed to Taylor. We photographed along the garden paths and around the historic villas in warm October sunshine.',
+  hubs: ['ravello-photographer', 'couple-photoshoot'],
+  related: { lead: 'More from Ravello:', links: [{ label: 'Loreana’s solo photoshoot', href: '/photoshootings/loreana/' }, { label: 'a fashion photoshoot in Ravello', href: '/photoshootings/ravello-photoshooting/' }] },
+}} />

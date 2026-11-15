@@ -1,8 +1,29 @@
 User-agent: *
 Allow: /
-
 Disallow: /design-guidelines/
 Disallow: /photoshootings/template/
 Disallow: /blog/*/edit/
+
+# AI answer engines and search crawlers are welcome.
+# A named group does not inherit the rules of the * group,
+# so the same Disallow lines are repeated here.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+User-agent: CCBot
+Allow: /
+Disallow: /design-guidelines/
+Disallow: /photoshootings/template/
+Disallow: /blog/*/edit/
+
+# Site guide for language models: https://amalfi.day/llms.txt
 
 Sitemap: https://amalfi.day/sitemap-index.xml

@@ -3,9 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import { site } from '../data/site'
 const heroImage = '/staticpages/timetables/bus-timetables-amalfi-coast.jpg'
 
-const pageTitle = 'Local Transport Timetables — Amalfi Coast Buses & Shuttles'
+const pageTitle = 'Amalfi Coast Bus Timetables 2026 — SITA Lines, Tickets & Shuttles'
 const pageDescription =
-  'Download the latest SitaBus (SITA) timetables for the Amalfi Coast and plan bus, shuttle, train, and taxi connections between Salerno, Amalfi, Positano, and Sorrento.'
+  'SITA bus timetables for the Amalfi Coast: official PDFs for lines 5120, 5070, 5110 and more, where to buy tickets, the Ravello shuttle and airport transfers.'
+const pageUpdatedISO = '2026-11-15'
+const pageUpdatedLabel = 'November 2026'
 const shareImageAlt = 'SITA bus traveling along the Amalfi Coast'
 const checkedDate = 'October 4, 2026'
 const pdfDateFormat = new Intl.DateTimeFormat('en-US', {
@@ -214,10 +216,61 @@ const ticketApps = [
   },
 ]
 
+const nextLinks = [
+  {
+    href: '/photoshootings/',
+    icon: 'ph-camera',
+    title: 'Photoshoots with Greg',
+    text: 'Couple and solo sessions in Atrani, Amalfi and Ravello, from €200, with posing help throughout.',
+  },
+  {
+    href: '/photoshootings/amalfi-photographer/',
+    icon: 'ph-aperture',
+    title: 'Photographer in Amalfi',
+    text: 'A session in Amalfi and Atrani, both a short walk from the bus stop at the harbour.',
+  },
+  {
+    href: '/experience/car-tours/',
+    icon: 'ph-car-profile',
+    title: 'Private car tours',
+    text: 'Skip the crowded buses: Positano, Amalfi, Ravello or Tramonti with a local guide, up to 3 or 4–6 hours.',
+  },
+  {
+    href: '/experience/scooter/',
+    icon: 'ph-gauge',
+    title: 'Scooter photo tour',
+    text: 'Ride the coastal road or the mountain valleys with a guide who photographs the trip, from €350.',
+  },
+  {
+    href: '/apartments/',
+    icon: 'ph-house',
+    title: 'Stay in Atrani',
+    text: 'Suites and rooms by the sea, a 10-minute walk from Amalfi and on the 5120 bus line.',
+  },
+  {
+    href: '/ferry-timetables/',
+    icon: 'ph-boat',
+    title: 'Ferry timetables',
+    text: 'Travelmar, Grassi Junior and NLG departures and fares between Salerno, Amalfi, Positano and Capri.',
+  },
+  {
+    href: '/how-to-get/',
+    icon: 'ph-airplane-landing',
+    title: 'Naples Airport to the coast',
+    text: 'Shuttle, train and ferry, or taxi: times and costs compared for every arrival time.',
+  },
+  {
+    href: '/parking/',
+    icon: 'ph-park',
+    title: 'Parking guide',
+    text: 'Prices by town, ZTL camera zones and where to leave the car if you drive.',
+  },
+]
+
 const timetablesFaqs = [
   {
     q: 'How do I buy SITA bus tickets on the Amalfi Coast?',
-    a: 'Buy tickets at any Tabacchi shop displaying the "T" sign before you board — drivers do not sell tickets on the bus. Tickets cost from 1.50 to 2.40 EUR depending on the route. Validate the ticket in the small machine when you board.',
+    a: 'Buy tickets at any Tabacchi shop displaying the "T" sign before you board — drivers do not sell tickets on the bus. Tickets cost from 1.60 EUR for short rides along the coast to about 3 EUR from Amalfi to Salerno. Validate the ticket in the small machine when you board.',
   },
   {
     q: 'Which bus line runs from Amalfi to Salerno?',
@@ -245,6 +298,8 @@ const timetablesJsonLd = [
     description: pageDescription,
     url: `${site.url}/timetables`,
     image: new URL(heroImage, site.url).toString(),
+    mainEntityOfPage: `${site.url}/timetables`,
+    dateModified: pageUpdatedISO,
     author: { '@id': `${site.url}/#business` },
     publisher: { '@id': `${site.url}/#business` },
     inLanguage: 'en',
@@ -341,6 +396,24 @@ const timetablesJsonLd = [
     </div>
     <div class="timetables-hero__scroll-hint" aria-hidden="true">
       <span></span>
+    </div>
+  </section>
+
+  <section class="quick-answer" aria-labelledby="quick-answer-title">
+    <div class="container">
+      <div class="quick-answer__box">
+        <span class="section-kicker">Quick answer</span>
+        <h2 class="quick-answer__title" id="quick-answer-title">Which bus do I take on the Amalfi Coast?</h2>
+        <p>
+          Six SITA Sud bus lines serve the Amalfi Coast. Line 5120 runs from Amalfi to Salerno
+          through Atrani, Minori, Maiori and Vietri sul Mare, line 5070 runs from Amalfi to Positano
+          and Sorrento, and line 5110 climbs from Amalfi to Ravello and Scala. Buy a paper ticket
+          (from 1.60 EUR along the coast to about 3 EUR for Amalfi to Salerno) at a Tabacchi shop before you board and validate it on the bus.
+        </p>
+        <p class="quick-answer__date">
+          Last updated: <time datetime={pageUpdatedISO}>{pageUpdatedLabel}</time>. Bus PDFs checked on {checkedDate}.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -632,7 +705,7 @@ const timetablesJsonLd = [
               Taxi
             </h3>
             <p>
-              Taxi to Amalfi from Airport cost about 180€ from Salerno to Amalfi about 100€ .
+              Taxi to Amalfi from Airport cost from 180€ from Salerno to Amalfi about 100€ .
               You can book a taxi at their website
             </p>
             <a
@@ -645,6 +718,30 @@ const timetablesJsonLd = [
             </a>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section next-links" aria-labelledby="next-links-title">
+    <div class="container">
+      <div class="section-heading next-links__heading">
+        <span class="section-kicker">While you're here</span>
+        <h2 id="next-links-title">More from the <span class="accent-italic">coast</span></h2>
+        <p>
+          Buses get you between towns. These pages help with the rest of the trip, from a
+          photoshoot in Amalfi to a private tour that skips the queue at the bus stop.
+        </p>
+      </div>
+      <div class="next-links__grid">
+        {nextLinks.map((link) => (
+          <a class="card next-link" href={link.href}>
+            <strong class="next-link__title">
+              <i class={`ph ${link.icon}`} aria-hidden="true"></i>
+              {link.title}
+            </strong>
+            <span class="next-link__text">{link.text}</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -1901,5 +1998,94 @@ const timetablesJsonLd = [
     padding: 0 1.2rem 1.1rem;
     color: var(--color-text-muted);
     line-height: 1.6;
+  }
+
+  /* Quick answer (first answer block after the hero) */
+  .quick-answer {
+    padding: 3.5rem 0 0;
+  }
+
+  .quick-answer__box {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 52rem;
+    padding: 1.6rem 1.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .quick-answer__title {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+    line-height: 1.2;
+  }
+
+  .quick-answer__box p {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .quick-answer__box .quick-answer__date {
+    margin-top: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* While you're here: cross-links */
+  .next-links__heading {
+    margin-bottom: 2rem;
+  }
+
+  .next-links__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .next-link {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+    padding: 1.25rem 1.35rem;
+    color: var(--color-text);
+  }
+
+  .next-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .next-link__title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .next-link__title i {
+    color: var(--color-accent);
+    font-size: 1.2rem;
+  }
+
+  .next-link__text {
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 640px) {
+    .quick-answer {
+      padding-top: 2.5rem;
+    }
+
+    .quick-answer__box {
+      padding: 1.3rem 1.25rem;
+    }
   }
 </style>

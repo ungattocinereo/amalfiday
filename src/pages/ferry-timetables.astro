@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { site } from '../data/site'
-const pageTitle = 'Amalfi Coast Ferry Timetables 2026'
+const pageTitle = 'Amalfi Coast Ferry Timetables 2026 — Salerno, Amalfi, Positano, Capri'
 const pageDescription =
-  'Updated Amalfi Coast ferry schedules for Travelmar, Grassi Junior Ferries, and NLG, with departures, fares, routes, notes, and PDF download.'
+  'Amalfi Coast ferry timetables 2026: Travelmar, Grassi Junior and NLG departures, journey times and fares between Salerno, Amalfi, Positano, Capri and Naples.'
+const pageUpdatedISO = '2026-11-15'
+const pageUpdatedLabel = 'November 2026'
 const shareImage = '/staticpages/timetables/ferry-hero-01.webp'
 
 const heroSlides = [
@@ -48,14 +50,107 @@ const getStickyRouteLabel = (title: string) => {
   return compactTitle
 }
 
+const ferryFaqs = [
+  {
+    q: 'How long is the ferry from Salerno to Amalfi?',
+    a: 'Travelmar sails from Salerno to Amalfi in about 35 minutes for EUR 12. A few trips call at Cetara and Maiori first and take about 60 minutes; they are starred in the table. Grassi Junior Ferries also runs Salerno to Amalfi at 09:50 and 14:35 for EUR 11.50. Recheck the operator before boarding, as times change with the season and the sea.',
+  },
+  {
+    q: 'How do I get from Amalfi to Positano by ferry?',
+    a: 'Travelmar runs from Amalfi to Positano in about 25 minutes for EUR 10, with nine departures between 09:20 and 18:00 in the 2026 timetable. Grassi Junior Ferries and NLG also sail between the two towns, and some Grassi trips go via Salerno. The ferry avoids the coastal road traffic, but sailings can be cancelled in rough sea.',
+  },
+  {
+    q: 'Is there a ferry from the Amalfi Coast to Capri?',
+    a: 'Yes. NLG sails from Amalfi to Capri at 08:54, 10:30 and 17:00 every day in season. Grassi Junior Ferries lists a direct 10:58 boat from Salerno to Capri (EUR 25.50) and Capri trips from Positano (EUR 28). Alicost also runs seasonal Capri services from Amalfi, Positano and Salerno. Check the official timetable for your date, because island routes are seasonal.',
+  },
+  {
+    q: 'When do Amalfi Coast ferries run?',
+    a: "Most routes are seasonal. NLG's main 2026 season runs from 1 April to 3 November, and Travelmar's coastal ferries run from about April to October. In winter only a reduced service sails, such as NLG's weekend boat between Sorrento and Amalfi from mid-November to March. Outside the season, plan around SITA buses and treat ferries as a bonus.",
+  },
+  {
+    q: 'How much does luggage cost on Amalfi Coast ferries?',
+    a: 'It depends on the company. Grassi Junior Ferries charges EUR 3 for luggage and EUR 5 for a bike or pet ticket. PositanoJet charges EUR 3 for baggage, EUR 5 for XL baggage and EUR 5 for a pet. The fares in the tables are in euros and may not include luggage or port extras, so ask at the ticket office.',
+  },
+  {
+    q: 'Can Amalfi Coast ferries be cancelled?',
+    a: 'Yes. Rough sea, bad weather, technical problems and operator updates can change or cancel sailings, sometimes on the same morning. All departures on this page are in local Italian time. Recheck the live schedule the day before and again before you walk to the pier, and keep the SITA bus timetable as a backup.',
+  },
+]
+
+const nextLinks = [
+  {
+    href: '/photoshootings/',
+    icon: 'ph-camera',
+    title: 'Photoshoots with Greg',
+    text: 'Couple and solo sessions in Atrani, Amalfi and Ravello, from €200, with posing help throughout.',
+  },
+  {
+    href: '/photoshootings/positano-photographer/',
+    icon: 'ph-aperture',
+    title: 'Photographer in Positano',
+    text: 'Arriving by boat? A photoshoot in Positano, the most photographed town on the coast.',
+  },
+  {
+    href: '/experience/car-tours/',
+    icon: 'ph-car-profile',
+    title: 'Private car tours',
+    text: 'When the sea is rough: Positano, Amalfi, Ravello or Tramonti by road with a local guide.',
+  },
+  {
+    href: '/experience/scooter/',
+    icon: 'ph-gauge',
+    title: 'Scooter photo tour',
+    text: 'Ride the coastal road with a guide who photographs the trip, from €350.',
+  },
+  {
+    href: '/apartments/',
+    icon: 'ph-house',
+    title: 'Stay in Atrani',
+    text: 'Suites and rooms by the sea, a 10-minute walk from the Amalfi ferry pier.',
+  },
+  {
+    href: '/timetables/',
+    icon: 'ph-bus',
+    title: 'Bus timetables',
+    text: 'SITA lines 5120, 5070 and 5110, ticket rules and the Amalfi-Ravello shuttle.',
+  },
+  {
+    href: '/how-to-get/',
+    icon: 'ph-airplane-landing',
+    title: 'Naples Airport to the coast',
+    text: 'Shuttle, train and ferry, or taxi: times and costs compared for every arrival time.',
+  },
+  {
+    href: '/beaches/',
+    icon: 'ph-umbrella',
+    title: 'Beach guide',
+    text: 'Eleven beaches reviewed, from the long shore at Maiori to the Furore fjord.',
+  },
+]
+
 const ferryJsonLd = [
   {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: pageTitle,
+    '@type': 'Article',
+    headline: pageTitle,
     description: pageDescription,
     url: `${site.url}/ferry-timetables`,
-    dateModified: '2026-05-06',
+    mainEntityOfPage: `${site.url}/ferry-timetables`,
+    image: new URL(shareImage, site.url).toString(),
+    dateModified: pageUpdatedISO,
+    author: { '@id': `${site.url}/#business` },
+    publisher: { '@id': `${site.url}/#business` },
+    inLanguage: 'en',
+    about: { '@type': 'Place', name: 'Amalfi Coast' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: ferryFaqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
   },
   {
     '@context': 'https://schema.org',
@@ -389,6 +484,25 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     </div>
   </section>
 
+  <div class="quick-answer" role="region" aria-labelledby="quick-answer-title">
+    <div class="container">
+      <div class="quick-answer__box">
+        <span class="ferry-eyebrow">Quick answer</span>
+        <h2 class="quick-answer__title" id="quick-answer-title">Which ferries run on the Amalfi Coast?</h2>
+        <p>
+          Three companies run the main Amalfi Coast ferry routes in 2026: Travelmar, Grassi Junior
+          Ferries and NLG. Travelmar's Salerno to Amalfi crossing takes about 35 minutes and costs
+          EUR 12, Amalfi to Positano takes 25 minutes for EUR 10, and Salerno to Positano takes
+          70 minutes for EUR 17. Most NLG routes run from 1 April to 3 November, and every sailing
+          depends on the sea, so recheck the operator on the day.
+        </p>
+        <p class="quick-answer__date">
+          Last updated: <time datetime={pageUpdatedISO}>{pageUpdatedLabel}</time>. Timetable files dated 26 March 2026.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <section class="section ferry-section" id="download" aria-label="Sea ferry timetable downloads">
     <div class="container">
       <div class="ferry-header">
@@ -657,6 +771,48 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
       </div>
     </section>
   ))}
+
+  <section class="section ferry-faq" aria-labelledby="ferry-faq-title">
+    <div class="container">
+      <header class="operator-header ferry-faq__heading">
+        <span class="ferry-eyebrow">Quick answers</span>
+        <h2 id="ferry-faq-title">Ferry <span class="accent-italic">questions</span></h2>
+        <p>Short answers about crossing times, Capri, the season, luggage and cancellations.</p>
+      </header>
+      <div class="ferry-faq__list">
+        {ferryFaqs.map((f) => (
+          <details class="ferry-faq__item">
+            <summary class="ferry-faq__q">{f.q}</summary>
+            <p class="ferry-faq__a">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section next-links" aria-labelledby="next-links-title">
+    <div class="container">
+      <header class="operator-header next-links__heading">
+        <span class="ferry-eyebrow">While you're here</span>
+        <h2 id="next-links-title">More from the <span class="accent-italic">coast</span></h2>
+        <p>
+          The ferry gets you between towns. These pages help with the rest of the trip, from a
+          photoshoot in Positano to a tour by road when the sea is too rough to sail.
+        </p>
+      </header>
+      <div class="next-links__grid">
+        {nextLinks.map((link) => (
+          <a class="card next-link" href={link.href}>
+            <strong class="next-link__title">
+              <i class={`ph ${link.icon}`} aria-hidden="true"></i>
+              {link.title}
+            </strong>
+            <span class="next-link__text">{link.text}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <script is:inline>
@@ -1733,6 +1889,164 @@ const splitItinerary = (value) => value.split(/\s*;\s*/).filter(Boolean)
     th,
     td {
       padding: 0.8rem;
+    }
+  }
+
+  /* Ferry FAQ (same pattern as the bus timetables FAQ) */
+  .ferry-faq {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .ferry-faq__heading {
+    margin-bottom: 2rem;
+  }
+
+  .ferry-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 820px;
+  }
+
+  .ferry-faq__item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .ferry-faq__item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .ferry-faq__q {
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-text);
+  }
+
+  .ferry-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .ferry-faq__q::after {
+    content: '+';
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .ferry-faq__item[open] .ferry-faq__q::after {
+    transform: rotate(45deg);
+  }
+
+  .ferry-faq__a {
+    margin: 0;
+    padding: 0 1.2rem 1.1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .next-links {
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Quick answer (first answer block after the hero) */
+  .quick-answer {
+    padding: 3.5rem 0 0;
+  }
+
+  .quick-answer__box {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 52rem;
+    padding: 1.6rem 1.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .quick-answer__title {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+    line-height: 1.2;
+  }
+
+  .quick-answer__box p {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .quick-answer__box .quick-answer__date {
+    margin-top: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* While you're here: cross-links */
+  .next-links__heading {
+    margin-bottom: 2rem;
+  }
+
+  .next-links__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .next-link {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+    padding: 1.25rem 1.35rem;
+    color: var(--color-text);
+  }
+
+  .next-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .next-link__title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .next-link__title i {
+    color: var(--color-accent);
+    font-size: 1.2rem;
+  }
+
+  .next-link__text {
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 640px) {
+    .quick-answer {
+      padding-top: 2.5rem;
+    }
+
+    .quick-answer__box {
+      padding: 1.3rem 1.25rem;
     }
   }
 </style>

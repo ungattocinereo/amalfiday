@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('tom-sam-atrani')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Editorial',
+  title: 'Editorial Photoshoot in Atrani — Tom and Sam | Amalfi.Day',
+  description: 'Editorial couple photoshoot in Atrani inspired by Ripley: Tom and Sam from London, sixties style, an August sunrise and a slow walk along the coast to Atrani.',
+  facts: 'Tom and Sam came from London for this editorial couple photoshoot, inspired by the series Ripley. We met fifteen minutes before sunrise on 20 August 2026 and walked slowly towards Atrani, stopping to photograph every few steps.',
+  hubs: ['amalfi-photographer', 'couple-photoshoot'],
+  related: { lead: 'More from Atrani:', links: [{ label: 'Olga & Marat’s sunrise', href: '/photoshootings/olga-marat/' }, { label: 'Takamasa’s post-wedding morning', href: '/photoshootings/takamasa-shigemi-amalfi-atrani/' }] },
+}} />

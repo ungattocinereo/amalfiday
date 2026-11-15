@@ -60,12 +60,12 @@ const promoTiles = [
 const pageLabel = currentPage > 1 ? ` — Page ${currentPage}` : ''
 const pageTitle = `Amalfi Notes — Blog${pageLabel}`
 const pageDescription =
-  'Amalfi Coast blog with travel notes, routes, photography tips, culture, and food. Stories from Atrani, Amalfi, Ravello, and beyond.'
+  `Amalfi Coast blog with travel notes, routes, photography tips, culture, and food. Stories from Atrani, Amalfi, Ravello, and beyond.${currentPage > 1 ? ` Page ${currentPage} of ${totalPages}.` : ''}`
 const shareImage =
   posts.find((post) => post.image)?.image ?? '/pre-footer/boat-tours-in-amalfi.webp'
 
-const prevUrl = currentPage === 1 ? null : currentPage === 2 ? '/blog' : `/blog/${currentPage - 1}`
-const nextUrl = currentPage < totalPages ? `/blog/${currentPage + 1}` : null
+const prevUrl = currentPage === 1 ? null : currentPage === 2 ? '/blog/' : `/blog/${currentPage - 1}/`
+const nextUrl = currentPage < totalPages ? `/blog/${currentPage + 1}/` : null
 
 const currentYear = new Date().getFullYear()
 const currentSeason = (() => {

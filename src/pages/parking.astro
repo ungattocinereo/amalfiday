@@ -5,9 +5,11 @@ import CldImage from '../components/CldImage.astro'
 import { site } from '../data/site'
 const heroImage = '/staticpages/parking/parking.webp'
 
-const pageTitle = 'Parking Amalfi Coast 2026 — Complete Guide'
+const pageTitle = 'Parking on the Amalfi Coast 2026 — Prices by Town, ZTL & Tips'
 const pageDescription =
-  'Complete 2026 guide to parking on the Amalfi Coast: official prices, ZTL zones, garage locations, and money-saving strategies for Positano, Amalfi, Ravello, and beyond.'
+  'Amalfi Coast parking in 2026: hourly and daily prices in 11 towns, Luna Rossa in Amalfi, Positano garages, Atrani limits, ZTL fines and park-and-ride tips.'
+const pageUpdatedISO = '2026-11-15'
+const pageUpdatedLabel = 'November 2026'
 const shareImageAlt = 'Cars parked along the Amalfi Coast road'
 
 const towns = [
@@ -18,8 +20,8 @@ const towns = [
       {
         name: 'Luna Rossa (multi-level garage)',
         hourly: '2-4',
-        daily: '25-45',
-        notes: 'Official: 170 car spots + 30 moto. Lunga sosta: 40/day Holy Thursday → 3 Nov + 27 Dec → 6 Jan; 25/day 4 Nov → 26 Dec and 7 Jan → 27 Mar. Jan 8 – Mar 31 2026: +1/hour surcharge on the first 2 daytime hours for non-residents. Check-in/out tied to 12:00.',
+        daily: 'from 40',
+        notes: 'Official: 170 car spots + 30 moto. Lunga sosta: from 40/day. Jan 8 – Mar 31 2026: +1/hour surcharge on the first 2 daytime hours for non-residents. Check-in/out tied to 12:00.',
         restrictions: 'No gas/methane vehicles. Max height 2m. Tunnel connects to Atrani.',
         source: 'official',
       },
@@ -97,7 +99,7 @@ const towns = [
         hourly: '3',
         daily: '-',
         notes: 'Official: Jun-Sep non-residents 3/hr, max 4 hours only (08:00-20:00).',
-        restrictions: 'Overnight parking banned 20:00-08:00 in summer. Not viable as a day base.',
+        restrictions: 'Overnight parking banned 23:00-08:00. Not viable as a day base.',
         source: 'official',
       },
     ],
@@ -271,7 +273,7 @@ const warnings = [
 const parkingFaqs = [
   {
     q: 'Where can I park in Amalfi town?',
-    a: 'Luna Rossa is the most predictable option for multi-day stays — an official multi-level garage with 170 car spots and 30 moto spots. Hourly rate is 2-4, daily rate is 25-45, and a long-stay (lunga sosta) tariff applies seasonally. A tunnel connects Luna Rossa to Atrani.',
+    a: 'Luna Rossa is the most predictable option for multi-day stays — an official multi-level garage with 170 car spots and 30 moto spots. Hourly rate is 2-4, daily rate is from 40, and a long-stay (lunga sosta) tariff applies seasonally. A tunnel connects Luna Rossa to Atrani.',
   },
   {
     q: 'What is the cheapest way to park in Positano?',
@@ -279,7 +281,7 @@ const parkingFaqs = [
   },
   {
     q: 'Can I park in Atrani as my base?',
-    a: 'No — Atrani has strict municipal limits. From June through September, non-residents pay 3 EUR per hour with a maximum stay of four hours (08:00-20:00), and overnight parking is banned 20:00-08:00. Plan to park in Amalfi (Luna Rossa) and walk through the tunnel to Atrani instead.',
+    a: 'No — Atrani has strict municipal limits. From June through September, non-residents pay 3 EUR per hour with a maximum stay of four hours (08:00-20:00), and overnight parking is banned 23:00-08:00. Plan to park in Amalfi (Luna Rossa) and walk through the tunnel to Atrani instead.',
   },
   {
     q: 'What is a ZTL zone on the Amalfi Coast?',
@@ -288,6 +290,57 @@ const parkingFaqs = [
   {
     q: 'Are there gas stations along the Amalfi Coast road?',
     a: 'Almost none. Fill up in Salerno or before entering the coastal road — the SS163 between Vietri sul Mare and Positano has only a couple of stations and they are easy to miss.',
+  },
+]
+
+const nextLinks = [
+  {
+    href: '/photoshootings/',
+    icon: 'ph-camera',
+    title: 'Photoshoots with Greg',
+    text: 'Couple and solo sessions in Atrani, Amalfi and Ravello, from €200, with posing help throughout.',
+  },
+  {
+    href: '/photoshootings/amalfi-photographer/',
+    icon: 'ph-aperture',
+    title: 'Photographer in Amalfi',
+    text: 'Parked at Luna Rossa? Amalfi and Atrani are both a few minutes on foot for a session.',
+  },
+  {
+    href: '/experience/car-tours/',
+    icon: 'ph-car-profile',
+    title: 'Private car tours',
+    text: 'Leave the driving and the parking to a local: Positano, Ravello or Tramonti, up to 3 or 4–6 hours.',
+  },
+  {
+    href: '/experience/scooter/',
+    icon: 'ph-gauge',
+    title: 'Scooter photo tour',
+    text: 'No car to park: ride the coast with a guide who photographs the trip, from €350.',
+  },
+  {
+    href: '/apartments/',
+    icon: 'ph-house',
+    title: 'Stay in Atrani',
+    text: 'Suites and rooms by the sea, a short walk through the tunnel from Luna Rossa.',
+  },
+  {
+    href: '/directions/',
+    icon: 'ph-signpost',
+    title: 'Directions to Atrani',
+    text: 'Driving routes from Naples Airport and the parking closest to Atrani.',
+  },
+  {
+    href: '/timetables/',
+    icon: 'ph-bus',
+    title: 'Bus timetables',
+    text: 'SITA lines along the coast if you park in Vietri sul Mare or Salerno and ride in.',
+  },
+  {
+    href: '/ferry-timetables/',
+    icon: 'ph-boat',
+    title: 'Ferry timetables',
+    text: 'Travelmar departures and fares from Salerno to Amalfi, Positano, Maiori and Cetara.',
   },
 ]
 
@@ -302,6 +355,8 @@ const parkingJsonLd = [
     author: { '@id': `${site.url}/#business` },
     publisher: { '@id': `${site.url}/#business` },
     datePublished: '2026-01-01',
+    dateModified: pageUpdatedISO,
+    mainEntityOfPage: `${site.url}/parking`,
     inLanguage: 'en',
     about: {
       '@type': 'Place',
@@ -401,6 +456,26 @@ const parkingJsonLd = [
       </div>
     </div>
   </section>
+
+  <!-- Quick answer -->
+  <div class="quick-answer" role="region" aria-labelledby="quick-answer-title">
+    <div class="container">
+      <div class="quick-answer__box">
+        <span class="parking-eyebrow">Quick answer</span>
+        <h2 class="quick-answer__title" id="quick-answer-title">How much is parking on the Amalfi Coast?</h2>
+        <p>
+          Parking on the Amalfi Coast costs from 1.50 EUR an hour in Vietri sul Mare to 8-12 EUR an
+          hour in the central Positano garages, and in summer most spaces in Positano and Amalfi are
+          gone after 10:00. In Amalfi, the Luna Rossa garage (170 spaces, from 40 EUR a day) is the
+          most predictable choice, and a tunnel links it to Atrani. Atrani limits non-residents to
+          4 hours from June to September and bans overnight parking.
+        </p>
+        <p class="quick-answer__date">
+          Last updated: <time datetime={pageUpdatedISO}>{pageUpdatedLabel}</time>. Prices are 2025-2026 rates.
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- Reality check intro -->
   <section class="section parking-intro-section">
@@ -677,7 +752,7 @@ const parkingJsonLd = [
           <div class="alt-card__content">
             <h3><i class="ph ph-waves" aria-hidden="true"></i> TravelMar Ferries</h3>
             <p>Connect Salerno, Cetara, Maiori, Minori, Amalfi, and Positano. Running April through October. From 5 per ride.</p>
-            <a class="alt-card__link" href="/timetables">
+            <a class="alt-card__link" href="/ferry-timetables/">
               <i class="ph ph-arrow-right" aria-hidden="true"></i>
               See ferry timetables
             </a>
@@ -694,7 +769,7 @@ const parkingJsonLd = [
           <div class="alt-card__content">
             <h3><i class="ph ph-bus" aria-hidden="true"></i> SITA Buses</h3>
             <p>Cover the entire coast for 1.50-2.40 per ride. Frequent service. Can be very crowded in summer, but reliable year-round.</p>
-            <a class="alt-card__link" href="/timetables">
+            <a class="alt-card__link" href="/timetables/">
               <i class="ph ph-arrow-right" aria-hidden="true"></i>
               See bus timetables
             </a>
@@ -753,6 +828,33 @@ const parkingJsonLd = [
             </a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- While you're here -->
+  <section class="section next-links" aria-labelledby="next-links-title">
+    <div class="container">
+      <div class="next-links__heading">
+        <span class="parking-eyebrow">While you're here</span>
+        <h2 id="next-links-title">
+          More from the <span class="accent-italic">coast</span>
+        </h2>
+        <p class="next-links__lead">
+          Parking sorted. These pages help with the rest of the trip, from a photoshoot a short walk
+          from Luna Rossa to a private tour where someone else drives.
+        </p>
+      </div>
+      <div class="next-links__grid">
+        {nextLinks.map((link) => (
+          <a class="card next-link" href={link.href}>
+            <strong class="next-link__title">
+              <i class={`ph ${link.icon}`} aria-hidden="true"></i>
+              {link.title}
+            </strong>
+            <span class="next-link__text">{link.text}</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -1975,5 +2077,103 @@ const parkingJsonLd = [
     padding: 0 1.2rem 1.1rem;
     color: var(--color-text-muted);
     line-height: 1.6;
+  }
+
+  .next-links h2 {
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .next-links__lead {
+    max-width: 44rem;
+  }
+
+  /* Quick answer (first answer block after the hero) */
+  .quick-answer {
+    padding: 3.5rem 0 0;
+  }
+
+  .quick-answer__box {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 52rem;
+    padding: 1.6rem 1.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .quick-answer__title {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+    line-height: 1.2;
+  }
+
+  .quick-answer__box p {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .quick-answer__box .quick-answer__date {
+    margin-top: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* While you're here: cross-links */
+  .next-links__heading {
+    margin-bottom: 2rem;
+  }
+
+  .next-links__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .next-link {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+    padding: 1.25rem 1.35rem;
+    color: var(--color-text);
+  }
+
+  .next-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .next-link__title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .next-link__title i {
+    color: var(--color-accent);
+    font-size: 1.2rem;
+  }
+
+  .next-link__text {
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 640px) {
+    .quick-answer {
+      padding-top: 2.5rem;
+    }
+
+    .quick-answer__box {
+      padding: 1.3rem 1.25rem;
+    }
   }
 </style>

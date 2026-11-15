@@ -4,7 +4,9 @@ import { site } from '../data/site'
 
 const pageTitle = 'Amalfi Coast Motorbike Roads — Tramonti & Agerola Routes'
 const pageDescription =
-  'Two scenic motorcycle routes on the Amalfi Coast: Tramonti Valley and the winding road from Amalfi to Agerola. Viewpoints, stops, and ride planning notes.'
+  'Two Amalfi Coast motorbike routes with free GPX and KMZ files: 42.4 km through the Tramonti Valley and 25.7 km from Amalfi to Agerola, with stops and food tips.'
+const pageUpdatedISO = '2026-11-15'
+const pageUpdatedLabel = 'November 2026'
 const shareImage = '/pre-footer/girl-on-moto-in-amalfi-small.webp'
 const mapEmbed =
   'https://www.google.com/maps/d/u/0/embed?mid=1z8saTtHohjOPGR4ejlsJ_qT0a8KLg8g&ehbc=2E312F&ll=40.6805,14.623&z=11&output=embed'
@@ -104,6 +106,84 @@ const stops = [
   },
 ]
 
+const motoFaqs = [
+  {
+    q: 'What are the best motorbike roads on the Amalfi Coast?',
+    a: 'Two routes stand out. The Tramonti Valley route runs 42.4 km from Atrani up to Ravello, through the Tramonti Valley to the Valico di Chiunzi viewpoint and back down to Minori, with eight stops. The Amalfi to Agerola road is 25.7 km of bends above Conca dei Marini, ending where the Path of the Gods begins.',
+  },
+  {
+    q: 'Can I download the Amalfi Coast moto routes for my GPS?',
+    a: 'Yes. Both routes on this page come as KMZ and GPX files for your navigator, plus a Google Maps version you can open on your phone. Download the Tramonti Valley file for the Atrani, Valico di Chiunzi and Minori loop, and the Agerola file for the road from Amalfi through Conca dei Marini to Agerola.',
+  },
+  {
+    q: 'Where can I stop for food on the Tramonti Valley route?',
+    a: 'Caseificio Vicedomini makes local mozzarella: look for the stairs leading down, ring the bell, and bring cash. Cantina Apicella, one of the largest wine producers on the coast with about 70,000 bottles a year, sells wine and runs tastings by booking. Finish in Minori at Sal De Riso, the pastry shop known for its Italian desserts.',
+  },
+  {
+    q: 'Can I reach the Path of the Gods by motorbike?',
+    a: 'Yes. The last stop on the Amalfi to Agerola route is the starting point of the Path of the Gods. Park the bike there, walk a good stretch of the trail on foot, then ride the winding road back down. Just before Agerola, the L\'Incanto cliffside restaurant has a large parking area for cars and motorcycles.',
+  },
+  {
+    q: 'Can I visit the Marisa Cuomo winery on the way to Agerola?',
+    a: 'Yes, but book ahead. Marisa Cuomo is one of the best-known wineries on the Amalfi Coast, and visits to the garden and cellar are booked in advance on their website. You can also buy bottles directly from them; a good bottle starts from about €50. It is stop C on the Amalfi to Agerola route.',
+  },
+  {
+    q: 'Can I ride these roads with a local guide?',
+    a: 'Yes. The Amalfi.Day scooter photo tour is a private ride for one person with a guide who is also a photographer. You choose the coastal road or the mountain valleys, agree the route in advance, and come home with 40-70 edited photos. Prices start at €350, with helmet and insurance included.',
+  },
+]
+
+const nextLinks = [
+  {
+    href: '/experience/scooter/',
+    icon: 'ph-gauge',
+    title: 'Scooter photo tour',
+    text: 'Ride these roads with a guide who photographs the trip, from €350 with helmet and insurance.',
+  },
+  {
+    href: '/photoshootings/',
+    icon: 'ph-camera',
+    title: 'Photoshoots with Greg',
+    text: 'Couple and solo sessions in Atrani, Amalfi and Ravello, from €200, with posing help throughout.',
+  },
+  {
+    href: '/photoshootings/path-of-the-gods-photographer/',
+    icon: 'ph-mountains',
+    title: 'Path of the Gods photoshoot',
+    text: 'Photos on the trail that starts at the end of the Agerola route.',
+  },
+  {
+    href: '/experience/car-tours/',
+    icon: 'ph-car-profile',
+    title: 'Private car tours',
+    text: 'Peak Flavors: Tramonti farms, mozzarella and hillside wine, with a local guide.',
+  },
+  {
+    href: '/apartments/',
+    icon: 'ph-house',
+    title: 'Stay in Atrani',
+    text: 'Start the Tramonti route from your door: suites and rooms by the sea in Atrani.',
+  },
+  {
+    href: '/parking/',
+    icon: 'ph-park',
+    title: 'Parking guide',
+    text: 'Where cars and motorbikes can park in 11 towns, plus ZTL camera zones to avoid.',
+  },
+  {
+    href: '/beaches/',
+    icon: 'ph-umbrella',
+    title: 'Beach guide',
+    text: 'Eleven beaches reviewed, including Castiglione, where only motorbikes can park.',
+  },
+  {
+    href: '/what-to-do/',
+    icon: 'ph-compass',
+    title: 'What to do on the coast',
+    text: "A local's picks: walks, viewpoints, food and day trips.",
+  },
+]
+
 const motoJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -111,6 +191,8 @@ const motoJsonLd = [
     headline: pageTitle,
     description: pageDescription,
     url: `${site.url}/moto`,
+    mainEntityOfPage: `${site.url}/moto`,
+    dateModified: pageUpdatedISO,
     image: new URL(shareImage, site.url).toString(),
     author: { '@id': `${site.url}/#business` },
     publisher: { '@id': `${site.url}/#business` },
@@ -151,6 +233,15 @@ const motoJsonLd = [
         description: s.text,
         containedInPlace: { '@type': 'Place', name: 'Amalfi Coast' },
       },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: motoFaqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
   },
   {
@@ -235,7 +326,7 @@ const motoJsonLd = [
               <div class="mh__stat-num">
                 <span class="mh__counter-frame mh__counter-frame--three">
                   <span class="mh__counter-ghost" aria-hidden="true">000</span>
-                  <span class="mh__counter" data-target="694" data-decimals="0">0</span>
+                  <span class="mh__counter" data-target="880" data-decimals="0">0</span>
                 </span>
               </div>
               <div class="mh__stat-unit">m</div>
@@ -271,6 +362,26 @@ const motoJsonLd = [
       <span></span>
     </div>
   </section>
+
+  <!-- QUICK ANSWER -->
+  <div class="quick-answer" role="region" aria-labelledby="quick-answer-title">
+    <div class="container">
+      <div class="quick-answer__box">
+        <span class="mr__eyebrow">Quick answer</span>
+        <h2 class="quick-answer__title" id="quick-answer-title">Where to ride a motorbike on the Amalfi Coast?</h2>
+        <p>
+          This page maps two Amalfi Coast motorbike roads, each with free GPX and KMZ files. The
+          Tramonti Valley route runs 42.4 km from Atrani through Ravello and the Tramonti Valley
+          to the Valico di Chiunzi viewpoint, then down to Minori, with eight stops. The Amalfi to
+          Agerola road is 25.7 km of bends above Conca dei Marini, ending at the start of the Path
+          of the Gods.
+        </p>
+        <p class="quick-answer__date">
+          Last updated: <time datetime={pageUpdatedISO}>{pageUpdatedLabel}</time>
+        </p>
+      </div>
+    </div>
+  </div>
 
   <!-- MAP + ROUTE INFO -->
   <section class="mr section" id="route">
@@ -581,6 +692,48 @@ const motoJsonLd = [
         <div class="mt__end">
           <i class="ph ph-flag" aria-hidden="true"></i>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section moto-faq" aria-labelledby="moto-faq-title">
+    <div class="container">
+      <div class="mr__header">
+        <span class="mr__eyebrow">Quick answers</span>
+        <h2 class="mr__title" id="moto-faq-title">Riding <em>questions</em></h2>
+      </div>
+      <div class="moto-faq__list">
+        {motoFaqs.map((f) => (
+          <details class="moto-faq__item">
+            <summary class="moto-faq__q">{f.q}</summary>
+            <p class="moto-faq__a">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHILE YOU'RE HERE -->
+  <section class="section next-links" aria-labelledby="next-links-title">
+    <div class="container">
+      <div class="mr__header">
+        <span class="mr__eyebrow">While you're here</span>
+        <h2 class="mr__title" id="next-links-title">More from the <em>coast</em></h2>
+        <p class="mr__lead">
+          Prefer someone else to plan the ride, or to take the photos while you enjoy the bends?
+        </p>
+      </div>
+      <div class="next-links__grid">
+        {nextLinks.map((link) => (
+          <a class="card next-link" href={link.href}>
+            <strong class="next-link__title">
+              <i class={`ph ${link.icon}`} aria-hidden="true"></i>
+              {link.title}
+            </strong>
+            <span class="next-link__text">{link.text}</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -1756,6 +1909,155 @@ const motoJsonLd = [
     .mr__card {
       opacity: 1;
       transform: none;
+    }
+  }
+
+  /* Moto FAQ (same pattern as the timetable FAQs) */
+  .moto-faq {
+    background: var(--color-surface);
+  }
+
+  .moto-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 820px;
+  }
+
+  .moto-faq__item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .moto-faq__item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .moto-faq__q {
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-text);
+  }
+
+  .moto-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .moto-faq__q::after {
+    content: '+';
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .moto-faq__item[open] .moto-faq__q::after {
+    transform: rotate(45deg);
+  }
+
+  .moto-faq__a {
+    margin: 0;
+    padding: 0 1.2rem 1.1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Quick answer (first answer block after the hero) */
+  .quick-answer {
+    padding: 3.5rem 0 0;
+  }
+
+  .quick-answer__box {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 52rem;
+    padding: 1.6rem 1.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .quick-answer__title {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+    line-height: 1.2;
+  }
+
+  .quick-answer__box p {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .quick-answer__box .quick-answer__date {
+    margin-top: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* While you're here: cross-links */
+  .next-links__heading {
+    margin-bottom: 2rem;
+  }
+
+  .next-links__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .next-link {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+    padding: 1.25rem 1.35rem;
+    color: var(--color-text);
+  }
+
+  .next-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .next-link__title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .next-link__title i {
+    color: var(--color-accent);
+    font-size: 1.2rem;
+  }
+
+  .next-link__text {
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 640px) {
+    .quick-answer {
+      padding-top: 2.5rem;
+    }
+
+    .quick-answer__box {
+      padding: 1.3rem 1.25rem;
     }
   }
 </style>

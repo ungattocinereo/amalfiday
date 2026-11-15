@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('camelia')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Motorbike',
+  title: 'Motorbike Photoshoot in Tramonti — Camelia | Amalfi.Day',
+  description: 'Motorbike photoshoot in Tramonti at sunset: a ride through the vineyards above the Amalfi Coast to a belvedere 880 metres up, with a view towards Vesuvius.',
+  facts: 'Camelia’s photoshoot took place in Tramonti, in the hills above the Amalfi Coast, in September 2017. We rode on my motorbike through the vineyards and the village and finished at a belvedere more than 880 metres above sea level, looking towards Vesuvius.',
+  hubs: ['solo-photoshoot'],
+  related: { lead: 'Another solo story:', links: [{ label: 'Loreana’s afternoon in Ravello', href: '/photoshootings/loreana/' }] },
+}} />

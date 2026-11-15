@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('jatin-sorrento')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Portrait',
+  title: 'Portrait Photoshoot in Sorrento — Jatin | Amalfi.Day',
+  description: 'Portrait photoshoot in Sorrento: Jatin’s first session, at his hotel among mirrors, paintings and ceramics, then out on the sea-view terraces above the town.',
+  facts: 'Jatin’s portrait photoshoot took place in Sorrento, at his hotel and on its sea-view terraces, away from the busy streets. It was his first photoshoot; I usually meet guests in Amalfi, but he had little time, so I came to him.',
+  hubs: ['solo-photoshoot'],
+  related: { lead: 'More solo stories:', links: [{ label: 'Loreana in Ravello', href: '/photoshootings/loreana/' }, { label: 'Hinad at sunrise in Atrani', href: '/photoshootings/hinad-amalfi-sunrise/' }] },
+}} />

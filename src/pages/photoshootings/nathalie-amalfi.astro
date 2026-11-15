@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('nathalie-amalfi')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Couple',
+  title: 'Couple Photoshoot in Amalfi — Nathalie | Amalfi.Day',
+  description: 'Couple photoshoot in Amalfi in early autumn: Nathalie and her companion from Finland, with warm morning light at the cathedral and along the waterfront.',
+  facts: 'Nathalie and her companion came from Finland for a few days in Amalfi in early autumn and booked this couple photoshoot through GetYourGuide. We met by Amalfi Cathedral in the morning and photographed around the cathedral and along the waterfront.',
+  hubs: ['amalfi-photographer', 'couple-photoshoot'],
+  related: { lead: 'More from Amalfi:', links: [{ label: 'Esmeralda’s sunrise at the cathedral', href: '/photoshootings/esmeralda-cortez-amalfi/' }, { label: 'Nilsa’s post-wedding morning', href: '/photoshootings/nilsa-otanez-amalfi-atrani/' }] },
+}} />

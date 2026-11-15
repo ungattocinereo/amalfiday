@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('loreana')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Solo',
+  title: 'Solo Photoshoot in Ravello — Loreana | Amalfi.Day',
+  description: 'Solo photoshoot in Ravello, booked just a few hours ahead as a birthday gift: Loreana, visiting Italy from Peru, in the quiet streets of Ravello at golden hour.',
+  facts: 'Loreana, visiting Italy from Peru, contacted me through GetYourGuide on a Sunday morning and asked if a photoshoot could happen within a few hours. Amalfi was crowded, so on 7 September 2025 we went up to Ravello and photographed there in golden-hour light. It was her birthday gift to herself.',
+  hubs: ['ravello-photographer', 'solo-photoshoot'],
+  related: { lead: 'More from Ravello:', links: [{ label: 'Taylor & Regan’s engagement photoshoot', href: '/photoshootings/regan-tay-ravello/' }, { label: 'a fashion photoshoot in Ravello', href: '/photoshootings/ravello-photoshooting/' }] },
+}} />

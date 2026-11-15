@@ -3,11 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import CldImage from '../components/CldImage.astro'
 import { site } from '../data/site'
 
-const pageTitle = 'Naples Airport to Amalfi Coast 2026: Best Routes'
+const pageTitle = 'Naples Airport to Amalfi Coast 2026: Shuttle, Ferry & Taxi Routes'
 const pageDescription =
-  'Naples Airport to Amalfi Coast guide for 2026: compare bus, train, ferry, taxi and private transfer routes to Amalfi, Positano, Ravello and Atrani.'
+  'Naples Airport to the Amalfi Coast in 2026: EUR 20 direct shuttle, train and ferry via Salerno, taxi fares from EUR 180, and what to do if you land late.'
 const shareImage = '/staticpages/how-to-get/naples-airport-amalfi-hero-01.webp'
-const updatedDate = '2026-05-08'
+const updatedDate = '2026-11-15'
+const updatedLabel = 'November 2026'
 
 const heroSlides = [
   {
@@ -93,7 +94,7 @@ const routeChoices = [
     route: 'Door to door from arrivals',
     bestFor: 'Late flights, families, Ravello',
     time: '1h 20m+',
-    cost: 'EUR 145+',
+    cost: 'EUR 180+',
     href: '#late-arrival',
   },
 ]
@@ -144,7 +145,7 @@ const quickRoutes = [
     imageHeight: 1024,
     timeMain: '1h 20m-2h 30m to your town',
     timeNote: 'Depends on traffic, destination and summer road conditions.',
-    cost: '€145-160 per car',
+    cost: 'from €180 per car',
     season: 'Year-round, and strongest for late arrivals.',
   },
 ]
@@ -311,13 +312,13 @@ const partyCosts = [
     note: 'Useful for Positano when the boat time fits.',
   },
   {
-    route: 'Taxi Fixed Fare',
+    route: 'Taxi',
     tag: 'Door-to-door private car',
     icon: 'ph-taxi',
-    solo: 'EUR 145-160',
-    couple: 'EUR 145-160',
-    four: 'EUR 145-160',
-    note: 'Per car: Positano EUR 145, Amalfi EUR 155, Ravello EUR 160.',
+    solo: 'from EUR 180',
+    couple: 'from EUR 180',
+    four: 'from EUR 180',
+    note: 'Per car, from EUR 180 to the Amalfi Coast.',
   },
 ]
 
@@ -384,30 +385,58 @@ const ctas = [
   {
     title: 'Transfer request',
     description: 'Door-to-door help when your arrival time or luggage makes public transport awkward.',
-    href: '/contact',
+    href: '/contact/',
     image: '/staticpages/contact/masterclasses.webp',
     imageAlt: 'Private Amalfi Coast planning help',
   },
   {
     title: 'Atrani apartments',
     description: 'Small coastal stays close to Amalfi, with the final arrival point worth checking early.',
-    href: '/apartments',
+    href: '/apartments/',
     image: '/staticpages/mainpage/rental-houses.webp',
     imageAlt: 'Amalfi Coast apartments with sea view',
   },
   {
     title: 'Ferry timetables',
     description: 'Seasonal boat routes from Salerno and Naples toward Amalfi and Positano.',
-    href: '/ferry-timetables',
+    href: '/ferry-timetables/',
     image: '/staticpages/index/ferry-timetables.webp',
     imageAlt: 'Ferry timetable card on the Amalfi Coast',
   },
   {
     title: 'Parking guide',
     description: 'Where to leave the car, what it usually costs, and how to avoid the painful spots.',
-    href: '/parking',
+    href: '/parking/',
     image: '/staticpages/mainpage/parking.webp',
     imageAlt: 'Parking area on the Amalfi Coast',
+  },
+  {
+    title: 'Photoshoots with Greg',
+    description: 'Couple and solo sessions in Atrani, Amalfi and Ravello once you arrive, from €200.',
+    href: '/photoshootings/',
+    image: '/photoshootings/individual/Shifa/Hero.webp',
+    imageAlt: 'Amalfi Coast photoshoot with Greg',
+  },
+  {
+    title: 'Private car tours',
+    description: 'Positano, Amalfi, Ravello or Tramonti with a local guide, up to 3 or 4–6 hours.',
+    href: '/experience/car-tours/',
+    image: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-1.webp',
+    imageAlt: 'Private car tour guest on the Amalfi waterfront',
+  },
+  {
+    title: 'Scooter photo tour',
+    description: 'Ride the coastal road or the mountain valleys with a guide who photographs the trip.',
+    href: '/experience/scooter/',
+    image: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp',
+    imageAlt: 'Scooter photo tour on the Amalfi Coast',
+  },
+  {
+    title: 'Directions to Atrani',
+    description: 'The walk from Amalfi through the tunnel, driving routes and the closest parking.',
+    href: '/directions/',
+    image: '/staticpages/directions/hero-bb-balcony.webp',
+    imageAlt: 'Balcony of the Amalfi.Day apartments in Atrani',
   },
 ]
 
@@ -470,7 +499,7 @@ const faqs = [
   },
   {
     q: 'How much is a taxi from Naples Airport to the Amalfi Coast?',
-    a: 'The official Naples fixed taxi tariff lists Positano at EUR 145, Amalfi at EUR 155, and Ravello at EUR 160 per cab. Motorway tolls and the EUR 5 minivan supplement are excluded.',
+    a: 'A taxi from Naples Airport to the Amalfi Coast costs from EUR 180 per car. Agree the price before you set off.',
   },
   {
     q: 'Can I reach the Amalfi Coast if my flight lands late?',
@@ -614,6 +643,24 @@ const airportJsonLd = [
         <span></span>
       </div>
     </section>
+
+    <div class="quick-answer" role="region" aria-labelledby="quick-answer-title">
+      <div class="container">
+        <div class="quick-answer__box">
+          <span class="airport-kicker">Quick answer</span>
+          <h2 class="quick-answer__title" id="quick-answer-title">How do I get from Naples Airport to the Amalfi Coast?</h2>
+          <p>
+            The simplest public option is the Pintour shuttle from Naples Airport: EUR 20 per
+            adult and 2h 15m to 2h 40m to Amalfi, with stops in Maiori, Minori, Ravello/Castiglione and
+            Atrani. The scenic route is Alibus and train to Salerno, then a ferry, for about EUR 22-35
+            per person. A taxi costs from EUR 180 per car. If you land after 19:30, book a transfer.
+          </p>
+          <p class="quick-answer__date">
+            Last updated: <time datetime={updatedDate}>{updatedLabel}</time>
+          </p>
+        </div>
+      </div>
+    </div>
 
     <section class="airport-choice-band" aria-label="Route shortcuts">
       <div class="container">
@@ -880,7 +927,7 @@ const airportJsonLd = [
               <strong>19:30</strong>
             </div>
             <p>Pre-book a transfer unless your exact ferry or shuttle is confirmed and has enough buffer.</p>
-            <a class="late-card__button" href="/contact">
+            <a class="late-card__button" href="/contact/">
               <span>Ask for Transfer Help</span>
               <i class="ph ph-arrow-right" aria-hidden="true"></i>
             </a>
@@ -980,7 +1027,7 @@ const airportJsonLd = [
     <section class="section airport-cta-section">
       <div class="container">
         <div class="airport-section__head">
-          <span class="airport-kicker">Next Step</span>
+          <span class="airport-kicker">While you're here</span>
           <h2>Useful Links <span class="accent-italic">Before Booking</span></h2>
         </div>
 
@@ -2648,6 +2695,95 @@ const airportJsonLd = [
       animation: none;
       opacity: 1;
       transform: none;
+    }
+  }
+
+  /* Quick answer (first answer block after the hero) */
+  .quick-answer {
+    padding: 3.5rem 0 0;
+  }
+
+  .quick-answer__box {
+    display: grid;
+    gap: 0.4rem;
+    max-width: 52rem;
+    padding: 1.6rem 1.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .quick-answer__title {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+    line-height: 1.2;
+  }
+
+  .quick-answer__box p {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .quick-answer__box .quick-answer__date {
+    margin-top: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* While you're here: cross-links */
+  .next-links__heading {
+    margin-bottom: 2rem;
+  }
+
+  .next-links__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .next-link {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+    padding: 1.25rem 1.35rem;
+    color: var(--color-text);
+  }
+
+  .next-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .next-link__title {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .next-link__title i {
+    color: var(--color-accent);
+    font-size: 1.2rem;
+  }
+
+  .next-link__text {
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 640px) {
+    .quick-answer {
+      padding-top: 2.5rem;
+    }
+
+    .quick-answer__box {
+      padding: 1.3rem 1.25rem;
     }
   }
 </style>

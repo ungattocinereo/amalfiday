@@ -3,61 +3,98 @@ import HomePhotoshoots from '../components/HomePhotoshoots.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import CldImage from '../components/CldImage.astro'
 import PoseGuidePhone from '../components/PoseGuidePhone.astro'
-import { heroLinks } from '../data/site'
+import { heroLinks, site } from '../data/site'
 import { photography } from '../data/photographer'
 import { getGhostPosts } from '../data/ghost'
 import heroQuatrains from '../../hero-quatrains.json'
 
-const pageTitle = 'Amalfi.Day — CristallPont Amalfi Day'
+const pageTitle = 'Amalfi Coast Photoshoots, Tours & Local Guide | Amalfi.Day'
 const pageDescription =
-  'Amalfi.Day is a local guide for Amalfi Coast photoshoots, apartments in Atrani, beach reviews, and curated experiences in Amalfi, Ravello, and Positano.'
+  'Amalfi Coast photoshoots with a local photographer, private car and scooter tours, Atrani apartments, and guides to ferries, buses, beaches and parking.'
 const shareImage = '/staticpages/video/atrani-sorrento-video.webp'
 const shareImageAlt = 'Atrani to Sorrento coast'
 
 const staticPages = [
   {
     title: 'Amalfi news',
-    href: '/blog',
+    href: '/blog/',
     note: 'Latest news and stories from the Amalfi Coast.',
     image: '/staticpages/index/blog-of-amalfi-coast.webp',
     imageAlt: 'Amalfi Coast blog and news',
   },
   {
     title: 'Public transport',
-    href: '/timetables',
+    href: '/timetables/',
     note: 'Buses, ferries, and regional routes in one place.',
     image: '/staticpages/mainpage/allublictransport.webp',
     imageAlt: 'Public transport connections along the Amalfi Coast',
   },
   {
     title: 'Apartment rentals',
-    href: '/apartments',
+    href: '/apartments/',
     note: 'Apartments, suites, and rooms near Atrani beach.',
     image: '/staticpages/mainpage/rental-houses.webp',
     imageAlt: 'Amalfi Coast apartments with sea view',
   },
   {
     title: 'Parking tips',
-    href: '/parking',
+    href: '/parking/',
     note: 'Where to park and how to avoid traffic.',
     image: '/staticpages/mainpage/parking.webp',
     imageAlt: 'Parking area on the Amalfi Coast',
   },
   {
     title: 'Beach reviews',
-    href: '/beaches',
+    href: '/beaches/',
     note: 'Best spots for swimming, sun, and photos.',
     image: '/staticpages/mainpage/beach-reviews.webp',
     imageAlt: 'Amalfi Coast beach overview',
   },
   {
     title: 'Moto roads',
-    href: '/moto',
+    href: '/moto/',
     note: 'Scenic motorcycle routes along the coast.',
     image: '/staticpages/index/moto-roads-in-amalfi.webp',
     imageAlt: 'Motorcycle roads on the Amalfi Coast',
   },
 ]
+
+// Main sections linked from the homepage, in page order.
+const homeSections = [
+  { name: 'Amalfi Coast photoshoots', url: '/photoshootings/' },
+  { name: 'Scenic Coast private car tour', url: '/experience/car-tours/#tour-scenic' },
+  { name: 'Peak Flavors car tour of the Tramonti Valley', url: '/experience/car-tours/#tour-tramonti' },
+  { name: 'Scooter photo tour', url: '/experience/scooter/' },
+  { name: 'Ferry timetables', url: '/ferry-timetables/' },
+  ...staticPages.map((page) => ({ name: page.title, url: page.href })),
+]
+
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${site.url}/#webpage`,
+  url: `${site.url}/`,
+  name: pageTitle,
+  description: pageDescription,
+  inLanguage: 'en',
+  isPartOf: { '@id': `${site.url}/#website` },
+  about: { '@id': `${site.url}/#business` },
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: new URL(shareImage, site.url).toString(),
+    caption: shareImageAlt,
+  },
+  mainEntity: {
+    '@type': 'ItemList',
+    name: 'Amalfi.Day sections',
+    itemListElement: homeSections.map((section, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: section.name,
+      url: new URL(section.url, site.url).toString(),
+    })),
+  },
+}
 
 const { posts: newsPosts } = await getGhostPosts({ limit: 8 })
 const quatrains = Array.isArray(heroQuatrains) ? heroQuatrains : []
@@ -72,6 +109,7 @@ const fallbackQuatrain =
   description={pageDescription}
   image={shareImage}
   imageAlt={shareImageAlt}
+  jsonLd={homeJsonLd}
   themeColor="#FF5900"
   themeColorDark="#031E4D"
   bodyClass="home-page"
@@ -145,7 +183,7 @@ const fallbackQuatrain =
         <div class="hero__tile hero__tile--small hero__tile--small-b">
           <a
             class="hero__mini hero__mini--photo"
-            href="/ferry-timetables"
+            href="/ferry-timetables/"
             id="ferry"
           >
             <CldImage
@@ -159,7 +197,7 @@ const fallbackQuatrain =
           </a>
         </div>
         <div class="hero__tile hero__tile--bottom">
-          <a class="hero__mini" href="/photoshootings">
+          <a class="hero__mini" href="/photoshootings/">
             <i class="ph ph-camera" aria-hidden="true"></i>
             <div>
               <strong>Photoshoots</strong>
@@ -193,13 +231,13 @@ const fallbackQuatrain =
         <h2>
           Amalfi <span class="accent-italic">with us</span>
         </h2>
-        <a class="section__subtitle-link" href="/experience">
+        <a class="section__subtitle-link" href="/experience/">
           We offer the most creative ways to experience the Amalfi Coast.
           <i class="ph ph-arrow-right" aria-hidden="true"></i>
         </a>
       </div>
       <div class="xp-grid">
-        <a class="xp-card" href="/experience/car-tours">
+        <a class="xp-card" href="/experience/car-tours/">
           <div class="xp-card__media">
             <CldImage
               src="/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp"
@@ -218,14 +256,14 @@ const fallbackQuatrain =
               Cliff-top viewpoints, charming villages, limoncello tasting, and a local lunch by the sea.
             </p>
             <div class="xp-card__tags">
-              <span class="xp-card__tag">8 hours</span>
+              <span class="xp-card__tag">Up to 3 / 4–6 hours</span>
               <span class="xp-card__tag">Up to 6 ppl</span>
             </div>
           </div>
           <span class="xp-card__arrow"><i class="ph ph-arrow-square-out" aria-hidden="true"></i></span>
         </a>
 
-        <a class="xp-card" href="/experience/car-tours">
+        <a class="xp-card" href="/experience/car-tours/">
           <div class="xp-card__media">
             <CldImage
               src="/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp"
@@ -244,14 +282,14 @@ const fallbackQuatrain =
               Buffalo mozzarella, hillside vineyards, and panoramic mountain views you won't find in any guidebook.
             </p>
             <div class="xp-card__tags">
-              <span class="xp-card__tag">8 hours</span>
+              <span class="xp-card__tag">Up to 3 / 4–6 hours</span>
               <span class="xp-card__tag">Wine tasting</span>
             </div>
           </div>
           <span class="xp-card__arrow"><i class="ph ph-arrow-square-out" aria-hidden="true"></i></span>
         </a>
 
-        <a class="xp-card" href="/experience/scooter">
+        <a class="xp-card" href="/experience/scooter/">
           <div class="xp-card__media">
             <CldImage
               src="/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp"
@@ -270,7 +308,7 @@ const fallbackQuatrain =
               Cliffside roads, cinematic overlooks, and 50+ professional photos to take home.
             </p>
             <div class="xp-card__tags">
-              <span class="xp-card__tag">4 hours</span>
+              <span class="xp-card__tag">From €350</span>
               <span class="xp-card__tag">Photo included</span>
             </div>
           </div>
@@ -288,7 +326,7 @@ const fallbackQuatrain =
         <h2>
           Amalfi <span class="accent-italic">News</span>
         </h2>
-        <a class="section__subtitle-link" href="/blog">
+        <a class="section__subtitle-link" href="/blog/">
           Fresh stories and local insights are always waiting...
           <i class="ph ph-arrow-right" aria-hidden="true"></i>
         </a>

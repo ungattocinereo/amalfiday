@@ -1,10 +1,11 @@
 ---
 import { getCityIcon } from '../../../data/city-icons'
 import BaseLayout from '../../../layouts/BaseLayout.astro'
+import { site } from '../../../data/site'
 
-const pageTitle = 'Private Amalfi Coast Car Tours — Full-Day with a Local Guide'
+const pageTitle = 'Private Amalfi Coast Car Tours from €400 | Amalfi.Day'
 const pageDescription =
-  'Book a private 8-hour car tour on the Amalfi Coast. Visit Positano, Amalfi, Ravello, and Tramonti with a local guide. Wine tastings, hidden beaches, and flexible itineraries for groups up to 6.'
+  'Book a private Amalfi Coast car tour of up to 3 hours or 4–6 hours. Visit Positano, Amalfi, Ravello, and Tramonti with a local guide and a flexible itinerary.'
 const shareImageAlt = 'Private car tour on the Amalfi Coast — red vintage car on a mountain road'
 
 const heroSlides = [
@@ -17,7 +18,7 @@ const heroSlides = [
 ]
 
 const heroTags = [
-  '8-hour tour',
+  'Up to 3 / 4–6 hours',
   'Private car',
   'Up to 6 people',
   'Local guide',
@@ -58,8 +59,8 @@ const pricingCards = [
     description: 'The classic Amalfi Coast route: cliff-top viewpoints, charming villages, limoncello tasting, and a local lunch by the sea.',
     priceSmall: '€400',
     priceLarge: '€600',
-    labelSmall: '1–3 ppl',
-    labelLarge: '4–6 ppl',
+    labelSmall: 'up to 3 hours',
+    labelLarge: '4–6 hours',
     icon: 'ph-map-pin',
   },
   {
@@ -68,8 +69,8 @@ const pricingCards = [
     description: 'A food-focused day in the mountains: buffalo mozzarella at a local farm, wine from hillside vineyards, and Michelin-star desserts.',
     priceSmall: '€450',
     priceLarge: '€650',
-    labelSmall: '1–3 ppl',
-    labelLarge: '4–6 ppl',
+    labelSmall: 'up to 3 hours',
+    labelLarge: '4–6 hours',
     icon: 'ph-coffee',
   },
   {
@@ -78,7 +79,7 @@ const pricingCards = [
     description: 'Tell us what you love — hidden beaches, hilltop towns, cooking classes — and we build a custom route around your interests.',
     priceSmall: 'from €550',
     priceLarge: '',
-    labelSmall: 'depends on itinerary',
+    labelSmall: 'depends on itinerary and duration',
     labelLarge: '',
     icon: 'ph-compass',
     isCustom: true,
@@ -100,6 +101,108 @@ const tramontiStops = [
   { name: 'Farm', icon: 'ph-leaf', desc: 'Buffalo mozzarella' },
   { name: 'Restaurant', icon: 'ph-star', desc: 'Michelin desserts' },
 ]
+
+// Structured data mirrors the pricing cards and tour sections on this page.
+const pageUrl = `${site.url}/experience/car-tours/`
+const businessRef = { '@id': `${site.url}/#business` }
+const toPrice = (value: string) => value.replace(/[^0-9.]/g, '')
+const toOffer = (price: string, name: string, url: string) => ({
+  '@type': 'Offer',
+  name,
+  url,
+  price: toPrice(price),
+  priceCurrency: 'EUR',
+  priceSpecification: {
+    '@type': 'PriceSpecification',
+    price: toPrice(price),
+    priceCurrency: 'EUR',
+    valueAddedTaxIncluded: true,
+  },
+  seller: businessRef,
+})
+const place = (name: string) => ({ '@type': 'Place', name, address: { '@type': 'PostalAddress', addressRegion: 'Campania', addressCountry: 'IT' } })
+const tourDetails = {
+  'Scenic Coast': {
+    id: 'tour-scenic',
+    image: scenicImages[4].src,
+    itinerary: ['Sorrento', 'Positano', 'Amalfi', 'Atrani', 'Ravello'],
+  },
+  'Peak Flavors': {
+    id: 'tour-tramonti',
+    image: tramontiImages[7].src,
+    itinerary: ['Tramonti', 'Valico di Chiunzi'],
+  },
+}
+const tourJsonLd = pricingCards.map((card) => {
+  const details = tourDetails[card.title as keyof typeof tourDetails]
+  const url = details ? `${pageUrl}#${details.id}` : `${pageUrl}#pricing`
+  return {
+    '@type': 'TouristTrip',
+    '@id': `${pageUrl}#${details ? details.id : 'tour-custom'}`,
+    name: card.title,
+    description: card.description,
+    url,
+    ...(details ? { image: new URL(details.image, site.url).toString() } : {}),
+    provider: businessRef,
+    ...(details
+      ? {
+          itinerary: {
+            '@type': 'ItemList',
+            itemListElement: details.itinerary.map((name, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              item: place(name),
+            })),
+          },
+        }
+      : {}),
+    offers: card.isCustom
+      ? {
+          '@type': 'Offer',
+          name: card.title,
+          description: card.labelSmall,
+          url,
+          priceCurrency: 'EUR',
+          priceSpecification: {
+            '@type': 'PriceSpecification',
+            minPrice: toPrice(card.priceSmall),
+            priceCurrency: 'EUR',
+            valueAddedTaxIncluded: true,
+          },
+          seller: businessRef,
+        }
+      : [
+          toOffer(card.priceSmall, `${card.title}, ${card.labelSmall}`, url),
+          toOffer(card.priceLarge, `${card.title}, ${card.labelLarge}`, url),
+        ],
+  }
+})
+
+const carToursJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: pageTitle,
+    description: pageDescription,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: businessRef,
+    primaryImageOfPage: { '@type': 'ImageObject', url: new URL(heroSlides[0].image, site.url).toString() },
+    mainEntity: tourJsonLd.map((tour) => ({ '@id': tour['@id'] })),
+  },
+  ...tourJsonLd.map((tour) => ({ '@context': 'https://schema.org', ...tour })),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Experiences', item: `${site.url}/experience/` },
+      { '@type': 'ListItem', position: 3, name: 'Private car tours', item: pageUrl },
+    ],
+  },
+]
 ---
 
 <BaseLayout
@@ -107,6 +210,7 @@ const tramontiStops = [
   description={pageDescription}
   image={heroSlides[0].image}
   imageAlt={shareImageAlt}
+  jsonLd={carToursJsonLd}
 >
   <div class="car-tours">
 
@@ -129,11 +233,11 @@ const tramontiStops = [
                 Breezing Through<br/><span class="ct-hero__title-accent">the Amalfi Coast</span>
               </h1>
               <p class="ct-hero__lead">
-                Private full-day car tours from Sorrento to Ravello.
-                A local guide, a flexible route, and 8 hours of coast, culture, and flavor.
+                Private car tours from Sorrento to Ravello with a local guide and a flexible route.
+                Choose a tour of up to 3 hours or 4–6 hours of coast, culture, and flavor.
               </p>
               <div class="ct-hero__actions">
-                <a class="ct-btn ct-btn--primary" href="/contact">
+                <a class="ct-btn ct-btn--primary" href="/contact/">
                   <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Request a tour
                 </a>
                 <a class="ct-btn ct-btn--ghost" href="#pricing">
@@ -219,8 +323,8 @@ const tramontiStops = [
           <h2>Scenic Coast:<br/><span class="ct-tour__accent">From the Sea to the Mountain</span></h2>
           <p class="ct-tour__lead">
             The classic Amalfi Coast road trip. We pick you up in Sorrento, Salerno,
-            or any point along the coast and spend 8 hours exploring Positano, Amalfi,
-            Atrani, and Ravello — with stops for food, photos, and swimming.
+            or any point along the coast to explore Positano, Amalfi,
+            Atrani, and Ravello — with stops for food, photos, and swimming, adapted to your chosen tour duration.
           </p>
         </div>
 
@@ -329,7 +433,7 @@ const tramontiStops = [
           <span class="ct-eyebrow">Tour 02</span>
           <h2>Peak Flavors:<br/><span class="ct-tour__accent">The Tramonti Valley</span></h2>
           <p class="ct-tour__lead">
-            An 8-hour food and wine tour through the mountains behind the Amalfi Coast.
+            A food and wine tour through the mountains behind the Amalfi Coast, lasting up to 3 hours or 4–6 hours.
             Buffalo mozzarella straight from the farm, wine from terraced vineyards,
             and a dessert created by a Michelin-starred pastry chef — all in one day.
           </p>
@@ -421,14 +525,15 @@ const tramontiStops = [
           <span class="ct-eyebrow ct-eyebrow--light">Tour prices</span>
           <h2>How Much Does an Amalfi Coast <span class="accent-italic">Car Tour</span> Cost?</h2>
           <p>
-            All tours are private, last 8 hours, and include a local guide with a car.
-            Pick-up and drop-off anywhere on the Amalfi Coast or in Sorrento.
+            All tours are private and include a local guide with a car.
+            Scenic Coast and Peak Flavors prices depend on duration: up to 3 hours or 4–6 hours.
+            Pick-up and drop-off anywhere on the Amalfi Coast, in Sorrento, or in Salerno.
           </p>
           <p class="ct-pricing__iva">Tutti i prezzi sono IVA inclusa.</p>
         </div>
         <div class="ct-pricing__grid">
           {pricingCards.map((card) => (
-            <article class={`ct-price-card ${card.isCustom ? 'ct-price-card--custom' : ''}`} data-tour-name={card.title} data-tour-price={card.isCustom ? card.priceSmall : `${card.priceSmall} (${card.labelSmall}) / ${card.priceLarge} (${card.labelLarge})`}>
+            <article class={`ct-price-card ${card.isCustom ? 'ct-price-card--custom' : ''}`} data-tour-name={card.title} data-tour-price={card.isCustom ? `${card.priceSmall} (${card.labelSmall})` : `${card.priceSmall} (${card.labelSmall}) / ${card.priceLarge} (${card.labelLarge})`}>
               <!-- Default card content -->
               <div class="ct-price-card__default">
                 <div class="ct-price-card__icon">

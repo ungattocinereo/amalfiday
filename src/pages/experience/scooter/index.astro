@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro'
+import { site } from '../../../data/site'
 
-const pageTitle = 'Amalfi Coast Scooter Photo Tour — Ride & Get Stunning Photos'
+const pageTitle = 'Amalfi Coast Scooter Tour with a Photographer | Amalfi.Day'
 const pageDescription =
-  'Book an individual scooter photo tour on the Amalfi Coast. Ride through legendary coastal roads or mountain valleys with a local guide and professional photographer. One rider, two routes to choose from.'
+  'Private Amalfi Coast scooter tour with a local guide and photographer. Ride to Positano or the Tramonti Valley from €350 and take home up to 70 edited photos.'
 const shareImageAlt = 'Scooter photo tour on the Amalfi Coast — riding along the coastal road with stunning sea views'
 
 const heroSlides = [
@@ -14,7 +15,7 @@ const heroSlides = [
 ]
 
 const heroTags = [
-  '4 hours',
+  'Route agreed individually',
   'Photo & ride',
   'You ride, we shoot',
   'Local guide',
@@ -66,17 +67,80 @@ const pricingCards = [
     title: 'Coastal Cruise',
     subtitle: 'Amalfi → Furore → Positano & back',
     description: 'The iconic coastal road. We ride the SS163 through the most famous villages, stopping at hidden viewpoints, scenic tunnels, and cliffside cafes. Includes 40–60 professionally edited photos and short video clips for social media.',
-    price: '€280',
+    price: 'from €350',
     icon: 'ph-waves',
-    features: ['4-hour guided ride', '40–60 edited photos', 'Video clips for reels', 'Cafe stop included', 'Helmet & insurance'],
+    features: ['Individually planned ride', '40–60 edited photos', 'Video clips for reels', 'Cafe stop included', 'Helmet & insurance'],
   },
   {
     title: 'Valley Explorer',
     subtitle: 'Coast → Tramonti → Valico di Chiunzi',
     description: 'The road less traveled. We climb through the Tramonti Valley to 880 meters, passing lemon groves, chestnut forests, and a sacred mountain cemetery. Stop at a mozzarella farm and local winery along the way.',
-    price: '€350',
+    price: 'from €350',
     icon: 'ph-signpost',
-    features: ['4-hour guided ride', '50–70 edited photos', 'Video clips for reels', 'Farm & winery visits', 'Helmet & insurance'],
+    features: ['Individually planned ride', '50–70 edited photos', 'Video clips for reels', 'Farm & winery visits', 'Helmet & insurance'],
+  },
+]
+
+// Structured data mirrors the route and pricing cards on this page.
+const pageUrl = `${site.url}/experience/scooter/`
+const businessRef = { '@id': `${site.url}/#business` }
+const routeItinerary: Record<string, string[]> = {
+  'Coastal Cruise': ['Amalfi', 'Furore', 'Positano'],
+  'Valley Explorer': ['Tramonti', 'Valico di Chiunzi'],
+}
+const scooterTours = pricingCards.map((card) => ({
+  '@type': 'TouristTrip',
+  '@id': `${pageUrl}#${card.title.toLowerCase().replace(/\s+/g, '-')}`,
+  name: `${card.title} scooter photo tour`,
+  description: card.description,
+  url: `${pageUrl}#pricing`,
+  provider: businessRef,
+  itinerary: {
+    '@type': 'ItemList',
+    itemListElement: (routeItinerary[card.title] ?? []).map((name, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: { '@type': 'Place', name, address: { '@type': 'PostalAddress', addressRegion: 'Campania', addressCountry: 'IT' } },
+    })),
+  },
+  offers: {
+    '@type': 'Offer',
+    name: `${card.title}, one rider`,
+    url: `${pageUrl}#pricing`,
+    priceCurrency: 'EUR',
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      minPrice: card.price.replace(/[^0-9.]/g, ''),
+      priceCurrency: 'EUR',
+      valueAddedTaxIncluded: true,
+    },
+    seller: businessRef,
+  },
+}))
+
+const scooterJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: pageTitle,
+    description: pageDescription,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: businessRef,
+    primaryImageOfPage: { '@type': 'ImageObject', url: new URL(heroSlides[0].image, site.url).toString() },
+    mainEntity: scooterTours.map((tour) => ({ '@id': tour['@id'] })),
+  },
+  ...scooterTours.map((tour) => ({ '@context': 'https://schema.org', ...tour })),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Experiences', item: `${site.url}/experience/` },
+      { '@type': 'ListItem', position: 3, name: 'Scooter photo tour', item: pageUrl },
+    ],
   },
 ]
 ---
@@ -84,6 +148,7 @@ const pricingCards = [
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
+  jsonLd={scooterJsonLd}
   image={heroSlides[0].image}
   imageAlt={shareImageAlt}
 >
@@ -110,10 +175,10 @@ const pricingCards = [
               </h1>
               <p class="sc-hero__lead">
                 An individual scooter tour with a professional photographer — just you and the road.
-                Legendary routes, hidden stops, and up to 70 cinematic photos — all in a 4-hour ride.
+                Legendary routes, hidden stops, and up to 70 cinematic photos — with a route agreed individually.
               </p>
               <div class="sc-hero__actions">
-                <a class="sc-btn sc-btn--primary" href="/contact">
+                <a class="sc-btn sc-btn--primary" href="/contact/">
                   <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i> Book your ride
                 </a>
                 <a class="sc-btn sc-btn--ghost" href="#pricing">
@@ -236,7 +301,7 @@ const pricingCards = [
                 This route is perfect for those who love the sea, sunshine, and the classic dolce vita atmosphere. Every tunnel exit opens a new panorama, every village has a story, and every curve deserves its own frame.
               </p>
               <ul class="sc-route-card__highlights">
-                <li><i class="ph ph-clock" aria-hidden="true"></i> 4 hours</li>
+                <li><i class="ph ph-signpost" aria-hidden="true"></i> Individually planned route</li>
                 <li><i class="ph ph-camera" aria-hidden="true"></i> 40–60 photos</li>
                 <li><i class="ph ph-coffee" aria-hidden="true"></i> Cafe break included</li>
               </ul>
@@ -261,7 +326,7 @@ const pricingCards = [
                 On our way back, we visit a mozzarella factory where the cheese is still warm, a family winery with wines you won't find outside this valley, and a local liquor distillery. This tour is perfect for those who love nature, history, culture, and the Italy that most tourists never see.
               </p>
               <ul class="sc-route-card__highlights">
-                <li><i class="ph ph-clock" aria-hidden="true"></i> 4 hours</li>
+                <li><i class="ph ph-signpost" aria-hidden="true"></i> Individually planned route</li>
                 <li><i class="ph ph-camera" aria-hidden="true"></i> 50–70 photos</li>
                 <li><i class="ph ph-leaf" aria-hidden="true"></i> Farm & winery visits</li>
               </ul>
@@ -282,6 +347,10 @@ const pricingCards = [
           <h2>How Much Does a Scooter <span class="accent-italic">Photo Tour</span> Cost?</h2>
           <p>
             Both tours are individual (one rider) and include a personal guide, scooter, helmet, insurance, and professional photography with full editing and delivery within 5 days.
+          </p>
+          <p>
+            Prices start at €350. We agree the route individually based on your riding experience and starting point,
+            and confirm the ride only when weather and road conditions are suitable.
           </p>
           <p class="sc-pricing__iva">Tutti i prezzi sono IVA inclusa.</p>
         </div>

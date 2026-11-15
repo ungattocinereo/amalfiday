@@ -4,10 +4,12 @@ import StayCard from '../components/StayCard.astro'
 import { APARTMENT_SECTIONS, ALL_APARTMENTS } from '../data/apartments'
 import { site, business } from '../data/site'
 
-const pageTitle = 'Atrani Apartments & Rooms — CristallPont | Amalfi.Day'
+const pageTitle = 'Apartments & Rooms in Atrani and Ravello | Amalfi.Day'
 const pageDescription =
-  'Apartments, suites, and rooms in Atrani — steps from the Amalfi Coast beach. Operated by CristallPont S.R.L. Book direct, on Booking.com, or Airbnb.'
+  'Apartments, suites and rooms in Atrani near the beach, plus apartments in Ravello, run by local host CristallPont. Book direct, on Booking.com or on Airbnb.'
 const shareImage = '/apartments/3-view-from-cristall-Pont.jpg'
+
+const lodgingId = `${site.url}/apartments/#lodging`
 
 const sharedAddress = {
   '@type': 'PostalAddress',
@@ -18,16 +20,26 @@ const sharedAddress = {
   addressCountry: business.country,
 }
 
+// Villa Susy (section "Timeless Retreat in Ravello") and The Sunrise Balcony
+// are in Ravello per their listings; the rest are at the Atrani address.
+const ravelloIds = new Set(['villa-susy', 'sunrise-balcony'])
+const ravelloAddress = {
+  '@type': 'PostalAddress',
+  addressLocality: 'Ravello',
+  addressRegion: business.region,
+  addressCountry: business.country,
+}
+
 const apartmentItems = ALL_APARTMENTS.map((a, i) => {
   const reserveUrl = a.bookingLinks.airbnb || a.bookingLinks.booking
   const node = {
     '@type': 'Apartment',
-    '@id': `${site.url}/apartments#${a.id}`,
+    '@id': `${site.url}/apartments/#${a.id}`,
     name: a.name,
     description: a.description,
     image: a.gallery.map((g) => new URL(g, site.url).toString()),
-    address: sharedAddress,
-    containedInPlace: { '@id': `${site.url}/#business` },
+    address: ravelloIds.has(a.id) ? ravelloAddress : sharedAddress,
+    containedInPlace: { '@id': lodgingId },
     ...(a.cin ? { identifier: a.cin } : {}),
     ...(reserveUrl
       ? {
@@ -44,11 +56,33 @@ const apartmentItems = ALL_APARTMENTS.map((a, i) => {
 const apartmentsSchema = [
   {
     '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    '@id': lodgingId,
+    name: 'CristallPont Amalfi Day',
+    alternateName: `${business.brandName} apartments`,
+    description: pageDescription,
+    url: `${site.url}/apartments/`,
+    image: new URL(shareImage, site.url).toString(),
+    telephone: business.phone,
+    email: business.email,
+    address: sharedAddress,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: business.geo.lat,
+      longitude: business.geo.lon,
+    },
+    parentOrganization: { '@id': `${site.url}/#business` },
+    sameAs: [business.bookingUrl, business.airbnbUrl],
+  },
+  {
+    '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: pageTitle,
     description: pageDescription,
-    url: `${site.url}/apartments`,
-    isPartOf: { '@id': `${site.url}/#business` },
+    url: `${site.url}/apartments/`,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': lodgingId },
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: apartmentItems.map(({ position, item }) => ({
@@ -62,8 +96,8 @@ const apartmentsSchema = [
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
-      { '@type': 'ListItem', position: 2, name: 'Apartments', item: `${site.url}/apartments` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Apartments', item: `${site.url}/apartments/` },
     ],
   },
 ]
@@ -147,7 +181,7 @@ const testimonials = [
               ))}
             </div>
             <div class="apt-hero__actions">
-              <a class="apt-hero__btn apt-hero__btn--primary" href="/contact">Book your stay</a>
+              <a class="apt-hero__btn apt-hero__btn--primary" href="/contact/">Book your stay</a>
               <a class="apt-hero__btn apt-hero__btn--ghost" href="#stays">Browse apartments</a>
             </div>
           </div>

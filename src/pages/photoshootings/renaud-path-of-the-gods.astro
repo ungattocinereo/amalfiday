@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('renaud-path-of-the-gods')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Proposal',
+  title: 'Proposal Photoshoot on the Path of the Gods — Renaud | Amalfi.Day',
+  description: 'Proposal photoshoot on the Path of the Gods: a two-kilometre hike from Agerola, the proposal recreated in several outfits, and golden hour above the coast.',
+  facts: 'Renaud and his partner booked this proposal photoshoot through GetYourGuide. In summer we met at the start of the Path of the Gods in Agerola, walked about two kilometres to a spot they had found, recreated the proposal in a few outfits and photographed through golden hour.',
+  hubs: ['path-of-the-gods-photographer', 'proposal-photographer'],
+  related: { lead: 'Another proposal:', links: [{ label: 'Jassi’s surprise on a villa terrace in Conca dei Marini', href: '/photoshootings/jassi-conca-proposal/' }] },
+}} />

@@ -3,8 +3,10 @@ import { navigation, socialLinks, site } from '../data/site'
 import MorphingLogo from './MorphingLogo.astro'
 const headerSocials = socialLinks.filter((item) => ['Instagram', 'Facebook'].includes(item.label))
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
-const isCurrent = (href?: string) => href === currentPath
-const isWithin = (href?: string) => href && !href.includes('#') && (isCurrent(href) || currentPath.startsWith(`${href}/`))
+const normalizeHref = (href?: string) => (href ? href.replace(/\/$/, '') || '/' : href)
+const isCurrent = (href?: string) => normalizeHref(href) === currentPath
+const isWithin = (href?: string) =>
+  href && !href.includes('#') && (isCurrent(href) || currentPath.startsWith(`${normalizeHref(href)}/`))
 const isActive = (item: (typeof navigation)[number]) =>
   isWithin(item.href) || item.dropdownSections?.some((section) => section.items.some((link) => isWithin(link.href)))
 ---
@@ -56,7 +58,7 @@ const isActive = (item: (typeof navigation)[number]) =>
             <span class="nav-link__hint" aria-hidden="true">{item.label}</span>
           </a>
         ))}
-        <a class:list={['nav-link', 'nav-link--contact', { 'is-active': isCurrent('/contact') }]} href="/contact" aria-current={isCurrent('/contact') ? 'page' : undefined}>
+        <a class:list={['nav-link', 'nav-link--contact', { 'is-active': isCurrent('/contact') }]} href="/contact/" aria-current={isCurrent('/contact') ? 'page' : undefined}>
           <i class="ph-fill ph-chat-circle-dots" aria-hidden="true"></i>
           <span class="nav-link__contact-label">Contact us</span>
         </a>
@@ -119,7 +121,7 @@ const isActive = (item: (typeof navigation)[number]) =>
         ))}
       </nav>
       <div class="mobile-connect">
-        <a class="mobile-contact" href="/contact"><span>Let’s plan your day</span><span>Contact us <i class="ph-fill ph-chat-circle-dots" aria-hidden="true"></i></span></a>
+        <a class="mobile-contact" href="/contact/"><span>Let’s plan your day</span><span>Contact us <i class="ph-fill ph-chat-circle-dots" aria-hidden="true"></i></span></a>
         <div class="mobile-socials">
           {headerSocials.map((item) => <a href={item.href} target="_blank" rel="noreferrer"><i class={`ph-light ph-${item.label.toLowerCase()}-logo`} aria-hidden="true"></i>{item.label}<span class="sr-only"> (opens in a new tab)</span></a>)}
         </div>

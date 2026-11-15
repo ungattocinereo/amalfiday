@@ -4,4 +4,11 @@ import { getPhotoshoot } from '../../data/photoshoots'
 
 const shoot = getPhotoshoot('esmeralda-cortez-amalfi')
 ---
-<PhotoshootPage shoot={shoot} />
+<PhotoshootPage shoot={shoot} seo={{
+  kind: 'Couple',
+  title: 'Couple Photoshoot in Amalfi & Atrani — Esmeralda | Amalfi.Day',
+  description: 'Sunrise couple photoshoot in Amalfi and Atrani: the steps of Amalfi Cathedral, empty streets at first light and the coast road to Atrani, in 102 photographs.',
+  facts: 'Esmeralda Cortez and her companion had a sunrise couple photoshoot in Amalfi and Atrani in August 2026. We met early, started at the Cathedral of Saint Andrew in Amalfi, walked the empty streets at first light and followed the coast to Atrani. The story is told in 102 photographs.',
+  hubs: ['amalfi-photographer', 'couple-photoshoot'],
+  related: { lead: 'More mornings in Amalfi and Atrani:', links: [{ label: 'Nilsa’s post-wedding photoshoot', href: '/photoshootings/nilsa-otanez-amalfi-atrani/' }, { label: 'Takamasa’s wedding dress from Japan', href: '/photoshootings/takamasa-shigemi-amalfi-atrani/' }] },
+}} />
