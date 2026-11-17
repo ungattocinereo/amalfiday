@@ -33,9 +33,15 @@ const cards = storySlugs.map(slug => {
       : `Solo · ${shoot.tag || 'Portraits'}`,
   }
 })
+
+// The homepage renders this block in two places: the slider first, the story cards after the tours.
+const { part = 'all' } = Astro.props
+const showSlider = part !== 'stories'
+const showStories = part !== 'slider'
+const storyCards = cards.slice(0, 6)
 ---
 
-<section class="home-photos" id="photo-sessions" aria-labelledby="home-photos-title">
+{showSlider && <section class="home-photos" id="photo-sessions" aria-labelledby="home-photos-title">
   <div class="container home-photos__intro">
     <div>
       <span class="home-photos__eyebrow">Through my lens / Amalfi Coast</span>
@@ -71,13 +77,16 @@ const cards = storySlugs.map(slug => {
     <span class="sr-only" data-status aria-live="polite" aria-atomic="true"></span>
   </div>
 
+</section>}
+
+{showStories && <section class="home-photos home-photos--stories" aria-labelledby="home-stories-title">
   <div class="container home-photos__stories">
     <div class="home-photos__stories-heading">
-      <div><span class="home-photos__eyebrow">Real people. Their own stories.</span><h3>Find your <span class="accent-italic">inspiration.</span></h3></div>
+      <div><span class="home-photos__eyebrow">Real people. Their own stories.</span><h2 id="home-stories-title">Find your <span class="accent-italic">inspiration.</span></h2></div>
       <p>Solo portraits, mornings together &amp; moments worth remembering.</p>
     </div>
     <div class="home-photos__grid" aria-label="Selected individual and couple photoshoots">
-      {cards.map(item => <PhotoshootCard item={item} />)}
+      {storyCards.map(item => <PhotoshootCard item={item} />)}
     </div>
     <div class="home-photos__footer">
       <a class="home-photos__browse" href="/photoshootings/">Explore all photoshoots <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
@@ -86,8 +95,8 @@ const cards = storySlugs.map(slug => {
       </div>
     </div>
   </div>
-</section>
-<PhotoRequestDialog />
+</section>}
+{showStories && <PhotoRequestDialog />}
 
 <style>
   .home-photos { padding: 5rem 0; }
@@ -96,7 +105,10 @@ const cards = storySlugs.map(slug => {
   .home-photos__intro h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
   .home-photos__intro p { margin: 0 0 .25rem; color: var(--color-text-muted); line-height: 1.7; }
   .photo-showcase { display: none; }
-  .home-photos__stories { padding-top: 3.5rem; }
+  .home-photos--stories { padding-top: 0; }
+  .home-photos__stories { padding-top: 0; }
+  .home-photos__stories-heading h2 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .home-photos__stories .shoot-card :global(.shoot-card__media) { background-color: var(--color-surface); }
   .home-photos__stories-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
   .home-photos__stories-heading h3 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); }
   .home-photos__stories-heading p { color: var(--color-text-muted); max-width: 300px; margin: 0; }
@@ -149,8 +161,6 @@ const cards = storySlugs.map(slug => {
     .photo-showcase__controls { left: 8vw; right: 8vw; }
   }
   @media (max-width: 1099px) {
-    .home-photos__stories { padding-top: .5rem; }
-    .home-photos__stories-heading { display: none; }
   }
   @media (max-width: 900px) { .home-photos__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
@@ -169,6 +179,12 @@ const cards = storySlugs.map(slug => {
 </style>
 
 <script>
+  // The story cards sit far down the page; native lazy loading leaves them black
+  // (dark card background) until the browser decides they are close enough.
+  // Start fetching them shortly after load, once the hero has had its bandwidth.
+  const loadStories = () => document.querySelectorAll<HTMLImageElement>('.home-photos__grid img').forEach(img => { img.loading = 'eager' })
+  if ('requestIdleCallback' in window) requestIdleCallback(loadStories, { timeout: 3000 })
+  else setTimeout(loadStories, 1500)
   const footer = document.querySelector<HTMLElement>('.home-photos__footer')
   if (footer) new IntersectionObserver(entries => {
     footer.classList.toggle('is-visible', entries[0].isIntersecting)

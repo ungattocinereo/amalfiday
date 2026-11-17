@@ -1,0 +1,123 @@
+---
+import CldImage from '../CldImage.astro'
+
+interface Item {
+  title: string
+  href: string
+  image: string
+  icon: string
+  external?: boolean
+}
+const { items } = Astro.props as { items: Item[] }
+---
+
+<nav class="coast" aria-label="Coast guide">
+  <div class="container coast__inner">
+    <span class="coast__label">Coast guide</span>
+    <ul class="coast__list">
+      {items.map((item) => (
+        <li>
+          <a
+            class="coast__item"
+            href={item.href}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noreferrer' : undefined}
+          >
+            <CldImage src={item.image} alt="" width={160} height={160} sizes="48px" />
+            <span class="coast__name">{item.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .coast {
+    padding: 0.5rem 0 1.5rem;
+  }
+
+  .coast__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .coast__label {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .coast__list {
+    display: flex;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-width: 0;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .coast__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .coast__list li {
+    flex: none;
+    scroll-snap-align: start;
+  }
+
+  .coast__item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.35rem 1rem 0.35rem 0.35rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-card);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .coast__item:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-soft);
+    text-decoration: none;
+  }
+
+  .coast__item:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .coast__item :global(img) {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .coast__name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 700px) {
+    .coast__inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.6rem;
+    }
+  }
+</style>

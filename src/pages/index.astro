@@ -2,6 +2,10 @@
 import HomePhotoshoots from '../components/HomePhotoshoots.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import CldImage from '../components/CldImage.astro'
+import CoastGuide from '../components/home/CoastGuide.astro'
+import StayDirect from '../components/home/StayDirect.astro'
+import PlanCta from '../components/home/PlanCta.astro'
+import { getPhotoshootCard } from '../data/photoshoots'
 import PoseGuidePhone from '../components/PoseGuidePhone.astro'
 import { heroLinks, site } from '../data/site'
 import { photography } from '../data/photographer'
@@ -54,6 +58,15 @@ const staticPages = [
   },
 ]
 
+// Compact "Coast guide" strip under the hero.
+const coastGuide = [
+  { title: 'Bus timetables', href: heroLinks.busPdf, external: true, image: '/staticpages/index/bus-timetables.webp', icon: 'ph-bus' },
+  { title: 'Ferry timetables', href: '/ferry-timetables/', image: '/staticpages/index/ferry-timetables.webp', icon: 'ph-boat' },
+  { title: 'Parking tips', href: '/parking/', image: '/staticpages/mainpage/parking.webp', icon: 'ph-car' },
+  { title: 'Moto roads', href: '/moto/', image: '/staticpages/index/moto-roads-in-amalfi.webp', icon: 'ph-motorcycle' },
+  { title: 'Amalfi news', href: '/blog/', image: '/staticpages/index/blog-of-amalfi-coast.webp', icon: 'ph-newspaper' },
+]
+
 // Main sections linked from the homepage, in page order.
 const homeSections = [
   { name: 'Amalfi Coast photoshoots', url: '/photoshootings/' },
@@ -91,7 +104,8 @@ const homeJsonLd = {
   },
 }
 
-const { posts: newsPosts } = await getGhostPosts({ limit: 8 })
+const { posts: newsPosts } = await getGhostPosts({ limit: 4 })
+const shootCard = getPhotoshootCard('jassi-conca-proposal')
 const quatrains = Array.isArray(heroQuatrains) ? heroQuatrains : []
 const fallbackQuatrain =
   Array.isArray(quatrains[0]) && quatrains[0].length === 4
@@ -129,7 +143,67 @@ const fallbackQuatrain =
       </div>
 
       <div class="hero__mosaic">
-        <div class="hero__tile hero__tile--primary">
+        <a class="hero__big hero__big--shoots" href="/photoshootings/">
+          <img
+            src={shootCard.image}
+            srcset={shootCard.srcset}
+            sizes="(max-width: 1000px) 100vw, 48vw"
+            width={shootCard.width}
+            height={shootCard.height}
+            alt="Couple photoshoot on the Amalfi Coast"
+            style={`object-position:${shootCard.focal || 'top center'}`}
+            loading="eager"
+            decoding="async"
+          />
+          <span class="hero__big-label">
+            <i class="ph ph-camera" aria-hidden="true"></i>
+            <span class="hero__big-text">
+              <strong>Photoshoots</strong>
+              <span>Professional photos of yourself, shot by a local.</span>
+            </span>
+          </span>
+        </a>
+
+        <a class="hero__big hero__big--stay" href="/apartments/#direct">
+          <CldImage
+            src="/staticpages/mainpage/rental-houses.webp"
+            alt="Amalfi Coast apartments with sea view"
+            width={1200}
+            height={1200}
+            sizes="(max-width: 1000px) 100vw, 48vw"
+          />
+          <span class="hero__offer">
+            <span class="hero__offer-label">Direct booking</span>
+            <strong class="hero__offer-value">−10%</strong>
+          </span>
+          <span class="hero__big-label">
+            <i class="ph ph-house" aria-hidden="true"></i>
+            <span class="hero__big-text">
+              <strong>Apartments in Atrani</strong>
+              <span>Steps from the sea.</span>
+            </span>
+            <span class="hero__big-cta">Check dates <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+          </span>
+        </a>
+
+        <a class="hero__big hero__big--tours" href="/experience/">
+          <CldImage
+            src="/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp"
+            alt="Private tours along the Amalfi Coast"
+            width={2499}
+            height={1874}
+            sizes="(max-width: 1000px) 100vw, 64vw"
+          />
+          <span class="hero__big-label">
+            <i class="ph ph-car-profile" aria-hidden="true"></i>
+            <span class="hero__big-text">
+              <strong>Tours</strong>
+              <span>By private car or scooter, with photos.</span>
+            </span>
+          </span>
+        </a>
+
+        <div class="hero__tile hero__tile--guide">
           <a class="guide-card" href="https://guide.amalfi.day" target="_blank" rel="noreferrer">
             <div class="guide-card__media">
               <CldImage
@@ -139,15 +213,9 @@ const fallbackQuatrain =
                 width={1500}
                 height={1072}
                 priority
-                sizes="(max-width: 900px) 100vw, 60vw"
+                sizes="(max-width: 1000px) 100vw, 32vw"
               />
-              <video
-                class="guide-card__video"
-                muted
-                loop
-                playsinline
-                preload="none"
-              >
+              <video class="guide-card__video" muted loop playsinline preload="none">
                 <source data-src="/staticpages/video/atrani-sorrento-video.mp4" type="video/mp4" />
               </video>
             </div>
@@ -157,74 +225,15 @@ const fallbackQuatrain =
             </span>
           </a>
         </div>
-        <div class="hero__tile hero__tile--small hero__tile--small-a">
-          <a
-            class="hero__mini hero__mini--photo"
-            href={heroLinks.busPdf}
-            id="bus"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <CldImage
-              src="/staticpages/index/bus-timetables.webp"
-              alt="Bus timetables"
-              width={1000}
-              height={1000}
-              sizes="(max-width: 900px) 50vw, 20vw"
-            />
-            <span class="hero__mini-badge">Bus timetables</span>
-          </a>
-        </div>
-        <div class="hero__tile hero__tile--small hero__tile--small-b">
-          <a
-            class="hero__mini hero__mini--photo"
-            href="/ferry-timetables/"
-            id="ferry"
-          >
-            <CldImage
-              src="/staticpages/index/ferry-timetables.webp"
-              alt="Ferry timetables"
-              width={1000}
-              height={1000}
-              sizes="(max-width: 900px) 50vw, 20vw"
-            />
-            <span class="hero__mini-badge">Ferry timetables</span>
-          </a>
-        </div>
-        <div class="hero__tile hero__tile--bottom">
-          <a class="hero__mini" href="/photoshootings/">
-            <i class="ph ph-camera" aria-hidden="true"></i>
-            <div>
-              <strong>Photoshoots</strong>
-              <span>Get the best professional photos of yourself.</span>
-            </div>
-            <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="hero__essentials">
-        {staticPages.map((item) => (
-          <a class:list={['hero__essential', item.wide && 'hero__essential--wide']} href={item.href}>
-            <CldImage
-              src={item.image}
-              alt={item.imageAlt}
-              width={1200}
-              height={1200}
-              sizes="(max-width: 900px) 50vw, 16vw"
-            />
-            <span class="hero__mini-badge">{item.title}</span>
-            {item.offer && (
-              <span class="hero__offer">
-                <span class="hero__offer-label">{item.offer.label}</span>
-                <strong class="hero__offer-value">{item.offer.value}</strong>
-              </span>
-            )}
-          </a>
-        ))}
       </div>
     </div>
   </section>
+
+  <CoastGuide items={coastGuide} />
+
+  <HomePhotoshoots part="slider" />
+
+  <StayDirect />
 
   <section class="section section--experience">
     <div class="container">
@@ -319,7 +328,7 @@ const fallbackQuatrain =
     </div>
   </section>
 
-  <HomePhotoshoots />
+  <HomePhotoshoots part="stories" />
 
   <section class="section section--news">
     <div class="container">
@@ -371,6 +380,8 @@ const fallbackQuatrain =
     </div>
   </section>
 
+  <PlanCta />
+
 </BaseLayout>
 
 <style>
@@ -389,6 +400,11 @@ const fallbackQuatrain =
 
   :global(body.home-page) {
     background-color: var(--home-hero-bg);
+  }
+
+  /* The homepage ends with its own Plan your day CTA. */
+  :global(body.home-page .prefooter) {
+    display: none;
   }
 
   :global(body.home-page main) {
@@ -565,10 +581,130 @@ const fallbackQuatrain =
   .hero__mosaic {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    grid-template-rows: auto auto;
     gap: 1.2rem;
-    align-items: stretch;
     width: 100%;
+  }
+
+  .hero__big {
+    position: relative;
+    display: block;
+    grid-column: span 3;
+    aspect-ratio: 4 / 3;
+    border-radius: 26px;
+    overflow: hidden;
+    color: #ffffff;
+    text-decoration: none;
+    background: #1a1a1a;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  }
+
+  .hero__big:hover {
+    text-decoration: none;
+  }
+
+  .hero__big:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+  }
+
+  .hero__big > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .hero__big:hover > img {
+    transform: scale(1.04);
+  }
+
+  .hero__big::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.62), transparent 55%);
+    pointer-events: none;
+  }
+
+  .hero__big--tours > img {
+    object-position: 50% 0%;
+  }
+
+  .hero__big--tours {
+    grid-column: span 4;
+    aspect-ratio: auto;
+    min-height: 260px;
+  }
+
+  .hero__tile--guide {
+    grid-column: span 2;
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    display: flex;
+    min-height: 260px;
+  }
+
+  .hero__tile--guide > a {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__big-label {
+    position: absolute;
+    z-index: 1;
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: #ffffff;
+  }
+
+  .hero__big-label > i {
+    flex: none;
+    font-size: 2rem;
+  }
+
+  .hero__big-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+    margin-right: auto;
+  }
+
+  .hero__big-text strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+    color: #ffffff;
+  }
+
+  .hero__big-text span {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hero__big-cta {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: #ff5900;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .hero__big-cta > i {
+    color: #ffffff;
   }
 
   @media (min-width: 1001px) {
@@ -576,43 +712,6 @@ const fallbackQuatrain =
       transform: scale(2.25) rotate(-3deg) translateY(-25%);
       transform-origin: center top;
     }
-  }
-
-  .hero__tile {
-    position: relative;
-    border-radius: 26px;
-    overflow: hidden;
-    display: flex;
-    align-items: stretch;
-  }
-
-  .hero__tile > a {
-    width: 100%;
-    height: 100%;
-  }
-
-  .hero__tile--primary {
-    grid-column: 1 / span 4;
-    grid-row: 1 / 3;
-  }
-
-  .hero__tile--small {
-    aspect-ratio: 1 / 1;
-  }
-
-  .hero__tile--small-a {
-    grid-column: 5;
-    grid-row: 1;
-  }
-
-  .hero__tile--small-b {
-    grid-column: 6;
-    grid-row: 1;
-  }
-
-  .hero__tile--bottom {
-    grid-column: 5 / span 2;
-    grid-row: 2;
   }
 
   .hero__intro :is(a, h1, h2, h3, h4, h5, h6, p, span, strong) {
@@ -701,116 +800,29 @@ const fallbackQuatrain =
     color: #ffffff;
   }
 
-  .hero__mini {
-    border-radius: 18px;
-    padding: 1rem 1.2rem;
-    background: #ffffff;
-    border: 1px solid rgba(26, 26, 26, 0.08);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: space-between;
-    text-decoration: none;
-    height: 100%;
-    color: #1a1a1a;
-  }
-
-  .hero__mini--photo {
-    position: relative;
-    padding: 0;
-    overflow: hidden;
-    color: #ffffff;
-    justify-content: stretch;
-    border: none;
-    background: transparent;
-  }
-
-  .hero__mini--photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .hero__mini--photo:hover img {
-    transform: scale(1.05);
-  }
-
-  .hero__mini-badge {
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: inline-flex;
-    align-items: center;
-    padding: 0.35rem 0.6rem;
-    border-radius: 999px;
-    background: #ffffff;
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 12px;
-    letter-spacing: 0.01em;
-    color: #111111;
-    white-space: nowrap;
-  }
-
-  .hero__mini--photo:hover .hero__mini-badge {
-    background: var(--color-accent);
-    color: #ffffff;
-  }
-
-  .hero__essentials {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1.2rem;
-    width: 100%;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero__essential {
-    position: relative;
-    border-radius: 26px;
-    overflow: hidden;
-    display: block;
-    text-decoration: none;
-    aspect-ratio: 1 / 1;
-  }
-
-  /* Two columns wide; the photo is taken out of flow so the row height
-     still comes from the square tiles beside it. */
-  .hero__essential--wide {
-    grid-column: span 2;
-    aspect-ratio: auto;
-  }
-
-  .hero__essential--wide img {
-    position: absolute;
-    inset: 0;
-  }
-
-  /* Discount sticker: a circle tucked into the bottom-right corner, clipped
-     by the tile so it reads as a half-circle rising from the corner. */
+  /* Discount sticker: a circle tucked into the top-right corner, clipped
+     by the tile so it reads as a half-circle. */
   .hero__offer {
     position: absolute;
+    z-index: 2;
     right: -1.6rem;
-    bottom: -2.9rem;
+    top: -2.9rem;
     width: 9.6rem;
     height: 9.6rem;
     border-radius: 50%;
-    background: var(--gradient-sunset);
+    background: #ff5900;
     color: #ffffff;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    padding-top: 1.35rem;
+    padding-bottom: 1.3rem;
     padding-right: 0.9rem;
     box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.55), var(--shadow-soft);
     text-align: center;
     line-height: 1;
     transition: transform 0.3s ease;
-    transform-origin: 70% 80%;
+    transform-origin: 70% 30%;
   }
 
   .hero__offer-label {
@@ -830,7 +842,7 @@ const fallbackQuatrain =
     font-variant-numeric: lining-nums;
   }
 
-  .hero__essential:hover .hero__offer {
+  .hero__big:hover .hero__offer {
     transform: scale(1.06) rotate(-4deg);
   }
 
@@ -839,71 +851,9 @@ const fallbackQuatrain =
       transition: none;
     }
 
-    .hero__essential:hover .hero__offer {
+    .hero__big:hover .hero__offer {
       transform: none;
     }
-  }
-
-  .hero__essential img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .hero__essential:hover img {
-    transform: scale(1.05);
-  }
-
-  .hero__essential:hover .hero__mini-badge {
-    background: var(--color-accent);
-    color: #ffffff;
-  }
-
-  .hero__mini--stack {
-    flex-direction: column;
-    gap: 0.8rem;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .hero__mini--stack i {
-    font-size: 2rem;
-  }
-
-  .hero__mini > i {
-    font-size: 2rem;
-  }
-
-  .hero__icon {
-    display: inline-block;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .hero__icon--sunset {
-    background-image: var(--gradient-sunset);
-  }
-
-  .hero__icon--azure {
-    background-image: var(--gradient-azure);
-  }
-
-  .hero__mini:hover {
-    text-decoration: none;
-  }
-
-  .hero__mini strong {
-    display: block;
-    font-size: 1rem;
-  }
-
-  .hero__mini span:not(.hero__mini-badge) {
-    font-size: 0.85rem;
-    color: rgba(26, 26, 26, 0.7);
   }
 
   .section__header {
@@ -1230,46 +1180,21 @@ const fallbackQuatrain =
       transform: scale(1.28) translateY(1%);
     }
 
-    .hero__mosaic {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      grid-template-rows: auto auto auto;
-    }
-
-    .hero__tile--primary {
-      grid-column: 1 / span 6;
-      grid-row: 1;
-      min-height: 320px;
-    }
-
-    .hero__tile--small-a {
-      grid-column: 1 / span 3;
-      grid-row: 2;
-    }
-
-    .hero__tile--small-b {
-      grid-column: 4 / span 3;
-      grid-row: 2;
-    }
-
-    .hero__tile--bottom {
-      grid-column: 1 / span 6;
-      grid-row: 3;
-    }
-
     .hero::after {
       height: calc(22vw + 1.5rem);
     }
 
-    .hero__essentials {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .hero__big--tours,
+    .hero__tile--guide {
+      grid-column: 1 / -1;
     }
 
-    .hero__essential {
-      aspect-ratio: 1 / 1;
+    .hero__big--tours {
+      aspect-ratio: 16 / 7;
     }
 
-    .hero__essential--wide {
-      aspect-ratio: 2 / 1;
+    .hero__tile--guide {
+      min-height: 300px;
     }
 
     .news-scroll {
@@ -1302,8 +1227,15 @@ const fallbackQuatrain =
   }
 
   @media (max-width: 640px) {
-    .hero__tile--primary {
-      min-height: 260px;
+    .hero__big,
+    .hero__big--tours {
+      grid-column: 1 / -1;
+      aspect-ratio: 4 / 3;
+    }
+
+    .hero__big-cta,
+    .hero__big-text span {
+      display: none;
     }
 
     .guide-card__badge {
@@ -1341,37 +1273,6 @@ const fallbackQuatrain =
       text-align: center;
     }
 
-    .hero__mosaic {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: auto auto auto;
-    }
-
-    .hero__tile--primary,
-    .hero__tile--small-a,
-    .hero__tile--small-b,
-    .hero__tile--bottom {
-      grid-column: auto;
-    }
-
-    .hero__tile--primary {
-      grid-column: 1 / span 2;
-      grid-row: 1;
-    }
-
-    .hero__tile--small-a {
-      grid-column: 1;
-      grid-row: 2;
-    }
-
-    .hero__tile--small-b {
-      grid-column: 2;
-      grid-row: 2;
-    }
-
-    .hero__tile--bottom {
-      grid-column: 1 / span 2;
-      grid-row: 3;
-    }
 
     .xp-card {
       flex-direction: column;
