@@ -310,16 +310,22 @@ export function initPlan(root, options = {}) {
     messageField.required = ask
   }
 
+  function startAsk() {
+    serviceBoxes.forEach((b) => (b.checked = b.value === 'other'))
+    showErrors({}, ['services'])
+    syncAll()
+    syncAskMode()
+    reached = STEPS
+    go(STEPS)
+  }
+  root.querySelector('[data-ask-btn]')?.addEventListener('click', startAsk)
+
   form.addEventListener('change', (event) => {
     const box = event.target
     if (box instanceof HTMLInputElement && box.name === 'service' && box.checked) {
       // "Ask" stands alone and opens the contact step straight away.
       if (box.value === 'other') {
-        serviceBoxes.forEach((b) => (b.checked = b === box))
-        syncAll()
-        syncAskMode()
-        reached = STEPS
-        go(STEPS)
+        startAsk()
         return
       }
       serviceBoxes.forEach((b) => { if (b.value === 'other') b.checked = false })

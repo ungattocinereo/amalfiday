@@ -71,7 +71,25 @@ const steps = [
             <p class="plan-step__hint" id="services-hint">Pick one or more.</p>
             <div class="plan-tiles" role="group" aria-describedby="services-hint services-error">
               {
-                tiles.map((t) => (
+                tiles.map((t) => t.id === 'other' ? (
+                  <div class="plan-ask-cell">
+                    {/* Not a choice: an action that jumps straight to the contact step.
+                        The hidden checkbox keeps the request state in one place. */}
+                    <input type="checkbox" name="service" value={t.id} data-label={t.label} hidden />
+                    <button type="button" class="plan-ask" data-ask-btn>
+                      <span class="plan-ask__media">
+                        <img src={t.image} alt="" width={t.w} height={t.h} loading="lazy" decoding="async" />
+                      </span>
+                      <span class="plan-ask__body">
+                        <span>I want to</span>
+                        <strong>just ask</strong>
+                      </span>
+                      <span class="plan-ask__go" aria-hidden="true">
+                        <i class="ph ph-arrow-right" />
+                      </span>
+                    </button>
+                  </div>
+                ) : (
                   <label class="plan-tile">
                     <input type="checkbox" name="service" value={t.id} data-label={t.label} />
                     <span class="plan-tile__media">
@@ -548,6 +566,96 @@ const steps = [
     font-size: 0.86rem;
     line-height: 1.4;
     color: var(--color-text-muted);
+  }
+
+  /* "Just ask": an action, not a choice. Dashed outline, warm fill, arrow instead of a check. */
+  .plan-ask-cell {
+    display: flex;
+  }
+
+  .plan-ask {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    border-radius: 20px;
+    border: 2px dashed color-mix(in srgb, var(--color-accent) 70%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 9%, var(--color-card));
+    color: var(--color-text);
+    font: inherit;
+    text-align: left;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .plan-ask:hover {
+    transform: translateY(-3px);
+    border-style: solid;
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 14%, var(--color-card));
+    box-shadow: 0 14px 30px rgba(255, 89, 0, 0.16);
+  }
+
+  .plan-ask:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .plan-ask__media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    opacity: 0.85;
+    mix-blend-mode: multiply;
+  }
+
+  :global(html[data-theme='night']) .plan-ask__media {
+    mix-blend-mode: normal;
+  }
+
+  .plan-ask__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .plan-ask__body {
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.8rem 0.9rem 0.95rem;
+  }
+
+  .plan-ask__body span {
+    font-size: 0.86rem;
+    color: var(--color-text-muted);
+  }
+
+  .plan-ask__body strong {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--color-accent);
+  }
+
+  .plan-ask__go {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--color-accent);
+    color: #ffffff;
+    transition: transform 0.2s ease;
+  }
+
+  .plan-ask:hover .plan-ask__go {
+    transform: translateX(3px);
   }
 
   .plan-tile__check {
@@ -1127,7 +1235,8 @@ const steps = [
       gap: 0.6rem;
     }
 
-    .plan-tile__body {
+    .plan-tile__body,
+    .plan-ask__body {
       padding: 0.6rem 0.7rem 0.75rem;
     }
 
