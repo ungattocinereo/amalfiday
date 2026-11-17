@@ -17,7 +17,7 @@ const tiles = [
   { id: 'photoshoot', label: 'Photoshoot', text: 'Portraits, couples, proposals', image: '/staticpages/contact/photoshootings.webp', w: 1200, h: 896 },
   { id: 'stay', label: 'Stay', text: 'Rooms in Atrani, by the sea', image: '/staticpages/mainpage/rental-houses.webp', w: 1200, h: 1200 },
   { id: 'tour', label: 'Tour', text: 'Private car tours of the coast', image: '/staticpages/contact/transfers.webp', w: 1200, h: 896 },
-  { id: 'other', label: 'Something else', text: 'Transfers, porters, workshops', image: '/staticpages/contact/masterclasses.webp', w: 1200, h: 896 },
+  { id: 'other', label: 'Ask', text: '', image: '/staticpages/contact/masterclasses.webp', w: 1200, h: 896 },
 ]
 
 const rooms = DIRECT_UNIT_IDS.map((id) => ({
@@ -79,7 +79,7 @@ const steps = [
                     </span>
                     <span class="plan-tile__body">
                       <strong>{t.label}</strong>
-                      <span>{t.text}</span>
+                      {t.text && <span>{t.text}</span>}
                     </span>
                     <span class="plan-tile__check" aria-hidden="true">
                       <i class="ph ph-check" />
@@ -188,13 +188,15 @@ const steps = [
                 <span class="plan-error" id="contact-error" data-error="contact" hidden></span>
               </label>
               <label class="plan-field plan-field--wide">
-                <span class="plan-field__label">Anything else? <small>(optional)</small></span>
+                <span class="plan-field__label" data-message-label>Anything else? <small>(optional)</small></span>
                 <textarea
                   name="message"
                   rows="4"
                   maxlength="1500"
                   placeholder="Occasion, favourite spots, how you arrive…"
-                  data-field="message"></textarea>
+                  data-field="message"
+                  aria-describedby="message-error"></textarea>
+                <span class="plan-error" id="message-error" data-error="message" hidden></span>
               </label>
             </div>
 
@@ -257,7 +259,7 @@ const steps = [
         <dl class="plan-card__rows">
           <div data-sum-row="services"><dt>What</dt><dd data-sum="services" data-empty="Pick a service">Pick a service</dd></div>
           <div data-sum-row="dates"><dt>When</dt><dd data-sum="when" data-empty="Dates to follow">Dates to follow</dd></div>
-          <div><dt>Guests</dt><dd data-sum="guests">2 guests</dd></div>
+          <div data-sum-row="guests"><dt>Guests</dt><dd data-sum="guests">2 guests</dd></div>
           <div data-sum-row="room" hidden><dt>Room</dt><dd data-sum="room">Any room</dd></div>
           <div><dt>From</dt><dd data-sum="from" data-empty="Your name and contact">Your name and contact</dd></div>
         </dl>
@@ -270,6 +272,19 @@ const steps = [
 </section>
 
 <style>
+  /* "Ask" alone: no dates step, no dates or guests in the summary. */
+  [data-ask] .plan__progress > li:nth-child(2),
+  [data-ask] [data-sum-row='dates'],
+  [data-ask] [data-sum-row='guests'] {
+    display: none;
+  }
+  [data-ask] .plan__progress > li:nth-child(3) .plan__dot-n {
+    font-size: 0;
+  }
+  [data-ask] .plan__progress > li:nth-child(3) .plan__dot-n::after {
+    content: '2';
+    font-size: 0.75rem;
+  }
   /* The hero's orange (navy at night) runs on under the top of the card. */
   .plan {
     --plan-hero-bg: #ff5900;

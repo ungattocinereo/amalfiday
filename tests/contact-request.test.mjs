@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
+  isAskOnly,
   LIMITS,
   buildContactRequest,
   clampGuests,
@@ -129,4 +130,22 @@ test('WhatsApp follow-up text', () => {
   const { summary } = buildContactRequest({ ...base, place: 'Ravello' })
   assert.equal(whatsappText(summary), 'Hi! I just sent a request on amalfi.day: Photoshoot, 12 Jun 2027, Ravello.')
   assert.equal(whatsappText({}), 'Hi! I just sent a request on amalfi.day.')
+})
+
+test('"Ask" alone is a plain question: no dates or guests, the message is required', () => {
+  assert.equal(isAskOnly(['other']), true)
+  assert.equal(isAskOnly(['other', 'stay']), false)
+  assert.equal(isAskOnly([]), false)
+
+  const empty = buildContactRequest({ services: ['other'], contact: 'guest@example.com' })
+  assert.equal(empty.ok, false)
+  assert.equal(empty.errors.message, 'Write your question.')
+  assert.equal(empty.errors.dates, undefined)
+
+  const asked = buildContactRequest({ services: ['other'], contact: 'guest@example.com', message: 'Do you arrange porters?' })
+  assert.equal(asked.ok, true)
+  assert.equal(asked.payload.service, 'Question')
+  assert.equal(asked.payload.dates, 'Not specified')
+  assert.equal(asked.payload.message, 'Do you arrange porters?')
+  assert.equal(asked.summary.guests, '')
 })

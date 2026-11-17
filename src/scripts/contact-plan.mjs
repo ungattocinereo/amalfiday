@@ -1,7 +1,7 @@
 // DOM wiring for the "Plan your day" request builder (src/components/contact/PlanRequest.astro).
 // Payload rules live in contact-request.mjs; URL prefill in contact-prefill.mjs.
 // Everything user-provided is written through textContent / .value, never as HTML.
-import { buildContactRequest, clampGuests, whatsappText, MAX_GUESTS } from './contact-request.mjs'
+import { buildContactRequest, clampGuests, isAskOnly, whatsappText, MAX_GUESTS } from './contact-request.mjs'
 import { contactPrefill } from './contact-prefill.mjs'
 
 const STEPS = 3
@@ -10,8 +10,8 @@ const COOLDOWN_MS = 60_000
 const COOLDOWN_KEY = 'amalfi-contact-last-submit-at'
 const FALLBACK_EMAIL = 'hello@amalfi.day'
 const RETRY_CODES = new Set([404, 405, 500, 502, 503, 504])
-const STEP_FIELDS = { 1: ['services'], 2: ['dates', 'to'], 3: ['contact', 'gdpr'] }
-const FIELD_STEP = { services: 1, dates: 2, to: 2, contact: 3, gdpr: 3 }
+const STEP_FIELDS = { 1: ['services'], 2: ['dates', 'to'], 3: ['contact', 'message', 'gdpr'] }
+const FIELD_STEP = { services: 1, dates: 2, to: 2, contact: 3, message: 3, gdpr: 3 }
 
 const isoToday = () => {
   const d = new Date()
@@ -147,6 +147,7 @@ export function initPlan(root, options = {}) {
     dates: () => [fromInput, field('place')],
     to: () => [toInput],
     contact: () => [field('contact')],
+    message: () => [field('message')],
     gdpr: () => [gdpr],
   }
 
@@ -191,7 +192,7 @@ export function initPlan(root, options = {}) {
       const n = Number(d.dataset.goto)
       d.classList.toggle('is-current', n === step)
       d.classList.toggle('is-done', n < step)
-      d.disabled = n > reached || n === step
+      d.disabled = n > reached || n === step || (n === 2 && askOnly())
       if (n === step) d.setAttribute('aria-current', 'step')
       else d.removeAttribute('aria-current')
     })
@@ -206,7 +207,11 @@ export function initPlan(root, options = {}) {
     }
   }
 
+  const askOnly = () => isAskOnly(state().services)
+
   function go(n, focus = true) {
+    // A plain question skips the dates step in both directions.
+    if (n === 2 && askOnly()) n = step > 2 ? 1 : 3
     step = Math.min(Math.max(n, 1), STEPS)
     reached = Math.max(reached, step)
     setStatus('')
@@ -294,7 +299,34 @@ export function initPlan(root, options = {}) {
     }
     syncAll()
   })
-  form.addEventListener('change', syncAll)
+  const messageLabel = root.querySelector('[data-message-label]')
+  const messageField = field('message')
+  const messageDefaults = { label: messageLabel?.innerHTML || '', placeholder: messageField.placeholder }
+  function syncAskMode() {
+    const ask = askOnly()
+    root.toggleAttribute('data-ask', ask)
+    if (messageLabel) messageLabel.innerHTML = ask ? 'Your question' : messageDefaults.label
+    messageField.placeholder = ask ? 'Ask us anything: transfers, porters, workshops, the coast…' : messageDefaults.placeholder
+    messageField.required = ask
+  }
+
+  form.addEventListener('change', (event) => {
+    const box = event.target
+    if (box instanceof HTMLInputElement && box.name === 'service' && box.checked) {
+      // "Ask" stands alone and opens the contact step straight away.
+      if (box.value === 'other') {
+        serviceBoxes.forEach((b) => (b.checked = b === box))
+        syncAll()
+        syncAskMode()
+        reached = STEPS
+        go(STEPS)
+        return
+      }
+      serviceBoxes.forEach((b) => { if (b.value === 'other') b.checked = false })
+    }
+    syncAll()
+    syncAskMode()
+  })
 
   root.querySelectorAll('[data-guests]').forEach((btn) =>
     btn.addEventListener('click', () => {
@@ -338,9 +370,10 @@ export function initPlan(root, options = {}) {
   }
 
   if (applyPrefill(location.search)) {
-    reached = 2
-    step = 2
+    reached = askOnly() ? STEPS : 2
+    step = reached
   }
+  syncAskMode()
   render(false)
 
   // Links on this page to /contact/?service=… pick the tile without a reload.
@@ -351,10 +384,13 @@ export function initPlan(root, options = {}) {
     if (url.pathname !== location.pathname) return
     event.preventDefault()
     if (!done.hidden) resetAll()
+    if (url.searchParams.get('service') === 'other') serviceBoxes.forEach((b) => (b.checked = false))
     applyPrefill(url.search)
+    syncAskMode()
     history.replaceState(null, '', `${url.pathname}${url.search}#plan`)
-    reached = Math.max(reached, 2)
-    go(2)
+    const target = askOnly() ? STEPS : 2
+    reached = Math.max(reached, target)
+    go(target)
   })
 
   // ---- submit --------------------------------------------------------------
@@ -390,6 +426,7 @@ export function initPlan(root, options = {}) {
     reached = 1
     showErrors({}, Object.keys(errorTargets))
     syncAll()
+    syncAskMode()
     go(1)
   }
 

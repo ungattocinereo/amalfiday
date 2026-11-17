@@ -12,7 +12,7 @@ export const SERVICES = Object.freeze([
   Object.freeze({ id: 'photoshoot', label: 'Photoshoot' }),
   Object.freeze({ id: 'stay', label: 'Stay' }),
   Object.freeze({ id: 'tour', label: 'Tour' }),
-  Object.freeze({ id: 'other', label: 'Something else' }),
+  Object.freeze({ id: 'other', label: 'Question' }),
 ])
 
 export const MAX_GUESTS = 12
@@ -74,6 +74,12 @@ export function normalizeServices(ids) {
   return SERVICES.filter((s) => set.has(s.id))
 }
 
+/** "Ask" on its own: a plain question, so no dates or guests are needed. */
+export function isAskOnly(ids) {
+  const services = normalizeServices(ids)
+  return services.length === 1 && services[0].id === 'other'
+}
+
 export function clampGuests(value) {
   const n = Math.round(Number(value))
   if (!Number.isFinite(n) || n < 1) return 1
@@ -106,30 +112,34 @@ export function buildContactRequest(input = {}) {
   const contact = line(input.contact)
   const note = text(input.message)
 
+  const askOnly = services.length === 1 && services[0].id === 'other'
+
   const errors = {}
   if (!services.length) errors.services = 'Pick at least one option.'
   const from = parseIsoDate(input.from)
   const to = parseIsoDate(input.to)
   if (from && to && to.t <= from.t) errors.to = 'The end date must be after the start date.'
-  if (!range && !place) errors.dates = 'Add a date, or tell us roughly when.'
+  if (!range && !place && !askOnly) errors.dates = 'Add a date, or tell us roughly when.'
+  if (askOnly && !note) errors.message = 'Write your question.'
   if (!contact) errors.contact = 'Add your email or WhatsApp number.'
   else if (!isValidContact(contact)) errors.contact = 'This does not look like an email or phone number.'
   else if (contact.length > LIMITS.contact) errors.contact = 'This is too long for an email or phone number.'
 
   const guestLabel = `${guests} guest${guests === 1 ? '' : 's'}`
   const serviceText = services.map((s) => s.label).join(' + ')
-  const service = clip(serviceText ? `${serviceText} · ${guestLabel}` : '', LIMITS.service)
-  const dates = clip([range, place].filter(Boolean).join(', '), LIMITS.dates)
+  const service = clip(askOnly ? serviceText : serviceText ? `${serviceText} · ${guestLabel}` : '', LIMITS.service)
+  // The API requires dates; a plain question has none.
+  const dates = clip([range, place].filter(Boolean).join(', ') || (askOnly ? 'Not specified' : ''), LIMITS.dates)
 
   const details = []
   if (services.length > 1) details.push(`Services: ${services.map((s) => s.label).join(', ')}`)
-  details.push(`Guests: ${guests}`)
+  if (!askOnly) details.push(`Guests: ${guests}`)
   if (hasStay) details.push(`Room: ${unit ? unit.label : 'any room'}`)
   if (range) details.push(`Dates: ${range}`)
   if (place) details.push(`Place / timing: ${place}`)
   const head = details.join('\n')
   const room = LIMITS.message - head.length - 2
-  const message = note ? `${head}\n\n${clip(note, Math.max(room, 0))}` : head
+  const message = !head ? note : note ? `${head}\n\n${clip(note, Math.max(room, 0))}` : head
 
   const payload = {
     name: clip(name, LIMITS.name),
@@ -148,7 +158,7 @@ export function buildContactRequest(input = {}) {
       services: services.map((s) => s.label),
       dates: range,
       place,
-      guests: guestLabel,
+      guests: askOnly ? '' : guestLabel,
       room: hasStay ? (unit ? unit.label : 'Any room') : '',
       name,
       contact,
