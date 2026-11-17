@@ -2,13 +2,24 @@ import http from 'node:http'
 import contactHandler from '../api/contact.js'
 import subscribeHandler from '../api/subscribe.js'
 import availabilityHandler from '../api/availability.js'
+import { handleCalendar, handleQuote, serveBooking } from './lib/booking-handlers.mjs'
+import { fixtureLoadNights } from './lib/booking-fixture.mjs'
 
 const port = Number(process.env.CONTACT_API_PORT || process.env.PORT || 8787)
+
+// BOOKING_FIXTURE=1: synthetic nights, no Hostex call and no token needed (dev only).
+const bookingFixture = process.env.BOOKING_FIXTURE === '1'
+const bookingOptions = bookingFixture
+  ? { env: { ...process.env, HOSTEX_ACCESS_TOKEN: 'fixture' }, loadNightsImpl: fixtureLoadNights }
+  : {}
+if (bookingFixture) console.log('[contact-api] booking routes use fixture nights')
 
 const routes = {
   '/api/contact': contactHandler,
   '/api/subscribe': subscribeHandler,
   '/api/availability': availabilityHandler,
+  '/api/booking/calendar': (req, res) => serveBooking(req, res, handleCalendar, bookingOptions),
+  '/api/booking/quote': (req, res) => serveBooking(req, res, handleQuote, bookingOptions),
 }
 
 const server = http.createServer((req, res) => {
