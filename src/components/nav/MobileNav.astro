@@ -74,8 +74,8 @@ const chips = chipOrder
 const guideStart = cards.length
 const newsStart = guideStart + 1 + chips.length
 
-// WhatsApp number from PUBLIC_WHATSAPP_PHONE; without it the button is hidden.
-const whatsappDigits = String(import.meta.env.PUBLIC_WHATSAPP_PHONE ?? '').replace(/\D/g, '')
+// WhatsApp number: PUBLIC_WHATSAPP_PHONE, falling back to the number the contact page uses.
+const whatsappDigits = String(import.meta.env.PUBLIC_WHATSAPP_PHONE || '393270972329').replace(/\D/g, '')
 const whatsappHref = whatsappDigits.length >= 6 ? `https://wa.me/${whatsappDigits}` : undefined
 ---
 
