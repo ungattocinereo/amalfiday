@@ -1,0 +1,196 @@
+---
+import { DIRECT_APARTMENTS } from '../../data/apartments'
+
+// Short line under each card title; mirrors DirectBooking.astro.
+const META: Record<string, string> = {
+  orange: 'Double room with balcony · up to 2 guests',
+  vintage: 'Double room with balcony · up to 2 guests',
+  youth: 'Twin room with bunk beds · up to 2 guests',
+  solo: 'Single room with balcony · 1 guest',
+  awesome: 'Apartment by the sea · up to 2 guests',
+}
+---
+
+<section class="section stay-direct" id="stay-direct" aria-labelledby="stay-direct-title">
+  <div class="container">
+    <div class="stay-direct__head">
+      <div>
+        <span class="stay-direct__eyebrow">Atrani · steps from the sea</span>
+        <h2 id="stay-direct-title">Stay <span class="accent-italic">direct</span></h2>
+        <p>Book with us and save up to 10% compared with the platforms.</p>
+      </div>
+      <a class="button stay-direct__cta" href="/apartments/#direct">Check your dates <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+    </div>
+
+    <ul class="stay-direct__grid">
+      {DIRECT_APARTMENTS.map((apartment) => (
+        <li>
+          <a class="sd-card" href={`/book/${apartment.id}/`}>
+            {apartment.gallery[0] && (
+              <img
+                src={apartment.gallery[0]}
+                alt={`${apartment.name} in Atrani — interior photo`}
+                width="640"
+                height="480"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+            <span class="sd-card__body">
+              <strong>{apartment.name}</strong>
+              <span>{META[apartment.id] ?? ''}</span>
+              <span class="sd-card__link">View &amp; book <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .stay-direct__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stay-direct__eyebrow {
+    display: block;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .stay-direct h2 {
+    margin: 0;
+    font-size: clamp(2rem, 3vw, 3rem);
+  }
+
+  .stay-direct__head p {
+    margin: 0.6rem 0 0;
+    color: var(--color-text-muted);
+  }
+
+  .stay-direct__cta {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #ffffff;
+  }
+
+  .stay-direct__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stay-direct__grid li {
+    grid-column: span 2;
+    min-width: 0;
+  }
+
+  /* Five cards: 3 + 2, the last two share the row evenly. */
+  .stay-direct__grid li:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+
+  .sd-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .sd-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    text-decoration: none;
+  }
+
+  .sd-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  .sd-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--color-surface);
+  }
+
+  .sd-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 1.1rem 1.15rem;
+  }
+
+  .sd-card__body strong {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+  }
+
+  .sd-card__body > span:not(.sd-card__link) {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+
+  .sd-card__link {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 900px) {
+    .stay-direct__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stay-direct__grid li,
+    .stay-direct__grid li:nth-child(n + 4) {
+      grid-column: auto;
+    }
+
+    .stay-direct__grid li:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .stay-direct__head {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .stay-direct__cta {
+      justify-content: center;
+    }
+
+    .stay-direct__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .stay-direct__grid li:last-child {
+      grid-column: auto;
+    }
+  }
+</style>
