@@ -35,6 +35,7 @@ const staticPages = [
     note: 'Apartments, suites, and rooms near Atrani beach.',
     image: '/staticpages/mainpage/rental-houses.webp',
     imageAlt: 'Amalfi Coast apartments with sea view',
+    wide: true,
   },
   {
     title: 'Parking tips',
@@ -42,13 +43,6 @@ const staticPages = [
     note: 'Where to park and how to avoid traffic.',
     image: '/staticpages/mainpage/parking.webp',
     imageAlt: 'Parking area on the Amalfi Coast',
-  },
-  {
-    title: 'Beach reviews',
-    href: '/beaches/',
-    note: 'Best spots for swimming, sun, and photos.',
-    image: '/staticpages/mainpage/beach-reviews.webp',
-    imageAlt: 'Amalfi Coast beach overview',
   },
   {
     title: 'Moto roads',
@@ -205,19 +199,12 @@ const fallbackQuatrain =
             </div>
             <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
           </a>
-          <a class="hero__mini" href="/apartments/#direct">
-            <i class="ph ph-tag" aria-hidden="true"></i>
-            <div>
-              <strong>Book your stay direct — 10% less than on the platforms</strong>
-            </div>
-            <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
-          </a>
         </div>
       </div>
 
       <div class="hero__essentials">
         {staticPages.map((item) => (
-          <a class="hero__essential" href={item.href}>
+          <a class:list={['hero__essential', item.wide && 'hero__essential--wide']} href={item.href}>
             <CldImage
               src={item.image}
               alt={item.imageAlt}
@@ -784,6 +771,18 @@ const fallbackQuatrain =
     aspect-ratio: 1 / 1;
   }
 
+  /* Two columns wide; the photo is taken out of flow so the row height
+     still comes from the square tiles beside it. */
+  .hero__essential--wide {
+    grid-column: span 2;
+    aspect-ratio: auto;
+  }
+
+  .hero__essential--wide img {
+    position: absolute;
+    inset: 0;
+  }
+
   .hero__essential img {
     width: 100%;
     height: 100%;
@@ -1206,6 +1205,10 @@ const fallbackQuatrain =
 
     .hero__essential {
       aspect-ratio: 1 / 1;
+    }
+
+    .hero__essential--wide {
+      aspect-ratio: 2 / 1;
     }
 
     .news-scroll {
