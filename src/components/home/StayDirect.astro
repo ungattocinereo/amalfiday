@@ -1,6 +1,13 @@
 ---
 import { DIRECT_APARTMENTS } from '../../data/apartments'
 
+// Two large cards first, then three smaller ones.
+const ORDER = ['awesome', 'vintage', 'orange', 'solo', 'youth']
+const apartments = [...DIRECT_APARTMENTS].sort((a, b) => {
+  const rank = (id: string) => (ORDER.indexOf(id) + 1 || ORDER.length + 1)
+  return rank(a.id) - rank(b.id)
+})
+
 // Short line under each card title; mirrors DirectBooking.astro.
 const META: Record<string, string> = {
   orange: 'Double room with balcony · up to 2 guests',
@@ -23,7 +30,7 @@ const META: Record<string, string> = {
     </div>
 
     <ul class="stay-direct__grid">
-      {DIRECT_APARTMENTS.map((apartment) => (
+      {apartments.map((apartment) => (
         <li>
           <a class="sd-card" href={`/book/${apartment.id}/`}>
             {apartment.gallery[0] && (
@@ -99,8 +106,8 @@ const META: Record<string, string> = {
     min-width: 0;
   }
 
-  /* Five cards: 3 + 2, the last two share the row evenly. */
-  .stay-direct__grid li:nth-child(n + 4) {
+  /* Five cards: two large on top, three below. */
+  .stay-direct__grid li:nth-child(-n + 2) {
     grid-column: span 3;
   }
 
@@ -166,7 +173,7 @@ const META: Record<string, string> = {
     }
 
     .stay-direct__grid li,
-    .stay-direct__grid li:nth-child(n + 4) {
+    .stay-direct__grid li:nth-child(-n + 2) {
       grid-column: auto;
     }
 
