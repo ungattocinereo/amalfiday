@@ -184,3 +184,63 @@ test('a rejecting fetch (network error) → HostexError without the token', asyn
     (err) => err instanceof HostexError && !err.message.includes(TOKEN),
   )
 })
+
+test('malformed, inverted or oversized ranges throw RangeError before any network call', async () => {
+  const cases = [
+    { from: '2026-12-19', to: 'zzzz' },
+    { from: '2026-12-19', to: '2026-12-19T' },
+    { from: '2026-12-19', to: '2026-02-30' },
+    { from: 'nope', to: '2026-12-23' },
+    { from: '2026-12-19', to: '9999-12-31' },
+    { from: '2026-12-23', to: '2026-12-19' },
+    { from: '2026-01-01', to: '2027-01-02' }, // 367 days inclusive
+  ]
+  for (const range of cases) {
+    const { fetchImpl, calls } = fakeHostex()
+    await assert.rejects(
+      loadNights({ unitIds: ['orange'], ...range, token: TOKEN, fetchImpl }),
+      RangeError,
+      JSON.stringify(range),
+    )
+    assert.equal(calls.length, 0)
+  }
+})
+
+test('a 366-day range inclusive of both ends is accepted', async () => {
+  const { fetchImpl, calls } = fakeHostex()
+  const result = await loadNights({ unitIds: ['orange'], from: '2026-01-01', to: '2027-01-01', token: TOKEN, fetchImpl })
+  assert.equal(result.orange.length, 366)
+  assert.equal(result.orange.at(-1).date, '2027-01-01')
+  assert.equal(calls.length, 2)
+})
+
+test('missing or empty token throws a plain Error before any network call', async () => {
+  for (const token of [undefined, '', '   ']) {
+    const { fetchImpl, calls } = fakeHostex()
+    await assert.rejects(
+      loadNights({ unitIds: ['orange'], ...RANGE, token, fetchImpl }),
+      (err) => err instanceof Error && !(err instanceof HostexError) && /token/i.test(err.message),
+    )
+    assert.equal(calls.length, 0)
+  }
+})
+
+test('a fetch that never settles and ignores the abort signal still times out', async () => {
+  const fetchImpl = () => new Promise(() => {})
+  const started = Date.now()
+  await assert.rejects(
+    loadNights({ unitIds: ['orange'], ...RANGE, token: TOKEN, fetchImpl, timeoutMs: 20 }),
+    (err) => err instanceof HostexError && err.status === 504 && !err.message.includes(TOKEN),
+  )
+  assert.ok(Date.now() - started < 1000)
+})
+
+test('duplicate unit ids are sent once and returned once', async () => {
+  const { fetchImpl, calls } = fakeHostex()
+  const result = await loadNights({ unitIds: ['orange', 'orange', 'vintage', 'orange'], ...RANGE, token: TOKEN, fetchImpl })
+  assert.deepEqual(Object.keys(result), ['orange', 'vintage'])
+  const avail = calls.find((c) => new URL(c.url).pathname === '/v3/availabilities')
+  const cal = calls.find((c) => new URL(c.url).pathname === '/v3/listings/calendar')
+  assert.equal(new URL(avail.url).searchParams.get('property_ids'), '12843799,12843798')
+  assert.deepEqual(JSON.parse(cal.init.body).listings.map((l) => l.listing_id), ['1622640206186838346', '1491803199632820467'])
+})

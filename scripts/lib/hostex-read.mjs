@@ -15,7 +15,30 @@ export class HostexError extends Error {
   }
 }
 
+const MAX_RANGE_DAYS = 366
+
+function assertDate(name, value) {
+  // addDays validates that the string is a real calendar day.
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new RangeError(`Invalid ${name} date`)
+  let normalized
+  try {
+    normalized = addDays(value, 0)
+  } catch {
+    normalized = null
+  }
+  if (normalized !== value) {
+    throw new RangeError(`Invalid ${name} date`)
+  }
+}
+
+// Inclusive list of days; both ends validated, span capped before looping.
 function datesBetween(from, to) {
+  assertDate('from', from)
+  assertDate('to', to)
+  if (from > to) throw new RangeError(`Empty date range: ${from}..${to}`)
+  if (addDays(from, MAX_RANGE_DAYS - 1) < to) {
+    throw new RangeError(`Date range longer than ${MAX_RANGE_DAYS} days: ${from}..${to}`)
+  }
   const dates = []
   for (let d = from; d <= to; d = addDays(d, 1)) dates.push(d)
   return dates
@@ -49,13 +72,13 @@ async function request(fetchImpl, endpoint, url, init, signal) {
 const CLOSED_NIGHT = { bookable: false, priceCents: null, minStay: 0, closedOnArrival: false, closedOnDeparture: false }
 
 export async function loadNights({ unitIds, from, to, token, fetchImpl = fetch, timeoutMs = 8000 }) {
-  const units = unitIds.map((id) => {
+  const units = [...new Set(unitIds)].map((id) => {
     const unit = getDirectUnit(id)
     if (!unit) throw new Error(`Unknown direct unit: ${id}`)
     return { id, ...unit }
   })
   const dates = datesBetween(from, to)
-  if (dates.length === 0) throw new RangeError(`Empty date range: ${from}..${to}`)
+  if (typeof token !== 'string' || token.trim() === '') throw new Error('Hostex access token is missing')
 
   const headers = { 'Hostex-Access-Token': token }
   const availabilitiesUrl = new URL(`${API_BASE}/availabilities`)
