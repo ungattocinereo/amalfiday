@@ -1,0 +1,130 @@
+---
+// "How we can help": three products, plus a line for everything else.
+const products = [
+  {
+    title: 'Photoshoot',
+    text: 'Golden-hour portraits and couple sessions, guided from start to finish.',
+    image: '/staticpages/contact/photoshootings.webp',
+    alt: 'Amalfi Coast photoshoot planning',
+    href: '/contact/?service=photoshoot#contact-form',
+    cta: 'Request a photoshoot',
+  },
+  {
+    title: 'Stay',
+    text: 'Our apartments in Atrani, steps from the sea. Book direct and save 10%.',
+    image: '/staticpages/mainpage/rental-houses.webp',
+    alt: 'Apartments in Atrani',
+    href: '/apartments/#direct',
+    cta: 'Check dates',
+  },
+  {
+    title: 'Tour',
+    text: 'Private tours by car along the coast, with hidden viewpoints and local stories.',
+    image: '/staticpages/car-tours/positano-Hero-tours-amalfi-coast-by-car-3.webp',
+    alt: 'Private car tour above Positano',
+    href: '/contact/?service=tour#contact-form',
+    cta: 'Ask about a tour',
+  },
+]
+---
+
+<section class="section contact-help">
+  <div class="container">
+    <h2>How we can <span class="accent-italic">help</span></h2>
+    <div class="contact-help__grid">
+      {
+        products.map((p) => (
+          <article class="contact-help__card">
+            <div class="contact-help__media">
+              <img src={p.image} alt={p.alt} width="1200" height="896" loading="lazy" />
+            </div>
+            <div class="contact-help__content">
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+              <a class="contact-help__link" href={p.href}>
+                <span>{p.cta}</span> <i class="ph ph-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <p class="contact-help__more">Transfers, porters, workshops — just ask.</p>
+  </div>
+</section>
+
+<style>
+  .contact-help__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-help__card {
+    border-radius: var(--radius-lg);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-help__media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .contact-help__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .contact-help__content {
+    padding: 1.4rem;
+    display: grid;
+    gap: 0.6rem;
+    flex: 1;
+    align-content: start;
+  }
+
+  .contact-help__content h3,
+  .contact-help__content p {
+    margin: 0;
+  }
+
+  .contact-help__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  /* Only the label is underlined, never the arrow. */
+  .contact-help__link span {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent, #ff5900);
+    text-underline-offset: 0.2em;
+  }
+
+  .contact-help__more {
+    margin: 1.6rem 0 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 980px) {
+    .contact-help__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
