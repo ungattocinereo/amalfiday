@@ -285,12 +285,15 @@ const steps = [
     content: '2';
     font-size: 0.75rem;
   }
-  /* The hero's orange (navy at night) runs on under the top of the card. */
+  /* The hero itself runs on under the top of the card (see ContactHero), so the
+     orange is one surface: the section is transparent for its first 9rem. */
   .plan {
     --plan-hero-bg: #ff5900;
     position: relative;
+    z-index: 1;
+    margin-top: -9rem;
     padding: 0 0 2rem;
-    background: linear-gradient(var(--plan-hero-bg) 0 9rem, var(--color-bg) 9rem);
+    background: linear-gradient(transparent 0 9rem, var(--color-bg) 9rem);
     scroll-margin-top: 1rem;
   }
 

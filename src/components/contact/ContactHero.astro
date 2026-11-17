@@ -83,7 +83,8 @@ const { whatsappHref, email, phone } = Astro.props
     overflow: hidden;
     color: #ffffff;
     background: var(--c-hero-bg);
-    padding: calc(var(--header-space) + 2.5rem) 0 clamp(7rem, 12vw, 10rem);
+    /* The extra 9rem runs on under the top of the Plan card, so the glow is never cut. */
+    padding: calc(var(--header-space) + 2.5rem) 0 calc(clamp(7rem, 12vw, 10rem) + 9rem);
   }
 
   :global(html[data-theme='night']) .c-hero {
@@ -186,15 +187,28 @@ const { whatsappHref, email, phone } = Astro.props
     outline-offset: 3px;
   }
 
-  /* Primary channel: a dark tile, so its white text never sits on a pale surface. */
+  /* Primary channel: a white tile with dark text, the one solid surface on the orange. */
   .c-channel--primary {
-    background: #14110f;
-    border-color: #14110f;
-    box-shadow: 0 16px 34px rgba(60, 20, 0, 0.28);
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #14110f;
+    box-shadow: 0 16px 34px rgba(60, 20, 0, 0.22);
   }
 
   .c-channel--primary:hover {
-    background: #000000;
+    background: #fff6ee;
+  }
+
+  .c-channel--primary :is(strong, span, small) {
+    color: #14110f;
+  }
+
+  .c-channel--primary > i {
+    color: var(--color-accent);
+  }
+
+  .c-channel--primary:focus-visible {
+    outline-color: #ffffff;
   }
 
   .c-channel > i {
