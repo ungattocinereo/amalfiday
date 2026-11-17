@@ -1,0 +1,505 @@
+---
+import DirectCard from './DirectCard.astro'
+import { DIRECT_APARTMENTS } from '../data/apartments'
+
+// Short guest-facing line under each card title. Kept here, not in the unit registry.
+const META: Record<string, string> = {
+  orange: 'Double room with balcony · up to 2 guests',
+  vintage: 'Double room with balcony · up to 2 guests',
+  youth: 'Twin room with bunk beds · up to 2 guests',
+  solo: 'Single room with balcony · 1 guest',
+  awesome: 'Apartment by the sea · up to 2 guests',
+}
+---
+
+<section id="direct" class="section db" data-direct-booking>
+  <div class="container">
+    <div class="db__head">
+      <h2>Book direct</h2>
+      <span class="db__badge" data-badge>Best price when you book direct</span>
+    </div>
+    <p class="db__sub">
+      Reserve here with instant confirmation. Free cancellation up to 7 days before arrival, and
+      your card is charged only 9 days before check-in.
+    </p>
+
+    <form class="db__search" method="get" action="/apartments/#direct" data-search>
+      <label class="db__field">
+        <span class="db__label">Check-in</span>
+        <input type="date" name="from" data-from />
+      </label>
+      <label class="db__field">
+        <span class="db__label">Check-out</span>
+        <input type="date" name="to" data-to />
+      </label>
+      <label class="db__field">
+        <span class="db__label">Guests</span>
+        <select name="guests" data-guests>
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+        </select>
+      </label>
+      <button class="button db__go" type="submit">Check availability</button>
+    </form>
+
+    <div class="db__status" aria-live="polite" data-status></div>
+
+    <div class="db__grid" data-grid>
+      {DIRECT_APARTMENTS.map((apartment) => (
+        <DirectCard apartment={apartment} meta={META[apartment.id] ?? ''} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import {
+    unitState,
+    openWindows,
+    selectableDates,
+    bookUrl,
+    queryString,
+    sortByState,
+    parseQuery,
+    formatEuro,
+    formatEuroTotal,
+    formatRange,
+    formatDate,
+    addDaysIso,
+    nightsBetween,
+    cityTaxCents,
+  } from '../scripts/direct-booking-client.mjs'
+
+  type Night = { d: string; b: number; p: number | null; m: number }
+  type Unit = { maxGuests: number; nights: Night[] }
+  type Calendar = { today: string; horizon: string; discountPct: number; units: Record<string, Unit> }
+  type Params = { from?: string; to?: string; guests?: number }
+
+  const ERROR_TEXT =
+    'Live prices are unavailable right now — you can still book on the platforms below.'
+
+  const root = document.querySelector<HTMLElement>('[data-direct-booking]')
+  if (root) init(root)
+
+  function init(root: HTMLElement) {
+    const form = root.querySelector<HTMLFormElement>('[data-search]')!
+    const fromInput = root.querySelector<HTMLInputElement>('[data-from]')!
+    const toInput = root.querySelector<HTMLInputElement>('[data-to]')!
+    const guestsSelect = root.querySelector<HTMLSelectElement>('[data-guests]')!
+    const status = root.querySelector<HTMLElement>('[data-status]')!
+    const badge = root.querySelector<HTMLElement>('[data-badge]')!
+    const grid = root.querySelector<HTMLElement>('[data-grid]')!
+    const cards = new Map(
+      Array.from(grid.querySelectorAll<HTMLElement>('[data-unit]')).map((el) => [el.dataset.unit!, el]),
+    )
+    const ids = Array.from(cards.keys())
+    let data: Calendar | null = null
+    let params: Params = parseQuery(location.search)
+
+    const localToday = () => {
+      const now = new Date()
+      const pad = (n: number) => String(n).padStart(2, '0')
+      return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
+    }
+
+    function setBounds(today: string, horizon?: string) {
+      fromInput.min = today
+      toInput.min = fromInput.value ? addDaysIso(fromInput.value, 1) : addDaysIso(today, 1)
+      if (horizon) {
+        fromInput.max = horizon
+        toInput.max = horizon
+      }
+    }
+
+    function fillInputs(p: Params) {
+      fromInput.value = p.from ?? ''
+      toInput.value = p.to ?? ''
+      guestsSelect.value = String(p.guests ?? 2)
+      toInput.min = p.from ? addDaysIso(p.from, 1) : toInput.min
+    }
+
+    const hasDates = (p: Params) => Boolean(p.from && p.to)
+    const linkParams = (p: Params) =>
+      hasDates(p) ? { from: p.from, to: p.to, guests: p.guests ?? 2 } : {}
+
+    function setStatus(...parts: Array<string | Node>) {
+      status.replaceChildren(...parts)
+    }
+
+    function el(tag: string, text?: string, attrs: Record<string, string> = {}) {
+      const node = document.createElement(tag)
+      if (text !== undefined) node.textContent = text
+      for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v)
+      return node
+    }
+
+    function bookLink(id: string, p: Params) {
+      return el('a', 'Book direct', { class: 'button', href: bookUrl(id, linkParams(p)) })
+    }
+
+    // Static state: only the "Book direct" hrefs follow the chosen dates.
+    function updateStaticLinks(p: Params) {
+      for (const [id, card] of cards) {
+        const link = card.querySelector<HTMLAnchorElement>('[data-cta] a')
+        if (link) link.href = bookUrl(id, linkParams(p))
+      }
+    }
+
+    function renderCard(id: string, card: HTMLElement, unit: Unit, p: Params) {
+      const pill = card.querySelector<HTMLElement>('[data-pill]')!
+      const price = card.querySelector<HTMLElement>('[data-price]')!
+      const note = card.querySelector<HTMLElement>('[data-note]')!
+      const cta = card.querySelector<HTMLElement>('[data-cta]')!
+      const guests = p.guests ?? 2
+      const s = unitState(unit, { ...p, guests, discountPct: data!.discountPct })
+
+      card.dataset.live = ''
+      card.dataset.state = s.state
+      pill.hidden = s.state === 'idle'
+      pill.classList.toggle('is-off', s.state !== 'available')
+      price.hidden = true
+      price.replaceChildren()
+      note.hidden = true
+      card.classList.toggle('is-off', s.state === 'unavailable' || s.state === 'min_stay')
+
+      const showNote = (text: string) => {
+        note.textContent = text
+        note.hidden = false
+      }
+      const showTotals = (suffix: string) => {
+        price.append(
+          el('strong', formatEuroTotal(s.totalCents!)),
+          el('s', formatEuro(s.fullCents!)),
+          el('small', `total for ${s.nights} night${s.nights === 1 ? '' : 's'}${suffix}`),
+        )
+        price.hidden = false
+      }
+      const offText = () => el('span', 'Book direct', { class: 'dc__off' })
+      const nextOpening = () => {
+        const w = openWindows(unit.nights).find((x) => x.to >= (p.from ?? ''))
+        return w ? `Next opening: ${formatRange(w.from, w.to)}` : 'Opening dates coming soon'
+      }
+
+      switch (s.state) {
+        case 'idle': {
+          if (s.fromCents !== undefined) {
+            price.append(el('strong', `from ${formatEuro(s.fromCents)}`), el('small', 'per night'))
+            price.hidden = false
+          }
+          if (s.nextWindow) {
+            showNote(`Open ${formatRange(s.nextWindow.from, s.nextWindow.to)}`)
+            cta.replaceChildren(bookLink(id, p))
+          } else {
+            showNote('Opening dates coming soon')
+            cta.replaceChildren(offText())
+          }
+          break
+        }
+        case 'available': {
+          pill.textContent = 'Available'
+          showTotals('')
+          showNote(`+ ${formatEuro(cityTaxCents(guests, s.nights!))} city tax, paid on arrival`)
+          cta.replaceChildren(bookLink(id, p))
+          break
+        }
+        case 'guests': {
+          const max = unit.maxGuests
+          pill.textContent = max === 1 ? '1 guest only' : `Up to ${max} guests`
+          if (s.totalCents !== undefined) showTotals(`, ${max} guest${max === 1 ? '' : 's'}`)
+          showNote(`Change to ${max} guest${max === 1 ? '' : 's'} to book this room`)
+          const button = el('button', `Search for ${max} guest${max === 1 ? '' : 's'}`, {
+            type: 'button',
+            class: 'dc__line',
+          })
+          button.addEventListener('click', () => {
+            guestsSelect.value = String(max)
+            apply({ ...p, guests: max })
+          })
+          cta.replaceChildren(button)
+          break
+        }
+        case 'min_stay': {
+          pill.textContent = `Minimum ${s.minStay} nights`
+          showNote(`Stays here start at ${s.minStay} nights`)
+          cta.replaceChildren(offText())
+          break
+        }
+        case 'unavailable': {
+          pill.textContent = 'Not available for these dates'
+          showNote(nextOpening())
+          cta.replaceChildren(offText())
+          break
+        }
+      }
+      return s
+    }
+
+    function renderStatus(p: Params, states: Record<string, { state: string }>) {
+      const cal = data!
+      if (!hasDates(p)) {
+        const windows = ids
+          .map((id) => cal.units[id] && openWindows(cal.units[id].nights)[0])
+          .filter(Boolean)
+          .sort((a, b) => (a.from < b.from ? -1 : 1))
+        const parts: Array<string | Node> = ['Pick your dates to see what is free and the total price.']
+        if (windows[0]) {
+          parts.push(' Currently open: ', el('b', formatRange(windows[0].from, windows[0].to)), '.')
+        }
+        setStatus(el('p', undefined, { class: 'db__hint' }))
+        status.firstElementChild!.append(...parts)
+        return
+      }
+
+      const nights = nightsBetween(p.from!, p.to!)
+      const range = formatRange(p.from!, p.to!)
+      const free = ids.filter((id) => states[id]?.state === 'available').length
+      const line = el('p', undefined, { class: 'db__hint' })
+      if (free > 0) {
+        const minStays = ids
+          .map((id) => cal.units[id]?.nights.find((n) => n.d === p.from)?.m)
+          .filter((m): m is number => typeof m === 'number')
+        line.append(
+          el('b', `${free} of ${ids.length}`),
+          ` ${free === 1 ? 'stay is' : 'stays are'} free for ${nights} night${nights === 1 ? '' : 's'}, ${range}.`,
+        )
+        if (minStays.length) line.append(` Minimum stay is ${Math.min(...minStays)} nights.`)
+      } else {
+        const open = selectableDates(cal.units)
+        const closed: string[] = []
+        for (let i = 0; i < nights; i++) {
+          const d = addDaysIso(p.from!, i)
+          if (!open.has(d)) closed.push(d)
+        }
+        line.append(`Nothing is free for ${nights} night${nights === 1 ? '' : 's'}, ${range}.`)
+        if (closed.length) {
+          line.append(
+            closed.length === 1
+              ? ` No stay is open on ${formatDate(closed[0])}.`
+              : ` No stay is open on ${closed.length} of these nights.`,
+          )
+        }
+        line.append(
+          ' Try other dates, see the ',
+          el('a', 'stays on Airbnb & Booking.com', { href: '#platforms' }),
+          ' or ',
+          el('a', 'ask us', { href: '/contact/' }),
+          '.',
+        )
+      }
+      setStatus(line)
+    }
+
+    function render(p: Params) {
+      const cal = data!
+      badge.textContent = `−${cal.discountPct}% vs Airbnb & Booking.com`
+      const states: Record<string, { state: string }> = {}
+      for (const id of ids) {
+        const unit = cal.units[id]
+        if (unit) states[id] = renderCard(id, cards.get(id)!, unit, p)
+      }
+      const plain = Object.fromEntries(Object.entries(states).map(([id, s]) => [id, s.state]))
+      const order = hasDates(p) ? sortByState(ids, plain) : ids
+      grid.append(...order.map((id) => cards.get(id)!))
+      renderStatus(p, states)
+    }
+
+    function apply(next: Params) {
+      const from = next.from
+      const to = next.to && from && next.to > from ? next.to : undefined
+      params = { from, to, guests: next.guests }
+      history.replaceState(history.state, '', `${location.pathname}${queryString(params)}${location.hash}`)
+      if (!data) {
+        updateStaticLinks(params)
+        return
+      }
+      render(params)
+      if (from && !to) {
+        setStatus(el('p', 'Choose a check-out date after check-in to see prices.', { class: 'db__hint' }))
+      } else if (!from && next.to) {
+        setStatus(el('p', 'Choose a check-in date to see prices.', { class: 'db__hint' }))
+      }
+    }
+
+    fromInput.addEventListener('change', () => {
+      if (!fromInput.value) return
+      toInput.min = addDaysIso(fromInput.value, 1)
+      if (toInput.value && toInput.value <= fromInput.value) toInput.value = ''
+    })
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault()
+      apply({
+        from: fromInput.value || undefined,
+        to: toInput.value || undefined,
+        guests: Number(guestsSelect.value) === 1 ? 1 : 2,
+      })
+    })
+
+    setBounds(localToday())
+    fillInputs(params)
+    updateStaticLinks(params)
+
+    fetch('/api/booking/calendar', { headers: { accept: 'application/json' } })
+      .then((res) => {
+        if (!res.ok) throw new Error(`calendar ${res.status}`)
+        return res.json()
+      })
+      .then((json: Calendar) => {
+        if (!json || typeof json.units !== 'object' || typeof json.discountPct !== 'number') {
+          throw new Error('calendar shape')
+        }
+        data = json
+        params = parseQuery(location.search, { today: json.today, horizon: json.horizon })
+        fillInputs(params)
+        setBounds(json.today, json.horizon)
+        render(params)
+      })
+      .catch(() => {
+        setStatus(el('p', ERROR_TEXT, { class: 'db__hint db__hint--error' }))
+      })
+  }
+</script>
+
+<style>
+  .db__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .db__head h2 {
+    margin: 0;
+    font-size: clamp(2rem, 3.6vw, 3rem);
+  }
+
+  .db__badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .db__sub {
+    max-width: 64ch;
+    margin: 0 0 1.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .db__search {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 9rem) auto;
+    align-items: stretch;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .db__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+    padding: 0.8rem 1.1rem;
+    border-right: 1px solid var(--color-border);
+    cursor: pointer;
+  }
+
+  .db__label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .db__field input,
+  .db__field select {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    font: 500 1.05rem var(--font-body);
+    cursor: pointer;
+  }
+
+  .db__field input:focus-visible,
+  .db__field select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .db__field select option {
+    background: var(--color-card);
+    color: var(--color-text);
+  }
+
+  :global([data-theme='night']) .db__field input,
+  :global([data-theme='night']) .db__field select {
+    color-scheme: dark;
+  }
+
+  .db__go {
+    align-self: center;
+    justify-content: center;
+    margin: 0.6rem;
+  }
+
+  .db__status {
+    min-height: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .db__status :global(.db__hint) {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .db__status :global(b) {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .db__status :global(a) {
+    color: var(--color-accent);
+  }
+
+  .db__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 720px) {
+    .db__search {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .db__field:nth-child(2) {
+      border-right: 0;
+    }
+
+    .db__field:nth-child(3) {
+      grid-column: 1 / -1;
+      border-right: 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .db__go {
+      grid-column: 1 / -1;
+      margin-top: 0;
+    }
+  }
+</style>

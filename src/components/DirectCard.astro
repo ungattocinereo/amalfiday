@@ -1,0 +1,203 @@
+---
+import type { Apartment } from '../data/apartments'
+
+export interface Props {
+  apartment: Apartment
+  meta: string
+}
+
+const { apartment, meta } = Astro.props
+const photo = apartment.gallery[0]
+const { airbnb, booking } = apartment.bookingLinks
+---
+
+<!--
+  Static first paint (no JS, before the calendar loads, or when it fails):
+  photo, name, meta, platform links and a plain "Book direct" link.
+  The DirectBooking script fills [data-pill], [data-price], [data-note] and [data-cta].
+-->
+<article class="dc" data-unit={apartment.id}>
+  {photo && (
+    <img
+      class="dc__photo"
+      src={photo}
+      alt={`${apartment.name} in Atrani — interior photo`}
+      width="640"
+      height="480"
+      loading="lazy"
+      decoding="async"
+    />
+  )}
+  <div class="dc__body">
+    <span class="dc__pill" data-pill hidden></span>
+    <h3 class="dc__title">{apartment.name}</h3>
+    <p class="dc__meta">{meta}</p>
+    <div class="dc__price" data-price hidden></div>
+    <p class="dc__note" data-note hidden></p>
+    <div class="dc__cta" data-cta>
+      <a class="button dc__book" href={`/book/${apartment.id}/`}>Book direct</a>
+    </div>
+    {(airbnb || booking) && (
+      <div class="dc__links" data-platforms>
+        {airbnb && (
+          <a class="dc__line" href={airbnb} target="_blank" rel="noopener noreferrer">Airbnb</a>
+        )}
+        {booking && (
+          <a class="dc__line" href={booking} target="_blank" rel="noopener noreferrer">Booking.com</a>
+        )}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .dc {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .dc__photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--color-surface);
+    transition: filter 0.25s ease, opacity 0.25s ease;
+  }
+
+  .dc__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem 1.1rem 1.15rem;
+  }
+
+  .dc__title {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+
+  .dc__meta,
+  .dc__note {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .dc__note {
+    font-size: 0.8125rem;
+  }
+
+  .dc__pill {
+    align-self: flex-start;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+    color: var(--color-text);
+  }
+
+  .dc__pill[hidden],
+  .dc__price[hidden],
+  .dc__note[hidden] {
+    display: none;
+  }
+
+  .dc__pill.is-off {
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+  }
+
+  .dc__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.5rem;
+    margin-top: auto;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dc__price :global(strong) {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .dc__price :global(s) {
+    color: var(--color-text-muted);
+  }
+
+  .dc__price :global(small) {
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+  }
+
+  .dc__cta {
+    margin-top: auto;
+  }
+
+  .dc__price:not([hidden]) ~ .dc__cta {
+    margin-top: 0.2rem;
+  }
+
+  .dc__cta :global(.button),
+  .dc__cta :global(.dc__off),
+  .dc__cta :global(.dc__line) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dc__cta :global(.dc__off) {
+    display: inline-flex;
+    padding: 0.9rem 1.4rem;
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  .dc__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .dc__line,
+  .dc__cta :global(.dc__line) {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text);
+    font: 500 0.875rem var(--font-body);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .dc__line:hover,
+  .dc__cta :global(.dc__line:hover) {
+    border-color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .dc[data-live] .dc__links {
+    display: none;
+  }
+
+  .dc.is-off .dc__photo {
+    filter: grayscale(1);
+    opacity: 0.55;
+  }
+</style>

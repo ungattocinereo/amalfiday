@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import StayCard from '../components/StayCard.astro'
-import { APARTMENT_SECTIONS, ALL_APARTMENTS } from '../data/apartments'
+import DirectBooking from '../components/DirectBooking.astro'
+import { ALL_APARTMENTS, PLATFORM_APARTMENTS } from '../data/apartments'
 import { site, business } from '../data/site'
 
 const pageTitle = 'Apartments & Rooms in Atrani and Ravello | Amalfi.Day'
@@ -20,7 +21,7 @@ const sharedAddress = {
   addressCountry: business.country,
 }
 
-// Villa Susy (section "Timeless Retreat in Ravello") and The Sunrise Balcony
+// Villa Susy and The Sunrise Balcony
 // are in Ravello per their listings; the rest are at the Atrani address.
 const ravelloIds = new Set(['villa-susy', 'sunrise-balcony'])
 const ravelloAddress = {
@@ -31,7 +32,10 @@ const ravelloAddress = {
 }
 
 const apartmentItems = ALL_APARTMENTS.map((a, i) => {
-  const reserveUrl = a.bookingLinks.airbnb || a.bookingLinks.booking
+  // Direct units reserve on our own booking page; the rest on the platforms.
+  const reserveUrl = a.direct
+    ? `${site.url}/book/${a.id}/`
+    : a.bookingLinks.airbnb || a.bookingLinks.booking
   const node = {
     '@type': 'Apartment',
     '@id': `${site.url}/apartments/#${a.id}`,
@@ -181,8 +185,8 @@ const testimonials = [
               ))}
             </div>
             <div class="apt-hero__actions">
-              <a class="apt-hero__btn apt-hero__btn--primary" href="/contact/">Book your stay</a>
-              <a class="apt-hero__btn apt-hero__btn--ghost" href="#stays">Browse apartments</a>
+              <a class="apt-hero__btn apt-hero__btn--primary" href="#direct">Book your stay</a>
+              <a class="apt-hero__btn apt-hero__btn--ghost" href="#platforms">Browse apartments</a>
             </div>
           </div>
           <div class="apt-hero__aside">
@@ -212,30 +216,19 @@ const testimonials = [
     </div>
   </section>
 
-  {APARTMENT_SECTIONS.map((section, sIdx) => (
-    <section
-      id={sIdx === 0 ? 'stays' : section.id}
-      class:list={[
-        'section',
-        'stay-section',
-        section.layout === 'grid-2' && 'stay-section--two',
-        section.layout === 'featured' && 'stay-section--featured',
-      ]}
-    >
-      <div class="container section__header">
-        <h2>{section.title}</h2>
-        {section.subtitle && <p>{section.subtitle}</p>}
-      </div>
-      <div class="container stay-grid">
-        {section.items.map((apartment) => (
-          <StayCard
-            apartment={apartment}
-            variant={section.layout === 'featured' ? 'featured' : 'grid'}
-          />
-        ))}
-      </div>
-    </section>
-  ))}
+  <DirectBooking />
+
+  <section id="platforms" class="section platforms">
+    <div class="container section__header">
+      <h2>Also on Airbnb &amp; Booking.com</h2>
+      <p>These stays are booked through the platforms. The calendar shows which nights are still free.</p>
+    </div>
+    <div class="container stay-grid">
+      {PLATFORM_APARTMENTS.map((apartment) => (
+        <StayCard apartment={apartment} variant="grid" />
+      ))}
+    </div>
+  </section>
 
   <section class="section section--adventure">
     <div class="container adventure-grid">
@@ -774,9 +767,9 @@ const testimonials = [
     }
   }
 
-  /* ===== Stay sections ===== */
-  .stay-section {
-    padding-top: 3rem;
+  /* ===== Platform stays ===== */
+  .platforms {
+    background: var(--color-surface);
   }
 
   .section__header {
@@ -786,8 +779,8 @@ const testimonials = [
     margin-bottom: 2rem;
   }
 
-  .stay-section .section__header h2 {
-    font-size: clamp(2.4rem, 3.6vw, 3.6rem);
+  .platforms .section__header h2 {
+    font-size: clamp(2rem, 3.6vw, 3rem);
   }
 
   .stay-grid {
