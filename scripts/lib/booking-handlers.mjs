@@ -15,7 +15,7 @@ const MAX_DISCOUNT_PCT = 50
 const DAY_MS = 86_400_000
 const RATE_WINDOW_MS = 60_000
 
-// Per-IP limits. Best-effort per instance; a Vercel Firewall rule is the real guard.
+// Per-IP limits. Production is one long-lived Node process behind Caddy, so these hold across requests.
 export const bookingRateLimiters = {
   quote: createRateLimiter({ limit: 30, windowMs: RATE_WINDOW_MS }),
   calendar: createRateLimiter({ limit: 20, windowMs: RATE_WINDOW_MS }),
@@ -83,7 +83,7 @@ export async function handleCalendar({
 } = {}) {
   const limited = rateLimited(rateLimiter, ip, now)
   if (limited) return limited
-  // The response is CDN-cached by path; a query string would bypass that cache.
+  // The calendar takes no parameters; refusing them keeps it cacheable by path and cheap to reject.
   if (hasQuery(query)) return fail(400, 'bad_request')
   try {
     const token = requireToken(env)
@@ -167,7 +167,7 @@ export async function handleQuote({
   }
 }
 
-// Shared wrapper for Vercel functions and the dev server: GET/HEAD only, query from req.url.
+// Shared wrapper for the Node route server (production and dev) and the api/ wrappers: GET/HEAD only, query from req.url.
 export async function serveBooking(req, res, handle, { env = process.env, now, loadNightsImpl, rateLimiter } = {}) {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET, HEAD')

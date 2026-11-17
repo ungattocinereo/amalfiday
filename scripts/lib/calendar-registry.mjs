@@ -1,5 +1,5 @@
 // Keep this in sync with src/data/apartments.ts -> ICAL_REGISTRY.
-// Consumed by api/availability.js (Vercel serverless) and scripts/update-calendars.mjs (manual fallback).
+// Consumed by api/availability.js (dev server route; not proxied in production) and scripts/update-calendars.mjs (manual fallback).
 export const ICAL_REGISTRY = {
   'Villa Susy': [
     'https://ical.booking.com/v1/export?t=d3c249ba-4358-4d99-abfd-7b81980525bf',

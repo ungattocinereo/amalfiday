@@ -1,5 +1,5 @@
 // Small in-memory per-key rate limiter (sliding log), modelled on the one in api/contact.js.
-// Best-effort per instance: each serverless instance has its own memory, so a Vercel Firewall
+// Production is one long-lived Node process behind Caddy, so the limits hold across requests; on a serverless host each instance would have its own memory and a platform firewall
 // rate-limit rule is the real guard.
 
 export function createRateLimiter({ limit, windowMs, maxKeys = 10_000 }) {
