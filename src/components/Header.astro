@@ -1,542 +1,143 @@
 ---
-import { navigation, socialLinks, site } from '../data/site'
+// Header shell: glass bar, logo morph, theme, collapse on scroll and light/dark
+// lettering that follows the page underneath. Menus live in ./nav/.
+import { navCta, site } from '../data/site'
 import MorphingLogo from './MorphingLogo.astro'
-const headerSocials = socialLinks.filter((item) => ['Instagram', 'Facebook'].includes(item.label))
+import DesktopNav from './nav/DesktopNav.astro'
+import MobileNav from './nav/MobileNav.astro'
+
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/'
-const normalizeHref = (href?: string) => (href ? href.replace(/\/$/, '') || '/' : href)
-const isCurrent = (href?: string) => normalizeHref(href) === currentPath
-const isWithin = (href?: string) =>
-  href && !href.includes('#') && (isCurrent(href) || currentPath.startsWith(`${normalizeHref(href)}/`))
-const isActive = (item: (typeof navigation)[number]) =>
-  isWithin(item.href) || item.dropdownSections?.some((section) => section.items.some((link) => isWithin(link.href)))
+const ctaCurrent = currentPath === navCta.href.replace(/\/$/, '')
 ---
 
 <header class="header" id="header" data-home={currentPath === '/' ? '' : undefined}>
   <div class="glass-bar">
     <span class="glass-bar__edge" aria-hidden="true"></span>
-    <a class="brand brand--morph" href="/" aria-label={`${site.name} home`}>
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
       <MorphingLogo />
     </a>
 
-    <div class="header__center">
-      <nav class="desktop-nav" aria-label="Main navigation">
-        {navigation.map((item) => item.dropdownSections?.length ? (
-          <details class="nav-disclosure" data-desktop-disclosure>
-            <summary class:list={['nav-link', 'nav-link--compact', 'nav-link--disclosure', { 'is-active': isActive(item) }]} aria-label={item.label}>
-              <span class="nav-link__label" aria-hidden="true">{item.label}</span>
-              <i class="ph ph-caret-down chevron" aria-hidden="true"></i>
-            </summary>
-            <div class="nav-reveal">
-              <span class="nav-reveal__pointer" aria-hidden="true"></span>
-              <div class="nav-sheet">
-                <div class="nav-sheet__intro">
-                  <span class="eyebrow">Explore the coast</span>
-                  <span class="nav-sheet__title">{item.label}</span>
-                  {item.href && <a class="overview" href={item.href}>Discover all <i class="ph ph-arrow-right" aria-hidden="true"></i></a>}
-                </div>
-                <div class="nav-sheet__sections">
-                  {item.dropdownSections.map((section) => (
-                    <div class="nav-section">
-                      <span class="eyebrow">{section.heading}</span>
-                      {section.items.map((link) => (
-                        <a class="sub-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
-                          <i class={`ph ${link.icon}`} aria-hidden="true"></i><span>{link.label}</span>
-                        </a>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </details>
-        ) : (
-          <a class:list={['nav-link', 'nav-link--compact', { 'is-active': isActive(item) }]} href={item.href} aria-label={item.label} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-            <span class="nav-link__label" aria-hidden="true">{item.label}</span>
-          </a>
-        ))}
-        <a class:list={['nav-link', 'nav-link--contact', { 'is-active': isCurrent('/contact') }]} href="/contact/" aria-current={isCurrent('/contact') ? 'page' : undefined}>
-          <i class="ph-fill ph-chat-circle-dots" aria-hidden="true"></i>
-          <span class="nav-link__contact-label">Contact us</span>
-        </a>
-      </nav>
-      <div class="header__connect" aria-label="Social media">
-        {headerSocials.map((item) => (
-          <a class="icon-link" href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.label} (opens in a new tab)`} title={item.label}>
-            <i class={`ph-light ph-${item.label.toLowerCase()}-logo`} aria-hidden="true"></i>
-          </a>
-        ))}
-      </div>
-    </div>
+    <DesktopNav currentPath={currentPath} />
+    <MobileNav currentPath={currentPath} />
 
-    <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" aria-haspopup="dialog">
-      <span class="menu-toggle__label" aria-hidden="true">MENU</span>
-    </button>
-    <button class="theme-switch" type="button" role="switch" data-theme-toggle aria-label="Dark mode" aria-checked="false" title="Switch to dark theme">
-      <span class="theme-switch__track" aria-hidden="true">
-        <span class="theme-switch__thumb"></span>
-        <i class="ph ph-sun theme-switch__sun" aria-hidden="true"></i>
-        <i class="ph ph-moon theme-switch__moon" aria-hidden="true"></i>
-      </span>
-    </button>
-  </div>
-
-  <dialog class="mobile-menu" id="mobile-menu" aria-label="Main navigation">
-    <div class="mobile-menu__bar">
-      <a class="brand" href="/" aria-label={`${site.name} home`}>
-        <img class="brand__day" src="/brand/logo-dark.svg" alt={site.name} width="267" height="63" />
-        <img class="brand__night" src="/brand/logo-light.svg" alt="" aria-hidden="true" width="267" height="63" />
+    <div class="actions">
+      <a class="cta" href={navCta.href} aria-current={ctaCurrent ? 'page' : undefined}>
+        <i class={`ph-fill ${navCta.icon}`} aria-hidden="true"></i> {navCta.label}
       </a>
-      <button class="menu-close" type="button" aria-label="Close menu" autofocus>CLOSE</button>
-      <button class="theme-switch" type="button" role="switch" data-theme-toggle aria-label="Dark mode" aria-checked="false" title="Switch to dark theme">
-        <span class="theme-switch__track" aria-hidden="true">
-          <span class="theme-switch__thumb"></span>
-          <i class="ph ph-sun theme-switch__sun" aria-hidden="true"></i>
-          <i class="ph ph-moon theme-switch__moon" aria-hidden="true"></i>
-        </span>
+      <button class="theme" type="button" role="switch" data-theme-toggle aria-label="Dark mode" aria-checked="false" title="Switch to dark theme">
+        <i class="ph ph-sun theme__sun" aria-hidden="true"></i>
+        <i class="ph ph-moon theme__moon" aria-hidden="true"></i>
       </button>
     </div>
-    <div class="mobile-menu__body">
-      <div class="mobile-menu__intro"><span class="eyebrow">Amalfi coast, your way</span><span class="mobile-menu__title">A little closer to paradise.</span></div>
-      <nav class="mobile-nav" aria-label="Mobile navigation">
-        <a class="mobile-nav__link" href="/" aria-current={isCurrent('/') ? 'page' : undefined}><span class="nav-number" aria-hidden="true">01</span><span>Home</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-        {navigation.map((item, index) => item.dropdownSections?.length ? (
-          <details class="mobile-disclosure">
-            <summary class:list={['mobile-nav__link', { 'is-active': isActive(item) }]}><span class="nav-number" aria-hidden="true">0{index + 2}</span><span>{item.label}</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <div class="mobile-subnav">
-              {item.href && <a class="overview" href={item.href}>Discover all {item.label.toLowerCase()} <i class="ph ph-arrow-right" aria-hidden="true"></i></a>}
-              {item.dropdownSections.map((section) => (
-                <div class="nav-section">
-                  <span class="eyebrow">{section.heading}</span>
-                  {section.items.map((link) => <a class="sub-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}><i class={`ph ${link.icon}`} aria-hidden="true"></i><span>{link.label}</span></a>)}
-                </div>
-              ))}
-            </div>
-          </details>
-        ) : (
-          <a class="mobile-nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}><span class="nav-number" aria-hidden="true">0{index + 2}</span><span>{item.label}</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-        ))}
-      </nav>
-      <div class="mobile-connect">
-        <a class="mobile-contact" href="/contact/"><span>Let’s plan your day</span><span>Contact us <i class="ph-fill ph-chat-circle-dots" aria-hidden="true"></i></span></a>
-        <div class="mobile-socials">
-          {headerSocials.map((item) => <a href={item.href} target="_blank" rel="noreferrer"><i class={`ph-light ph-${item.label.toLowerCase()}-logo`} aria-hidden="true"></i>{item.label}<span class="sr-only"> (opens in a new tab)</span></a>)}
-        </div>
-      </div>
-    </div>
-  </dialog>
+  </div>
 </header>
 
-<script is:inline>
-  ;(() => {
-    const root = document.documentElement
-    const header = document.getElementById('header')
-    const themeButtons = header.querySelectorAll('[data-theme-toggle]')
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-    let storedTheme
-    try { storedTheme = localStorage.getItem('theme') } catch {}
-    let followSystem = storedTheme !== 'day' && storedTheme !== 'night'
-    const setTheme = (theme) => {
-      root.dataset.theme = theme
-      window.__setBrowserThemeColor?.(theme)
-      themeButtons.forEach((button) => {
-        const label = `Switch to ${theme === 'night' ? 'light' : 'dark'} theme`
-        button.setAttribute('aria-checked', String(theme === 'night'))
-        button.title = label
-      })
-    }
-    setTheme(root.dataset.theme || (systemTheme.matches ? 'night' : 'day'))
-    themeButtons.forEach((button) => button.addEventListener('click', () => {
-      followSystem = false
-      const theme = root.dataset.theme === 'night' ? 'day' : 'night'
-      setTheme(theme)
-      try { localStorage.setItem('theme', theme) } catch {}
-    }))
-    systemTheme.addEventListener('change', (event) => {
-      if (followSystem) setTheme(event.matches ? 'night' : 'day')
-    })
-
-    const desktop = window.matchMedia('(min-width: 1100px)')
-    const hoverNavigation = window.matchMedia('(min-width: 1100px) and (hover: hover) and (pointer: fine)')
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const disclosures = [...header.querySelectorAll('[data-desktop-disclosure]')]
-    const disclosureTimers = new Map()
-    const clearDisclosureTimer = (details) => {
-      clearTimeout(disclosureTimers.get(details))
-      disclosureTimers.delete(details)
-    }
-    const closeDisclosure = (details, immediately = false) => {
-      clearDisclosureTimer(details)
-      details.classList.remove('is-visible')
-      details.querySelector('summary').setAttribute('aria-expanded', 'false')
-      if (!details.open) return
-      if (immediately || reducedMotion.matches) { details.open = false; return }
-      disclosureTimers.set(details, setTimeout(() => {
-        details.open = false
-        disclosureTimers.delete(details)
-      }, 180))
-    }
-    const closeDisclosures = (except) => disclosures.forEach((details) => {
-      if (details !== except) closeDisclosure(details, true)
-    })
-    const positionDisclosure = (details) => {
-      const summaryBounds = details.querySelector('summary').getBoundingClientRect()
-      const panelWidth = details.querySelector('.nav-reveal').getBoundingClientRect().width
-      const triggerCenter = summaryBounds.left + summaryBounds.width / 2
-      const centeredLeft = triggerCenter - panelWidth / 2
-      const panelLeft = Math.max(16, Math.min(centeredLeft, window.innerWidth - panelWidth - 16))
-      // Keep the panel on screen while its pointer remains beneath the trigger.
-      details.style.setProperty('--nav-reveal-offset', `${panelLeft - centeredLeft}px`)
-      details.style.setProperty('--nav-pointer-x', `${triggerCenter - panelLeft}px`)
-      details.style.setProperty('--nav-sheet-max-height', `${Math.max(120, window.innerHeight - summaryBounds.bottom - 28)}px`)
-    }
-    const openDisclosure = (details) => {
-      clearDisclosureTimer(details)
-      closeDisclosures(details)
-      if (details.open && details.classList.contains('is-visible')) return
-      details.open = true
-      positionDisclosure(details)
-      // Commit the starting pose before fading the anchored panel into view.
-      details.querySelector('.nav-sheet').getBoundingClientRect()
-      details.classList.add('is-visible')
-      details.querySelector('summary').setAttribute('aria-expanded', 'true')
-    }
-    disclosures.forEach((details) => {
-      const summary = details.querySelector('summary')
-      const sheet = details.querySelector('.nav-sheet')
-      details.classList.add('is-enhanced')
-      summary.setAttribute('aria-expanded', String(details.open))
-      details.addEventListener('pointerenter', (event) => {
-        if (hoverNavigation.matches && event.pointerType !== 'touch') openDisclosure(details)
-      })
-      details.addEventListener('pointerleave', () => {
-        if (!hoverNavigation.matches || sheet.contains(document.activeElement)) return
-        clearDisclosureTimer(details)
-        // Allow the pointer to cross the gap between the bar and the panel.
-        disclosureTimers.set(details, setTimeout(() => closeDisclosure(details), 180))
-      })
-      summary.addEventListener('click', (event) => {
-        event.preventDefault()
-        if (hoverNavigation.matches && event.detail > 0 && event.pointerType !== 'touch') {
-          openDisclosure(details)
-          return
-        }
-        if (details.classList.contains('is-visible')) closeDisclosure(details)
-        else openDisclosure(details)
-      })
-      summary.addEventListener('keydown', (event) => {
-        if (event.key !== 'ArrowDown') return
-        event.preventDefault()
-        openDisclosure(details)
-        sheet.querySelector('a')?.focus({ preventScroll: true })
-      })
-      details.addEventListener('focusout', (event) => {
-        if (!details.contains(event.relatedTarget) && !details.matches(':hover')) closeDisclosure(details)
-      })
-    })
-    document.addEventListener('click', (event) => {
-      if (!disclosures.some((details) => details.contains(event.target))) closeDisclosures()
-    })
-    document.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape') return
-      const opened = disclosures.find((details) => details.open)
-      if (opened) {
-        opened.querySelector('summary').focus()
-        closeDisclosures()
-      }
-    })
-
-    const menu = header.querySelector('#mobile-menu')
-    const menuToggle = header.querySelector('.menu-toggle')
-    let previousOverflow = ''
-    let menuState = 'closed'
-    let menuFrame = 0
-    let closeTimer
-    const finishClose = () => {
-      cancelAnimationFrame(menuFrame)
-      clearTimeout(closeTimer)
-      if (menu.open) menu.close()
-    }
-    const closeMenu = (immediately = false) => {
-      if (!menu.open) return
-      if (immediately || reducedMotion.matches) { finishClose(); return }
-      if (menuState === 'closing') return
-      cancelAnimationFrame(menuFrame)
-      const wasVisible = menu.classList.contains('is-visible')
-      menuState = 'closing'
-      menu.classList.add('is-closing')
-      menu.classList.remove('is-visible')
-      if (!wasVisible) { finishClose(); return }
-      // Keep the native focus trap until the panel has faded out.
-      closeTimer = setTimeout(finishClose, 300)
-    }
-    menuToggle.addEventListener('click', () => {
-      if (menu.open || menuState !== 'closed') return
-      cancelAnimationFrame(menuFrame)
-      clearTimeout(closeTimer)
-      closeDisclosures()
-      previousOverflow = document.body.style.overflow
-      menuState = 'opening'
-      menu.classList.remove('is-visible', 'is-closing')
-      menu.showModal()
-      menu.querySelector('.mobile-menu__body').scrollTop = 0
-      document.body.style.overflow = 'hidden'
-      menuToggle.setAttribute('aria-expanded', 'true')
-      // Commit the starting pose before transitioning into the open state.
-      menu.getBoundingClientRect()
-      if (reducedMotion.matches) { menu.classList.add('is-visible'); menuState = 'open' }
-      else menuFrame = requestAnimationFrame(() => {
-        if (menu.open && menuState === 'opening') menu.classList.add('is-visible')
-      })
-    })
-    menu.querySelector('.menu-close').addEventListener('click', () => closeMenu())
-    menu.addEventListener('cancel', (event) => {
-      event.preventDefault()
-      closeMenu()
-    })
-    menu.addEventListener('transitionend', (event) => {
-      if (event.target !== menu || event.propertyName !== 'opacity') return
-      if (menuState === 'closing') finishClose()
-      else if (menuState === 'opening') menuState = 'open'
-    })
-    menu.addEventListener('click', (event) => {
-      if (event.target.closest('a')) { closeMenu(true); return }
-      if (event.target !== menu) return
-      const bounds = menu.getBoundingClientRect()
-      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeMenu()
-    })
-    menu.addEventListener('close', () => {
-      cancelAnimationFrame(menuFrame)
-      clearTimeout(closeTimer)
-      menuState = 'closed'
-      menu.classList.remove('is-visible', 'is-closing')
-      document.body.style.overflow = previousOverflow
-      menuToggle.setAttribute('aria-expanded', 'false')
-      menu.querySelectorAll('details').forEach((details) => { details.open = false })
-      if (desktop.matches) header.querySelector('.brand').focus({ preventScroll: true })
-      else menuToggle.focus({ preventScroll: true })
-    })
-    reducedMotion.addEventListener('change', () => {
-      if (!reducedMotion.matches || !menu.open) return
-      if (menuState === 'closing') finishClose()
-      else { menu.classList.add('is-visible'); menuState = 'open' }
-    })
-    desktop.addEventListener('change', () => {
-      closeDisclosures()
-      if (menu.open) closeMenu(true)
-    })
-    hoverNavigation.addEventListener('change', () => closeDisclosures())
-    // Read the sections behind the fixed bar, ignoring the navigation itself.
-    // Photo heroes declare their dark treatment. All other sections use their
-    // computed background to choose light or dark navigation lettering.
-    const bar = header.querySelector('.glass-bar')
-    // Use the final control sizes so the capsule does not chase animated widths.
-    const measureCompactWidth = () => {
-      if (!desktop.matches) return
-      const style = getComputedStyle(header)
-      const size = (property) => parseFloat(style.getPropertyValue(property))
-      const linkSize = size('--compact-link-size')
-      const disclosureSize = size('--compact-disclosure-size')
-      const contactSize = size('--compact-contact-size')
-      const links = [...bar.querySelector('.desktop-nav').children]
-      const linksWidth = links.reduce((width, item) => {
-        if (item.matches('.nav-disclosure')) return width + disclosureSize
-        if (item.matches('.nav-link--contact')) return width + contactSize
-        return width + linkSize
-      }, 0)
-      // The social links leave the capsule, so only the navigation is counted.
-      const centerWidth = linksWidth + Math.max(0, links.length - 1) * size('--compact-nav-gap')
-      header.style.setProperty('--compact-center-width', `${centerWidth}px`)
-    }
-    measureCompactWidth()
-    desktop.addEventListener('change', measureCompactWidth)
-    const parseColor = (value) => {
-      const channels = value.match(/[\d.]+/g)?.map(Number)
-      return value.startsWith('rgb') && channels?.length >= 3
-        ? [...channels.slice(0, 3), channels[3] ?? 1]
-        : [0, 0, 0, 0]
-    }
-    const over = (front, back) => [
-      ...front.slice(0, 3).map((channel, index) => channel * front[3] + back[index] * (1 - front[3])),
-      1,
-    ]
-    const luminance = (color) => color.slice(0, 3).reduce((total, channel, index) => {
-      const value = channel / 255
-      const linear = value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4
-      return total + linear * [0.2126, 0.7152, 0.0722][index]
-    }, 0)
-    const sectionTone = (section) => {
-      const declared = section.closest('[data-nav-surface]')?.dataset.navSurface
-      if (declared === 'dark' || declared === 'light') return declared
-      if (section.closest('.hero--dark')) return 'dark'
-      const layers = []
-      for (let element = section; element; element = element.parentElement) {
-        const style = getComputedStyle(element)
-        let color = parseColor(style.backgroundColor)
-        // Gradients in the site's sections use sRGB colors. Their average gives
-        // a stable section tone instead of flickering as small details pass by.
-        if (style.backgroundImage.includes('gradient(') && !style.backgroundImage.includes('url(')) {
-          const stops = [...style.backgroundImage.matchAll(/rgba?\([^)]+\)/g)].map((match) => parseColor(match[0]))
-          if (stops.length) {
-            const average = [0, 1, 2, 3].map((index) => stops.reduce((sum, stop) => sum + stop[index], 0) / stops.length)
-            // Preserve transparency so the ancestors still contribute.
-            const alpha = average[3] + color[3] * (1 - average[3])
-            if (alpha) color = [...average.slice(0, 3).map((v, i) => (v * average[3] + color[i] * color[3] * (1 - average[3])) / alpha), alpha]
-          }
-        }
-        layers.push(color)
-        if (color[3] >= 1) break
-      }
-      const fallback = root.dataset.theme === 'night' ? [15, 17, 21, 1] : [255, 255, 255, 1]
-      const background = layers.reverse().reduce((back, front) => over(front, back), fallback)
-      return luminance(background) < 0.18 ? 'dark' : 'light'
-    }
-    let scheduled = false
-    const updateSurface = () => {
-      scheduled = false
-      if (menu.open) return
-      // Separate enter/exit thresholds keep the morph steady near the top.
-      const scrolled = window.scrollY > (header.classList.contains('is-scrolled') ? 16 : 48)
-      header.classList.toggle('is-scrolled', scrolled)
-      const bounds = bar.getBoundingClientRect()
-      disclosures.filter((details) => details.open).forEach(positionDisclosure)
-      const y = Math.min(bounds.top + bounds.height / 2, window.innerHeight - 1)
-      const tones = [0.12, 0.5, 0.88].map((position) => {
-        const underneath = document.elementsFromPoint(bounds.left + bounds.width * position, y)
-          .find((element) => !header.contains(element) && element.closest('main, footer, .prefooter'))
-        const section = underneath?.closest('section, footer, article, main') || document.body
-        return sectionTone(section)
-      })
-      const surface = (!scrolled && header.hasAttribute('data-home')) || tones.filter((tone) => tone === 'dark').length >= 2 ? 'dark' : 'light'
-      if (bar.dataset.surface !== surface) {
-        bar.dataset.surface = surface
-        header.dataset.surface = surface
-      }
-    }
-    const scheduleSurface = () => {
-      if (scheduled) return
-      scheduled = true
-      requestAnimationFrame(updateSurface)
-    }
-    window.addEventListener('scroll', scheduleSurface, { passive: true })
-    window.addEventListener('resize', () => { measureCompactWidth(); scheduleSurface() }, { passive: true })
-    bar.addEventListener('transitionend', (event) => {
-      if (event.target === bar && event.propertyName === 'width') scheduleSurface()
-    })
-    window.addEventListener('pageshow', scheduleSurface)
-    window.addEventListener('load', scheduleSurface, { once: true })
-    menu.addEventListener('close', scheduleSurface)
-    let themeSettleTimer
-    new MutationObserver(() => {
-      scheduleSurface()
-      clearTimeout(themeSettleTimer)
-      themeSettleTimer = setTimeout(scheduleSurface, 350)
-    }).observe(root, { attributes: true, attributeFilter: ['data-theme'] })
-    const initSurface = () => {
-      measureCompactWidth()
-      updateSurface()
-      requestAnimationFrame(() => { header.dataset.surfaceReady = '' })
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSurface, { once: true })
-    else initSurface()
-  })()
+<script>
+  import { initHeader } from '../scripts/nav/header.mjs'
+  const header = document.getElementById('header')
+  if (header) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initHeader(header), { once: true })
+    else initHeader(header)
+  }
 </script>
 
 <style>
-  /* Panels follow the chosen theme. The bar independently follows the page below. */
-  .header, .nav-sheet, .mobile-menu {
-    --glass-solid: #ffffff;
-    --glass-panel: rgba(255, 255, 255, 0.78);
-    --glass-line: rgba(20, 20, 20, 0.12);
-    --glass-ink: #141414;
-    --glass-muted: #626262;
-    --glass-hover: rgba(255, 89, 0, 0.09);
-    --glass-accent: #FF5900;
-    --day-logo: block;
-    --night-logo: none;
-  }
-  :global([data-theme='night']) :is(.header, .nav-sheet, .mobile-menu) {
-    --glass-solid: #111417;
-    --glass-panel: rgba(17, 20, 23, 0.82);
-    --glass-line: rgba(255, 255, 255, 0.15);
-    --glass-ink: #ffffff;
-    --glass-muted: #b8b8b8;
-    --glass-hover: rgba(255, 89, 0, 0.13);
-    --day-logo: none;
-    --night-logo: block;
-  }
+  /* Popup panels follow the chosen theme; the bar follows the page below it. */
   .header {
-    --nav-background: rgba(255, 255, 255, 0.23);
-    --nav-sheen: rgba(255, 255, 255, 0.28);
-    --nav-glint: rgba(255, 255, 255, 0.85);
-    --morph-duration: 440ms;
+    --accent: #FF5900;
+    --pop-bg: rgba(255, 255, 255, 0.94);
+    --pop-solid: #ffffff;
+    --pop-ink: #141414;
+    --pop-muted: #6b6b6b;
+    --pop-line: rgba(20, 20, 20, 0.1);
+    --pop-hover: rgba(20, 20, 20, 0.06);
+    --morph: 460ms;
     --morph-ease: cubic-bezier(0.33, 1, 0.68, 1);
-    --compact-link-size: 64px;
-    --compact-disclosure-size: 128px;
-    --compact-contact-size: 112px;
-    --compact-nav-gap: 4px;
-    --compact-center-width: 444px;
     position: fixed;
     z-index: 30;
     top: 0;
     inset-inline: 0;
-    padding: 0 max(var(--page-gutter), env(safe-area-inset-right)) 0 max(var(--page-gutter), env(safe-area-inset-left));
-    color: var(--glass-ink);
-    transition: padding-top var(--morph-duration) var(--morph-ease);
+    padding: max(14px, env(safe-area-inset-top)) max(var(--page-gutter), env(safe-area-inset-right)) 0 max(var(--page-gutter), env(safe-area-inset-left));
+    transition: padding-top var(--morph) var(--morph-ease);
   }
-  .header[data-surface='dark'] {
-    --nav-background: rgba(13, 16, 19, 0.26);
-    --nav-sheen: rgba(255, 255, 255, 0.1);
-    --nav-glint: rgba(255, 255, 255, 0.62);
+  :global([data-theme='night']) .header {
+    --pop-bg: rgba(20, 23, 27, 0.93);
+    --pop-solid: #14171b;
+    --pop-ink: #ffffff;
+    --pop-muted: #a9adb5;
+    --pop-line: rgba(255, 255, 255, 0.12);
+    --pop-hover: rgba(255, 255, 255, 0.08);
   }
-  .header.is-scrolled { padding-top: max(12px, env(safe-area-inset-top)); }
+  .header.is-scrolled { padding-top: max(10px, env(safe-area-inset-top)); }
+
+  /* Bar lettering and glass. Light by default, dark over dark sections and the home hero. */
   .glass-bar {
-    width: 100%;
-    max-width: min(100%, var(--content-max));
-    margin-inline: auto;
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    align-items: center;
-    gap: 24px;
-    min-height: 88px;
-    padding: 16px 0;
-    padding-top: max(16px, env(safe-area-inset-top));
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
-    box-shadow: none;
-    color: var(--glass-ink);
-    isolation: isolate;
-    transition: width var(--morph-duration) var(--morph-ease), min-height var(--morph-duration) var(--morph-ease), padding var(--morph-duration) var(--morph-ease), gap var(--morph-duration) var(--morph-ease), color 200ms ease, backdrop-filter 320ms ease, -webkit-backdrop-filter 320ms ease;
+    --bar-ink: #141414;
+    --bar-hover: rgba(20, 20, 20, 0.06);
+    --bar-glass: rgba(255, 255, 255, 0.62);
+    --bar-glass-strong: rgba(255, 255, 255, 0.8);
+    --bar-line: rgba(20, 20, 20, 0.1);
+    --bar-sheen: rgba(255, 255, 255, 0.35);
+    --bar-solid: #ffffff;
   }
-  .glass-bar::before, .glass-bar::after {
+  .glass-bar[data-surface='dark'],
+  :global([data-theme='night']) .glass-bar:not([data-surface]),
+  .header[data-home]:not(.is-scrolled) .glass-bar {
+    --bar-ink: #ffffff;
+    --bar-hover: rgba(255, 255, 255, 0.14);
+    --bar-glass: rgba(14, 17, 21, 0.26);
+    --bar-glass-strong: rgba(18, 21, 25, 0.62);
+    --bar-line: rgba(255, 255, 255, 0.16);
+    --bar-sheen: rgba(255, 255, 255, 0.12);
+    --bar-solid: #14171b;
+  }
+
+  .glass-bar {
+    box-sizing: border-box;
+    position: relative;
+    isolation: isolate;
+    width: min(var(--content-max), 100%);
+    height: 64px;
+    margin: 0 auto;
+    padding: 0 10px 0 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--bar-line);
+    border-radius: 999px;
+    color: var(--bar-ink);
+    transition: width var(--morph) var(--morph-ease), height var(--morph) var(--morph-ease), padding var(--morph) var(--morph-ease), border-color 0.3s ease, color 0.2s ease;
+  }
+  /* The glass lives on a pseudo-element so the bar is not a backdrop root for the menu popup. */
+  .glass-bar::before {
     content: '';
     position: absolute;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 320ms ease, transform var(--morph-duration) var(--morph-ease);
-  }
-  .glass-bar::before {
-    inset: 0;
+    inset: -1px;
     z-index: -1;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--nav-sheen), transparent 48%), linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 60%), var(--nav-background);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 -1px 0 rgba(13, 24, 37, 0.05), 0 5px 20px rgba(15, 20, 28, 0.045);
-    transform: scaleY(0.86);
+    border-radius: inherit;
+    pointer-events: none;
+    background: var(--bar-glass);
+    box-shadow: 0 8px 30px rgba(10, 20, 30, 0.08), inset 0 1px 0 var(--bar-sheen);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    backdrop-filter: blur(24px) saturate(160%);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
   }
-  /* Blur the glass surface itself so it does not block the dropdown's backdrop. */
-  .is-scrolled .glass-bar::before { -webkit-backdrop-filter: blur(28px) saturate(155%); backdrop-filter: blur(28px) saturate(155%); }
-  /* A masked light reflection follows the perimeter without a solid border. */
+  .is-scrolled .glass-bar::before {
+    background: var(--bar-glass-strong);
+    box-shadow: 0 10px 34px rgba(10, 20, 30, 0.14), inset 0 1px 0 var(--bar-sheen);
+  }
+  /* A masked light reflection follows the perimeter once the bar is a capsule. */
   .glass-bar__edge {
     display: none;
     position: absolute;
-    inset: 0;
+    inset: -1px;
     z-index: 1;
     padding: 1px;
     border-radius: inherit;
     pointer-events: none;
     opacity: 0;
-    background: linear-gradient(135deg, var(--nav-glint), rgba(255, 255, 255, 0.16) 24%, rgba(255, 255, 255, 0.04) 46%, rgba(255, 255, 255, 0.3) 74%, var(--nav-glint));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.12) 24%, rgba(255, 255, 255, 0.03) 46%, rgba(255, 255, 255, 0.24) 74%, rgba(255, 255, 255, 0.7));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
@@ -546,211 +147,60 @@ const isActive = (item: (typeof navigation)[number]) =>
   @supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
     .glass-bar__edge { display: block; }
   }
-  .is-scrolled .glass-bar__edge { opacity: 1; }
-  .glass-bar::after {
-    inset: 20px 30px -7px;
-    z-index: -2;
-    border-radius: 999px;
-    background: linear-gradient(100deg, rgba(255, 89, 0, 0.1), rgba(30, 48, 70, 0.12) 52%, rgba(21, 31, 44, 0.08));
-    filter: blur(16px);
-  }
-  .is-scrolled .glass-bar::before, .is-scrolled .glass-bar::after { opacity: 1; transform: none; }
-  .glass-bar[data-surface='light'] {
-    --glass-solid: #ffffff;
-    --glass-line: rgba(20, 20, 20, 0.12);
-    --glass-ink: #141414;
-    --glass-muted: #626262;
-    --glass-hover: rgba(255, 89, 0, 0.09);
-    --day-logo: block;
-    --night-logo: none;
-  }
-  .glass-bar[data-surface='dark'] {
-    --glass-solid: #111417;
-    --glass-line: rgba(255, 255, 255, 0.15);
-    --glass-ink: #ffffff;
-    --glass-muted: #b8b8b8;
-    --glass-hover: rgba(255, 89, 0, 0.13);
-    --day-logo: none;
-    --night-logo: block;
-  }
-  .header[data-home]:not(.is-scrolled) .glass-bar {
-    --glass-ink: #ffffff;
-    --glass-muted: #ffffff;
-    --day-logo: none;
-    --night-logo: block;
-  }
-  .is-scrolled .glass-bar { width: calc(var(--compact-center-width) + 128px); min-height: 60px; padding: 8px 12px; gap: 8px; }
-  .header a, .header button, .header summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .is-scrolled .glass-bar__edge { opacity: 0.8; }
+
+  .header a, .header button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
   .header a:hover { text-decoration: none; }
-  .header :is(a, button, summary):focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 3px; }
-  .brand { position: relative; display: inline-flex; align-items: center; justify-self: start; width: 176px; min-width: 0; height: 44px; max-width: 100%; color: var(--glass-ink); }
-  .brand img { width: 100%; height: auto; }
-  .brand--morph { transition: width var(--morph-duration) var(--morph-ease); }
-  .is-scrolled .brand--morph { width: 44px; }
-  .brand__day { display: var(--day-logo); }
-  .brand__night { display: var(--night-logo); }
-  .header__center, .desktop-nav, .header__connect { display: flex; align-items: center; }
-  .header__center { justify-self: center; gap: 24px; height: 44px; transition: gap var(--morph-duration) var(--morph-ease); }
-  .desktop-nav { gap: 8px; height: 44px; transition: gap var(--morph-duration) var(--morph-ease); }
-  .is-scrolled .header__center { gap: 0; }
-  .is-scrolled .desktop-nav { gap: var(--compact-nav-gap); }
-  .is-scrolled .nav-link, .is-scrolled .nav-disclosure[open] > .nav-link { border-radius: 999px; }
-  .is-scrolled .nav-link::after { display: none; }
-  .nav-disclosure { position: relative; height: 44px; }
-  .header__connect { position: relative; gap: 4px; height: 44px; max-width: 100px; transition: max-width var(--morph-duration) var(--morph-ease), opacity 200ms ease, visibility 200ms ease; }
-  .glass-bar > .theme-switch::before { content: ''; position: absolute; top: 50%; width: 1px; height: 18px; transform: translateY(-50%); background: var(--glass-ink); opacity: 0; pointer-events: none; transition: opacity 240ms ease; }
-  .nav-link { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; height: 44px; padding: 0 14px; border-radius: 4px; color: var(--glass-ink); font-size: 15px; line-height: 20px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background 160ms ease; }
-  .nav-link--compact { width: 64px; transition: width var(--morph-duration) var(--morph-ease), background 160ms ease, border-radius 240ms ease; }
-  .nav-link--contact { width: 128px; gap: 8px; padding-inline: 10px; transition: width var(--morph-duration) var(--morph-ease), background 160ms ease, color 160ms ease, border-radius 240ms ease; }
-  .nav-link--contact > i { flex-shrink: 0; width: 19px; font-size: 19px; line-height: 1; overflow: hidden; transition: width var(--morph-duration) var(--morph-ease), margin var(--morph-duration) var(--morph-ease), opacity 200ms ease; }
-  .nav-link__contact-label { font-size: 13px; font-weight: 500; letter-spacing: 0.01em; }
-  .nav-link--disclosure { width: 148px; padding-inline: 12px; }
-  .nav-link--disclosure .nav-link__label { position: absolute; left: 12px; right: 32px; text-align: center; }
-  .nav-link--disclosure .chevron { margin-left: auto; flex-shrink: 0; }
-  .is-scrolled .nav-link--compact { width: var(--compact-link-size); }
-  .is-scrolled .nav-link--disclosure { width: var(--compact-disclosure-size); }
-  .nav-link::after { content: ''; position: absolute; height: 2px; bottom: 3px; left: 14px; right: 14px; background: var(--glass-accent); transform: scaleX(0); transform-origin: left; transition: transform 180ms ease; }
-  .nav-link.is-active::after, details[open] > .nav-link::after { transform: scaleX(1); }
-  .nav-disclosure.is-enhanced[open] > .nav-link::after { display: none; }
-  .nav-link.is-active { background: var(--glass-hover); }
-  .nav-disclosure[open] > .nav-link { background: var(--glass-accent); color: #ffffff; border-radius: 12px; }
-  summary { list-style: none; }
-  summary::-webkit-details-marker { display: none; }
-  .chevron { display: grid; place-items: center; width: 12px; height: 20px; line-height: 1; font-size: 9px; transition: transform 180ms ease; }
-  details[open] > summary .chevron { transform: rotate(180deg); }
-  .icon-link { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--glass-ink); border-radius: 4px; font-size: 18px; line-height: 1; padding: 0; flex-shrink: 0; transition: background 160ms ease, color 160ms ease, transform 180ms ease; }
-  .icon-link > i { width: 20px; line-height: 20px; text-align: center; }
-  .theme-switch { position: relative; display: inline-flex; align-items: center; justify-content: center; justify-self: end; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: var(--glass-ink); cursor: pointer; }
-  .header .theme-switch:focus-visible { border-radius: 999px; }
-  .theme-switch__track { flex-shrink: 0; position: relative; display: block; width: 44px; height: 24px; border-radius: 999px; background: color-mix(in srgb, currentColor 6%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 22%, transparent); transition: background 240ms ease, box-shadow 240ms ease; }
-  .theme-switch__thumb { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: color-mix(in srgb, currentColor 88%, transparent); transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), background 240ms ease; }
-  .theme-switch__track > i { position: absolute; top: 2px; display: grid; place-items: center; width: 20px; height: 20px; font-size: 14px; transition: color 240ms ease, opacity 240ms ease; }
-  .theme-switch__sun { left: 2px; color: var(--glass-solid); }
-  .theme-switch__moon { right: 2px; opacity: 0.55; }
-  :global([data-theme='night']) .theme-switch__thumb { transform: translateX(20px); }
-  :global([data-theme='night']) .theme-switch__sun { color: inherit; opacity: 0.55; }
-  :global([data-theme='night']) .theme-switch__moon { color: var(--glass-solid); opacity: 1; }
-  .theme-switch:active .theme-switch__thumb { scale: 0.9; }
-  .nav-reveal { position: absolute; z-index: 3; top: calc(100% + 12px); left: 50%; width: min(360px, calc(100vw - 32px)); transform: translateX(calc(-50% + var(--nav-reveal-offset, 0px))); pointer-events: auto; transition: opacity 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1); }
-  /* The invisible bridge lets the pointer travel from the trigger to its panel. */
-  .nav-reveal::before { content: ''; position: absolute; inset: -13px 0 auto; height: 13px; }
-  .nav-reveal__pointer { position: absolute; top: -10px; left: var(--nav-pointer-x, 50%); width: 22px; height: 11px; transform: translateX(-50%); clip-path: polygon(50% 0, 100% 100%, 0 100%); background: var(--glass-panel); -webkit-backdrop-filter: blur(28px) saturate(155%); backdrop-filter: blur(28px) saturate(155%); }
-  .nav-sheet { position: relative; max-height: var(--nav-sheet-max-height, calc(100dvh - 116px)); overflow-y: auto; overscroll-behavior: contain; padding: 24px; border: 1px solid var(--glass-line); border-radius: 18px; background: var(--glass-panel); box-shadow: 0 14px 30px rgba(10, 20, 25, 0.14); -webkit-backdrop-filter: blur(28px) saturate(155%); backdrop-filter: blur(28px) saturate(155%); color: var(--glass-ink); scrollbar-width: thin; }
-  .nav-disclosure.is-enhanced .nav-reveal { opacity: 0; transform: translateX(calc(-50% + var(--nav-reveal-offset, 0px))) translateY(-6px); pointer-events: none; }
-  .nav-disclosure.is-visible .nav-reveal { opacity: 1; transform: translateX(calc(-50% + var(--nav-reveal-offset, 0px))); pointer-events: auto; }
-  .nav-sheet__intro { display: flex; flex-direction: column; align-items: flex-start; padding-bottom: 18px; margin-bottom: 18px; border-bottom: 1px solid var(--glass-line); }
-  .eyebrow { display: block; font-family: var(--font-mono); font-size: 10px; line-height: 1.6; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--glass-muted); }
-  .nav-sheet__title { margin: 10px 0 0; font-family: var(--font-display); font-size: 28px; line-height: 1.35; }
-  .nav-sheet__intro > .overview { margin-top: 8px; }
-  .nav-sheet__sections .nav-section + .nav-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--glass-line); }
-  .nav-sheet .nav-section > .eyebrow { padding: 0 0 6px; }
-  .nav-sheet .sub-link { gap: 13px; padding: 10px 8px; margin-inline: -8px; min-height: 44px; border-radius: 8px; font-size: 15px; }
-  .nav-sheet .sub-link i { width: 20px; font-size: 18px; }
-  .overview { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--glass-ink); font-size: 13px; font-weight: 500; text-decoration: underline; text-decoration-color: var(--glass-accent); text-underline-offset: 6px; }
-  .overview:hover { color: var(--glass-ink); text-decoration: underline !important; text-decoration-color: var(--glass-accent); }
-  .overview i { font-size: 10px; color: var(--glass-accent); }
-  .nav-section + .nav-section { margin-top: 16px; }
-  .nav-section > .eyebrow { padding: 0 10px 5px; }
-  .sub-link { display: flex; align-items: center; gap: 12px; min-height: 46px; padding: 10px; color: var(--glass-ink); font-size: 14px; line-height: 1.4; border-radius: 3px; transition: background 160ms ease; }
-  .sub-link i { width: 18px; flex-shrink: 0; color: var(--glass-muted); text-align: center; font-size: 14px; }
-  .sub-link:hover, .sub-link[aria-current='page'] { background: var(--glass-hover); color: var(--glass-ink); }
-  .sub-link:hover i, .sub-link[aria-current='page'] i { color: var(--glass-accent); }
-  .menu-toggle, .menu-close { display: flex; align-items: center; justify-content: center; justify-self: center; position: relative; height: 44px; padding: 0 10px; background: transparent; color: var(--glass-ink); border: 0; border-radius: 24px; font: 500 11px/1 var(--font-body); letter-spacing: 0.16em; cursor: pointer; transition: background 180ms ease, color 180ms ease, transform 180ms ease; }
-  .menu-toggle { display: none; width: 64px; }
-  .menu-close { width: 84px; font-size: 10px; }
-  .menu-toggle__label { display: block; padding-left: 0.16em; white-space: nowrap; }
-  .menu-toggle::after { content: ''; position: absolute; bottom: 10px; inset-inline: 15px; height: 1px; background: currentColor; opacity: 0; transform: scaleX(0.5); transition: opacity 180ms ease, transform 180ms ease; }
-  .menu-toggle:active, .menu-close:active { transform: scale(0.96); background: color-mix(in srgb, currentColor 8%, transparent); }
-  .mobile-menu { position: fixed; inset: 0; width: 100%; max-width: 640px; height: 100%; height: 100dvh; max-height: none; margin: 0 auto; padding: 0; border: 0; border-radius: 28px; color: var(--glass-ink); background: color-mix(in srgb, var(--glass-solid) 94%, transparent); -webkit-backdrop-filter: blur(28px); backdrop-filter: blur(28px); overflow: clip; opacity: 0; transform: translateY(-20px) scale(0.985); transform-origin: 50% 0; transition: opacity 260ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms ease, background 240ms ease, color 240ms ease; }
-  .mobile-menu[open] { display: flex; flex-direction: column; }
-  .mobile-menu.is-visible { opacity: 1; transform: none; border-radius: 0; }
-  .mobile-menu.is-closing { transition-duration: 240ms; }
-  .mobile-menu::backdrop { background: rgba(12, 20, 25, 0); -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0); transition: background 300ms ease, backdrop-filter 360ms ease, -webkit-backdrop-filter 360ms ease; }
-  .mobile-menu.is-visible::backdrop { background: rgba(12, 20, 25, 0.34); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-  .mobile-menu.is-closing::backdrop { transition-duration: 240ms; }
-  .mobile-menu__bar { transition: background 240ms ease, color 240ms ease; }
-  .mobile-menu__bar { position: sticky; top: 0; z-index: 1; background: transparent; flex-shrink: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; min-height: 72px; padding: 14px max(24px, env(safe-area-inset-right)) 14px max(24px, env(safe-area-inset-left)); padding-top: max(14px, env(safe-area-inset-top)); }
-  .mobile-menu__body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 28px max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); display: flex; flex-direction: column; flex: 1; }
-  .mobile-menu__body > * { flex-shrink: 0; }
-  .mobile-menu__intro, .mobile-menu .mobile-nav > *, .mobile-connect { opacity: 0; transform: translateY(14px); transition: opacity 280ms ease, transform 380ms cubic-bezier(0.22, 1, 0.36, 1), background 160ms ease; }
-  .mobile-menu.is-visible :is(.mobile-menu__intro, .mobile-nav > *, .mobile-connect) { opacity: 1; transform: none; }
-  .mobile-menu.is-visible .mobile-menu__intro { transition-delay: 70ms; }
-  .mobile-menu.is-visible .mobile-nav > :nth-child(1) { transition-delay: 100ms; }
-  .mobile-menu.is-visible .mobile-nav > :nth-child(2) { transition-delay: 130ms; }
-  .mobile-menu.is-visible .mobile-nav > :nth-child(3) { transition-delay: 160ms; }
-  .mobile-menu.is-visible .mobile-nav > :nth-child(4) { transition-delay: 190ms; }
-  .mobile-menu.is-visible .mobile-connect { transition-delay: 220ms; }
-  .mobile-menu.is-closing :is(.mobile-menu__intro, .mobile-nav > *, .mobile-connect) { transition-duration: 160ms; transition-delay: 0ms; }
-  .mobile-menu__intro { margin-bottom: 24px; }
-  .mobile-menu__title { display: block; margin-top: 9px; font-family: var(--font-display); font-style: italic; font-size: 17px; line-height: 1.6; }
-  .mobile-nav { border-top: 1px solid var(--glass-line); }
-  .mobile-nav > * { border-bottom: 1px solid var(--glass-line); }
-  .mobile-nav__link { display: grid; grid-template-columns: 24px 1fr 20px; align-items: center; gap: 12px; min-height: 72px; color: var(--glass-ink); font-family: var(--font-display); font-size: 23px; cursor: pointer; transition: background 160ms ease; }
-  .mobile-nav__link.is-active, .mobile-nav__link[aria-current='page'] { box-shadow: inset 2px 0 var(--glass-accent); }
-  .nav-number { padding-left: 5px; font: 10px var(--font-mono); color: var(--glass-muted); }
-  .mobile-nav__link > i { justify-self: end; font-size: 13px; transition: transform 180ms ease; }
-  .mobile-disclosure[open] > summary > i { transform: rotate(45deg); color: var(--glass-accent); }
-  .mobile-subnav { padding: 0 0 20px 26px; }
-  .mobile-subnav > .overview { margin: 0 10px 14px; }
-  .mobile-connect { margin-top: auto; padding-top: 30px; }
-  .mobile-contact { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; border: 0; background: transparent; color: var(--glass-ink); transition: color 180ms ease; }
-  .mobile-contact > span:first-child { font: 10px var(--font-mono); }
-  .mobile-contact > span:last-child { display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: 500; }
-  .mobile-contact i { font-size: 22px; }
-  .mobile-contact:hover { color: var(--glass-accent); }
-  .mobile-socials { display: flex; justify-content: center; gap: 28px; margin-top: 14px; }
-  .mobile-socials a { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; color: var(--glass-ink); font-size: 12px; }
-  .mobile-socials i { font-size: 18px; }
-  @media (hover: hover) {
-    .nav-link:hover { background: var(--glass-hover); color: var(--glass-ink); }
-    .nav-link:hover::after { transform: scaleX(1); }
-    .icon-link:hover { background: var(--glass-accent); color: #141414; transform: translateY(-2px); }
-    .theme-switch:hover .theme-switch__track { background: color-mix(in srgb, currentColor 12%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 38%, transparent); }
-    .menu-toggle:hover, .menu-close:hover { background: color-mix(in srgb, currentColor 7%, transparent); }
-    .menu-toggle:hover::after { opacity: 0.55; transform: scaleX(1); }
-    .mobile-nav__link:hover { background: var(--glass-hover); color: var(--glass-ink); }
-    .mobile-socials a:hover { text-decoration: underline; text-decoration-color: var(--glass-accent); text-underline-offset: 5px; }
+
+  .brand { flex-shrink: 0; position: relative; display: block; width: 150px; height: 44px; color: var(--bar-ink); transition: width var(--morph) var(--morph-ease); }
+  .brand:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 4px; }
+
+  .actions { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px;
+    white-space: nowrap; background: var(--accent); color: #fff; font: 600 14px/1 var(--font-body); text-decoration: none;
+    transition: height var(--morph) var(--morph-ease), padding var(--morph) var(--morph-ease), background 0.18s, transform 0.18s;
   }
+  .cta:hover { text-decoration: none; color: #fff; background: color-mix(in srgb, var(--accent) 90%, #000); transform: translateY(-1px); }
+  .cta:focus-visible { outline: 2px solid var(--bar-ink); outline-offset: 3px; }
+  .theme {
+    position: relative; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px;
+    background: transparent; color: var(--bar-ink); font-size: 18px; cursor: pointer;
+    transition: width var(--morph) var(--morph-ease), height var(--morph) var(--morph-ease), background 0.18s;
+  }
+  .theme:hover { background: var(--bar-hover); }
+  .theme:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+  .theme > i { grid-area: 1 / 1; transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+  .theme__moon { opacity: 0; transform: rotate(-40deg) scale(0.7); }
+  :global([data-theme='night']) .theme__sun { opacity: 0; transform: rotate(40deg) scale(0.7); }
+  :global([data-theme='night']) .theme__moon { opacity: 1; transform: none; }
+
   @media (min-width: 1100px) {
-    /* The capsule keeps its words. Contact becomes the one filled action. */
-    .is-scrolled .nav-link--contact { width: var(--compact-contact-size); background: var(--glass-accent); color: #141414; }
-    .is-scrolled .nav-link--contact:hover { background: color-mix(in srgb, var(--glass-accent) 88%, #ffffff); color: #141414; }
-    .is-scrolled .nav-link--contact > i { width: 0; margin-right: -8px; opacity: 0; }
-    .is-scrolled .nav-disclosure[open] > .nav-link { background: var(--glass-hover); color: var(--glass-ink); }
-    .is-scrolled .header__connect { max-width: 0; overflow: hidden; opacity: 0; visibility: hidden; }
-    .is-scrolled .glass-bar { grid-template-columns: 44px auto 57px; width: calc(var(--compact-center-width) + 149px); gap: 12px; }
-    .is-scrolled .glass-bar > .theme-switch::before { opacity: 0.18; }
-    .is-scrolled .glass-bar > .theme-switch { width: 57px; padding-left: 13px; }
-    .glass-bar > .theme-switch::before { left: 0; }
+    /* Collapsed: the bar shrinks horizontally around its contents and the wordmark morphs into the monogram. */
+    .is-scrolled .glass-bar { width: var(--compact-w, 760px); height: 54px; padding: 0 6px 0 10px; }
+    .is-scrolled .brand { width: 38px; }
+    .is-scrolled .cta { height: 40px; padding: 0 16px; }
+    .is-scrolled .theme { width: 40px; height: 40px; }
   }
   @media (max-width: 1099px) {
-    .glass-bar { --compact-center-width: 64px; min-height: 72px; gap: 12px; padding: 14px 0; padding-top: max(14px, env(safe-area-inset-top)); }
-    .is-scrolled .glass-bar { min-height: 56px; padding: 6px 12px; gap: 8px; }
-    .brand { width: 112px; height: 44px; }
-    .brand img { width: 100%; }
-    .header__center { display: none; }
-    .menu-toggle { display: flex; }
+    .glass-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); height: 56px; padding: 0 6px 0 16px; }
+    .brand { width: 112px; }
+    .is-scrolled .brand { width: 44px; }
+    .actions { justify-self: end; }
+    .cta { display: none; }
   }
   @media (max-width: 480px) {
     .brand { width: 104px; }
   }
-  @media (max-width: 380px) {
-    .glass-bar, .mobile-menu__bar { gap: 8px; }
-    .mobile-menu__body { padding-inline: 20px; }
-  }
+
   .header:not([data-surface-ready]), .header:not([data-surface-ready]) *, .header:not([data-surface-ready]) *::before, .header:not([data-surface-ready]) *::after { transition: none !important; }
   @media (prefers-reduced-motion: reduce) {
-    .header, .header *, .header *::before, .header *::after { transition: none !important; animation: none !important; }
+    .header, .glass-bar, .glass-bar::before, .brand, .cta, .theme, .theme > i { transition: none !important; }
   }
   @media (prefers-reduced-transparency: reduce) {
-    .is-scrolled .glass-bar::before { -webkit-backdrop-filter: none; backdrop-filter: none; }
-    .glass-bar::before { background: var(--glass-solid); }
-    .mobile-menu { background: var(--glass-solid); -webkit-backdrop-filter: none; backdrop-filter: none; }
-    .mobile-menu.is-visible::backdrop { -webkit-backdrop-filter: none; backdrop-filter: none; }
-    .nav-sheet, .nav-reveal__pointer { background: var(--glass-solid); -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .glass-bar::before { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bar-solid); }
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .glass-bar::before { background: var(--glass-solid); }
-    .nav-sheet, .nav-reveal__pointer { background: var(--glass-solid); }
+    .glass-bar::before { background: var(--bar-glass-strong); }
   }
 </style>
