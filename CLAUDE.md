@@ -58,6 +58,9 @@ Guests search dates on `/apartments/#direct` and get a price quote on `/book/<id
 - `scripts/lib/hostex-read.mjs` — read-only Hostex client
 - `scripts/lib/booking-handlers.mjs` + `api/booking/calendar.js`, `api/booking/quote.js` — endpoints
 - `src/scripts/direct-booking-client.mjs` — browser pure functions
+- `src/data/booking-mode.mjs` — `BOOKING_MODE` (`'request'` now, `'instant'` with online payment): drives guest copy in `DirectBooking.astro`, `BookingPanel.astro` and `policyText`
+- `scripts/lib/rate-limit.mjs` — in-memory per-IP limiter (quote 30/min, calendar 20/min → 429 + `Retry-After`); best-effort per instance, a Vercel Firewall rule is the real guard. The calendar endpoint answers 400 to any query string (it would bypass the CDN cache)
+- Calendar nights are `{ d, b, p, m }` plus `a: 1` (closed on arrival) / `x: 1` (closed on departure); `unitState` refuses those stays like `quoteStay`
 - `src/components/DirectBooking.astro`, `DirectCard.astro`, `BookingPanel.astro`; page `src/pages/book/[id].astro`
 - Local dev without Hostex: `BOOKING_FIXTURE=1 npm run contact:api` serves fixture data
 
