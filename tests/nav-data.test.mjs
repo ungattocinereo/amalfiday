@@ -31,7 +31,7 @@ test('apartments panel lists every direct unit once, linking to its booking page
   for (const row of directUnitRows) {
     const unit = DIRECT_UNITS[row.href.split('/')[2]]
     assert.equal(row.note, unit.maxGuests === 1 ? '1 guest' : `Up to ${unit.maxGuests} guests`)
-    assert.match(row.image, /^\/apartments\//)
+    assert.match(row.image, /^\/nav\/.+-thumb\.webp$/)
   }
   const stay = navigation.find((item) => item.label === 'Apartments')
   assert.equal(stay.badge, '−10%')
