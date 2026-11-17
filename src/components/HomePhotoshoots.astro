@@ -151,12 +151,16 @@ const storyCards = cards.slice(0, 6)
     .photo-showcase__slide picture, .photo-showcase__slide img { display: block; width: 100%; height: 100%; }
     /* Fill the banner below the crown, then align that crown 2px from its top edge. */
     .photo-showcase__slide img { object-fit: cover; height: max(calc((100% - 2px) / var(--visible-height)), calc(100vw / var(--image-ratio))); transform: translateY(calc(2px - var(--head-top))); }
-    .photo-showcase__veil { position: absolute; inset: 0; background: linear-gradient(0deg, #0008, transparent 45%), linear-gradient(90deg, #0004, transparent 60%); }
+    .photo-showcase__veil { position: absolute; inset: 0; background: linear-gradient(0deg, #0007, transparent 40%), linear-gradient(90deg, #0003, transparent 50%); }
+    /* Slow pan-zoom-out on every cover until the next slide. */
+    .photo-showcase__slide picture { transform-origin: 60% 40%; will-change: transform; }
+    .photo-showcase__slide.is-active picture { animation: showcase-zoom-out calc(var(--slide-ms, 6000ms) + 1.1s) linear both; }
     .photo-showcase__caption { position: absolute; left: 0; right: 0; bottom: 6.5rem; pointer-events: none; }
-    .photo-showcase__label { display: flex; align-items: center; gap: .8rem; font-family: var(--font-mono); font-size: .65rem; letter-spacing: .06em; text-transform: uppercase; }
-    .photo-showcase__caption h3 { font-size: clamp(2.3rem, 4.3vw, 4.3rem); line-height: 1.2; color: #fff; margin: 1.1rem 0 1.5rem; }
+    .photo-showcase__label { display: flex; align-items: center; gap: .7rem; font-family: var(--font-mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+    /* A light caption: smaller type, a narrow measure, so the photo leads. */
+    .photo-showcase__caption h3 { max-width: 30rem; font-size: clamp(1.7rem, 2.5vw, 2.6rem); font-weight: 400; line-height: 1.18; letter-spacing: -.01em; color: #fff; margin: .8rem 0 1.1rem; text-shadow: 0 2px 18px #0004; }
     .photo-showcase__caption em { font-weight: 400; }
-    .photo-showcase__caption a { pointer-events: auto; display: inline-flex; align-items: center; gap: .8rem; color: #fff; border-bottom: 1px solid #ffffff80; padding-bottom: .6rem; }
+    .photo-showcase__caption a { pointer-events: auto; display: inline-flex; align-items: center; gap: .6rem; color: #fff; font-size: .9rem; border-bottom: 1px solid #ffffff70; padding-bottom: .45rem; }
     .photo-showcase__controls { position: absolute; left: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); right: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); bottom: 2rem; display: none; align-items: center; gap: .7rem; }
     .photo-showcase.is-enhanced .photo-showcase__controls { display: flex; }
     .home-photos__all--intro { display: none; }
@@ -170,16 +174,26 @@ const storyCards = cards.slice(0, 6)
     .home-photos__all--slider:hover .home-photos__all-go { transform: translateX(3px); }
     .photo-showcase__picks { display: flex; gap: .8rem; margin-right: auto; }
     .photo-showcase button { cursor: pointer; color: #fff; font: inherit; }
-    .photo-showcase__picks button { width: 64px; height: 44px; background: transparent; border: 0; border-bottom: 2px solid #ffffff50; text-align: left; font-family: var(--font-mono); font-size: .7rem; opacity: .7; }
-    .photo-showcase__picks button[aria-pressed='true'] { border-color: #fff; opacity: 1; }
+    .photo-showcase__picks button { position: relative; width: 64px; height: 44px; background: transparent; border: 0; border-bottom: 2px solid #ffffff45; text-align: left; font-family: var(--font-mono); font-size: .7rem; opacity: .7; }
+    .photo-showcase__picks button[aria-pressed='true'] { opacity: 1; }
+    /* White line over the track: full on the current slide when paused, filling over the slide's time when running. */
+    .photo-showcase__picks button::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: #fff; transform: scaleX(0); transform-origin: left; }
+    .photo-showcase__picks button[aria-pressed='true']::after { transform: scaleX(1); }
+    .photo-showcase.is-running .photo-showcase__picks button[aria-pressed='true']:not(.is-filling)::after { transform: scaleX(0); }
+    .photo-showcase__picks button.is-filling::after { animation: showcase-fill var(--slide-ms, 6000ms) linear both; }
     .photo-showcase__round { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ffffff80; border-radius: 50%; background: #0005; }
     .photo-showcase button:hover { background: #ffffff20; }
     .photo-showcase__count { font-family: var(--font-mono); font-size: .75rem; margin-right: 1rem; }
   }
+  @keyframes showcase-zoom-out { from { transform: scale(1.09); } to { transform: scale(1); } }
+  @keyframes showcase-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) {
+    .photo-showcase__slide.is-active picture, .photo-showcase__picks button.is-filling::after { animation: none; }
+  }
   @media (min-width: 1100px) and (min-aspect-ratio: 2/1) {
     /* Keep the copy beside faces when wide screens crop these close portraits. */
     .photo-showcase__caption { max-width: none; padding-inline: 8vw; }
-    .photo-showcase__caption h3 { font-size: clamp(2.3rem, 2.7vw, 3.8rem); }
+    .photo-showcase__caption h3 { font-size: clamp(1.7rem, 2vw, 2.5rem); }
     .photo-showcase__controls { left: 8vw; right: 8vw; }
     .home-photos__all--slider { right: 8vw; }
   }
@@ -225,6 +239,16 @@ const storyCards = cards.slice(0, 6)
     let visible = false
     let paused = reduced.matches
     let timer: ReturnType<typeof setTimeout> | undefined
+    // One slide's time on screen; the cover zooms out and the active line fills over it.
+    const SLIDE_MS = 6000
+    showcase.style.setProperty('--slide-ms', `${SLIDE_MS}ms`)
+    const setProgress = (running: boolean) => {
+      picks.forEach((p) => p.classList.remove('is-filling'))
+      showcase.classList.toggle('is-running', running)
+      if (!running) return
+      void picks[active].offsetWidth // restart the fill from empty
+      picks[active].classList.add('is-filling')
+    }
 
     const syncPause = () => {
       pause.setAttribute('aria-pressed', String(paused))
@@ -233,7 +257,7 @@ const storyCards = cards.slice(0, 6)
     }
     const schedule = () => {
       clearTimeout(timer)
-      if (!visible || !desktop.matches || document.hidden) return
+      if (!visible || !desktop.matches || document.hidden) { setProgress(false); return }
       // Load the next cover before its turn, without downloading the desktop banner on mobile.
       for (const index of [active, (active + 1) % slides.length]) {
         const image = slides[index].querySelector('img')
@@ -244,8 +268,9 @@ const storyCards = cards.slice(0, 6)
       // The persistent Play button can resume even while it retains keyboard focus.
       const keyboardFocus = focused instanceof HTMLElement && focused !== pause
         && showcase.contains(focused) && focused.matches(':focus-visible')
-      if (paused || keyboardFocus) return
-      timer = setTimeout(() => show(active + 1), 3000)
+      if (paused || keyboardFocus) { setProgress(false); return }
+      setProgress(true)
+      timer = setTimeout(() => show(active + 1), SLIDE_MS)
     }
     const show = (index: number, manual = false) => {
       active = (index + slides.length) % slides.length
