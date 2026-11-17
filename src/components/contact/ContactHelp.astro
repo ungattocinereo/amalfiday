@@ -3,45 +3,54 @@
 const products = [
   {
     title: 'Photoshoot',
-    text: 'Golden-hour portraits and couple sessions, guided from start to finish.',
+    text: 'Portraits and couple sessions at golden hour. We pick the spots and guide every pose.',
     image: '/staticpages/contact/photoshootings.webp',
-    alt: 'Amalfi Coast photoshoot planning',
-    href: '/contact/?service=photoshoot#contact-form',
-    cta: 'Request a photoshoot',
+    alt: 'Paper-cut illustration of a photographer shooting a couple above the sea',
+    href: '/contact/?service=photoshoot#plan',
+    cta: 'Plan a photoshoot',
+    plan: true,
+    w: 1200,
+    h: 896,
   },
   {
     title: 'Stay',
-    text: 'Our apartments in Atrani, steps from the sea. Book direct and save 10%.',
+    text: 'Our rooms in Atrani, a few steps from the beach. Book direct and pay 10% less.',
     image: '/staticpages/mainpage/rental-houses.webp',
-    alt: 'Apartments in Atrani',
+    alt: 'Paper-cut illustration of houses with balconies above the sea',
     href: '/apartments/#direct',
-    cta: 'Check dates',
+    cta: 'Check your dates',
+    plan: false,
+    w: 1200,
+    h: 1200,
   },
   {
     title: 'Tour',
-    text: 'Private tours by car along the coast, with hidden viewpoints and local stories.',
-    image: '/staticpages/car-tours/positano-Hero-tours-amalfi-coast-by-car-3.webp',
-    alt: 'Private car tour above Positano',
-    href: '/contact/?service=tour#contact-form',
-    cta: 'Ask about a tour',
+    text: 'A private car along the coast road, with stops at the viewpoints the buses skip.',
+    image: '/staticpages/contact/transfers.webp',
+    alt: 'Paper-cut illustration of a convertible on the coast road above a harbour',
+    href: '/contact/?service=tour#plan',
+    cta: 'Plan a tour',
+    plan: true,
+    w: 1200,
+    h: 896,
   },
 ]
 ---
 
-<section class="section contact-help">
+<section class="section contact-help" aria-labelledby="contact-help-title">
   <div class="container">
-    <h2>How we can <span class="accent-italic">help</span></h2>
+    <h2 id="contact-help-title">How we can <span class="accent-italic">help</span></h2>
     <div class="contact-help__grid">
       {
         products.map((p) => (
           <article class="contact-help__card">
             <div class="contact-help__media">
-              <img src={p.image} alt={p.alt} width="1200" height="896" loading="lazy" />
+              <img src={p.image} alt={p.alt} width={p.w} height={p.h} loading="lazy" decoding="async" />
             </div>
             <div class="contact-help__content">
               <h3>{p.title}</h3>
               <p>{p.text}</p>
-              <a class="contact-help__link" href={p.href}>
+              <a class="contact-help__link" href={p.href} data-plan-link={p.plan ? '' : undefined}>
                 <span>{p.cta}</span> <i class="ph ph-arrow-right" aria-hidden="true"></i>
               </a>
             </div>
@@ -49,7 +58,9 @@ const products = [
         ))
       }
     </div>
-    <p class="contact-help__more">Transfers, porters, workshops — just ask.</p>
+    <p class="contact-help__more">
+      Transfers, porters, workshops — <a href="/contact/?service=other#plan" data-plan-link><span>just ask</span></a>.
+    </p>
   </div>
 </section>
 
@@ -58,7 +69,7 @@ const products = [
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.4rem;
-    margin-top: 1.5rem;
+    margin-top: 1.8rem;
   }
 
   .contact-help__card {
@@ -69,6 +80,26 @@ const products = [
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .contact-help__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .contact-help__card:hover .contact-help__media img {
+    transform: scale(1.04);
+  }
+
+  .contact-help__card h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+
+  .contact-help__card p {
+    color: var(--color-text-muted);
   }
 
   .contact-help__media {
@@ -81,6 +112,7 @@ const products = [
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s ease;
   }
 
   .contact-help__content {
@@ -113,6 +145,17 @@ const products = [
     text-underline-offset: 0.2em;
   }
 
+  .contact-help__more a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .contact-help__more a span {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 0.2em;
+  }
+
   .contact-help__more {
     margin: 1.6rem 0 0;
     text-align: center;
@@ -122,9 +165,15 @@ const products = [
     color: var(--color-text-muted);
   }
 
+  .contact-help h2 {
+    margin: 0;
+    font-size: clamp(2rem, 3.6vw, 2.8rem);
+  }
+
   @media (max-width: 980px) {
     .contact-help__grid {
       grid-template-columns: 1fr;
+      max-width: 560px;
     }
   }
 </style>

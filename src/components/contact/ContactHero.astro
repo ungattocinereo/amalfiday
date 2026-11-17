@@ -1,0 +1,368 @@
+---
+// Contact hero on the home page's orange (navy at night): headline, reply promise,
+// three big channel buttons and a stacked paper-cut illustration.
+interface Props {
+  whatsappHref: string
+  email: string
+  phone: string
+}
+const { whatsappHref, email, phone } = Astro.props
+---
+
+<section class="c-hero" data-nav-surface="dark">
+  <div class="c-hero__inner hero-container">
+    <div class="c-hero__copy">
+      <p class="c-hero__eyebrow">Contact · Atrani, Amalfi Coast</p>
+      <h1 class="c-hero__title">Let's plan your <em>Amalfi</em> days</h1>
+      <p class="c-hero__lead">
+        Photoshoots, rooms in Atrani, tours along the coast. Write to us and we answer ourselves,
+        within 24 hours.
+      </p>
+
+      <ul class="c-hero__channels">
+        <li>
+          <a class="c-channel c-channel--primary" href={whatsappHref} target="_blank" rel="noreferrer">
+            <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+            <span class="c-channel__text"><strong>WhatsApp</strong><small>{phone}</small></span>
+          </a>
+        </li>
+        <li>
+          <a class="c-channel" href="https://instagram.com/amalfi.day" target="_blank" rel="noreferrer">
+            <i class="ph ph-instagram-logo" aria-hidden="true"></i>
+            <span class="c-channel__text"><strong>Instagram</strong><small>@amalfi.day</small></span>
+          </a>
+        </li>
+        <li>
+          <a class="c-channel" href={`mailto:${email}`}>
+            <i class="ph ph-envelope-simple" aria-hidden="true"></i>
+            <span class="c-channel__text"><strong>Email</strong><small>{email}</small></span>
+          </a>
+        </li>
+      </ul>
+
+      <a class="c-hero__jump" href="#plan">
+        <span>Or plan it step by step</span>
+        <i class="ph ph-arrow-down" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <div class="c-hero__art" aria-hidden="true">
+      <img
+        class="c-hero__sheet c-hero__sheet--back"
+        src="/staticpages/contact/masterclasses.webp"
+        alt=""
+        width="1200"
+        height="896"
+        loading="eager"
+        decoding="async"
+      />
+      <img
+        class="c-hero__sheet c-hero__sheet--front"
+        src="/staticpages/contact/porters.webp"
+        alt=""
+        width="1200"
+        height="896"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <span class="c-hero__stamp">
+        <i class="ph ph-clock-countdown"></i>
+        <span>Reply<br />within 24 h</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .c-hero {
+    --c-hero-bg: #ff5900;
+    --c-hero-glow-core: rgba(255, 195, 0, 0.9);
+    --c-hero-glow-mid: rgba(255, 126, 0, 0.85);
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: var(--c-hero-bg);
+    padding: calc(var(--header-space) + 2.5rem) 0 clamp(7rem, 12vw, 10rem);
+  }
+
+  :global(html[data-theme='night']) .c-hero {
+    --c-hero-bg: #031e4d;
+    --c-hero-glow-core: rgba(151, 210, 255, 0.55);
+    --c-hero-glow-mid: rgba(35, 104, 190, 0.6);
+  }
+
+  /* The same sun glow as the home hero, moved to the illustration side. */
+  .c-hero::before {
+    content: '';
+    position: absolute;
+    right: -10%;
+    top: -30%;
+    width: min(1100px, 130vw);
+    aspect-ratio: 1;
+    background: radial-gradient(circle, var(--c-hero-glow-core) 0%, var(--c-hero-glow-mid) 42%, transparent 70%);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .c-hero__inner {
+    position: relative;
+    z-index: 1;
+    width: calc(100% - 2 * max(var(--page-gutter), env(safe-area-inset-left), env(safe-area-inset-right)));
+    max-width: var(--content-max);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+
+  .c-hero__eyebrow {
+    margin: 0 0 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .c-hero__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    color: #ffffff;
+    text-wrap: balance;
+  }
+
+  .c-hero__title em {
+    font-style: italic;
+  }
+
+  .c-hero__lead {
+    margin: 1.3rem 0 2rem;
+    max-width: 34rem;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.6;
+    color: #ffffff;
+  }
+
+  .c-hero__channels {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    max-width: 40rem;
+  }
+
+  .c-channel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 1.05rem 1.1rem 1.1rem;
+    border-radius: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .c-channel:hover {
+    text-decoration: none;
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .c-channel:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+  }
+
+  /* Primary channel: a dark tile, so its white text never sits on a pale surface. */
+  .c-channel--primary {
+    background: #14110f;
+    border-color: #14110f;
+    box-shadow: 0 16px 34px rgba(60, 20, 0, 0.28);
+  }
+
+  .c-channel--primary:hover {
+    background: #000000;
+  }
+
+  .c-channel > i {
+    font-size: 1.7rem;
+    line-height: 1;
+  }
+
+  .c-channel__text {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .c-channel__text strong {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .c-channel__text small {
+    font-size: 0.82rem;
+    opacity: 0.85;
+    overflow-wrap: anywhere;
+  }
+
+  .c-hero__jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 1.6rem;
+    color: #ffffff;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .c-hero__jump span {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+
+  .c-hero__jump:hover span {
+    text-decoration-thickness: 2px;
+  }
+
+  .c-hero__jump i {
+    transition: transform 0.2s ease;
+  }
+
+  .c-hero__jump:hover i {
+    transform: translateY(3px);
+  }
+
+  /* Illustration: two paper sheets, the front one slightly turned. */
+  .c-hero__art {
+    position: relative;
+    aspect-ratio: 1.12;
+    max-width: 600px;
+    width: 100%;
+    justify-self: end;
+  }
+
+  .c-hero__sheet {
+    position: absolute;
+    width: 82%;
+    height: auto;
+    border-radius: 24px;
+    border: 7px solid #fffaf3;
+    box-shadow: 0 30px 60px rgba(70, 25, 0, 0.3);
+    box-sizing: border-box;
+  }
+
+  .c-hero__sheet--back {
+    top: 0;
+    right: 0;
+    transform: rotate(5deg);
+    filter: saturate(0.9);
+  }
+
+  .c-hero__sheet--front {
+    left: 0;
+    bottom: 0;
+    transform: rotate(-3.5deg);
+    animation: c-hero-settle 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .c-hero__stamp {
+    position: absolute;
+    right: 4%;
+    bottom: 6%;
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+    width: 7.2rem;
+    aspect-ratio: 1;
+    box-sizing: border-box;
+    padding: 1.1rem 0.6rem 0.8rem;
+    border-radius: 50%;
+    background: #fffaf3;
+    color: #14110f;
+    box-shadow: 0 14px 30px rgba(70, 25, 0, 0.28);
+    transform: rotate(8deg);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.15;
+    text-align: center;
+    outline: 1.5px dashed rgba(20, 17, 15, 0.35);
+    outline-offset: -7px;
+  }
+
+  .c-hero__stamp i {
+    font-size: 1.5rem;
+    color: #ff5900;
+  }
+
+  @keyframes c-hero-settle {
+    from {
+      transform: rotate(-9deg) translateY(24px);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-hero__sheet--front {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 1099px) {
+    .c-hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .c-hero__art {
+      justify-self: center;
+      max-width: 520px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .c-hero {
+      padding-top: calc(var(--header-space) + 1rem);
+    }
+
+    .c-hero__channels {
+      gap: 0.5rem;
+    }
+
+    .c-channel {
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      padding: 0.9rem 0.4rem;
+      border-radius: 18px;
+    }
+
+    .c-channel__text small {
+      display: none;
+    }
+
+    .c-hero__art {
+      max-width: 400px;
+    }
+
+    .c-hero__stamp {
+      width: 5.8rem;
+      font-size: 0.78rem;
+      padding-top: 0.85rem;
+    }
+  }
+</style>

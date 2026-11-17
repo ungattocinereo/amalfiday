@@ -1,0 +1,1150 @@
+---
+// "Plan your day": a three-step request builder with a live postcard summary.
+// Without JS every step is visible and the form opens the visitor's mail app (mailto),
+// because /api/contact only accepts JSON. With JS it becomes a stepper and posts JSON
+// to /api/contact (see src/scripts/contact-plan.mjs and contact-request.mjs).
+import { DIRECT_UNITS, DIRECT_UNIT_IDS } from '../../data/direct-units.mjs'
+import { DIRECT_APARTMENTS } from '../../data/apartments'
+import { MAX_GUESTS, LIMITS } from '../../scripts/contact-request.mjs'
+
+interface Props {
+  whatsappHref: string
+  email: string
+}
+const { whatsappHref, email } = Astro.props
+
+const tiles = [
+  { id: 'photoshoot', label: 'Photoshoot', text: 'Portraits, couples, proposals', image: '/staticpages/contact/photoshootings.webp', w: 1200, h: 896 },
+  { id: 'stay', label: 'Stay', text: 'Rooms in Atrani, by the sea', image: '/staticpages/mainpage/rental-houses.webp', w: 1200, h: 1200 },
+  { id: 'tour', label: 'Tour', text: 'Private car tours of the coast', image: '/staticpages/contact/transfers.webp', w: 1200, h: 896 },
+  { id: 'other', label: 'Something else', text: 'Transfers, porters, workshops', image: '/staticpages/contact/masterclasses.webp', w: 1200, h: 896 },
+]
+
+const rooms = DIRECT_UNIT_IDS.map((id) => ({
+  id,
+  label: DIRECT_UNITS[id].label,
+  maxGuests: DIRECT_UNITS[id].maxGuests,
+  image: DIRECT_APARTMENTS.find((a) => a.id === id)?.gallery?.[0] ?? '',
+}))
+
+const steps = [
+  { n: 1, label: 'What' },
+  { n: 2, label: 'When' },
+  { n: 3, label: 'You' },
+]
+---
+
+<section class="plan" id="plan" aria-labelledby="plan-title">
+  <div class="container plan__container">
+    <div class="plan__layout" id="contact-form" data-plan data-step="1">
+      <div class="plan__card">
+        <header class="plan__head">
+          <h2 id="plan-title">Plan your <span class="accent-italic">day</span></h2>
+          <p>Three short steps. We answer with free dates and a price.</p>
+          <ol class="plan__progress" data-plan-progress hidden>
+            {
+              steps.map((s) => (
+                <li>
+                  <button type="button" class="plan__dot" data-goto={s.n} disabled={s.n !== 1}>
+                    <span class="plan__dot-n">{s.n}</span>
+                    <span class="plan__dot-label">{s.label}</span>
+                  </button>
+                </li>
+              ))
+            }
+          </ol>
+        </header>
+
+        <form
+          class="plan-form"
+          action={`mailto:${email}`}
+          method="post"
+          enctype="text/plain"
+          data-primary-endpoint="/api/contact"
+          data-fallback-endpoint="/hooks/send-telegram-amalfiday"
+        >
+          <!-- Step 1 -->
+          <fieldset class="plan-step" data-step-panel="1">
+            <legend class="plan-step__title" tabindex="-1">
+              <span class="plan-step__n">1</span> What do you need?
+            </legend>
+            <p class="plan-step__hint" id="services-hint">Pick one or more.</p>
+            <div class="plan-tiles" role="group" aria-describedby="services-hint services-error">
+              {
+                tiles.map((t) => (
+                  <label class="plan-tile">
+                    <input type="checkbox" name="service" value={t.id} data-label={t.label} />
+                    <span class="plan-tile__media">
+                      <img src={t.image} alt="" width={t.w} height={t.h} loading="lazy" decoding="async" />
+                    </span>
+                    <span class="plan-tile__body">
+                      <strong>{t.label}</strong>
+                      <span>{t.text}</span>
+                    </span>
+                    <span class="plan-tile__check" aria-hidden="true">
+                      <i class="ph ph-check" />
+                    </span>
+                  </label>
+                ))
+              }
+            </div>
+            <p class="plan-error" id="services-error" data-error="services" hidden></p>
+          </fieldset>
+
+          <!-- Step 2 -->
+          <fieldset class="plan-step" data-step-panel="2">
+            <legend class="plan-step__title" tabindex="-1">
+              <span class="plan-step__n">2</span> When, and how many?
+            </legend>
+            <div class="plan-grid">
+              <label class="plan-field">
+                <span class="plan-field__label">From</span>
+                <input type="date" name="from" data-field="from" aria-describedby="dates-error" />
+              </label>
+              <label class="plan-field">
+                <span class="plan-field__label">Until <small>(optional)</small></span>
+                <input type="date" name="to" data-field="to" aria-describedby="to-error" />
+                <span class="plan-error" id="to-error" data-error="to" hidden></span>
+              </label>
+              <div class="plan-field plan-field--guests">
+                <label class="plan-field__label" for="plan-guests">Guests</label>
+                <div class="plan-stepper">
+                  <button type="button" class="plan-stepper__btn" data-guests="-1" aria-label="One guest fewer" hidden>
+                    <i class="ph ph-minus" aria-hidden="true"></i>
+                  </button>
+                  <input id="plan-guests" type="number" name="guests" min="1" max={MAX_GUESTS} value="2" inputmode="numeric" data-field="guests" />
+                  <button type="button" class="plan-stepper__btn" data-guests="1" aria-label="One guest more" hidden>
+                    <i class="ph ph-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+              <label class="plan-field plan-field--wide">
+                <span class="plan-field__label">Where, or roughly when</span>
+                <input
+                  type="text"
+                  name="place"
+                  maxlength="120"
+                  placeholder="Positano, or “a weekend in June”"
+                  data-field="place"
+                  aria-describedby="dates-error"
+                />
+              </label>
+            </div>
+            <p class="plan-error" id="dates-error" data-error="dates" hidden></p>
+
+            <fieldset class="plan-rooms" data-needs="stay">
+              <legend class="plan-field__label">Room <small>(for a stay)</small></legend>
+              <div class="plan-rooms__list">
+                <label class="plan-room plan-room--any">
+                  <input type="radio" name="unit" value="" checked />
+                  <span class="plan-room__media plan-room__media--any" aria-hidden="true">
+                    <i class="ph ph-shuffle" />
+                  </span>
+                  <span class="plan-room__body"><strong>Any room</strong><span>We suggest one</span></span>
+                </label>
+                {
+                  rooms.map((r) => (
+                    <label class="plan-room" data-max-guests={r.maxGuests}>
+                      <input type="radio" name="unit" value={r.id} data-label={r.label} />
+                      <span class="plan-room__media">
+                        {r.image && <img src={r.image} alt="" width="160" height="120" loading="lazy" decoding="async" />}
+                      </span>
+                      <span class="plan-room__body">
+                        <strong>{r.label}</strong>
+                        <span>
+                          Up to {r.maxGuests} guest{r.maxGuests === 1 ? '' : 's'}
+                        </span>
+                      </span>
+                    </label>
+                  ))
+                }
+              </div>
+              <p class="plan-rooms__note" data-rooms-note hidden></p>
+            </fieldset>
+          </fieldset>
+
+          <!-- Step 3 -->
+          <fieldset class="plan-step" data-step-panel="3">
+            <legend class="plan-step__title" tabindex="-1">
+              <span class="plan-step__n">3</span> How do we reach you?
+            </legend>
+            <div class="plan-grid">
+              <label class="plan-field">
+                <span class="plan-field__label">Your name</span>
+                <input type="text" name="name" autocomplete="name" maxlength={LIMITS.name} placeholder="Anna" data-field="name" />
+              </label>
+              <label class="plan-field">
+                <span class="plan-field__label">WhatsApp or email</span>
+                <input
+                  type="text"
+                  name="contact"
+                  autocomplete="email"
+                  maxlength={LIMITS.contact}
+                  placeholder="+44 7700 900123"
+                  required
+                  data-field="contact"
+                  aria-describedby="contact-error"
+                />
+                <span class="plan-error" id="contact-error" data-error="contact" hidden></span>
+              </label>
+              <label class="plan-field plan-field--wide">
+                <span class="plan-field__label">Anything else? <small>(optional)</small></span>
+                <textarea
+                  name="message"
+                  rows="4"
+                  maxlength="1500"
+                  placeholder="Occasion, favourite spots, how you arrive…"
+                  data-field="message"></textarea>
+              </label>
+            </div>
+
+            <label class="plan-trap" aria-hidden="true">
+              Leave this field empty
+              <input type="text" name="company_website" tabindex="-1" autocomplete="off" />
+            </label>
+
+            <label class="plan-consent">
+              <input type="checkbox" name="gdpr" id="gdpr-consent" required aria-describedby="gdpr-error" />
+              <span>
+                Acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679
+                (GDPR). <a href="/privacy/" target="_blank" rel="noreferrer">Leggi la Privacy Policy</a>.
+                <small>I dati saranno trasmessi tramite servizio di messaggistica Telegram per garantire una risposta rapida.</small>
+              </span>
+            </label>
+            <p class="plan-error" id="gdpr-error" data-error="gdpr" hidden></p>
+          </fieldset>
+
+          <div class="plan-nav">
+            <button type="button" class="plan-btn plan-btn--ghost" data-plan-back hidden>
+              <i class="ph ph-arrow-left" aria-hidden="true"></i>
+              <span>Back</span>
+            </button>
+            <button type="button" class="plan-btn plan-btn--primary" data-plan-next hidden>
+              <span>Next</span>
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
+            </button>
+            <button type="submit" class="plan-btn plan-btn--primary" data-plan-submit>
+              <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+              <span>Send request</span>
+            </button>
+          </div>
+          <p class="plan-status" data-plan-status role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="plan-done" data-plan-done hidden tabindex="-1">
+          <span class="plan-done__icon" aria-hidden="true"><i class="ph ph-check"></i></span>
+          <h3 class="plan-done__title">Got it<span data-done-name></span>.</h3>
+          <p>Your request is with us. Expect an answer within 24 hours, on WhatsApp or by email.</p>
+          <div class="plan-done__actions">
+            <a class="plan-btn plan-btn--primary" href={whatsappHref} target="_blank" rel="noreferrer" data-done-whatsapp>
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+              <span>Chat on WhatsApp now</span>
+            </a>
+            <button type="button" class="plan-btn plan-btn--ghost" data-plan-again>
+              <span>Send another request</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="plan-card" data-plan-summary aria-label="Your request so far" hidden>
+        <div class="plan-card__top">
+          <p class="plan-card__kicker">Your request</p>
+          <span class="plan-card__stamp" aria-hidden="true">
+            <img src="/staticpages/contact/porters.webp" alt="" width="1200" height="896" loading="lazy" />
+          </span>
+        </div>
+        <dl class="plan-card__rows">
+          <div data-sum-row="services"><dt>What</dt><dd data-sum="services" data-empty="Pick a service">Pick a service</dd></div>
+          <div data-sum-row="dates"><dt>When</dt><dd data-sum="when" data-empty="Dates to follow">Dates to follow</dd></div>
+          <div><dt>Guests</dt><dd data-sum="guests">2 guests</dd></div>
+          <div data-sum-row="room" hidden><dt>Room</dt><dd data-sum="room">Any room</dd></div>
+          <div><dt>From</dt><dd data-sum="from" data-empty="Your name and contact">Your name and contact</dd></div>
+        </dl>
+        <p class="plan-card__foot">
+          To <strong>Amalfi.Day</strong>, Atrani.<br />We answer within 24 hours.
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* The hero's orange (navy at night) runs on under the top of the card. */
+  .plan {
+    --plan-hero-bg: #ff5900;
+    position: relative;
+    padding: 0 0 2rem;
+    background: linear-gradient(var(--plan-hero-bg) 0 9rem, var(--color-bg) 9rem);
+    scroll-margin-top: 1rem;
+  }
+
+  :global(html[data-theme='night']) .plan {
+    --plan-hero-bg: #031e4d;
+  }
+
+  .plan__container {
+    margin-top: -6rem;
+    position: relative;
+  }
+
+  .plan__layout {
+    scroll-margin-top: calc(var(--header-space) + 0.5rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .plan__layout.is-enhanced {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 330px);
+  }
+
+  .plan__card {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 26px;
+    box-shadow: 0 24px 60px rgba(40, 18, 0, 0.14);
+    padding: clamp(1.4rem, 3.4vw, 2.6rem);
+    min-width: 0;
+  }
+
+  :global(html[data-theme='night']) .plan__card {
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .plan__head h2 {
+    margin: 0;
+    font-size: clamp(2rem, 3.6vw, 2.8rem);
+    line-height: 1.1;
+  }
+
+  .plan__head > p {
+    margin: 0.5rem 0 0;
+    color: var(--color-text-muted);
+  }
+
+  /* Progress */
+  .plan__progress {
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+    counter-reset: none;
+  }
+
+  .plan__progress[hidden] {
+    display: none;
+  }
+
+  .plan__progress li {
+    flex: 1;
+  }
+
+  .plan__dot {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0 0 0.7rem;
+    border: 0;
+    border-bottom: 3px solid var(--color-border);
+    background: none;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-size: 0.92rem;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+
+  .plan__dot:disabled {
+    cursor: default;
+  }
+
+  .plan__dot-n {
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    flex: none;
+  }
+
+  .plan__dot.is-done,
+  .plan__dot.is-current {
+    color: var(--color-text);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .plan__dot.is-current .plan__dot-n,
+  .plan__dot.is-done .plan__dot-n {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  .plan__dot:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+
+  /* Steps */
+  .plan-form {
+    margin-top: 1.8rem;
+  }
+
+  .plan-step {
+    border: 0;
+    margin: 0 0 2.2rem;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .is-enhanced .plan-step {
+    margin-bottom: 0;
+    animation: plan-in 0.35s ease both;
+  }
+
+  .plan-step[hidden] {
+    display: none;
+  }
+
+  @keyframes plan-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  .plan-step__title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0;
+    margin: 0 0 0.4rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    color: var(--color-text);
+    outline: none;
+  }
+
+  .plan-step__n {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-surface);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-accent);
+  }
+
+  .is-enhanced .plan-step__n {
+    display: none;
+  }
+
+  .plan-step__hint {
+    margin: 0 0 1rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Tiles */
+  .plan-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .plan-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 2px solid var(--color-border);
+    background: var(--color-card);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .plan-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .plan-tile input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .plan-tile:has(input:focus-visible) {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .plan-tile:has(input:checked) {
+    border-color: var(--color-accent);
+    box-shadow: 0 14px 30px rgba(255, 89, 0, 0.18);
+  }
+
+  .plan-tile__media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .plan-tile__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .plan-tile:hover .plan-tile__media img {
+    transform: scale(1.04);
+  }
+
+  .plan-tile__body {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.8rem 0.9rem 0.95rem;
+  }
+
+  .plan-tile__body strong {
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 400;
+    color: var(--color-text);
+  }
+
+  .plan-tile__body span {
+    font-size: 0.86rem;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+  }
+
+  .plan-tile__check {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.92);
+    border: 2px solid rgba(26, 26, 26, 0.15);
+    color: transparent;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .plan-tile:has(input:checked) .plan-tile__check {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
+    transform: scale(1.08);
+  }
+
+  /* Fields */
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.1rem;
+    margin-top: 0.9rem;
+  }
+
+  .plan-step[data-step-panel='2'] .plan-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .plan-field {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    min-width: 0;
+  }
+
+  .plan-field--wide {
+    grid-column: 1 / -1;
+  }
+
+  .plan-field__label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-text);
+    padding: 0;
+  }
+
+  .plan-field__label small {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .plan-field input,
+  .plan-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 3.1rem;
+    padding: 0.75rem 0.95rem;
+    border-radius: 14px;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .plan-field textarea {
+    resize: vertical;
+    min-height: 7rem;
+  }
+
+  .plan-field input::placeholder,
+  .plan-field textarea::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.75;
+  }
+
+  .plan-field input:focus,
+  .plan-field textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(255, 89, 0, 0.16);
+  }
+
+  .plan-field input[aria-invalid='true'] {
+    border-color: #d93a00;
+  }
+
+  :global(html[data-theme='night']) .plan-field input {
+    color-scheme: dark;
+  }
+
+  .plan-stepper {
+    display: flex;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+
+  .plan-stepper input {
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+
+  .plan-stepper input::-webkit-inner-spin-button,
+  .plan-stepper input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .plan-stepper__btn {
+    flex: none;
+    width: 3.1rem;
+    border-radius: 14px;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .plan-stepper__btn:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .plan-stepper__btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .plan-stepper__btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  /* Rooms */
+  .plan-rooms {
+    border: 0;
+    margin: 1.6rem 0 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  .plan-rooms[hidden] {
+    display: none;
+  }
+
+  .plan-rooms__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.65rem;
+    margin-top: 0.6rem;
+  }
+
+  .plan-room {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+    border-radius: 16px;
+    border: 2px solid var(--color-border);
+    cursor: pointer;
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .plan-room input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .plan-room:has(input:checked) {
+    border-color: var(--color-accent);
+    background: rgba(255, 89, 0, 0.06);
+  }
+
+  .plan-room:has(input:focus-visible) {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .plan-room:has(input:disabled) {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .plan-room__media {
+    flex: none;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-surface);
+    display: grid;
+    place-items: center;
+    color: var(--color-accent);
+    font-size: 1.4rem;
+  }
+
+  .plan-room__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .plan-room__body {
+    display: grid;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  .plan-room__body strong {
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .plan-room__body span {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+  }
+
+  .plan-rooms__note {
+    margin: 0.6rem 0 0;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Consent, honeypot, errors */
+  .plan-trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .plan-consent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    margin-top: 1.3rem;
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+    background: var(--color-surface);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+
+  .plan-consent input {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin: 0.1rem 0 0;
+    accent-color: var(--color-accent);
+  }
+
+  .plan-consent a {
+    color: var(--color-text);
+  }
+
+  .plan-consent small {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.78rem;
+  }
+
+  .plan-error {
+    margin: 0.5rem 0 0;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: #c43400;
+  }
+
+  :global(html[data-theme='night']) .plan-error {
+    color: #ff8a4c;
+  }
+
+  .plan-error[hidden] {
+    display: none;
+  }
+
+  /* Navigation */
+  .plan-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 1.8rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .plan-nav [data-plan-next],
+  .plan-nav [data-plan-submit] {
+    margin-left: auto;
+  }
+
+  .plan-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 3.2rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 999px;
+    border: 1.5px solid transparent;
+    font: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .plan-btn[hidden] {
+    display: none;
+  }
+
+  .plan-btn:hover {
+    text-decoration: none;
+  }
+
+  .plan-btn:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .plan-btn--primary {
+    background: var(--color-accent);
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(255, 89, 0, 0.28);
+  }
+
+  .plan-btn--primary:hover {
+    background: #e94f00;
+    transform: translateY(-2px);
+  }
+
+  .plan-btn--primary:disabled {
+    opacity: 0.6;
+    cursor: progress;
+    transform: none;
+  }
+
+  .plan-btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+
+  .plan-btn--ghost:hover {
+    border-color: var(--color-text);
+  }
+
+  .plan-btn--ghost span {
+    text-decoration: none;
+  }
+
+  .plan-status {
+    margin: 0.8rem 0 0;
+    min-height: 1.4em;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .plan-status[data-state='error'] {
+    color: #c43400;
+  }
+
+  :global(html[data-theme='night']) .plan-status[data-state='error'] {
+    color: #ff8a4c;
+  }
+
+  /* Success */
+  .plan-done {
+    margin-top: 1.6rem;
+    padding: 2rem 0 0.5rem;
+    text-align: center;
+    outline: none;
+    animation: plan-in 0.45s ease both;
+  }
+
+  .plan-done[hidden] {
+    display: none;
+  }
+
+  .plan-done__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 4.2rem;
+    height: 4.2rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #ffffff;
+    font-size: 1.8rem;
+    box-shadow: 0 0 0 10px rgba(255, 89, 0, 0.14);
+  }
+
+  .plan-done__title {
+    margin: 1.4rem 0 0.4rem;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+  }
+
+  .plan-done p {
+    max-width: 30rem;
+    margin: 0 auto;
+    color: var(--color-text-muted);
+  }
+
+  .plan-done__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+    margin-top: 1.6rem;
+  }
+
+  /* Postcard summary */
+  .plan-card {
+    position: sticky;
+    top: calc(var(--header-space) + 1rem);
+    margin-top: 6.5rem;
+    padding: 1.4rem 1.4rem 1.2rem;
+    border-radius: 22px;
+    background: #fffaf3;
+    color: #1a1a1a;
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    box-shadow: var(--shadow-lift);
+    transform: rotate(1.2deg);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 10px,
+      rgba(255, 89, 0, 0.1) 10px 20px
+    );
+    background-size: 100% 8px;
+    background-repeat: no-repeat;
+    background-position: top;
+  }
+
+  .plan-card[hidden] {
+    display: none;
+  }
+
+  :global(html[data-theme='night']) .plan-card {
+    background-color: #1b1f26;
+    color: #f5f5f5;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .plan-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .plan-card__kicker {
+    margin: 0.4rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.35rem;
+  }
+
+  .plan-card__stamp {
+    flex: none;
+    width: 4.2rem;
+    height: 4.8rem;
+    padding: 4px;
+    background: #ffffff;
+    box-sizing: border-box;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transform: rotate(4deg);
+    outline: 2px dashed rgba(26, 26, 26, 0.18);
+    outline-offset: -2px;
+  }
+
+  .plan-card__stamp img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .plan-card__rows {
+    margin: 1.1rem 0 0;
+    display: grid;
+  }
+
+  .plan-card__rows > div {
+    display: grid;
+    grid-template-columns: 4.2rem 1fr;
+    gap: 0.6rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed rgba(127, 127, 127, 0.35);
+  }
+
+  .plan-card__rows > div[hidden] {
+    display: none;
+  }
+
+  .plan-card__rows dt {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    padding-top: 0.2rem;
+  }
+
+  .plan-card__rows dd {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .plan-card__rows dd.is-empty {
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  .plan-card__foot {
+    margin: 1rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 1099px) {
+    .plan__layout.is-enhanced {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* On narrow screens the postcard shows on the last step only, above the buttons' context. */
+    .plan-card {
+      position: static;
+      margin-top: 0;
+      transform: none;
+      display: none;
+    }
+
+    .plan__layout[data-step='3'] .plan-card:not([hidden]) {
+      display: block;
+    }
+
+    .plan-tiles {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .plan {
+      background: linear-gradient(var(--plan-hero-bg) 0 6rem, var(--color-bg) 6rem);
+    }
+
+    .plan__container {
+      margin-top: -5rem;
+    }
+
+    .plan__card {
+      border-radius: 22px;
+    }
+
+    .plan-tiles {
+      gap: 0.6rem;
+    }
+
+    .plan-tile__body {
+      padding: 0.6rem 0.7rem 0.75rem;
+    }
+
+    .plan-tile__body span {
+      font-size: 0.8rem;
+    }
+
+    .plan-grid,
+    .plan-step[data-step-panel='2'] .plan-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .plan-field--guests,
+    .plan-step[data-step-panel='3'] .plan-field {
+      grid-column: 1 / -1;
+    }
+
+    .plan-nav {
+      position: sticky;
+      bottom: 0;
+      margin-inline: -1.4rem;
+      padding: 0.9rem 1.4rem calc(0.9rem + env(safe-area-inset-bottom));
+      background: var(--color-card);
+      z-index: 2;
+    }
+
+    .plan-btn {
+      padding-inline: 1.2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-enhanced .plan-step,
+    .plan-done {
+      animation: none;
+    }
+  }
+</style>
