@@ -2,40 +2,40 @@
 // Plain ESM on purpose: imported by Astro pages and by Node serverless functions.
 // Contains no secrets; the repository is public.
 
-export const DIRECT_UNITS = {
-  vintage: {
+export const DIRECT_UNITS = Object.freeze({
+  vintage: Object.freeze({
     hostexPropertyId: 12843798,
     airbnbListingId: '1491803199632820467',
     maxGuests: 2,
     label: 'Vintage interior',
-  },
-  orange: {
+  }),
+  orange: Object.freeze({
     hostexPropertyId: 12843799,
     airbnbListingId: '1622640206186838346',
     maxGuests: 2,
     label: 'Orange room',
-  },
-  solo: {
+  }),
+  solo: Object.freeze({
     hostexPropertyId: 12843800,
     airbnbListingId: '1623848144637841636',
     maxGuests: 1,
     label: 'Room for solo traveller',
-  },
-  youth: {
+  }),
+  youth: Object.freeze({
     hostexPropertyId: 12843801,
     airbnbListingId: '1624089061068359230',
     maxGuests: 2,
     label: 'Room for youngsters',
-  },
-  awesome: {
+  }),
+  awesome: Object.freeze({
     hostexPropertyId: 12843803,
     airbnbListingId: '3456236',
     maxGuests: 2,
     label: 'Awesome apartments',
-  },
-}
+  }),
+})
 
-export const DIRECT_UNIT_IDS = ['orange', 'vintage', 'youth', 'solo', 'awesome']
+export const DIRECT_UNIT_IDS = Object.freeze(['orange', 'vintage', 'youth', 'solo', 'awesome'])
 
 export function getDirectUnit(id) {
   if (typeof id !== 'string' || !Object.hasOwn(DIRECT_UNITS, id)) return null

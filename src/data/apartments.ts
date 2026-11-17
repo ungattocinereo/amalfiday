@@ -34,7 +34,7 @@ export type ApartmentSection = {
 const GENERIC_BOOKING_URL =
   'https://www.booking.com/hotel/it/cristallpont-amalfi-day.html'
 
-export const APARTMENT_SECTIONS: ApartmentSection[] = [
+const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
   {
     id: 'stays',
     title: 'Timeless Retreat in Ravello',
@@ -254,22 +254,34 @@ export const APARTMENT_SECTIONS: ApartmentSection[] = [
   },
 ]
 
-export const ALL_APARTMENTS: Apartment[] = APARTMENT_SECTIONS.flatMap((s) => s.items)
-
-for (const apartment of ALL_APARTMENTS) {
-  const unit = getDirectUnit(apartment.id)
-  if (unit) apartment.direct = { maxGuests: unit.maxGuests }
+// Pure: returns a new item carrying `direct` when its id is in the registry.
+function withDirect(item: Apartment): Apartment {
+  const unit = getDirectUnit(item.id)
+  return unit ? { ...item, direct: { maxGuests: unit.maxGuests } } : item
 }
+
+export const APARTMENT_SECTIONS: ApartmentSection[] = RAW_APARTMENT_SECTIONS.map((section) => ({
+  ...section,
+  items: section.items.map(withDirect),
+}))
+
+export const ALL_APARTMENTS: Apartment[] = APARTMENT_SECTIONS.flatMap((s) => s.items)
 
 const apartmentById = new Map(ALL_APARTMENTS.map((a) => [a.id, a]))
 
-// Units bookable directly, in registry order.
-export const DIRECT_APARTMENTS: Apartment[] = DIRECT_UNIT_IDS.flatMap(
-  (id) => apartmentById.get(id) ?? []
-)
+// Units bookable directly, in registry order. Fails loudly on a registry id with no apartment.
+export const DIRECT_APARTMENTS: Apartment[] = DIRECT_UNIT_IDS.map((id) => {
+  const apartment = apartmentById.get(id)
+  if (!apartment) {
+    throw new Error(`Direct unit "${id}" has no matching apartment in APARTMENT_SECTIONS`)
+  }
+  return apartment
+})
 
 // Everything else, booked through the platforms (Airbnb / Booking.com).
-export const PLATFORM_APARTMENTS: Apartment[] = ALL_APARTMENTS.filter((a) => !a.direct)
+export const PLATFORM_APARTMENTS: Apartment[] = ALL_APARTMENTS.filter(
+  (a) => !getDirectUnit(a.id)
+)
 
 export const ICAL_REGISTRY: Record<string, string[]> = Object.fromEntries(
   ALL_APARTMENTS.map((a) => [
