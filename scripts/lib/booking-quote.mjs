@@ -36,8 +36,11 @@ const refuse = (reason, extra) => ({ ok: false, reason, ...extra })
 
 export function quoteStay({ nights, checkIn, checkOut, guests, maxGuests, discountPct, today }) {
   // Caller bugs, not guest input: never quote a NaN or negative total.
-  if (!Number.isFinite(discountPct) || discountPct < 0 || discountPct > 100) {
+  if (!Number.isInteger(discountPct) || discountPct < 0 || discountPct > 100) {
     throw new RangeError(`Invalid discountPct: ${discountPct}`)
+  }
+  if (!Number.isInteger(maxGuests) || maxGuests < 1) {
+    throw new RangeError(`Invalid maxGuests: ${maxGuests}`)
   }
   const inMs = toUtcMs(checkIn)
   const outMs = toUtcMs(checkOut)
@@ -59,7 +62,7 @@ export function quoteStay({ nights, checkIn, checkOut, guests, maxGuests, discou
   for (let i = 0; i < stayNights; i++) {
     const date = addDays(checkIn, i)
     const n = byDate.get(date)
-    if (!n || n.bookable !== true || !Number.isInteger(n.priceCents) || n.priceCents < 0) return refuse('unavailable')
+    if (!n || n.bookable !== true || !Number.isInteger(n.priceCents) || n.priceCents <= 0) return refuse('unavailable')
     perNight.push({ date, priceCents: n.priceCents })
   }
 

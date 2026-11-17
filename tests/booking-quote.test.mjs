@@ -56,10 +56,33 @@ test('zero discount', () => {
 })
 
 test('invalid discountPct is a caller error', () => {
-  for (const discountPct of [undefined, NaN, -1, 101, '10']) {
+  for (const discountPct of [undefined, NaN, -1, 101, '10', 10.5]) {
     assert.throws(() => quoteStay({ ...base, discountPct, nights: range('2026-12-20', 2, 8300),
       checkIn: '2026-12-20', checkOut: '2026-12-22' }), RangeError, `discountPct=${String(discountPct)}`)
   }
+})
+
+test('invalid maxGuests is a caller error', () => {
+  for (const maxGuests of [undefined, NaN, null, 0, 1.5, '2']) {
+    assert.throws(() => quoteStay({ ...base, maxGuests, nights: range('2026-12-20', 2, 8300),
+      checkIn: '2026-12-20', checkOut: '2026-12-22', guests: 1 }), RangeError, `maxGuests=${String(maxGuests)}`)
+  }
+})
+
+test('zero-priced night is unavailable', () => {
+  const q = quoteStay({ ...base, nights: [night('2026-12-20', 8300), night('2026-12-21', 0)],
+    checkIn: '2026-12-20', checkOut: '2026-12-22' })
+  assert.deepEqual(q, { ok: false, reason: 'unavailable' })
+})
+
+test('invalid today and non-leap Feb 29 are invalid_dates', () => {
+  const nights = range('2026-12-20', 2, 8300)
+  for (const today of ['2026-11-31', '17-11-2026', undefined]) {
+    assert.deepEqual(quoteStay({ ...base, today, nights, checkIn: '2026-12-20', checkOut: '2026-12-22' }),
+      { ok: false, reason: 'invalid_dates' }, `today=${String(today)}`)
+  }
+  assert.deepEqual(quoteStay({ ...base, nights: range('2027-02-28', 4, 8300), checkIn: '2027-02-29', checkOut: '2027-03-03' }),
+    { ok: false, reason: 'invalid_dates' })
 })
 
 test('checkout on first closed day is allowed', () => {
@@ -254,4 +277,9 @@ test('romeToday near midnight', () => {
 test('romeToday in summer time', () => {
   assert.equal(romeToday(new Date('2026-07-14T21:59:00Z')), '2026-07-14')
   assert.equal(romeToday(new Date('2026-07-14T22:00:00Z')), '2026-07-15')
+})
+
+test('romeToday on DST transition day', () => {
+  assert.equal(romeToday(new Date('2027-03-27T23:30:00Z')), '2027-03-28')
+  assert.equal(romeToday(new Date('2027-03-28T00:30:00Z')), '2027-03-28')
 })
