@@ -16,9 +16,10 @@ npm run build          # Build static site to dist/
 npm run build:static   # Build + Brotli/Gzip precompress assets
 npm run preview        # Preview production build locally
 npm run contact:api    # Run contact form API server (for dev, proxied via /api)
+npm test               # Unit tests (Node built-in test runner, tests/)
 ```
 
-No test runner or linter is configured.
+No linter is configured.
 
 ## Architecture
 
@@ -48,6 +49,18 @@ Pages pass `title`, `description`, `image` as props to BaseLayout.
 
 The contact page submits to `/api/contact` which forwards messages to Telegram via the Bot API. In dev, Vite proxies `/api` to `localhost:8787` where `scripts/contact-server.mjs` runs. In production, `api/contact.js` is a serverless function (Vercel/similar).
 
+### Direct Booking
+
+Guests search dates on `/apartments/#direct` and get a price quote on `/book/<id>/`. Payment is not online yet: the guest sends a request through the contact form and the host confirms.
+
+- `src/data/direct-units.mjs` — registry: site id → Hostex property / Airbnb listing, max guests
+- `scripts/lib/booking-quote.mjs` — pure price rules (nightly rate, discount, minimum stay)
+- `scripts/lib/hostex-read.mjs` — read-only Hostex client
+- `scripts/lib/booking-handlers.mjs` + `api/booking/calendar.js`, `api/booking/quote.js` — endpoints
+- `src/scripts/direct-booking-client.mjs` — browser pure functions
+- `src/components/DirectBooking.astro`, `DirectCard.astro`, `BookingPanel.astro`; page `src/pages/book/[id].astro`
+- Local dev without Hostex: `BOOKING_FIXTURE=1 npm run contact:api` serves fixture data
+
 ### Key Data Files
 
 - `src/data/site.ts` — site metadata, navigation links, footer links, featured photoshoots
@@ -71,8 +84,12 @@ Copy `.env.example` to `.env`:
 | `TELEGRAM_BOT_TOKEN` | Contact form → Telegram |
 | `TELEGRAM_CHAT_ID` | Target Telegram chat |
 | `PUBLIC_WHATSAPP_PHONE` | WhatsApp contact number |
+| `HOSTEX_ACCESS_TOKEN` | Hostex API token for direct booking (server-only) |
+| `DIRECT_DISCOUNT_PCT` | Direct booking discount in percent (default 10) |
 
 All are optional — the site builds and works without them (blog shows empty, contact form errors).
+
+This repository is public: tokens live only in `.env` and the hosting dashboard, and must never be committed.
 
 ## Adding Content
 
