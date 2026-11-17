@@ -13,8 +13,9 @@ function prng(seed) {
 /**
  * @param {number} w
  * @param {number} h
- * @param {{ fadeLeft?: boolean }} [options]
- * @returns {{ x: number, y: number, r: number, a: number, warm: number }[]}
+ * @param {{ fadeLeft?: boolean, plainAlpha?: number }} [options]
+ *   plainAlpha scales only the plain white dots; golden dots and sparkles keep full strength.
+ * @returns {{ x: number, y: number, r: number, a: number, warm: number, sparkle: boolean }[]}
  */
 export function halftoneDots(w, h, options = {}) {
   const dots = []
@@ -40,8 +41,9 @@ export function halftoneDots(w, h, options = {}) {
       if (r <= 0.05) continue
       // Behind a left-hand text column the dots fade to a quarter.
       const fade = options.fadeLeft ? Math.min(1, Math.max(0.25, (x / w - 0.08) / 0.5)) : 1
-      const a = Math.min(1, (sparkle ? 0.4 : 0.19) * 1.6 * fade)
-      dots.push({ x, y, r, a, warm })
+      const plain = !sparkle && warm <= 0 ? (options.plainAlpha ?? 1) : 1
+      const a = Math.min(1, (sparkle ? 0.4 : 0.19) * 1.6 * fade * plain)
+      dots.push({ x, y, r, a, warm, sparkle })
     }
   }
   return dots

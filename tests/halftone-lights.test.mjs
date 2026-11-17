@@ -20,3 +20,13 @@ test('fadeLeft dims dots behind the text column and the layout is deterministic'
   assert.ok(left(faded) < left(plain))
   assert.deepEqual(halftoneDots(0, 600), [])
 })
+
+test('plainAlpha dims only the plain white dots', () => {
+  const full = halftoneDots(1200, 800)
+  const quiet = halftoneDots(1200, 800, { plainAlpha: 0.45 })
+  full.forEach((d, i) => {
+    const q = quiet[i]
+    if (d.warm > 0 || d.sparkle) assert.equal(q.a, d.a)
+    else assert.ok(Math.abs(q.a - d.a * 0.45) < 1e-9)
+  })
+})

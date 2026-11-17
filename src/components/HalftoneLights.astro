@@ -5,11 +5,13 @@
 interface Props {
   /** 'left' fades the dots out behind a left-hand text column. */
   fade?: 'left' | 'none'
+  /** Opacity of the plain white dots (0–1); golden dots and sparkles stay as they are. */
+  plainAlpha?: number
 }
-const { fade = 'none' } = Astro.props
+const { fade = 'none', plainAlpha = 1 } = Astro.props
 ---
 
-<canvas class="halftone-lights" data-halftone-lights data-fade={fade} aria-hidden="true"></canvas>
+<canvas class="halftone-lights" data-halftone-lights data-fade={fade} data-plain-alpha={plainAlpha} aria-hidden="true"></canvas>
 
 <style>
   .halftone-lights {
@@ -39,7 +41,7 @@ const { fade = 'none' } = Astro.props
       if (!ctx) continue
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, width, height)
-      drawHalftoneLights(ctx, width, height, { fadeLeft: canvas.dataset.fade === 'left' })
+      drawHalftoneLights(ctx, width, height, { fadeLeft: canvas.dataset.fade === 'left', plainAlpha: Number(canvas.dataset.plainAlpha ?? 1) })
     }
   }
 
