@@ -1,0 +1,28 @@
+{
+  "error_code": 200,
+  "error_msg": "Done.",
+  "data": {
+    "properties": [
+      {
+        "id": 12843799,
+        "availabilities": [
+          { "date": "2026-12-19", "available": false },
+          { "date": "2026-12-20", "available": true },
+          { "date": "2026-12-21", "available": true },
+          { "date": "2026-12-22", "available": true },
+          { "date": "2026-12-23", "available": true }
+        ]
+      },
+      {
+        "id": 12843798,
+        "availabilities": [
+          { "date": "2026-12-19", "available": true },
+          { "date": "2026-12-20", "available": true },
+          { "date": "2026-12-21", "available": true },
+          { "date": "2026-12-22", "available": true },
+          { "date": "2026-12-23", "available": true }
+        ]
+      }
+    ]
+  }
+}

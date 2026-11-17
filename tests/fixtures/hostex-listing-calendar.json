@@ -1,0 +1,30 @@
+{
+  "error_code": 200,
+  "error_msg": "Done.",
+  "data": {
+    "listings": [
+      {
+        "channel_type": "airbnb",
+        "listing_id": "1622640206186838346",
+        "calendar": [
+          { "date": "2026-12-19", "price": 100, "inventory": 0, "restrictions": { "min_stay_on_arrival": 2, "closed_on_arrival": false, "closed_on_departure": false } },
+          { "date": "2026-12-20", "price": 100, "inventory": 1, "restrictions": { "min_stay_on_arrival": 2, "closed_on_arrival": true, "closed_on_departure": false } },
+          { "date": "2026-12-21", "price": 110.5, "inventory": 1, "restrictions": { "min_stay_on_arrival": 0, "closed_on_arrival": false, "closed_on_departure": false } },
+          { "date": "2026-12-22", "price": 120, "inventory": 1, "restrictions": { "min_stay_on_arrival": 3, "closed_on_arrival": false, "closed_on_departure": true } },
+          { "date": "2026-12-23", "price": 120, "inventory": 1, "restrictions": { "min_stay_on_arrival": 2, "closed_on_arrival": false, "closed_on_departure": false } }
+        ]
+      },
+      {
+        "channel_type": "airbnb",
+        "listing_id": "1491803199632820467",
+        "calendar": [
+          { "date": "2026-12-19", "price": 90, "inventory": 1, "restrictions": { "min_stay_on_arrival": 2, "closed_on_arrival": false, "closed_on_departure": false } },
+          { "date": "2026-12-20", "price": 90, "inventory": 1, "restrictions": { "min_stay_on_arrival": 2, "closed_on_arrival": false, "closed_on_departure": false } },
+          { "date": "2026-12-21", "price": 90, "inventory": 0, "restrictions": { "min_stay_on_arrival": 2, "closed_on_arrival": false, "closed_on_departure": false } },
+          { "date": "2026-12-22", "price": 95, "inventory": 1, "restrictions": { "min_stay_on_arrival": 2, "closed_on_arrival": false, "closed_on_departure": false } },
+          { "date": "2026-12-23", "price": null, "inventory": 1, "restrictions": { "min_stay_on_arrival": 2, "closed_on_arrival": false, "closed_on_departure": false } }
+        ]
+      }
+    ]
+  }
+}
