@@ -1,0 +1,59 @@
+---
+// Static halftone screen lit by two lights (sun top right, faint glow bottom left):
+// golden dots near the sun, white elsewhere, a few sparkles. Drawn on a canvas that
+// fills the nearest positioned ancestor and sits under its content (z-index 0).
+interface Props {
+  /** 'left' fades the dots out behind a left-hand text column. */
+  fade?: 'left' | 'none'
+}
+const { fade = 'none' } = Astro.props
+---
+
+<canvas class="halftone-lights" data-halftone-lights data-fade={fade} aria-hidden="true"></canvas>
+
+<style>
+  .halftone-lights {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  import { drawHalftoneLights } from '../scripts/halftone-lights.mjs'
+
+  const canvases = [...document.querySelectorAll<HTMLCanvasElement>('[data-halftone-lights]')]
+  const paint = () => {
+    for (const canvas of canvases) {
+      const host = canvas.parentElement
+      if (!host) continue
+      const { width, height } = host.getBoundingClientRect()
+      if (!width || !height) continue
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      canvas.width = Math.round(width * dpr)
+      canvas.height = Math.round(height * dpr)
+      const ctx = canvas.getContext('2d')
+      if (!ctx) continue
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx.clearRect(0, 0, width, height)
+      drawHalftoneLights(ctx, width, height, { fadeLeft: canvas.dataset.fade === 'left' })
+    }
+  }
+
+  let frame = 0
+  const schedule = () => {
+    cancelAnimationFrame(frame)
+    frame = requestAnimationFrame(paint)
+  }
+  paint()
+  // The host's height settles after fonts and images load.
+  window.addEventListener('load', schedule, { once: true })
+  window.addEventListener('resize', schedule, { passive: true })
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(schedule)
+    canvases.forEach((c) => c.parentElement && ro.observe(c.parentElement))
+  }
+</script>

@@ -1,4 +1,5 @@
 ---
+import HalftoneLights from '../HalftoneLights.astro'
 // Contact hero on the home page's orange (navy at night): headline, reply promise,
 // three big channel buttons and a stacked paper-cut illustration.
 interface Props {
@@ -10,6 +11,7 @@ const { whatsappHref, email, phone } = Astro.props
 ---
 
 <section class="c-hero" data-nav-surface="dark">
+  <HalftoneLights fade="left" />
   <div class="c-hero__inner hero-container">
     <div class="c-hero__copy">
       <p class="c-hero__eyebrow">Contact · Atrani, Amalfi Coast</p>
