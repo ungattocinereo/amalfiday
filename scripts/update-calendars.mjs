@@ -2,18 +2,20 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 import { buildAvailability } from './lib/ical.mjs'
-import { ICAL_REGISTRY, AVAILABILITY_END } from './lib/calendar-registry.mjs'
+import {
+  ICAL_REGISTRY,
+  availabilityRange,
+  formatRangeDate,
+} from './lib/calendar-registry.mjs'
 
 const main = async () => {
-  const today = new Date()
-  const rangeStart = new Date(today.getFullYear(), today.getMonth(), 1)
-  const rangeEnd = new Date(AVAILABILITY_END.year, AVAILABILITY_END.month, AVAILABILITY_END.day)
+  const { start: rangeStart, end: rangeEnd } = availabilityRange(new Date())
 
   const calendars = await buildAvailability(ICAL_REGISTRY, rangeStart, rangeEnd)
 
   const payload = {
     generatedAt: new Date().toISOString(),
-    rangeEnd: `${AVAILABILITY_END.year}-${String(AVAILABILITY_END.month + 1).padStart(2, '0')}-${String(AVAILABILITY_END.day).padStart(2, '0')}`,
+    rangeEnd: formatRangeDate(rangeEnd),
     calendars,
   }
 

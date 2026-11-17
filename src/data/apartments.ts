@@ -289,5 +289,3 @@ export const ICAL_REGISTRY: Record<string, string[]> = Object.fromEntries(
     [...(a.ical.airbnb || []), ...(a.ical.booking || [])],
   ])
 )
-
-export const AVAILABILITY_END_DATE = { year: 2026, month: 10, day: 30 }

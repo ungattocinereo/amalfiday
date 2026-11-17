@@ -11,7 +11,7 @@ const { calendarName, airbnb, booking } = Astro.props
 <div class="avail" data-calendar data-calendar-name={calendarName}>
   <div class="avail__heading">
     <span class="avail__eyebrow">Availability</span>
-    <span class="avail__range">through 30 November 2026</span>
+    <span class="avail__range" data-avail-range>next 12 months</span>
   </div>
   <div class="avail__chips" data-avail-chips aria-label="Jump to month"></div>
   <div class="avail__viewport">
@@ -61,9 +61,6 @@ const { calendarName, airbnb, booking } = Astro.props
     if (window.__availabilityBooted) return
     window.__availabilityBooted = true
 
-    const END_YEAR = 2026
-    const END_MONTH = 10 // November (0-indexed)
-
     const monthShort = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     const monthFull = ['January','February','March','April','May','June','July','August','September','October','November','December']
     const dayLabels = ['Mo','Tu','We','Th','Fr','Sa','Su']
@@ -80,12 +77,30 @@ const { calendarName, airbnb, booking } = Astro.props
       date.getMonth() === today.getMonth() &&
       date.getDate() === today.getDate()
 
-    const monthsInRange = () => {
+    // Range end from the availability payload (`rangeEnd`, YYYY-MM-DD).
+    // Older payloads without it fall back to the same rolling window the
+    // server uses: last day of the month 12 months from now.
+    const resolveRangeEnd = (availability) => {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(availability?.rangeEnd || '')
+      if (match) {
+        const end = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]))
+        if (!Number.isNaN(end.getTime())) return end
+      }
+      const now = new Date()
+      return new Date(now.getFullYear(), now.getMonth() + 13, 0)
+    }
+
+    const formatRangeLabel = (end) =>
+      `through ${end.getDate()} ${monthFull[end.getMonth()]} ${end.getFullYear()}`
+
+    const monthsInRange = (rangeEnd) => {
       const today = new Date()
+      const endYear = rangeEnd.getFullYear()
+      const endMonth = rangeEnd.getMonth()
       const months = []
       for (let i = 0; ; i++) {
         const d = new Date(today.getFullYear(), today.getMonth() + i, 1)
-        if (d.getFullYear() > END_YEAR || (d.getFullYear() === END_YEAR && d.getMonth() > END_MONTH)) break
+        if (d.getFullYear() > endYear || (d.getFullYear() === endYear && d.getMonth() > endMonth)) break
         months.push({ year: d.getFullYear(), month: d.getMonth() })
         if (i > 24) break
       }
@@ -190,11 +205,10 @@ const { calendarName, airbnb, booking } = Astro.props
       })
     }
 
-    const renderCalendar = (root, busy) => {
+    const renderCalendar = (root, busy, months) => {
       const chipsEl = root.querySelector('[data-avail-chips]')
       const trackEl = root.querySelector('[data-avail-track]')
       const today = new Date()
-      const months = monthsInRange()
 
       renderChips(chipsEl, months)
       trackEl.innerHTML = months
@@ -226,8 +240,16 @@ const { calendarName, airbnb, booking } = Astro.props
         renderStatus(root, 'Calendar coming soon.')
         return
       }
+      const rangeEnd = resolveRangeEnd(availability)
+      const months = monthsInRange(rangeEnd)
+      if (!months.length) {
+        renderStatus(root, 'Availability is updating — please check back shortly.')
+        return
+      }
+      const rangeEl = root.querySelector('[data-avail-range]')
+      if (rangeEl) rangeEl.textContent = formatRangeLabel(rangeEnd)
       const busy = new Set(availability.calendars[name] || [])
-      renderCalendar(root, busy)
+      renderCalendar(root, busy, months)
     }
 
     document.addEventListener('DOMContentLoaded', () => {

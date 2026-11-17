@@ -37,4 +37,20 @@ export const ICAL_REGISTRY = {
   ],
 }
 
-export const AVAILABILITY_END = { year: 2026, month: 10, day: 30 } // November 30, 2026
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+]
+
+// Rolling availability window: from the first day of the current month to the
+// last day of the month 12 months later. Uses local-time Date fields, like the
+// range start in api/availability.js.
+export const availabilityRange = (now = new Date()) => {
+  const start = new Date(now.getFullYear(), now.getMonth(), 1)
+  const end = new Date(now.getFullYear(), now.getMonth() + 13, 0)
+  const endLabel = `${end.getDate()} ${MONTH_NAMES[end.getMonth()]} ${end.getFullYear()}`
+  return { start, end, endLabel }
+}
+
+export const formatRangeDate = (d) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`

@@ -1,7 +1,9 @@
 import { buildAvailability } from '../scripts/lib/ical.mjs'
-import { ICAL_REGISTRY, AVAILABILITY_END } from '../scripts/lib/calendar-registry.mjs'
-
-const RANGE_END = new Date(AVAILABILITY_END.year, AVAILABILITY_END.month, AVAILABILITY_END.day)
+import {
+  ICAL_REGISTRY,
+  availabilityRange,
+  formatRangeDate,
+} from '../scripts/lib/calendar-registry.mjs'
 
 export const config = {
   runtime: 'nodejs',
@@ -15,18 +17,17 @@ export default async function handler(req, res) {
     return
   }
 
-  const now = new Date()
-  const rangeStart = new Date(now.getFullYear(), now.getMonth(), 1)
+  const { start: rangeStart, end: rangeEnd } = availabilityRange(new Date())
 
   try {
-    const calendars = await buildAvailability(ICAL_REGISTRY, rangeStart, RANGE_END)
+    const calendars = await buildAvailability(ICAL_REGISTRY, rangeStart, rangeEnd)
     res.setHeader(
       'Cache-Control',
       'public, s-maxage=3600, stale-while-revalidate=86400'
     )
     res.status(200).json({
       generatedAt: new Date().toISOString(),
-      rangeEnd: '2026-10-31',
+      rangeEnd: formatRangeDate(rangeEnd),
       calendars,
     })
   } catch (error) {
