@@ -264,3 +264,14 @@ export function requestUrl(apartmentName, quote) {
   )
   return `/contact/?${params.toString()}`
 }
+
+// Screen-reader summary of a bookable quote: "Total €149.40 for 2 nights."
+export function quoteSummary(quote) {
+  return `Total ${formatEuroTotal(quote.totalCents)} for ${plural(quote.nights, 'night')}.`
+}
+
+// Guests from the query string, kept within 1..maxGuests; undefined stays undefined.
+export function clampGuests(guests, maxGuests) {
+  if (guests === undefined) return undefined
+  return Math.min(Math.max(1, guests), maxGuests)
+}

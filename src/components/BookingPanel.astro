@@ -20,6 +20,7 @@ const copy = MODES[BOOKING_MODE]
 const { apartment } = Astro.props
 const maxGuests = apartment.direct?.maxGuests ?? 2
 const { airbnb, booking } = apartment.bookingLinks
+const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
 ---
 
 <!--
@@ -67,8 +68,11 @@ const { airbnb, booking } = apartment.bookingLinks
       <label class="bp__field bp__field--wide">
         <span class="bp__label">Guests</span>
         <select name="guests" data-guests>
-          <option value="1">1 guest</option>
-          <option value="2" selected={maxGuests >= 2}>2 guests</option>
+          {guestOptions.map((n) => (
+            <option value={n} selected={n === Math.min(2, maxGuests)}>
+              {n === 1 ? '1 guest' : `${n} guests`}
+            </option>
+          ))}
         </select>
       </label>
     </form>
@@ -99,6 +103,8 @@ const { airbnb, booking } = apartment.bookingLinks
     policyText,
     quoteMessage,
     requestUrl,
+    quoteSummary,
+    clampGuests,
   } from '../scripts/direct-booking-client.mjs'
 
   type Night = { d: string; b: number; p: number | null; m: number }
@@ -184,13 +190,13 @@ const { airbnb, booking } = apartment.bookingLinks
     const readParams = (): Params => ({
       from: fromInput.value || undefined,
       to: toInput.value || undefined,
-      guests: Number(guestsSelect.value) === 1 ? 1 : 2,
+      guests: clampGuests(Number(guestsSelect.value) || 1, maxGuests),
     })
 
     function fillInputs(p: Params) {
       fromInput.value = p.from ?? ''
       toInput.value = p.to ?? ''
-      guestsSelect.value = String(p.guests ?? Math.min(2, maxGuests))
+      guestsSelect.value = String(clampGuests(p.guests, maxGuests) ?? Math.min(2, maxGuests))
       if (p.from) toInput.min = addDaysIso(p.from, 1)
     }
 
@@ -210,9 +216,11 @@ const { airbnb, booking } = apartment.bookingLinks
       backLinks.forEach((a) => (a.href = `/apartments/${qs}#direct`))
     }
 
-    function setStatus(text: string, tone: 'hint' | 'error' = 'hint') {
+    // The live region stays rendered; only its content changes.
+    function setStatus(text: string, tone: 'hint' | 'error' | 'sr' = 'hint') {
+      const cls = tone === 'sr' ? 'sr-only' : `bp__hint${tone === 'error' ? ' bp__hint--error' : ''}`
       if (!text) status.replaceChildren()
-      else status.replaceChildren(el('p', text, `bp__hint${tone === 'error' ? ' bp__hint--error' : ''}`))
+      else status.replaceChildren(el('p', text, cls))
     }
 
     function setBookable(quote: Quote | null) {
@@ -246,7 +254,7 @@ const { airbnb, booking } = apartment.bookingLinks
       tax.replaceChildren(el('span', lines.cityTax.label), el('span', lines.cityTax.amount, 'bp__amount'))
       policy.textContent = policyText(quote)
       price.hidden = false
-      setStatus('')
+      setStatus(quoteSummary(quote), 'sr')
       setBookable(quote)
     }
 
@@ -311,19 +319,24 @@ const { airbnb, booking } = apartment.bookingLinks
       price.hidden = true
       setBookable(null)
       const p = readParams()
+      // Complete pair: show the wait state; incomplete: drop the old message now, not after the debounce.
       if (p.from && p.to && p.from < p.to) setStatus('Checking price…')
+      else setStatus('')
       timer = window.setTimeout(update, DEBOUNCE_MS)
     }
 
-    fromInput.addEventListener('change', () => {
+    const onFromChange = () => {
       if (fromInput.value) {
         toInput.min = addDaysIso(fromInput.value, 1)
         if (toInput.value && toInput.value <= fromInput.value) toInput.value = ''
       }
       schedule()
-    })
-    toInput.addEventListener('change', schedule)
-    guestsSelect.addEventListener('change', schedule)
+    }
+    for (const type of ['input', 'change']) {
+      fromInput.addEventListener(type, onFromChange)
+      toInput.addEventListener(type, schedule)
+      guestsSelect.addEventListener(type, schedule)
+    }
     form.addEventListener('submit', (event) => event.preventDefault())
 
     actionButton.addEventListener('click', () => {
@@ -493,8 +506,10 @@ const { airbnb, booking } = apartment.bookingLinks
     color-scheme: dark;
   }
 
-  .bp__status:empty {
-    display: none;
+  /* Always rendered (live region). With no visible text it takes no space: cancel the flex gap. */
+  .bp__status:empty,
+  :global(.bp__status:has(> .sr-only)) {
+    margin-top: -0.85rem;
   }
 
   .bp__status :global(.bp__hint) {

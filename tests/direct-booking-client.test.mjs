@@ -20,6 +20,8 @@ import {
   policyText,
   quoteMessage,
   requestUrl,
+  quoteSummary,
+  clampGuests,
 } from '../src/scripts/direct-booking-client.mjs'
 
 const open = (d, p, m = 2) => ({ d, b: 1, p, m })
@@ -327,4 +329,17 @@ test('requestUrl builds a contact link that parses back', () => {
     params.get('message'),
     'Direct booking request: Orange room, 20 Dec – 22 Dec 2026, 2 nights, 2 guests. Total €149.40 + €10.00 city tax on arrival.',
   )
+})
+
+test('quoteSummary announces the total with pluralised nights', () => {
+  assert.equal(quoteSummary(quote), 'Total €149.40 for 2 nights.')
+  assert.equal(quoteSummary({ ...quote, nights: 1, totalCents: 7470 }), 'Total €74.70 for 1 night.')
+})
+
+test('clampGuests keeps guests within 1..maxGuests', () => {
+  assert.equal(clampGuests(2, 1), 1)
+  assert.equal(clampGuests(1, 2), 1)
+  assert.equal(clampGuests(2, 2), 2)
+  assert.equal(clampGuests(0, 2), 1)
+  assert.equal(clampGuests(undefined, 1), undefined)
 })
