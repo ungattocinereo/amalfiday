@@ -244,3 +244,15 @@ test('duplicate unit ids are sent once and returned once', async () => {
   assert.equal(new URL(avail.url).searchParams.get('property_ids'), '12843799,12843798')
   assert.deepEqual(JSON.parse(cal.init.body).listings.map((l) => l.listing_id), ['1622640206186838346', '1491803199632820467'])
 })
+
+test('min_stay_on_arrival is parsed as a base-10 integer; junk or negative → 0', async () => {
+  const cases = [['3', 3], [4, 4], ['5 nights', 5], [2.7, 2], ['abc', 0], [-1, 0], ['-2', 0], [null, 0], [undefined, 0], [true, 0]]
+  for (const [value, expected] of cases) {
+    const calendar = structuredClone(CALENDAR)
+    const orangeListing = calendar.data.listings.find((l) => l.listing_id === '1622640206186838346')
+    orangeListing.calendar.find((d) => d.date === '2026-12-20').restrictions.min_stay_on_arrival = value
+    const { fetchImpl } = fakeHostex({ calendar })
+    const result = await loadNights({ unitIds: ['orange'], ...RANGE, token: TOKEN, fetchImpl })
+    assert.equal(byDate(result.orange)['2026-12-20'].minStay, expected, JSON.stringify(value))
+  }
+})

@@ -22,6 +22,8 @@ import {
   requestUrl,
   quoteSummary,
   clampGuests,
+  stayTooLong,
+  minStayOnly,
 } from '../src/scripts/direct-booking-client.mjs'
 
 const open = (d, p, m = 2) => ({ d, b: 1, p, m })
@@ -342,4 +344,65 @@ test('clampGuests keeps guests within 1..maxGuests', () => {
   assert.equal(clampGuests(2, 2), 2)
   assert.equal(clampGuests(0, 2), 1)
   assert.equal(clampGuests(undefined, 1), undefined)
+})
+
+// ---- final fix wave ----
+
+test('policyText in request mode: three branches', () => {
+  assert.equal(
+    policyText(quote, 'request'),
+    'Once we confirm your request: free cancellation until 13 Dec 2026, and payment is due on 11 Dec 2026. You pay nothing now.',
+  )
+  assert.equal(
+    policyText({ ...quote, payNow: true, refundable: true }, 'request'),
+    'Once we confirm your request: free cancellation until 13 Dec 2026. Payment is due on confirmation.',
+  )
+  assert.equal(
+    policyText({ ...quote, payNow: true, refundable: false }, 'request'),
+    'Once we confirm your request, the booking is non-refundable, except where the law provides otherwise. Payment is due on confirmation.',
+  )
+})
+
+test('policyText defaults to instant mode', () => {
+  assert.equal(policyText(quote), policyText(quote, 'instant'))
+})
+
+test('unitState: closed-on-arrival night makes the stay unavailable', () => {
+  const u = { maxGuests: 2, nights: [{ ...open('2026-12-20', 100), a: 1 }, open('2026-12-21', 100), open('2026-12-22', 100)] }
+  assert.deepEqual(unitState(u, opts('2026-12-20', '2026-12-22')), { state: 'unavailable' })
+  assert.equal(unitState(u, opts('2026-12-21', '2026-12-23')).state, 'available')
+})
+
+test('unitState: closed-on-departure checkout day makes the stay unavailable', () => {
+  const u = { maxGuests: 2, nights: [open('2026-12-20', 100), open('2026-12-21', 100), { ...open('2026-12-22', 100), x: 1 }] }
+  assert.deepEqual(unitState(u, opts('2026-12-20', '2026-12-22')), { state: 'unavailable' })
+  // x only matters on the checkout day, not on a night of the stay.
+  assert.equal(unitState(u, opts('2026-12-21', '2026-12-23')).state, 'available')
+})
+
+test('unitState: restrictions are checked after guests and min_stay', () => {
+  const u = { maxGuests: 1, nights: [{ ...open('2026-12-20', 100), a: 1 }, open('2026-12-21', 100)] }
+  assert.deepEqual(unitState(u, opts('2026-12-20', '2026-12-22', 2)), { state: 'guests' })
+  assert.deepEqual(unitState(u, opts('2026-12-20', '2026-12-21', 1)), { state: 'min_stay', minStay: 2 })
+})
+
+test('priceLines uses discountPct from the quote when present', () => {
+  // 1660 / 16600 derives 10; the server said 10 too. Use an odd case where rounding differs.
+  const q = { ...quote, perNight: [{ date: '2026-12-20', priceCents: 999 }], nights: 1, guests: 1, subtotalCents: 999, discountCents: 150, totalCents: 849, cityTaxCents: 250 }
+  assert.equal(priceLines(q).discount.label, 'Direct booking discount −15%')
+  assert.equal(priceLines({ ...q, discountPct: 15 }).discount.label, 'Direct booking discount −15%')
+  assert.equal(priceLines({ ...quote, discountPct: 12 }).discount.label, 'Direct booking discount −12%')
+  assert.equal(priceLines({ ...quote, discountPct: '12' }).discount.label, 'Direct booking discount −10%')
+})
+
+test('stayTooLong: more than 30 nights', () => {
+  assert.equal(stayTooLong('2026-12-01', '2026-12-31'), false)
+  assert.equal(stayTooLong('2026-12-01', '2027-01-01'), true)
+  assert.equal(stayTooLong(undefined, '2027-01-01'), false)
+})
+
+test('minStayOnly: smallest minStay when every unit is min_stay, else null', () => {
+  assert.equal(minStayOnly({ a: { state: 'min_stay', minStay: 3 }, b: { state: 'min_stay', minStay: 2 } }), 2)
+  assert.equal(minStayOnly({ a: { state: 'min_stay', minStay: 3 }, b: { state: 'unavailable' } }), null)
+  assert.equal(minStayOnly({}), null)
 })

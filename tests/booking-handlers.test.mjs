@@ -1,8 +1,10 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { handleCalendar, handleQuote, serveBooking } from '../scripts/lib/booking-handlers.mjs'
+import { handleCalendar, handleQuote, serveBooking, bookingRateLimiters } from '../scripts/lib/booking-handlers.mjs'
+import { createRateLimiter } from '../scripts/lib/rate-limit.mjs'
+import { unitState } from '../src/scripts/direct-booking-client.mjs'
 import { HostexError } from '../scripts/lib/hostex-read.mjs'
-import { addDays } from '../scripts/lib/booking-quote.mjs'
+import { addDays, quoteStay } from '../scripts/lib/booking-quote.mjs'
 
 const NOW = new Date('2026-11-17T10:00:00Z') // Rome: 2026-11-17
 const ENV = { HOSTEX_ACCESS_TOKEN: 'fake-token-for-tests' }
@@ -268,4 +270,153 @@ test('serveBooking: methods other than GET/HEAD are 405', async () => {
   assert.equal(res.headers.Allow, 'GET, HEAD')
   assert.deepEqual(res.body, { error: 'method_not_allowed' })
   assert.equal(calls.length, 0)
+})
+
+// ---- final fix wave: restrictions, query guard, rate limit, horizon, discountPct ----
+
+test('calendar: emits a/x only for closed-on-arrival / closed-on-departure nights', async () => {
+  const impl = async ({ unitIds, from }) =>
+    Object.fromEntries(unitIds.map((id) => [id, [
+      { date: from, bookable: true, priceCents: 8000, minStay: 2, closedOnArrival: true, closedOnDeparture: false },
+      { date: addDays(from, 1), bookable: true, priceCents: 8000, minStay: 2, closedOnArrival: false, closedOnDeparture: true },
+      { date: addDays(from, 2), bookable: true, priceCents: 8000, minStay: 2, closedOnArrival: false, closedOnDeparture: false },
+    ]]))
+  const r = await handleCalendar({ env: ENV, now: NOW, loadNightsImpl: impl })
+  assert.deepEqual(r.body.units.orange.nights, [
+    { d: '2026-11-17', b: 1, p: 8000, m: 2, a: 1 },
+    { d: '2026-11-18', b: 1, p: 8000, m: 2, x: 1 },
+    { d: '2026-11-19', b: 1, p: 8000, m: 2 },
+  ])
+})
+
+test('calendar: any query parameter is 400 no-store without calling Hostex', async () => {
+  for (const qs of ['x=1', 'from=2026-12-20', 'a', '_=123']) {
+    const { impl, calls } = fakeLoad()
+    const r = await handleCalendar({ query: new URLSearchParams(qs), env: ENV, now: NOW, loadNightsImpl: impl })
+    assert.equal(r.status, 400, qs)
+    assert.deepEqual(r.body, { error: 'bad_request' })
+    assert.equal(r.headers['Cache-Control'], 'no-store')
+    assert.equal(calls.length, 0)
+  }
+  const ok = await handleCalendar({ query: new URLSearchParams(''), env: ENV, now: NOW, loadNightsImpl: fakeLoad().impl })
+  assert.equal(ok.status, 200)
+})
+
+test('quote: check-out beyond today + 365 is a 200 unavailable refusal without calling Hostex', async () => {
+  const r = await quote({ ...ORANGE, from: '2027-11-17', to: '2027-11-19' })
+  assert.equal(r.status, 200)
+  assert.equal(r.body.ok, false)
+  assert.equal(r.body.reason, 'unavailable')
+  assert.equal(r.body.unit, 'orange')
+  assert.equal(r.calls.length, 0)
+  const edge = await quote({ ...ORANGE, from: '2027-11-15', to: '2027-11-17' })
+  assert.equal(edge.calls.length, 1)
+})
+
+test('quote: ok response carries the discountPct used', async () => {
+  assert.equal((await quote(ORANGE)).body.discountPct, 10)
+  assert.equal((await quote(ORANGE, { env: { ...ENV, DIRECT_DISCOUNT_PCT: '15' } })).body.discountPct, 15)
+})
+
+test('rate limit: quote allows 30 per minute per IP, then 429 with Retry-After and no Hostex call', async () => {
+  const limiter = createRateLimiter({ limit: 30, windowMs: 60_000 })
+  const { impl, calls } = fakeLoad()
+  const run = (ip, now = NOW) =>
+    handleQuote({ query: new URLSearchParams(ORANGE), env: ENV, now, loadNightsImpl: impl, ip, rateLimiter: limiter })
+  for (let i = 0; i < 30; i++) assert.equal((await run('203.0.113.1')).status, 200)
+  const over = await run('203.0.113.1')
+  assert.equal(over.status, 429)
+  assert.deepEqual(over.body, { error: 'rate_limited' })
+  assert.equal(over.headers['Cache-Control'], 'no-store')
+  assert.match(over.headers['Retry-After'], /^\d+$/)
+  assert.ok(Number(over.headers['Retry-After']) >= 1 && Number(over.headers['Retry-After']) <= 60)
+  assert.equal(calls.length, 30)
+  assert.equal((await run('203.0.113.2')).status, 200, 'other IPs are not affected')
+  assert.equal((await run('203.0.113.1', new Date(NOW.getTime() + 60_001))).status, 200, 'window expires')
+  limiter.reset()
+  assert.equal(limiter.size, 0)
+})
+
+test('rate limit: calendar allows 20 per minute per IP', async () => {
+  const limiter = createRateLimiter({ limit: 20, windowMs: 60_000 })
+  const { impl, calls } = fakeLoad()
+  const run = () => handleCalendar({ env: ENV, now: NOW, loadNightsImpl: impl, ip: '198.51.100.7', rateLimiter: limiter })
+  for (let i = 0; i < 20; i++) assert.equal((await run()).status, 200)
+  const over = await run()
+  assert.equal(over.status, 429)
+  assert.deepEqual(over.body, { error: 'rate_limited' })
+  assert.equal(over.headers['Cache-Control'], 'no-store')
+  assert.ok(Number(over.headers['Retry-After']) >= 1)
+  assert.equal(calls.length, 20)
+})
+
+test('rate limit: default limits are 30 for quote and 20 for calendar', () => {
+  assert.equal(bookingRateLimiters.quote.limit, 30)
+  assert.equal(bookingRateLimiters.calendar.limit, 20)
+  assert.equal(bookingRateLimiters.quote.windowMs, 60_000)
+  assert.equal(bookingRateLimiters.calendar.windowMs, 60_000)
+})
+
+test('rate limiter prunes expired entries and stays bounded', () => {
+  const limiter = createRateLimiter({ limit: 2, windowMs: 1000, maxKeys: 5 })
+  for (let i = 0; i < 5; i++) limiter.take(`ip${i}`, 0)
+  assert.equal(limiter.size, 5)
+  limiter.take('late', 1500) // every earlier entry is expired → pruned
+  assert.equal(limiter.size, 1)
+  for (let i = 0; i < 20; i++) limiter.take(`burst${i}`, 1600)
+  assert.ok(limiter.size <= 5)
+})
+
+test('serveBooking: passes the client IP to the limiter (x-forwarded-for first entry)', async () => {
+  bookingRateLimiters.quote.reset()
+  const limiter = createRateLimiter({ limit: 1, windowMs: 60_000 })
+  const send = async (headers) => {
+    const res = fakeRes()
+    await serveBooking(
+      { method: 'GET', url: '/api/booking/quote?unit=orange&from=2026-12-20&to=2026-12-22&guests=2', headers },
+      res,
+      handleQuote,
+      { env: ENV, now: NOW, loadNightsImpl: fakeLoad().impl, rateLimiter: limiter },
+    )
+    return res
+  }
+  assert.equal((await send({ 'x-forwarded-for': '192.0.2.5, 10.0.0.1' })).statusCode, 200)
+  const over = await send({ 'x-forwarded-for': '192.0.2.5' })
+  assert.equal(over.statusCode, 429)
+  assert.ok(over.headers['Retry-After'])
+  assert.equal((await send({ 'x-real-ip': '192.0.2.6' })).statusCode, 200)
+})
+
+test('seam: unitState (calendar payload) and quoteStay agree on bookable vs not', async () => {
+  // Raw loadNights-shaped nights for orange, 2026-12-01..2026-12-12.
+  const raw = []
+  for (let d = '2026-12-01'; d <= '2026-12-12'; d = addDays(d, 1)) {
+    raw.push({
+      date: d,
+      bookable: d !== '2026-12-09',
+      priceCents: 9000,
+      minStay: 2,
+      closedOnArrival: d === '2026-12-05',
+      closedOnDeparture: d === '2026-12-07',
+    })
+  }
+  const impl = async ({ unitIds }) => Object.fromEntries(unitIds.map((id) => [id, raw]))
+  const cal = await handleCalendar({ env: ENV, now: NOW, loadNightsImpl: impl })
+  const unit = cal.body.units.orange
+  const stays = [
+    ['2026-12-01', '2026-12-03'], // open
+    ['2026-12-05', '2026-12-07'], // closed arrival (and departure)
+    ['2026-12-04', '2026-12-07'], // closed departure
+    ['2026-12-05', '2026-12-08'], // closed arrival only
+    ['2026-12-02', '2026-12-04'], // open
+    ['2026-12-07', '2026-12-10'], // partially closed (12-09 not bookable)
+    ['2026-12-07', '2026-12-09'], // check-out on the first closed day
+    ['2026-12-06', '2026-12-08'], // open, passes over a closed-departure day
+  ]
+  for (const [from, to] of stays) {
+    const q = quoteStay({ nights: raw, checkIn: from, checkOut: to, guests: 2, maxGuests: 2, discountPct: 10, today: '2026-11-17' })
+    const s = unitState(unit, { from, to, guests: 2, discountPct: 10 })
+    assert.equal(s.state === 'available', q.ok, `${from}..${to}: unitState ${s.state}, quote ${q.reason ?? 'ok'}`)
+    if (q.ok) assert.equal(s.totalCents, q.totalCents)
+  }
 })

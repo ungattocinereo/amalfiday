@@ -1,13 +1,14 @@
 ---
 import type { Apartment } from '../data/apartments'
+import { BOOKING_MODE } from '../data/booking-mode.mjs'
 
 export interface Props {
   apartment: Apartment
 }
 
-// 'request': the button opens the contact form prefilled with the quote.
-// Plan 2 switches this to 'instant' (online payment); add its copy here and its action below.
-const BOOKING_MODE = 'request' as const
+// BOOKING_MODE (src/data/booking-mode.mjs) — 'request': the button opens the contact form
+// prefilled with the quote. Plan 2 switches it to 'instant' (online payment); add its copy here
+// and its action below.
 
 const MODES = {
   request: {
@@ -16,7 +17,7 @@ const MODES = {
   },
 } as const
 
-const copy = MODES[BOOKING_MODE]
+const copy = MODES[BOOKING_MODE as keyof typeof MODES]
 const { apartment } = Astro.props
 const maxGuests = apartment.direct?.maxGuests ?? 2
 const { airbnb, booking } = apartment.bookingLinks
@@ -25,7 +26,8 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
 
 <!--
   Static first paint and no-JS state: [data-fallback] (platform links + contact).
-  The script swaps in [data-live] and returns to the fallback on 503 / network error.
+  The script swaps in [data-live] and returns to the fallback only when the calendar fails;
+  a failed quote keeps the inputs and offers "Try again".
   Every number in [data-price] comes from GET /api/booking/quote.
 -->
 <section
@@ -105,9 +107,10 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
     requestUrl,
     quoteSummary,
     clampGuests,
+    stayTooLong,
   } from '../scripts/direct-booking-client.mjs'
 
-  type Night = { d: string; b: number; p: number | null; m: number }
+  type Night = { d: string; b: number; p: number | null; m: number; a?: 1; x?: 1 }
   type Calendar = {
     today: string
     horizon: string
@@ -131,6 +134,7 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
     chargeDate: string
     payNow: boolean
     refundable: boolean
+    discountPct?: number
   }
   type Params = { from?: string; to?: string; guests?: number }
 
@@ -223,6 +227,29 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
       else status.replaceChildren(el('p', text, cls))
     }
 
+    // A failed quote (503, 429, network, bad body): keep the inputs, offer one retry per click.
+    function showQuoteError() {
+      price.hidden = true
+      setBookable(null)
+      const retry = el('button', 'Try again', 'bp__retry')
+      retry.setAttribute('type', 'button')
+      retry.addEventListener('click', () => {
+        retry.disabled = true
+        update()
+      }, { once: true })
+      const line = el('p', "We couldn't check the price just now. ", 'bp__hint bp__hint--error')
+      line.append(retry)
+      status.replaceChildren(line)
+    }
+
+    function showTooLong() {
+      const line = el('p', 'For stays longer than 30 nights, please ', 'bp__hint bp__hint--error')
+      const link = el('a', 'contact us', 'bp__link')
+      link.setAttribute('href', '/contact/')
+      line.append(link, '.')
+      status.replaceChildren(line)
+    }
+
     function setBookable(quote: Quote | null) {
       current = quote
       actionButton.disabled = !quote
@@ -252,7 +279,7 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
         row(lines.total.label, lines.total.amount, 'bp__row bp__row--total'),
       )
       tax.replaceChildren(el('span', lines.cityTax.label), el('span', lines.cityTax.amount, 'bp__amount'))
-      policy.textContent = policyText(quote)
+      policy.textContent = policyText(quote, mode)
       price.hidden = false
       setStatus(quoteSummary(quote), 'sr')
       setBookable(quote)
@@ -299,6 +326,11 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
       }
       price.hidden = true
       setBookable(null)
+      // Decided here from the dates; the endpoint answers 400 for these.
+      if (stayTooLong(p.from, p.to)) {
+        showTooLong()
+        return
+      }
       setStatus('Checking price…')
       try {
         const quote = await fetchQuote(p)
@@ -307,7 +339,7 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
         else setStatus(quoteMessage(quote, maxGuests) ?? 'Please choose valid dates.', 'error')
       } catch {
         if (id !== latest) return
-        showUnavailable()
+        showQuoteError()
       }
     }
 
@@ -320,7 +352,7 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
       setBookable(null)
       const p = readParams()
       // Complete pair: show the wait state; incomplete: drop the old message now, not after the debounce.
-      if (p.from && p.to && p.from < p.to) setStatus('Checking price…')
+      if (p.from && p.to && p.from < p.to && !stayTooLong(p.from, p.to)) setStatus('Checking price…')
       else setStatus('')
       timer = window.setTimeout(update, DEBOUNCE_MS)
     }
@@ -521,6 +553,31 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
   .bp__status :global(.bp__hint--error) {
     color: var(--color-text);
     font-weight: 500;
+  }
+
+  .bp__status :global(.bp__retry) {
+    margin-left: 0.25rem;
+    padding: 0.2rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-text);
+    font: 500 0.875rem var(--font-body);
+    cursor: pointer;
+  }
+
+  .bp__status :global(.bp__retry:hover) {
+    border-color: var(--color-accent);
+  }
+
+  .bp__status :global(.bp__retry:focus-visible),
+  .bp__status :global(.bp__link:focus-visible) {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .bp__status :global(.bp__link) {
+    color: var(--color-accent);
   }
 
   .bp__price {

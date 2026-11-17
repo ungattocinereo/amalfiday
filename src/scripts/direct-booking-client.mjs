@@ -1,11 +1,13 @@
 // Pure helpers for the "Book direct" block on /apartments and the /book/<id>/ panel.
 // No DOM, no fetch: imported by the page scripts and by `node --test`.
-// Data shape: GET /api/booking/calendar → units[id] = { maxGuests, nights: [{ d, b, p, m }] },
-// `p` is the pre-discount nightly price in integer cents.
+// Data shape: GET /api/booking/calendar → units[id] = { maxGuests, nights: [{ d, b, p, m, a?, x? }] },
+// `p` is the pre-discount nightly price in integer cents; `a: 1` closed on arrival, `x: 1` closed on departure.
 
 const ISO_RE = /^(\d{4})-(\d{2})-(\d{2})$/
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const CITY_TAX_CENTS_PER_PERSON_NIGHT = 250
+// Same cap as the quote endpoint (longer stays are a 400 there).
+const MAX_STAY_NIGHTS = 30
 
 export function isIsoDate(value) {
   if (typeof value !== 'string') return false
@@ -75,13 +77,28 @@ export function unitState(unit, { from, to, guests, discountPct }) {
   const minStay = arrival && typeof arrival.m === 'number' ? arrival.m : 1
   const fullCents = bookable ? stay.reduce((sum, n) => sum + n.p, 0) : 0
   const totals = { fullCents, totalCents: discounted(fullCents, discountPct), nights: count }
+  // Same refusals as the server's quoteStay: closed on arrival / closed on departure.
+  const restricted = arrival?.a === 1 || byDate.get(to)?.x === 1
 
   if (guests > unit.maxGuests) {
-    return bookable && count >= minStay ? { state: 'guests', ...totals } : { state: 'guests' }
+    return bookable && !restricted && count >= minStay ? { state: 'guests', ...totals } : { state: 'guests' }
   }
   if (count < minStay) return { state: 'min_stay', minStay }
-  if (!bookable) return { state: 'unavailable' }
+  if (!bookable || restricted) return { state: 'unavailable' }
   return { state: 'available', ...totals }
+}
+
+// The quote endpoint refuses stays over 30 nights; the panel says so before asking.
+export function stayTooLong(from, to) {
+  if (!isIsoDate(from) || !isIsoDate(to)) return false
+  return nightsBetween(from, to) > MAX_STAY_NIGHTS
+}
+
+// Smallest minStay when every unit's state is min_stay; null otherwise (or when there are none).
+export function minStayOnly(states) {
+  const list = Object.values(states)
+  if (list.length === 0 || !list.every((s) => s?.state === 'min_stay')) return null
+  return Math.min(...list.map((s) => s.minStay))
 }
 
 export function selectableDates(units) {
@@ -170,7 +187,7 @@ export function formatRange(from, to) {
 // ---- /book/<id>/ panel: every number below is read from the server quote ----
 // Quote shape: GET /api/booking/quote → { checkIn, checkOut, guests, ok, nights,
 // perNight: [{ date, priceCents }], subtotalCents, discountCents, totalCents, cityTaxCents,
-// freeCancellationUntil, chargeDate, payNow, refundable } or { ok: false, reason, minStay? }.
+// freeCancellationUntil, chargeDate, payNow, refundable, discountPct } or { ok: false, reason, minStay? }.
 
 // Contact form `service` option for stays (src/pages/contact.astro, data-value).
 const CONTACT_SERVICE = 'Apartment'
@@ -205,7 +222,8 @@ export function priceLines(quote) {
     if (last && last.priceCents === priceCents) last.count += 1
     else runs.push({ priceCents, count: 1 })
   }
-  const pct = quote.subtotalCents > 0 ? Math.round((quote.discountCents / quote.subtotalCents) * 100) : 0
+  const derivedPct = quote.subtotalCents > 0 ? Math.round((quote.discountCents / quote.subtotalCents) * 100) : 0
+  const pct = Number.isInteger(quote.discountPct) ? quote.discountPct : derivedPct
   const taxNights = quote.guests * quote.nights
   const taxRate = taxNights > 0 ? Math.round(quote.cityTaxCents / taxNights) : 0
   return {
@@ -225,7 +243,17 @@ export function priceLines(quote) {
   }
 }
 
-export function policyText(quote) {
+// mode: 'request' (the guest sends a request; we confirm by message) or 'instant' (online payment).
+export function policyText(quote, mode = 'instant') {
+  if (mode === 'request') {
+    const due = 'Payment is due on confirmation.'
+    if (!quote.refundable) {
+      return `Once we confirm your request, the booking is non-refundable, except where the law provides otherwise. ${due}`
+    }
+    const until = `Once we confirm your request: free cancellation until ${formatDateLong(quote.freeCancellationUntil)}`
+    if (quote.payNow) return `${until}. ${due}`
+    return `${until}, and payment is due on ${formatDateLong(quote.chargeDate)}. You pay nothing now.`
+  }
   if (!quote.refundable) return 'This booking is non-refundable, except where the law provides otherwise.'
   const until = `Free cancellation until ${formatDateLong(quote.freeCancellationUntil)}.`
   if (quote.payNow) return `${until} Payment is taken at booking.`

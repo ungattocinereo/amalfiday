@@ -140,11 +140,12 @@ export async function loadNights({ unitIds, from, to, token, fetchImpl = fetch, 
       if (!day) return { date, ...CLOSED_NIGHT }
       const price = typeof day.price === 'number' && Number.isFinite(day.price) ? day.price : null
       const restrictions = day.restrictions ?? {}
+      const minStay = Number.parseInt(restrictions.min_stay_on_arrival, 10)
       return {
         date,
         bookable: available?.get(date) === true && price != null && day.inventory > 0,
         priceCents: price == null ? null : Math.round(price * 100),
-        minStay: restrictions.min_stay_on_arrival || 0,
+        minStay: Number.isFinite(minStay) && minStay >= 0 ? minStay : 0,
         closedOnArrival: restrictions.closed_on_arrival === true,
         closedOnDeparture: restrictions.closed_on_departure === true,
       }

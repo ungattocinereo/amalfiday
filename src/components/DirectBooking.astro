@@ -1,6 +1,7 @@
 ---
 import DirectCard from './DirectCard.astro'
 import { DIRECT_APARTMENTS } from '../data/apartments'
+import { BOOKING_MODE } from '../data/booking-mode.mjs'
 
 // Short guest-facing line under each card title. Kept here, not in the unit registry.
 const META: Record<string, string> = {
@@ -10,6 +11,14 @@ const META: Record<string, string> = {
   solo: 'Single room with balcony · 1 guest',
   awesome: 'Apartment by the sea · up to 2 guests',
 }
+
+// Sub-line under the heading, by booking mode (src/data/booking-mode.mjs).
+const SUB_LINE: Record<string, string> = {
+  request:
+    'Send a booking request here and we confirm by message, usually within a few hours. Free cancellation up to 7 days before arrival; payment is due 9 days before check-in.',
+  instant:
+    'Reserve here with instant confirmation. Free cancellation up to 7 days before arrival, and your card is charged only 9 days before check-in.',
+}
 ---
 
 <section id="direct" class="section db" data-direct-booking>
@@ -18,10 +27,7 @@ const META: Record<string, string> = {
       <h2>Book direct</h2>
       <span class="db__badge" data-badge>Best price when you book direct</span>
     </div>
-    <p class="db__sub">
-      Reserve here with instant confirmation. Free cancellation up to 7 days before arrival, and
-      your card is charged only 9 days before check-in.
-    </p>
+    <p class="db__sub">{SUB_LINE[BOOKING_MODE]}</p>
 
     <form class="db__search" method="get" action="/apartments/#direct" data-search>
       <label class="db__field">
@@ -68,13 +74,15 @@ const META: Record<string, string> = {
     addDaysIso,
     nightsBetween,
     cityTaxCents,
+    minStayOnly,
   } from '../scripts/direct-booking-client.mjs'
 
-  type Night = { d: string; b: number; p: number | null; m: number }
+  type Night = { d: string; b: number; p: number | null; m: number; a?: 1; x?: 1 }
   type Unit = { maxGuests: number; nights: Night[] }
   type Calendar = { today: string; horizon: string; discountPct: number; units: Record<string, Unit> }
   type Params = { from?: string; to?: string; guests?: number }
 
+  // Any non-200 calendar answer (503, 429) or network error: one message, no automatic retry.
   const ERROR_TEXT =
     'Live prices are unavailable right now — you can still book on the platforms below.'
 
@@ -234,7 +242,7 @@ const META: Record<string, string> = {
       return s
     }
 
-    function renderStatus(p: Params, states: Record<string, { state: string }>) {
+    function renderStatus(p: Params, states: Record<string, { state: string; minStay?: number }>) {
       const cal = data!
       if (!hasDates(p)) {
         const windows = ids
@@ -254,7 +262,10 @@ const META: Record<string, string> = {
       const range = formatRange(p.from!, p.to!)
       const free = ids.filter((id) => states[id]?.state === 'available').length
       const line = el('p', undefined, { class: 'db__hint' })
-      if (free > 0) {
+      const minStay = minStayOnly(states)
+      if (minStay !== null) {
+        line.append(`Minimum stay is ${minStay} nights — please choose a longer stay.`)
+      } else if (free > 0) {
         const minStays = ids
           .map((id) => cal.units[id]?.nights.find((n) => n.d === p.from)?.m)
           .filter((m): m is number => typeof m === 'number')
@@ -292,7 +303,7 @@ const META: Record<string, string> = {
     function render(p: Params) {
       const cal = data!
       badge.textContent = `−${cal.discountPct}% vs Airbnb & Booking.com`
-      const states: Record<string, { state: string }> = {}
+      const states: Record<string, { state: string; minStay?: number }> = {}
       for (const id of ids) {
         const unit = cal.units[id]
         if (unit) states[id] = renderCard(id, cards.get(id)!, unit, p)
