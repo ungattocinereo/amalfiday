@@ -10,11 +10,21 @@ function prng(seed) {
   return () => (s = (s * 16807) % 2147483647) / 2147483647
 }
 
+/** 0 inside the ellipse, rising smoothly to 1 at 1.6× its radius. */
+export function clearance(fx, fy, clear) {
+  if (!clear) return 1
+  const d = Math.hypot((fx - clear.cx) / clear.rx, (fy - clear.cy) / clear.ry)
+  const t = Math.min(1, Math.max(0, (d - 1) / 0.6))
+  return t * t * (3 - 2 * t)
+}
+
 /**
  * @param {number} w
  * @param {number} h
- * @param {{ fadeLeft?: boolean, plainAlpha?: number }} [options]
+ * @param {{ fadeLeft?: boolean, plainAlpha?: number, sparkles?: boolean, clear?: { cx: number, cy: number, rx: number, ry: number } }} [options]
  *   plainAlpha scales only the plain white dots; golden dots and sparkles keep full strength.
+ *   clear: an ellipse (fractions of w/h) where the dots fade out, e.g. behind a headline.
+ *   sparkles: false drops the occasional large dot.
  * @returns {{ x: number, y: number, r: number, a: number, warm: number, sparkle: boolean }[]}
  */
 export function halftoneDots(w, h, options = {}) {
@@ -36,13 +46,14 @@ export function halftoneDots(w, h, options = {}) {
         r = Math.max(r, light.strength * 2.8 * (1 - d) - 0.3)
         if (light.warm) warm = Math.max(0, 1 - d * 2.2)
       }
-      const sparkle = rand() < SPARKLE_RATE && r > 0.4
+      const sparkle = rand() < SPARKLE_RATE && r > 0.4 && options.sparkles !== false
       if (sparkle) r += 1.8
       if (r <= 0.05) continue
       // Behind a left-hand text column the dots fade to a quarter.
       const fade = options.fadeLeft ? Math.min(1, Math.max(0.25, (x / w - 0.08) / 0.5)) : 1
       const plain = !sparkle && warm <= 0 ? (options.plainAlpha ?? 1) : 1
-      const a = Math.min(1, (sparkle ? 0.4 : 0.19) * 1.6 * fade * plain)
+      const a = Math.min(1, (sparkle ? 0.4 : 0.19) * 1.6 * fade * plain * clearance(x / w, y / h, options.clear))
+      if (a <= 0.004) continue
       dots.push({ x, y, r, a, warm, sparkle })
     }
   }

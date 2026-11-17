@@ -30,3 +30,11 @@ test('plainAlpha dims only the plain white dots', () => {
     else assert.ok(Math.abs(q.a - d.a * 0.45) < 1e-9)
   })
 })
+
+test('clear keeps an ellipse free of dots and sparkles can be turned off', () => {
+  const clear = { cx: 0.5, cy: 0.3, rx: 0.3, ry: 0.2 }
+  const dots = halftoneDots(1000, 800, { clear, sparkles: false })
+  assert.ok(dots.every((d) => !d.sparkle))
+  assert.ok(!dots.some((d) => Math.hypot((d.x / 1000 - 0.5) / 0.3, (d.y / 800 - 0.3) / 0.2) < 1))
+  assert.ok(dots.some((d) => d.y > 700))
+})

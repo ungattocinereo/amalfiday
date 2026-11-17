@@ -7,11 +7,15 @@ interface Props {
   fade?: 'left' | 'none'
   /** Opacity of the plain white dots (0–1); golden dots and sparkles stay as they are. */
   plainAlpha?: number
+  /** Drop the occasional large sparkle dot. */
+  sparkles?: boolean
+  /** Ellipse (fractions of the host size) kept free of dots, e.g. behind a headline. */
+  clear?: { cx: number; cy: number; rx: number; ry: number }
 }
-const { fade = 'none', plainAlpha = 1 } = Astro.props
+const { fade = 'none', plainAlpha = 1, sparkles = true, clear } = Astro.props
 ---
 
-<canvas class="halftone-lights" data-halftone-lights data-fade={fade} data-plain-alpha={plainAlpha} aria-hidden="true"></canvas>
+<canvas class="halftone-lights" data-halftone-lights data-fade={fade} data-plain-alpha={plainAlpha} data-sparkles={String(sparkles)} data-clear={clear ? JSON.stringify(clear) : undefined} aria-hidden="true"></canvas>
 
 <style>
   .halftone-lights {
@@ -41,7 +45,7 @@ const { fade = 'none', plainAlpha = 1 } = Astro.props
       if (!ctx) continue
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, width, height)
-      drawHalftoneLights(ctx, width, height, { fadeLeft: canvas.dataset.fade === 'left', plainAlpha: Number(canvas.dataset.plainAlpha ?? 1) })
+      drawHalftoneLights(ctx, width, height, { fadeLeft: canvas.dataset.fade === 'left', plainAlpha: Number(canvas.dataset.plainAlpha ?? 1), sparkles: canvas.dataset.sparkles !== 'false', clear: canvas.dataset.clear ? JSON.parse(canvas.dataset.clear) : undefined })
     }
   }
 

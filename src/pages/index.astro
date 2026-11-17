@@ -115,7 +115,8 @@ const fallbackQuatrain =
   hidePrefooter
 >
   <section class="hero hero--orange">
-    <HalftoneLights plainAlpha={0.45} />
+    {/* The particle logo is the hero's own dot figure: keep the halftone off it and its verse. */}
+    <HalftoneLights plainAlpha={0.45} sparkles={false} clear={{ cx: 0.5, cy: 0.24, rx: 0.5, ry: 0.22 }} />
     <div class="container hero__inner hero-container">
       <div class="hero__intro">
         <h1 class="hero__h1 sr-only">Amalfi Coast Photoshoots, Tours & Local Guide</h1>
