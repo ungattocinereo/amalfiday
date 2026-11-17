@@ -592,15 +592,17 @@ const fallbackQuatrain =
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.35rem;
-    padding: 0 0.5rem 0 1rem;
+    gap: 0.25rem;
+    /* Centred, nudged up a little: the icon above makes true centre look low. */
+    padding: 0 0.5rem 0.45rem 1rem;
     font-family: var(--font-display);
-    font-size: 15px;
-    line-height: 1.2;
+    font-size: 14px;
+    line-height: 1.15;
     color: var(--color-text);
   }
   .hero__half-text > i:first-child {
-    font-size: 1.35rem;
+    font-size: 1.15rem;
+    line-height: 1;
     color: var(--color-accent);
   }
   .hero__half-ext {
@@ -627,6 +629,8 @@ const fallbackQuatrain =
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 46%;
+    /* The row follows the card height, not the image's intrinsic height. */
+    grid-template-rows: minmax(0, 1fr);
     overflow: hidden;
     border-radius: 20px;
     background: var(--color-card);
@@ -637,6 +641,7 @@ const fallbackQuatrain =
   .hero__half > img {
     width: 100%;
     height: 100%;
+    min-height: 0;
     object-fit: cover;
     transition: transform 0.4s ease;
   }
@@ -1222,6 +1227,8 @@ const fallbackQuatrain =
   }
 
   @media (max-width: 640px) {
+    .hero__half-text > i:first-child, .hero__half-ext { display: none; }
+    .hero__half-text { padding: 0 0.4rem 0.15rem 0.75rem; font-size: 13px; }
     .hero__big,
     .hero__big--tours {
       grid-column: 1 / -1;
