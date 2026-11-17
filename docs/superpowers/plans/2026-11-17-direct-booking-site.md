@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-11-17-direct-booking-design.md` (разделы 5.1, 5.2, 5.4 «Сайт», 5.6). Макет раскладки: `output/mockups/apartments-direct-booking.html`.
 
+> **Статус (17 ноября 2026):** задачи 1–8 выполнены в ветке `feature/direct-booking-site`. Задача 9, шаг 3 («превью-деплой на Vercel») неприменима: сайт размещён на сервере `sweden`, а не на Vercel. Вместо неё перед выкладкой нужны: правило Caddy для `/api/booking/*`, `HOSTEX_ACCESS_TOKEN` в `/srv/amalfiday/.env`, перезапуск `amalfi-contact.service` и кэш календаря в процессе Node (CDN нет). См. «Hosting and Deployment» в `CLAUDE.md`.
+
 **Разбивка на планы.** Спецификация покрывает три подсистемы, каждая даёт работающий результат:
 
 1. **Этот план** — сайт и чтение Hostex. Не зависит от тестовой брони.

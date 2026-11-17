@@ -36,6 +36,7 @@ const staticPages = [
     image: '/staticpages/mainpage/rental-houses.webp',
     imageAlt: 'Amalfi Coast apartments with sea view',
     wide: true,
+    offer: { label: 'Discount up to', value: '10%' },
   },
   {
     title: 'Parking tips',
@@ -213,6 +214,12 @@ const fallbackQuatrain =
               sizes="(max-width: 900px) 50vw, 16vw"
             />
             <span class="hero__mini-badge">{item.title}</span>
+            {item.offer && (
+              <span class="hero__offer">
+                <span class="hero__offer-label">{item.offer.label}</span>
+                <strong class="hero__offer-value">{item.offer.value}</strong>
+              </span>
+            )}
           </a>
         ))}
       </div>
@@ -781,6 +788,60 @@ const fallbackQuatrain =
   .hero__essential--wide img {
     position: absolute;
     inset: 0;
+  }
+
+  /* Discount sticker: a circle tucked into the bottom-right corner, clipped
+     by the tile so it reads as a half-circle rising from the corner. */
+  .hero__offer {
+    position: absolute;
+    right: -1.6rem;
+    bottom: -2.9rem;
+    width: 9.6rem;
+    height: 9.6rem;
+    border-radius: 50%;
+    background: var(--gradient-sunset);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.35rem;
+    padding-right: 0.9rem;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.55), var(--shadow-soft);
+    text-align: center;
+    line-height: 1;
+    transition: transform 0.3s ease;
+    transform-origin: 70% 80%;
+  }
+
+  .hero__offer-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.95;
+  }
+
+  .hero__offer-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: -0.02em;
+    margin-top: 0.3rem;
+    font-variant-numeric: lining-nums;
+  }
+
+  .hero__essential:hover .hero__offer {
+    transform: scale(1.06) rotate(-4deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__offer {
+      transition: none;
+    }
+
+    .hero__essential:hover .hero__offer {
+      transform: none;
+    }
   }
 
   .hero__essential img {
