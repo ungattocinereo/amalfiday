@@ -123,6 +123,7 @@ const fallbackQuatrain =
   themeColorDark="#031E4D"
   bodyClass="home-page"
   browserChromeColor="var(--home-hero-bg)"
+  hidePrefooter
 >
   <section class="hero hero--orange">
     <div class="container hero__inner hero-container">
@@ -400,11 +401,6 @@ const fallbackQuatrain =
 
   :global(body.home-page) {
     background-color: var(--home-hero-bg);
-  }
-
-  /* The homepage ends with its own Plan your day CTA. */
-  :global(body.home-page .prefooter) {
-    display: none;
   }
 
   :global(body.home-page main) {

@@ -120,25 +120,31 @@ export type NavigationItem = {
   panel?: NavPanel
 }
 
-const navImages = {
-  couple: '/photoshootings/optimized/regan-tay-ravello/HERO-regan-walk-ravello-love-720.webp',
-  solo: '/photoshootings/optimized/loreana/hero-720.webp',
-  family: '/photoshootings/olga-marat/28-olga-marat-atrani-2023.webp',
-  balcony: '/apartments/the-sunrise-balcony.webp',
-  scenic: '/staticpages/car-tours/Scenic-Coast/Scenic-Coast-amalfi-coast-tours-5.webp',
-  peak: '/staticpages/car-tours/Peak-Flavors/Peak-Flavors-amalfi-coast-tours-7.webp',
-  moto: '/staticpages/moto/hero/moto-ride-with-photographer-in-amalfi-coast-4.webp',
-  ferry: '/staticpages/timetables/ferry-hero-01.webp',
+// Menu photos generated from the source photos by `npm run nav:images` (public/nav/).
+// `card` (560px) for large cards, `thumb` (120px) for the small photos in rows.
+const navCard = {
+  couple: '/nav/couple-card.webp',
+  balcony: '/nav/balcony-card.webp',
+  scenic: '/nav/scenic-card.webp',
+  peak: '/nav/peak-card.webp',
+  moto: '/nav/moto-card.webp',
+  ferry: '/nav/ferry-card.webp',
+}
+
+const navThumb = {
+  couple: '/nav/couple-thumb.webp',
+  solo: '/nav/solo-thumb.webp',
+  family: '/nav/family-thumb.webp',
 }
 
 // Menu order, short labels and photos of the units that take direct bookings.
 // Ids, guest limits and default labels come from the registry.
 const directUnitMenu: { id: string; image: string; label?: string }[] = [
-  { id: 'orange', image: '/apartments/orange-room.jpg' },
-  { id: 'vintage', image: '/apartments/room-in-atrani-vintage.webp' },
-  { id: 'awesome', image: '/apartments/3-view-from-cristall-Pont.jpg' },
-  { id: 'youth', image: '/apartments/casa-bunkbed-room.jpg' },
-  { id: 'solo', image: '/apartments/romfor-1-person.jpg.webp', label: 'Solo traveller' },
+  { id: 'orange', image: '/nav/orange-thumb.webp' },
+  { id: 'vintage', image: '/nav/vintage-thumb.webp' },
+  { id: 'awesome', image: '/nav/atrani-thumb.webp' },
+  { id: 'youth', image: '/nav/youth-thumb.webp' },
+  { id: 'solo', image: '/nav/solo-room-thumb.webp', label: 'Solo traveller' },
 ]
 
 export const guestsNote = (maxGuests: number) => (maxGuests === 1 ? '1 guest' : `Up to ${maxGuests} guests`)
@@ -161,7 +167,7 @@ export const navigation: NavigationItem[] = [
         {
           kind: 'featured',
           href: '/photoshootings/',
-          image: navImages.couple,
+          image: navCard.couple,
           eyebrow: 'Real stories · Ravello',
           title: 'Your Amalfi,',
           titleAccent: 'in frames',
@@ -172,9 +178,9 @@ export const navigation: NavigationItem[] = [
           kind: 'rows',
           heading: 'Who’s in the frame',
           items: [
-            { label: 'Solo portrait', note: 'Golden hour, just you', href: '/photoshootings/solo-photoshoot/', image: navImages.solo },
-            { label: 'Couples', note: 'Walks, terraces, sunsets', href: '/photoshootings/couple-photoshoot/', image: navImages.couple },
-            { label: 'Family', note: 'Relaxed, kids welcome', href: '/photoshootings/family-photoshoot/', image: navImages.family },
+            { label: 'Solo portrait', note: 'Golden hour, just you', href: '/photoshootings/solo-photoshoot/', image: navThumb.solo },
+            { label: 'Couples', note: 'Walks, terraces, sunsets', href: '/photoshootings/couple-photoshoot/', image: navThumb.couple },
+            { label: 'Family', note: 'Relaxed, kids welcome', href: '/photoshootings/family-photoshoot/', image: navThumb.family },
             { label: 'Proposal', note: 'We keep the secret', href: '/photoshootings/proposal-photographer/', icon: 'ph-diamond' },
           ],
         },
@@ -204,7 +210,7 @@ export const navigation: NavigationItem[] = [
         {
           kind: 'featured',
           href: '/apartments/#direct',
-          image: navImages.balcony,
+          image: navCard.balcony,
           eyebrow: 'Atrani · steps from the sea',
           title: 'Stay with',
           titleAccent: 'locals',
@@ -233,9 +239,9 @@ export const navigation: NavigationItem[] = [
         {
           kind: 'cards',
           items: [
-            { eyebrow: 'Private car tour', title: 'Scenic Coast', text: 'Cliff villages, limoncello, lunch by the sea', href: '/experience/car-tours/#tour-scenic', image: navImages.scenic },
-            { eyebrow: 'Wine & food', title: 'Peak Flavors', text: 'Tramonti vineyards and mountain views', href: '/experience/car-tours/#tour-tramonti', image: navImages.peak },
-            { eyebrow: 'Ride + photos', title: 'Scooter Photo Tour', text: 'Cliffside roads, 50+ photos included', href: '/experience/scooter/', image: navImages.moto },
+            { eyebrow: 'Private car tour', title: 'Scenic Coast', text: 'Cliff villages, limoncello, lunch by the sea', href: '/experience/car-tours/#tour-scenic', image: navCard.scenic },
+            { eyebrow: 'Wine & food', title: 'Peak Flavors', text: 'Tramonti vineyards and mountain views', href: '/experience/car-tours/#tour-tramonti', image: navCard.peak },
+            { eyebrow: 'Ride + photos', title: 'Scooter Photo Tour', text: 'Cliffside roads, 50+ photos included', href: '/experience/scooter/', image: navCard.moto },
           ],
           more: { label: 'All experiences', href: '/experience/' },
         },
@@ -270,7 +276,7 @@ export const navigation: NavigationItem[] = [
             { label: 'Greg’s guide', href: '/guide/' },
           ],
         },
-        { kind: 'mini', href: '/ferry-timetables/', image: navImages.ferry, label: 'Next ferry from Amalfi', icon: 'ph-arrow-up-right' },
+        { kind: 'mini', href: '/ferry-timetables/', image: navCard.ferry, label: 'Next ferry from Amalfi', icon: 'ph-arrow-up-right' },
       ],
     },
   },

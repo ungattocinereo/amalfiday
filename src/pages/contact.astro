@@ -47,7 +47,7 @@ const contactJsonLd = [
 ]
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} jsonLd={contactJsonLd}>
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} jsonLd={contactJsonLd} hidePrefooter>
   <section class="contact-top hero--dark hero-centered">
     <div class="contact-top__media">
       <CldImage
@@ -686,11 +686,6 @@ const contactJsonLd = [
     })
   </script>
 </BaseLayout>
-
-<style is:global>
-  /* The shared prefooter repeats "Your Amalfi, crafted" right under this page's own content. */
-  .prefooter { display: none; }
-</style>
 
 <style>
   .contact-book__inner {

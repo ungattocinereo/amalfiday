@@ -20,6 +20,7 @@ const {
   themeColorDark = '#FF5900',
   bodyClass = '',
   browserChromeColor = null,
+  hidePrefooter = false,
 } = Astro.props
 
 const resolveImage = (value) => {
@@ -240,7 +241,7 @@ const bodyStyle = browserChromeColor
     <main>
       <slot />
     </main>
-    <Prefooter />
+    {!hidePrefooter && <Prefooter />}
     <Footer />
     <div
       id="cookie-banner"

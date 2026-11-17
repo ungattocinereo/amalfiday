@@ -90,8 +90,8 @@ const elevation = [
 const componentMap = [
   {
     title: 'Header & navigation',
-    classes: ['.header', '.nav', '.logo', '.theme-switch', '.mobile-panel'],
-    note: 'Sticky glass header, scroll-aware brightness, theme toggle.',
+    classes: ['.header', '.glass-bar', '.brand', '.nm', '.cta', '.theme-switch', '.mobile-menu'],
+    note: 'Sticky glass header with five items: Photoshoots, Apartments, Tours, Coast guide, News. Desktop menu panels, mobile menu, theme toggle.',
   },
   {
     title: 'Hero systems',
@@ -174,7 +174,7 @@ const rules = [
         <div class="card guide-meta">
           <h3>Foundation</h3>
           <p>Core styles: <code>src/styles/tokens.css</code> and <code>src/styles/global.css</code>.</p>
-          <p>Header/Footer: <code>src/components/Header.astro</code> and <code>Footer.astro</code>.</p>
+          <p>Header/Footer: <code>src/components/Header.astro</code> (menus in <code>src/components/nav/</code>) and <code>Footer.astro</code>.</p>
         </div>
         <div class="card guide-meta">
           <h3>Theme</h3>
@@ -183,7 +183,7 @@ const rules = [
         </div>
         <div class="card guide-meta">
           <h3>Icons</h3>
-          <p>We use <a href="https://phosphoricons.com">Phosphor Icons</a>: <code>ph</code> (regular) + icon name. Icons identifying Experience and Coast Intel use <code>ph-fill</code>; social icons in the navigation use <code>ph-light</code>.</p>
+          <p>We use <a href="https://phosphoricons.com">Phosphor Icons</a>: <code>ph</code> (regular) + icon name. Menu icons (Photoshoots, Apartments, Tours, Coast guide, News) use the regular weight; the header CTA uses <code>ph-fill</code>; social icons in the navigation use <code>ph-light</code>.</p>
           <p>City labels share one icon per city through <code>CityLabel.astro</code> and <code>src/data/city-icons.ts</code>.</p>
           <div class="guide-icons">
             <i class="ph ph-camera" aria-hidden="true"></i>
