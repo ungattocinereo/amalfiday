@@ -6,7 +6,9 @@ import { getDirectUnit } from '../data/direct-units.mjs'
 export const SERVICE_BY_TOKEN = Object.freeze({
   photoshoot: 'Photoshooting',
   apartment: 'Apartment',
+  stay: 'Apartment',
   tour: 'Tour',
+  other: 'Other',
 })
 
 // Labels of the select options. Legacy links use them directly (?service=Photoshooting).
@@ -33,6 +35,15 @@ function cleanMessage(value) {
     .slice(0, MAX_MESSAGE)
 }
 
+// Option label → "Plan your day" tile id (see SERVICES in contact-request.mjs).
+export const TILE_BY_SERVICE = Object.freeze({
+  Photoshooting: 'photoshoot',
+  Apartment: 'stay',
+  Tour: 'tour',
+  'Porters/taxi': 'other',
+  Other: 'other',
+})
+
 export function resolveService(raw) {
   if (typeof raw !== 'string') return null
   const key = raw.trim().toLowerCase()
@@ -43,7 +54,7 @@ export function resolveService(raw) {
 
 /**
  * @param {string | URLSearchParams} search  location.search or its params
- * @returns {{ service: string|null, unit: {id:string,label:string}|null, dates: string, message: string }}
+ * @returns {{ service: string|null, tile: string|null, unit: {id:string,label:string}|null, dates: string, message: string }}
  */
 export function contactPrefill(search) {
   const params = search instanceof URLSearchParams ? search : new URLSearchParams(String(search ?? ''))
@@ -60,5 +71,6 @@ export function contactPrefill(search) {
   let message = cleanMessage(params.get('message') ?? '')
   if (!message && unit) message = `I'd like to book ${unit.label}.`
 
-  return { service, unit, dates, message }
+  const tile = service ? TILE_BY_SERVICE[service] : null
+  return { service, tile, unit, dates, message }
 }

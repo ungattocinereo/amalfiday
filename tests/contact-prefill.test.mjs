@@ -66,5 +66,14 @@ test('markup, control characters and length are neutralised', () => {
 
 test('accepts URLSearchParams and missing input', () => {
   assert.equal(contactPrefill(new URLSearchParams('service=tour')).service, 'Tour')
-  assert.deepEqual(contactPrefill(undefined), { service: null, unit: null, dates: '', message: '' })
+  assert.deepEqual(contactPrefill(undefined), { service: null, tile: null, unit: null, dates: '', message: '' })
+})
+
+test('services map to Plan your day tiles', () => {
+  assert.equal(contactPrefill('?service=photoshoot').tile, 'photoshoot')
+  assert.equal(contactPrefill('?service=stay').tile, 'stay')
+  assert.equal(contactPrefill('?unit=orange').tile, 'stay')
+  assert.equal(contactPrefill('?service=Porters%2Ftaxi').tile, 'other')
+  assert.equal(contactPrefill('?service=other').tile, 'other')
+  assert.equal(contactPrefill('?service=spa').tile, null)
 })
