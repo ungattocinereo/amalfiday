@@ -18,7 +18,8 @@
     "icons:sync": "node scripts/sync-phosphor-icons.mjs",
     "photoshoots:images": "node scripts/build-photoshoot-images.mjs",
     "precompress": "node scripts/precompress.mjs",
-    "ghost:rebuild": "node scripts/ghost-rebuild.mjs"
+    "ghost:rebuild": "node scripts/ghost-rebuild.mjs",
+    "nav:images": "node scripts/build-nav-images.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.5",
