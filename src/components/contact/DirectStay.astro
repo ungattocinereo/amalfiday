@@ -1,0 +1,562 @@
+---
+import { DIRECT_APARTMENTS } from '../../data/apartments'
+import { BOOKING_MODE } from '../../data/booking-mode.mjs'
+
+// Best frames: rooms from the direct units plus Atrani views.
+const room = (id: string) => DIRECT_APARTMENTS.find((a) => a.id === id)
+
+type Slide = { src: string; caption: string; alt: string }
+
+const slides: Slide[] = [
+  { src: room('awesome')?.gallery[0], caption: 'Atrani at sunset', alt: 'Atrani and the cathedral bell tower at sunset, seen from the Awesome apartments' },
+  { src: room('vintage')?.gallery[0], caption: 'Vintage interior', alt: 'Double room with a balcony door and a green patterned bedspread' },
+  { src: '/apartments/3-view-from-cristall-Pont.jpg', caption: 'White houses of Atrani', alt: 'White houses and green shutters of Atrani under the cliff' },
+  { src: room('orange')?.gallery[0], caption: 'Orange room', alt: 'Double room with a yellow quilt and sheer curtains' },
+  { src: '/apartments/the-sunrise-balcony.webp', caption: 'Balcony at sunrise', alt: 'Bedroom with an open balcony door onto the sea' },
+  { src: '/apartments/aria-di-mare-for-amalfi-day-2.webp', caption: 'Atrani alleys', alt: 'Pink and white houses above a stone stairway in Atrani' },
+  { src: room('youth')?.gallery[0], caption: 'Room for youngsters', alt: 'Twin room with wooden bunk beds' },
+  { src: room('solo')?.gallery[0], caption: 'Room for solo travellers', alt: 'Single room with a desk and sheer curtains' },
+].filter((s): s is Slide => Boolean(s.src))
+
+const instant = BOOKING_MODE === 'instant'
+const steps = instant
+  ? [
+      { title: 'Pick your dates', text: 'Search free nights and see the price with the direct discount.' },
+      { title: 'Pay online', text: 'Secure payment on the booking page.' },
+      { title: 'Get your confirmation', text: 'The booking is confirmed right away.' },
+    ]
+  : [
+      { title: 'Pick your dates', text: 'Search free nights and see the direct price.' },
+      { title: 'Send a request', text: 'It goes to us through the contact form. You pay nothing online.' },
+      { title: 'We confirm by message', text: 'Your host replies on WhatsApp or email to confirm the stay.' },
+    ]
+---
+
+<section class="direct-stay" id="direct-stay" aria-labelledby="direct-stay-title">
+  <div class="container">
+    <div class="ds-card">
+      <div
+        class="ds-show"
+        data-slideshow
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Photos of the rooms and Atrani"
+        tabindex="0"
+      >
+        <ul class="ds-slides">
+          {slides.map((slide, i) => (
+            <li
+              class:list={['ds-slide', { 'is-active': i === 0 }]}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${slides.length}`}
+              aria-hidden={i === 0 ? 'false' : 'true'}
+            >
+              <img
+                src={i === 0 ? slide.src : undefined}
+                data-src={i === 0 ? undefined : slide.src}
+                alt={slide.alt}
+                width="1200"
+                height="900"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchpriority={i === 0 ? 'high' : undefined}
+              />
+              <span class="ds-caption">{slide.caption}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="ds-controls">
+          <button type="button" class="ds-arrow" data-prev aria-label="Previous photo">
+            <i class="ph ph-caret-left" aria-hidden="true"></i>
+          </button>
+          <div class="ds-dots">
+            {slides.map((slide, i) => (
+              <button
+                type="button"
+                class:list={['ds-dot', { 'is-active': i === 0 }]}
+                data-dot={i}
+                aria-label={`Show photo ${i + 1}: ${slide.caption}`}
+                aria-current={i === 0 ? 'true' : 'false'}
+              ></button>
+            ))}
+          </div>
+          <button type="button" class="ds-arrow ds-pause" data-pause aria-label="Pause slideshow">
+            <i class="ph ph-pause" aria-hidden="true" data-pause-icon></i>
+          </button>
+          <button type="button" class="ds-arrow" data-next aria-label="Next photo">
+            <i class="ph ph-caret-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="ds-copy">
+        <span class="ds-badge">Book direct &minus;10%</span>
+        <h2 id="direct-stay-title">Stay in Atrani, <span class="accent-italic">booked direct</span></h2>
+
+        <ol class="ds-steps">
+          {steps.map((step, i) => (
+            <li>
+              <span class="ds-num" aria-hidden="true">{i + 1}</span>
+              <span>
+                <strong>{step.title}</strong>
+                <span class="ds-step-text">{step.text}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+
+        <a class="button ds-cta" href="/apartments/#direct">
+          <span>Check your dates</span>
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>
+        </a>
+        <p class="ds-fine">Also on Airbnb and Booking.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .direct-stay {
+    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+  }
+
+  .ds-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    overflow: hidden;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 26px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* ---- slideshow ---- */
+  .ds-show {
+    position: relative;
+    min-width: 0;
+    min-height: 460px;
+    overflow: hidden;
+    background: var(--color-surface);
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .ds-show:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: -3px;
+  }
+
+  .ds-slides {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ds-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+
+  .ds-slide.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .ds-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transform-origin: 50% 55%;
+    -webkit-user-drag: none;
+  }
+
+  .ds-slide.is-active img {
+    animation: ds-kenburns 8s ease-out forwards;
+  }
+
+  @keyframes ds-kenburns {
+    from { transform: scale(1); }
+    to { transform: scale(1.07); }
+  }
+
+  /* Dark scrim so the caption and controls stay readable on any photo. */
+  .ds-slide::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 42%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0));
+    pointer-events: none;
+  }
+
+  .ds-caption {
+    position: absolute;
+    left: 1.5rem;
+    bottom: 4.6rem;
+    z-index: 1;
+    max-width: calc(100% - 3rem);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  }
+
+  .ds-controls {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.9rem;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .ds-dots {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .ds-dot {
+    position: relative;
+    width: 24px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .ds-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    transition: width 0.25s ease, margin 0.25s ease, background 0.25s ease;
+  }
+
+  .ds-dot.is-active::before {
+    width: 22px;
+    margin-left: -11px;
+    background: #ffffff;
+  }
+
+  .ds-dot:focus-visible,
+  .ds-arrow:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  .ds-arrow {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    background: rgba(20, 20, 20, 0.45);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .ds-arrow:hover {
+    background: rgba(20, 20, 20, 0.7);
+  }
+
+  /* ---- copy ---- */
+  .ds-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.25rem;
+    min-width: 0;
+    padding: clamp(1.75rem, 3.5vw, 3rem);
+  }
+
+  .ds-badge {
+    display: inline-block;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ds-copy h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 2.8vw, 2.7rem);
+    line-height: 1.12;
+  }
+
+  .ds-steps {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    margin: 0.25rem 0 0.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ds-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+
+  .ds-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .ds-steps strong {
+    display: block;
+    font-weight: 600;
+  }
+
+  .ds-step-text {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .ds-cta {
+    gap: 0.6rem;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .ds-cta:hover {
+    text-decoration: none;
+  }
+
+  .ds-cta:hover span {
+    text-decoration: underline;
+  }
+
+  .ds-fine {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* ---- phones: slideshow on top, text below ---- */
+  @media (max-width: 860px) {
+    .ds-card {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ds-show {
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ds-caption {
+      left: 1rem;
+      bottom: 4.4rem;
+    }
+
+    .ds-controls {
+      left: 0.5rem;
+      right: 0.5rem;
+    }
+
+    .ds-dot {
+      width: 20px;
+    }
+
+    .ds-cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ds-slide {
+      transition: none;
+    }
+
+    .ds-slide.is-active img {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import {
+    AUTOPLAY_MS,
+    clampIndex,
+    indexesToLoad,
+    keyDirection,
+    shouldAutoplay,
+    stepIndex,
+    swipeDirection,
+  } from '../../scripts/slideshow.mjs'
+
+  document.querySelectorAll<HTMLElement>('[data-slideshow]').forEach((root) => {
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('.ds-slide'))
+    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-dot]'))
+    const pauseBtn = root.querySelector<HTMLButtonElement>('[data-pause]')
+    const pauseIcon = root.querySelector<HTMLElement>('[data-pause-icon]')
+    const count = slides.length
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    let index = 0
+    let timer: number | undefined
+    const state = {
+      count,
+      reducedMotion: motion.matches,
+      hovered: false,
+      focused: false,
+      visible: true,
+      tabHidden: document.hidden,
+      userPaused: false,
+    }
+
+    const load = (i: number) => {
+      const img = slides[i]?.querySelector<HTMLImageElement>('img[data-src]')
+      if (img?.dataset.src) {
+        img.src = img.dataset.src
+        img.removeAttribute('data-src')
+      }
+    }
+
+    const show = (next: number) => {
+      index = clampIndex(next, count)
+      slides.forEach((slide, i) => {
+        const on = i === index
+        slide.classList.toggle('is-active', on)
+        slide.setAttribute('aria-hidden', on ? 'false' : 'true')
+      })
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === index)
+        dot.setAttribute('aria-current', i === index ? 'true' : 'false')
+      })
+      indexesToLoad(index, count).forEach(load)
+    }
+
+    const schedule = () => {
+      window.clearTimeout(timer)
+      if (!shouldAutoplay(state)) return
+      timer = window.setTimeout(() => {
+        show(stepIndex(index, count, 1))
+        schedule()
+      }, AUTOPLAY_MS)
+    }
+
+    const go = (next: number) => {
+      show(next)
+      schedule()
+    }
+
+    root.querySelector('[data-prev]')?.addEventListener('click', () => go(stepIndex(index, count, -1)))
+    root.querySelector('[data-next]')?.addEventListener('click', () => go(stepIndex(index, count, 1)))
+    dots.forEach((dot) => dot.addEventListener('click', () => go(Number(dot.dataset.dot))))
+
+    pauseBtn?.addEventListener('click', () => {
+      state.userPaused = !state.userPaused
+      pauseBtn.setAttribute('aria-label', state.userPaused ? 'Play slideshow' : 'Pause slideshow')
+      pauseIcon?.classList.toggle('ph-pause', !state.userPaused)
+      pauseIcon?.classList.toggle('ph-play', state.userPaused)
+      schedule()
+    })
+
+    root.addEventListener('keydown', (event) => {
+      const dir = keyDirection(event.key)
+      if (dir === null) return
+      event.preventDefault()
+      go(stepIndex(index, count, dir))
+    })
+
+    // Swipe
+    let startX = 0
+    let startY = 0
+    let tracking = false
+    root.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' || (event.target as HTMLElement).closest('button')) return
+      tracking = true
+      startX = event.clientX
+      startY = event.clientY
+    })
+    root.addEventListener('pointerup', (event) => {
+      if (!tracking) return
+      tracking = false
+      const dir = swipeDirection(event.clientX - startX, event.clientY - startY)
+      if (dir) go(stepIndex(index, count, dir))
+    })
+    root.addEventListener('pointercancel', () => {
+      tracking = false
+    })
+
+    // Pause on hover / focus / off screen / hidden tab.
+    root.addEventListener('mouseenter', () => { state.hovered = true; schedule() })
+    root.addEventListener('mouseleave', () => { state.hovered = false; schedule() })
+    root.addEventListener('focusin', () => { state.focused = true; schedule() })
+    root.addEventListener('focusout', (event) => {
+      if (!root.contains(event.relatedTarget as Node | null)) {
+        state.focused = false
+        schedule()
+      }
+    })
+    document.addEventListener('visibilitychange', () => {
+      state.tabHidden = document.hidden
+      schedule()
+    })
+    motion.addEventListener('change', () => {
+      state.reducedMotion = motion.matches
+      schedule()
+    })
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(
+        ([entry]) => {
+          state.visible = entry.isIntersecting
+          schedule()
+        },
+        { threshold: 0.35 },
+      ).observe(root)
+    }
+
+    load(1 % count)
+    schedule()
+  })
+</script>
