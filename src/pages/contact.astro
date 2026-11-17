@@ -616,6 +616,7 @@ const contactJsonLd = [
       const spot = params.get('spot')
       const location = params.get('location')
       const dates = params.get('dates')
+      const message = (params.get('message') || '').slice(0, 500)
       const selectedPackage = Object.values(photographyPackages).find(pkg => pkg.id === params.get('package'))
 
       if (service) {
@@ -635,6 +636,10 @@ const contactJsonLd = [
       } else if (messageInput && spot && !messageInput.value.trim()) {
         const place = location ? `${spot}, ${location}` : spot
         messageInput.value = `I'm interested in a photoshooting at ${place}.`
+      }
+
+      if (messageInput && message.trim() && !messageInput.value.trim()) {
+        messageInput.value = message
       }
     }
 

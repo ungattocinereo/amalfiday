@@ -13,6 +13,13 @@ import {
   nightsBetween,
   addDaysIso,
   cityTaxCents,
+  formatDateLong,
+  formatStayRange,
+  stayLine,
+  priceLines,
+  policyText,
+  quoteMessage,
+  requestUrl,
 } from '../src/scripts/direct-booking-client.mjs'
 
 const open = (d, p, m = 2) => ({ d, b: 1, p, m })
@@ -201,4 +208,123 @@ test('date helpers and city tax', () => {
   assert.equal(addDaysIso('2026-12-31', 1), '2027-01-01')
   assert.equal(nightsBetween('2026-12-20', '2026-12-22'), 2)
   assert.equal(cityTaxCents(2, 2), 1000)
+})
+
+// ---- /book/<id>/ panel helpers (quote-driven) ----
+
+const quote = {
+  unit: 'orange',
+  checkIn: '2026-12-20',
+  checkOut: '2026-12-22',
+  guests: 2,
+  ok: true,
+  nights: 2,
+  perNight: [
+    { date: '2026-12-20', priceCents: 8300 },
+    { date: '2026-12-21', priceCents: 8300 },
+  ],
+  subtotalCents: 16600,
+  discountCents: 1660,
+  totalCents: 14940,
+  cityTaxCents: 1000,
+  freeCancellationUntil: '2026-12-13',
+  chargeDate: '2026-12-11',
+  payNow: false,
+  refundable: true,
+}
+
+test('formatEuroTotal (the brief\'s formatEuro) on three values', () => {
+  assert.equal(formatEuroTotal(14940), '€149.40')
+  assert.equal(formatEuroTotal(1000), '€10.00')
+  assert.equal(formatEuroTotal(250), '€2.50')
+})
+
+test('formatDateLong and formatStayRange carry the year', () => {
+  assert.equal(formatDateLong('2026-12-13'), '13 Dec 2026')
+  assert.equal(formatStayRange('2026-12-20', '2026-12-22'), '20 Dec – 22 Dec 2026')
+  assert.equal(formatStayRange('2026-12-28', '2027-01-03'), '28 Dec 2026 – 3 Jan 2027')
+})
+
+test('stayLine summarises dates, nights and guests', () => {
+  assert.equal(stayLine(quote), '20 Dec – 22 Dec 2026 · 2 nights · 2 guests')
+  assert.equal(stayLine({ ...quote, guests: 1, nights: 1, checkOut: '2026-12-21' }), '20 Dec – 21 Dec 2026 · 1 night · 1 guest')
+})
+
+test('priceLines: one run, discount, total, city tax — all from the quote', () => {
+  assert.deepEqual(priceLines(quote), {
+    runs: [{ label: '€83 × 2 nights', amount: '€166.00' }],
+    discount: { label: 'Direct booking discount −10%', amount: '−€16.60' },
+    total: { label: 'Total', amount: '€149.40' },
+    cityTax: { label: 'City tax, paid on arrival (€2.50 × 2 guests × 2 nights)', amount: '€10.00' },
+  })
+})
+
+test('priceLines groups consecutive equal prices only', () => {
+  const q = {
+    ...quote,
+    guests: 1,
+    nights: 4,
+    perNight: [
+      { date: '2026-12-20', priceCents: 8300 },
+      { date: '2026-12-21', priceCents: 9050 },
+      { date: '2026-12-22', priceCents: 9050 },
+      { date: '2026-12-23', priceCents: 8300 },
+    ],
+    subtotalCents: 34700,
+    discountCents: 3470,
+    totalCents: 31230,
+    cityTaxCents: 1000,
+  }
+  const lines = priceLines(q)
+  assert.deepEqual(lines.runs, [
+    { label: '€83 × 1 night', amount: '€83.00' },
+    { label: '€90.50 × 2 nights', amount: '€181.00' },
+    { label: '€83 × 1 night', amount: '€83.00' },
+  ])
+  assert.equal(lines.cityTax.label, 'City tax, paid on arrival (€2.50 × 1 guest × 4 nights)')
+})
+
+test('priceLines has no discount row when the quote has no discount', () => {
+  assert.equal(priceLines({ ...quote, discountCents: 0, totalCents: 16600 }).discount, null)
+})
+
+test('policyText by payNow / refundable', () => {
+  assert.equal(
+    policyText(quote),
+    'Free cancellation until 13 Dec 2026. You pay nothing today: your card is charged on 11 Dec 2026.',
+  )
+  assert.equal(
+    policyText({ ...quote, payNow: true, refundable: true }),
+    'Free cancellation until 13 Dec 2026. Payment is taken at booking.',
+  )
+  assert.equal(
+    policyText({ ...quote, payNow: true, refundable: false }),
+    'This booking is non-refundable, except where the law provides otherwise.',
+  )
+})
+
+test('quoteMessage for every ok:false reason', () => {
+  const no = (reason, extra = {}) => ({ ok: false, reason, ...extra })
+  assert.equal(quoteMessage(no('min_stay', { minStay: 3 }), 2), 'Minimum stay is 3 nights for these dates.')
+  assert.equal(quoteMessage(no('too_many_guests'), 1), 'This stay is for up to 1 guest.')
+  assert.equal(quoteMessage(no('too_many_guests'), 2), 'This stay is for up to 2 guests.')
+  assert.equal(quoteMessage(no('unavailable'), 2), 'These dates are not available. Try other dates.')
+  assert.equal(quoteMessage(no('closed_arrival'), 2), 'Check-in is not possible on this day.')
+  assert.equal(quoteMessage(no('closed_departure'), 2), 'Check-out is not possible on this day.')
+  assert.equal(quoteMessage(no('past'), 2), 'Please choose valid dates.')
+  assert.equal(quoteMessage(no('invalid_dates'), 2), 'Please choose valid dates.')
+  assert.equal(quoteMessage(quote, 2), null)
+})
+
+test('requestUrl builds a contact link that parses back', () => {
+  const url = requestUrl('Orange room', quote)
+  assert.ok(url.startsWith('/contact/?'))
+  const params = new URLSearchParams(url.slice('/contact/?'.length))
+  assert.deepEqual([...params.keys()], ['service', 'dates', 'message'])
+  assert.equal(params.get('service'), 'Apartment')
+  assert.equal(params.get('dates'), '20 Dec – 22 Dec 2026, Orange room')
+  assert.equal(
+    params.get('message'),
+    'Direct booking request: Orange room, 20 Dec – 22 Dec 2026, 2 nights, 2 guests. Total €149.40 + €10.00 city tax on arrival.',
+  )
 })

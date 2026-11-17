@@ -1,0 +1,580 @@
+---
+import type { Apartment } from '../data/apartments'
+
+export interface Props {
+  apartment: Apartment
+}
+
+// 'request': the button opens the contact form prefilled with the quote.
+// Plan 2 switches this to 'instant' (online payment); add its copy here and its action below.
+const BOOKING_MODE = 'request' as const
+
+const MODES = {
+  request: {
+    label: 'Request to book',
+    helper: 'Instant online payment is coming soon. We confirm requests within a few hours.',
+  },
+} as const
+
+const copy = MODES[BOOKING_MODE]
+const { apartment } = Astro.props
+const maxGuests = apartment.direct?.maxGuests ?? 2
+const { airbnb, booking } = apartment.bookingLinks
+---
+
+<!--
+  Static first paint and no-JS state: [data-fallback] (platform links + contact).
+  The script swaps in [data-live] and returns to the fallback on 503 / network error.
+  Every number in [data-price] comes from GET /api/booking/quote.
+-->
+<section
+  class="bp"
+  aria-labelledby="bp-title"
+  data-booking-panel
+  data-unit={apartment.id}
+  data-name={apartment.name}
+  data-max-guests={maxGuests}
+  data-mode={BOOKING_MODE}
+>
+  <h2 class="bp__title" id="bp-title">Book direct</h2>
+
+  <div class="bp__fallback" data-fallback>
+    <p class="bp__notice">Live prices are unavailable right now.</p>
+    <p class="bp__muted">
+      You can still book {apartment.name} on the platforms below, or write to us.
+    </p>
+    <div class="bp__links">
+      {airbnb && (
+        <a class="bp__line" href={airbnb} target="_blank" rel="noopener noreferrer">Airbnb</a>
+      )}
+      {booking && (
+        <a class="bp__line" href={booking} target="_blank" rel="noopener noreferrer">Booking.com</a>
+      )}
+      <a class="bp__line" href="/contact/">Contact us</a>
+    </div>
+  </div>
+
+  <div class="bp__live" data-live hidden>
+    <form class="bp__form" data-form>
+      <label class="bp__field">
+        <span class="bp__label">Check-in</span>
+        <input type="date" name="from" data-from />
+      </label>
+      <label class="bp__field">
+        <span class="bp__label">Check-out</span>
+        <input type="date" name="to" data-to />
+      </label>
+      <label class="bp__field bp__field--wide">
+        <span class="bp__label">Guests</span>
+        <select name="guests" data-guests>
+          <option value="1">1 guest</option>
+          <option value="2" selected={maxGuests >= 2}>2 guests</option>
+        </select>
+      </label>
+    </form>
+
+    <div class="bp__status" aria-live="polite" data-status></div>
+
+    <div class="bp__price" data-price hidden>
+      <p class="bp__stay" data-stay></p>
+      <div class="bp__rows" data-rows></div>
+      <div class="bp__row bp__row--tax" data-tax></div>
+      <p class="bp__policy" data-policy></p>
+    </div>
+
+    <button class="button bp__cta" type="button" data-action disabled>{copy.label}</button>
+    <p class="bp__helper">{copy.helper}</p>
+  </div>
+</section>
+
+<script>
+  import {
+    parseQuery,
+    queryString,
+    addDaysIso,
+    unitState,
+    formatRange,
+    stayLine,
+    priceLines,
+    policyText,
+    quoteMessage,
+    requestUrl,
+  } from '../scripts/direct-booking-client.mjs'
+
+  type Night = { d: string; b: number; p: number | null; m: number }
+  type Calendar = {
+    today: string
+    horizon: string
+    discountPct: number
+    units: Record<string, { maxGuests: number; nights: Night[] }>
+  }
+  type Quote = {
+    ok: boolean
+    reason?: string
+    minStay?: number
+    checkIn: string
+    checkOut: string
+    guests: number
+    nights: number
+    perNight: Array<{ date: string; priceCents: number }>
+    subtotalCents: number
+    discountCents: number
+    totalCents: number
+    cityTaxCents: number
+    freeCancellationUntil: string
+    chargeDate: string
+    payNow: boolean
+    refundable: boolean
+  }
+  type Params = { from?: string; to?: string; guests?: number }
+
+  const DEBOUNCE_MS = 300
+
+  class Unavailable extends Error {}
+
+  const root = document.querySelector<HTMLElement>('[data-booking-panel]')
+  if (root) init(root)
+
+  function init(root: HTMLElement) {
+    const unitId = root.dataset.unit!
+    const name = root.dataset.name!
+    const maxGuests = Number(root.dataset.maxGuests) || 2
+    const mode = root.dataset.mode as 'request'
+
+    const fallback = root.querySelector<HTMLElement>('[data-fallback]')!
+    const live = root.querySelector<HTMLElement>('[data-live]')!
+    const form = root.querySelector<HTMLFormElement>('[data-form]')!
+    const fromInput = root.querySelector<HTMLInputElement>('[data-from]')!
+    const toInput = root.querySelector<HTMLInputElement>('[data-to]')!
+    const guestsSelect = root.querySelector<HTMLSelectElement>('[data-guests]')!
+    const status = root.querySelector<HTMLElement>('[data-status]')!
+    const price = root.querySelector<HTMLElement>('[data-price]')!
+    const stay = root.querySelector<HTMLElement>('[data-stay]')!
+    const rows = root.querySelector<HTMLElement>('[data-rows]')!
+    const tax = root.querySelector<HTMLElement>('[data-tax]')!
+    const policy = root.querySelector<HTMLElement>('[data-policy]')!
+    const actionButton = root.querySelector<HTMLButtonElement>('[data-action]')!
+    const backLinks = document.querySelectorAll<HTMLAnchorElement>('[data-back-link]')
+
+    // One entry per BOOKING_MODE: what the button does with a bookable quote.
+    const ACTIONS: Record<'request', (quote: Quote) => void> = {
+      request: (quote) => location.assign(requestUrl(name, quote)),
+    }
+
+    let calendar: Calendar | null = null
+    let current: Quote | null = null
+    let latest = 0
+    let timer: number | undefined
+    let touched = false
+    let failed = false
+
+    const el = (tag: string, text?: string, className?: string) => {
+      const node = document.createElement(tag)
+      if (text !== undefined) node.textContent = text
+      if (className) node.className = className
+      return node
+    }
+
+    const localToday = () => {
+      const now = new Date()
+      const pad = (n: number) => String(n).padStart(2, '0')
+      return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
+    }
+
+    const readParams = (): Params => ({
+      from: fromInput.value || undefined,
+      to: toInput.value || undefined,
+      guests: Number(guestsSelect.value) === 1 ? 1 : 2,
+    })
+
+    function fillInputs(p: Params) {
+      fromInput.value = p.from ?? ''
+      toInput.value = p.to ?? ''
+      guestsSelect.value = String(p.guests ?? Math.min(2, maxGuests))
+      if (p.from) toInput.min = addDaysIso(p.from, 1)
+    }
+
+    function setBounds(today: string, horizon?: string) {
+      fromInput.min = today
+      toInput.min = fromInput.value ? addDaysIso(fromInput.value, 1) : addDaysIso(today, 1)
+      if (horizon) {
+        fromInput.max = horizon
+        toInput.max = horizon
+      }
+    }
+
+    function syncUrl(p: Params) {
+      const hasDates = Boolean(p.from && p.to)
+      const qs = queryString(hasDates ? p : { guests: p.guests })
+      history.replaceState(history.state, '', `${location.pathname}${qs}`)
+      backLinks.forEach((a) => (a.href = `/apartments/${qs}#direct`))
+    }
+
+    function setStatus(text: string, tone: 'hint' | 'error' = 'hint') {
+      if (!text) status.replaceChildren()
+      else status.replaceChildren(el('p', text, `bp__hint${tone === 'error' ? ' bp__hint--error' : ''}`))
+    }
+
+    function setBookable(quote: Quote | null) {
+      current = quote
+      actionButton.disabled = !quote
+    }
+
+    function showUnavailable() {
+      failed = true
+      window.clearTimeout(timer)
+      latest += 1
+      setBookable(null)
+      live.hidden = true
+      fallback.hidden = false
+    }
+
+    function row(label: string, amount: string, className = 'bp__row') {
+      const node = el('div', undefined, className)
+      node.append(el('span', label), el('span', amount, 'bp__amount'))
+      return node
+    }
+
+    function renderQuote(quote: Quote) {
+      const lines = priceLines(quote)
+      stay.textContent = stayLine(quote)
+      rows.replaceChildren(
+        ...lines.runs.map((r: { label: string; amount: string }) => row(r.label, r.amount)),
+        ...(lines.discount ? [row(lines.discount.label, lines.discount.amount, 'bp__row bp__row--discount')] : []),
+        row(lines.total.label, lines.total.amount, 'bp__row bp__row--total'),
+      )
+      tax.replaceChildren(el('span', lines.cityTax.label), el('span', lines.cityTax.amount, 'bp__amount'))
+      policy.textContent = policyText(quote)
+      price.hidden = false
+      setStatus('')
+      setBookable(quote)
+    }
+
+    // Before a quote is asked for: a hint, using the calendar when it is loaded.
+    function hintWithoutDates(p: Params) {
+      if (p.from && !p.to) return 'Choose a check-out date to see the price.'
+      if (!p.from && p.to) return 'Choose a check-in date to see the price.'
+      const unit = calendar?.units[unitId]
+      if (unit) {
+        const s = unitState(unit, { guests: p.guests ?? 2, discountPct: calendar!.discountPct })
+        if (!s.nextWindow) return 'Opening dates are coming soon.'
+        return `Choose your dates to see the price. Open ${formatRange(s.nextWindow.from, s.nextWindow.to)}.`
+      }
+      return 'Choose your dates to see the price.'
+    }
+
+    async function fetchQuote(p: Params): Promise<Quote> {
+      const qs = new URLSearchParams({ unit: unitId, from: p.from!, to: p.to!, guests: String(p.guests) })
+      const res = await fetch(`/api/booking/quote?${qs}`, { headers: { accept: 'application/json' } })
+      if (res.status === 400 || res.status === 404) {
+        return { ok: false, reason: 'invalid_dates' } as Quote
+      }
+      if (!res.ok) throw new Unavailable(`quote ${res.status}`)
+      const json = await res.json()
+      if (!json || typeof json.ok !== 'boolean') throw new Unavailable('quote shape')
+      if (json.ok && (!Array.isArray(json.perNight) || typeof json.totalCents !== 'number')) {
+        throw new Unavailable('quote shape')
+      }
+      return json as Quote
+    }
+
+    async function update() {
+      if (failed) return
+      const p = readParams()
+      syncUrl(p)
+      const id = ++latest
+      if (!(p.from && p.to && p.from < p.to)) {
+        price.hidden = true
+        setBookable(null)
+        setStatus(hintWithoutDates(p))
+        return
+      }
+      price.hidden = true
+      setBookable(null)
+      setStatus('Checking price…')
+      try {
+        const quote = await fetchQuote(p)
+        if (id !== latest) return
+        if (quote.ok) renderQuote(quote)
+        else setStatus(quoteMessage(quote, maxGuests) ?? 'Please choose valid dates.', 'error')
+      } catch {
+        if (id !== latest) return
+        showUnavailable()
+      }
+    }
+
+    function schedule() {
+      touched = true
+      window.clearTimeout(timer)
+      latest += 1
+      // Drop the old price at once so it is never on screen next to new inputs.
+      price.hidden = true
+      setBookable(null)
+      const p = readParams()
+      if (p.from && p.to && p.from < p.to) setStatus('Checking price…')
+      timer = window.setTimeout(update, DEBOUNCE_MS)
+    }
+
+    fromInput.addEventListener('change', () => {
+      if (fromInput.value) {
+        toInput.min = addDaysIso(fromInput.value, 1)
+        if (toInput.value && toInput.value <= fromInput.value) toInput.value = ''
+      }
+      schedule()
+    })
+    toInput.addEventListener('change', schedule)
+    guestsSelect.addEventListener('change', schedule)
+    form.addEventListener('submit', (event) => event.preventDefault())
+
+    actionButton.addEventListener('click', () => {
+      if (current && !actionButton.disabled) ACTIONS[mode](current)
+    })
+
+    fallback.hidden = true
+    live.hidden = false
+    setBounds(localToday())
+    fillInputs(parseQuery(location.search))
+    update()
+
+    fetch('/api/booking/calendar', { headers: { accept: 'application/json' } })
+      .then((res) => {
+        if (!res.ok) throw new Unavailable(`calendar ${res.status}`)
+        return res.json()
+      })
+      .then((json: Calendar) => {
+        if (!json || typeof json.units !== 'object' || typeof json.today !== 'string') {
+          throw new Unavailable('calendar shape')
+        }
+        if (failed) return
+        calendar = json
+        setBounds(json.today, json.horizon)
+        if (!touched) {
+          const bounded = parseQuery(location.search, { today: json.today, horizon: json.horizon })
+          const before = readParams()
+          fillInputs(bounded)
+          const after = readParams()
+          const changed = before.from !== after.from || before.to !== after.to
+          // Re-quote only if bounds dropped a date; otherwise refresh the hint when no dates are set.
+          if (changed || !(after.from && after.to)) update()
+        }
+      })
+      .catch(() => showUnavailable())
+  }
+</script>
+
+<style>
+  .bp {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+    padding: 1.25rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .bp__title {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .bp [hidden] {
+    display: none;
+  }
+
+  .bp__fallback,
+  .bp__live {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    min-width: 0;
+  }
+
+  .bp__notice {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .bp__muted,
+  .bp__helper {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .bp__helper {
+    font-size: 0.8125rem;
+  }
+
+  .bp__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bp__line {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    font: 500 0.875rem var(--font-body);
+    text-decoration: none;
+  }
+
+  .bp__line:hover {
+    border-color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .bp__form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  .bp__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+    padding: 0.65rem 0.85rem;
+    cursor: pointer;
+  }
+
+  .bp__field:first-child {
+    border-right: 1px solid var(--color-border);
+  }
+
+  .bp__field--wide {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .bp__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .bp__field input,
+  .bp__field select {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    font: 500 1rem var(--font-body);
+    cursor: pointer;
+  }
+
+  .bp__field input:focus-visible,
+  .bp__field select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .bp__field select option {
+    background: var(--color-card);
+    color: var(--color-text);
+  }
+
+  :global([data-theme='night']) .bp__field input,
+  :global([data-theme='night']) .bp__field select {
+    color-scheme: dark;
+  }
+
+  .bp__status:empty {
+    display: none;
+  }
+
+  .bp__status :global(.bp__hint) {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .bp__status :global(.bp__hint--error) {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .bp__price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bp__stay {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  .bp__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .bp__rows :global(.bp__row),
+  .bp__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .bp :global(.bp__amount) {
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .bp__rows :global(.bp__row--discount) {
+    color: var(--color-accent);
+  }
+
+  .bp__rows :global(.bp__row--total) {
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  .bp__row--tax {
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+  }
+
+  .bp__policy {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .bp__cta {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .bp__cta:disabled {
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+</style>

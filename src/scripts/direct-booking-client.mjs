@@ -1,5 +1,5 @@
-// Pure helpers for the "Book direct" block on /apartments.
-// No DOM, no fetch: imported by the page script and by `node --test`.
+// Pure helpers for the "Book direct" block on /apartments and the /book/<id>/ panel.
+// No DOM, no fetch: imported by the page scripts and by `node --test`.
 // Data shape: GET /api/booking/calendar → units[id] = { maxGuests, nights: [{ d, b, p, m }] },
 // `p` is the pre-discount nightly price in integer cents.
 
@@ -165,4 +165,102 @@ export function formatRange(from, to) {
   const b = dayMonth(to)
   if (from.slice(0, 7) === to.slice(0, 7)) return `${a.day}–${b.day} ${b.month}`
   return `${formatDate(from)} – ${formatDate(to)}`
+}
+
+// ---- /book/<id>/ panel: every number below is read from the server quote ----
+// Quote shape: GET /api/booking/quote → { checkIn, checkOut, guests, ok, nights,
+// perNight: [{ date, priceCents }], subtotalCents, discountCents, totalCents, cityTaxCents,
+// freeCancellationUntil, chargeDate, payNow, refundable } or { ok: false, reason, minStay? }.
+
+// Contact form `service` option for stays (src/pages/contact.astro, data-value).
+const CONTACT_SERVICE = 'Apartment'
+
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`
+
+// "13 Dec 2026"
+export function formatDateLong(iso) {
+  return `${formatDate(iso)} ${iso.slice(0, 4)}`
+}
+
+// "20 Dec – 22 Dec 2026", or "28 Dec 2026 – 3 Jan 2027" across years.
+export function formatStayRange(from, to) {
+  if (from.slice(0, 4) === to.slice(0, 4)) return `${formatDate(from)} – ${formatDateLong(to)}`
+  return `${formatDateLong(from)} – ${formatDateLong(to)}`
+}
+
+// "20 Dec – 22 Dec 2026 · 2 nights · 2 guests"
+export function stayLine(quote) {
+  return [
+    formatStayRange(quote.checkIn, quote.checkOut),
+    plural(quote.nights, 'night'),
+    plural(quote.guests, 'guest'),
+  ].join(' · ')
+}
+
+// Rows of the price block: runs of consecutive nights at one price, discount, total, city tax.
+export function priceLines(quote) {
+  const runs = []
+  for (const { priceCents } of quote.perNight) {
+    const last = runs[runs.length - 1]
+    if (last && last.priceCents === priceCents) last.count += 1
+    else runs.push({ priceCents, count: 1 })
+  }
+  const pct = quote.subtotalCents > 0 ? Math.round((quote.discountCents / quote.subtotalCents) * 100) : 0
+  const taxNights = quote.guests * quote.nights
+  const taxRate = taxNights > 0 ? Math.round(quote.cityTaxCents / taxNights) : 0
+  return {
+    runs: runs.map(({ priceCents, count }) => ({
+      label: `${formatEuro(priceCents)} × ${plural(count, 'night')}`,
+      amount: formatEuroTotal(priceCents * count),
+    })),
+    discount:
+      quote.discountCents > 0
+        ? { label: `Direct booking discount −${pct}%`, amount: `−${formatEuroTotal(quote.discountCents)}` }
+        : null,
+    total: { label: 'Total', amount: formatEuroTotal(quote.totalCents) },
+    cityTax: {
+      label: `City tax, paid on arrival (${formatEuroTotal(taxRate)} × ${plural(quote.guests, 'guest')} × ${plural(quote.nights, 'night')})`,
+      amount: formatEuroTotal(quote.cityTaxCents),
+    },
+  }
+}
+
+export function policyText(quote) {
+  if (!quote.refundable) return 'This booking is non-refundable, except where the law provides otherwise.'
+  const until = `Free cancellation until ${formatDateLong(quote.freeCancellationUntil)}.`
+  if (quote.payNow) return `${until} Payment is taken at booking.`
+  return `${until} You pay nothing today: your card is charged on ${formatDateLong(quote.chargeDate)}.`
+}
+
+// Guest-facing text for an ok:false quote; null when the quote is bookable.
+export function quoteMessage(quote, maxGuests) {
+  if (quote.ok) return null
+  switch (quote.reason) {
+    case 'min_stay':
+      return `Minimum stay is ${quote.minStay} nights for these dates.`
+    case 'too_many_guests':
+      return `This stay is for up to ${plural(maxGuests, 'guest')}.`
+    case 'unavailable':
+      return 'These dates are not available. Try other dates.'
+    case 'closed_arrival':
+      return 'Check-in is not possible on this day.'
+    case 'closed_departure':
+      return 'Check-out is not possible on this day.'
+    default:
+      return 'Please choose valid dates.'
+  }
+}
+
+// "Request to book" → the contact form, prefilled. Values are plain text, encoded by URLSearchParams.
+export function requestUrl(apartmentName, quote) {
+  const range = formatStayRange(quote.checkIn, quote.checkOut)
+  const params = new URLSearchParams()
+  params.set('service', CONTACT_SERVICE)
+  params.set('dates', `${range}, ${apartmentName}`)
+  params.set(
+    'message',
+    `Direct booking request: ${apartmentName}, ${range}, ${plural(quote.nights, 'night')}, ${plural(quote.guests, 'guest')}. ` +
+      `Total ${formatEuroTotal(quote.totalCents)} + ${formatEuroTotal(quote.cityTaxCents)} city tax on arrival.`,
+  )
+  return `/contact/?${params.toString()}`
 }

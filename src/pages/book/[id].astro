@@ -1,0 +1,229 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import BookingPanel from '../../components/BookingPanel.astro'
+import { DIRECT_APARTMENTS, type Apartment } from '../../data/apartments'
+import { site } from '../../data/site'
+
+// Only units in the direct registry get a page; Central and Carina are never generated.
+export function getStaticPaths() {
+  return DIRECT_APARTMENTS.map((apartment) => ({ params: { id: apartment.id }, props: { apartment } }))
+}
+
+const { apartment } = Astro.props as { apartment: Apartment }
+const maxGuests = apartment.direct?.maxGuests ?? 2
+const guestsText = maxGuests === 1 ? '1 guest' : `up to ${maxGuests} guests`
+
+const pageTitle = `Book ${apartment.name} direct | Amalfi.Day`
+const pageDescription = `Book ${apartment.name} in Atrani direct with the host: live prices, a direct booking discount and clear cancellation terms, for ${guestsText}.`
+const shareImage = apartment.gallery[0]
+const pageUrl = `${site.url}/book/${apartment.id}/`
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Apartment',
+  '@id': `${site.url}/apartments/#${apartment.id}`,
+  name: apartment.name,
+  description: apartment.description,
+  image: apartment.gallery.map((g) => new URL(g, site.url).toString()),
+  containedInPlace: { '@id': `${site.url}/apartments/#lodging` },
+  ...(apartment.cin ? { identifier: apartment.cin } : {}),
+  potentialAction: { '@type': 'ReserveAction', target: pageUrl },
+}
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} jsonLd={schema}>
+  <section class="section book">
+    <div class="container">
+      <a class="book__back" href="/apartments/#direct" data-back-link>← All apartments</a>
+
+      <div class="book__grid">
+        <div class="book__main">
+          <h1 class="book__title">{apartment.name}</h1>
+          <p class="book__meta">Atrani, Amalfi Coast · {guestsText}</p>
+
+          <div class="book__media" data-book-gallery>
+            {apartment.gallery.map((src, idx) => (
+              <img
+                class:list={['book__image', idx === 0 && 'is-active']}
+                src={src}
+                alt={`${apartment.name} in Atrani — photo ${idx + 1}`}
+                width="1200"
+                height="900"
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                data-gallery-image
+              />
+            ))}
+            {apartment.gallery.length > 1 && (
+              <>
+                <button class="book__ctrl book__ctrl--prev" type="button" data-gallery-prev aria-label="Previous photo">
+                  <i class="ph ph-caret-left" aria-hidden="true"></i>
+                </button>
+                <button class="book__ctrl book__ctrl--next" type="button" data-gallery-next aria-label="Next photo">
+                  <i class="ph ph-caret-right" aria-hidden="true"></i>
+                </button>
+              </>
+            )}
+          </div>
+
+          <p class="book__desc">{apartment.description}</p>
+          {apartment.cin && <p class="book__cin">CIN: {apartment.cin}</p>}
+        </div>
+
+        <aside class="book__side">
+          <BookingPanel apartment={apartment} />
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Same cycle behaviour as the StayCard gallery on /apartments: buttons, tap on photo, swipe.
+  document.querySelectorAll<HTMLElement>('[data-book-gallery]').forEach((gallery) => {
+    const images = Array.from(gallery.querySelectorAll<HTMLElement>('[data-gallery-image]'))
+    if (images.length <= 1) return
+    let index = 0
+    const show = (next: number) => {
+      index = (next + images.length) % images.length
+      images.forEach((img, i) => img.classList.toggle('is-active', i === index))
+    }
+    gallery.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement
+      if (target.closest('[data-gallery-prev]')) show(index - 1)
+      else if (target.closest('[data-gallery-next]') || target.closest('[data-gallery-image]')) show(index + 1)
+    })
+    let startX = 0
+    gallery.addEventListener('touchstart', (event) => {
+      startX = event.touches[0]?.clientX ?? 0
+    })
+    gallery.addEventListener('touchend', (event) => {
+      const diff = (event.changedTouches[0]?.clientX ?? 0) - startX
+      if (Math.abs(diff) < 35) return
+      show(diff < 0 ? index + 1 : index - 1)
+    })
+  })
+</script>
+
+<style>
+  .book {
+    padding-top: calc(var(--header-space) + 1.5rem);
+  }
+
+  .book__back {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+
+  .book__back:hover {
+    color: var(--color-accent);
+  }
+
+  .book__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .book__main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .book__title {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .book__meta {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .book__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .book__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .book__image.is-active {
+    opacity: 1;
+  }
+
+  .book__ctrl {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    transform: translateY(-50%);
+    border: none;
+    border-radius: 50%;
+    background: var(--color-card);
+    color: var(--color-text);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+  }
+
+  .book__ctrl--prev {
+    left: 10px;
+  }
+
+  .book__ctrl--next {
+    right: 10px;
+  }
+
+  .book__desc {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .book__cin {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  .book__side {
+    position: sticky;
+    top: calc(var(--header-space) + 1rem);
+    min-width: 0;
+  }
+
+  @media (max-width: 900px) {
+    .book__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    .book__side {
+      position: static;
+    }
+  }
+</style>
