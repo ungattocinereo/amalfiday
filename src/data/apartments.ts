@@ -1,3 +1,5 @@
+import { DIRECT_UNIT_IDS, getDirectUnit } from './direct-units.mjs'
+
 export type ApartmentIcal = {
   airbnb?: string[]
   booking?: string[]
@@ -18,6 +20,7 @@ export type Apartment = {
   galleryStyle?: 'scroll' | 'cycle'
   bookingLinks: ApartmentBookingLinks
   ical: ApartmentIcal
+  direct?: { maxGuests: number }
 }
 
 export type ApartmentSection = {
@@ -252,6 +255,21 @@ export const APARTMENT_SECTIONS: ApartmentSection[] = [
 ]
 
 export const ALL_APARTMENTS: Apartment[] = APARTMENT_SECTIONS.flatMap((s) => s.items)
+
+for (const apartment of ALL_APARTMENTS) {
+  const unit = getDirectUnit(apartment.id)
+  if (unit) apartment.direct = { maxGuests: unit.maxGuests }
+}
+
+const apartmentById = new Map(ALL_APARTMENTS.map((a) => [a.id, a]))
+
+// Units bookable directly, in registry order.
+export const DIRECT_APARTMENTS: Apartment[] = DIRECT_UNIT_IDS.flatMap(
+  (id) => apartmentById.get(id) ?? []
+)
+
+// Everything else, booked through the platforms (Airbnb / Booking.com).
+export const PLATFORM_APARTMENTS: Apartment[] = ALL_APARTMENTS.filter((a) => !a.direct)
 
 export const ICAL_REGISTRY: Record<string, string[]> = Object.fromEntries(
   ALL_APARTMENTS.map((a) => [

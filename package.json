@@ -13,6 +13,7 @@
     "contact:api": "node scripts/contact-server.mjs",
     "update-calendars": "node scripts/update-calendars.mjs",
     "preview": "astro preview",
+    "test": "node --test tests/",
     "optimize-images": "node scripts/optimize-images.mjs",
     "icons:sync": "node scripts/sync-phosphor-icons.mjs",
     "photoshoots:images": "node scripts/build-photoshoot-images.mjs",
