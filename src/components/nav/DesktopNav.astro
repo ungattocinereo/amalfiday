@@ -62,6 +62,9 @@ const blank = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAA
             class="nm-trigger"
             href={item.href}
             data-panel={item.panel?.id}
+            data-link-trigger={item.linkTrigger ? '' : undefined}
+            aria-haspopup={item.linkTrigger && item.panel ? 'true' : undefined}
+            aria-controls={item.linkTrigger && item.panel ? item.panel.id : undefined}
             data-current={isCurrentSection(item) ? '' : undefined}
             aria-current={pageAttr(item.href)}
           >

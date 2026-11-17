@@ -48,6 +48,7 @@ const storyCards = cards.slice(0, 6)
       <h2 id="home-photos-title">Photo <span class="accent-italic">sessions</span></h2>
     </div>
     <p>Just you. Or the two of you.<br />A little time on the coast, a story to keep.</p>
+    <a class="home-photos__all home-photos__all--intro" href="/photoshootings/"><span>See all photoshoots</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
   </div>
 
   <div class="photo-showcase" data-photo-showcase role="region" aria-roledescription="carousel" aria-label="Stories from the Amalfi Coast" tabindex="0">
@@ -65,6 +66,10 @@ const storyCards = cards.slice(0, 6)
         </div>
       </div>
     ))}
+    <a class="home-photos__all home-photos__all--slider" href="/photoshootings/">
+      <span class="home-photos__all-text"><small>Every story, every place</small><strong>See all photoshoots</strong></span>
+      <span class="home-photos__all-go" aria-hidden="true"><i class="ph ph-arrow-right"></i></span>
+    </a>
     <div class="photo-showcase__controls" data-controls>
       <div class="photo-showcase__picks" role="group" aria-label="Choose a story">
         {slides.map((shoot, index) => <button type="button" data-pick={index} aria-label={`Show ${shoot.name}’s story`} aria-pressed={index === 0 ? 'true' : 'false'}><span>{String(index + 1).padStart(2, '0')}</span></button>)}
@@ -105,6 +110,14 @@ const storyCards = cards.slice(0, 6)
   .home-photos__intro h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
   .home-photos__intro p { margin: 0 0 .25rem; color: var(--color-text-muted); line-height: 1.7; }
   .photo-showcase { display: none; }
+  /* "See all photoshoots": an orange pill under the intro on small screens,
+     a large white pill on the slider photo from 1100px. */
+  .home-photos__all { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; }
+  .home-photos__all:hover { text-decoration: none; }
+  .home-photos__all--intro { align-self: start; padding: .85rem 1.3rem; border-radius: 999px; background: var(--color-accent); color: #fff; font-weight: 600; box-shadow: 0 10px 26px #ff590033; }
+  .home-photos__all--intro:hover { color: #fff; background: color-mix(in srgb, var(--color-accent) 90%, #000); }
+  .home-photos__all--intro i { color: #fff; }
+  .home-photos__all--slider { display: none; }
   .home-photos--stories { padding-top: 0; }
   .home-photos__stories { padding-top: 0; }
   .home-photos__stories-heading h2 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); }
@@ -146,6 +159,15 @@ const storyCards = cards.slice(0, 6)
     .photo-showcase__caption a { pointer-events: auto; display: inline-flex; align-items: center; gap: .8rem; color: #fff; border-bottom: 1px solid #ffffff80; padding-bottom: .6rem; }
     .photo-showcase__controls { position: absolute; left: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); right: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); bottom: 2rem; display: none; align-items: center; gap: .7rem; }
     .photo-showcase.is-enhanced .photo-showcase__controls { display: flex; }
+    .home-photos__all--intro { display: none; }
+    .home-photos__all--slider { position: absolute; z-index: 3; bottom: 6.5rem; right: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); display: inline-flex; gap: 1.1rem; padding: .9rem .95rem .9rem 1.5rem; border-radius: 999px; background: #fff; color: #14110f; box-shadow: 0 18px 40px #0000004d; transition: transform .25s ease, box-shadow .25s ease; }
+    .home-photos__all--slider:hover { color: #14110f; transform: translateY(-2px); box-shadow: 0 22px 46px #00000059; }
+    .home-photos__all-text { display: grid; gap: .1rem; line-height: 1.2; }
+    .home-photos__all-text small { font-family: var(--font-mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: #6b6b6b; }
+    .home-photos__all-text strong { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: #14110f; }
+    .home-photos__all-go { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent); color: #fff; font-size: 1.2rem; transition: transform .25s ease; }
+    .home-photos__all-go i { color: #fff; }
+    .home-photos__all--slider:hover .home-photos__all-go { transform: translateX(3px); }
     .photo-showcase__picks { display: flex; gap: .8rem; margin-right: auto; }
     .photo-showcase button { cursor: pointer; color: #fff; font: inherit; }
     .photo-showcase__picks button { width: 64px; height: 44px; background: transparent; border: 0; border-bottom: 2px solid #ffffff50; text-align: left; font-family: var(--font-mono); font-size: .7rem; opacity: .7; }
@@ -159,6 +181,7 @@ const storyCards = cards.slice(0, 6)
     .photo-showcase__caption { max-width: none; padding-inline: 8vw; }
     .photo-showcase__caption h3 { font-size: clamp(2.3rem, 2.7vw, 3.8rem); }
     .photo-showcase__controls { left: 8vw; right: 8vw; }
+    .home-photos__all--slider { right: 8vw; }
   }
   @media (max-width: 1099px) {
   }

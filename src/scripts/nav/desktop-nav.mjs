@@ -7,9 +7,13 @@ const CLOSE_DELAY = 160
 const PIN_WINDOW = 500
 const LEAVE_MS = 240
 
-/** Without JS the triggers are links to the hub pages; with JS they become disclosure buttons. */
+/**
+ * Without JS the triggers are links to the hub pages. With JS, triggers without
+ * data-link-trigger become disclosure buttons; link triggers stay links (hover or a
+ * first tap opens the panel, a click goes to the section).
+ */
 function upgradeTriggers(nav) {
-  nav.querySelectorAll('a.nm-trigger[data-panel]').forEach((link) => {
+  nav.querySelectorAll('a.nm-trigger[data-panel]:not([data-link-trigger])').forEach((link) => {
     const button = document.createElement('button')
     for (const { name, value } of link.attributes) {
       if (name !== 'href' && name !== 'aria-current') button.setAttribute(name, value)
@@ -47,6 +51,7 @@ export function initDesktopNav(nav) {
   let closeTimer
   let openedAt = 0
   let pinned = false
+  let lastPointer = ''
 
   // Menu photos load on the first sign of interest, not with the page.
   let imagesLoaded = false
@@ -148,7 +153,21 @@ export function initDesktopNav(nav) {
     })
     t.addEventListener('focus', () => moveHighlight(t))
     if (!t.dataset.panel) return
-    t.addEventListener('click', () => {
+    if (t.matches('a[data-link-trigger]')) {
+      t.setAttribute('aria-expanded', 'false')
+      // Mouse and keyboard follow the link. On touch the first tap opens the panel,
+      // a second tap on the same trigger goes to the section.
+      t.addEventListener('pointerdown', (event) => { lastPointer = event.pointerType })
+      t.addEventListener('click', (event) => {
+        const touch = lastPointer === 'touch' || lastPointer === 'pen'
+        lastPointer = ''
+        if (!touch || active === t.dataset.panel) return
+        event.preventDefault()
+        open(t)
+        pinned = true
+        moveHighlight(t)
+      })
+    } else t.addEventListener('click', () => {
       if (active === t.dataset.panel) {
         // A click soon after the hover that opened the panel pins it open.
         if (performance.now() - openedAt < PIN_WINDOW) { pinned = true; return }

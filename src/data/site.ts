@@ -118,6 +118,8 @@ export type NavigationItem = {
   /** Orange pill next to the label (white text). */
   badge?: string
   panel?: NavPanel
+  /** The trigger stays a link to `href` (hover/tap opens the panel, click goes to the section). */
+  linkTrigger?: boolean
 }
 
 // Menu photos generated from the source photos by `npm run nav:images` (public/nav/).
@@ -159,6 +161,7 @@ export const navigation: NavigationItem[] = [
   {
     label: 'Photoshoots',
     href: '/photoshootings/',
+    linkTrigger: true,
     icon: 'ph-camera',
     panel: {
       id: 'nav-photo',
@@ -201,6 +204,7 @@ export const navigation: NavigationItem[] = [
   {
     label: 'Apartments',
     href: '/apartments/',
+    linkTrigger: true,
     icon: 'ph-house',
     badge: '−10%',
     panel: {
@@ -231,6 +235,7 @@ export const navigation: NavigationItem[] = [
   {
     label: 'Tours',
     href: '/experience/',
+    linkTrigger: true,
     icon: 'ph-compass',
     panel: {
       id: 'nav-tours',
