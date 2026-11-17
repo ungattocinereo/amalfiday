@@ -85,7 +85,7 @@ const blank = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAA
             if (block.kind === 'featured') return (
               <a class:list={['feat', { 'feat--tall': block.tall }]} href={block.href} style={`--i:${start}`} data-i aria-current={pageAttr(block.href)}>
                 <img src={blank} data-src={block.image} alt="" decoding="async" />
-                {block.sticker && <span class="sticker">{block.sticker.label}<br /><b>{block.sticker.value}</b></span>}
+                {block.sticker && <span class="sticker"><span>{block.sticker.label}</span><b>{block.sticker.value}</b></span>}
                 <span class="feat__body">
                   <span class="eyebrow">{block.eyebrow}</span>
                   <span class="feat__title">{block.title} {block.titleAccent && <em>{block.titleAccent}</em>}</span>
@@ -257,8 +257,9 @@ const blank = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAA
   .feat__title em { color: var(--accent); }
   .feat__cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 13px; font-weight: 500; }
   .feat:hover .feat__cta > span { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 5px; }
-  .sticker { position: absolute; z-index: 1; top: 14px; right: 14px; display: grid; place-items: center; width: 74px; height: 74px; border-radius: 50%; background: var(--accent); color: #fff; text-align: center; font: 500 10px/1.15 var(--font-body); transform: rotate(-10deg); box-shadow: 0 6px 18px rgba(0,0,0,.25); }
-  .sticker b { font: 700 20px/1 var(--font-body); }
+  /* Label and value as one tight block in the middle of the circle. */
+  .sticker { position: absolute; z-index: 1; top: 14px; right: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; width: 74px; height: 74px; border-radius: 50%; background: var(--accent); color: #fff; text-align: center; font: 600 9.5px/1.1 var(--font-body); letter-spacing: .01em; transform: rotate(-10deg); box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+  .sticker b { font: 700 20px/1 var(--font-body); letter-spacing: -.02em; }
 
   .row { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; }
   .row:hover, .row[aria-current='page'] { background: var(--pop-hover); }
