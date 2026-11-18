@@ -42,7 +42,7 @@ const apartmentItems = ALL_APARTMENTS.map((a, i) => {
     name: a.name,
     description: a.description,
     image: a.gallery.map((g) => new URL(g, site.url).toString()),
-    address: ravelloIds.has(a.id) ? ravelloAddress : sharedAddress,
+    address: ravelloIds.has(a.id) ? ravelloAddress : a.street ? { ...sharedAddress, streetAddress: a.street } : sharedAddress,
     containedInPlace: { '@id': lodgingId },
     url: `${site.url}/apartments/${a.id}/`,
     ...(a.cin ? { identifier: a.cin } : {}),
@@ -70,7 +70,7 @@ const faqs = [
   },
   {
     q: 'Where is CristallPont Amalfi Day and how do I get there from Amalfi?',
-    a: `The Atrani address is ${business.street}, ${business.postalCode} ${business.locality} (${business.region}), ${business.countryName}. From the Amalfi ferry terminal, follow the waterfront road: the walk to Atrani takes about 10 minutes. Two apartments are in Ravello instead.`,
+    a: `The Atrani address is ${business.street}, ${business.postalCode} ${business.locality} (${business.region}), ${business.countryName}. From the Amalfi ferry terminal, follow the waterfront road: the walk to Atrani takes about 10 minutes. Awesome apartments is at Via San Sebastiano, 21, also in Atrani. Two apartments are in Ravello instead.`,
     link: { href: '/directions/', label: 'Directions to Atrani' },
   },
   {

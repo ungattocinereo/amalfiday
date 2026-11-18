@@ -1,0 +1,529 @@
+/* Date picker (src/scripts/date-picker.ts) on Cally web components, styled through ::part(). */
+
+/* ---- Trigger: the visible field that replaces the native date input */
+.dp-trigger {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.dp-trigger.is-empty {
+  color: var(--color-text-muted);
+}
+
+.dp-trigger[aria-expanded='true'] {
+  color: var(--color-accent);
+}
+
+.dp-trigger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+html.dp-lock {
+  overflow: hidden;
+}
+
+/* ---- Popover shell */
+.dp {
+  --dp-accent: var(--color-accent);
+  --dp-tint: color-mix(in srgb, var(--color-accent) 13%, transparent);
+  --dp-cell: 2.875rem;
+  --dp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: fixed;
+  inset: auto;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  overflow: visible;
+  font-family: var(--font-body);
+}
+
+.dp:not(.is-shown) {
+  display: none;
+}
+
+.dp::backdrop {
+  background: transparent;
+}
+
+.dp__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  padding: 1.25rem 1.5rem 1.1rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lift), 0 2px 6px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top center;
+  transition: opacity 0.2s ease, transform 0.28s var(--dp-ease);
+}
+
+.dp[data-side='above'] .dp__panel {
+  transform: translateY(8px) scale(0.98);
+  transform-origin: bottom center;
+}
+
+.dp.is-open .dp__panel {
+  opacity: 1;
+  transform: none;
+}
+
+.dp__grab {
+  display: none;
+}
+
+/* ---- Header: chosen dates + close */
+.dp__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dp__summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.dp__summary > .ph {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.dp__slot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 8.5rem;
+  padding: 0.5rem 0.9rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.dp__slot:hover {
+  border-color: color-mix(in srgb, var(--color-text) 30%, transparent);
+}
+
+.dp__slot.is-active {
+  border-color: var(--dp-accent);
+  box-shadow: 0 0 0 4px var(--dp-tint);
+}
+
+.dp__slot-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.dp__slot-value {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dp__slot.is-empty .dp__slot-value {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.dp__close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s var(--dp-ease), background 0.2s ease;
+}
+
+.dp__close:hover {
+  transform: rotate(90deg);
+}
+
+/* ---- Calendar */
+.dp__cal {
+  position: relative;
+  inline-size: auto;
+}
+
+.dp__cal::part(container) {
+  gap: 0;
+}
+
+.dp__cal::part(header) {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dp__cal::part(heading) {
+  display: none;
+}
+
+.dp__cal::part(button) {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.2s ease, transform 0.2s var(--dp-ease);
+}
+
+.dp__cal::part(button):hover {
+  background: var(--color-surface);
+}
+
+.dp__cal::part(button):active {
+  transform: scale(0.9);
+}
+
+.dp__cal::part(disabled) {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.dp__cal::part(button):focus-visible {
+  outline: 2px solid var(--dp-accent);
+  outline-offset: 1px;
+}
+
+.dp__months {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.dp__months.is-next calendar-month {
+  animation: dp-from-right 0.34s var(--dp-ease);
+}
+
+.dp__months.is-prev calendar-month {
+  animation: dp-from-left 0.34s var(--dp-ease);
+}
+
+.dp calendar-month {
+  --color-accent: var(--dp-accent);
+  --color-text-on-accent: #fff;
+  inline-size: auto;
+  gap: 0.75rem;
+}
+
+.dp calendar-month::part(heading) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.dp calendar-month::part(table) {
+  font-size: 0.95rem;
+}
+
+.dp calendar-month::part(th) {
+  inline-size: var(--dp-cell);
+  block-size: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.dp calendar-month::part(td) {
+  padding: 1px 0;
+}
+
+.dp calendar-month::part(button day) {
+  position: relative;
+  inline-size: var(--dp-cell);
+  block-size: var(--dp-cell);
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text);
+  font: 500 0.95rem/1 var(--font-body);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dp calendar-month::part(button day):hover {
+  box-shadow: inset 0 0 0 1.5px var(--color-text);
+}
+
+.dp calendar-month::part(today) {
+  color: var(--dp-accent);
+  font-weight: 700;
+}
+
+.dp calendar-month::part(disallowed),
+.dp calendar-month::part(button day disabled) {
+  color: var(--color-text-muted);
+  opacity: 0.38;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* Nights nobody can book (set from the booking calendar) */
+.dp calendar-month::part(closed) {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--color-text-muted) 60%, transparent);
+  opacity: 0.7;
+}
+
+.dp calendar-month::part(selected),
+.dp calendar-month::part(range-start),
+.dp calendar-month::part(range-end) {
+  background: var(--dp-accent);
+  color: #fff;
+  opacity: 1;
+  text-decoration: none;
+  animation: dp-pop 0.32s var(--dp-ease);
+}
+
+.dp calendar-month::part(range-start) {
+  border-radius: 999px 0 0 999px;
+}
+
+.dp calendar-month::part(range-end) {
+  border-radius: 0 999px 999px 0;
+}
+
+.dp calendar-month::part(range-start range-end) {
+  border-radius: 999px;
+}
+
+.dp calendar-month::part(range-inner) {
+  border-radius: 0;
+  background: var(--dp-tint);
+  color: var(--color-text);
+  animation: dp-fade 0.2s ease;
+  opacity: 1;
+  text-decoration: none;
+}
+
+
+.dp calendar-month::part(range-inner):hover,
+.dp calendar-month::part(range-start):hover,
+.dp calendar-month::part(range-end):hover {
+  box-shadow: none;
+}
+
+.dp calendar-month::part(button day):focus-visible {
+  outline: 2px solid var(--dp-accent);
+  outline-offset: -2px;
+}
+
+/* ---- Footer */
+.dp__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.dp__count {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.dp__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.dp__clear,
+.dp__done {
+  min-height: 2.5rem;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  font: 500 0.92rem var(--font-body);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s var(--dp-ease), opacity 0.2s ease;
+}
+
+.dp__clear {
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.dp__clear:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.dp__done {
+  border: 0;
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.dp__done:active,
+.dp__clear:active {
+  transform: scale(0.96);
+}
+
+.dp :is(.dp__slot, .dp__close, .dp__clear, .dp__done):focus-visible {
+  outline: 2px solid var(--dp-accent);
+  outline-offset: 2px;
+}
+
+/* ---- Phones: bottom sheet, one large month, swipe to change month */
+.dp--sheet {
+  inset: auto 0 0 0;
+  width: 100%;
+}
+
+.dp--sheet::backdrop {
+  background: rgba(10, 12, 16, 0);
+  transition: background 0.25s ease;
+}
+
+.dp--sheet.is-open::backdrop {
+  background: rgba(10, 12, 16, 0.45);
+}
+
+.dp--sheet .dp__panel {
+  --dp-cell: min(3.25rem, calc((100vw - 2.5rem) / 7));
+  width: 100%;
+  max-width: none;
+  max-height: 92dvh;
+  overflow-y: auto;
+  padding: 0.6rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-bottom: 0;
+  transform: translateY(100%);
+  transition: opacity 0.2s ease, transform 0.36s var(--dp-ease);
+}
+
+.dp--sheet.is-open .dp__panel {
+  transform: none;
+}
+
+.dp--sheet .dp__grab {
+  display: block;
+  width: 2.5rem;
+  height: 4px;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: var(--color-border);
+}
+
+.dp--sheet .dp__summary {
+  flex: 1;
+}
+
+.dp--sheet .dp__slot {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+}
+
+.dp--sheet .dp__cal {
+  margin-inline: auto;
+}
+
+.dp--sheet .dp__months {
+  justify-content: center;
+  touch-action: pan-y;
+}
+
+.dp--sheet .dp__months calendar-month + calendar-month {
+  display: none;
+}
+
+.dp--sheet calendar-month::part(button day) {
+  font-size: 1.02rem;
+}
+
+.dp--sheet .dp__done {
+  min-height: 2.9rem;
+  padding: 0 1.6rem;
+}
+
+@keyframes dp-pop {
+  0% { transform: scale(0.82); }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@keyframes dp-fade {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+@keyframes dp-from-right {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes dp-from-left {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp__panel,
+  .dp--sheet .dp__panel {
+    transition: opacity 0.15s ease;
+    transform: none;
+  }
+
+  .dp *,
+  .dp calendar-month::part(button day) {
+    animation: none !important;
+  }
+}

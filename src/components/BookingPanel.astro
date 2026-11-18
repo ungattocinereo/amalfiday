@@ -109,6 +109,7 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
     clampGuests,
     stayTooLong,
   } from '../scripts/direct-booking-client.mjs'
+  import { attachDatePicker } from '../scripts/date-picker'
 
   type Night = { d: string; b: number; p: number | null; m: number; a?: 1; x?: 1 }
   type Calendar = {
@@ -165,6 +166,7 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
     const policy = root.querySelector<HTMLElement>('[data-policy]')!
     const actionButton = root.querySelector<HTMLButtonElement>('[data-action]')!
     const backLinks = document.querySelectorAll<HTMLAnchorElement>('[data-back-link]')
+    const picker = attachDatePicker({ from: fromInput, to: toInput, anchor: form })
 
     // One entry per BOOKING_MODE: what the button does with a bookable quote.
     const ACTIONS: Record<'request', (quote: Quote) => void> = {
@@ -393,6 +395,8 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
         if (failed) return
         calendar = json
         setBounds(json.today, json.horizon)
+        const open = new Set((json.units[unitId]?.nights ?? []).filter((n) => n.b === 1).map((n) => n.d))
+        picker.setDayParts((iso) => (iso >= json.today && iso < json.horizon && !open.has(iso) ? 'closed' : ''))
         if (!touched) {
           const bounded = parseQuery(location.search, { today: json.today, horizon: json.horizon })
           const before = readParams()
@@ -519,6 +523,10 @@ const guestOptions = Array.from({ length: maxGuests }, (_, i) => i + 1)
     color: var(--color-text);
     font: 500 1rem var(--font-body);
     cursor: pointer;
+  }
+
+  .bp__field :global(.dp-trigger) {
+    font: 500 1rem var(--font-body);
   }
 
   .bp__field input:focus-visible,

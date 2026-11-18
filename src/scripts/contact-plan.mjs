@@ -3,6 +3,7 @@
 // Everything user-provided is written through textContent / .value, never as HTML.
 import { buildContactRequest, clampGuests, isAskOnly, whatsappText, MAX_GUESTS } from './contact-request.mjs'
 import { contactPrefill } from './contact-prefill.mjs'
+import { attachDatePicker } from './date-picker'
 
 const STEPS = 3
 const MIN_FILL_MS = 3500
@@ -122,6 +123,12 @@ export function initPlan(root, options = {}) {
   const today = isoToday()
   fromInput.min = today
   toInput.min = nextIso(today)
+  attachDatePicker({
+    from: fromInput,
+    to: toInput,
+    anchor: fromInput.closest('.plan-grid') ?? undefined,
+    labels: { from: 'From', to: 'Until' },
+  })
 
   const state = () => ({
     services: serviceBoxes.filter((b) => b.checked).map((b) => b.value),

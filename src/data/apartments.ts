@@ -17,6 +17,8 @@ export type Apartment = {
   name: string
   // Detail page /apartments/<id>/ — every value below restates copy already on the site.
   town: 'Atrani' | 'Ravello'
+  // Street address when the unit is not at the main Atrani address (business.street).
+  street?: string
   kind: 'apartment' | 'suite' | 'room'
   typeLabel: string
   summary: string
@@ -92,6 +94,7 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
         id: 'awesome',
         name: 'Awesome apartments',
         town: 'Atrani',
+        street: 'Via San Sebastiano, 21',
         kind: 'apartment',
         typeLabel: 'Apartment by the sea',
         summary:
@@ -99,6 +102,7 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
         seoDescription:
           'Awesome apartments in Atrani: separate kitchen, shower room and a spacious room above the centre, up to 2 guests. Book direct or on Airbnb.',
         facts: [
+          { label: 'Address', value: 'Via San Sebastiano, 21, Atrani' },
           { label: 'Access', value: '350 steps uphill, a 5–7 minute walk' },
           { label: 'Kitchen', value: 'Separate kitchen' },
           { label: 'Bathroom', value: 'Shower room' },

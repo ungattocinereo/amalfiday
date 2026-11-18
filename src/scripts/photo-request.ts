@@ -1,4 +1,5 @@
 import { setupPhotoDialog } from './photo-dialog'
+import { attachDatePicker } from './date-picker'
 
 const request = document.querySelector<HTMLDialogElement>('#gs-request')
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -55,6 +56,7 @@ if (request) {
   const date = form.elements.namedItem('dates') as HTMLInputElement
   const today = new Date()
   date.min = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+  attachDatePicker({ from: date, anchor: date.closest('.gs-field-pair') as HTMLElement, labels: { from: 'Photoshoot date' } })
   const status = form.querySelector<HTMLElement>('.gs-form-status')!
   const send = form.querySelector<HTMLButtonElement>('[type="submit"]')!
   const setStatus = (message: string, error = false) => { status.textContent = message; status.dataset.error = String(error) }

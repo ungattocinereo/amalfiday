@@ -76,6 +76,7 @@ const SUB_LINE: Record<string, string> = {
     cityTaxCents,
     minStayOnly,
   } from '../scripts/direct-booking-client.mjs'
+  import { attachDatePicker } from '../scripts/date-picker'
 
   type Night = { d: string; b: number; p: number | null; m: number; a?: 1; x?: 1 }
   type Unit = { maxGuests: number; nights: Night[] }
@@ -101,6 +102,7 @@ const SUB_LINE: Record<string, string> = {
       Array.from(grid.querySelectorAll<HTMLElement>('[data-unit]')).map((el) => [el.dataset.unit!, el]),
     )
     const ids = Array.from(cards.keys())
+    const picker = attachDatePicker({ from: fromInput, to: toInput, anchor: form })
     let data: Calendar | null = null
     let params: Params = parseQuery(location.search)
 
@@ -337,6 +339,11 @@ const SUB_LINE: Record<string, string> = {
       if (toInput.value && toInput.value <= fromInput.value) toInput.value = ''
     })
 
+    // A complete range from the calendar searches at once.
+    toInput.addEventListener('change', () => {
+      if (fromInput.value && toInput.value) form.requestSubmit()
+    })
+
     form.addEventListener('submit', (event) => {
       event.preventDefault()
       apply({
@@ -363,6 +370,8 @@ const SUB_LINE: Record<string, string> = {
         params = parseQuery(location.search, { today: json.today, horizon: json.horizon })
         fillInputs(params)
         setBounds(json.today, json.horizon)
+        const open = selectableDates(json.units)
+        picker.setDayParts((iso) => (iso >= json.today && iso < json.horizon && !open.has(iso) ? 'closed' : ''))
         render(params)
       })
       .catch(() => {
@@ -442,6 +451,10 @@ const SUB_LINE: Record<string, string> = {
     color: var(--color-text);
     font: 500 1.05rem var(--font-body);
     cursor: pointer;
+  }
+
+  .db__field :global(.dp-trigger) {
+    font: 500 1.05rem var(--font-body);
   }
 
   .db__field input:focus-visible,

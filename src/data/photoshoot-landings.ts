@@ -84,7 +84,7 @@ export const travelZones = [
   { zone: 'Base', level: 0, towns: 'Atrani, Amalfi', fee: 'Included' },
   { zone: 'Zone 1', level: 1, towns: 'Ravello, Minori, Maiori', fee: '+€30' },
   { zone: 'Zone 2', level: 2, towns: 'Cetara, Vietri sul Mare, Tramonti, Scala', fee: '+€50' },
-  { zone: 'Zone 3', level: 3, towns: 'Positano, Praiano, Furore', fee: '+€70' },
+  { zone: 'Zone 3', level: 3, towns: 'Positano, Praiano, Conca dei Marini, Furore', fee: '+€70' },
   { zone: 'Zone 4', level: 4, towns: 'Sorrento, Salerno', fee: '+€100' },
   { zone: 'Zone 5', level: 5, towns: 'Capri, Naples, Pompeii', fee: '+€150 + transport' },
 ]

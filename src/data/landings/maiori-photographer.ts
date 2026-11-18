@@ -20,7 +20,7 @@ const page = {
   answer: {
     title: 'What is a photoshoot in Maiori like?',
     paragraphs: [
-      'I’m Greg (Gregory), a photographer based in Atrani, and I photograph travellers and friends in Maiori at sunset. My published Maiori story is Julietta’s, from July 2024: an evening walk through town, along the seafront and into the last light behind the mountains, a gift between two friends. Minori, the next town along, is in the same travel zone, though I have no Minori story to show you yet.',
+      'I’m Greg (Gregory), a photographer based in Atrani, and I photograph travellers and friends in Maiori at sunset. My published Maiori story is Julietta’s, from July 2024: an evening walk through town, along the seafront and into the last light behind the mountains. It was a birthday gift from one friend to another. Minori, the next town along, is in the same travel zone, though I have no Minori story to show you yet.',
       'Maiori and Minori are travel zone 1: standard package prices plus a €30 travel fee, halved to €15 when you book 120 minutes or more. Any package can be booked here. Send your date through the form on this page or on WhatsApp, and I’ll reply personally.',
     ],
   },
@@ -38,7 +38,7 @@ const page = {
       title: 'A sunset',
       accent: 'that became a gift',
       paragraphs: [
-        'On 20 July 2024, in Maiori, the atmosphere was light, natural and full of real emotions. The session was a gift between two friends, which is why most of the photographs are of one of them. At the end we also made photographs of the two of them together, to keep the feeling of their trip and their friendship.',
+        'On 20 July 2024, in Maiori, the atmosphere was light, natural and full of real emotions. The session was a birthday gift: one friend booked me to photograph the other on her birthday, which is why most of the photographs are of one of them. At the end the friend who had booked joined us, and we made photographs of the two of them together, to keep the feeling of their trip and their friendship.',
         'It was a story about two friends travelling along the Amalfi Coast: walking through the town, talking, laughing at simple things and feeling time slow down. Sessions like this feel authentic because people are simply living their moment while I photograph it.',
         'Only one story from Maiori is on the site so far. I’d rather show you that honestly than fill the page with places I haven’t photographed.',
       ],
@@ -63,7 +63,7 @@ const page = {
         '<strong>Getting there.</strong> Travelmar ferries run seasonally between Amalfi and Maiori in about 15 minutes (€5), and SITA bus line 5120 links Amalfi, Atrani, Minori and Maiori. Check <a href="/ferry-timetables/">the ferry timetables</a> for your date.',
         '<strong>Minori next door.</strong> It is in the same zone and has the same fee. Its beach is smaller and softer than Maiori’s, and fills up quickly in peak season. I haven’t published a shoot there, so we would plan it together.',
         '<strong>Up in the valley.</strong> Tramonti, the valley above Maiori, is travel zone 2 (+€50). I photographed <a href="/photoshootings/camelia/">Camelia there on my motorbike</a>, and the <a href="/moto/">Tramonti moto route</a> ends at Minori.',
-        '<strong>A gift.</strong> Julietta’s session was a present between friends. It gives an experience, emotions and professional photos that stay with you for years.',
+        '<strong>A gift.</strong> Julietta’s session was a birthday present from one friend to another. A session like this gives an experience, emotions and professional photos that stay with you for years.',
         '<strong>Prefer my home towns?</strong> Atrani and Amalfi have no travel fee: <a href="/photoshootings/amalfi-photographer/">see Amalfi and Atrani</a>.',
       ],
     },
@@ -83,7 +83,7 @@ const page = {
     { q: 'What time is best for a photoshoot in Maiori?', a: 'Sunset. Julietta’s session was an evening one in July: soft warm light on the town and seafront, then strong backlight as the sun dropped behind the mountains. Tell me your dates and I will confirm the sunset time for your day so we can start in good time.' },
     { q: 'Do you photograph in Minori too?', a: 'Yes, Minori is in the same travel zone as Maiori, with the same €30 fee. I should be honest that my published story is from Maiori only, not Minori. Its beach is smaller than Maiori’s and fills up quickly in peak season, so we would choose the timing and the spots together.' },
     { q: 'How do I get to Maiori from Amalfi?', a: 'Travelmar ferries sail between Amalfi and Maiori in about 15 minutes for €5 in the season, and SITA bus line 5120 runs through Atrani, Minori and Maiori. The ferry timetable is on my ferry page. If you are staying in Atrani or Amalfi, I can also meet you at your hotel or at the harbour.' },
-    { q: 'Can a Maiori photoshoot be a gift?', a: 'Yes, that is exactly what Julietta’s was: a gift between two friends. Most of the photographs are of one of them, and we finished with a few of the two together. Tell me the travel dates and who the session is for, and I will plan the length and the time of day.' },
+    { q: 'Can a Maiori photoshoot be a gift?', a: 'Yes, that is exactly what Julietta’s was: one friend booked me as a birthday present for the other. Most of the photographs are of the birthday girl, and the friend who booked joined us at the end for a few of the two together. Tell me the travel dates and who the session is for, and I will plan the length and the time of day.' },
     { q: 'Do you photograph couples and groups in Maiori?', a: 'Yes. Couple packages cover two people and are €250, €350 and €550 for 30, 60 and 120 minutes, plus the €30 zone 1 travel fee. My only Maiori story is a solo session with a friend at the end, so tell me what you have in mind and I will confirm what works for your date.' },
   ],
   service: {

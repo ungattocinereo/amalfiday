@@ -88,6 +88,8 @@
 .gs-select i { position: absolute; right: 12px; top: 17px; font-size: 9px; pointer-events: none; }
 .gs-fields input[type='date'] { appearance: none; min-inline-size: 0; }
 .gs-fields input[type='date']::-webkit-date-and-time-value { text-align: left; }
+.gs-fields .dp-trigger { height: 44px; padding: 10px 12px; margin-top: 6px; border: 1px solid var(--gs-line); border-radius: 4px; color: var(--gs-ink); background: var(--gs-paper); font-size: 14px; line-height: 1.4; }
+.gs-fields .dp-trigger.is-empty { color: var(--gs-muted); }
 .gs-extra { border-block: 1px solid var(--gs-line); }
 .gs-extra summary { min-height: 38px; display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none; font-size: 11px; }
 .gs-extra summary::-webkit-details-marker { display: none; }

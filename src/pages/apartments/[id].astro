@@ -122,7 +122,7 @@ const jsonLd = [
     name,
     description: apartment.description,
     image: images,
-    address: town === 'Ravello' ? ravelloAddress : sharedAddress,
+    address: town === 'Ravello' ? ravelloAddress : apartment.street ? { ...sharedAddress, streetAddress: apartment.street } : sharedAddress,
     containedInPlace: { '@id': `${site.url}/apartments/#lodging` },
     ...(cin ? { identifier: cin } : {}),
     ...(maxGuests ? { occupancy: { '@type': 'QuantitativeValue', maxValue: maxGuests, unitText: 'guests' } } : {}),
