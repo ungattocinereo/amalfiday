@@ -22,7 +22,9 @@ const slides = [
   const frame = shoot.frames.find(frame => frame.id === frameId)
   if (!frame) throw new Error(`Missing homepage cover: ${slug}/${frameId}`)
   // Manually reviewed upper crop boundary; keep every head below this line.
-  return { ...shoot, category, cover: { ...frame, focal, headTop } }
+  // Small screens show a 4:5 crop: cap the candidates at 1440w so 3x phones do not fetch the desktop banner.
+  const mobileSrcset = frame.srcset.split(', ').filter(c => parseInt(c.split(' ')[1]) <= 1440).join(', ')
+  return { ...shoot, category, cover: { ...frame, focal, headTop, mobileSrcset } }
 })
 const cards = storySlugs.map(slug => {
   const shoot = getPhotoshoot(slug)
@@ -56,7 +58,7 @@ const storyCards = cards.slice(0, 6)
       <div class:list={['photo-showcase__slide', { 'is-active': index === 0 }]} data-slide role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${slides.length}: ${shoot.name}`} aria-hidden={index !== 0 ? 'true' : 'false'} inert={index !== 0}>
         <picture>
           <source media="(min-width: 1100px)" srcset={shoot.cover.srcset} sizes={`max(100vw, ${(shoot.cover.width / shoot.cover.height / (1 - shoot.cover.headTop) * 100).toFixed(1)}svh)`} />
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E" width={shoot.cover.width} height={shoot.cover.height} alt={shoot.cover.alt} style={`object-position:${shoot.cover.focal};--head-top:${shoot.cover.headTop * 100}%;--visible-height:${1 - shoot.cover.headTop};--image-ratio:${shoot.cover.width / shoot.cover.height}`} loading="lazy" decoding="async" />
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E" srcset={shoot.cover.mobileSrcset} sizes={`(min-width: 641px) max(100vw, ${(shoot.cover.width / shoot.cover.height / (1 - shoot.cover.headTop) * 66.7).toFixed(0)}vw), ${(shoot.cover.width / shoot.cover.height / (1 - shoot.cover.headTop) * 125).toFixed(0)}vw`} width={shoot.cover.width} height={shoot.cover.height} alt={shoot.cover.alt} style={`object-position:${shoot.cover.focal};--head-top:${shoot.cover.headTop * 100}%;--visible-height:${1 - shoot.cover.headTop};--image-ratio:${shoot.cover.width / shoot.cover.height}`} loading="lazy" decoding="async" />
         </picture>
         <div class="photo-showcase__veil"></div>
         <div class="container photo-showcase__caption">
@@ -109,7 +111,6 @@ const storyCards = cards.slice(0, 6)
   .home-photos__eyebrow { display: block; font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .14em; color: var(--color-text-muted); margin-bottom: 1rem; }
   .home-photos__intro h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
   .home-photos__intro p { margin: 0 0 .25rem; color: var(--color-text-muted); line-height: 1.7; }
-  .photo-showcase { display: none; }
   /* "See all photoshoots": an orange pill under the intro on small screens,
      a large white pill on the slider photo from 1100px. */
   .home-photos__all { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; }
@@ -144,47 +145,62 @@ const storyCards = cards.slice(0, 6)
   .home-photos__book:active { transform: translateY(1px) scale(.975); }
   @keyframes home-book-glow { to { opacity: .5; transform: scale(1.04); } }
   .home-photos a:focus-visible, .home-photos button:focus-visible, .photo-showcase:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
+  /* The slideshow runs at every width: a full-height banner from 1100px, a 4:5 crop on phones. */
+  .photo-showcase { display: block; position: relative; aspect-ratio: 4 / 5; max-height: calc(100svh - var(--header-space)); overflow: hidden; background: #252b29; color: #fff; touch-action: pan-y; }
+  .photo-showcase__slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 1.1s ease, visibility 1.1s; }
+  .photo-showcase__slide.is-active { opacity: 1; visibility: visible; }
+  .photo-showcase__slide picture, .photo-showcase__slide img { display: block; width: 100%; height: 100%; }
+  /* Fill the banner below the crown, then align that crown 2px from its top edge. */
+  .photo-showcase__slide img { object-fit: cover; height: max(calc((100% - 2px) / var(--visible-height)), calc(100vw / var(--image-ratio))); transform: translateY(calc(2px - var(--head-top))); }
+  .photo-showcase__veil { position: absolute; inset: 0; background: linear-gradient(0deg, #0007, transparent 40%), linear-gradient(90deg, #0003, transparent 50%); }
+  /* Slow pan-zoom-out on every cover until the next slide. */
+  /* Scale from the top edge: covers are aligned so the crown sits 2px below it, so heads stay whole while zoomed. */
+  .photo-showcase__slide picture { transform-origin: 50% 0; will-change: transform; }
+  .photo-showcase__slide.is-active picture { animation: showcase-zoom-out calc(var(--slide-ms, 6000ms) + 1.1s) linear both; }
+  .photo-showcase__caption { position: absolute; left: 0; right: 0; bottom: 6.5rem; pointer-events: none; }
+  .photo-showcase__label { display: flex; align-items: center; gap: .7rem; font-family: var(--font-mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+  /* A light caption: smaller type, a narrow measure, so the photo leads. */
+  .photo-showcase__caption h3 { max-width: 30rem; font-size: clamp(1.7rem, 2.5vw, 2.6rem); font-weight: 400; line-height: 1.18; letter-spacing: -.01em; color: #fff; margin: .8rem 0 1.1rem; text-shadow: 0 2px 18px #0004; }
+  .photo-showcase__caption em { font-weight: 400; }
+  .photo-showcase__caption a { pointer-events: auto; display: inline-flex; align-items: center; gap: .6rem; color: #fff; font-size: .9rem; border-bottom: 1px solid #ffffff70; padding-bottom: .45rem; }
+  .photo-showcase__controls { position: absolute; left: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); right: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); bottom: 2rem; display: none; align-items: center; gap: .7rem; }
+  .photo-showcase.is-enhanced .photo-showcase__controls { display: flex; }
+  .home-photos__all--slider { position: absolute; z-index: 3; bottom: 6.5rem; right: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); display: inline-flex; gap: 1.1rem; padding: .9rem .95rem .9rem 1.5rem; border-radius: 999px; background: #fff; color: #14110f; box-shadow: 0 18px 40px #0000004d; transition: transform .25s ease, box-shadow .25s ease; }
+  .home-photos__all--slider:hover { color: #14110f; transform: translateY(-2px); box-shadow: 0 22px 46px #00000059; }
+  .home-photos__all-text { display: grid; gap: .1rem; line-height: 1.2; }
+  .home-photos__all-text small { font-family: var(--font-mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: #6b6b6b; }
+  .home-photos__all-text strong { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: #14110f; }
+  .home-photos__all-go { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent); color: #fff; font-size: 1.2rem; transition: transform .25s ease; }
+  .home-photos__all-go i { color: #fff; }
+  .home-photos__all--slider:hover .home-photos__all-go { transform: translateX(3px); }
+  .photo-showcase__picks { display: flex; gap: .8rem; margin-right: auto; }
+  .photo-showcase button { cursor: pointer; color: #fff; font: inherit; }
+  .photo-showcase__picks button { position: relative; width: 64px; height: 44px; background: transparent; border: 0; border-bottom: 2px solid #ffffff45; text-align: left; font-family: var(--font-mono); font-size: .7rem; opacity: .7; }
+  .photo-showcase__picks button[aria-pressed='true'] { opacity: 1; }
+  /* White line over the track: full on the current slide when paused, filling over the slide's time when running. */
+  .photo-showcase__picks button::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: #fff; transform: scaleX(0); transform-origin: left; }
+  .photo-showcase__picks button[aria-pressed='true']::after { transform: scaleX(1); }
+  .photo-showcase.is-running .photo-showcase__picks button[aria-pressed='true']:not(.is-filling)::after { transform: scaleX(0); }
+  .photo-showcase__picks button.is-filling::after { animation: showcase-fill var(--slide-ms, 6000ms) linear both; }
+  .photo-showcase__round { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ffffff80; border-radius: 50%; background: #0005; }
+  .photo-showcase button:hover { background: #ffffff20; }
+  .photo-showcase__count { font-family: var(--font-mono); font-size: .75rem; margin-right: 1rem; }
   @media (min-width: 1100px) {
-    .photo-showcase { display: block; position: relative; height: calc(100svh - var(--header-space)); min-height: 580px; max-height: 1100px; overflow: hidden; background: #252b29; color: #fff; }
-    .photo-showcase__slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 1.1s ease, visibility 1.1s; }
-    .photo-showcase__slide.is-active { opacity: 1; visibility: visible; }
-    .photo-showcase__slide picture, .photo-showcase__slide img { display: block; width: 100%; height: 100%; }
-    /* Fill the banner below the crown, then align that crown 2px from its top edge. */
-    .photo-showcase__slide img { object-fit: cover; height: max(calc((100% - 2px) / var(--visible-height)), calc(100vw / var(--image-ratio))); transform: translateY(calc(2px - var(--head-top))); }
-    .photo-showcase__veil { position: absolute; inset: 0; background: linear-gradient(0deg, #0007, transparent 40%), linear-gradient(90deg, #0003, transparent 50%); }
-    /* Slow pan-zoom-out on every cover until the next slide. */
-    /* Scale from the top edge: covers are aligned so the crown sits 2px below it, so heads stay whole while zoomed. */
-    .photo-showcase__slide picture { transform-origin: 50% 0; will-change: transform; }
-    .photo-showcase__slide.is-active picture { animation: showcase-zoom-out calc(var(--slide-ms, 6000ms) + 1.1s) linear both; }
-    .photo-showcase__caption { position: absolute; left: 0; right: 0; bottom: 6.5rem; pointer-events: none; }
-    .photo-showcase__label { display: flex; align-items: center; gap: .7rem; font-family: var(--font-mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
-    /* A light caption: smaller type, a narrow measure, so the photo leads. */
-    .photo-showcase__caption h3 { max-width: 30rem; font-size: clamp(1.7rem, 2.5vw, 2.6rem); font-weight: 400; line-height: 1.18; letter-spacing: -.01em; color: #fff; margin: .8rem 0 1.1rem; text-shadow: 0 2px 18px #0004; }
-    .photo-showcase__caption em { font-weight: 400; }
-    .photo-showcase__caption a { pointer-events: auto; display: inline-flex; align-items: center; gap: .6rem; color: #fff; font-size: .9rem; border-bottom: 1px solid #ffffff70; padding-bottom: .45rem; }
-    .photo-showcase__controls { position: absolute; left: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); right: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); bottom: 2rem; display: none; align-items: center; gap: .7rem; }
-    .photo-showcase.is-enhanced .photo-showcase__controls { display: flex; }
+    .photo-showcase { aspect-ratio: auto; height: calc(100svh - var(--header-space)); min-height: 580px; max-height: 1100px; }
     .home-photos__all--intro { display: none; }
-    .home-photos__all--slider { position: absolute; z-index: 3; bottom: 6.5rem; right: max(var(--page-gutter), calc((100% - var(--content-max)) / 2)); display: inline-flex; gap: 1.1rem; padding: .9rem .95rem .9rem 1.5rem; border-radius: 999px; background: #fff; color: #14110f; box-shadow: 0 18px 40px #0000004d; transition: transform .25s ease, box-shadow .25s ease; }
-    .home-photos__all--slider:hover { color: #14110f; transform: translateY(-2px); box-shadow: 0 22px 46px #00000059; }
-    .home-photos__all-text { display: grid; gap: .1rem; line-height: 1.2; }
-    .home-photos__all-text small { font-family: var(--font-mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: #6b6b6b; }
-    .home-photos__all-text strong { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: #14110f; }
-    .home-photos__all-go { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--color-accent); color: #fff; font-size: 1.2rem; transition: transform .25s ease; }
-    .home-photos__all-go i { color: #fff; }
-    .home-photos__all--slider:hover .home-photos__all-go { transform: translateX(3px); }
-    .photo-showcase__picks { display: flex; gap: .8rem; margin-right: auto; }
-    .photo-showcase button { cursor: pointer; color: #fff; font: inherit; }
-    .photo-showcase__picks button { position: relative; width: 64px; height: 44px; background: transparent; border: 0; border-bottom: 2px solid #ffffff45; text-align: left; font-family: var(--font-mono); font-size: .7rem; opacity: .7; }
-    .photo-showcase__picks button[aria-pressed='true'] { opacity: 1; }
-    /* White line over the track: full on the current slide when paused, filling over the slide's time when running. */
-    .photo-showcase__picks button::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: #fff; transform: scaleX(0); transform-origin: left; }
-    .photo-showcase__picks button[aria-pressed='true']::after { transform: scaleX(1); }
-    .photo-showcase.is-running .photo-showcase__picks button[aria-pressed='true']:not(.is-filling)::after { transform: scaleX(0); }
-    .photo-showcase__picks button.is-filling::after { animation: showcase-fill var(--slide-ms, 6000ms) linear both; }
-    .photo-showcase__round { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ffffff80; border-radius: 50%; background: #0005; }
-    .photo-showcase button:hover { background: #ffffff20; }
-    .photo-showcase__count { font-family: var(--font-mono); font-size: .75rem; margin-right: 1rem; }
+  }
+  @media (max-width: 1099px) {
+    .home-photos__all--slider { display: none; }
+    .photo-showcase__veil { background: linear-gradient(0deg, #000a, transparent 55%); }
+    .photo-showcase__caption { bottom: 4.9rem; }
+    .photo-showcase__caption h3 { max-width: 19rem; font-size: 1.55rem; margin: .6rem 0 .9rem; }
+    .photo-showcase__controls { bottom: 1rem; gap: .6rem; }
+    .photo-showcase__picks { flex: 1; gap: .45rem; }
+    .photo-showcase__picks button { flex: 1; width: auto; min-width: 0; }
+    .photo-showcase__count, .photo-showcase__round[data-prev], .photo-showcase__round[data-next] { display: none; }
+  }
+  @media (min-width: 641px) and (max-width: 1099px) {
+    .photo-showcase { aspect-ratio: 3 / 2; }
   }
   @keyframes showcase-zoom-out { from { transform: scale(1.09); } to { transform: scale(1); } }
   @keyframes showcase-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -197,8 +213,6 @@ const storyCards = cards.slice(0, 6)
     .photo-showcase__caption h3 { font-size: clamp(1.7rem, 2vw, 2.5rem); }
     .photo-showcase__controls { left: 8vw; right: 8vw; }
     .home-photos__all--slider { right: 8vw; }
-  }
-  @media (max-width: 1099px) {
   }
   @media (max-width: 900px) { .home-photos__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
@@ -234,7 +248,6 @@ const storyCards = cards.slice(0, 6)
     const pause = showcase.querySelector<HTMLButtonElement>('[data-pause]')!
     const count = showcase.querySelector<HTMLElement>('[data-count]')!
     const status = showcase.querySelector<HTMLElement>('[data-status]')!
-    const desktop = window.matchMedia('(min-width: 1100px)')
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
     let active = 0
     let visible = false
@@ -258,8 +271,8 @@ const storyCards = cards.slice(0, 6)
     }
     const schedule = () => {
       clearTimeout(timer)
-      if (!visible || !desktop.matches || document.hidden) { setProgress(false); return }
-      // Load the next cover before its turn, without downloading the desktop banner on mobile.
+      if (!visible || document.hidden) { setProgress(false); return }
+      // Load the next cover before its turn.
       for (const index of [active, (active + 1) % slides.length]) {
         const image = slides[index].querySelector('img')
         if (image) image.loading = 'eager'
@@ -296,10 +309,23 @@ const storyCards = cards.slice(0, 6)
       if (slides[active].contains(document.activeElement)) showcase.focus()
       show(active + (event.key === 'ArrowRight' ? 1 : -1), true)
     })
+    // Swipe left or right to change the story; vertical drags keep scrolling the page.
+    let swipe: { x: number; y: number } | null = null
+    showcase.addEventListener('touchstart', event => {
+      const touch = event.touches[0]
+      swipe = event.touches.length === 1 ? { x: touch.clientX, y: touch.clientY } : null
+    }, { passive: true })
+    showcase.addEventListener('touchend', event => {
+      if (!swipe) return
+      const touch = event.changedTouches[0]
+      const dx = touch.clientX - swipe.x
+      const dy = touch.clientY - swipe.y
+      swipe = null
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) show(active + (dx < 0 ? 1 : -1), true)
+    }, { passive: true })
     showcase.addEventListener('focusin', schedule)
     showcase.addEventListener('focusout', () => queueMicrotask(schedule))
     document.addEventListener('visibilitychange', schedule)
-    desktop.addEventListener('change', schedule)
     reduced.addEventListener('change', () => { if (reduced.matches) paused = true; syncPause(); schedule() })
     new IntersectionObserver(entries => {
       visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .25

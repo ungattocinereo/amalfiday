@@ -146,7 +146,7 @@ const fallbackQuatrain =
             sizes="(max-width: 1000px) 100vw, 32vw"
           />
           <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true">
-            <source data-src="/staticpages/video/atrani-sorrento-video.mp4" type="video/mp4" />
+            <source data-src="/staticpages/video/atrani-sorrento-video.mp4" data-src-mobile="/staticpages/video/atrani-sorrento-video-mobile.mp4" type="video/mp4" />
           </video>
           <span class="hero__offer">
             <span class="hero__offer-label">Direct booking</span>
@@ -1817,8 +1817,9 @@ const fallbackQuatrain =
   }
 
   if (heroVideo) {
+    // Phones get the 960px encode (about a tenth of the desktop file), so the video plays there too.
+    const smallScreen = window.matchMedia('(max-width: 900px)').matches
     const prefersStaticHeroMedia =
-      window.matchMedia('(max-width: 900px)').matches ||
       prefersReducedMotion.matches ||
       navigator.connection?.saveData ||
       navigator.connection?.effectiveType === 'slow-2g' ||
@@ -1828,7 +1829,7 @@ const fallbackQuatrain =
       const sources = heroVideo.querySelectorAll('source')
       sources.forEach((source) => {
         if (source.dataset.src) {
-          source.src = source.dataset.src
+          source.src = (smallScreen && source.dataset.srcMobile) || source.dataset.src
           source.removeAttribute('data-src')
         }
       })
