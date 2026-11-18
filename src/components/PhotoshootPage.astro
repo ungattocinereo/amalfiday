@@ -11,13 +11,19 @@ import PhotoRequestDialog from './PhotoRequestDialog.astro'
 import { site, business } from '../data/site'
 import { photography, photographerSchema } from '../data/photographer'
 import { photoStyle, type PhotoFrame, type Photoshoot } from '../data/photoshoot-types'
+import { landingPath, townLandings } from '../data/photoshoot-landings'
 import '../styles/gallery-study.css'
 
 // Landing pages each shoot can point to. Labels read as part of a sentence.
 const hubPages = {
   'positano-photographer': 'photoshoots in Positano',
   'ravello-photographer': 'photoshoots in Ravello',
-  'amalfi-photographer': 'photoshoots in Amalfi and Atrani',
+  'amalfi-photographer': 'photoshoots in Amalfi',
+  'atrani-photographer': 'photoshoots in Atrani',
+  'conca-dei-marini-photographer': 'photoshoots in Conca dei Marini',
+  'praiano-photographer': 'photoshoots in Praiano',
+  'sorrento-photographer': 'photoshoots in Sorrento',
+  'maiori-photographer': 'photoshoots in Maiori',
   'path-of-the-gods-photographer': 'photoshoots on the Path of the Gods',
   'proposal-photographer': 'proposal photography',
   'couple-photoshoot': 'couple photoshoots',
@@ -82,9 +88,17 @@ const joinLinks = (links: StoryLink[]) => links.flatMap((link, index) => [
 ])
 const more: (string | StoryLink)[][] = []
 if (seo?.related?.links.length) more.push([`${seo.related.lead} `, ...joinLinks(seo.related.links), '.'])
+// One link per town to its landing page, from the location map in photoshoot-landings.ts.
+const townLinks = towns.flatMap(town => townLandings[town] ? [{ label: town === 'Path of the Gods' ? 'the Path of the Gods' : town, href: landingPath(townLandings[town]) }] : [])
+if (townLinks.length) more.push([`More photoshoots ${onPath ? 'on' : 'in'} `, ...joinLinks(townLinks), ' →'])
 if (seo) {
-  const hubs = seo.hubs.map(slug => ({ label: hubPages[slug], href: `/photoshootings/${slug}/` }))
-  more.push(['Planning your own? Read more about ', ...joinLinks(hubs), ', or see ', { label: 'all my photoshoots', href: '/photoshootings/' }, '.'])
+  const allShoots = { label: 'all my photoshoots', href: '/photoshootings/' }
+  const hubs = seo.hubs
+    .map(slug => ({ label: hubPages[slug], href: `/photoshootings/${slug}/` }))
+    .filter(hub => !townLinks.some(link => link.href === hub.href))
+  more.push(hubs.length
+    ? ['Planning your own? Read more about ', ...joinLinks(hubs), ', or see ', allShoots, '.']
+    : ['Planning your own? See ', allShoots, '.'])
 }
 
 // Structured data

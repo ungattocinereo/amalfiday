@@ -1,5 +1,5 @@
 ---
-import type { Apartment } from '../data/apartments'
+import { apartmentPath, type Apartment } from '../data/apartments'
 
 export interface Props {
   apartment: Apartment
@@ -30,7 +30,7 @@ const { airbnb, booking } = apartment.bookingLinks
   )}
   <div class="dc__body">
     <span class="dc__pill" data-pill hidden></span>
-    <h3 class="dc__title">{apartment.name}</h3>
+    <h3 class="dc__title"><a href={apartmentPath(apartment.id)}>{apartment.name}</a></h3>
     <p class="dc__meta">{meta}</p>
     <div class="dc__price" data-price hidden></div>
     <p class="dc__note" data-note hidden></p>
@@ -83,6 +83,14 @@ const { airbnb, booking } = apartment.bookingLinks
     margin: 0;
     font-size: 1.25rem;
     line-height: 1.2;
+  }
+
+  .dc__title a {
+    color: inherit;
+  }
+
+  .dc__title a:hover {
+    color: var(--color-accent);
   }
 
   .dc__meta,

@@ -10,9 +10,19 @@ export type ApartmentBookingLinks = {
   booking?: string
 }
 
+export type ApartmentFact = { label: string; value: string }
+
 export type Apartment = {
   id: string
   name: string
+  // Detail page /apartments/<id>/ — every value below restates copy already on the site.
+  town: 'Atrani' | 'Ravello'
+  kind: 'apartment' | 'suite' | 'room'
+  typeLabel: string
+  summary: string
+  seoDescription: string
+  facts?: ApartmentFact[]
+  bedrooms?: number
   calendar: string
   cin?: string
   description: string
@@ -44,6 +54,14 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'villa-susy',
         name: 'Villa Susy',
+        town: 'Ravello',
+        kind: 'apartment',
+        typeLabel: 'Historical two-bedroom apartment',
+        summary:
+          'Villa Susy is our timeless retreat in Ravello: a historical two-bedroom apartment, just a mile from Amalfi.',
+        seoDescription:
+          'Villa Susy: a historical two-bedroom apartment in Ravello, a mile from Amalfi, run by CristallPont Amalfi Day. Photos, CIN and Booking.com link.',
+        bedrooms: 2,
         calendar: 'Villa Susy',
         cin: 'IT065104C2Q9GJBER7',
         description:
@@ -73,6 +91,18 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'awesome',
         name: 'Awesome apartments',
+        town: 'Atrani',
+        kind: 'apartment',
+        typeLabel: 'Apartment by the sea',
+        summary:
+          'Awesome apartments is an apartment just above the centre of Atrani, with a separate kitchen, a shower room and a spacious room.',
+        seoDescription:
+          'Awesome apartments in Atrani: separate kitchen, shower room and a spacious room above the centre, up to 2 guests. Book direct or on Airbnb.',
+        facts: [
+          { label: 'Access', value: '350 steps uphill, a 5–7 minute walk' },
+          { label: 'Kitchen', value: 'Separate kitchen' },
+          { label: 'Bathroom', value: 'Shower room' },
+        ],
         calendar: 'Awesome Apts',
         cin: 'IT065011B442X3QQQL',
         description:
@@ -91,6 +121,17 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'sunrise-balcony',
         name: 'The Sunrise Balcony',
+        town: 'Ravello',
+        kind: 'apartment',
+        typeLabel: 'Apartment with kitchen and balcony',
+        summary:
+          'The Sunrise Balcony is a spacious apartment in Ravello with a kitchen and a balcony facing the sunrise over Amalfi.',
+        seoDescription:
+          'The Sunrise Balcony: a spacious apartment in Ravello with a kitchen and a balcony facing the sunrise over Amalfi. Photos, CIN, availability, Airbnb.',
+        facts: [
+          { label: 'Kitchen', value: 'Yes' },
+          { label: 'Outdoor', value: 'Balcony facing the sunrise' },
+        ],
         calendar: 'The Sunrise Balcony',
         cin: 'IT065104C24IZCCRHA',
         description:
@@ -108,6 +149,18 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'carina',
         name: 'Suite Carina',
+        town: 'Atrani',
+        kind: 'suite',
+        typeLabel: 'Double-level apartment',
+        summary:
+          'Suite Carina is a double-level apartment in the heart of Atrani, with no steps to reach it and windows on Atrani\'s main street.',
+        seoDescription:
+          'Suite Carina: a double-level apartment in the heart of Atrani, no steps to reach it, windows on the main street. Book on Airbnb or Booking.com.',
+        facts: [
+          { label: 'Access', value: 'No steps' },
+          { label: 'Layout', value: 'Two levels' },
+          { label: 'Views', value: 'Atrani\'s main street' },
+        ],
         calendar: 'Casa Carina',
         cin: 'IT065011B4MVEU3B33',
         description:
@@ -126,6 +179,17 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'harmony',
         name: 'Suite Harmony',
+        town: 'Atrani',
+        kind: 'suite',
+        typeLabel: 'Apartment with balcony',
+        summary:
+          'Suite Harmony is a newly decorated apartment in the very centre of Atrani, close to the main street, with a small balcony and mountain views.',
+        seoDescription:
+          'Suite Harmony: a newly decorated apartment in the very centre of Atrani with a small balcony and mountain views. Photos, CIN, availability, booking.',
+        facts: [
+          { label: 'Outdoor', value: 'Small balcony' },
+          { label: 'Views', value: 'Mountains' },
+        ],
         calendar: 'Harmony Suite',
         cin: 'IT065011B4JERC6CIZ',
         description:
@@ -144,6 +208,13 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'royal',
         name: 'Royal Suite',
+        town: 'Atrani',
+        kind: 'suite',
+        typeLabel: 'Premium suite',
+        summary:
+          'Royal Suite is our premium suite in Atrani: thoughtfully decorated, centrally located and a comfortable base for exploring the Amalfi Coast.',
+        seoDescription:
+          'Royal Suite: our premium, centrally located suite in Atrani on the Amalfi Coast, run by CristallPont Amalfi Day. Photos, availability and booking.',
         calendar: 'Royal Suite',
         description:
           'Our premium suite in Atrani — thoughtfully decorated, centrally located, and a comfortable base for exploring the Amalfi Coast.',
@@ -169,6 +240,17 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'vintage',
         name: 'Vintage interior',
+        town: 'Atrani',
+        kind: 'room',
+        typeLabel: 'Double room with balcony',
+        summary:
+          'Vintage interior is a double room with a balcony in our townhouse in the heart of Atrani, furnished with a vintage aesthetic and a large mirrored closet.',
+        seoDescription:
+          'Vintage interior: a double room with balcony and mirrored closet in our townhouse in Atrani, up to 2 guests. Book direct, or on Airbnb or Booking.com.',
+        facts: [
+          { label: 'Outdoor', value: 'Balcony' },
+          { label: 'Storage', value: 'Large mirrored closet' },
+        ],
         calendar: 'Vintage Room',
         cin: 'IT065011B442X3QQQL',
         description:
@@ -190,6 +272,18 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'orange',
         name: 'Orange room',
+        town: 'Atrani',
+        kind: 'room',
+        typeLabel: 'Double room with balcony',
+        summary:
+          'Orange room is a double room with a balcony in our townhouse in the heart of Atrani, with 1960s decor, a large multi-panel closet and a small table with garden chairs.',
+        seoDescription:
+          'Orange room: a 1960s-style double room with balcony in our townhouse in Atrani, up to 2 guests. Book direct, or on Airbnb or Booking.com.',
+        facts: [
+          { label: 'Outdoor', value: 'Balcony' },
+          { label: 'Seating', value: 'Garden chairs, small table' },
+          { label: 'Storage', value: 'Large multi-panel closet' },
+        ],
         calendar: 'Orange Room',
         cin: 'IT065011B442X3QQQL',
         description:
@@ -211,6 +305,18 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'solo',
         name: 'Room for solo traveller',
+        town: 'Atrani',
+        kind: 'room',
+        typeLabel: 'Single room with balcony',
+        summary:
+          'Room for solo traveller is a compact single room in our townhouse in the heart of Atrani, with a spacious balcony over the main street and mountain views.',
+        seoDescription:
+          'Room for solo traveller: a single room with a spacious balcony over Atrani\'s main street, for 1 guest. Book direct, or on Airbnb or Booking.com.',
+        facts: [
+          { label: 'Bed', value: 'Single bed' },
+          { label: 'Outdoor', value: 'Spacious balcony' },
+          { label: 'Views', value: 'Main street and mountains' },
+        ],
         calendar: 'Solo Room',
         cin: 'IT065011B442X3QQQL',
         description:
@@ -232,6 +338,17 @@ const RAW_APARTMENT_SECTIONS: ApartmentSection[] = [
       {
         id: 'youth',
         name: 'Room for youngsters',
+        town: 'Atrani',
+        kind: 'room',
+        typeLabel: 'Twin room with bunk beds',
+        summary:
+          'Room for youngsters is the budget-friendly room in our townhouse in the heart of Atrani: a bunk bed, a big artistic mural and a large window onto an inner street.',
+        seoDescription:
+          'Room for youngsters: a budget bunk-bed room with a big mural in our townhouse in Atrani, up to 2 guests. Book direct, or on Airbnb or Booking.com.',
+        facts: [
+          { label: 'Bed', value: 'Bunk bed' },
+          { label: 'Window', value: 'Large, onto an inner street' },
+        ],
         calendar: 'Bunkbed Room',
         cin: 'IT065011B442X3QQQL',
         description:
@@ -289,3 +406,6 @@ export const ICAL_REGISTRY: Record<string, string[]> = Object.fromEntries(
     [...(a.ical.airbnb || []), ...(a.ical.booking || [])],
   ])
 )
+
+// Detail page of one unit (src/pages/apartments/[id].astro).
+export const apartmentPath = (id: string): string => `/apartments/${id}/`

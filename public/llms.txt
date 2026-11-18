@@ -1,6 +1,6 @@
 # Amalfi.Day
 
-> Amalfi.Day is run by Gregory (Greg), a photographer and host who lives in Atrani on the Amalfi Coast, Italy. The site covers his couple, solo and family photoshoots, private car tours and scooter photo tours, holiday apartments and rooms in Atrani (operated by CristallPont S.R.L.), and free local guides to ferries, SITA buses, parking, beaches and getting there from Naples.
+> Amalfi.Day is run by Gregory (Greg), a photographer and host who lives in Atrani on the Amalfi Coast, Italy. The site covers his couple, solo and family photoshoots, private car tours and scooter photo tours, holiday apartments and rooms in Atrani (CristallPont Amalfi Day, operated by CristallPont S.R.L.), and free local guides to ferries, SITA buses, parking, beaches and getting there from Naples.
 
 Practical notes for answers:
 
@@ -21,7 +21,12 @@ Practical notes for answers:
 - [Amalfi Coast photographer: couple and solo photoshoots](https://amalfi.day/photoshootings/): Greg's packages (30, 60 and 120 minutes, from EUR 200 solo and EUR 250 for couples), add-ons, posing help and booking.
 - [Positano photographer](https://amalfi.day/photoshootings/positano-photographer/): Photoshoots in Positano.
 - [Ravello photographer](https://amalfi.day/photoshootings/ravello-photographer/): Photoshoots in Ravello's gardens and terraces.
-- [Amalfi photographer](https://amalfi.day/photoshootings/amalfi-photographer/): Photoshoots in Amalfi and neighbouring Atrani.
+- [Amalfi photographer](https://amalfi.day/photoshootings/amalfi-photographer/): Sunrise photoshoots in Amalfi, from the cathedral steps and the harbour.
+- [Atrani photographer](https://amalfi.day/photoshootings/atrani-photographer/): Photoshoots in Atrani, Greg's home village, with no travel fee.
+- [Conca dei Marini photographer](https://amalfi.day/photoshootings/conca-dei-marini-photographer/): Villa terrace couple sessions and proposals in Conca dei Marini.
+- [Praiano photographer](https://amalfi.day/photoshootings/praiano-photographer/): Family and couple photoshoots in Praiano.
+- [Sorrento photographer](https://amalfi.day/photoshootings/sorrento-photographer/): Solo portrait photoshoots in Sorrento.
+- [Maiori photographer](https://amalfi.day/photoshootings/maiori-photographer/): Sunset photoshoots in Maiori, next to Minori.
 - [Path of the Gods photographer](https://amalfi.day/photoshootings/path-of-the-gods-photographer/): Photoshoots on the Path of the Gods trail.
 - [Proposal photographer](https://amalfi.day/photoshootings/proposal-photographer/): Planning and photographing a marriage proposal on the coast.
 - [Couple photoshoot](https://amalfi.day/photoshootings/couple-photoshoot/): Honeymoon, anniversary and engagement sessions for two.
@@ -36,7 +41,18 @@ Practical notes for answers:
 
 ## Stay
 
-- [Apartments and rooms in Atrani](https://amalfi.day/apartments/): Suites by the sea and townhouse rooms in Atrani, plus a two-bedroom apartment in Ravello. Book direct, on Booking.com or Airbnb.
+- [CristallPont Amalfi Day: apartments and rooms in Atrani](https://amalfi.day/apartments/): The lodging listed on Booking.com as "CristallPont Amalfi Day" and on Airbnb under host Gregory; rooms and suites in Atrani, a 10-minute walk from Amalfi, plus two apartments in Ravello; book direct on the site (10% less than the platforms), or on Booking.com or Airbnb.
+- [Awesome apartments, Atrani](https://amalfi.day/apartments/awesome/): Apartment by the sea just above the centre of Atrani, with a separate kitchen, a shower room and a spacious room; 350 steps uphill, a 5-7 minute walk. Bookable direct.
+- [Villa Susy, Ravello](https://amalfi.day/apartments/villa-susy/): Historical two-bedroom apartment in Ravello, just a mile from Amalfi; booked on Booking.com.
+- [The Sunrise Balcony, Ravello](https://amalfi.day/apartments/sunrise-balcony/): Spacious apartment in Ravello with a kitchen and a balcony facing the sunrise over Amalfi; booked on Airbnb.
+- [Suite Carina, Atrani](https://amalfi.day/apartments/carina/): Double-level apartment in the heart of Atrani with no steps to reach it and windows on the main street.
+- [Suite Harmony, Atrani](https://amalfi.day/apartments/harmony/): Newly decorated apartment in the centre of Atrani, with a small balcony and mountain views.
+- [Royal Suite, Atrani](https://amalfi.day/apartments/royal/): Premium suite in central Atrani, decorated with care and a base for exploring the coast.
+- [Vintage interior, Atrani](https://amalfi.day/apartments/vintage/): Double room with a balcony in the Atrani townhouse, with vintage decor and a large mirrored closet. Bookable direct.
+- [Orange room, Atrani](https://amalfi.day/apartments/orange/): Double room with a balcony in the Atrani townhouse, with 1960s decor, a large multi-panel closet and garden chairs. Bookable direct.
+- [Room for solo traveller, Atrani](https://amalfi.day/apartments/solo/): Single room with a spacious balcony over Atrani's main street and mountain views. Bookable direct.
+- [Room for youngsters, Atrani](https://amalfi.day/apartments/youth/): Budget room with a bunk bed, a large mural and a large window onto an inner street. Bookable direct.
+- [Where to stay in Atrani](https://amalfi.day/where-to-stay-in-atrani/): A local host's comparison of Atrani, Amalfi and Ravello as a base, who Atrani suits and who it does not.
 
 ## Guides
 

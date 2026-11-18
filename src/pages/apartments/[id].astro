@@ -1,0 +1,593 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import AvailabilityCalendar from '../../components/AvailabilityCalendar.astro'
+import { ALL_APARTMENTS, apartmentPath, type Apartment } from '../../data/apartments'
+import { BOOKING_MODE } from '../../data/booking-mode.mjs'
+import { site, business } from '../../data/site'
+
+// One indexable profile per unit. Every fact on the page comes from src/data/apartments.ts,
+// src/data/direct-units.mjs, the terms page or llms.txt; nothing is added here.
+export function getStaticPaths() {
+  return ALL_APARTMENTS.map((apartment) => ({ params: { id: apartment.id }, props: { apartment } }))
+}
+
+const { apartment } = Astro.props as { apartment: Apartment }
+const { id, name, town, kind, typeLabel, cin, gallery } = apartment
+const { airbnb, booking } = apartment.bookingLinks
+const isDirect = Boolean(apartment.direct)
+const maxGuests = apartment.direct?.maxGuests
+const guestsText = maxGuests === undefined ? null : maxGuests === 1 ? '1 guest' : `Up to ${maxGuests} guests`
+
+const path = apartmentPath(id)
+const pageUrl = `${site.url}${path}`
+const bookPath = `/book/${id}/`
+const unitId = `${site.url}/apartments/#${id}`
+
+const pageTitle = `${name} in ${town} | CristallPont Amalfi Day`
+const pageDescription = apartment.seoDescription
+const shareImage = gallery[0]
+
+// Same rule as the booking server (scripts/lib/booking-handlers.mjs): 1–2 digits, at most 50, default 10.
+const rawPct = import.meta.env.DIRECT_DISCOUNT_PCT
+const discountPct =
+  typeof rawPct === 'string' && /^\d{1,2}$/.test(rawPct) && Number(rawPct) <= 50 ? Number(rawPct) : 10
+
+const platforms = [airbnb && 'Airbnb', booking && 'Booking.com'].filter(Boolean).join(' and ')
+
+// Guest copy follows the booking mode (src/data/booking-mode.mjs), as in DirectBooking.astro.
+const directHow: Record<string, string> = {
+  request: 'Book it direct on amalfi.day: choose your dates, send a request and we confirm by message, usually within a few hours.',
+  instant: 'Book it direct on amalfi.day with instant confirmation.',
+}
+const directNote: Record<string, string> = {
+  request: 'Send a request, we confirm by message. Free cancellation up to 7 days before arrival.',
+  instant: 'Instant confirmation. Free cancellation up to 7 days before arrival.',
+}
+
+const guestsSentence =
+  maxGuests === undefined ? '' : maxGuests === 1 ? ' It is for 1 guest.' : ` It sleeps up to ${maxGuests} guests.`
+
+// The opening answer states what the unit is and how to book it. What is inside (furniture, details)
+// lives in apartment.description, shown in the "Inside" section, so it is not repeated here.
+const typeLower = typeLabel.charAt(0).toLowerCase() + typeLabel.slice(1)
+const article = /^[aeiou]/i.test(typeLower) ? 'an' : 'a'
+const answer = [
+  `${name} is ${article} ${typeLower} in ${town}, part of CristallPont Amalfi Day.`,
+  `It is run by ${business.legalName} under the ${business.brandName} brand.${guestsSentence}`,
+  isDirect
+    ? `${directHow[BOOKING_MODE]} It is also listed on ${platforms}.`
+    : `It is booked on ${platforms}; the calendar on this page shows which nights are still free.`,
+]
+
+const howToBook = isDirect ? `Direct on amalfi.day, ${platforms}` : platforms
+
+const facts = [
+  { label: 'Town', value: `${town}, Amalfi Coast` },
+  { label: 'Type', value: typeLabel },
+  ...(apartment.bedrooms ? [{ label: 'Bedrooms', value: String(apartment.bedrooms) }] : []),
+  ...(guestsText ? [{ label: 'Guests', value: guestsText }] : []),
+  ...(apartment.facts ?? []),
+  ...(isDirect
+    ? [
+        { label: 'Minimum stay', value: '2 nights' },
+        { label: 'Check-in / out', value: 'From 14:00 / by 10:00' },
+      ]
+    : []),
+  ...(town === 'Atrani' ? [{ label: 'City tax', value: '€2.50 per person per night' }] : []),
+  ...(cin ? [{ label: 'CIN', value: cin }] : []),
+  // Platform units already say how to book in the book card, so the row is only kept for direct units.
+  ...(isDirect ? [{ label: 'How to book', value: howToBook }] : []),
+]
+// A near-empty box is worse than none: with 4 or fewer real facts on a platform unit they go into the book card.
+const foldFacts = !isDirect && facts.length <= 4
+
+// Platform units: the first available platform becomes the primary button, the other stays a pill.
+const platformLinks = [
+  airbnb && { href: airbnb, name: 'Airbnb' },
+  booking && { href: booking, name: 'Booking.com' },
+].filter(Boolean) as { href: string; name: string }[]
+const [primaryPlatform, ...otherPlatforms] = platformLinks
+
+// Siblings: same kind first (rooms with rooms, apartments with apartments), then the rest.
+const others = ALL_APARTMENTS.filter((a) => a.id !== id)
+const siblings = [
+  ...others.filter((a) => (a.kind === 'room') === (kind === 'room')),
+  ...others.filter((a) => (a.kind === 'room') !== (kind === 'room')),
+].slice(0, 4)
+
+const sharedAddress = {
+  '@type': 'PostalAddress',
+  streetAddress: business.street,
+  addressLocality: business.locality,
+  addressRegion: business.region,
+  postalCode: business.postalCode,
+  addressCountry: business.country,
+}
+const ravelloAddress = {
+  '@type': 'PostalAddress',
+  addressLocality: 'Ravello',
+  addressRegion: business.region,
+  addressCountry: business.country,
+}
+
+const reserveUrl = isDirect ? `${site.url}${bookPath}` : airbnb || booking
+const images = gallery.map((g) => new URL(g, site.url).toString())
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': kind === 'room' ? 'Room' : 'Apartment',
+    '@id': unitId,
+    url: pageUrl,
+    name,
+    description: apartment.description,
+    image: images,
+    address: town === 'Ravello' ? ravelloAddress : sharedAddress,
+    containedInPlace: { '@id': `${site.url}/apartments/#lodging` },
+    ...(cin ? { identifier: cin } : {}),
+    ...(maxGuests ? { occupancy: { '@type': 'QuantitativeValue', maxValue: maxGuests, unitText: 'guests' } } : {}),
+    ...(apartment.bedrooms ? { numberOfBedrooms: apartment.bedrooms } : {}),
+    ...(reserveUrl ? { potentialAction: { '@type': 'ReserveAction', target: reserveUrl } } : {}),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: pageTitle,
+    description: pageDescription,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': unitId },
+    primaryImageOfPage: images[0],
+    breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${pageUrl}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Apartments', item: `${site.url}/apartments/` },
+      { '@type': 'ListItem', position: 3, name, item: pageUrl },
+    ],
+  },
+]
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  url={path}
+  image={shareImage}
+  imageAlt={`${name} in ${town}`}
+  jsonLd={jsonLd}
+>
+  <section class="section apd" aria-labelledby="apd-title">
+    <div class="container">
+      <nav class="apd-breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/apartments/">Apartments</a></li>
+          <li aria-current="page">{name}</li>
+        </ol>
+      </nav>
+
+      <div class="apd__grid">
+        <div class="apd__main">
+          <span class="apd__eyebrow">{typeLabel} · {town}</span>
+          <h1 id="apd-title" class="apd__title">{name} <span class="accent-italic">in {town}</span></h1>
+          <div class="apd__answer">
+            {answer.map((text) => <p>{text}</p>)}
+            {isDirect && (
+              <p class="apd__jump-wrap"><a class="apd__jump" href="#book">Check dates and price ↓</a></p>
+            )}
+          </div>
+
+          <div class:list={['apd__gallery', gallery.length > 1 && 'apd__gallery--multi']}>
+            {gallery.map((src, idx) => (
+              <img
+                class="apd__photo"
+                src={src}
+                alt={`${name} in ${town} — photo ${idx + 1}`}
+                loading={idx === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            ))}
+          </div>
+        </div>
+
+        <aside class="apd__side">
+          {!foldFacts && (
+            <div class="apd-facts" aria-label="At a glance">
+              <h2><i class="ph ph-house-line" aria-hidden="true"></i> At a glance</h2>
+              <dl>
+                {facts.map((fact) => <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
+              </dl>
+            </div>
+          )}
+
+          <div class="apd-book" id="book">
+            <h2>Book {name}</h2>
+            {isDirect ? (
+              <>
+                <a class="button apd-book__cta" href={bookPath}>Check dates and price</a>
+                <p class="apd-book__note">
+                  Book direct, {discountPct}% less than on Airbnb and Booking.com. {directNote[BOOKING_MODE]}
+                </p>
+              </>
+            ) : (
+              <>
+                {primaryPlatform && (
+                  <a class="button apd-book__cta" href={primaryPlatform.href} target="_blank" rel="noopener noreferrer">
+                    Book on {primaryPlatform.name}
+                  </a>
+                )}
+                <p class="apd-book__note">This stay is booked through {platforms}. Availability is below.</p>
+              </>
+            )}
+            {(isDirect ? platformLinks : otherPlatforms).length > 0 && (
+              <div class="apd-book__links">
+                {(isDirect ? platformLinks : otherPlatforms).map((link) => (
+                  <a class="apd-book__line" href={link.href} target="_blank" rel="noopener noreferrer">{link.name}</a>
+                ))}
+              </div>
+            )}
+            {foldFacts && (
+              <dl class="apd-book__facts" aria-label="At a glance">
+                {facts.map((fact) => <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
+              </dl>
+            )}
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section apd-section apd-section--alt" aria-labelledby="apd-about-title">
+    <div class="container apd-about">
+      <div class="apd-about__copy">
+        <span class="apd__eyebrow">About the {kind === 'room' ? 'room' : kind === 'suite' ? 'suite' : 'apartment'}</span>
+        <h2 id="apd-about-title">Inside <span class="accent-italic">{name}</span></h2>
+        <p>{apartment.description}</p>
+      </div>
+      <div class="apd-about__calendar">
+        <AvailabilityCalendar
+          calendarName={apartment.calendar}
+          airbnb={isDirect ? undefined : airbnb}
+          booking={isDirect ? undefined : booking}
+        />
+        {isDirect && (
+          <p class="apd-about__hint">Live prices for your dates are on the <a href={bookPath}>direct booking page</a>.</p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section apd-section" aria-labelledby="apd-here-title">
+    <div class="container">
+      <span class="apd__eyebrow">Getting here</span>
+      <h2 id="apd-here-title">How to reach <span class="accent-italic">{town}</span></h2>
+      <div class="apd-prose">
+        {town === 'Atrani' ? (
+          <p>
+            Atrani is a 10-minute walk from Amalfi along the waterfront, through a pedestrian tunnel. The{' '}
+            <a href="/directions/">directions to Atrani</a> cover the route from Naples by train, ferry or bus, the
+            walk from Amalfi and the driving routes.
+          </p>
+        ) : (
+          <p>
+            Ravello is linked to Amalfi by the SITA bus line 5110 Amalfi–Ravello–Scala and by the Amalfi–Ravello
+            shuttle (see the <a href="/timetables/">bus timetables</a>). For the way to the coast, start with the{' '}
+            <a href="/directions/">directions</a>.
+          </p>
+        )}
+        <p>
+          Coming by car? Read the <a href="/parking/">parking guide</a> first. Arriving at Naples Airport? See{' '}
+          <a href="/how-to-get/">how to get to the coast</a>. Access instructions for {name} are sent after your
+          booking is confirmed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section apd-section apd-section--alt" aria-labelledby="apd-more-title">
+    <div class="container">
+      <span class="apd__eyebrow">Keep looking</span>
+      <h2 id="apd-more-title">More <span class="accent-italic">stays</span></h2>
+      <div class="apd-links">
+        {siblings.map((item) => (
+          <a class="apd-link" href={apartmentPath(item.id)}>
+            <span class="apd-link__icon"><i class={`ph ${item.kind === 'room' ? 'ph-bed' : 'ph-house-line'}`} aria-hidden="true"></i></span>
+            <span class="apd-link__body">
+              <span class="apd-link__group">{item.town}</span>
+              <span class="apd-link__name">{item.name}</span>
+              <span class="apd-link__desc">{item.typeLabel}</span>
+            </span>
+            <i class="ph ph-arrow-right apd-link__arrow" aria-hidden="true"></i>
+          </a>
+        ))}
+        <a class="apd-link" href="/apartments/">
+          <span class="apd-link__icon"><i class="ph ph-buildings" aria-hidden="true"></i></span>
+          <span class="apd-link__body">
+            <span class="apd-link__group">Everything</span>
+            <span class="apd-link__name">All apartments and rooms</span>
+            <span class="apd-link__desc">Atrani and Ravello, book direct or on the platforms</span>
+          </span>
+          <i class="ph ph-arrow-right apd-link__arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+      <p class="apd-photo-note">
+        Your host is also a photographer. If you would like photos of your days on the coast, see the{' '}
+        <a href="/photoshootings/">photoshoots in Atrani and around</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .apd {
+    padding-top: calc(var(--header-space) + 1.5rem);
+  }
+
+  .apd-breadcrumb ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    margin: 0 0 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .apd-breadcrumb li + li::before { content: '/'; margin-right: 0.4rem; opacity: 0.5; }
+  .apd-breadcrumb a { color: inherit; }
+  .apd-breadcrumb [aria-current] { color: var(--color-text); }
+
+  .apd__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .apd__main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .apd__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .apd__title {
+    margin: 0 0 1.25rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .apd__answer p {
+    margin: 0 0 0.9rem;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+  .apd__answer p:first-child { color: var(--color-text); }
+
+  .apd__answer .apd__jump-wrap { margin: 0 0 0.9rem; }
+  .apd__jump {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .apd__gallery {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .apd__photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .apd__gallery--multi .apd__photo {
+    aspect-ratio: 1500 / 770;
+  }
+
+  .apd__side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: sticky;
+    top: calc(var(--header-space) + 1rem);
+    min-width: 0;
+  }
+
+  .apd-facts,
+  .apd-book {
+    scroll-margin-top: calc(var(--header-space) + 1rem);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.6rem;
+  }
+
+  .apd-facts h2,
+  .apd-book h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    margin: 0 0 1rem;
+  }
+  .apd-facts h2 i { color: var(--color-accent); }
+  .apd-facts dl,
+  .apd-book__facts { margin: 0; display: grid; }
+  .apd-book__facts { margin-top: 1.1rem; }
+  .apd-facts dl div,
+  .apd-book__facts div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.65rem 0; border-top: 1px solid var(--color-border); }
+  .apd-facts dt,
+  .apd-book__facts dt { flex-shrink: 0; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted); padding-top: 0.15rem; }
+  .apd-facts dd,
+  .apd-book__facts dd { margin: 0; font-size: 0.9rem; font-weight: 600; text-align: right; color: var(--color-text); overflow-wrap: anywhere; }
+
+  .apd-book__cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .apd-book__note {
+    margin: 0.75rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+  }
+
+  .apd-book__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  /* Same pill as the platform links on DirectCard */
+  .apd-book__line {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    font: 500 0.875rem var(--font-body);
+    text-decoration: none;
+  }
+  .apd-book__line:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .apd-section--alt {
+    background: var(--color-surface);
+  }
+
+  .apd-section h2 {
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0 0 1.25rem;
+  }
+
+  .apd-about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .apd-about__copy p,
+  .apd-prose p {
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .apd-prose { max-width: 760px; }
+
+  .apd-prose a,
+  .apd-about__hint a,
+  .apd-photo-note a { text-decoration: underline; text-underline-offset: 3px; }
+
+  .apd-about__calendar { min-width: 0; }
+
+  .apd-about__hint {
+    margin: 0.75rem 0 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .apd-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .apd-link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.1rem 1.2rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .apd-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); border-color: var(--color-accent); text-decoration: none; color: var(--color-text); }
+  .apd-link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 5px; }
+
+  .apd-link__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    background: rgba(255, 89, 0, 0.08);
+    color: var(--color-accent);
+    font-size: 1.1rem;
+  }
+  .apd-link__body { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; flex: 1; }
+  .apd-link__group { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent); }
+  .apd-link__name { font-family: var(--font-display); font-size: 1rem; font-weight: 700; }
+  .apd-link__desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.45; }
+  .apd-link__arrow { color: var(--color-text-muted); transition: transform 0.2s ease; }
+  .apd-link:hover .apd-link__arrow { transform: translateX(3px); color: var(--color-accent); }
+
+  .apd-photo-note {
+    margin: 1.75rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .apd__grid,
+    .apd-about {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .apd__side {
+      position: static;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Booking first on phones: the book card precedes "At a glance". */
+    .apd-book {
+      order: -1;
+    }
+  }
+</style>

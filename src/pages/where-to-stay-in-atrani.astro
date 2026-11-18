@@ -1,0 +1,640 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { site } from '../data/site'
+
+const pageTitle = 'Where to Stay in Atrani: A Local Host\'s Guide | Amalfi.Day'
+const pageDescription =
+  'Is Atrani a good base for the Amalfi Coast? A local host compares Atrani, Amalfi and Ravello, and says who it suits, who it does not, and where to sleep.'
+const pageUpdatedISO = '2026-11-15'
+const pageUpdatedLabel = 'November 2026'
+const pageUrl = `${site.url}/where-to-stay-in-atrani`
+const shareImage = '/apartments/3-view-from-cristall-Pont.jpg'
+
+const compareRows = [
+  {
+    point: 'Feel',
+    atrani: 'One of the smallest towns in Italy: a beach, a square under the arch, houses stacked up the valley. Calm most of the year, busier in July and August.',
+    amalfi: 'The main town: cathedral, seafront and the most crowded beach, especially near the cruise pier.',
+    ravello: 'Calm, 365 metres above the sea, with wide views and cooler air.',
+  },
+  {
+    point: 'Transport',
+    atrani: 'SITA line 5120 serves Atrani. Ferries and most buses leave from Amalfi, a 10-minute walk away.',
+    amalfi: 'The hub for SITA buses and for ferries to Salerno, Positano and beyond.',
+    ravello: 'Up a steep road: SITA bus 5110 or the Amico shuttle from Amalfi.',
+  },
+  {
+    point: 'Beach',
+    atrani: 'Its own beach, on your doorstep.',
+    amalfi: 'The main beach, with budget to premium prices.',
+    ravello: 'Castiglione, reached by about 120 steps. Atrani is an easy swim away.',
+  },
+  {
+    point: 'Parking',
+    atrani: 'Not practical: parking is banned overnight (23:00 to 08:00) and limited in summer.',
+    amalfi: 'Luna Rossa garage, with a tunnel to Atrani. From 40 EUR a day.',
+    ravello: 'Auditorium car park, 4 EUR an hour.',
+  },
+]
+
+const units = [
+  {
+    id: 'carina',
+    name: 'Suite Carina',
+    line: 'A double-level apartment in the heart of Atrani, with no steps to reach it and windows onto the main street.',
+  },
+  {
+    id: 'harmony',
+    name: 'Suite Harmony',
+    line: 'Newly decorated, in the very centre of Atrani near the main street, with a small balcony and mountain views.',
+  },
+  {
+    id: 'awesome',
+    name: 'Awesome apartments',
+    line: 'Just above the centre: a 5 to 7 minute walk uphill via 350 steps, with a separate kitchen and a spacious room.',
+  },
+  {
+    id: 'solo',
+    name: 'Room for solo traveller',
+    line: 'A compact room with a single bed and a spacious balcony facing the main street.',
+  },
+  {
+    id: 'sunrise-balcony',
+    name: 'The Sunrise Balcony',
+    line: 'In Ravello rather than Atrani: a spacious apartment with a kitchen and a balcony facing the sunrise over Amalfi.',
+  },
+]
+
+const guides = [
+  { href: '/directions/', label: 'Directions to Atrani', desc: 'Train, ferry or bus to Amalfi, then the 10-minute walk' },
+  { href: '/how-to-get/', label: 'Naples Airport to the coast', desc: 'Shuttle, train and ferry, or taxi compared' },
+  { href: '/ferry-timetables/', label: 'Ferry timetables', desc: 'Salerno to Amalfi departures and fares' },
+  { href: '/timetables/', label: 'Bus timetables', desc: 'SITA line 5120 and the other coast lines' },
+  { href: '/parking/', label: 'Parking guide', desc: 'Prices, garages and ZTL camera zones' },
+  { href: '/beaches/', label: 'Beach guide', desc: '11 beaches reviewed, Atrani included' },
+  { href: '/what-to-do/', label: 'What to do', desc: 'My local picks, town by town' },
+]
+
+const faqs = [
+  {
+    q: 'Is Atrani a good base for the Amalfi Coast?',
+    a: 'Yes, if you travel without a car. Atrani sits in the middle of the coast, a 10-minute walk from Amalfi, where the SITA buses and ferries leave from, and it is much quieter than Amalfi itself.',
+  },
+  {
+    q: 'Should I stay in Atrani or Amalfi?',
+    a: 'Amalfi puts you on top of the buses and ferries and is busier. Atrani is a 10-minute walk away through a pedestrian tunnel and is calmer, with its own small beach. I prefer Atrani for sleeping and Amalfi for catching transport.',
+  },
+  {
+    q: 'How far is Atrani from Amalfi?',
+    a: 'About 10 minutes on foot, along the waterfront and through a pedestrian tunnel. A porter service can carry luggage from Amalfi port or bus station to Atrani by golf cart, from 20 EUR per person, every day 7:00 to 20:00.',
+  },
+  {
+    q: 'Can I stay in Atrani with a rental car?',
+    a: 'It is not practical. Parking in Atrani is banned overnight from 23:00 to 08:00, and in summer non-residents are limited to four hours. Most guests leave the car at the Luna Rossa garage in Amalfi, which a tunnel links to Atrani, or travel by bus and ferry instead.',
+  },
+  {
+    q: 'Are there steps in Atrani?',
+    a: 'Yes. The town is stacked up a valley, so many lanes climb. Some of my places have none, such as Suite Carina, while Awesome apartments sits a 5 to 7 minute uphill walk above the centre via 350 steps.',
+  },
+  {
+    q: 'Can I book direct with you?',
+    a: 'Yes. Search your dates on the apartments page and send a booking request. Online payment is not live yet: I confirm your request by message.',
+  },
+]
+
+const pageJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: "Where to Stay in Atrani: A Local Host's Guide",
+    description: pageDescription,
+    url: pageUrl,
+    image: new URL(shareImage, site.url).toString(),
+    mainEntityOfPage: pageUrl,
+    dateModified: pageUpdatedISO,
+    isPartOf: { '@id': `${site.url}/#website` },
+    author: { '@id': `${site.url}/#business` },
+    publisher: { '@id': `${site.url}/#business` },
+    inLanguage: 'en',
+    about: { '@type': 'Place', name: 'Atrani, Amalfi Coast' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Where to stay in Atrani', item: pageUrl },
+    ],
+  },
+]
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} image={shareImage} jsonLd={pageJsonLd}>
+  <section class="wts-hero">
+    <div class="container">
+      <nav class="wts-breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">Where to stay in Atrani</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="container wts-hero__grid">
+      <div class="wts-hero__copy">
+        <div class="wts-eyebrow">Local host's guide</div>
+        <h1>Where to stay in <span class="accent-italic">Atrani</span></h1>
+        <p class="wts-hero__lead">
+          Atrani suits travellers who want a quiet base in the middle of the Amalfi Coast. It is a
+          10-minute walk from Amalfi through a pedestrian tunnel, so the buses and ferries are close,
+          and the town itself is calmer than Amalfi. I live here and host guests in apartments and
+          rooms in the centre.
+        </p>
+        <p class="wts-hero__date">
+          Last checked: <time datetime={pageUpdatedISO}>{pageUpdatedLabel}</time>
+        </p>
+      </div>
+      <img
+        class="wts-hero__img"
+        src={shareImage}
+        alt="View over Atrani from the CristallPont apartments"
+        width="1768"
+        height="1450"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+
+  <section class="section wts-compare">
+    <div class="container">
+      <div class="wts-eyebrow">Compared</div>
+      <h2>Atrani, Amalfi or Ravello as a <span class="accent-italic">base</span></h2>
+      <div class="wts-table-wrap">
+        <table class="wts-table">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Atrani</th><th scope="col">Amalfi</th><th scope="col">Ravello</th></tr>
+          </thead>
+          <tbody>
+            {compareRows.map((r) => (
+              <tr>
+                <th scope="row">{r.point}</th>
+                <td data-label="Atrani">{r.atrani}</td>
+                <td data-label="Amalfi">{r.amalfi}</td>
+                <td data-label="Ravello">{r.ravello}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="wts-note">
+        Details on garages and fines are in the <a href="/parking/">parking guide</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section wts-fit">
+    <div class="container wts-fit__grid">
+      <div class="wts-card">
+        <h2>Atrani suits you if</h2>
+        <ul>
+          <li>You travel by bus and ferry, not by car.</li>
+          <li>You want a small town and a calm evening, with Amalfi a short walk away.</li>
+          <li>You like having a beach next to your door.</li>
+        </ul>
+      </div>
+      <div class="wts-card">
+        <h2>Think twice if</h2>
+        <ul>
+          <li>You are driving: there is no overnight parking in Atrani, so you would park in Amalfi.</li>
+          <li>Steps are hard for you or you carry heavy luggage. The town climbs a valley, though some places have no steps.</li>
+          <li>You arrive late: ferries and buses thin out after about 19:30.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wts-host">
+    <div class="container">
+      <div class="wts-eyebrow">Where I host</div>
+      <h2>CristallPont <span class="accent-italic">Amalfi Day</span></h2>
+      <p class="wts-lead">
+        We run suites and rooms in Atrani, close to the beach, plus two apartments in
+        Ravello. See everything on the <a href="/apartments/">apartments page</a>. You can book
+        direct there: search your dates and send a request, and I confirm it by message. A few places
+        to start:
+      </p>
+      <ul class="wts-units">
+        {units.map((u) => (
+          <li>
+            <a class="wts-unit" href={`/apartments/${u.id}/`}>
+              <span class="wts-unit__name">{u.name}</span>
+              <span class="wts-unit__line">{u.line}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="wts-cta">
+        <a class="button" href="/apartments/#direct">Check dates and book direct</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section wts-getting">
+    <div class="container">
+      <div class="wts-eyebrow">Getting there and around</div>
+      <h2>Plan the <span class="accent-italic">logistics</span></h2>
+      <p class="wts-lead">
+        The usual route is train to Salerno, then a ferry (about 35 minutes) or SITA bus line 5120
+        to Amalfi, then the 10-minute walk.
+      </p>
+      <div class="wts-links">
+        {guides.map((g) => (
+          <a href={g.href} class="wts-link">
+            <span class="wts-link__name">{g.label}</span>
+            <span class="wts-link__desc">{g.desc}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section wts-faq">
+    <div class="container">
+      <div class="wts-eyebrow">Frequently asked</div>
+      <h2>Staying in <span class="accent-italic">Atrani</span></h2>
+      <div class="wts-faq__list">
+        {faqs.map((f) => (
+          <details class="wts-faq__item">
+            <summary class="wts-faq__q">{f.q}<i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p class="wts-faq__a">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .wts-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .wts-hero {
+    padding: calc(var(--header-space) + 1.5rem) 0 2.5rem;
+  }
+
+  .wts-breadcrumb ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    margin: 0 0 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .wts-breadcrumb li + li::before { content: '/'; margin-right: 0.4rem; opacity: 0.5; }
+  .wts-breadcrumb a { color: inherit; }
+  .wts-breadcrumb [aria-current] { color: var(--color-text); }
+
+  .wts-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .wts-hero h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 1.1;
+  }
+
+  .wts-hero__lead {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+
+  .wts-hero__date {
+    margin: 0.9rem 0 0;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .wts-hero__img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .wts-compare h2,
+  .wts-host h2,
+  .wts-getting h2,
+  .wts-faq h2 {
+    margin: 0 0 1.5rem;
+  }
+
+  .wts-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+  }
+
+  .wts-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .wts-table th,
+  .wts-table td {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+
+  .wts-table thead th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    background: var(--color-surface);
+  }
+
+  .wts-table tbody th {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .wts-table tbody tr:last-child th,
+  .wts-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .wts-note {
+    margin: 1rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+  }
+
+  .wts-fit {
+    background: var(--color-surface);
+  }
+
+  .wts-fit__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .wts-card {
+    padding: 1.5rem 1.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+  }
+
+  .wts-card h2 {
+    margin: 0 0 0.8rem;
+    font-size: 1.35rem;
+  }
+
+  .wts-card ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .wts-lead {
+    max-width: 52rem;
+    margin: 0 0 1.5rem;
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .wts-units {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1rem;
+  }
+
+  .wts-units li {
+    display: flex;
+  }
+
+  .wts-unit {
+    flex: 1;
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    color: inherit;
+  }
+
+  .wts-unit:hover {
+    color: inherit;
+    text-decoration: none;
+    border-color: var(--color-accent);
+  }
+
+  .wts-unit:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .wts-unit__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--color-accent);
+  }
+
+  .wts-unit__line {
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .wts-cta {
+    margin: 1.75rem 0 0;
+  }
+
+  .wts-getting {
+    background: var(--color-surface);
+  }
+
+  .wts-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .wts-link {
+    display: grid;
+    gap: 0.3rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-card);
+    color: var(--color-text);
+  }
+
+  .wts-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+    border-color: var(--color-accent);
+  }
+
+  .wts-link__name {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+  }
+
+  .wts-link__desc {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .wts-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-width: 820px;
+  }
+
+  .wts-faq__item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-card);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .wts-faq__item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .wts-faq__q {
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-text);
+  }
+
+  .wts-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .wts-faq__q > i {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .wts-faq__item[open] .wts-faq__q > i {
+    transform: rotate(45deg);
+  }
+
+  .wts-faq__a {
+    margin: 0;
+    padding: 0 1.2rem 1.1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .wts-hero__grid,
+    .wts-fit__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .wts-hero {
+      padding-top: calc(var(--header-space) + 1.5rem);
+    }
+
+    /* Table becomes stacked cards on narrow screens */
+    .wts-table,
+    .wts-table tbody,
+    .wts-table tr,
+    .wts-table th,
+    .wts-table td {
+      display: block;
+    }
+
+    .wts-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
+    .wts-table tbody tr {
+      border-bottom: 1px solid var(--color-border);
+      padding: 0.4rem 0;
+    }
+
+    .wts-table tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    .wts-table th,
+    .wts-table td {
+      border-bottom: 0 !important;
+      padding: 0.35rem 1rem;
+    }
+
+    .wts-table tbody th {
+      padding-top: 0.8rem;
+      color: var(--color-accent);
+    }
+
+    .wts-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+  }
+</style>

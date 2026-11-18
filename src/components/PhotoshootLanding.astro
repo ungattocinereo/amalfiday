@@ -105,12 +105,15 @@ const jsonLd = [
 
 <BaseLayout title={page.title} description={page.description} url={url} image={hero.src} imageAlt={hero.alt} jsonLd={jsonLd}>
   <section class="lp-hero hero--dark" style={`--hero-focal:${hero.focal};--hero-mobile-focal:${hero.mobileFocal}`}>
-    <img class="lp-hero__image" src={hero.src} srcset={hero.srcset} sizes="100vw" width={hero.width} height={hero.height} alt={hero.alt} fetchpriority="high" loading="eager" />
+    <picture>
+      {hero.mobile && <source media="(max-width: 768px)" srcset={hero.mobile.srcset} sizes="100vw" width={hero.mobile.width} height={hero.mobile.height} />}
+      <img class="lp-hero__image" src={hero.src} srcset={hero.srcset} sizes="100vw" width={hero.width} height={hero.height} alt={hero.alt} fetchpriority="high" loading="eager" />
+    </picture>
     <div class="lp-hero__vignette hero-shade" aria-hidden="true"></div>
     <div class="lp-hero__content hero-content">
       <div class="container hero-container">
         <span class="lp-hero__eyebrow">{page.hero.eyebrow}</span>
-        <h1 class="lp-hero__title">{page.hero.lead}<br /><span class="lp-hero__title-accent">{page.hero.accent}</span></h1>
+        <h1 class:list={['lp-hero__title', { 'lp-hero__title--long': page.hero.lead.length > 12 }]}>{page.hero.lead}<br /><span class="lp-hero__title-accent">{page.hero.accent}</span></h1>
         <p class="lp-hero__lead">{page.hero.intro}</p>
         <div class="lp-hero__actions">
           <a class="lp-btn lp-btn--primary" href={requestHref} data-request aria-haspopup="dialog" aria-controls="gs-request">Request a photoshoot</a>
@@ -347,6 +350,9 @@ const jsonLd = [
     margin: 0;
     color: #ffffff;
   }
+
+  /* Long town names ("Conca dei Marini", "Path of the Gods") run narrower so they stay off the subjects' faces. */
+  .lp-hero__title--long { font-size: clamp(2.1rem, 4.8vw, 4rem); }
 
   .lp-hero__title-accent {
     font-style: italic;
@@ -684,6 +690,7 @@ const jsonLd = [
     .lp-hero { min-height: 78svh; }
     .lp-hero__image { object-position: var(--hero-mobile-focal); }
     .lp-hero__title { font-size: clamp(2.1rem, 10vw, 3.6rem); }
+    .lp-hero__title--long { font-size: clamp(1.7rem, 8vw, 2.9rem); }
     .lp-hero__lead { font-size: 0.95rem; margin-top: 1rem; }
     .lp-hero__actions { gap: 0.5rem; margin-top: 1.2rem; }
     .lp-hero__actions .lp-btn { padding-inline: 1rem; font-size: 0.82rem; }

@@ -1,6 +1,6 @@
 ---
 import AvailabilityCalendar from './AvailabilityCalendar.astro'
-import type { Apartment } from '../data/apartments'
+import { apartmentPath, type Apartment } from '../data/apartments'
 
 export interface Props {
   apartment: Apartment
@@ -13,7 +13,7 @@ const scrollGallery = apartment.galleryStyle === 'scroll' && apartment.gallery.l
 ---
 
 <article class:list={['stay', isFeatured && 'stay--featured']}>
-  <h3 class="stay__title">{apartment.name}</h3>
+  <h3 class="stay__title"><a href={apartmentPath(apartment.id)}>{apartment.name}</a></h3>
 
   <div class="stay__row">
     {scrollGallery ? (
@@ -107,6 +107,14 @@ const scrollGallery = apartment.galleryStyle === 'scroll' && apartment.gallery.l
     font-size: clamp(1.5rem, 2.2vw, 1.9rem);
     margin: 0;
     line-height: 1.15;
+  }
+
+  .stay__title a {
+    color: inherit;
+  }
+
+  .stay__title a:hover {
+    color: var(--color-accent);
   }
 
   .stay__row {

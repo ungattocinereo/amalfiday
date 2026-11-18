@@ -2,16 +2,26 @@ import { site } from './site'
 import { photographyPackages } from './photographer'
 import { getPhotoshoot, getPhotoshootCard } from './photoshoots'
 import type { PhotoshootCardData } from './photoshoot-types'
+import concaDeiMariniLanding from './landings/conca-dei-marini-photographer'
+import praianoLanding from './landings/praiano-photographer'
+import sorrentoLanding from './landings/sorrento-photographer'
+import maioriLanding from './landings/maiori-photographer'
 
 // Keyword landing pages for photoshoots. Every fact here comes from the hub
 // (/photoshootings/), src/data/photographer.ts or the published story JSON files.
 // Prose fields marked `html` may contain simple links; everything else is plain text.
+// Some landings live in ./landings/<slug>.ts as plain data (type-only import of this file).
 
 export type PackageKey = keyof typeof photographyPackages
 export type LandingSlug =
   | 'positano-photographer'
   | 'ravello-photographer'
   | 'amalfi-photographer'
+  | 'atrani-photographer'
+  | 'conca-dei-marini-photographer'
+  | 'praiano-photographer'
+  | 'sorrento-photographer'
+  | 'maiori-photographer'
   | 'path-of-the-gods-photographer'
   | 'proposal-photographer'
   | 'couple-photoshoot'
@@ -55,6 +65,20 @@ export const businessId = `${site.url}/#business`
 export const landingUrl = (slug: LandingSlug) => `${site.url}/photoshootings/${slug}/`
 export const landingPath = (slug: LandingSlug) => `/photoshootings/${slug}/`
 
+// Story location (the town names in a story's `location`, split on " & ") → that town's landing.
+// Story pages use it for their "More photoshoots in <town>" link.
+export const townLandings: Record<string, LandingSlug> = {
+  Positano: 'positano-photographer',
+  Ravello: 'ravello-photographer',
+  Amalfi: 'amalfi-photographer',
+  Atrani: 'atrani-photographer',
+  'Conca dei Marini': 'conca-dei-marini-photographer',
+  Praiano: 'praiano-photographer',
+  Sorrento: 'sorrento-photographer',
+  Maiori: 'maiori-photographer',
+  'Path of the Gods': 'path-of-the-gods-photographer',
+}
+
 // Same zones and fees as the "Travel Zones" table on /photoshootings/.
 export const travelZones = [
   { zone: 'Base', level: 0, towns: 'Atrani, Amalfi', fee: 'Included' },
@@ -82,15 +106,20 @@ const cardCopy: Record<string, Partial<PhotoshootCardData>> = {
 export const landingCard = (slug: string): PhotoshootCardData => ({ ...getPhotoshootCard(slug), ...cardCopy[slug] })
 
 export const landingHero = (page: LandingPage) => {
-  const { hero } = getPhotoshoot(page.hero.slug)
-  return { src: hero.src, srcset: hero.srcset, width: hero.width, height: hero.height, focal: hero.focal, mobileFocal: hero.mobileFocal || hero.focal, alt: page.hero.alt }
+  const story = getPhotoshoot(page.hero.slug)
+  const { hero } = story
+  const mobileFrame = story.mobileHero && story.frames.find(frame => frame.id === story.mobileHero?.frameId)
+  const mobile = story.mobileHero && mobileFrame
+    ? { src: mobileFrame.src, srcset: mobileFrame.srcset, width: mobileFrame.width, height: mobileFrame.height, focal: story.mobileHero.focal }
+    : undefined
+  return { src: hero.src, srcset: hero.srcset, width: hero.width, height: hero.height, focal: hero.focal, mobileFocal: mobile?.focal || hero.mobileFocal || hero.focal, mobile, alt: page.hero.alt }
 }
 
 const allPackages = Object.keys(photographyPackages) as PackageKey[]
 const couplePackages: PackageKey[] = ['coupleMini', 'golden', 'panorama']
 const soloPackages: PackageKey[] = ['portrait', 'soloSignature', 'coastal']
 
-export const landingPages: LandingPage[] = [
+const landingPagesSource: LandingPage[] = [
   // ───────────────────────────── POSITANO ─────────────────────────────
   {
     slug: 'positano-photographer',
@@ -152,7 +181,7 @@ export const landingPages: LandingPage[] = [
           '<strong>Meeting point.</strong> We agree it in advance. For Sally and Rose’s family, who arrived together by car, a car park in Positano was the simplest place to meet.',
           '<strong>Parking.</strong> Spaces are few and expensive in season. If you are driving in, allow extra time before sunrise.',
           '<strong>Why 90 minutes.</strong> Positano is in travel zone 3, which has a 90-minute minimum because I travel from Atrani. Travel time is not deducted from your session.',
-          '<strong>Staying in Praiano?</strong> It is in the same zone. <a href="/photoshootings/nick-family-praiano/">Nick’s family session in Praiano</a> finished at a view towards Positano.',
+          '<strong>Staying in Praiano?</strong> It is in the same zone. <a href="/photoshootings/nick-family-praiano/">Nick’s family session in Praiano</a> finished at a view towards Positano; see <a href="/photoshootings/praiano-photographer/">photoshoots in Praiano</a>.',
         ],
       },
     ],
@@ -178,7 +207,7 @@ export const landingPages: LandingPage[] = [
       packages: ['panorama', 'coastal'],
       priceNote: 'Base package price. Positano sessions add a €70 travel fee (zone 3) and have a 90-minute minimum.',
     },
-    related: ['amalfi-photographer', 'ravello-photographer', 'family-photoshoot', 'couple-photoshoot'],
+    related: ['praiano-photographer', 'amalfi-photographer', 'family-photoshoot', 'couple-photoshoot'],
   },
 
   // ───────────────────────────── RAVELLO ─────────────────────────────
@@ -266,47 +295,48 @@ export const landingPages: LandingPage[] = [
       packages: allPackages,
       priceNote: 'Base package price. Ravello sessions add a €30 travel fee (zone 1), halved for sessions of 120 minutes or more.',
     },
-    related: ['amalfi-photographer', 'positano-photographer', 'proposal-photographer', 'solo-photoshoot'],
+    related: ['atrani-photographer', 'amalfi-photographer', 'maiori-photographer', 'proposal-photographer'],
   },
 
-  // ───────────────────────────── AMALFI & ATRANI ─────────────────────────────
+  // ───────────────────────────── AMALFI ─────────────────────────────
   {
     slug: 'amalfi-photographer',
     group: 'location',
-    nav: { label: 'Amalfi & Atrani', desc: 'My home towns, no travel fee', icon: 'ph-sun-horizon' },
-    title: 'Amalfi & Atrani Photographer: Sunrise Photoshoots | Amalfi.Day',
-    description: 'Amalfi and Atrani photoshoots with Greg, who lives in Atrani: sunrise sessions from the cathedral steps along the coast to Atrani, no travel fee, from €200.',
+    nav: { label: 'Amalfi', desc: 'Cathedral steps at sunrise, no travel fee', icon: 'ph-sun-horizon' },
+    title: 'Amalfi Photographer: Sunrise Photoshoots | Amalfi.Day',
+    description: 'Amalfi photoshoots with Greg, who lives next door in Atrani: sunrise sessions on the cathedral steps, the harbour and the pier. No travel fee, from €200.',
     hero: {
-      slug: 'esmeralda-cortez-amalfi',
-      alt: 'A couple walking hand in hand along the coast road between Amalfi and Atrani at sunrise',
-      eyebrow: 'Sunrise photoshoots in Amalfi & Atrani',
-      lead: 'Amalfi & Atrani',
+      slug: 'nathalie-amalfi',
+      alt: 'Nathalie and her companion beside the harbour railing in warm morning light, with Amalfi’s houses and cliffs behind them',
+      eyebrow: 'Sunrise photoshoots in Amalfi',
+      lead: 'Amalfi',
       accent: 'Photographer',
-      intro: 'My home streets. We meet at first light on the cathedral steps and walk the coast to Atrani while both towns are still asleep.',
+      intro: 'We meet at first light on the cathedral steps, use the harbour while it is still empty, and follow the coast road as far as the light takes us.',
     },
     answer: {
-      title: 'Who photographs couples and travellers in Amalfi and Atrani?',
+      title: 'Who photographs couples and travellers in Amalfi?',
       paragraphs: [
-        'I’m Greg (Gregory), a photographer who lives in Atrani, a few minutes’ walk from Amalfi, and these two towns are my everyday route. Most sessions start at sunrise on the steps of Amalfi Cathedral, then follow the harbour and the coast road to Atrani’s viewpoints, staircases and square.',
-        'There is no travel fee here: solo packages start at €200 and couple packages at €250. You can book through the form on this page, on WhatsApp, or through my sunrise photoshoot on GetYourGuide.',
+        'I’m Greg (Gregory), a photographer who lives in Atrani, a few minutes’ walk from Amalfi, and Amalfi is where most of my sessions begin. We usually meet at sunrise on the steps of Amalfi Cathedral, then work through the portico and arches, the harbour, the pier and the beach before the town wakes up. Many sessions continue along the coast road towards Atrani.',
+        'There is no travel fee in Amalfi: solo packages start at €200 and couple packages at €250. You can book through the form on this page, on WhatsApp, or through my sunrise photoshoot on GetYourGuide.',
       ],
     },
     facts: [
       { label: 'Travel fee', value: 'Included (base zone)' },
       { label: 'Meeting point', value: 'Amalfi Cathedral steps' },
       { label: 'Start', value: 'A few minutes before sunrise' },
-      { label: 'Route', value: 'Amalfi to Atrani on foot' },
+      { label: 'Route', value: 'Cathedral, harbour, coast road' },
       { label: 'Prices from', value: '€200 solo, €250 couple' },
-      { label: 'Also on', value: 'GetYourGuide, Airbnb, Localgrapher' },
+      { label: 'Best light', value: 'Sunrise' },
     ],
     sections: [
       {
         eyebrow: 'The route',
         title: 'From the cathedral',
-        accent: 'to Atrani',
+        accent: 'to the harbour',
         paragraphs: [
-          'The staircase of Amalfi Cathedral is the easiest meeting point in town: everyone can find it, and at dawn it is almost empty. Nathalie met me there at 6:50 on an autumn morning, when, in her words, the town was “still quiet and almost empty.” From the steps we use the cathedral portico and arches, then the harbour, the pier and the beach.',
-          'From there we follow the coast towards Atrani. The viewpoints above the village, the railing over its rooftops, the white staircases, the clock tower and the little square are where many of my favourite frames come from. Atrani is where I live, so people greet us on the way. When Takamasa and his partner walked through in her wedding dress, almost every passing car stopped so people could call out “Auguri!”',
+          'The staircase of Amalfi Cathedral is the easiest meeting point in town: everyone can find it, and at dawn it is almost empty. Nathalie met me there at 6:50 on an autumn morning, when, in her words, the town was “still quiet and almost empty.” Shifa’s session started on the same steps. From there we use the cathedral portico and arches, then the harbour, the pier and the beach.',
+          'Hotels in town make an easy start too. Takamasa and his partner began at their hotel in Amalfi, the morning after arriving from Japan, and we walked through the streets at six with the wedding dress they had brought with them. Nilsa and her husband met me by the harbour, near the large car park, and we followed the coast from there.',
+          'Most routes then continue along the coast road towards Atrani, the village where I live, with viewpoints over its rooftops on the way. Atrani has its own page: <a href="/photoshootings/atrani-photographer/">photoshoots in Atrani</a>.',
         ],
       },
       {
@@ -314,9 +344,9 @@ export const landingPages: LandingPage[] = [
         title: 'Why I ask you',
         accent: 'to meet so early',
         paragraphs: [
-          'I always ask guests to arrive as early as they can, ideally a couple of minutes before sunrise. In June that means around half past five. In mid-August, Lashanda and I were working at the Atrani bus stop by about 06:15, and in early autumn Nathalie’s 6:50 start was early enough.',
-          'The reason is light and space. At sunrise the first rays come over the mountains onto Atrani’s shore, as in Hinad’s session, and the harbour gives soft light reflected off the sea with clean backgrounds. Later, bright Amalfi sunshine makes photographs look hot and summery, almost like film. That can be lovely too, but by then the streets are busy.',
-          'Allow for traffic on the coast road, even at dawn. Nilsa and her husband set off by car while it was still dark and reached Amalfi a little after sunrise. If you are staying in another town, leave earlier than the map suggests.',
+          'I always ask guests to arrive as early as they can, ideally a couple of minutes before sunrise. In June that means around half past five; in early autumn, Nathalie’s 6:50 start was early enough. In August, Esmeralda and her partner got up incredibly early for colours I find impossible to resist.',
+          'The reason is light and space. Sunrise in the harbour gives soft light reflected off the sea, clean backgrounds without tourists and the freedom to move between the pier, the sand and the shoreline, which is exactly what Shifa’s content session needed. Later, bright Amalfi sunshine makes photographs look hot and summery, almost like film. That can be lovely too, but by then the streets are busy.',
+          'Allow for traffic on the coast road, even at dawn. Nilsa and her husband set off by car while it was still dark and reached Amalfi a little after sunrise. If you are staying in another town, leave earlier than the map suggests, or do as Hinad did: she moved from Minori to Amalfi the evening before and found our meeting point that same evening.',
         ],
       },
       {
@@ -324,38 +354,131 @@ export const landingPages: LandingPage[] = [
         title: 'A few local',
         accent: 'details',
         list: [
-          '<strong>No travel fee.</strong> Atrani and Amalfi are my base zone, included in every package.',
+          '<strong>No travel fee.</strong> Amalfi and Atrani are my base zone, included in every package.',
           '<strong>Two towns in one session.</strong> The two-hour Coastal Story covers four to six spots across Amalfi and Atrani, with time for two outfit changes.',
-          '<strong>Summer heat.</strong> Tom and Sam’s session fell during an August heatwave. We met fifteen minutes before sunrise and stopped every few steps rather than rushing.',
-          '<strong>Festivals.</strong> Lashanda’s birthday shoot fell during Atrani’s Blue Fish Festival, and the decorations turned every corner into a set.',
-          '<strong>After the shoot.</strong> I share my Amalfi Coast guide, with places to visit and restaurants, with everyone I photograph.',
-          '<strong>Villas nearby.</strong> Conca dei Marini, a short drive west, is where I photographed <a href="/photoshootings/jassi-conca-proposal/">Jassi’s proposal</a> and <a href="/photoshootings/anh-hoang-conca-dei-marini/">Anh’s April morning</a>.',
+          '<strong>Autumn light.</strong> The end of September and the beginning of October are my favourite time here: even outside golden hour, the colours in Amalfi make me want to photograph everything.',
+          '<strong>After the shoot.</strong> I share my Amalfi Coast guide, with places to visit and restaurants, with everyone I photograph. Nathalie and her companion, who only had a few days in Amalfi, told me afterwards how useful it had been.',
+          '<strong>Next door.</strong> If you would rather start in a quieter village, <a href="/photoshootings/atrani-photographer/">Atrani</a> is a few minutes’ walk away and also has no travel fee.',
+          '<strong>Villas nearby.</strong> Conca dei Marini, a short drive west, is where I photographed <a href="/photoshootings/jassi-conca-proposal/">Jassi’s proposal</a> and <a href="/photoshootings/anh-hoang-conca-dei-marini/">Anh’s April morning</a>. See <a href="/photoshootings/conca-dei-marini-photographer/">photoshoots in Conca dei Marini</a>.',
         ],
       },
     ],
     shoots: {
       eyebrow: 'Real sessions',
       title: 'Photoshoots in',
-      accent: 'Amalfi & Atrani',
-      desc: 'Couples, post-wedding sessions and solo sunrise portraits along my usual route between the two towns.',
-      slugs: ['esmeralda-cortez-amalfi', 'nilsa-otanez-amalfi-atrani', 'takamasa-shigemi-amalfi-atrani', 'nathalie-amalfi', 'hinad-amalfi-sunrise', 'tom-sam-atrani', 'shifa', 'lashada', 'olga-marat'],
+      accent: 'Amalfi',
+      desc: 'Couples, post-wedding sessions and solo sunrise portraits that start in Amalfi, several of them continuing along the coast to Atrani.',
+      slugs: ['nathalie-amalfi', 'shifa', 'esmeralda-cortez-amalfi', 'nilsa-otanez-amalfi-atrani', 'takamasa-shigemi-amalfi-atrani', 'hinad-amalfi-sunrise'],
       columns: 3,
     },
     faqs: [
-      { q: 'How much is a photoshoot in Amalfi or Atrani?', a: 'Amalfi and Atrani are my base zone, so there is no travel fee. Solo sessions are €200 for 30 minutes, €300 for 60 and €480 for two hours; couple sessions are €250, €350 and €550 for both of you. The 60 and 120-minute sessions include preview photos within 24 hours, and everything is delivered in a private online gallery within 7 business days.' },
-      { q: 'Where do we meet for an Amalfi photoshoot?', a: 'Usually on the staircase of Amalfi Cathedral, in Piazza Duomo. It is the easiest place in town to find, and at sunrise it is nearly empty, so we can start photographing right there. If you are staying in Atrani or at a hotel along the route, we can meet closer to you. We agree the exact spot by WhatsApp or email beforehand.' },
+      { q: 'How much is a photoshoot in Amalfi?', a: 'Amalfi is in my base zone, so there is no travel fee. Solo sessions are €200 for 30 minutes, €300 for 60 and €480 for two hours; couple sessions are €250, €350 and €550 for both of you. The 60 and 120-minute sessions include preview photos within 24 hours, and everything is delivered in a private online gallery within 7 business days.' },
+      { q: 'Where do we meet for an Amalfi photoshoot?', a: 'Usually on the staircase of Amalfi Cathedral, in Piazza Duomo. It is the easiest place in town to find, and at sunrise it is nearly empty, so we can start photographing right there. If you are staying at a hotel in town, or arriving by car near the harbour car park, we can meet there instead. We agree the exact spot by WhatsApp or email beforehand.' },
       { q: 'Can we walk from Amalfi to Atrani during the shoot?', a: 'Yes, and it is my favourite route. Atrani is a few minutes’ walk from Amalfi along the coast road, with viewpoints over the village on the way. The 60-minute packages cover two or three nearby spots, while the two-hour Coastal Story is planned for four to six spots across both towns.' },
       { q: 'What time is sunrise in Amalfi?', a: 'It changes a lot through the year: roughly half past five in late June, around six in early August and close to seven in early October. I ask guests to arrive a couple of minutes before sunrise, so we can start calmly and enjoy the soft light before the sun gets strong. I confirm the exact time for your date when we plan.' },
-      { q: 'Is Atrani good for photos when Amalfi is crowded?', a: 'Yes. Atrani is one of the smallest towns in Italy and stays calm even when Amalfi’s waterfront is busy. Its square, white staircases, clock tower and the railing above the rooftops are all within a few minutes of each other. If both towns are too busy for you, Ravello, up the hill, is another quiet option.' },
+      { q: 'Is Amalfi too crowded for a photoshoot?', a: 'Not at sunrise. In the first hour there is no traffic, no beach activity and no crowds, so the cathedral steps, the harbour and the pier are open to us. By mid-morning the waterfront fills up. If you want somewhere calmer later in the day, Atrani is a few minutes away and Ravello, up the hill, stays quiet for longer.' },
     ],
     service: {
-      name: 'Amalfi and Atrani photoshoots with Greg',
-      serviceType: 'Couple, solo and post-wedding photography in Amalfi and Atrani',
-      areaServed: ['Amalfi', 'Atrani'],
+      name: 'Amalfi photoshoots with Greg',
+      serviceType: 'Couple, solo and post-wedding photography in Amalfi',
+      areaServed: ['Amalfi'],
       packages: allPackages,
-      priceNote: 'Base zone: no travel fee in Amalfi or Atrani.',
+      priceNote: 'Base zone: no travel fee in Amalfi.',
     },
-    related: ['ravello-photographer', 'positano-photographer', 'couple-photoshoot', 'solo-photoshoot'],
+    related: ['atrani-photographer', 'ravello-photographer', 'conca-dei-marini-photographer', 'couple-photoshoot'],
+  },
+
+  // ───────────────────────────── ATRANI ─────────────────────────────
+  {
+    slug: 'atrani-photographer',
+    group: 'location',
+    nav: { label: 'Atrani', desc: 'My home village, no travel fee', icon: 'ph-stairs' },
+    title: 'Atrani Photographer: Photoshoots by a Local | Amalfi.Day',
+    description: 'Photoshoots in Atrani with Greg, who lives in the village: sunrise couple, birthday and solo sessions on its square, stairways and bus stop. No travel fee.',
+    hero: {
+      slug: 'lashada',
+      alt: 'Lashanda in a birthday crown and sash at the railing above Atrani, with the village clock tower behind her',
+      eyebrow: 'Couple & solo photoshoots in Atrani',
+      lead: 'Atrani',
+      accent: 'Photographer',
+      intro: 'I live here. The square, the white staircases and the railing above the rooftops are my everyday walk, and at sunrise they are still empty.',
+    },
+    answer: {
+      title: 'Who photographs couples and travellers in Atrani?',
+      paragraphs: [
+        'I’m Greg (Gregory), a photographer who lives in Atrani, one of the smallest towns in Italy, a few minutes’ walk from Amalfi. I photograph couples, birthdays, post-wedding sessions and solo portraits here, almost always at sunrise: at the bus stop above the sea, at the railing over the square and clock tower, by the church and on the white staircases that climb through the village.',
+        'Atrani is in my base zone, so there is no travel fee: solo packages start at €200 and couple packages at €250. Book through the form on this page, on WhatsApp or through my sunrise photoshoot on GetYourGuide.',
+      ],
+    },
+    facts: [
+      { label: 'Travel fee', value: 'Included (base zone)' },
+      { label: 'Best light', value: 'Sunrise, before the heat' },
+      { label: 'Backdrops', value: 'Square, staircases, sea views' },
+      { label: 'Stories here', value: 'Couples, birthday, post-wedding' },
+      { label: 'Prices from', value: '€200 solo, €250 couple' },
+      { label: 'Languages', value: 'English, Italian, Russian' },
+    ],
+    sections: [
+      {
+        eyebrow: 'Why Atrani',
+        title: 'A village',
+        accent: 'that knows me',
+        paragraphs: [
+          'Atrani is where I live, and it is the place I know best at every hour. It is tiny: the square, the church, the clock tower, the beach and the staircases are a few minutes apart, so even a short session can include several backdrops without a long walk. It also stays calm when Amalfi’s waterfront is busy.',
+          'People here know me, and it shows. When Takamasa and his partner walked in from Amalfi with the wedding dress they had brought from Japan, locals walking their dogs greeted us on foot and from their cars, again and again: “Auguri!” Tom and Sam, from London, were staying at my B&B, so we met fifteen minutes before sunrise almost on their doorstep and walked towards the village together.',
+        ],
+      },
+      {
+        eyebrow: 'Where we photograph',
+        title: 'Atrani spots',
+        accent: 'I return to',
+        cards: [
+          { icon: 'ph-bus', title: 'The bus stop above the sea', text: 'One of my favourite places, often called one of the most beautiful bus stops in the world: sea, cliffs, pastel houses and open sky in one frame. Lashanda’s birthday session started here at about 06:15 in mid-August.' },
+          { icon: 'ph-clock', title: 'The railing over the square', text: 'Above the square, a railing looks across Atrani’s rooftops to the clock tower. Lashanda’s portrait at the top of this page was made there, and Esmeralda, Takamasa and Tom and Sam all have photographs at the same railing.' },
+          { icon: 'ph-church', title: 'The church & the piazza', text: 'Esmeralda and Takamasa both have portraits beside Atrani’s church in the early light. For Lashanda, Piazza Santa Maria Maddalena gave some of the strongest images of her session.' },
+          { icon: 'ph-stairs', title: 'White staircases & arches', text: 'Tom and Sam’s photographs move between white terrace steps, a stone arch with a ceramic vase, a small stone bridge and a broad white staircase. Ayuna’s portfolio used Atrani’s stone steps and pastel walls.' },
+          { icon: 'ph-sun-horizon', title: 'The shore at sunrise', text: 'With the right timing, you reach the shore as the sun comes up behind you, while the mountains still hold the softer light. That is how Hinad’s session went: her colourful dress, the water and the first light on the buildings.' },
+        ],
+      },
+      {
+        eyebrow: 'Practical',
+        title: 'Timing, heat',
+        accent: '& festivals',
+        list: [
+          '<strong>Start at sunrise.</strong> I ask guests to arrive a couple of minutes before sunrise. In mid-August the light is strong enough to work with by about 06:15, and the heat comes quickly after that.',
+          '<strong>Summer heat.</strong> Tom and Sam’s August morning fell during an extraordinary heatwave. We didn’t get far: we stopped to photograph almost every few steps rather than rushing.',
+          '<strong>Festivals.</strong> When Lashanda came in August, the village was decorated for the Blue Fish Festival, and the decorations turned every corner into a set for her birthday.',
+          '<strong>Leave room in your day.</strong> Lashanda’s day was planned minute by minute, yet her one-hour session stretched on, and she postponed a cooking masterclass to stay longer in Atrani.',
+          '<strong>Getting here.</strong> Atrani is a few minutes’ walk from Amalfi along the coast road. In August, traffic on the coast is constant even at dawn, so if you are coming by car or taxi, leave earlier than the map suggests.',
+          '<strong>Staying in the village?</strong> I also host <a href="/apartments/">apartments and rooms in Atrani</a>, and if you are staying here we can meet close to your door.',
+          '<strong>Add Amalfi.</strong> The two-hour Coastal Story covers four to six spots across both towns. <a href="/photoshootings/amalfi-photographer/">See photoshoots in Amalfi</a>.',
+        ],
+      },
+    ],
+    shoots: {
+      eyebrow: 'Real sessions',
+      title: 'Photoshoots in',
+      accent: 'Atrani',
+      desc: 'A birthday sunrise, a Ripley-inspired couple from London, a model’s portfolio and a couple’s morning in the village, plus a walk from Amalfi that ended in Atrani.',
+      slugs: ['lashada', 'tom-sam-atrani', 'ayuna', 'olga-marat', 'takamasa-shigemi-amalfi-atrani'],
+      columns: 3,
+    },
+    faqs: [
+      { q: 'How much does a photoshoot in Atrani cost?', a: 'Atrani is my base zone, so there is no travel fee. Solo sessions are €200 for 30 minutes, €300 for 60 and €480 for two hours; couple sessions are €250, €350 and €550, covering both of you. You get 20+, 60+ or 120+ retouched photos, previews within 24 hours on the 60 and 120-minute sessions, and a private online gallery within 7 business days.' },
+      { q: 'Is Atrani a good place for a photoshoot?', a: 'Yes, and it is the place I know best. Atrani is one of the smallest towns in Italy, so the square, the church, the clock tower, the staircases, the beach and the railing above the rooftops are all within a few minutes of each other. It stays calm even when Amalfi’s waterfront is busy, especially at sunrise.' },
+      { q: 'Where do we meet for a photoshoot in Atrani?', a: 'Wherever suits the route. For Lashanda I was already waiting at the Atrani bus stop, which is easy to find on the coast road. Tom and Sam met me almost on their doorstep. Couples staying in Amalfi often start there and walk to Atrani with me. We agree the exact spot by WhatsApp or email beforehand.' },
+      { q: 'What time should an Atrani photoshoot start?', a: 'A couple of minutes before sunrise. That is roughly half past five in late June, around six in early August and close to seven in early October. In mid-August Lashanda and I were working by about 06:15, before the heat became extreme. I confirm the exact time for your date when we plan.' },
+      { q: 'Should we choose Atrani or Amalfi?', a: 'Both are in my base zone with no travel fee, and they are a few minutes apart, so you don’t have to choose: the two-hour Coastal Story covers four to six spots across both. Amalfi gives you the cathedral steps, the harbour and the pier; Atrani is smaller and quieter, with its square, white staircases and views over the rooftops. The 30 and 60-minute sessions suit one compact area.' },
+      { q: 'Do you photograph birthdays and post-wedding sessions in Atrani?', a: 'Yes. Lashanda booked her birthday sunrise as a gift to herself, with a golden crown and ribbon, while her sister helped as an improvised stylist. Takamasa and his partner brought their wedding dress from Japan for a post-wedding session that walked from Amalfi to Atrani. Tell me the occasion when you send your request.' },
+    ],
+    service: {
+      name: 'Atrani photoshoots with Greg',
+      serviceType: 'Couple, solo, birthday and post-wedding photography in Atrani',
+      areaServed: ['Atrani'],
+      packages: allPackages,
+      priceNote: 'Base zone: no travel fee in Atrani.',
+    },
+    related: ['amalfi-photographer', 'ravello-photographer', 'couple-photoshoot', 'solo-photoshoot'],
   },
 
   // ───────────────────────────── PATH OF THE GODS ─────────────────────────────
@@ -437,7 +560,7 @@ export const landingPages: LandingPage[] = [
       packages: couplePackages,
       priceNote: 'Base package price. Travel to Agerola is quoted on request.',
     },
-    related: ['proposal-photographer', 'positano-photographer', 'couple-photoshoot', 'amalfi-photographer'],
+    related: ['proposal-photographer', 'positano-photographer', 'praiano-photographer', 'couple-photoshoot'],
   },
 
   // ───────────────────────────── PROPOSAL ─────────────────────────────
@@ -530,7 +653,7 @@ export const landingPages: LandingPage[] = [
       packages: couplePackages,
       priceNote: 'Base price for two. Travel fees apply outside Atrani and Amalfi.',
     },
-    related: ['couple-photoshoot', 'path-of-the-gods-photographer', 'ravello-photographer', 'amalfi-photographer'],
+    related: ['conca-dei-marini-photographer', 'couple-photoshoot', 'path-of-the-gods-photographer', 'ravello-photographer'],
   },
 
   // ───────────────────────────── COUPLE ─────────────────────────────
@@ -623,7 +746,7 @@ export const landingPages: LandingPage[] = [
       packages: couplePackages,
       priceNote: 'Base price for two. Travel fees apply outside Atrani and Amalfi.',
     },
-    related: ['proposal-photographer', 'amalfi-photographer', 'positano-photographer', 'family-photoshoot'],
+    related: ['proposal-photographer', 'atrani-photographer', 'amalfi-photographer', 'positano-photographer'],
   },
 
   // ───────────────────────────── FAMILY ─────────────────────────────
@@ -685,7 +808,7 @@ export const landingPages: LandingPage[] = [
         accent: 'for families',
         paragraphs: [
           'Praiano is calm, full of flowers in spring, with a church square and open views, and it suits families staying in villas along that stretch. Positano gives you the famous beach backdrop but is busier and has many steps. Both are in travel zone 3: +€70, with a 90-minute minimum.',
-          'Atrani and Amalfi are my base, with no travel fee. In Atrani the square, the beach and the staircases are all close together, so small legs don’t have far to go. See <a href="/photoshootings/amalfi-photographer/">photoshoots in Amalfi and Atrani</a> or <a href="/photoshootings/positano-photographer/">in Positano</a>.',
+          'Atrani and Amalfi are my base, with no travel fee. In Atrani the square, the beach and the staircases are all close together, so small legs don’t have far to go. See photoshoots <a href="/photoshootings/atrani-photographer/">in Atrani</a>, <a href="/photoshootings/amalfi-photographer/">in Amalfi</a>, <a href="/photoshootings/praiano-photographer/">in Praiano</a> or <a href="/photoshootings/positano-photographer/">in Positano</a>.',
         ],
       },
     ],
@@ -713,7 +836,7 @@ export const landingPages: LandingPage[] = [
       packages: couplePackages,
       priceNote: 'Base price for two people; each additional person is €30. Travel fees apply outside Atrani and Amalfi.',
     },
-    related: ['positano-photographer', 'couple-photoshoot', 'amalfi-photographer', 'solo-photoshoot'],
+    related: ['praiano-photographer', 'positano-photographer', 'atrani-photographer', 'couple-photoshoot'],
   },
 
   // ───────────────────────────── SOLO ─────────────────────────────
@@ -777,7 +900,7 @@ export const landingPages: LandingPage[] = [
           '<strong>Bring something bright.</strong> A colourful dress against the water, with the first light on the buildings, as in Hinad’s session, gives me a lot to work with.',
           '<strong>Last-minute is sometimes possible.</strong> Hinad changed her plans the evening before; Loreana asked for a shoot within a few hours. In high season, booking two to four weeks ahead is safer.',
           '<strong>Someone can come along.</strong> Lashanda’s sister came to her session and helped as an improvised stylist.',
-          '<strong>Outside the base towns.</strong> I’ve also photographed solo sessions in Ravello, Maiori, Tramonti and Sorrento, where <a href="/photoshootings/jatin-sorrento/">Jatin’s</a> took place at his hotel.',
+          '<strong>Outside the base towns.</strong> I’ve also photographed solo sessions in <a href="/photoshootings/ravello-photographer/">Ravello</a>, <a href="/photoshootings/maiori-photographer/">Maiori</a>, Tramonti and <a href="/photoshootings/sorrento-photographer/">Sorrento</a>, where <a href="/photoshootings/jatin-sorrento/">Jatin’s</a> took place at his hotel.',
         ],
       },
     ],
@@ -805,9 +928,28 @@ export const landingPages: LandingPage[] = [
       packages: soloPackages,
       priceNote: 'Base price for one person. Travel fees apply outside Atrani and Amalfi.',
     },
-    related: ['amalfi-photographer', 'ravello-photographer', 'couple-photoshoot', 'proposal-photographer'],
+    related: ['atrani-photographer', 'amalfi-photographer', 'ravello-photographer', 'sorrento-photographer'],
   },
+
+  // ─────────────── LOCATIONS KEPT IN ./landings/ ───────────────
+  concaDeiMariniLanding,
+  praianoLanding,
+  sorrentoLanding,
+  maioriLanding,
 ]
+
+// Locations are listed by geography along the coast (the order of the cards on the hub);
+// occasion pages follow in the order they are written above.
+const locationOrder: LandingSlug[] = [
+  'atrani-photographer', 'amalfi-photographer', 'ravello-photographer', 'maiori-photographer',
+  'conca-dei-marini-photographer', 'praiano-photographer', 'positano-photographer',
+  'sorrento-photographer', 'path-of-the-gods-photographer',
+]
+const orderOf = (page: LandingPage) => (page.group === 'location' ? locationOrder.indexOf(page.slug) : locationOrder.length)
+export const landingPages: LandingPage[] = landingPagesSource
+  .map((page, index) => ({ page, index }))
+  .sort((a, b) => orderOf(a.page) - orderOf(b.page) || a.index - b.index)
+  .map(item => item.page)
 
 export const getLandingPage = (slug: LandingSlug) => {
   const page = landingPages.find(item => item.slug === slug)

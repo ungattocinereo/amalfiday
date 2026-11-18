@@ -192,7 +192,8 @@ export const navigation: NavigationItem[] = [
           heading: 'By location',
           items: [
             { label: 'Positano', href: '/photoshootings/positano-photographer/' },
-            { label: 'Amalfi & Atrani', href: '/photoshootings/amalfi-photographer/' },
+            { label: 'Amalfi', href: '/photoshootings/amalfi-photographer/' },
+            { label: 'Atrani', href: '/photoshootings/atrani-photographer/' },
             { label: 'Ravello', href: '/photoshootings/ravello-photographer/' },
             { label: 'Path of the Gods', href: '/photoshootings/path-of-the-gods-photographer/' },
           ],
