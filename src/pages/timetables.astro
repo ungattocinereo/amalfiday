@@ -6,16 +6,16 @@ const heroImage = '/staticpages/timetables/bus-timetables-amalfi-coast.jpg'
 const pageTitle = 'Amalfi Coast Bus Timetables 2026 — SITA Lines, Tickets & Shuttles'
 const pageDescription =
   'SITA bus timetables for the Amalfi Coast: official PDFs for lines 5120, 5070, 5110 and more, where to buy tickets, the Ravello shuttle and airport transfers.'
-const pageUpdatedISO = '2026-11-15'
+const pageUpdatedISO = '2026-11-25'
 const pageUpdatedLabel = 'November 2026'
 const shareImageAlt = 'SITA bus traveling along the Amalfi Coast'
-const checkedDate = 'October 4, 2026'
+const checkedDate = 'November 25, 2026'
 const pdfDateFormat = new Intl.DateTimeFormat('en-US', {
   month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC',
 })
 const formatPdfDate = (value: string) => pdfDateFormat.format(new Date(value))
 const sitaTimetablesUrl = 'https://sitasudtrasporti.it/campania/orari/'
-const schoolServiceNoticeUrl = 'https://sitasudtrasporti.it/campania/avvisi/variazioni-orario-corse-scolastiche-amalfi/'
+const roadClosureNoticeUrl = 'https://sitasudtrasporti.it/campania/avvisi/interruzione-stradale-ss163-localita-tordigliano/'
 
 const heroSlides = [
   {
@@ -54,8 +54,8 @@ const heroStats = [
 ]
 
 const introParagraphs = [
-  'These official SITA Sud PDF copies were refreshed on October 4, 2026. Each card shows the update date recorded inside the PDF and, separately, the start date printed in the timetable. Check the weekday, holiday and school-day symbols before travelling.',
-  'The SITA listing dates show how long each file is listed as valid in the official catalogue. For lines 5110 and 5120, the catalogue says October 4, while the combined PDF headers say November 1. Service notices may change individual departures before a new PDF is published.',
+  'These official SITA Sud PDF copies were refreshed on November 25, 2026. Each card shows the update date recorded inside the PDF and, separately, the start date printed in the timetable. Check the weekday, holiday and school-day symbols before travelling.',
+  'The SITA listing dates show how long each file is listed as valid in the official catalogue. Lines 5110 and 5120 share one combined PDF whose header runs from November 9, 2026 to March 21, 2027, while the catalogue lists it until December 31, 2026. Service notices may change individual departures before a new PDF is published.',
 ]
 
 const timetables = [
@@ -64,9 +64,9 @@ const timetables = [
     from: 'Amalfi',
     to: 'Salerno',
     via: 'Via Maiori & Vietri sul Mare',
-    pdfUpdated: '2026-09-14',
-    timetableFrom: '2026-09-14',
-    validity: 'SITA listing: until October 4, 2026',
+    pdfUpdated: '2026-11-10',
+    timetableFrom: '2026-11-09',
+    validity: 'SITA listing: until December 31, 2026',
     route: ['Amalfi', 'Atrani', 'Minori', 'Maiori', 'Cetara', 'Vietri sul Mare', 'Salerno'],
     link: '/files/BUS-5120-AMALFI-MAIORI-SALERNO.pdf',
   },
@@ -75,9 +75,9 @@ const timetables = [
     from: 'Scala',
     to: 'Amalfi',
     via: 'Via Ravello & Pontone',
-    pdfUpdated: '2026-09-11',
-    timetableFrom: '2026-09-14',
-    validity: 'SITA listing: until October 4, 2026',
+    pdfUpdated: '2026-11-10',
+    timetableFrom: '2026-11-09',
+    validity: 'SITA listing: until December 31, 2026',
     route: [
       'Scala',
       'Minuta',
@@ -95,9 +95,9 @@ const timetables = [
     from: 'Amalfi',
     to: 'Napoli',
     via: 'Via Agerola & Castellammare',
-    pdfUpdated: '2026-09-22',
-    timetableFrom: '2026-09-14',
-    validity: 'SITA listing: until October 4, 2026',
+    pdfUpdated: '2026-10-30',
+    timetableFrom: '2026-11-02',
+    validity: 'SITA listing: until December 31, 2026',
     route: ['Amalfi', 'Conca', 'Furore', 'Agerola', 'Pimonte', 'Gragnano', 'Castellammare', 'Napoli'],
     link: 'https://amalfi.day/files/BUS-5080-AMALFI-AGEROLA-GRAGNANO-CASTELLAMMARE-NAPOLI.pdf',
   },
@@ -127,9 +127,9 @@ const timetables = [
     from: 'Maiori',
     to: 'Salerno',
     via: 'Via Tramonti & Nocera',
-    pdfUpdated: '2026-09-24',
-    timetableFrom: '2026-09-28',
-    validity: 'SITA listing: until October 4, 2026',
+    pdfUpdated: '2026-10-28',
+    timetableFrom: '2026-11-02',
+    validity: 'SITA listing: until December 31, 2026',
     route: [
       'Maiori',
       'Tramonti',
@@ -147,9 +147,9 @@ const timetables = [
     from: 'Amalfi',
     to: 'Sorrento',
     via: 'Via Praiano & Positano',
-    pdfUpdated: '2026-09-11',
-    timetableFrom: '2026-09-14',
-    validity: 'SITA listing: until November 1, 2026',
+    pdfUpdated: '2026-11-10',
+    timetableFrom: '2026-11-09',
+    validity: 'SITA listing: until December 31, 2026',
     route: [
       'Amalfi',
       'Conca',
@@ -435,10 +435,10 @@ const timetablesJsonLd = [
           <p>{introParagraphs[0]}</p>
           <p>{introParagraphs[1]}</p>
           <p class="timetables-copy__highlight">
-            From October 5, 2026: SITA has announced changes to school-day services on
-            lines 5110, 5010, 5080 and 5120. These changes are not reflected in the PDFs
-            checked on October 4.
-            {' '}<a href={schoolServiceNoticeUrl} target="_blank" rel="noreferrer">Read the official service notice</a>.
+            Since November 16, 2026: the SS163 coast road is closed at Tordigliano (Vico Equense)
+            after a rockfall. Until it reopens, line 5070 runs Amalfi–Sorrento via Agerola on a reduced
+            weekday schedule, with separate Amalfi–Praiano–Positano departures. The PDF does not show this diversion.
+            {' '}<a href={roadClosureNoticeUrl} target="_blank" rel="noreferrer">Read the official service notice</a>.
           </p>
           <p>
             <a href={sitaTimetablesUrl} target="_blank" rel="noreferrer">Check the SITA Sud timetable catalogue</a>
