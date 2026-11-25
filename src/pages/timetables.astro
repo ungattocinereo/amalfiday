@@ -7,7 +7,6 @@ const pageTitle = 'Amalfi Coast Bus Timetables 2026 — SITA Lines, Tickets & Sh
 const pageDescription =
   'SITA bus timetables for the Amalfi Coast: official PDFs for lines 5120, 5070, 5110 and more, where to buy tickets, the Ravello shuttle and airport transfers.'
 const pageUpdatedISO = '2026-11-25'
-const pageUpdatedLabel = 'November 2026'
 const shareImageAlt = 'SITA bus traveling along the Amalfi Coast'
 const checkedDate = 'November 25, 2026'
 const pdfDateFormat = new Intl.DateTimeFormat('en-US', {
@@ -396,24 +395,6 @@ const timetablesJsonLd = [
     </div>
     <div class="timetables-hero__scroll-hint" aria-hidden="true">
       <span></span>
-    </div>
-  </section>
-
-  <section class="quick-answer" aria-labelledby="quick-answer-title">
-    <div class="container">
-      <div class="quick-answer__box">
-        <span class="section-kicker">Quick answer</span>
-        <h2 class="quick-answer__title" id="quick-answer-title">Which bus do I take on the Amalfi Coast?</h2>
-        <p>
-          Six SITA Sud bus lines serve the Amalfi Coast. Line 5120 runs from Amalfi to Salerno
-          through Atrani, Minori, Maiori and Vietri sul Mare, line 5070 runs from Amalfi to Positano
-          and Sorrento, and line 5110 climbs from Amalfi to Ravello and Scala. Buy a paper ticket
-          (from 1.60 EUR along the coast to about 3 EUR for Amalfi to Salerno) at a Tabacchi shop before you board and validate it on the bus.
-        </p>
-        <p class="quick-answer__date">
-          Last updated: <time datetime={pageUpdatedISO}>{pageUpdatedLabel}</time>. Bus PDFs checked on {checkedDate}.
-        </p>
-      </div>
     </div>
   </section>
 
@@ -2000,40 +1981,6 @@ const timetablesJsonLd = [
     line-height: 1.6;
   }
 
-  /* Quick answer (first answer block after the hero) */
-  .quick-answer {
-    padding: 3.5rem 0 0;
-  }
-
-  .quick-answer__box {
-    display: grid;
-    gap: 0.4rem;
-    max-width: 52rem;
-    padding: 1.6rem 1.8rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-card);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .quick-answer__title {
-    margin: 0 0 0.4rem;
-    font-size: clamp(1.45rem, 2.6vw, 1.95rem);
-    line-height: 1.2;
-  }
-
-  .quick-answer__box p {
-    margin: 0;
-    color: var(--color-text);
-    line-height: 1.7;
-  }
-
-  .quick-answer__box .quick-answer__date {
-    margin-top: 0.5rem;
-    color: var(--color-text-muted);
-    font-size: 0.85rem;
-  }
-
   /* While you're here: cross-links */
   .next-links__heading {
     margin-bottom: 2rem;
@@ -2079,13 +2026,4 @@ const timetablesJsonLd = [
     line-height: 1.55;
   }
 
-  @media (max-width: 640px) {
-    .quick-answer {
-      padding-top: 2.5rem;
-    }
-
-    .quick-answer__box {
-      padding: 1.3rem 1.25rem;
-    }
-  }
 </style>
